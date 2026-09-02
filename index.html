@@ -911,12 +911,26 @@ function mc(prompt,correct,wrongs,o){
   o=o||{};correct=String(correct);
   const set=[correct];
   (wrongs||[]).forEach(w=>{const s=String(w);if(!set.includes(s)&&set.length<4)set.push(s);});
+  /* Completa as opções quando a fase não mandou distratores suficientes.
+     Três regras, porque criança de 8 a 13 anos ainda não estuda negativo e o app
+     escreve decimal com vírgula:
+       1) nunca oferecer número negativo;
+       2) usar a mesma pontuação do gabarito (1,25 gera 1,75 — nunca 1.75);
+       3) arredondar na casa do gabarito, senão aparece 0.30000000000000004 na tela. */
+  const virg=correct.indexOf(',')>=0;
+  const n=Number(correct.replace(',','.'));
+  const casas=(correct.split(virg?',':'.')[1]||'').length;
+  const esc=Math.pow(10,casas);
+  const escreve=v=>{const t=v.toFixed(casas);return virg?t.replace('.',','):t;};
   let guard=0;
-  while(set.length<3&&guard++<60){
-    const n=Number(String(correct).replace(',','.'));
+  while(set.length<3&&guard++<80){
     if(isNaN(n))break;
-    const d=R(-8,8);const cand=String(n+(d||9));
-    if(!set.includes(cand))set.push(cand);
+    /* metade das vezes um vizinho na mesma casa decimal (1,25 -> 1,28),
+       metade um vizinho inteiro (1,25 -> 4,25): os dois enganam de verdade */
+    const v=Math.round((casas&&R(0,1)?n+(R(1,9)*(R(0,1)?1:-1))/esc:n+(R(-8,8)||9))*esc)/esc;
+    if(v<0)continue;
+    const cand=escreve(v);
+    if(cand!==correct&&set.indexOf(cand)<0)set.push(cand);
   }
   return Object.assign({type:'mc',prompt:prompt,options:shuf(set),answer:correct},o);
 }
@@ -1279,7 +1293,9 @@ L('6.2','0,5','Comparar decimais',
   ()=>{const a=r2(R(10,49)/10),b=r2(R(50,99)/10);return mc('Qual sinal completa?  '+fmt(a)+' ___ '+fmt(b),'<',['>','=']);},
   ()=>{const d=R(1,9);return tf('0,'+d+' é igual a 0,'+d+'0.',true);},
   ()=>{const a=R(1,9);return tf('0,'+a+'5 é maior que 0,'+a+'.',true);},
-  ()=>{const a=r2(R(11,89)/10);return mc('Qual é o número decimal mais próximo de '+Math.round(a)+'?',fmt(a),[fmt(r2(a+1.4)),fmt(r2(a-1.6))]);},
+  /* começa em 2,1 (era 1,1): com 1,1 o distrator de baixo virava -0,5 e a criança
+     via um número negativo numa aula de decimais, conteúdo que ela ainda não viu */
+  ()=>{const a=r2(R(21,89)/10);return mc('Qual é o número decimal mais próximo de '+Math.round(a)+'?',fmt(a),[fmt(r2(a+1.4)),fmt(r2(a-1.6))]);},
   ()=>{return mc('Coloque em ordem crescente: 0,3 — 0,03 — 0,33','0,03 &lt; 0,3 &lt; 0,33',['0,3 &lt; 0,03 &lt; 0,33','0,33 &lt; 0,3 &lt; 0,03']);}
  ]),
 L('6.3','+,','Somar e subtrair decimais',
@@ -1541,7 +1557,13 @@ L('10.2','▥','Ler gráficos',
   ()=>{const l=['Seg','Ter','Qua','Qui'],v=shuf([R(2,9),R(10,15),R(16,22),R(23,30)]);const i=v.indexOf(Math.min.apply(null,v));return mc('Qual dia teve o menor valor?',l[i],l.filter(x=>x!==l[i]),{figure:barras(l,v)});},
   ()=>{const l=['Seg','Ter','Qua','Qui'],v=[R(4,9),R(10,15),R(16,22),R(23,30)];return inp('Qual é o total dos quatro dias?',v.reduce((a,b)=>a+b,0),{figure:barras(l,v)});},
   ()=>{const l=['Ana','Beto','Caio'],v=[R(4,9),R(10,15),R(16,22)];return inp('Quantos '+l[2]+' tem <b>a mais</b> que '+l[0]+'?',v[2]-v[0],{figure:barras(l,v)});},
-  ()=>{const l=['Seg','Ter','Qua'],v=[R(4,9)*2,R(10,14)*2,R(16,20)*2];const tot=v.reduce((a,b)=>a+b,0);return mc('O total dos três dias é '+tot+'. A média diária é...',tot/3,[tot,tot/2]);},
+  /* Antes os três valores eram sorteados soltos e o total quase nunca dava certinho por 3:
+     a resposta certa aparecia escrita como "27.333333333333332" no botão.
+     Agora sorteia a MÉDIA primeiro e monta os três dias em volta dela (m-d, m, m+d),
+     então o total é sempre 3*m e a média é sempre um número redondo. */
+  ()=>{const m=R(8,30),d=R(1,5),v=[m-d,m,m+d];const tot=v[0]+v[1]+v[2];
+       return mc('Na segunda foram '+v[0]+', na terça '+v[1]+' e na quarta '+v[2]+'. O total é '+tot+'. A média diária é...',
+         m,[tot,Math.round(tot/2),m+d]);},
   ()=>{const l=['A','B','C','D'],v=[R(5,9),R(10,14),R(15,19),R(20,25)];return tf('A barra D é a mais alta do gráfico.',true,{figure:barras(l,v)});}
  ]),
 L('10.3','◐','Probabilidade',
@@ -1597,12 +1619,41 @@ function genQuestions(lesson,n){
   }
   while(out.length<n&&guard++<n*12){
     if(i>=bag.length){bag=novaSacola();i=0;}
-    const q=bag[i++]();
+    let q;try{q=bag[i++]();}catch(e){continue;}
+    if(!q)continue;
     const key=q.prompt+'|'+q.answer;
     if(seen.has(key))continue;
     seen.add(key);out.push(q);
   }
+  /* Algumas fases têm poucas perguntas possíveis (p6.2 só consegue montar 6).
+     Antes isso entregava uma fase curta e o placar dizia "6 de 8" numa jogada perfeita.
+     Agora completa com perguntas das fases já vistas da mesma matéria — revisão
+     intercalada, que é justamente o que fixa o que foi aprendido antes. */
+  if(out.length<n){
+    const extra=reforco(lesson);
+    let g2=0;
+    while(out.length<n&&extra.length&&g2++<n*20){
+      let q;try{q=pick(extra)();}catch(e){continue;}
+      if(!q)continue;
+      const key=q.prompt+'|'+q.answer;
+      if(seen.has(key))continue;
+      seen.add(key);q.reforco=true;out.push(q);
+    }
+  }
   return out;
+}
+/* perguntas de apoio: só das fases que a criança já passou, nunca de conteúdo mais adiantado */
+function reforco(lesson){
+  const id=String(lesson&&lesson.id||'');
+  try{
+    if(id.charAt(0)==='p')return ptPool(1,Math.max(1,parseInt(id.slice(1),10)||1));
+    if(id.charAt(0)==='e'){
+      const ate=Math.max(1,parseInt(id.slice(1),10)||1),ls=[];
+      UNITS_EN.forEach(u=>{if(u.n<=ate)u.lessons.forEach(l=>{if(l.id!=='e10.5')ls.push.apply(ls,l.makers);});});
+      return ls;
+    }
+    return pool(1,Math.max(1,parseInt(id,10)||1));
+  }catch(e){return [];}
 }
 const TOTAL_MAT=UNITS_MAT.reduce((a,u)=>a+u.lessons.length,0);
 
@@ -3198,7 +3249,12 @@ LP('p9.1','´','Para que serve o acento',
   ()=>{return mc('Qual está certo: o passarinho que canta?','sabiá',['sabia','sábia']);},
   ()=>{return mc('Qual palavra tem acento?','café',['cafe','cafeh']);},
   ()=>{return mc('Onde está a sílaba forte em "café"?','fé',['ca']);},
-  ()=>{return mc('Qual está certo?','é',['e ']);},
+  /* antes era mc('Qual está certo?','é',['e ']) — sem frase, "e" e "é" estão os dois certos
+     em português (e = junta, é = do verbo ser). A pergunta só faz sentido dentro de uma frase. */
+  ()=>{const f=pick([['O gato ___ preto.','é'],['Comprei pão ___ leite.','e'],
+                     ['Ela ___ minha amiga.','é'],['Bola ___ boneca.','e']]);
+       return mc('Complete: "'+f[0]+'"',f[1],[f[1]==='é'?'e':'é'],
+         {dica:'<b>é</b> vem do verbo ser. <b>e</b> serve para juntar duas coisas.'});},
   ()=>{return tf('O acento pode mudar o sentido da palavra.',true);},
   ()=>{return mc('Qual está certo?','avô',['avo']);}
  ]),
@@ -4351,7 +4407,12 @@ const _igual=w=>_norm(w.en)===_norm(w.pt);
 function enMakers(id){
   const L=(LEX[id]||[]).map(w=>({en:w[0],pt:w[1],fala:w[2],frase:w[3],frasePt:w[4]}));
   if(!L.length)return null;
-  let k=0;const gira=()=>L[(k++)%L.length];
+  /* O cursor era compartilhado pelos 6 makers e andava de 1 em 1. Com 3 palavras por fase,
+     6 chamadas fechavam a volta exata e a 2ª rodada repetia palavra por palavra —
+     genQuestions descartava tudo como duplicado e a fase saía com 6 perguntas em vez de 8.
+     Reembaralhar a cada volta quebra esse alinhamento e ainda varia a fase a cada jogada. */
+  let ordem=shuf(L),k=0;
+  const gira=()=>{const w=ordem[k%ordem.length];k++;if(k%ordem.length===0){ordem=shuf(L);k=0;}return w;};
   return [
    /* 1. apresentação: a resposta está escrita no enunciado — aqui a criança aprende, não adivinha */
    ()=>{const w=gira();
@@ -4929,6 +4990,12 @@ function avisoVoz(){
 const calar=()=>{try{speechSynthesis.cancel();}catch(e){}};
 
 /* ---------- utilidades ---------- */
+/* O nome do perfil é digitado pela criança e entra em innerHTML em vários lugares.
+   Sem escapar, um nome como <img src=x onerror=...> vira código — e o nome viaja
+   junto no backup .json, então um arquivo restaurado também carregaria o problema. */
+function escapa(t){return String(t==null?'':t)
+  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function estrelasSVG(n,total){let h='';for(let i=0;i<(total||3);i++)h+=IC.estrela.replace('<svg',i<n?'<svg class="on"':'<svg');return h;}
 function corUnidade(u){return 'var('+TONS[u.tone]+')';}
 function normaliza(t){
@@ -5039,7 +5106,7 @@ function renderTrilha(){
   pintarTopo();calar();
   const p=proxima();
   const pct=Math.round(feitas()/TOTAL_LESSONS*100);
-  const nome=S.nome?S.nome:'explorador';
+  const nome=escapa(S.nome?S.nome:'explorador');
   const frase=feitas()===0?'Bem-vindo ao meu universo! Cada galáxia é uma matéria e cada mundo tem 5 fases. Escolha por onde começar.'
     :(p?'Sua próxima fase é “'+UNITS[p[0]].lessons[p[1]].title+'”. Bora?'
        :'Você zerou esta galáxia inteira! Pode refazer as fases ou trocar de matéria lá em cima.');
@@ -5069,7 +5136,10 @@ function renderTrilha(){
 let LIC={};
 function abrirLicao(ui,li){
   const u=UNITS[ui],l=u.lessons[li];
-  LIC={ui:ui,li:li,u:u,l:l,qs:genQuestions(l,8),base:8,i:0,passo:0,vidas:5,erros:0,acertos:0,
+  /* base = quantas perguntas a fase REALMENTE tem. Fixo em 8 fazia a fase de 6 perguntas
+     dizer "você acertou 6 de 8" numa jogada perfeita e travar a barra de missão em 75%. */
+  const _qs=genQuestions(l,8);
+  LIC={ui:ui,li:li,u:u,l:l,qs:_qs,base:_qs.length,i:0,passo:0,vidas:5,erros:0,acertos:0,
        combo:0,melhorCombo:0,etapa:'historia',resp:null,digitado:'',conferido:false,dica:false,
        md:{c:0,d:0,u:0},miss:(MISS_ATUAL?MISS_ATUAL[l.id]:null),
        cap:(CAP_ATUAL?CAP_ATUAL[u.n]:null),t0:Date.now()};
@@ -5080,7 +5150,9 @@ function abrirLicao(ui,li){
   pintarLicao();
 }
 function fecharLicao(){
-  calar();$('#licao').classList.remove('on');document.body.style.overflow='';renderTrilha();
+  calar();
+  if(LIC.tDica){clearTimeout(LIC.tDica);LIC.tDica=null;}
+  $('#licao').classList.remove('on');document.body.style.overflow='';renderTrilha();
 }
 function pintarVidas(){
   let h='';for(let i=0;i<5;i++)h+=IC.coracao.replace('<svg',i<LIC.vidas?'<svg':'<svg class="off"');
@@ -5336,8 +5408,14 @@ function dicaDaPergunta(q){
   return (ps[1]&&ps[1].c)||(ps[0]&&ps[0].c)||'Leia a pergunta de novo devagar.';
 }
 function mostrarDica(){
+  /* No modo fácil a dica é agendada com 700ms de atraso depois de um erro.
+     Se a criança tocar em "Continuar" (ou fechar a fase) nesse meio tempo,
+     LIC.i já avançou e LIC.qs[LIC.i] vem undefined — dava TypeError e a dica sumia.
+     Agora só mostra se ainda houver pergunta na tela. */
+  if(LIC.etapa!=='questao')return;
   const q=LIC.qs[LIC.i];
   const cx=$('#caixa-dica');
+  if(!q||!cx)return;
   const txt=dicaDaPergunta(q);
   cx.innerHTML='<div class="mini-tuco">'+MASC('pensa')+'</div><div><span class="tit">Como fazer</span>'+txt+
     '<button class="mais-ajuda" id="mais-ajuda">Ainda não entendi</button></div>';
@@ -5348,7 +5426,8 @@ function mostrarDica(){
   $('.lc-corpo').scrollTo(0,$('.lc-corpo').scrollHeight);
 }
 function ajudaForte(){
-  const q=LIC.qs[LIC.i];LIC.dica=2;
+  const q=LIC.qs[LIC.i];if(!q)return;
+  LIC.dica=2;
   const cx=$('#caixa-dica');
   let msg='';
   if(q.type==='mc'){
@@ -5416,7 +5495,7 @@ function conferir(){
       (LIC.vidas>0?' Esta pergunta volta no fim para você tentar de novo.':'');
     if(!q.__rep&&LIC.vidas>0){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);}
     somErro();pintarVidas();
-    if(S.nivel==='facil'&&!LIC.dica)setTimeout(mostrarDica,700);
+    if(S.nivel==='facil'&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
     const p=$('#palco').firstElementChild;if(p){p.classList.add('tremer');setTimeout(()=>p.classList.remove('tremer'),460);}
   }
   pintarTopo();salvar();
@@ -5432,6 +5511,8 @@ function conferir(){
 }
 function avancar(){
   $('#pe').className='pe';calar();
+  /* a dica do modo fácil pode estar agendada: cancelar antes de trocar de pergunta */
+  if(LIC.tDica){clearTimeout(LIC.tDica);LIC.tDica=null;}
   if(LIC.vidas<=0){LIC.etapa='fim';pintarLicao();return;}
   LIC.i++;
   if(LIC.i>=LIC.qs.length){LIC.etapa='fim';pintarLicao();return;}
@@ -5681,7 +5762,7 @@ function telaPerfil(){
   const niv=Math.min(20,Math.floor(feitasGeral/5)+1);
   let h='<div class="perfil-in">';
   h+='<div class="perfil-cabeca"><div class="perfil-bobby">'+MASC('feliz')+'</div>'+
-     '<h1>'+(p.nome||'Jogador')+'</h1>'+
+     '<h1>'+escapa(p.nome||'Jogador')+'</h1>'+
      '<span class="titulo">Explorador nível '+niv+' · '+(S.nivel==='facil'?'6 a 8 anos':S.nivel==='medio'?'9 a 10 anos':'11+ anos')+'</span></div>';
   h+='<div class="stats">'+
     stat(IC.bandeira,feitasGeral+'/'+totalGeral,'fases')+
@@ -5768,7 +5849,7 @@ function telaResponsavel(){
   const totalAcertos=Object.keys(porL).reduce((a,k)=>a+(porL[k].acertos||0),0);
   const pc=totalAcertos+totalErros?Math.round(totalAcertos/(totalAcertos+totalErros)*100):0;
 
-  let h='<div class="perfil-in"><p class="galeria-intro">Resumo de <b>'+(perfilAtual().nome||'')+'</b> para você acompanhar. '+
+  let h='<div class="perfil-in"><p class="galeria-intro">Resumo de <b>'+escapa(perfilAtual().nome||'')+'</b> para você acompanhar. '+
     'Nada aqui é enviado para lugar nenhum — fica só neste aparelho.</p>';
   h+='<div class="stats">'+
     stat(IC.bandeira,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
@@ -6034,7 +6115,7 @@ function telaPerfis(){
     const n=Object.keys(d.feitas||{}).filter(k=>k.indexOf('rev')!==0).length;
     h+='<div class="cartao'+(apagando===i?' apagando':'')+'">'+
        '<button class="cartao-bt" data-i="'+i+'" style="--m1:'+p.cor+'">'+
-       '<span class="rosto">'+MASC('feliz')+'</span><b>'+p.nome+'</b>'+
+       '<span class="rosto">'+MASC('feliz')+'</span><b>'+escapa(p.nome)+'</b>'+
        '<span class="pg">'+n+' de '+TOTAL_LESSONS+' fases</span></button>'+
        '<button class="lixo" data-del="'+i+'" aria-label="Apagar jogador">'+
        (apagando===i?'<span class="conf">apagar?</span>':IC.lixo)+'</button></div>';
