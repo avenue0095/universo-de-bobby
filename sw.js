@@ -4,8 +4,8 @@
    - a página do app: primeiro tenta a internet (para pegar a versão nova),
      e só usa o cache se estiver sem sinal;
    - ícones e manifesto: primeiro o cache, porque quase nunca mudam.  */
-const CACHE='bobby-v2';
-const ARQUIVOS=['./','./index.html','./manifest.webmanifest','./icone-192.png','./icone-512.png'];
+const CACHE='bobby-v3';
+const ARQUIVOS=['./','./index.html','./manifest.webmanifest','./icone-192.png','./icone-512.png','./icone-maskable.png'];
 
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ARQUIVOS)).then(()=>self.skipWaiting()));
