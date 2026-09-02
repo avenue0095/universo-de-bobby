@@ -769,6 +769,23 @@ ol.plano li{padding-left:38px}
   background:var(--fig-fill);border:2px solid var(--quadro);
   font-size:14.5px;font-weight:700;color:var(--tinta)}
 
+/* ---- escolha de voz ---- */
+.vozes{display:grid;gap:8px;margin-bottom:22px}
+.voz-op{display:flex;flex-direction:column;align-items:flex-start;gap:1px;width:100%;
+  min-width:0;text-align:left;font:inherit;cursor:pointer;
+  padding:11px 14px;border-radius:16px;background:var(--surf);
+  border:2.5px solid var(--linha);border-bottom-width:4px;color:var(--tinta)}
+.voz-op b{font-family:Fredoka,Nunito,sans-serif;font-size:15px;font-weight:600;
+  line-height:1.25;overflow-wrap:anywhere}
+.voz-op span{font-size:12px;font-weight:700;color:var(--tinta2)}
+.voz-op.on{border-color:var(--quadro);background:color-mix(in srgb,var(--quadro) 9%,var(--surf))}
+.voz-op:active{transform:translateY(2px);border-bottom-width:2px}
+.velocidade{display:grid;gap:10px;margin-bottom:22px}
+.velocidade input[type=range]{width:100%;accent-color:var(--quadro);height:26px}
+.vel-tx{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  font-size:12px;font-weight:700;color:var(--tinta2)}
+.vel-tx b{font-family:Fredoka,Nunito,sans-serif;font-size:17px;color:var(--tinta)}
+
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -4673,7 +4690,8 @@ function estadoVazio(){
   return {nome:'',xp:0,ganhoTotal:0,ofensiva:0,melhorOfensiva:0,ultimoDia:'',
     feitas:{},errados:{},comprado:[],look:{},
     stats:{porLicao:{},dias:{},tempo:0},
-    acertos:0,combo:0,som:true,voz:true,nivel:'facil',materia:'mat'};
+    acertos:0,combo:0,som:true,voz:true,nivel:'facil',materia:'mat',
+    vozPt:'',vozEn:'',velocidade:1};
 }
 function clonar(o){
   try{return JSON.parse(JSON.stringify(o));}catch(e){return null;}
@@ -4692,6 +4710,9 @@ function estadoDe(dados){
   s.comprado=Array.isArray(s.comprado)?s.comprado.slice():[];
   ['xp','ganhoTotal','ofensiva','melhorOfensiva','acertos','combo'].forEach(k=>{s[k]=+s[k]||0;});
   s.som=s.som!==false;s.voz=s.voz!==false;
+  s.vozPt=String(s.vozPt||'').slice(0,80);
+  s.vozEn=String(s.vozEn||'').slice(0,80);
+  s.velocidade=Math.min(1.3,Math.max(.6,+s.velocidade||1));
   if(['facil','medio','forte'].indexOf(s.nivel)<0)s.nivel='facil';
   if(['mat','pt','en'].indexOf(s.materia)<0)s.materia='mat';
   s.nome=String(s.nome||'').slice(0,18);
@@ -4834,25 +4855,39 @@ if(typeof speechSynthesis!=='undefined'){
   try{speechSynthesis.addEventListener('voiceschanged',carregarVozes);}catch(e){speechSynthesis.onvoiceschanged=carregarVozes;}
   setTimeout(carregarVozes,300);setTimeout(carregarVozes,1200);
 }
-function vozDe(lang){
+const idioma=v=>String((v&&v.lang)||'').toLowerCase().replace('_','-');
+/* vozes de brincadeira do macOS/iOS: nunca servem para ler uma aula */
+const VOZ_RUIM=/albert|bad news|bahh|bells|boing|bubbles|cellos|deranged|good news|jester|junior|organ|superstar|trinoids|whisper|wobble|zarvox|ralph|fred|kathy|princess|hysterical|pipe organ|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley|novelty/i;
+/* lista de vozes de um idioma, da melhor para a pior */
+function vozesDe(lang){
   if(!VOZES.length)carregarVozes();
   const alvo=(lang||'pt-BR').toLowerCase(),raiz=alvo.slice(0,2);
-  const ok=v=>String(v.lang||'').toLowerCase().replace('_','-');
-  /* 1) exatamente o idioma pedido (en-US / pt-BR) */
-  let c=VOZES.filter(v=>ok(v)===alvo);
-  /* 2) qualquer variante do mesmo idioma (en-GB, pt-PT...) */
-  if(!c.length)c=VOZES.filter(v=>ok(v).slice(0,2)===raiz);
-  if(!c.length)return null;
-  /* prefere voz local (mais natural e sem internet) e nomes conhecidos */
+  let c=VOZES.filter(v=>idioma(v)===alvo);
+  if(!c.length)c=VOZES.filter(v=>idioma(v).slice(0,2)===raiz);
   const nota=v=>{
     let p=0;const n=(v.name||'').toLowerCase();
-    if(v.localService)p+=4;
-    if(ok(v)===alvo)p+=6;
-    if(/samantha|google|natural|siri|zira|aria|jenny|luciana|francisca|maria/.test(n))p+=3;
+    if(VOZ_RUIM.test(n))p-=40;                         /* voz de piada, fora */
+    if(v.localService)p+=4;                            /* funciona sem internet */
+    if(idioma(v)===alvo)p+=6;                          /* sotaque certo */
+    if(/premium|enhanced|neural|natural|siri/.test(n))p+=8;  /* as boas de verdade */
+    if(/samantha|ava|allison|luciana|joana|google|zira|aria|jenny|francisca/.test(n))p+=4;
+    if(/compact/.test(n))p-=3;
     if(v.default)p+=1;
     return p;
   };
-  return c.slice().sort((a,b)=>nota(b)-nota(a))[0];
+  return c.slice().sort((a,b)=>nota(b)-nota(a));
+}
+function vozDe(lang){
+  const lista=vozesDe(lang);
+  if(!lista.length)return null;
+  /* respeita a voz escolhida nas configurações, se ela existir neste aparelho */
+  const escolhida=(lang==='en-US')?S.vozEn:S.vozPt;
+  if(escolhida){
+    const achou=lista.filter(v=>v.name===escolhida)[0]||
+                VOZES.filter(v=>v.name===escolhida)[0];
+    if(achou)return achou;
+  }
+  return lista[0];
 }
 function temVoz(lang){return !!vozDe(lang);}
 function falar(html,lang){
@@ -4862,11 +4897,18 @@ function falar(html,lang){
     const ing=lang==='en-US';
     const u=new SpeechSynthesisUtterance(ing?limpaEN(html):emTexto(html));
     u.lang=ing?'en-US':'pt-BR';
-    const v=vozDe(u.lang);
-    /* sem voz inglesa instalada, ler com voz portuguesa sairia errado: melhor não ler */
+    const escolhida=ing?S.vozEn:S.vozPt;
+    /* Português: sem escolha, deixa o aparelho usar a voz padrão dele —
+       é o som que a criança já conhecia. Inglês é diferente: se ninguém
+       escolher, o aparelho leria com a voz portuguesa e sairia errado,
+       então aí sim procuramos uma voz inglesa de verdade. */
+    let v=null;
+    if(escolhida)v=VOZES.filter(x=>x.name===escolhida)[0]||null;
+    if(!v&&ing)v=vozDe('en-US');
     if(ing&&!v){if(VOZES.length)avisoVoz();return;}
     if(v)u.voice=v;
-    u.rate=ing?.82:.92;u.pitch=1.05;
+    const vel=+S.velocidade||1;
+    u.rate=(ing?.82:.92)*vel;u.pitch=1.05;
     speechSynthesis.speak(u);
   }catch(e){}
 }
@@ -5678,6 +5720,7 @@ function telaPerfil(){
   h+='<div class="perfil-bts"><button class="btn" id="ir-loja">'+IC.chapeu+' Guarda-roupa do Bobby</button>'+
      '<button class="btn laranja" id="ir-galeria">'+IC.quadro+' Meus desenhos</button>'+
      '<button class="btn laranja" id="ir-resp">Para o responsável</button>'+
+     '<button class="btn laranja" id="ir-voz">'+IC.falar+' Voz e som</button>'+
      '<button class="btn fantasma" id="som-perfil">'+(S.som?'Desligar sons':'Ligar sons')+'</button>'+
      '<button class="btn fantasma" id="ed-nome">Trocar nome e cor</button>'+
      '<button class="btn fantasma" id="tr-jogador">Trocar de jogador</button></div>';
@@ -5688,6 +5731,7 @@ function telaPerfil(){
   $('#perfil').querySelectorAll('[data-gal]').forEach(b=>b.addEventListener('click',()=>{
     usarMateria(b.dataset.gal);telaPerfil();}));
   $('#ir-loja').addEventListener('click',telaLoja);
+  $('#ir-voz').addEventListener('click',telaVoz);
   $('#ir-galeria').addEventListener('click',()=>{fecharPerfil2();abrirGaleria(false);});
   $('#ir-resp').addEventListener('click',()=>comSenha(telaResponsavel));
   $('#som-perfil').addEventListener('click',()=>{S.som=!S.som;salvar();pintarTopo();telaPerfil();});
@@ -5802,6 +5846,75 @@ function instrucaoInstalar(){
   return 'No celular, abra este endereço no navegador e procure a opção '+
     '<b>“Adicionar à tela inicial”</b> — no iPhone fica no botão de compartilhar do Safari, '+
     'no Android fica nos três pontinhos do Chrome.';
+}
+
+
+/* ---------- voz e som ---------- */
+function telaVoz(){
+  const pt=vozesDe('pt-BR'),en=vozesDe('en-US');
+  const nomeCurto=v=>{
+    let n=String(v.name||'').replace(/\s*\(.*?\)\s*/g,' ').trim();
+    const extra=[];
+    if(/premium|enhanced|neural|natural/i.test(v.name))extra.push('melhor qualidade');
+    if(!v.localService)extra.push('precisa de internet');
+    if(idioma(v)!=='pt-br'&&idioma(v).slice(0,2)==='pt')extra.push('português de Portugal');
+    if(idioma(v)!=='en-us'&&idioma(v).slice(0,2)==='en')extra.push('inglês não americano');
+    return n+(extra.length?' · '+extra.join(', '):'');
+  };
+  const lista=(vs,atual,campo)=>{
+    if(!vs.length)return '<p class="galeria-intro">Este aparelho não tem nenhuma voz instalada para este idioma.</p>';
+    let h='<div class="vozes">';
+    h+='<button class="voz-op'+(!atual?' on':'')+'" data-voz="'+campo+'|">'+
+       '<b>Voz padrão do aparelho</b><span>a mesma de sempre</span></button>';
+    vs.forEach(v=>{
+      const sel=atual===v.name;
+      h+='<button class="voz-op'+(sel?' on':'')+'" data-voz="'+campo+'|'+
+         String(v.name).replace(/"/g,'&quot;')+'"><b>'+nomeCurto(v)+'</b>'+
+         '<span>'+idioma(v)+'</span></button>';
+    });
+    return h+'</div>';
+  };
+
+  let h='<div class="perfil-in">';
+  h+='<p class="galeria-intro">A voz que lê as aulas vem do próprio aparelho — cada celular tem as suas. '+
+     'Toque numa opção para ouvir e ela já fica escolhida.</p>';
+
+  h+='<h2 class="sec">Voz do português</h2>'+lista(pt,S.vozPt,'pt');
+  h+='<h2 class="sec">Voz do inglês</h2>';
+  if(!en.length)h+='<p class="galeria-intro">Nenhuma voz em inglês instalada. '+
+     'No iPhone: <b>Ajustes → Acessibilidade → Conteúdo Falado → Vozes → Inglês</b>. '+
+     'No Android: <b>Config. → Idiomas → Conversão de texto em voz</b>.</p>';
+  h+=lista(en,S.vozEn,'en');
+
+  const v=Math.round((+S.velocidade||1)*100);
+  h+='<h2 class="sec">Velocidade da fala</h2>';
+  h+='<div class="velocidade"><input type="range" id="vel" min="60" max="130" step="5" value="'+v+'">'+
+     '<div class="vel-tx"><span>mais devagar</span><b id="vel-n">'+v+'%</b><span>mais rápido</span></div>'+
+     '<button class="btn fantasma" id="vel-teste">Ouvir uma frase</button></div>';
+
+  h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-voz">Voltar ao perfil</button></div></div>';
+
+  $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-voz2" aria-label="Voltar">'+
+    IC.volta+'</button><h2>Voz e som</h2></div><div class="rev-corpo">'+h+'</div>';
+  $('#perfil').classList.add('on');document.body.style.overflow='hidden';
+  $('#volta-voz').addEventListener('click',telaPerfil);
+  $('#volta-voz2').addEventListener('click',telaPerfil);
+
+  $('#perfil').querySelectorAll('[data-voz]').forEach(b=>b.addEventListener('click',()=>{
+    const i=b.dataset.voz.indexOf('|');
+    const campo=b.dataset.voz.slice(0,i),nome=b.dataset.voz.slice(i+1);
+    if(campo==='pt'){S.vozPt=nome;salvar();falar('Oi! Eu sou o Bobby. Vamos aprender juntos?');}
+    else{S.vozEn=nome;salvar();falar('Hello! My name is Bobby. Nice to meet you!','en-US');}
+    telaVoz();
+  }));
+  const r=$('#vel');
+  if(r){
+    r.addEventListener('input',()=>{$('#vel-n').textContent=r.value+'%';});
+    r.addEventListener('change',()=>{S.velocidade=(+r.value)/100;salvar();
+      falar('Assim está bom para você acompanhar?');});
+  }
+  const t=$('#vel-teste');
+  if(t)t.addEventListener('click',()=>falar('Contar é apontar para cada coisa e falar um número em voz alta.'));
 }
 
 /* ---------- segurança e dados do perfil ---------- */
