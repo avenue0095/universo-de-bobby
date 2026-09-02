@@ -5852,25 +5852,34 @@ function instrucaoInstalar(){
 /* ---------- voz e som ---------- */
 function telaVoz(){
   const pt=vozesDe('pt-BR'),en=vozesDe('en-US');
+  const REGIAO={'pt-br':'português do Brasil','pt-pt':'português de Portugal',
+    'en-us':'inglês americano','en-gb':'inglês britânico','en-au':'inglês australiano',
+    'en-ie':'inglês irlandês','en-za':'inglês sul-africano','en-in':'inglês indiano'};
   const nomeCurto=v=>{
-    let n=String(v.name||'').replace(/\s*\(.*?\)\s*/g,' ').trim();
-    const extra=[];
-    if(/premium|enhanced|neural|natural/i.test(v.name))extra.push('melhor qualidade');
-    if(!v.localService)extra.push('precisa de internet');
-    if(idioma(v)!=='pt-br'&&idioma(v).slice(0,2)==='pt')extra.push('português de Portugal');
-    if(idioma(v)!=='en-us'&&idioma(v).slice(0,2)==='en')extra.push('inglês não americano');
-    return n+(extra.length?' · '+extra.join(', '):'');
+    /* nomes vêm como "Eddy (Português (Brasil))" — corta tudo do primeiro parêntese */
+    const i=String(v.name||'').indexOf('(');
+    return (i>0?String(v.name).slice(0,i):String(v.name||'')).trim()||'Voz sem nome';
+  };
+  const detalhe=v=>{
+    const e=[];
+    const reg=REGIAO[idioma(v)];
+    if(reg)e.push(reg);
+    if(/premium|enhanced|neural|natural/i.test(v.name))e.push('melhor qualidade');
+    if(!v.localService)e.push('precisa de internet');
+    return e.join(' · ')||idioma(v);
   };
   const lista=(vs,atual,campo)=>{
     if(!vs.length)return '<p class="galeria-intro">Este aparelho não tem nenhuma voz instalada para este idioma.</p>';
     let h='<div class="vozes">';
     h+='<button class="voz-op'+(!atual?' on':'')+'" data-voz="'+campo+'|">'+
        '<b>Voz padrão do aparelho</b><span>a mesma de sempre</span></button>';
+    /* quando dois nomes iguais aparecem, o detalhe do lado desempata */
+    const vistos={};vs.forEach(v=>{const n=nomeCurto(v);vistos[n]=(vistos[n]||0)+1;});
     vs.forEach(v=>{
-      const sel=atual===v.name;
+      const sel=atual===v.name,n=nomeCurto(v);
       h+='<button class="voz-op'+(sel?' on':'')+'" data-voz="'+campo+'|'+
-         String(v.name).replace(/"/g,'&quot;')+'"><b>'+nomeCurto(v)+'</b>'+
-         '<span>'+idioma(v)+'</span></button>';
+         String(v.name).replace(/"/g,'&quot;')+'"><b>'+n+'</b>'+
+         '<span>'+detalhe(v)+'</span></button>';
     });
     return h+'</div>';
   };
@@ -6359,9 +6368,33 @@ else{telaPerfis();if(STORE.atual>=0){S=estadoDe(STORE.perfis[STORE.atual].dados)
 </script>
 
 <script>
+/* Registra o modo offline e, quando existir uma versao mais nova no servidor,
+   troca sozinho e recarrega uma vez so. */
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').then(function(reg){
+      reg.update();
+      setInterval(function(){reg.update();},60*60*1000);
+      reg.addEventListener('updatefound',function(){
+        var novo=reg.installing;
+        if(!novo)return;
+        novo.addEventListener('statechange',function(){
+          if(novo.state==='installed'&&navigator.serviceWorker.controller){
+            novo.postMessage('atualizar-agora');
+          }
+        });
+      });
+    }).catch(function(){});
+    /* Na PRIMEIRA visita o service worker assume o controle e isso tambem
+       dispara controllerchange — recarregar ali seria um piscar sem motivo.
+       So recarregamos quando ja havia um controlador, ou seja, numa troca
+       de versao de verdade. */
+    var tinhaControlador=!!navigator.serviceWorker.controller;
+    var recarregou=false;
+    navigator.serviceWorker.addEventListener('controllerchange',function(){
+      if(!tinhaControlador||recarregou)return;
+      recarregou=true;location.reload();
+    });
   });
 }
 </script>
