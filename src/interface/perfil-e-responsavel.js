@@ -144,7 +144,11 @@ function telaResponsavel(){
   h+='<p class="galeria-intro">Todo o progresso fica guardado <b>só neste aparelho</b>, no navegador. '+
      'Nada é enviado para a internet e não existe cadastro nem e-mail. '+
      'Cada jogador tem a própria caixinha de dados: moedas, fases, erros e desenhos de um não aparecem no outro. '+
-     'Se você limpar os dados do navegador, o progresso vai junto: por isso vale guardar uma cópia.</p>';
+     'Se você limpar os dados do navegador, o progresso vai junto: por isso vale guardar uma cópia.</p>'+
+     '<p class="galeria-intro"><b>A senha desta área é uma trava neste aparelho</b>, para a criança não entrar sozinha. '+
+     'Ela não é controle parental com valor legal: quem sabe mexer no navegador consegue tirá-la. '+
+     'A cópia do perfil é um arquivo de texto comum, sem proteção: guarde com cuidado, porque tem o progresso de uma criança. '+
+     'O app registra números de uso (dias, perguntas, acertos) só neste aparelho, sem nome nem texto.</p>';
   h+=controlesHTML();
   h+=medidorHTML();
   h+='<div id="resp-aviso"></div>';
@@ -153,6 +157,8 @@ function telaResponsavel(){
      '<button class="btn fantasma" id="rs-perfil">Restaurar de uma cópia</button>'+
      '<button class="btn fantasma" id="sn-perfil">'+(temSenha()?'Trocar a senha desta área':'Proteger esta área com senha')+'</button>'+
      '</div>';
+  h+='<h2 class="sec">Apagar</h2><p class="galeria-intro">Remove deste aparelho todos os jogadores, o progresso, os desenhos coloridos, as cópias de segurança guardadas pelo app e a senha. Não dá para desfazer.</p>'+
+     '<div class="perfil-bts"><button class="btn-sec" id="apagar-tudo">Apagar todos os dados deste aparelho</button></div>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-resp">Voltar ao perfil</button></div></div>';
   $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-resp2" aria-label="Voltar">'+IC.volta+'</button><h2>Para o responsável</h2></div><div class="rev-corpo">'+h+'</div>';
   $('#perfil').classList.add('on');document.body.style.overflow='hidden';
@@ -161,9 +167,10 @@ function telaResponsavel(){
   ligarControles(telaResponsavel);ligarSemana();ligarMedidor();
   $('#bx-perfil').addEventListener('click',baixarPerfil);
   $('#rs-perfil').addEventListener('click',restaurarPerfil);
+  $('#apagar-tudo').addEventListener('click',apagarTudoPasso1);
   $('#sn-perfil').addEventListener('click',()=>pedirSenha(
     temSenha()?'Nova senha':'Criar senha',
-    'Escolha de 4 a 6 números. Ela protege os relatórios e a troca de perfis. Anote em algum lugar, não dá para recuperar.',
+    'Escolha de 4 a 6 números. É uma trava neste aparelho para a criança não entrar sozinha, não um controle parental com valor legal. Anote em algum lugar, não dá para recuperar.',
     ()=>telaResponsavel(),true));
 }
 
@@ -185,3 +192,37 @@ function instrucaoInstalar(){
 }
 
 
+
+
+/* ---------- apagar todos os dados deste aparelho: dois passos, com a senha ---------- */
+function apagarTudoPasso1(){
+  abrirFolha('<div class="folha-in"><h2>Apagar tudo deste aparelho?</h2>'+
+    '<p>Isso remove todos os jogadores, o progresso, os desenhos coloridos, as cópias guardadas pelo app e a senha. Não dá para desfazer.</p>'+
+    '<p>Se quiser guardar o progresso, feche esta janela e toque em “Salvar cópia deste perfil” antes.</p>'+
+    '<div class="folha-bts par"><button class="btn-sec" id="at-cancela">Voltar</button><button class="btn-acao" id="at-segue">Quero continuar</button></div></div>');
+  $('#at-cancela').addEventListener('click',fecharFolha);
+  $('#at-segue').addEventListener('click',apagarTudoPasso2);
+}
+function apagarTudoPasso2(erro){
+  const comPin=temSenha();
+  abrirFolha('<div class="folha-in senha-in"><h2>Confirme para apagar</h2>'+
+    '<p class="perfis-sub">'+(comPin?'Digite a senha desta área.':'Digite a palavra APAGAR.')+'</p>'+
+    '<input id="at-campo" class="campo pin" '+(comPin?'type="password" inputmode="numeric" maxlength="6" placeholder="••••" aria-label="Senha da área do responsável"':'type="text" maxlength="6" placeholder="APAGAR" aria-label="Digite APAGAR"')+' autocomplete="off">'+
+    '<label class="marcar"><input type="checkbox" id="at-caches"> Apagar também as imagens e vozes guardadas para jogar sem internet (será preciso baixar de novo)</label>'+
+    (typeof erro==='string'&&erro?'<p class="erro-pin">'+escapa(erro)+'</p>':'')+
+    '<div class="folha-bts par"><button class="btn-sec" id="at-cancela">Cancelar</button><button class="btn-acao" id="at-apaga">Apagar tudo</button></div></div>');
+  $('#at-cancela').addEventListener('click',fecharFolha);
+  $('#at-apaga').addEventListener('click',async()=>{
+    const v=($('#at-campo').value||'').trim();
+    if(comPin){
+      const falta=Math.ceil(esperaDoPin()/1000);
+      if(falta>0){apagarTudoPasso2('Muitas tentativas. Espere '+(falta>=60?Math.ceil(falta/60)+' min':falta+' s')+'.');return;}
+      if(!(await conferirSenha(v))){apagarTudoPasso2('Senha errada.');return;}
+    }else if(v!=='APAGAR'){apagarTudoPasso2('Digite a palavra APAGAR.');return;}
+    const caches=!!$('#at-caches').checked;
+    const r=await apagarTudoDoAparelho({caches:caches});
+    abrirFolha('<div class="folha-in"><h2>Tudo apagado</h2><p>Os dados deste aparelho foram removidos ('+r.chaves.length+' registros'+(caches?' e as imagens e vozes guardadas':'')+'). O app vai recomeçar do zero.</p>'+
+      '<div class="folha-bts"><button class="btn-acao" id="at-fim">Recomeçar</button></div></div>');
+    $('#at-fim').addEventListener('click',()=>{try{location.reload();}catch(e){}});
+  });
+}

@@ -323,7 +323,7 @@ function medidorHTML(){
     '<div class="linha-mundo"><div class="mtx"><b>Voltou no dia 30</b><span class="sub-l">exato: '+f(r.D30)+' · janela: '+f(r.D30_janela)+' · base '+r.n.D30+'</span></div></div>'+
     '<div class="linha-mundo"><div class="mtx"><b>Volta no dia seguinte</b><span class="sub-l">'+f(r.retornoDiaSeguinte)+' · base '+r.n.curr+'</span></div></div>'+
     '<div class="linha-mundo"><div class="mtx"><b>Meta cheia por dia ativo</b><span class="sub-l">'+f(meta)+'</span></div></div></div>';
-  h+='<div class="perfil-bts"><button class="btn fantasma" id="exp-metricas">Exportar métricas anônimas</button></div>';
+  h+='<div class="perfil-bts"><button class="btn fantasma" id="exp-metricas">Exportar métricas sem nome</button></div>';
   return h;
 }
 function ligarMedidor(){

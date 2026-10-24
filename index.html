@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
 <meta name="theme-color" content="#12A06E">
-<meta name="description" content="O Universo de Bobby: matematica, portugues e ingles para criancas de 8 a 13 anos.">
+<meta name="description" content="O Universo de Bobby: matematica, portugues e ingles para criancas de 7 a 12 anos.">
 <title>O Universo de Bobby</title>
 <link rel="preload" href="./assets/fontes/Fredoka-variavel-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./assets/fontes/Nunito-variavel-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -1337,6 +1337,8 @@ body:has(#licao.on) .aviso-voz{display:none}
 /* cenas com o apagado fora de enquadramento: a luz entra por opacidade (cross-fade) */
 .cena.fade .cena-luz{-webkit-mask-image:none;mask-image:none;opacity:var(--op,0);transition:opacity var(--mov-lento) var(--curva-move)}
 @media (prefers-reduced-motion:reduce){.cena.fade .cena-luz{transition:none}}
+.marcar{display:flex;align-items:flex-start;gap:var(--esp-8);text-align:left;margin:var(--esp-8) 0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto-suave)}
+.marcar input{width:24px;height:24px;flex:none;accent-color:var(--materia-base)}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -1472,7 +1474,7 @@ function mc(prompt,correct,wrongs,o){
   const set=[correct];
   (wrongs||[]).forEach(w=>{const s=String(w);if(!set.some(x=>x.trim()===s.trim())&&set.length<4)set.push(s);});
   /* Completa as opções quando a fase não mandou distratores suficientes.
-     Três regras, porque criança de 8 a 13 anos ainda não estuda negativo e o app
+     Três regras, porque criança de 7 a 12 anos ainda não estuda negativo e o app
      escreve decimal com vírgula:
        1) nunca oferecer número negativo;
        2) usar a mesma pontuação do gabarito (1,25 gera 1,75 — nunca 1.75);
@@ -5314,8 +5316,12 @@ function arrumarStore(x){
       dados:estadoDe(p.dados)
     });
   });
-  if(x.senha&&typeof x.senha==='object'&&x.senha.h&&x.senha.s)
-    st.senha={s:String(x.senha.s),h:String(x.senha.h)};
+  if(x.senha&&typeof x.senha==='object'&&x.senha.h&&x.senha.s){
+    const sn=x.senha;
+    if(sn.v===2&&/^[0-9a-f]{32}$/.test(String(sn.s))&&/^[0-9a-f]{64}$/.test(String(sn.h)))
+      st.senha={v:2,s:String(sn.s),it:intDe(sn.it,10000,2000000,150000),h:String(sn.h),e:intDe(sn.e,0,1000,0),b:Math.max(0,Math.min(Date.now()+900000,+sn.b||0))};
+    else st.senha={s:String(sn.s).slice(0,40),h:String(sn.h).slice(0,40)};
+  }
   if(typeof x.atual==='string'){st.atual=st.perfis.findIndex(p=>p.id===x.atual);}
   else{const a=+x.atual;st.atual=(a>=0&&a<st.perfis.length)?a:-1;}
   return st;
@@ -5424,12 +5430,51 @@ function novoPerfil(nome,cor){
   salvarStore();usarPerfil(STORE.perfis.length-1);
   if(typeof registrarEvento==='function')registrarEvento('perfil_criado',{faixa:novo.faixa});
 }
+/* Rastros de um perfil nas chaves antigas (a cópia do v3, a cópia bruta, a versão corrompida e o formato mais antigo):
+   o app só lia essas chaves como segurança, mas dado de criança não pode ficar escondido depois de "apagar jogador". */
+function limparRastrosDoPerfil(p){
+  if(!p)return;
+  try{
+    [CHAVE_V3,CHAVE_V3_BAK].forEach(k=>{
+      const bruto=localStorage.getItem(k);if(!bruto)return;
+      let o=null;try{o=JSON.parse(bruto,semChavesPerigosas);}catch(e){}
+      if(!o||!Array.isArray(o.perfis)){localStorage.removeItem(k);return;}      /* ilegível: não dá para separar, sai inteiro */
+      const resto=o.perfis.filter(q=>!(q&&q.id!==undefined&&String(q.id)===String(p.id)));
+      if(resto.length===o.perfis.length)return;
+      if(!resto.length)localStorage.removeItem(k);
+      else{o.perfis=resto;if(!resto.some(q=>q&&String(q.id)===String(o.atual)))o.atual=0;localStorage.setItem(k,JSON.stringify(o));}
+    });
+    localStorage.removeItem(CHAVE_V4_RUIM);
+    const antigo=localStorage.getItem(CHAVE);
+    if(antigo){let d=null;try{d=JSON.parse(antigo);}catch(e){}
+      if(!d||String(d.nome||'')===String(p.nome||'')||STORE.perfis.length===0)localStorage.removeItem(CHAVE);}
+  }catch(e){}
+}
+const PREFIXOS_DO_APP=['universo-bobby','mundo-numeros','trilha-matematica'];
+/* Apaga TUDO que o app guarda neste aparelho. opc.caches: também as imagens e vozes guardadas para jogar sem internet. */
+async function apagarTudoDoAparelho(opc){
+  opc=opc||{};
+  const chaves=[];
+  try{
+    for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k&&PREFIXOS_DO_APP.some(pf=>k.indexOf(pf)===0))chaves.push(k);}
+  }catch(e){}
+  [CHAVE4,CHAVE_V3,CHAVE_V3_BAK,CHAVE_V4_RUIM,CHAVE,typeof CHAVE_EVENTOS!=='undefined'?CHAVE_EVENTOS:'universo-bobby-eventos-v1'].forEach(k=>{if(chaves.indexOf(k)<0)chaves.push(k);});
+  chaves.forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
+  const apagados=[];
+  if(opc.caches&&typeof caches!=='undefined'){
+    try{const ks=await caches.keys();for(const k of ks){if(k.indexOf('bobby-arte-')===0||k.indexOf('bobby-audio-')===0){await caches.delete(k);apagados.push(k);}}}catch(e){}
+  }
+  STORE.perfis=[];STORE.atual=-1;STORE.senha=null;S=estadoVazio();
+  return {chaves:chaves,caches:apagados};
+}
 function apagarPerfil(i){
+  const apagado=STORE.perfis[i];
   const pid=STORE.perfis[i]&&STORE.perfis[i].pid;
   STORE.perfis.splice(i,1);
   if(STORE.atual===i)STORE.atual=-1;
   else if(STORE.atual>i)STORE.atual--;
   salvarStore();
+  limparRastrosDoPerfil(apagado);
   if(pid&&typeof apagarEventosDe==='function')apagarEventosDe(pid);
   if(STORE.atual<0){S=estadoVazio();}
   telaPerfis();
@@ -7036,12 +7081,12 @@ function resumoSemana(stats,hojeStr){
   r.pct=r.perguntas?Math.round(r.acertos/r.perguntas*100):null;
   return r;
 }
-/* pacote anônimo: só contadores. O pid sai trocado por outro sorteio e o apelido nunca entra. */
+/* pacote SEM NOME (pseudonimizado, não anônimo: guarda dia e hora de uso): só contadores. O pid sai trocado por outro sorteio e o apelido nunca entra. */
 function pacoteDeMetricas(pid){
   const troca=sorteioId(12);
   const itens=eventosDoPerfil(pid).map(x=>Object.assign({},x,{pid:troca,s:undefined}));
   itens.forEach(x=>{delete x.s;});
-  return {app:'universo-de-bobby',tipo:'metricas-anonimas',versao:1,quando:new Date().toISOString(),eventos:itens};
+  return {app:'universo-de-bobby',tipo:'metricas-sem-nome',versao:1,quando:new Date().toISOString(),eventos:itens};
 }
 /* ---------- ciclo diário: dia vivo, meta, baú, missões, bilhete e ponto de parada ----------
    docs/FASE-2-especificacao.md, seção 5. Lógica sem desenho (as telas ficam em ciclo-ui.js).
@@ -7575,7 +7620,11 @@ function telaResponsavel(){
   h+='<p class="galeria-intro">Todo o progresso fica guardado <b>só neste aparelho</b>, no navegador. '+
      'Nada é enviado para a internet e não existe cadastro nem e-mail. '+
      'Cada jogador tem a própria caixinha de dados: moedas, fases, erros e desenhos de um não aparecem no outro. '+
-     'Se você limpar os dados do navegador, o progresso vai junto: por isso vale guardar uma cópia.</p>';
+     'Se você limpar os dados do navegador, o progresso vai junto: por isso vale guardar uma cópia.</p>'+
+     '<p class="galeria-intro"><b>A senha desta área é uma trava neste aparelho</b>, para a criança não entrar sozinha. '+
+     'Ela não é controle parental com valor legal: quem sabe mexer no navegador consegue tirá-la. '+
+     'A cópia do perfil é um arquivo de texto comum, sem proteção: guarde com cuidado, porque tem o progresso de uma criança. '+
+     'O app registra números de uso (dias, perguntas, acertos) só neste aparelho, sem nome nem texto.</p>';
   h+=controlesHTML();
   h+=medidorHTML();
   h+='<div id="resp-aviso"></div>';
@@ -7584,6 +7633,8 @@ function telaResponsavel(){
      '<button class="btn fantasma" id="rs-perfil">Restaurar de uma cópia</button>'+
      '<button class="btn fantasma" id="sn-perfil">'+(temSenha()?'Trocar a senha desta área':'Proteger esta área com senha')+'</button>'+
      '</div>';
+  h+='<h2 class="sec">Apagar</h2><p class="galeria-intro">Remove deste aparelho todos os jogadores, o progresso, os desenhos coloridos, as cópias de segurança guardadas pelo app e a senha. Não dá para desfazer.</p>'+
+     '<div class="perfil-bts"><button class="btn-sec" id="apagar-tudo">Apagar todos os dados deste aparelho</button></div>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-resp">Voltar ao perfil</button></div></div>';
   $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-resp2" aria-label="Voltar">'+IC.volta+'</button><h2>Para o responsável</h2></div><div class="rev-corpo">'+h+'</div>';
   $('#perfil').classList.add('on');document.body.style.overflow='hidden';
@@ -7592,9 +7643,10 @@ function telaResponsavel(){
   ligarControles(telaResponsavel);ligarSemana();ligarMedidor();
   $('#bx-perfil').addEventListener('click',baixarPerfil);
   $('#rs-perfil').addEventListener('click',restaurarPerfil);
+  $('#apagar-tudo').addEventListener('click',apagarTudoPasso1);
   $('#sn-perfil').addEventListener('click',()=>pedirSenha(
     temSenha()?'Nova senha':'Criar senha',
-    'Escolha de 4 a 6 números. Ela protege os relatórios e a troca de perfis. Anote em algum lugar, não dá para recuperar.',
+    'Escolha de 4 a 6 números. É uma trava neste aparelho para a criança não entrar sozinha, não um controle parental com valor legal. Anote em algum lugar, não dá para recuperar.',
     ()=>telaResponsavel(),true));
 }
 
@@ -7616,6 +7668,40 @@ function instrucaoInstalar(){
 }
 
 
+
+
+/* ---------- apagar todos os dados deste aparelho: dois passos, com a senha ---------- */
+function apagarTudoPasso1(){
+  abrirFolha('<div class="folha-in"><h2>Apagar tudo deste aparelho?</h2>'+
+    '<p>Isso remove todos os jogadores, o progresso, os desenhos coloridos, as cópias guardadas pelo app e a senha. Não dá para desfazer.</p>'+
+    '<p>Se quiser guardar o progresso, feche esta janela e toque em “Salvar cópia deste perfil” antes.</p>'+
+    '<div class="folha-bts par"><button class="btn-sec" id="at-cancela">Voltar</button><button class="btn-acao" id="at-segue">Quero continuar</button></div></div>');
+  $('#at-cancela').addEventListener('click',fecharFolha);
+  $('#at-segue').addEventListener('click',apagarTudoPasso2);
+}
+function apagarTudoPasso2(erro){
+  const comPin=temSenha();
+  abrirFolha('<div class="folha-in senha-in"><h2>Confirme para apagar</h2>'+
+    '<p class="perfis-sub">'+(comPin?'Digite a senha desta área.':'Digite a palavra APAGAR.')+'</p>'+
+    '<input id="at-campo" class="campo pin" '+(comPin?'type="password" inputmode="numeric" maxlength="6" placeholder="••••" aria-label="Senha da área do responsável"':'type="text" maxlength="6" placeholder="APAGAR" aria-label="Digite APAGAR"')+' autocomplete="off">'+
+    '<label class="marcar"><input type="checkbox" id="at-caches"> Apagar também as imagens e vozes guardadas para jogar sem internet (será preciso baixar de novo)</label>'+
+    (typeof erro==='string'&&erro?'<p class="erro-pin">'+escapa(erro)+'</p>':'')+
+    '<div class="folha-bts par"><button class="btn-sec" id="at-cancela">Cancelar</button><button class="btn-acao" id="at-apaga">Apagar tudo</button></div></div>');
+  $('#at-cancela').addEventListener('click',fecharFolha);
+  $('#at-apaga').addEventListener('click',async()=>{
+    const v=($('#at-campo').value||'').trim();
+    if(comPin){
+      const falta=Math.ceil(esperaDoPin()/1000);
+      if(falta>0){apagarTudoPasso2('Muitas tentativas. Espere '+(falta>=60?Math.ceil(falta/60)+' min':falta+' s')+'.');return;}
+      if(!(await conferirSenha(v))){apagarTudoPasso2('Senha errada.');return;}
+    }else if(v!=='APAGAR'){apagarTudoPasso2('Digite a palavra APAGAR.');return;}
+    const caches=!!$('#at-caches').checked;
+    const r=await apagarTudoDoAparelho({caches:caches});
+    abrirFolha('<div class="folha-in"><h2>Tudo apagado</h2><p>Os dados deste aparelho foram removidos ('+r.chaves.length+' registros'+(caches?' e as imagens e vozes guardadas':'')+'). O app vai recomeçar do zero.</p>'+
+      '<div class="folha-bts"><button class="btn-acao" id="at-fim">Recomeçar</button></div></div>');
+    $('#at-fim').addEventListener('click',()=>{try{location.reload();}catch(e){}});
+  });
+}
 /* ---------- voz e som (voz gravada: só liga/desliga, velocidade e pacotes para jogar sem internet) ---------- */
 function telaVoz(){
   let h='<div class="perfil-in">';
@@ -7679,26 +7765,54 @@ function telaVoz(){
 }
 
 /* ---------- segurança e dados do perfil ---------- */
-/* A senha guarda a AREA DO RESPONSAVEL (relatorios, apagar perfis, backup).
-   Nao e criptografia de verdade — e uma tranca simples para a crianca nao entrar
-   sozinha. Nenhum dado sai deste aparelho. */
+/* A senha guarda a ÁREA DO RESPONSÁVEL (relatórios, apagar perfis, backup, apagar tudo).
+   É uma TRAVA LOCAL neste aparelho para a criança não entrar sozinha. NÃO é controle parental com valor legal: quem sabe mexer no
+   navegador consegue removê-la, porque não existe servidor. Controle parental de verdade fica para a conta do responsável na nuvem.
+   Guardada com PBKDF2-SHA256 (150 mil voltas, Web Crypto) e sal aleatório de 16 bytes, criado a cada vez que a senha é definida
+   (a senha é uma só por aparelho, não por jogador). Depois de 5 erros seguidos, espera crescente (30 s, 1 min, 2 min... até 15 min).
+   Senha criada nas versões anteriores (hash simples) continua valendo e é trocada pelo PBKDF2 no primeiro acerto. */
+const PBKDF2_VOLTAS=150000,PIN_ERROS_ATE_ESPERA=5;
 function temSenha(){return !!(STORE.senha&&STORE.senha.h);}
-function embaralha(pin){
-  /* hash simples e estavel; guardamos so o resultado, nunca a senha em si */
-  const sal=STORE.senha&&STORE.senha.s?STORE.senha.s:('s'+Math.random().toString(36).slice(2,10));
-  let h=5381;const t=sal+'|'+String(pin);
-  for(let i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))>>>0;
-  for(let v=0;v<5000;v++)h=((h<<5)+h+(v%97))>>>0;
-  return {s:sal,h:h.toString(36)};
+const paraHex=b=>Array.from(new Uint8Array(b)).map(x=>('0'+x.toString(16)).slice(-2)).join('');
+const temCripto=()=>typeof crypto!=='undefined'&&crypto&&crypto.subtle&&typeof crypto.getRandomValues==='function';
+function salAleatorio(){const a=new Uint8Array(16);crypto.getRandomValues(a);return paraHex(a);}
+async function pbkdf2(pin,salHex,voltas){
+  const chave=await crypto.subtle.importKey('raw',new TextEncoder().encode(String(pin)),'PBKDF2',false,['deriveBits']);
+  const sal=Uint8Array.from(salHex.match(/../g).map(x=>parseInt(x,16)));
+  return paraHex(await crypto.subtle.deriveBits({name:'PBKDF2',salt:sal,iterations:voltas,hash:'SHA-256'},chave,256));
 }
-function definirSenha(pin){STORE.senha=null;STORE.senha=embaralha(pin);salvarStore();}
-function conferirSenha(pin){
-  if(!temSenha())return true;
-  const sal=STORE.senha.s;
+/* hash simples das versões anteriores: só para conferir senha antiga e trocá-la */
+function hashLegado(pin,sal){
   let h=5381;const t=sal+'|'+String(pin);
   for(let i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))>>>0;
   for(let v=0;v<5000;v++)h=((h<<5)+h+(v%97))>>>0;
-  return h.toString(36)===STORE.senha.h;
+  return h.toString(36);
+}
+async function definirSenha(pin){
+  if(temCripto()){
+    const s=salAleatorio();
+    STORE.senha={v:2,s:s,it:PBKDF2_VOLTAS,h:await pbkdf2(pin,s,PBKDF2_VOLTAS),e:0,b:0};
+  }else{                                    /* ambiente sem Web Crypto (não é o caso de https nem de localhost) */
+    const s='s'+Math.random().toString(36).slice(2,10);
+    STORE.senha={s:s,h:hashLegado(pin,s)};
+  }
+  salvarStore();
+}
+const esperaDoPin=()=>Math.max(0,((STORE.senha&&STORE.senha.b)||0)-Date.now());
+async function conferirSenha(pin){
+  if(!temSenha())return true;
+  if(esperaDoPin()>0)return false;
+  const sn=STORE.senha;
+  let ok=false;
+  if(sn.v===2&&temCripto())ok=(await pbkdf2(pin,sn.s,sn.it||PBKDF2_VOLTAS))===sn.h;
+  else if(sn.v!==2){ok=hashLegado(pin,sn.s)===sn.h;if(ok)await definirSenha(pin);}   /* migra no primeiro acerto */
+  if(ok){if(STORE.senha.e||STORE.senha.b){STORE.senha.e=0;STORE.senha.b=0;salvarStore();}return true;}
+  if(sn.v===2){
+    sn.e=(sn.e||0)+1;
+    if(sn.e>=PIN_ERROS_ATE_ESPERA)sn.b=Date.now()+Math.min(900,30*Math.pow(2,sn.e-PIN_ERROS_ATE_ESPERA))*1000;
+    salvarStore();
+  }
+  return false;
 }
 let liberadoAte=0;
 const respLiberado=()=>!temSenha()||Date.now()<liberadoAte;
@@ -7714,15 +7828,17 @@ function pedirSenha(titulo,texto,aoAcertar,criando){
       '<button class="btn" id="pin-ok">'+(criando?'Criar senha':'Entrar')+'</button></div></div>';
     $('#folha').classList.add('on');
     const campo=$('#campo-pin');campo.focus();
-    const tenta=()=>{
+    const tenta=async()=>{
       const v=(campo.value||'').trim();
       if(criando){
         if(!/^[0-9]{4,6}$/.test(v)){erro='Use de 4 a 6 números.';pinta();return;}
-        definirSenha(v);liberadoAte=Date.now()+15*60000;
+        await definirSenha(v);liberadoAte=Date.now()+15*60000;
         $('#folha').classList.remove('on');aoAcertar();return;
       }
-      if(conferirSenha(v)){liberadoAte=Date.now()+15*60000;$('#folha').classList.remove('on');aoAcertar();}
-      else{erro='Senha errada. Tente de novo.';pinta();}
+      const falta=Math.ceil(esperaDoPin()/1000);
+      if(falta>0){erro='Muitas tentativas. Espere '+(falta>=60?Math.ceil(falta/60)+' min':falta+' s')+' para tentar de novo.';pinta();return;}
+      if(await conferirSenha(v)){liberadoAte=Date.now()+15*60000;$('#folha').classList.remove('on');aoAcertar();}
+      else{const f2=Math.ceil(esperaDoPin()/1000);erro=f2>0?'Muitas tentativas. Espere '+(f2>=60?Math.ceil(f2/60)+' min':f2+' s')+' para tentar de novo.':'Senha errada. Tente de novo.';pinta();}
     };
     $('#pin-ok').addEventListener('click',tenta);
     campo.addEventListener('keydown',e=>{if(e.key==='Enter')tenta();});
@@ -8537,7 +8653,7 @@ function medidorHTML(){
     '<div class="linha-mundo"><div class="mtx"><b>Voltou no dia 30</b><span class="sub-l">exato: '+f(r.D30)+' · janela: '+f(r.D30_janela)+' · base '+r.n.D30+'</span></div></div>'+
     '<div class="linha-mundo"><div class="mtx"><b>Volta no dia seguinte</b><span class="sub-l">'+f(r.retornoDiaSeguinte)+' · base '+r.n.curr+'</span></div></div>'+
     '<div class="linha-mundo"><div class="mtx"><b>Meta cheia por dia ativo</b><span class="sub-l">'+f(meta)+'</span></div></div></div>';
-  h+='<div class="perfil-bts"><button class="btn fantasma" id="exp-metricas">Exportar métricas anônimas</button></div>';
+  h+='<div class="perfil-bts"><button class="btn fantasma" id="exp-metricas">Exportar métricas sem nome</button></div>';
   return h;
 }
 function ligarMedidor(){

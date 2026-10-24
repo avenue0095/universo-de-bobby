@@ -1325,3 +1325,5 @@ body:has(#licao.on) .aviso-voz{display:none}
 /* cenas com o apagado fora de enquadramento: a luz entra por opacidade (cross-fade) */
 .cena.fade .cena-luz{-webkit-mask-image:none;mask-image:none;opacity:var(--op,0);transition:opacity var(--mov-lento) var(--curva-move)}
 @media (prefers-reduced-motion:reduce){.cena.fade .cena-luz{transition:none}}
+.marcar{display:flex;align-items:flex-start;gap:var(--esp-8);text-align:left;margin:var(--esp-8) 0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto-suave)}
+.marcar input{width:24px;height:24px;flex:none;accent-color:var(--materia-base)}

@@ -39,7 +39,7 @@ function mc(prompt,correct,wrongs,o){
   const set=[correct];
   (wrongs||[]).forEach(w=>{const s=String(w);if(!set.some(x=>x.trim()===s.trim())&&set.length<4)set.push(s);});
   /* Completa as opções quando a fase não mandou distratores suficientes.
-     Três regras, porque criança de 8 a 13 anos ainda não estuda negativo e o app
+     Três regras, porque criança de 7 a 12 anos ainda não estuda negativo e o app
      escreve decimal com vírgula:
        1) nunca oferecer número negativo;
        2) usar a mesma pontuação do gabarito (1,25 gera 1,75 — nunca 1.75);

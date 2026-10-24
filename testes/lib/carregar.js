@@ -84,6 +84,7 @@ function contextoBase(semente) {
   };
   sandbox.Math.random = prng(semente == null ? 1 : semente);
   sandbox.window = sandbox;
+  sandbox.crypto = require('crypto').webcrypto; sandbox.TextEncoder = TextEncoder; sandbox.Uint8Array = Uint8Array;
   sandbox.innerWidth = 390; sandbox.innerHeight = 844;
   return sandbox;
 }
@@ -117,6 +118,8 @@ function carregarApp(semente, opcoes) {
     getItem: (k) => (k in guarda ? guarda[k] : null),
     setItem: (k, v) => { if (opcoes.recusar && opcoes.recusar(k)) throw new Error('QuotaExceededError'); guarda[k] = String(v); },
     removeItem: (k) => { delete guarda[k]; },
+    key: (i) => Object.keys(guarda)[i] || null,
+    get length() { return Object.keys(guarda).length; },
   };
   sandbox.document = {
     querySelector: () => elementoFalso(),

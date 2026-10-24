@@ -95,7 +95,7 @@ const eventos = (a) => JSON.parse(a.guarda['universo-bobby-eventos-v1']).itens;
     const a = novoApp();
     const pid = a.avaliar('perfilAtual().pid');
     const pac = JSON.parse(JSON.stringify(a.avaliar('pacoteDeMetricas(perfilAtual().pid)')));
-    A.strictEqual(pac.tipo, 'metricas-anonimas');
+    A.strictEqual(pac.tipo, 'metricas-sem-nome');
     A.ok(pac.eventos.length >= 1);
     pac.eventos.forEach((e) => { A.notStrictEqual(e.pid, pid); A.ok(!('s' in e)); });
     A.ok(!JSON.stringify(pac).includes('Zeca'));

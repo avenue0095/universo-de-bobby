@@ -196,8 +196,12 @@ function arrumarStore(x){
       dados:estadoDe(p.dados)
     });
   });
-  if(x.senha&&typeof x.senha==='object'&&x.senha.h&&x.senha.s)
-    st.senha={s:String(x.senha.s),h:String(x.senha.h)};
+  if(x.senha&&typeof x.senha==='object'&&x.senha.h&&x.senha.s){
+    const sn=x.senha;
+    if(sn.v===2&&/^[0-9a-f]{32}$/.test(String(sn.s))&&/^[0-9a-f]{64}$/.test(String(sn.h)))
+      st.senha={v:2,s:String(sn.s),it:intDe(sn.it,10000,2000000,150000),h:String(sn.h),e:intDe(sn.e,0,1000,0),b:Math.max(0,Math.min(Date.now()+900000,+sn.b||0))};
+    else st.senha={s:String(sn.s).slice(0,40),h:String(sn.h).slice(0,40)};
+  }
   if(typeof x.atual==='string'){st.atual=st.perfis.findIndex(p=>p.id===x.atual);}
   else{const a=+x.atual;st.atual=(a>=0&&a<st.perfis.length)?a:-1;}
   return st;
@@ -306,12 +310,51 @@ function novoPerfil(nome,cor){
   salvarStore();usarPerfil(STORE.perfis.length-1);
   if(typeof registrarEvento==='function')registrarEvento('perfil_criado',{faixa:novo.faixa});
 }
+/* Rastros de um perfil nas chaves antigas (a cópia do v3, a cópia bruta, a versão corrompida e o formato mais antigo):
+   o app só lia essas chaves como segurança, mas dado de criança não pode ficar escondido depois de "apagar jogador". */
+function limparRastrosDoPerfil(p){
+  if(!p)return;
+  try{
+    [CHAVE_V3,CHAVE_V3_BAK].forEach(k=>{
+      const bruto=localStorage.getItem(k);if(!bruto)return;
+      let o=null;try{o=JSON.parse(bruto,semChavesPerigosas);}catch(e){}
+      if(!o||!Array.isArray(o.perfis)){localStorage.removeItem(k);return;}      /* ilegível: não dá para separar, sai inteiro */
+      const resto=o.perfis.filter(q=>!(q&&q.id!==undefined&&String(q.id)===String(p.id)));
+      if(resto.length===o.perfis.length)return;
+      if(!resto.length)localStorage.removeItem(k);
+      else{o.perfis=resto;if(!resto.some(q=>q&&String(q.id)===String(o.atual)))o.atual=0;localStorage.setItem(k,JSON.stringify(o));}
+    });
+    localStorage.removeItem(CHAVE_V4_RUIM);
+    const antigo=localStorage.getItem(CHAVE);
+    if(antigo){let d=null;try{d=JSON.parse(antigo);}catch(e){}
+      if(!d||String(d.nome||'')===String(p.nome||'')||STORE.perfis.length===0)localStorage.removeItem(CHAVE);}
+  }catch(e){}
+}
+const PREFIXOS_DO_APP=['universo-bobby','mundo-numeros','trilha-matematica'];
+/* Apaga TUDO que o app guarda neste aparelho. opc.caches: também as imagens e vozes guardadas para jogar sem internet. */
+async function apagarTudoDoAparelho(opc){
+  opc=opc||{};
+  const chaves=[];
+  try{
+    for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k&&PREFIXOS_DO_APP.some(pf=>k.indexOf(pf)===0))chaves.push(k);}
+  }catch(e){}
+  [CHAVE4,CHAVE_V3,CHAVE_V3_BAK,CHAVE_V4_RUIM,CHAVE,typeof CHAVE_EVENTOS!=='undefined'?CHAVE_EVENTOS:'universo-bobby-eventos-v1'].forEach(k=>{if(chaves.indexOf(k)<0)chaves.push(k);});
+  chaves.forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
+  const apagados=[];
+  if(opc.caches&&typeof caches!=='undefined'){
+    try{const ks=await caches.keys();for(const k of ks){if(k.indexOf('bobby-arte-')===0||k.indexOf('bobby-audio-')===0){await caches.delete(k);apagados.push(k);}}}catch(e){}
+  }
+  STORE.perfis=[];STORE.atual=-1;STORE.senha=null;S=estadoVazio();
+  return {chaves:chaves,caches:apagados};
+}
 function apagarPerfil(i){
+  const apagado=STORE.perfis[i];
   const pid=STORE.perfis[i]&&STORE.perfis[i].pid;
   STORE.perfis.splice(i,1);
   if(STORE.atual===i)STORE.atual=-1;
   else if(STORE.atual>i)STORE.atual--;
   salvarStore();
+  limparRastrosDoPerfil(apagado);
   if(pid&&typeof apagarEventosDe==='function')apagarEventosDe(pid);
   if(STORE.atual<0){S=estadoVazio();}
   telaPerfis();

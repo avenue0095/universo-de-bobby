@@ -118,10 +118,10 @@ function resumoSemana(stats,hojeStr){
   r.pct=r.perguntas?Math.round(r.acertos/r.perguntas*100):null;
   return r;
 }
-/* pacote anônimo: só contadores. O pid sai trocado por outro sorteio e o apelido nunca entra. */
+/* pacote SEM NOME (pseudonimizado, não anônimo: guarda dia e hora de uso): só contadores. O pid sai trocado por outro sorteio e o apelido nunca entra. */
 function pacoteDeMetricas(pid){
   const troca=sorteioId(12);
   const itens=eventosDoPerfil(pid).map(x=>Object.assign({},x,{pid:troca,s:undefined}));
   itens.forEach(x=>{delete x.s;});
-  return {app:'universo-de-bobby',tipo:'metricas-anonimas',versao:1,quando:new Date().toISOString(),eventos:itens};
+  return {app:'universo-de-bobby',tipo:'metricas-sem-nome',versao:1,quando:new Date().toISOString(),eventos:itens};
 }

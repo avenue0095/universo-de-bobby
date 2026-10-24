@@ -1,6 +1,6 @@
 # O Universo de Bobby
 
-App PWA infantil (matemática, português e inglês, 8 a 13 anos). Sem framework e sem dependências:
+App PWA infantil (matemática, português e inglês, 7 a 12 anos). Sem framework e sem dependências:
 HTML, CSS e JavaScript puros, publicados pelo GitHub Pages **a partir da raiz** do repositório.
 
 ## Como editar
@@ -68,3 +68,22 @@ Se mexer em `sw.js`, suba o número de `CACHE` (hoje `bobby-v5`). O áudio grava
 ## Pastas que não são do app
 
 `pesquisa/` e `docs/` são material de apoio e não entram no build.
+
+## Segurança e privacidade (auditoria de 24/10/2026)
+
+- **Dados que entram** (backup `.json` e `localStorage`) passam por `src/interface/seguranca-dados.js`: chave `__proto__`/`constructor`/`prototype` nunca entra, texto de pergunta só mantém marcação simples, figura só se for SVG curto, campo fora da lista cai, arquivo acima de 2 MB é recusado. Defesa em profundidade: o ponto que escreve HTML também escapa. `node testes/seguranca.js` importa um backup malicioso e prova que nada executa.
+- **CSP** por `<meta>` no `index.html` (sem `unsafe-eval`, sem origem externa, `connect-src 'self'`, `form-action 'none'`). Scripts e estilo continuam inline porque a build os inlina; o ganho real é que um script injetado não consegue mandar dados para fora. `frame-ancestors` e os demais cabeçalhos vão em `_headers` (gerado por `build/site.py`).
+- **Service worker** só guarda recurso da própria origem; só o início do app substitui o `index.html` guardado.
+- **Senha da área do responsável**: PBKDF2-SHA256 (150 mil voltas, Web Crypto), sal aleatório de 16 bytes por senha (a senha é uma só por aparelho), espera crescente depois de 5 erros (30 s, 1 min, 2 min... até 15 min). Senha antiga (hash simples) vale e é trocada no primeiro acerto. **É uma trava local para a criança não entrar sozinha, não controle parental com valor legal**: quem sabe mexer no navegador consegue removê-la. Isso está escrito na tela do responsável.
+- **Apagar**: "Apagar jogador" limpa também os rastros dele nas chaves antigas (`mundo-numeros-v2`, `.bak-v3`, `.corrompido`). "Apagar todos os dados deste aparelho" (área do responsável) pede dois passos e a senha (ou a palavra APAGAR se não houver senha) e, se marcado, também as imagens e vozes guardadas.
+- Cópia do perfil (`.json`) é texto comum, sem cifra: tem dado de criança, guarde com cuidado. O pacote de métricas se chama `metricas-sem-nome` (é pseudonimizado, não anônimo).
+- A faixa etária pública é **7 a 12 anos** (manifesto, descrição e README).
+
+## Publicar (só com ordem do Filipe)
+
+`python3 build/site.py` monta `dist/site/` (cerca de 51 MB) só com o que vai ao público: `index.html`, `sw.js`, manifesto, ícones, `assets/`, `audio/manifesto-min.json` e os `.m4a`, mais `_headers` e `.nojekyll`. Não entram `arte/`, `docs/`, `pesquisa/`, `src/`, `build/`, `testes/`, `.git`, o manifesto de áudio com os textos das falas nem os `.opus` (use `--com-opus` se quiser). `node testes/site.js` falha se aparecer pasta proibida, extensão fora da lista ou mais de 75 MB.
+
+Dois caminhos, nenhum feito por este repositório:
+1. **GitHub Pages por Actions** (recomendado): um workflow que roda `python3 build/build.py && python3 build/site.py` e publica `dist/site` com `actions/upload-pages-artifact` e `actions/deploy-pages`. Como o Pages não lê `_headers`, a CSP vai só pela `<meta>` (sem `frame-ancestors`).
+2. **Branch `gh-pages`** com o conteúdo de `dist/site` na raiz (`git subtree` ou cópia manual).
+Em Cloudflare Pages ou Netlify o `_headers` vale e traz todos os cabeçalhos. Antes de qualquer publicação: `npm test`, `npm run fumaca`, gitleaks e semgrep, e a ordem do Filipe.

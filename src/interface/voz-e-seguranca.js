@@ -61,26 +61,54 @@ function telaVoz(){
 }
 
 /* ---------- segurança e dados do perfil ---------- */
-/* A senha guarda a AREA DO RESPONSAVEL (relatorios, apagar perfis, backup).
-   Nao e criptografia de verdade — e uma tranca simples para a crianca nao entrar
-   sozinha. Nenhum dado sai deste aparelho. */
+/* A senha guarda a ÁREA DO RESPONSÁVEL (relatórios, apagar perfis, backup, apagar tudo).
+   É uma TRAVA LOCAL neste aparelho para a criança não entrar sozinha. NÃO é controle parental com valor legal: quem sabe mexer no
+   navegador consegue removê-la, porque não existe servidor. Controle parental de verdade fica para a conta do responsável na nuvem.
+   Guardada com PBKDF2-SHA256 (150 mil voltas, Web Crypto) e sal aleatório de 16 bytes, criado a cada vez que a senha é definida
+   (a senha é uma só por aparelho, não por jogador). Depois de 5 erros seguidos, espera crescente (30 s, 1 min, 2 min... até 15 min).
+   Senha criada nas versões anteriores (hash simples) continua valendo e é trocada pelo PBKDF2 no primeiro acerto. */
+const PBKDF2_VOLTAS=150000,PIN_ERROS_ATE_ESPERA=5;
 function temSenha(){return !!(STORE.senha&&STORE.senha.h);}
-function embaralha(pin){
-  /* hash simples e estavel; guardamos so o resultado, nunca a senha em si */
-  const sal=STORE.senha&&STORE.senha.s?STORE.senha.s:('s'+Math.random().toString(36).slice(2,10));
-  let h=5381;const t=sal+'|'+String(pin);
-  for(let i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))>>>0;
-  for(let v=0;v<5000;v++)h=((h<<5)+h+(v%97))>>>0;
-  return {s:sal,h:h.toString(36)};
+const paraHex=b=>Array.from(new Uint8Array(b)).map(x=>('0'+x.toString(16)).slice(-2)).join('');
+const temCripto=()=>typeof crypto!=='undefined'&&crypto&&crypto.subtle&&typeof crypto.getRandomValues==='function';
+function salAleatorio(){const a=new Uint8Array(16);crypto.getRandomValues(a);return paraHex(a);}
+async function pbkdf2(pin,salHex,voltas){
+  const chave=await crypto.subtle.importKey('raw',new TextEncoder().encode(String(pin)),'PBKDF2',false,['deriveBits']);
+  const sal=Uint8Array.from(salHex.match(/../g).map(x=>parseInt(x,16)));
+  return paraHex(await crypto.subtle.deriveBits({name:'PBKDF2',salt:sal,iterations:voltas,hash:'SHA-256'},chave,256));
 }
-function definirSenha(pin){STORE.senha=null;STORE.senha=embaralha(pin);salvarStore();}
-function conferirSenha(pin){
-  if(!temSenha())return true;
-  const sal=STORE.senha.s;
+/* hash simples das versões anteriores: só para conferir senha antiga e trocá-la */
+function hashLegado(pin,sal){
   let h=5381;const t=sal+'|'+String(pin);
   for(let i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))>>>0;
   for(let v=0;v<5000;v++)h=((h<<5)+h+(v%97))>>>0;
-  return h.toString(36)===STORE.senha.h;
+  return h.toString(36);
+}
+async function definirSenha(pin){
+  if(temCripto()){
+    const s=salAleatorio();
+    STORE.senha={v:2,s:s,it:PBKDF2_VOLTAS,h:await pbkdf2(pin,s,PBKDF2_VOLTAS),e:0,b:0};
+  }else{                                    /* ambiente sem Web Crypto (não é o caso de https nem de localhost) */
+    const s='s'+Math.random().toString(36).slice(2,10);
+    STORE.senha={s:s,h:hashLegado(pin,s)};
+  }
+  salvarStore();
+}
+const esperaDoPin=()=>Math.max(0,((STORE.senha&&STORE.senha.b)||0)-Date.now());
+async function conferirSenha(pin){
+  if(!temSenha())return true;
+  if(esperaDoPin()>0)return false;
+  const sn=STORE.senha;
+  let ok=false;
+  if(sn.v===2&&temCripto())ok=(await pbkdf2(pin,sn.s,sn.it||PBKDF2_VOLTAS))===sn.h;
+  else if(sn.v!==2){ok=hashLegado(pin,sn.s)===sn.h;if(ok)await definirSenha(pin);}   /* migra no primeiro acerto */
+  if(ok){if(STORE.senha.e||STORE.senha.b){STORE.senha.e=0;STORE.senha.b=0;salvarStore();}return true;}
+  if(sn.v===2){
+    sn.e=(sn.e||0)+1;
+    if(sn.e>=PIN_ERROS_ATE_ESPERA)sn.b=Date.now()+Math.min(900,30*Math.pow(2,sn.e-PIN_ERROS_ATE_ESPERA))*1000;
+    salvarStore();
+  }
+  return false;
 }
 let liberadoAte=0;
 const respLiberado=()=>!temSenha()||Date.now()<liberadoAte;
@@ -96,15 +124,17 @@ function pedirSenha(titulo,texto,aoAcertar,criando){
       '<button class="btn" id="pin-ok">'+(criando?'Criar senha':'Entrar')+'</button></div></div>';
     $('#folha').classList.add('on');
     const campo=$('#campo-pin');campo.focus();
-    const tenta=()=>{
+    const tenta=async()=>{
       const v=(campo.value||'').trim();
       if(criando){
         if(!/^[0-9]{4,6}$/.test(v)){erro='Use de 4 a 6 números.';pinta();return;}
-        definirSenha(v);liberadoAte=Date.now()+15*60000;
+        await definirSenha(v);liberadoAte=Date.now()+15*60000;
         $('#folha').classList.remove('on');aoAcertar();return;
       }
-      if(conferirSenha(v)){liberadoAte=Date.now()+15*60000;$('#folha').classList.remove('on');aoAcertar();}
-      else{erro='Senha errada. Tente de novo.';pinta();}
+      const falta=Math.ceil(esperaDoPin()/1000);
+      if(falta>0){erro='Muitas tentativas. Espere '+(falta>=60?Math.ceil(falta/60)+' min':falta+' s')+' para tentar de novo.';pinta();return;}
+      if(await conferirSenha(v)){liberadoAte=Date.now()+15*60000;$('#folha').classList.remove('on');aoAcertar();}
+      else{const f2=Math.ceil(esperaDoPin()/1000);erro=f2>0?'Muitas tentativas. Espere '+(f2>=60?Math.ceil(f2/60)+' min':f2+' s')+' para tentar de novo.':'Senha errada. Tente de novo.';pinta();}
     };
     $('#pin-ok').addEventListener('click',tenta);
     campo.addEventListener('keydown',e=>{if(e.key==='Enter')tenta();});
