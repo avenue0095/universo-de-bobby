@@ -369,7 +369,7 @@ img{max-width:100%}
 .etapa-prog svg{width:16px;height:16px;color:var(--cor-acerto)}
 .etapa-prog.ok{background:var(--cor-acerto-suave);border-color:var(--cor-acerto)}
 
-.cena{position:relative;aspect-ratio:5/7.6;background:var(--materia-chao);overflow:hidden;--rev:70%}
+.cena{position:relative;aspect-ratio:5/8;background:var(--materia-chao);overflow:hidden;--rev:70%}
 .cena-base,.cena-luz{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block}
 .cena-luz{-webkit-mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));
   mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));transition:--rev var(--mov-lento) var(--curva-move)}
@@ -1245,7 +1245,7 @@ body:has(#licao.on) .barra-baixo{display:none}
 
 /* ---------- correções da revisão visual ---------- */
 /* aviso das vozes: no topo, nunca por cima da pergunta, do painel de feedback, da barra ou da Rotina */
-.aviso-voz{bottom:auto;top:calc(var(--topo-h) + var(--esp-16) + env(safe-area-inset-top,0px));z-index:var(--z-barra)}
+.aviso-voz{top:auto;bottom:calc(var(--barra-h) + var(--esp-16) + var(--area-segura-baixo));width:min(360px,calc(100vw - 32px));z-index:var(--z-barra);pointer-events:none}
 body:has(#licao.on) .aviso-voz{display:none}
 .stat svg{flex:none}
 /* pontinhos da aula: 11 px de desenho dentro de 48 px de toque */
@@ -1256,8 +1256,8 @@ body:has(#licao.on) .aviso-voz{display:none}
 /* resposta do erro: o <b> do número fica na linha */
 .pe .msg small b{display:inline}
 /* nós do mapa: nome em até 2 linhas e Bobby ao lado, sem cobrir o disco */
-.no .rot{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;border-radius:var(--raio-16);max-width:112px;padding:0 var(--esp-8)}
-.voce{height:72px;width:50px;transform:translate(calc(-100% - 40px),-70%)}
+.no .rot{white-space:normal;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;border-radius:var(--raio-16);max-width:120px;padding:0 var(--esp-8)}
+.voce{height:58px;width:40px;transform:translate(calc(-100% - 40px),-70%)}
 .voce.d{transform:translate(40px,-70%)}
 .revisao-no .bt svg{width:36px;height:36px}
 /* barra: rótulo de uma linha */
@@ -1295,3 +1295,29 @@ body:has(#licao.on) .aviso-voz{display:none}
 
 /* o painel fixo da fase fica acima do corpo rolável (regressão de toque: ver README-FASE-3-VISUAL.md) */
 .pe{z-index:var(--z-painel)}
+
+/* painel de erro e lembrete da aula */
+.lembrete summary{display:flex;align-items:center;gap:var(--esp-8);min-height:var(--toque-min);cursor:pointer;list-style:none}
+.lembrete summary::-webkit-details-marker{display:none}
+.lembrete summary::after{content:"";margin-left:auto;width:10px;height:10px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(45deg);flex:none}
+.lembrete[open] summary::after{transform:rotate(-135deg)}
+.lembrete[open] summary{min-height:var(--toque-min)}
+/* responsável e perfil */
+.chip-ctl{min-width:var(--toque-min)}
+.stat-card span{text-transform:none;letter-spacing:0;font-size:var(--t-legenda);line-height:var(--lh-legenda);overflow-wrap:normal;word-break:normal;hyphens:none}
+/* barra: ícone e retrato na mesma caixa de 40 px, rótulos na mesma linha */
+.barra-baixo button>svg{height:24px;margin:var(--esp-8) 0}
+.barra-baixo button .retrato-bb{margin:0}
+/* baú: Bobby comemorando com o baú ao lado */
+.bau-cena{position:relative;display:flex;align-items:flex-end;justify-content:center;gap:0;height:168px;margin:0 auto var(--esp-8)}
+.bau-cena .mascote{width:auto;height:160px}
+.bau-cena .bau-fig{width:96px;height:84px;margin:0 0 0 calc(-1 * var(--esp-16))}
+.bau-cena .bau-fig svg{width:100%;height:100%}
+.bau-cena.aberto .bau-fig svg{filter:drop-shadow(0 0 14px var(--cor-ouro))}
+.comprar-vida{display:inline-flex;align-items:center;gap:var(--esp-8);min-height:var(--toque-min);margin-top:var(--esp-8);padding:var(--esp-4) var(--esp-16);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);white-space:normal;text-align:left}
+.comprar-vida svg{width:20px;height:20px;flex:none}
+@media (max-width:480px){
+  .pe.mostra .pe-in{flex-wrap:wrap}
+  .pe.mostra .msg{flex:1 1 100%}
+  .pe.mostra #acao{flex:1 1 100%;margin:0}
+}

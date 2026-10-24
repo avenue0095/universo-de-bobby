@@ -4,7 +4,7 @@
    Cores: só tokens do DESIGN.md (var(--cor-*)); nada de hex aqui. */
 Object.assign(IC,{
  gelo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5"/></svg>',
- bau:'<svg viewBox="0 0 48 48"><circle cx="24" cy="22" r="20" fill="var(--cor-ouro)" opacity=".28"/><path d="M7 25v-7a10 10 0 0 1 10-10h14a10 10 0 0 1 10 10v7Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2" stroke-linejoin="round"/><rect x="7" y="25" width="34" height="16" rx="3" fill="var(--cor-acao)" stroke="var(--cor-acao-borda)" stroke-width="2"/><rect x="20.5" y="8" width="7" height="33" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="20" y="23" width="8" height="9" rx="2" fill="var(--cor-ouro-sobre)"/><path d="m39 5 1.2 3 3 1.2-3 1.2L39 13.4l-1.2-3-3-1.2 3-1.2ZM9 3l.9 2.2 2.2.9-2.2.9L9 9.2l-.9-2.2L5.9 6.1l2.2-.9Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="1"/></svg>',
+ bau:'<svg viewBox="0 0 64 56"><defs><linearGradient id="bg-tampa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-ouro)"/><stop offset="1" stop-color="var(--cor-acao)"/></linearGradient><linearGradient id="bg-corpo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-acao)"/><stop offset="1" stop-color="var(--cor-acao-borda)"/></linearGradient><radialGradient id="bg-luz" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--cor-ouro)" stop-opacity=".9"/><stop offset="1" stop-color="var(--cor-ouro)" stop-opacity="0"/></radialGradient></defs><ellipse cx="32" cy="52" rx="24" ry="4" fill="var(--cor-sombra)"/><circle cx="32" cy="22" r="26" fill="url(#bg-luz)"/><path d="M8 28V19a13 13 0 0 1 13-13h22a13 13 0 0 1 13 13v9Z" fill="url(#bg-tampa)" stroke="var(--cor-ouro-borda)" stroke-width="2" stroke-linejoin="round"/><path d="M14 16a8 8 0 0 1 8-6h12" fill="none" stroke="var(--cor-superficie)" stroke-width="2.4" stroke-linecap="round" opacity=".7"/><rect x="8" y="28" width="48" height="21" rx="4" fill="url(#bg-corpo)" stroke="var(--cor-acao-borda)" stroke-width="2"/><path d="M15 33h34M15 40h34" stroke="var(--cor-acao-borda)" stroke-width="1.4" opacity=".55"/><rect x="25" y="6" width="14" height="43" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="8" y="25" width="48" height="5" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="27.5" y="28" width="9" height="11" rx="2.5" fill="var(--cor-ouro-sobre)" stroke="var(--cor-ouro-borda)" stroke-width="1.5"/><circle cx="32" cy="33" r="1.8" fill="var(--cor-ouro)"/><path d="M55 4l1.4 3.4 3.4 1.4-3.4 1.4L55 13.6l-1.4-3.4-3.4-1.4 3.4-1.4ZM8 2l1 2.4 2.4 1-2.4 1L8 8.8l-1-2.4L4.6 5.4l2.4-1Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="1"/></svg>',
  casa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>',
  pessoa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg>',
  bobby:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><rect x="3.5" y="5.5" width="17" height="15" rx="7.5"/><circle cx="9" cy="12.5" r="1.4" fill="var(--cor-superficie)"/><circle cx="15" cy="12.5" r="1.4" fill="var(--cor-superficie)"/></svg>'
@@ -97,19 +97,23 @@ function mostrarBilhete(){
 function falarDepois2(ms,t){audioAgendar(()=>{if($('#folha').classList.contains('on'))falar(t);},ms);}
 
 /* ---------- baú do dia (sem sorteio) ---------- */
+/* Bobby comemorando ao lado do baú (o baú em arte 3D ainda não chegou: enquanto isso, SVG com volume e luz) */
+function bauCena(aberto){
+  return '<div class="bau-cena'+(aberto?' aberto':'')+'" aria-hidden="true">'+MASC('comemora')+'<div class="bau-fig">'+IC.bau+'</div></div>';
+}
 function mostrarBau(){
   garantirDia();
   if(S.diario.bau.aberto){mostrarBauAberto();return;}
   if(!bauPronto())return;
   const dia=Math.max(1,S.ofensiva.atual);
-  abrirFolha('<div class="folha-in"><div class="bau-fig" aria-hidden="true">'+IC.bau+'</div><h2>Baú do dia</h2>'+
+  abrirFolha('<div class="folha-in">'+bauCena(false)+'<h2>Seu baú de hoje</h2>'+
     '<p>Você completou a meta de hoje. Dentro do baú tem '+categoriaDoBau(dia)+'.</p>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-abrir">Abrir o baú</button></div></div>');
   $('#fl-abrir').addEventListener('click',()=>{abrirBau();salvar();mostrarBauAberto();});
 }
 function mostrarBauAberto(){
   const b=S.diario.bau;
-  abrirFolha('<div class="folha-in"><div class="bau-fig aberto" aria-hidden="true">'+IC.bau+'</div><h2>Você ganhou</h2>'+
+  abrirFolha('<div class="folha-in">'+bauCena(true)+'<h2>Você ganhou</h2>'+
     '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+escapa(i.n)+'</li>').join('')+'</ul>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Continuar</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{
@@ -179,7 +183,7 @@ function ligarBlocoFim(){
 /* ---------- barra de baixo (DESIGN 10.1): Mapa, Meu personagem, Desenhos, Perfil. Fica à vista fora das fases ---------- */
 function pintarBarra(){
   let atual='bb-mapa';
-  if($('#galeria').classList.contains('on'))atual='bb-gal';
+  if($('#galeria').classList.contains('on')||$('#desenho-tela').classList.contains('on'))atual='bb-gal';
   else if($('#perfil').classList.contains('on'))atual=$('#perfil').dataset.tela==='loja'?'bb-pers':'bb-perfil';
   ['bb-mapa','bb-pers','bb-gal','bb-perfil'].forEach(id=>{
     const bt=$('#'+id);if(!bt)return;
@@ -195,6 +199,11 @@ function fecharTelasDaBarra(){
   if($('#galeria').classList.contains('on'))fecharGaleria();
   if($('#perfil').classList.contains('on')){$('#perfil').classList.remove('on');$('#perfil').dataset.tela='';document.body.style.overflow='';}
 }
+/* qualquer tela que abra ou feche #perfil (perfil, responsável, voz, loja) ou #galeria atualiza o item ativo da barra */
+function observarBarra(){
+  if(typeof MutationObserver==='undefined')return;
+  ['#perfil','#galeria','#desenho-tela'].forEach(q=>{const e=$(q);if(e&&e.nodeType)new MutationObserver(pintarBarra).observe(e,{attributes:true,attributeFilter:['class','data-tela']});});
+}
 function ligarBarra(){
   const mapa=$('#bb-mapa'),pers=$('#bb-pers'),gal=$('#bb-gal'),perfil=$('#bb-perfil');
   if(mapa)mapa.addEventListener('click',()=>{
@@ -205,7 +214,7 @@ function ligarBarra(){
   if(pers)pers.addEventListener('click',()=>{fecharTelasDaBarra();lojaOrigem='barra';telaLoja();});
   if(gal)gal.addEventListener('click',()=>{fecharTelasDaBarra();abrirGaleria(false);pintarBarra();});
   if(perfil)perfil.addEventListener('click',()=>{fecharTelasDaBarra();telaPerfil();});
-  pintarBarra();
+  pintarBarra();observarBarra();
 }
 
 /* ---------- abertura e fechamento da sessão ---------- */

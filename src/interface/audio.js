@@ -227,7 +227,8 @@ async function audioPrepararMateria(m){
 }
 function avisoBaixando(texto){
   try{
-    const d=document.createElement('div');d.className='aviso-voz';
+    document.querySelectorAll('.aviso-voz').forEach(x=>x.remove());       /* um aviso por vez */
+    const d=document.createElement('div');d.className='aviso-voz';d.setAttribute('role','status');
     d.innerHTML='<span>'+escapa(texto)+'</span>';
     document.body.appendChild(d);
     setTimeout(()=>{d.classList.add('sai');setTimeout(()=>d.remove(),400);},4500);

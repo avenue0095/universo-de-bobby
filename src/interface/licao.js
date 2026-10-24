@@ -144,7 +144,8 @@ function pintarLicao(){
   /* nas duas primeiras perguntas a regra da aula fica na tela: nunca cobrar antes de ensinar */
   if(!LIC.rev&&LIC.i<2){
     const lem=lembreteDaAula(LIC.l);
-    if(lem)h+='<div class="lembrete"><span class="tit">'+IC.lampada+' Lembre da aula</span>'+lem+'</div>';
+    /* telas baixas (celular): o lembrete começa fechado para a alternativa 3 não ir parar embaixo do painel */
+    if(lem)h+='<details class="lembrete"'+(innerHeight>=820?' open':'')+'><summary class="tit">'+IC.lampada+' Lembre da aula</summary>'+lem+'</details>';
   }
   h+='<h2 class="pergunta">'+q.prompt+'</h2>';
   if(q.figure)h+='<div class="figura">'+q.figure+'</div>';
