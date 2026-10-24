@@ -1365,6 +1365,31 @@ body:has(#licao.on) .aviso-voz{display:none}
 .bau-cena .bau-img{width:100%;height:auto;max-height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px var(--cor-sombra))}
 .bau-cena .bau-fig{width:128px;height:112px;margin:0 0 0 calc(-1 * var(--esp-24))}
 .bau-cena.aberto .bau-img{filter:drop-shadow(0 0 16px var(--cor-ouro))}
+
+/* ---------- correções da 3ª revisão ---------- */
+/* modal Novo jogador cabe em 360x640 com teclado: rola dentro dele */
+.modal{align-items:start;overflow:auto}
+.cx{max-height:calc(100dvh - 48px);overflow:auto;margin:auto}
+/* alvos de 48 px: velocidade e caixa de marcar */
+.velocidade input[type=range]{height:var(--toque-min);margin:0}
+.marcar{min-height:var(--toque-min);align-items:center;cursor:pointer}
+input[type=checkbox]{width:24px;height:24px}
+/* apagar jogador: confirmação numa faixa abaixo do cartão, sem cobrir o rosto */
+.apagar-conf{display:grid;gap:var(--esp-8);margin-top:var(--esp-8);padding:var(--esp-16);border:2px solid var(--cor-linha-forte);border-radius:var(--raio-16);background:var(--cor-superficie);text-align:center;font-weight:var(--peso-forte)}
+.apagar-conf div{display:grid;grid-template-columns:1fr 1fr;gap:var(--esp-8)}
+.apagar-conf .btn-acao,.apagar-conf .btn-sec{min-height:var(--toque-min);padding:var(--esp-4) var(--esp-8);font-size:var(--t-pequeno)}
+.cartao{display:flex;flex-direction:column}
+/* looks: selo "em uso" fora da cabeça, miniatura sempre do mesmo tamanho */
+.item .selo{position:static;align-self:center}
+.item-look{height:144px;display:grid;place-items:center}
+.item-look img{height:100%;width:auto;max-width:100%;object-fit:contain}
+.item-look .bobby-com-item{height:100%;display:block}
+.item-look .bobby-com-item .mascote{height:100%;width:auto}
+/* prêmios do baú com arte, não barra amarela */
+.folha-lista.premios li{display:flex;align-items:center;gap:var(--esp-16);background:var(--cor-superficie);color:var(--cor-texto);border:2px solid var(--cor-ouro-borda);border-radius:var(--raio-16);font-weight:var(--peso-forte);text-align:left}
+.premio-ic,.folha-lista.premios .ic-arte{width:48px;height:48px}
+.etapa h3 .t-2{display:block;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);font-weight:var(--peso-corpo);color:var(--cor-texto-suave);font-family:var(--fonte-corpo)}
+.no .rot{font-weight:var(--peso-forte)}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -1373,6 +1398,7 @@ body:has(#licao.on) .aviso-voz{display:none}
 <link rel="apple-touch-icon" sizes="512x512" href="./icone-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./icone-192.png">
 <link rel="icon" type="image/png" href="./icone-192.png">
+<link rel="shortcut icon" href="./favicon.ico">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Bobby">
@@ -4899,6 +4925,11 @@ const IC={
  lapis:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 17.2V20h2.8L17 9.8 14.2 7 4 17.2ZM19.7 7.3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0L15.3 5.7 18.3 8.7l1.4-1.4Z"/></svg>',
  impressora:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M7 9V3h10v6M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="7" y="14" width="10" height="7" rx="1"/></svg>',
  refazer:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>',
+ relogio:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>',
+ alvo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>',
+ calendario:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',
+ pergunta:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5Z"/><path d="M9.8 8.6a2.3 2.3 0 1 1 3.2 2.1c-.7.3-1 .8-1 1.5"/><circle cx="12" cy="13.3" r=".6" fill="currentColor"/></svg>',
+ desfazer:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7 4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 0 12" transform="translate(0 -5)"/></svg>',
  baixar:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4L10 13.2V3ZM4 19h16v2H4Z"/></svg>',
  lixo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 21h10l1-14H6ZM9 3h6l1 2h4v2H4V5h4Z"/></svg>',
  volta:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>',
@@ -5071,9 +5102,9 @@ function cartaoLook(slot,id){
   const it=PECAS[slot][id],L=S.look||{},tem=temItem(id),eq=L[slot]===id;
   const bt=tem?'<button class="btn-sec" data-eq="'+slot+'|'+id+'">'+(eq?'Tirar':'Usar')+'</button>'
               :'<button class="'+(S.moedas<it.p?'btn-sec':'btn-acao')+'" data-buy="'+slot+'|'+id+'">'+IC.moeda+' '+it.p+'</button>';
-  const figura=it.modo==='sobrepor'?'<div class="item-img item-peca">'+imgArte(it.arte,{})+'</div>'
-    :'<div class="item-img item-look"><span class="look-retrato">'+imgArte(it.arte,{})+'</span></div>';
-  return '<div class="item'+(eq?' equipado':'')+'">'+(eq?'<span class="selo">'+IC.certo+' em uso</span>':'')+figura+'<b>'+it.n+'</b>'+bt+'</div>';
+  /* miniatura padronizada: o Bobby inteiro vestido com o item (o chapéu entra sobre a pose Oi) */
+  const figura='<div class="item-img item-look">'+(it.modo==='sobrepor'?MASC('oi','',{[slot]:id},it.n):imgArte(it.arte,{alt:it.n}))+'</div>';
+  return '<div class="item'+(eq?' equipado':'')+'">'+figura+(eq?'<span class="selo">'+IC.certo+' em uso</span>':'')+'<b>'+it.n+'</b>'+bt+'</div>';
 }
 function telaLoja(){
   const L=S.look||{};
@@ -5091,8 +5122,8 @@ function telaLoja(){
     });
   }else{
     const nenhum=!lookEmUso(L);
-    h+='<div class="item'+(nenhum?' equipado':'')+'">'+(nenhum?'<span class="selo">'+IC.certo+' em uso</span>':'')+
-      '<div class="item-img item-look"><span class="look-retrato">'+imgArte('item-base',{})+'</span></div><b>Sem item</b><span class="tipo">o Bobby de sempre</span>'+
+    h+='<div class="item'+(nenhum?' equipado':'')+'">'+
+      '<div class="item-img item-look">'+imgArte('item-base',{alt:'Bobby sem item'})+'</div>'+(nenhum?'<span class="selo">'+IC.certo+' em uso</span>':'')+'<b>Sem item</b><span class="tipo">o Bobby de sempre</span>'+
       '<button class="btn-sec" data-semlook="1"'+(nenhum?' disabled':'')+'>'+(nenhum?'Em uso':'Usar')+'</button></div>';
     LOOKS_ORDEM.forEach(par=>{if(PECAS[par[0]][par[1]]&&PECAS[par[0]][par[1]].arte&&ativo(PECAS[par[0]][par[1]].arte))h+=cartaoLook(par[0],par[1]);});
   }
@@ -5936,13 +5967,13 @@ async function audioPrepararMateria(m){
     audioBaixarPacote(m).then(r=>{if(r&&r.ok&&!r.ja)avisoBaixando('Vozes de '+NOME_PACOTE[m]+' prontas para jogar sem internet.');});
   }catch(e){}
 }
+/* O aviso das vozes NUNCA aparece sobre o mapa nem sobre a fase: fica guardado e é mostrado só na tela Voz e som (linha de estado). */
 function avisoBaixando(texto){
   try{
-    document.querySelectorAll('.aviso-voz').forEach(x=>x.remove());       /* um aviso por vez */
-    const d=document.createElement('div');d.className='aviso-voz';d.setAttribute('role','status');
-    d.innerHTML='<span>'+escapa(texto)+'</span>';
-    document.body.appendChild(d);
-    setTimeout(()=>{d.classList.add('sai');setTimeout(()=>d.remove(),400);},4500);
+    AUDIO.avisoPacote=texto;
+    const aberta=document.querySelector('#perfil');
+    if(!aberta||!aberta.classList||!aberta.classList.contains('on')||!document.querySelector('#voz-estado'))return;
+    const vz=document.querySelector('#voz-estado');if(vz)vz.textContent=texto;
   }catch(e){}
 }
 /* ---------- som e voz ---------- */
@@ -6058,6 +6089,13 @@ function trilhaPontos(){
   }
   return h;
 }
+/* o nó mostra só o nome principal (em inglês, o que vem antes do parêntese); a tradução fica na aula e no rótulo de acessibilidade */
+const nomeCurto=t=>String(t).replace(/\s*\([^)]*\)\s*$/,'')||String(t);
+/* 'Animals · Animais' vira duas linhas (nome e tradução), sem ponto solto no começo de uma linha */
+function tituloEmDuasLinhas(t){
+  const p=String(t).split(' · ');
+  return escapa(p[0])+(p[1]?'<span class="t-2">'+escapa(p.slice(1).join(' · '))+'</span>':'');
+}
 function noAtualDaEtapa(u){
   for(let li=0;li<u.lessons.length;li++)if(!S.feitas[u.lessons[li].id])return li;
   return 5;   /* tudo feito: ele espera na revisão */
@@ -6086,7 +6124,7 @@ function etapaHTML(u,ui,prox){
   const atualNo=ehAtual?noAtualDaEtapa(u):-1;
   let h='<section class="etapa'+(completo?' completa':'')+(estRev?' acesa':'')+'" id="etapa-'+(ui+1)+'" aria-labelledby="etapa-t-'+(ui+1)+'">';
   h+='<header class="etapa-cab"><div class="etapa-tx"><span class="etapa-n">Etapa '+u.n+'</span>'+
-     '<h3 id="etapa-t-'+(ui+1)+'">'+escapa(u.title)+'</h3><p>'+escapa(u.sub)+'</p></div>'+
+     '<h3 id="etapa-t-'+(ui+1)+'">'+tituloEmDuasLinhas(u.title)+'</h3><p>'+escapa(u.sub)+'</p></div>'+
      '<span class="etapa-prog'+(completo?' ok':'')+'">'+(completo?IC.certo+' Completa':feitasN+' de '+u.lessons.length+' fases')+'</span></header>';
   h+=cenaHTML(u,feitasN);
   h+='<div class="trilha">'+trilhaPontos();
@@ -6099,7 +6137,7 @@ function etapaHTML(u,ui,prox){
        ' aria-label="Fase '+(li+1)+': '+escapa(l.title)+(ok?'. Concluída com '+est+(est===1?' estrela':' estrelas'):(atual?'. Sua próxima fase':''))+'">'+
        (abr?'<b>'+(li+1)+'</b>':IC.cadeado)+'</button>'+
        '<span class="estrelas" aria-hidden="true">'+(ok?estrelasSVG(est):'')+'</span>'+
-       '<span class="rot">'+escapa(l.title)+'</span></div>';
+       '<span class="rot">'+escapa(nomeCurto(l.title))+'</span></div>';
   });
   const cr=['no','revisao-no'];if(!completo)cr.push('trava');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
   h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%">'+
@@ -7547,8 +7585,8 @@ function telaPerfil(){
     stat(IC.bandeira,feitasGeral+'/'+totalGeral,'fases')+
     stat(IC.estrela,estrelasTotal(),'estrelas')+
     stat(IC.moeda,S.moedas,'moedas')+
-    stat(IC.fogo,S.ofensiva.atual,'dias seguidos')+
-    stat(IC.coracao,S.ofensiva.melhor,'recorde de dias')+
+    stat(IC.fogo,S.ofensiva.atual,S.ofensiva.atual===1?'dia seguido':'dias seguidos')+
+    stat(IC.trofeu,S.ofensiva.melhor,S.ofensiva.melhor===1?'dia de recorde':'dias de recorde')+
     stat(IC.quadro,desenhos+'/'+desenhosCatalogo().length,'desenhos')+'</div>';
 
   /* progresso das três galáxias, sempre visível */
@@ -7578,7 +7616,7 @@ function telaPerfil(){
     h+='<div class="medalha'+(ok?' on':'')+'">'+IC.medalha+'<b>'+c.n+'</b><span>'+c.d+'</span></div>';});
   h+='</div>';
   h+='<h2 class="sec">Ajustes</h2>';
-  h+='<div class="perfil-bts"><button class="btn" id="ir-loja">'+IC.chapeu+' Guarda-roupa do Bobby</button>'+
+  h+='<div class="perfil-bts"><button class="btn" id="ir-loja">Meu personagem</button>'+
      '<button class="btn laranja" id="ir-galeria">'+IC.quadro+' Meus desenhos</button>'+
      '<button class="btn laranja" id="ir-resp">Para o responsável</button>'+
      '<button class="btn laranja" id="ir-voz">'+IC.falar+' Voz e som</button>'+
@@ -7633,8 +7671,8 @@ function telaResponsavel(){
     'Nada aqui é enviado para lugar nenhum: fica só neste aparelho.</p>';
   h+='<div class="stats">'+
     stat(IC.bandeira,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
-    stat(IC.fogo,fmtTempo(st.tempo),'tempo total')+
-    stat(IC.estrela,pc+'%','acerto geral')+'</div>';
+    stat(IC.relogio,fmtTempo(st.tempo),'tempo total')+
+    stat(IC.alvo,pc+'%','acerto geral')+'</div>';
   h+=semanaHTML();
   h+='<h2 class="sec">Últimos 7 dias</h2><div class="semana">';
   dias.forEach(x=>{const dt=new Date(x.d+'T12:00:00');
@@ -7760,6 +7798,7 @@ function apagarTudoPasso2(erro){
 function telaVoz(){
   let h='<div class="perfil-in">';
   h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
+  h+='<p class="galeria-intro" id="voz-estado" role="status">'+escapa(AUDIO.avisoPacote||'As vozes ficam guardadas no aparelho depois de baixadas, para jogar sem internet.')+'</p>';
   h+='<h2 class="sec">Sons</h2><div class="ctl">';
   h+='<div class="ctl-linha"><b>Efeitos e voz</b><div>'+
      '<button class="chip-ctl'+(S.som?' on':'')+'" data-som="1">Ligados</button>'+
@@ -7917,15 +7956,16 @@ let apagando=-1;
 function telaPerfis(){
   let h='<div class="perfis-in"><h1>Quem vai jogar?</h1>'+
     '<p class="perfis-sub">Cada jogador tem o próprio mapa, moedas e desenhos.</p><div class="cartoes">';
+  const totalGeral=Object.keys(MATERIAS).reduce((a,k)=>a+MATERIAS[k].total(),0);
   STORE.perfis.forEach((p,i)=>{
     const d=estadoDe(p.dados);
     const n=Object.keys(d.feitas||{}).filter(k=>k.indexOf('rev')!==0).length;
     h+='<div class="cartao'+(apagando===i?' apagando':'')+'">'+
        '<button class="cartao-bt" data-i="'+i+'" style="--aro:'+p.cor+'">'+
        '<span class="rosto">'+retratoBobby()+'</span><b>'+escapa(p.nome)+'</b>'+
-       '<span class="pg">'+n+' de '+TOTAL_LESSONS+' fases</span></button>'+
-       '<button class="lixo" data-del="'+i+'" aria-label="Apagar jogador">'+
-       (apagando===i?'<span class="conf">apagar?</span>':IC.lixo)+'</button></div>';
+       '<span class="pg">'+n+' de '+totalGeral+' fases</span></button>'+
+       '<button class="lixo" data-del="'+i+'" aria-label="Apagar jogador '+escapa(p.nome)+'">'+IC.lixo+'</button>'+
+       (apagando===i?'<div class="apagar-conf" role="alertdialog" aria-label="Apagar jogador"><span>Apagar este jogador?</span><div><button class="btn-acao" data-sim="'+i+'">Sim, apagar</button><button class="btn-sec" data-nao="1">Não</button></div></div>':'')+'</div>';
   });
   h+='<button class="cartao-bt novo" id="novo-perfil"><span class="mais">+</span><b>Novo jogador</b>'+
      '<span class="pg">começar do zero</span></button>';
@@ -7937,10 +7977,10 @@ function telaPerfis(){
     b.addEventListener('click',()=>usarPerfil(+b.dataset.i)));
   $('#perfis').querySelectorAll('[data-del]').forEach(b=>
     b.addEventListener('click',()=>{
-      const i=+b.dataset.del;
-      if(apagando===i){apagando=-1;comSenha(()=>apagarPerfil(i));}
-      else{apagando=i;telaPerfis();}
+      apagando=apagando===+b.dataset.del?-1:+b.dataset.del;telaPerfis();
     }));
+  $('#perfis').querySelectorAll('[data-sim]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.sim;apagando=-1;comSenha(()=>apagarPerfil(i));}));
+  $('#perfis').querySelectorAll('[data-nao]').forEach(b=>b.addEventListener('click',()=>{apagando=-1;telaPerfis();}));
   $('#novo-perfil').addEventListener('click',()=>pedirNome(true));
 }
 function fecharPerfis(){
@@ -8035,19 +8075,20 @@ async function entregar(nome,dados){
   let cap=null;
   try{cap=window.claude&&claude.use?await claude.use('downloads'):null;}catch(e){cap=null;}
   if(cap){
-    try{await cap.save({filename:nome,data:dados});avisoBaixa('');return;}
+    try{await cap.save({filename:nome,data:dados});avisoBaixa('');return true;}
     catch(err){
       const c=err&&err.code;
-      if(c==='declined')return;
-      if(c==='rate_limited'){avisoBaixa('Já tem um download aguardando resposta. Confirme e tente de novo.');return;}
-      avisoBaixa('Este aparelho não deixou salvar o arquivo. O caderno completo também vem em PDF na conversa.');
-      return;
+      if(c==='declined')return false;
+      if(c==='rate_limited'){avisoBaixa('Já tem um download aguardando resposta. Confirme e tente de novo.');return false;}
+      avisoBaixa('Este aparelho não deixou salvar o arquivo. Tente de novo.');
+      return false;
     }
   }
   const tipo=/\.json$/i.test(nome)?'application/json':(/\.ics$/i.test(nome)?'text/calendar':(/\.png$/i.test(nome)?'image/png':'image/svg+xml'));
   const url=URL.createObjectURL(typeof dados==='string'?new Blob([dados],{type:tipo}):dados);
   const a=document.createElement('a');a.href=url;a.download=nome;document.body.appendChild(a);a.click();
   setTimeout(()=>{a.remove();URL.revokeObjectURL(url);},2000);
+  return true;
 }
 
 /* ---------- tinta: balde de pintar por inundação (sem DOM, testado em Node) ----------
@@ -8199,7 +8240,7 @@ function abrirDesenho(id){
   }else{
     corpo='<div class="des-tela"><canvas id="cv-des" role="img" aria-label="Desenho para colorir: '+escapa(d.nome)+'. Toque numa área para pintar."></canvas></div>'+
       '<div class="des-ferramentas"><div class="paleta" role="radiogroup" aria-label="Cores"></div>'+
-      '<div class="des-acoes"><button class="btn-sec" id="des-desfazer">'+IC.volta+' Desfazer</button>'+
+      '<div class="des-acoes"><button class="btn-sec" id="des-desfazer">'+IC.desfazer+' Desfazer</button>'+
       '<button class="btn-sec" id="des-limpar">Recomeçar</button>'+
       '<button class="btn-sec" id="des-imprimir">'+IC.impressora+' Imprimir</button>'+
       '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar</button></div></div><div id="aviso-baixa"></div>';
@@ -8272,7 +8313,11 @@ function pintarPaleta(){
   q('des-imprimir').onclick=()=>imprimirDesenhos([desenhoPorId(DES.id)]);
   q('des-salvar').onclick=()=>{
     const cv=$('#cv-des');
-    cv.toBlob(b=>{if(b)entregar('desenho-'+DES.id+'.png',b);},'image/png');
+    cv.toBlob(async b=>{
+      if(!b){avisoBaixa('Não consegui guardar o desenho agora. Tente de novo.');return;}
+      const ok=await entregar('desenho-'+DES.id+'.png',b);
+      if(ok)avisoBaixa('Desenho guardado! A imagem foi salva no seu aparelho, na pasta de downloads.');
+    },'image/png');
   };
 }
 
@@ -8487,6 +8532,11 @@ function bauCena(aberto){
   return '<div class="bau-cena'+(aberto?' aberto':'')+'" aria-hidden="true">'+MASC('comemora')+'<div class="bau-fig">'+
     (grande?imgArte(aberto?'bau-aberto':'bau-fechado',{cls:'bau-img',eager:true}):IC.bauSvg)+'</div></div>';
 }
+/* cada prêmio do baú ganha a arte 3D certa (adesivo vira estrela, medalha é medalha, moeda é moeda) */
+function iconeDoPremio(k){
+  const id={moedas:'rec-moeda',medalha:'rec-medalha',adesivo:'rec-estrela',ornamento:'rec-estrela',pose:'rec-trofeu',moldura:'rec-medalha',trilha:'rec-estrela'}[k]||'rec-presente';
+  return ativo(id)?imgArte(id,{cls:'ic-arte premio-ic',eager:true}):'';
+}
 function mostrarBau(){
   garantirDia();
   if(S.diario.bau.aberto){mostrarBauAberto();return;}
@@ -8500,7 +8550,7 @@ function mostrarBau(){
 function mostrarBauAberto(){
   const b=S.diario.bau;
   abrirFolha('<div class="folha-in">'+bauCena(true)+'<h2>Você ganhou</h2>'+
-    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+escapa(i.n)+'</li>').join('')+'</ul>'+
+    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+iconeDoPremio(i.k)+'<span>'+escapa(i.n)+'</span></li>').join('')+'</ul>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Continuar</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{
     fecharFolha();pintarTopo();
@@ -8526,7 +8576,7 @@ function mostrarParada(limite){
   abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('tchau')+'</div><h2>Por hoje chega!</h2>'+
     '<p>Você fez um ótimo trabalho.</p><p>Amanhã tem mais. O baú de amanhã já está guardado.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
     '<div class="folha-bts par"><button class="btn-acao" id="fl-fim">Terminar por hoje</button>'+
-    '<button class="btn-acao" id="fl-segue">Continuar explorando</button></div></div>');
+    '<button class="btn-sec" id="fl-segue">Continuar explorando</button></div></div>');
   if(ehF78())falarDepois2(400,'Por hoje chega! Você fez um ótimo trabalho.');
   $('#fl-fim').addEventListener('click',()=>{
     registrarParada('terminar');
@@ -8669,9 +8719,9 @@ function ligarControles(refaz){
 function semanaHTML(){
   const r=resumoSemana(S.stats,hoje());
   let h='<h2 class="sec">Esta semana</h2><div class="stats">'+
-    stat(IC.fogo,r.dias+' de 7','dias com atividade')+
-    stat(IC.estrela,r.min+' min','de atividade')+
-    stat(IC.bandeira,r.perguntas,'perguntas feitas')+'</div>';
+    stat(IC.calendario,r.dias+' de 7','dias com atividade')+
+    stat(IC.relogio,r.min+' min','de atividade')+
+    stat(IC.pergunta,r.perguntas,'perguntas feitas')+'</div>';
   h+='<p class="galeria-intro">'+r.revisoes+(r.revisoes===1?' revisão feita':' revisões feitas')+
      (r.pct!==null?' e '+r.pct+'% de acerto nas perguntas da semana.':'.')+'</p>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="copia-resumo">Copiar o resumo da semana</button></div><div id="resumo-aviso"></div>';

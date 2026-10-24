@@ -225,12 +225,12 @@ async function audioPrepararMateria(m){
     audioBaixarPacote(m).then(r=>{if(r&&r.ok&&!r.ja)avisoBaixando('Vozes de '+NOME_PACOTE[m]+' prontas para jogar sem internet.');});
   }catch(e){}
 }
+/* O aviso das vozes NUNCA aparece sobre o mapa nem sobre a fase: fica guardado e é mostrado só na tela Voz e som (linha de estado). */
 function avisoBaixando(texto){
   try{
-    document.querySelectorAll('.aviso-voz').forEach(x=>x.remove());       /* um aviso por vez */
-    const d=document.createElement('div');d.className='aviso-voz';d.setAttribute('role','status');
-    d.innerHTML='<span>'+escapa(texto)+'</span>';
-    document.body.appendChild(d);
-    setTimeout(()=>{d.classList.add('sai');setTimeout(()=>d.remove(),400);},4500);
+    AUDIO.avisoPacote=texto;
+    const aberta=document.querySelector('#perfil');
+    if(!aberta||!aberta.classList||!aberta.classList.contains('on')||!document.querySelector('#voz-estado'))return;
+    const vz=document.querySelector('#voz-estado');if(vz)vz.textContent=texto;
   }catch(e){}
 }

@@ -2,6 +2,7 @@
 function telaVoz(){
   let h='<div class="perfil-in">';
   h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
+  h+='<p class="galeria-intro" id="voz-estado" role="status">'+escapa(AUDIO.avisoPacote||'As vozes ficam guardadas no aparelho depois de baixadas, para jogar sem internet.')+'</p>';
   h+='<h2 class="sec">Sons</h2><div class="ctl">';
   h+='<div class="ctl-linha"><b>Efeitos e voz</b><div>'+
      '<button class="chip-ctl'+(S.som?' on':'')+'" data-som="1">Ligados</button>'+

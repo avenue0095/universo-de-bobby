@@ -128,9 +128,9 @@ function cartaoLook(slot,id){
   const it=PECAS[slot][id],L=S.look||{},tem=temItem(id),eq=L[slot]===id;
   const bt=tem?'<button class="btn-sec" data-eq="'+slot+'|'+id+'">'+(eq?'Tirar':'Usar')+'</button>'
               :'<button class="'+(S.moedas<it.p?'btn-sec':'btn-acao')+'" data-buy="'+slot+'|'+id+'">'+IC.moeda+' '+it.p+'</button>';
-  const figura=it.modo==='sobrepor'?'<div class="item-img item-peca">'+imgArte(it.arte,{})+'</div>'
-    :'<div class="item-img item-look"><span class="look-retrato">'+imgArte(it.arte,{})+'</span></div>';
-  return '<div class="item'+(eq?' equipado':'')+'">'+(eq?'<span class="selo">'+IC.certo+' em uso</span>':'')+figura+'<b>'+it.n+'</b>'+bt+'</div>';
+  /* miniatura padronizada: o Bobby inteiro vestido com o item (o chapéu entra sobre a pose Oi) */
+  const figura='<div class="item-img item-look">'+(it.modo==='sobrepor'?MASC('oi','',{[slot]:id},it.n):imgArte(it.arte,{alt:it.n}))+'</div>';
+  return '<div class="item'+(eq?' equipado':'')+'">'+figura+(eq?'<span class="selo">'+IC.certo+' em uso</span>':'')+'<b>'+it.n+'</b>'+bt+'</div>';
 }
 function telaLoja(){
   const L=S.look||{};
@@ -148,8 +148,8 @@ function telaLoja(){
     });
   }else{
     const nenhum=!lookEmUso(L);
-    h+='<div class="item'+(nenhum?' equipado':'')+'">'+(nenhum?'<span class="selo">'+IC.certo+' em uso</span>':'')+
-      '<div class="item-img item-look"><span class="look-retrato">'+imgArte('item-base',{})+'</span></div><b>Sem item</b><span class="tipo">o Bobby de sempre</span>'+
+    h+='<div class="item'+(nenhum?' equipado':'')+'">'+
+      '<div class="item-img item-look">'+imgArte('item-base',{alt:'Bobby sem item'})+'</div>'+(nenhum?'<span class="selo">'+IC.certo+' em uso</span>':'')+'<b>Sem item</b><span class="tipo">o Bobby de sempre</span>'+
       '<button class="btn-sec" data-semlook="1"'+(nenhum?' disabled':'')+'>'+(nenhum?'Em uso':'Usar')+'</button></div>';
     LOOKS_ORDEM.forEach(par=>{if(PECAS[par[0]][par[1]]&&PECAS[par[0]][par[1]].arte&&ativo(PECAS[par[0]][par[1]].arte))h+=cartaoLook(par[0],par[1]);});
   }

@@ -1353,3 +1353,28 @@ body:has(#licao.on) .aviso-voz{display:none}
 .bau-cena .bau-img{width:100%;height:auto;max-height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px var(--cor-sombra))}
 .bau-cena .bau-fig{width:128px;height:112px;margin:0 0 0 calc(-1 * var(--esp-24))}
 .bau-cena.aberto .bau-img{filter:drop-shadow(0 0 16px var(--cor-ouro))}
+
+/* ---------- correções da 3ª revisão ---------- */
+/* modal Novo jogador cabe em 360x640 com teclado: rola dentro dele */
+.modal{align-items:start;overflow:auto}
+.cx{max-height:calc(100dvh - 48px);overflow:auto;margin:auto}
+/* alvos de 48 px: velocidade e caixa de marcar */
+.velocidade input[type=range]{height:var(--toque-min);margin:0}
+.marcar{min-height:var(--toque-min);align-items:center;cursor:pointer}
+input[type=checkbox]{width:24px;height:24px}
+/* apagar jogador: confirmação numa faixa abaixo do cartão, sem cobrir o rosto */
+.apagar-conf{display:grid;gap:var(--esp-8);margin-top:var(--esp-8);padding:var(--esp-16);border:2px solid var(--cor-linha-forte);border-radius:var(--raio-16);background:var(--cor-superficie);text-align:center;font-weight:var(--peso-forte)}
+.apagar-conf div{display:grid;grid-template-columns:1fr 1fr;gap:var(--esp-8)}
+.apagar-conf .btn-acao,.apagar-conf .btn-sec{min-height:var(--toque-min);padding:var(--esp-4) var(--esp-8);font-size:var(--t-pequeno)}
+.cartao{display:flex;flex-direction:column}
+/* looks: selo "em uso" fora da cabeça, miniatura sempre do mesmo tamanho */
+.item .selo{position:static;align-self:center}
+.item-look{height:144px;display:grid;place-items:center}
+.item-look img{height:100%;width:auto;max-width:100%;object-fit:contain}
+.item-look .bobby-com-item{height:100%;display:block}
+.item-look .bobby-com-item .mascote{height:100%;width:auto}
+/* prêmios do baú com arte, não barra amarela */
+.folha-lista.premios li{display:flex;align-items:center;gap:var(--esp-16);background:var(--cor-superficie);color:var(--cor-texto);border:2px solid var(--cor-ouro-borda);border-radius:var(--raio-16);font-weight:var(--peso-forte);text-align:left}
+.premio-ic,.folha-lista.premios .ic-arte{width:48px;height:48px}
+.etapa h3 .t-2{display:block;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);font-weight:var(--peso-corpo);color:var(--cor-texto-suave);font-family:var(--fonte-corpo)}
+.no .rot{font-weight:var(--peso-forte)}

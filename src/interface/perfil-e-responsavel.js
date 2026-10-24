@@ -17,8 +17,8 @@ function telaPerfil(){
     stat(IC.bandeira,feitasGeral+'/'+totalGeral,'fases')+
     stat(IC.estrela,estrelasTotal(),'estrelas')+
     stat(IC.moeda,S.moedas,'moedas')+
-    stat(IC.fogo,S.ofensiva.atual,'dias seguidos')+
-    stat(IC.coracao,S.ofensiva.melhor,'recorde de dias')+
+    stat(IC.fogo,S.ofensiva.atual,S.ofensiva.atual===1?'dia seguido':'dias seguidos')+
+    stat(IC.trofeu,S.ofensiva.melhor,S.ofensiva.melhor===1?'dia de recorde':'dias de recorde')+
     stat(IC.quadro,desenhos+'/'+desenhosCatalogo().length,'desenhos')+'</div>';
 
   /* progresso das três galáxias, sempre visível */
@@ -48,7 +48,7 @@ function telaPerfil(){
     h+='<div class="medalha'+(ok?' on':'')+'">'+IC.medalha+'<b>'+c.n+'</b><span>'+c.d+'</span></div>';});
   h+='</div>';
   h+='<h2 class="sec">Ajustes</h2>';
-  h+='<div class="perfil-bts"><button class="btn" id="ir-loja">'+IC.chapeu+' Guarda-roupa do Bobby</button>'+
+  h+='<div class="perfil-bts"><button class="btn" id="ir-loja">Meu personagem</button>'+
      '<button class="btn laranja" id="ir-galeria">'+IC.quadro+' Meus desenhos</button>'+
      '<button class="btn laranja" id="ir-resp">Para o responsável</button>'+
      '<button class="btn laranja" id="ir-voz">'+IC.falar+' Voz e som</button>'+
@@ -103,8 +103,8 @@ function telaResponsavel(){
     'Nada aqui é enviado para lugar nenhum: fica só neste aparelho.</p>';
   h+='<div class="stats">'+
     stat(IC.bandeira,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
-    stat(IC.fogo,fmtTempo(st.tempo),'tempo total')+
-    stat(IC.estrela,pc+'%','acerto geral')+'</div>';
+    stat(IC.relogio,fmtTempo(st.tempo),'tempo total')+
+    stat(IC.alvo,pc+'%','acerto geral')+'</div>';
   h+=semanaHTML();
   h+='<h2 class="sec">Últimos 7 dias</h2><div class="semana">';
   dias.forEach(x=>{const dt=new Date(x.d+'T12:00:00');

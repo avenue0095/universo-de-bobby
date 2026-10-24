@@ -15,7 +15,7 @@ import shutil, sys, os
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
-PUBLICO_FIXO = ['index.html', 'sw.js', 'manifest.webmanifest', 'icone-192.png', 'icone-512.png', 'icone-maskable.png', 'icone.svg']
+PUBLICO_FIXO = ['index.html', 'sw.js', 'manifest.webmanifest', 'icone-192.png', 'icone-512.png', 'icone-maskable.png', 'icone.svg', 'favicon.ico']
 PROIBIDO = {'arte', 'docs', 'pesquisa', 'src', 'build', 'testes', '.git', 'node_modules', 'dist', 'ferramentas'}
 
 # a mesma politica da meta CSP do index.html, mais o que so cabecalho consegue (frame-ancestors)

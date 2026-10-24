@@ -23,7 +23,7 @@ const TETO_MB = 75;
     A.ok(ruins.length === 0, 'no site publico: ' + ruins.slice(0, 5).join(', '));
   });
   await teste('3. so extensoes do app: html, js (apenas sw.js), json, webmanifest, png, svg, webp, woff2, txt das licencas, m4a e _headers; sem .md, .py, .sh, .tsv, .jpg, .env', () => {
-    const ok = /\.(html|json|webmanifest|png|svg|webp|woff2|m4a)$/;
+    const ok = /\.(html|json|webmanifest|png|svg|webp|woff2|m4a|ico)$/;
     const ruins = arquivos.filter((f) => !(ok.test(f) || f === 'sw.js' || f === '_headers' || f === '.nojekyll' || /^assets\/fontes\/OFL-[A-Za-z]+\.txt$/.test(f)));
     A.ok(ruins.length === 0, 'arquivo fora da lista: ' + ruins.slice(0, 5).join(', '));
     A.ok(!arquivos.some((f) => /manifesto\.json$/.test(f) && f.startsWith('audio/')), 'manifesto.json de audio (texto das falas) nao deve ir');

@@ -3,15 +3,16 @@ let apagando=-1;
 function telaPerfis(){
   let h='<div class="perfis-in"><h1>Quem vai jogar?</h1>'+
     '<p class="perfis-sub">Cada jogador tem o próprio mapa, moedas e desenhos.</p><div class="cartoes">';
+  const totalGeral=Object.keys(MATERIAS).reduce((a,k)=>a+MATERIAS[k].total(),0);
   STORE.perfis.forEach((p,i)=>{
     const d=estadoDe(p.dados);
     const n=Object.keys(d.feitas||{}).filter(k=>k.indexOf('rev')!==0).length;
     h+='<div class="cartao'+(apagando===i?' apagando':'')+'">'+
        '<button class="cartao-bt" data-i="'+i+'" style="--aro:'+p.cor+'">'+
        '<span class="rosto">'+retratoBobby()+'</span><b>'+escapa(p.nome)+'</b>'+
-       '<span class="pg">'+n+' de '+TOTAL_LESSONS+' fases</span></button>'+
-       '<button class="lixo" data-del="'+i+'" aria-label="Apagar jogador">'+
-       (apagando===i?'<span class="conf">apagar?</span>':IC.lixo)+'</button></div>';
+       '<span class="pg">'+n+' de '+totalGeral+' fases</span></button>'+
+       '<button class="lixo" data-del="'+i+'" aria-label="Apagar jogador '+escapa(p.nome)+'">'+IC.lixo+'</button>'+
+       (apagando===i?'<div class="apagar-conf" role="alertdialog" aria-label="Apagar jogador"><span>Apagar este jogador?</span><div><button class="btn-acao" data-sim="'+i+'">Sim, apagar</button><button class="btn-sec" data-nao="1">Não</button></div></div>':'')+'</div>';
   });
   h+='<button class="cartao-bt novo" id="novo-perfil"><span class="mais">+</span><b>Novo jogador</b>'+
      '<span class="pg">começar do zero</span></button>';
@@ -23,10 +24,10 @@ function telaPerfis(){
     b.addEventListener('click',()=>usarPerfil(+b.dataset.i)));
   $('#perfis').querySelectorAll('[data-del]').forEach(b=>
     b.addEventListener('click',()=>{
-      const i=+b.dataset.del;
-      if(apagando===i){apagando=-1;comSenha(()=>apagarPerfil(i));}
-      else{apagando=i;telaPerfis();}
+      apagando=apagando===+b.dataset.del?-1:+b.dataset.del;telaPerfis();
     }));
+  $('#perfis').querySelectorAll('[data-sim]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.sim;apagando=-1;comSenha(()=>apagarPerfil(i));}));
+  $('#perfis').querySelectorAll('[data-nao]').forEach(b=>b.addEventListener('click',()=>{apagando=-1;telaPerfis();}));
   $('#novo-perfil').addEventListener('click',()=>pedirNome(true));
 }
 function fecharPerfis(){
@@ -121,18 +122,19 @@ async function entregar(nome,dados){
   let cap=null;
   try{cap=window.claude&&claude.use?await claude.use('downloads'):null;}catch(e){cap=null;}
   if(cap){
-    try{await cap.save({filename:nome,data:dados});avisoBaixa('');return;}
+    try{await cap.save({filename:nome,data:dados});avisoBaixa('');return true;}
     catch(err){
       const c=err&&err.code;
-      if(c==='declined')return;
-      if(c==='rate_limited'){avisoBaixa('Já tem um download aguardando resposta. Confirme e tente de novo.');return;}
-      avisoBaixa('Este aparelho não deixou salvar o arquivo. O caderno completo também vem em PDF na conversa.');
-      return;
+      if(c==='declined')return false;
+      if(c==='rate_limited'){avisoBaixa('Já tem um download aguardando resposta. Confirme e tente de novo.');return false;}
+      avisoBaixa('Este aparelho não deixou salvar o arquivo. Tente de novo.');
+      return false;
     }
   }
   const tipo=/\.json$/i.test(nome)?'application/json':(/\.ics$/i.test(nome)?'text/calendar':(/\.png$/i.test(nome)?'image/png':'image/svg+xml'));
   const url=URL.createObjectURL(typeof dados==='string'?new Blob([dados],{type:tipo}):dados);
   const a=document.createElement('a');a.href=url;a.download=nome;document.body.appendChild(a);a.click();
   setTimeout(()=>{a.remove();URL.revokeObjectURL(url);},2000);
+  return true;
 }
 

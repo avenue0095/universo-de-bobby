@@ -19,6 +19,13 @@ function trilhaPontos(){
   }
   return h;
 }
+/* o nó mostra só o nome principal (em inglês, o que vem antes do parêntese); a tradução fica na aula e no rótulo de acessibilidade */
+const nomeCurto=t=>String(t).replace(/\s*\([^)]*\)\s*$/,'')||String(t);
+/* 'Animals · Animais' vira duas linhas (nome e tradução), sem ponto solto no começo de uma linha */
+function tituloEmDuasLinhas(t){
+  const p=String(t).split(' · ');
+  return escapa(p[0])+(p[1]?'<span class="t-2">'+escapa(p.slice(1).join(' · '))+'</span>':'');
+}
 function noAtualDaEtapa(u){
   for(let li=0;li<u.lessons.length;li++)if(!S.feitas[u.lessons[li].id])return li;
   return 5;   /* tudo feito: ele espera na revisão */
@@ -47,7 +54,7 @@ function etapaHTML(u,ui,prox){
   const atualNo=ehAtual?noAtualDaEtapa(u):-1;
   let h='<section class="etapa'+(completo?' completa':'')+(estRev?' acesa':'')+'" id="etapa-'+(ui+1)+'" aria-labelledby="etapa-t-'+(ui+1)+'">';
   h+='<header class="etapa-cab"><div class="etapa-tx"><span class="etapa-n">Etapa '+u.n+'</span>'+
-     '<h3 id="etapa-t-'+(ui+1)+'">'+escapa(u.title)+'</h3><p>'+escapa(u.sub)+'</p></div>'+
+     '<h3 id="etapa-t-'+(ui+1)+'">'+tituloEmDuasLinhas(u.title)+'</h3><p>'+escapa(u.sub)+'</p></div>'+
      '<span class="etapa-prog'+(completo?' ok':'')+'">'+(completo?IC.certo+' Completa':feitasN+' de '+u.lessons.length+' fases')+'</span></header>';
   h+=cenaHTML(u,feitasN);
   h+='<div class="trilha">'+trilhaPontos();
@@ -60,7 +67,7 @@ function etapaHTML(u,ui,prox){
        ' aria-label="Fase '+(li+1)+': '+escapa(l.title)+(ok?'. Concluída com '+est+(est===1?' estrela':' estrelas'):(atual?'. Sua próxima fase':''))+'">'+
        (abr?'<b>'+(li+1)+'</b>':IC.cadeado)+'</button>'+
        '<span class="estrelas" aria-hidden="true">'+(ok?estrelasSVG(est):'')+'</span>'+
-       '<span class="rot">'+escapa(l.title)+'</span></div>';
+       '<span class="rot">'+escapa(nomeCurto(l.title))+'</span></div>';
   });
   const cr=['no','revisao-no'];if(!completo)cr.push('trava');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
   h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%">'+

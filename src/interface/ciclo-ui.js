@@ -103,6 +103,11 @@ function bauCena(aberto){
   return '<div class="bau-cena'+(aberto?' aberto':'')+'" aria-hidden="true">'+MASC('comemora')+'<div class="bau-fig">'+
     (grande?imgArte(aberto?'bau-aberto':'bau-fechado',{cls:'bau-img',eager:true}):IC.bauSvg)+'</div></div>';
 }
+/* cada prêmio do baú ganha a arte 3D certa (adesivo vira estrela, medalha é medalha, moeda é moeda) */
+function iconeDoPremio(k){
+  const id={moedas:'rec-moeda',medalha:'rec-medalha',adesivo:'rec-estrela',ornamento:'rec-estrela',pose:'rec-trofeu',moldura:'rec-medalha',trilha:'rec-estrela'}[k]||'rec-presente';
+  return ativo(id)?imgArte(id,{cls:'ic-arte premio-ic',eager:true}):'';
+}
 function mostrarBau(){
   garantirDia();
   if(S.diario.bau.aberto){mostrarBauAberto();return;}
@@ -116,7 +121,7 @@ function mostrarBau(){
 function mostrarBauAberto(){
   const b=S.diario.bau;
   abrirFolha('<div class="folha-in">'+bauCena(true)+'<h2>Você ganhou</h2>'+
-    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+escapa(i.n)+'</li>').join('')+'</ul>'+
+    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+iconeDoPremio(i.k)+'<span>'+escapa(i.n)+'</span></li>').join('')+'</ul>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Continuar</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{
     fecharFolha();pintarTopo();
@@ -142,7 +147,7 @@ function mostrarParada(limite){
   abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('tchau')+'</div><h2>Por hoje chega!</h2>'+
     '<p>Você fez um ótimo trabalho.</p><p>Amanhã tem mais. O baú de amanhã já está guardado.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
     '<div class="folha-bts par"><button class="btn-acao" id="fl-fim">Terminar por hoje</button>'+
-    '<button class="btn-acao" id="fl-segue">Continuar explorando</button></div></div>');
+    '<button class="btn-sec" id="fl-segue">Continuar explorando</button></div></div>');
   if(ehF78())falarDepois2(400,'Por hoje chega! Você fez um ótimo trabalho.');
   $('#fl-fim').addEventListener('click',()=>{
     registrarParada('terminar');
@@ -285,9 +290,9 @@ function ligarControles(refaz){
 function semanaHTML(){
   const r=resumoSemana(S.stats,hoje());
   let h='<h2 class="sec">Esta semana</h2><div class="stats">'+
-    stat(IC.fogo,r.dias+' de 7','dias com atividade')+
-    stat(IC.estrela,r.min+' min','de atividade')+
-    stat(IC.bandeira,r.perguntas,'perguntas feitas')+'</div>';
+    stat(IC.calendario,r.dias+' de 7','dias com atividade')+
+    stat(IC.relogio,r.min+' min','de atividade')+
+    stat(IC.pergunta,r.perguntas,'perguntas feitas')+'</div>';
   h+='<p class="galeria-intro">'+r.revisoes+(r.revisoes===1?' revisão feita':' revisões feitas')+
      (r.pct!==null?' e '+r.pct+'% de acerto nas perguntas da semana.':'.')+'</p>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="copia-resumo">Copiar o resumo da semana</button></div><div id="resumo-aviso"></div>';

@@ -73,7 +73,7 @@ async function main() {
     await cdp('Runtime.enable'); await cdp('Log.enable'); await cdp('Page.enable'); await cdp('Network.enable');
 
     const problemas = []; const avisos = []; const feito = [];
-    const EXTERNO = /fonts\.googleapis|fonts\.gstatic|cdnjs\.cloudflare|favicon\.ico/;  // favicon.ico: o Chrome pede sozinho; o app declara o icone por <link>
+    const EXTERNO = /fonts\.googleapis|fonts\.gstatic|cdnjs\.cloudflare/;  // o favicon.ico agora existe na raiz: 404 nele reprova
     const urlsDeRede = new Map();
     const coleta = (rotulo) => {
       while (eventos.length) {
@@ -90,11 +90,12 @@ async function main() {
           if (p.canceled) continue;
           (EXTERNO.test(u) ? avisos : problemas).push(rotulo + ' rede falhou: ' + u + ' ' + p.errorText);
         }
-        if (e.method === 'Network.responseReceived' && p.response.status >= 400 && p.response.url.startsWith(base) && !/favicon\.ico/.test(p.response.url)) problemas.push(rotulo + ' HTTP ' + p.response.status + ' ' + p.response.url);
+        if (e.method === 'Network.responseReceived' && p.response.status >= 400 && p.response.url.startsWith(base)) problemas.push(rotulo + ' HTTP ' + p.response.status + ' ' + p.response.url);
       }
     };
 
-    const telas = [['desktop', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false }], ['celular', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }]];
+    const telas = [['desktop', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false }], ['celular', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }], ['celular360', { width: 360, height: 640, deviceScaleFactor: 2, mobile: true }]];
+    const shot0 = async (nome) => { if (!FOTO) return; fs.mkdirSync(path.join(__dirname, 'saida'), { recursive: true }); const f = await cdp('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(path.join(__dirname, 'saida', 'modal-' + nome + '.png'), Buffer.from(f.data, 'base64')); };
     for (const [nomeTela, medidas] of telas) {
       await cdp('Emulation.setDeviceMetricsOverride', medidas);
       await cdp('Page.navigate', { url: 'about:blank' });
@@ -109,6 +110,15 @@ async function main() {
       /* 1) cria o jogador pelo modal, como a crianca faria */
       const modalAberto = await js("document.querySelector('#modal').classList.contains('on')");
       if (!modalAberto) problemas.push(rot + ': o modal de novo jogador nao abriu no primeiro acesso');
+      /* o modal precisa caber (ou rolar) em celular pequeno, inclusive com o teclado aberto (viewport 300 px mais baixo) */
+      const cabeModal = async (quando) => {
+        const r = await js("(()=>{const b=document.querySelector('#salvar-nome');b.scrollIntoView({block:'nearest'});const q=b.getBoundingClientRect();const t=document.elementFromPoint(q.left+q.width/2,q.top+q.height/2);return {ok:!!t&&(t===b||b.contains(t)),bottom:q.bottom,ih:innerHeight}})()");
+        if (!r.ok || r.bottom > r.ih + 1) problemas.push(rot + ': botao Pronto do modal nao alcancavel ' + quando + ' (bottom ' + Math.round(r.bottom) + ' de ' + r.ih + ')');
+      };
+      await cabeModal('sem teclado');
+      await cdp('Emulation.setDeviceMetricsOverride', Object.assign({}, medidas, { height: Math.max(300, medidas.height - 300) }));
+      await dorme(150); await cabeModal('com o teclado aberto'); await shot0('modal-teclado');
+      await cdp('Emulation.setDeviceMetricsOverride', medidas); await dorme(150);
       await js("(()=>{const c=document.querySelector('#campo-nome');c.value='Teste Fumaça';document.querySelector('#salvar-nome').click();return 1})()");
       await dorme(500);
       const nomeNaTela = await js("document.body.innerText.includes('Teste Fumaça')");
@@ -309,6 +319,7 @@ async function main() {
           await js("fecharLicao();0"); await dorme(200);
         }
         // varredura de pontaria nas telas principais: todo botao habilitado e o elemento que recebe o toque no seu centro
+        const textoRuim = async (nome) => { const t = await js('document.body.innerText'); const m = t.match(/.{0,30}(undefined|NaN).{0,30}/); if (m) problemas.push(rot + " '" + m[1] + "' no texto da tela " + nome + ': ' + m[0].replace(/\s+/g, ' ')); };
         const varre = (nome) => js(`(()=>{
           const nome=(e)=>e?(e.id||(typeof e.className==='string'&&e.className)||e.tagName):'nada';
           const ativo=['#folha','#modal','#licao','#desenho-tela','#perfil','#galeria'].map(q=>document.querySelector(q)).find(e=>e&&(e.classList.contains('on')));
@@ -325,12 +336,12 @@ async function main() {
             if(!(t&&(t===b||b.contains(t))))ruins.push(nome(b)+' coberto por '+nome(t));
           }));
           return {ruins:ruins,n:n};})()`).then((r) => { if (r.ruins.length) problemas.push(rot + ' pontaria em ' + nome + ': ' + [...new Set(r.ruins)].slice(0, 6).join(' | ')); if (!r.n) problemas.push(rot + ' pontaria em ' + nome + ': nenhum botao conferido'); });
-        await js("fecharLicao();document.querySelector('#bb-mapa').click();0"); await dorme(500); await varre('mapa');
-        await js("document.querySelector('#bb-pers').click();0"); await dorme(500); await varre('Meu personagem'); await js('fecharTelasDaBarra();0');
-        await js("document.querySelector('#bb-gal').click();0"); await dorme(700); await varre('galeria'); await js('fecharTelasDaBarra();0');
-        await js("document.querySelector('#bb-perfil').click();0"); await dorme(500); await varre('perfil'); await js('fecharTelasDaBarra();0');
-        await js("abrirLicao(1,0);LIC.etapa='aula';pintarLicao();0"); await dorme(300); await varre('aula');
-        await js("LIC.etapa='questao';LIC.i=0;pintarLicao();0"); await dorme(300); await varre('pergunta');
+        await js("fecharLicao();document.querySelector('#bb-mapa').click();0"); await dorme(500); await varre('mapa'); await textoRuim('mapa');
+        await js("document.querySelector('#bb-pers').click();0"); await dorme(500); await varre('Meu personagem'); await textoRuim('Meu personagem'); await js('fecharTelasDaBarra();0');
+        await js("document.querySelector('#bb-gal').click();0"); await dorme(700); await varre('galeria'); await textoRuim('galeria'); await js('fecharTelasDaBarra();0');
+        await js("document.querySelector('#bb-perfil').click();0"); await dorme(500); await varre('perfil'); await textoRuim('perfil'); await js('telaResponsavel();0'); await dorme(300); await textoRuim('responsavel'); await js('telaVoz();0'); await dorme(300); await textoRuim('voz'); await js('fecharTelasDaBarra();telaPerfis();0'); await dorme(300); await textoRuim('quem vai jogar'); await js('fecharPerfis();0'); await js('fecharTelasDaBarra();0');
+        await js("abrirLicao(1,0);LIC.etapa='aula';pintarLicao();0"); await dorme(300); await varre('aula'); await textoRuim('aula');
+        await js("LIC.etapa='questao';LIC.i=0;pintarLicao();0"); await dorme(300); await varre('pergunta'); await textoRuim('pergunta');
         await js("fecharLicao();document.querySelector('#bb-mapa').click();0"); await dorme(300);
         if (medidas.mobile) await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
         coleta(rot + ' toque real');

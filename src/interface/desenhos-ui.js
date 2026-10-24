@@ -103,7 +103,7 @@ function abrirDesenho(id){
   }else{
     corpo='<div class="des-tela"><canvas id="cv-des" role="img" aria-label="Desenho para colorir: '+escapa(d.nome)+'. Toque numa área para pintar."></canvas></div>'+
       '<div class="des-ferramentas"><div class="paleta" role="radiogroup" aria-label="Cores"></div>'+
-      '<div class="des-acoes"><button class="btn-sec" id="des-desfazer">'+IC.volta+' Desfazer</button>'+
+      '<div class="des-acoes"><button class="btn-sec" id="des-desfazer">'+IC.desfazer+' Desfazer</button>'+
       '<button class="btn-sec" id="des-limpar">Recomeçar</button>'+
       '<button class="btn-sec" id="des-imprimir">'+IC.impressora+' Imprimir</button>'+
       '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar</button></div></div><div id="aviso-baixa"></div>';
@@ -176,7 +176,11 @@ function pintarPaleta(){
   q('des-imprimir').onclick=()=>imprimirDesenhos([desenhoPorId(DES.id)]);
   q('des-salvar').onclick=()=>{
     const cv=$('#cv-des');
-    cv.toBlob(b=>{if(b)entregar('desenho-'+DES.id+'.png',b);},'image/png');
+    cv.toBlob(async b=>{
+      if(!b){avisoBaixa('Não consegui guardar o desenho agora. Tente de novo.');return;}
+      const ok=await entregar('desenho-'+DES.id+'.png',b);
+      if(ok)avisoBaixa('Desenho guardado! A imagem foi salva no seu aparelho, na pasta de downloads.');
+    },'image/png');
   };
 }
 
