@@ -14,7 +14,7 @@ Sessão encerrada a pedido do Filipe por custo. Tudo abaixo está na branch `ref
 
 ## Em andamento quando parou
 - Sessão 1C (mundo reage: Bobby anda no mapa, nós como objetos, etapa trancada até a revisão da anterior): ver o último commit ou o `git stash` chamado `1C-parcial`.
-- Revisão independente da música e da 1B1: interrompida; sem nota.
+- Revisão independente da música e da 1B1: interrompida sem nota. O que passou: música desligada por padrão, botão de um toque liga só a música, faixa baixa sob demanda, ganho -18 dB e -28 dB na voz, licenças CC0 e hashes batem, 1.1 com 6 de 8 tocáveis, latência < 100 ms, painel de feedback 10 a 18% da altura. O que FALHOU e entra na 1B2: (1) trinca de verbos iguais em 97 das 150 fases (inglês 50 de 50 em 'ouvir e tocar'); (2) tocar objeto e depois tocar a cesta trava com 1 item dentro (troca oscila), arrasto funciona; (3) alternativas atrás do rodapé com ~20 objetos sem rolar (390 e 360) e última fileira cortada 18 px no 360; (4) perfis antigos ficam com musica=true (estadoDe usa ===true): migrar para false; (5) efeito 'solta' é ruído a 16 kHz, trocar; (6) objetos de contar parecem gotas, não sementes (arte das folhas de objetos).
 - Lote 6 de áudio (193 fragmentos curtos de resposta da dica: "a resposta é", "antes do", "vem o"): NÃO concluído. Até gerar, a resposta falada da dica fica muda na maioria dos casos (o texto aparece). Lista em `audio/regerar-pendentes.json`; ferramentas em `audio/ferramentas/`.
 
 ## Próximas etapas, em ordem
