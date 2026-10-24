@@ -1616,3 +1616,35 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
 .fala-p{font-weight:700;color:var(--cor-texto);margin:0 0 var(--esp-8)}
 .fala-mini{display:block;margin-top:var(--esp-4);font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:700;color:var(--cor-texto-suave)}
 .fala-mini[hidden]{display:none}
+
+/* ---------- cerimônias: fim de fase, de etapa e de planeta ---------- */
+.estrelao.acende svg.on{animation:so-opacidade var(--mov-padrao) var(--curva-entra) both}
+.estrelao.acende svg.on:nth-child(1){animation-delay:.4s}.estrelao.acende svg.on:nth-child(2){animation-delay:.7s}.estrelao.acende svg.on:nth-child(3){animation-delay:1s}
+.linha-fim{font-weight:700;font-size:var(--t-corpo);line-height:var(--lh-corpo);margin:0 0 var(--esp-16)}
+.cer{display:grid;gap:var(--esp-8);justify-items:center;text-align:center}
+.cer-cena{width:100%;max-height:26vh;aspect-ratio:auto;height:26vh;border-radius:var(--raio-16)}
+.cer-cena .cena-base,.cer-cena .cena-luz{object-position:50% 70%}
+.cer-atores{display:flex;align-items:flex-end;justify-content:center;gap:var(--esp-16)}
+.cer-atores .mascote{width:auto;height:80px}
+.cer-guia{width:auto;height:80px}
+.cer-trofeu{display:flex;align-items:center;gap:var(--esp-8);font-weight:700}
+.cer-trofeu .ic-arte,.cer-trofeu svg{width:48px;height:48px}
+.cer .premio{max-width:100%;text-align:left}
+.cer .p1,.cer .p2,.cer .p3,.cer .p4,.cer .p5{opacity:0;transform:translateY(8px)}
+.cer.tudo .p1,.cer.tudo .p2,.cer.tudo .p3,.cer.tudo .p4,.cer.tudo .p5{opacity:1;transform:none;transition:opacity var(--mov-padrao) var(--curva-entra),transform var(--mov-padrao) var(--curva-entra)}
+.cer:not(.tudo) .p1{animation:cer-entra var(--mov-padrao) var(--curva-entra) 1.2s forwards}
+.cer:not(.tudo) .p2{animation:cer-entra var(--mov-padrao) var(--curva-entra) 2s forwards}
+.cer:not(.tudo) .p3{animation:cer-entra var(--mov-padrao) var(--curva-entra) 3.5s forwards}
+.cer:not(.tudo) .p4{animation:cer-entra var(--mov-padrao) var(--curva-entra) 5s forwards}
+.cer:not(.tudo) .p5{animation:cer-entra var(--mov-padrao) var(--curva-entra) 6.5s forwards}
+@keyframes cer-entra{to{opacity:1;transform:none}}
+.cer .folha-bts.par{width:100%}
+.cer .folha-bts.par .btn-sec{flex:1}
+.cer-ceu{width:100%;background:radial-gradient(70% 90% at 50% 20%,color-mix(in srgb,var(--materia-luz) 30%,transparent),transparent 70%),var(--cor-fundo);border-radius:var(--raio-16)}
+.constelacao{width:100%;height:auto;max-height:36vh;display:block}
+.constelacao .traco{fill:none;stroke:var(--cor-linha-forte);stroke-width:2;stroke-dasharray:4 6}
+.constelacao .traco.on{stroke:var(--cor-ouro);stroke-dasharray:none}
+.constelacao .estrela{fill:var(--cor-superficie-2);stroke:var(--cor-linha-forte);stroke-width:2}
+.constelacao .estrela.on{fill:var(--materia-base);stroke:var(--cor-ouro);stroke-width:3;filter:drop-shadow(0 0 6px var(--materia-luz))}
+.constelacao .nome-const{fill:var(--cor-ouro);font-family:var(--fonte-titulo);font-size:var(--t-destaque);font-weight:var(--peso-titulo)}
+@media (prefers-reduced-motion:reduce){.cer .p1,.cer .p2,.cer .p3,.cer .p4,.cer .p5{opacity:1;transform:none;animation:none}}

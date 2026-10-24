@@ -577,7 +577,7 @@ function pintarFim(){
   const nErr=(S.errados[MATERIA+LIC.u.n]||[]).length;
   $('#palco').innerHTML='<div class="fim surge">'+
     MASC(passou?'comemora':'incentiva')+
-    '<div class="estrelao">'+estrelasSVG(est)+'</div>'+
+    '<div class="estrelao acende">'+estrelasSVG(est)+'</div>'+
     '<h2>'+(passou?(LIC.rev?'Revisão concluída!':(LIC.erros===0?'Fase perfeita!':'Fase concluída!'))
       :'Vamos descansar e revisar')+'</h2>'+
     (passou&&!LIC.rev?'<p class="fala-p">'+falaDe(LIC.erros===0?'fasePerfeita':'faseCompleta')+'</p>':'')+
@@ -587,14 +587,14 @@ function pintarFim(){
       :'Os erros foram para o seu caderno e voltam amanhã na revisão. Seu progresso está guardado. Errar faz parte de aprender.')+'</p>'+
     (completouMundo?'<div class="mundo-ok">'+IC.trofeu+' Etapa '+LIC.u.n+' completa!</div><p class="fala-p">'+falaDe('etapaCompleta')+'</p>':'')+
     (passou&&!LIC.rev?premioDesenhoHTML(completouMundo):'')+
-    '<div class="placar">'+
-      '<div><span>Acertos</span><b>'+LIC.acertos+'</b></div>'+
-      '<div><span>Moedas</span><b>'+(LIC.ganhoFase||0)+'</b></div>'+
-      '<div><span>Melhor combo</span><b>'+LIC.melhorCombo+'</b></div>'+
-    '</div>'+
+    '<p class="linha-fim">'+LIC.acertos+' de '+LIC.base+' perguntas, '+(LIC.ganhoFase||0)+' moedas</p>'+
     (typeof blocoFimHTML==='function'?blocoFimHTML(bloco):'')+
     '<button class="btn fantasma" id="rever-fim">Rever a aula desta fase</button></div>';
   $('.lc-corpo').scrollTo(0,0);
+  /* cerimônia da fase (até 3 s): as estrelas ganhas acendem uma a uma, cada uma com o seu 'ding' */
+  if(passou&&!LIC.cerEstrelas){LIC.cerEstrelas=true;for(let i=0;i<est;i++)setTimeout(()=>sfx('estrela',i),400+i*300);}
+  /* depois da última fase da etapa: cerimônia da etapa e, se o planeta fechou, a do planeta (cada uma aparece uma vez) */
+  if(completouMundo&&passou&&!LIC.rev&&!LIC.cerVista){LIC.cerVista=true;setTimeout(()=>cerimoniasDoFim(LIC.u),1500);}
   $('#rever-fim').addEventListener('click',abrirRevisao);
   if(typeof ligarBlocoFim==='function')ligarBlocoFim(bloco);
   const vg=$('#ver-galeria');if(vg)vg.addEventListener('click',()=>abrirGaleria(vg.dataset.id||true));

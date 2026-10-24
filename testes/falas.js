@@ -67,5 +67,18 @@ const mulberry = (a) => () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.
     const sem = todas.filter((f) => !lista.has(f.texto) && !app.avaliar('audioResolveTexto(' + JSON.stringify(f.texto) + ',"pt-BR",["feedback"])'));
     A.deepStrictEqual(sem.map((f) => f.texto), [], 'faltam na lista do audio');
   });
+  await teste('6. narrativa do Embaralho: 10 etapas por planeta, sem tristeza, culpa nem travessao, e todo texto esta na lista do audio', () => {
+    const N = JSON.parse(app.avaliar('JSON.stringify(NARRATIVA)'));
+    const p = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'regerar-pendentes.json'), 'utf8'));
+    const lista = new Set(p.itens.map((i) => i.texto));
+    ['mat', 'pt', 'en'].forEach((k) => {
+      A.strictEqual(N[k].length, 10, k);
+      N[k].forEach(([nome, frase]) => {
+        A.ok(nome && frase.length > 20, k + ' ' + nome);
+        A.ok(!/triste|saudade|decepcion|culpa|\u2014|\btu\b/i.test(frase), 'regra de texto: ' + frase);
+        A.ok(lista.has(frase), 'sem clipe nem lista de audio: ' + frase);
+      });
+    });
+  });
   resumo('falas.js');
 })();

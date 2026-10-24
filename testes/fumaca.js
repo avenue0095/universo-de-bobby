@@ -519,6 +519,53 @@ async function main() {
         feito.push(rot + ': som sintetizado (' + Object.keys(tabela).length + ' efeitos medidos em OfflineAudioContext, erro ' + er.dif.toFixed(1) + ' dB abaixo do acerto)');
       }
 
+      /* 2d6) CERIMONIAS: fim de etapa (cena acende, frase da historia, desenho entregue, dois botoes de peso igual, pulavel com um toque depois de 1 s)
+         e fim de planeta (constelacao, com o nome da crianca quando as tres estrelas voltaram); cada uma aparece uma vez; fim de fase em uma linha. */
+      {
+        await js("usarMateria('mat');fecharFolha();document.querySelector('#modal').classList.remove('on');S.cer=[];S.feitas={};S.moedas=0;UNITS[0].lessons.slice(0,4).forEach(l=>S.feitas[l.id]=3);salvar();0");
+        // fluxo real: jogar a ultima fase da etapa 1 e esperar a cerimonia
+        await js("abrirLicao(0,4);LIC.etapa='questao';pintarLicao();while(LIC.etapa==='questao'){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0"); await dorme(2200);
+        const fim = await js("(()=>{const f=document.querySelector('#palco .fim');return {linha:(document.querySelector('.linha-fim')||{}).innerText||'',placar:!!document.querySelector('#palco .placar'),cer:!!document.querySelector('#folha .cer')}})()");
+        if (!/\d+ de \d+ perguntas, \d+ moedas/.test(fim.linha) || fim.placar) problemas.push(rot + ' fim de fase: esperada uma linha unica ("8 de 8 perguntas, 90 moedas") e nenhum cartao ' + JSON.stringify(fim));
+        if (!fim.cer) problemas.push(rot + ' cerimonia da etapa nao apareceu depois da ultima fase');
+        const c1 = await js(`(()=>{const f=document.querySelector('#folha .cer');if(!f)return null;return {titulo:(f.querySelector('h2')||{}).innerText,frase:(f.querySelector('p.fala-p')||{}).innerText||'',luz:!!f.querySelector('.cena-luz'),desenho:!!f.querySelector('.premio'),antes:f.classList.contains('tudo')}})()`);
+        if (c1) {
+          if (!/Etapa 1 completa/.test(c1.titulo)) problemas.push(rot + ' cerimonia da etapa: titulo ' + c1.titulo);
+          if (c1.frase.indexOf(await js('NARRATIVA.mat[1][1]')) < 0) problemas.push(rot + ' cerimonia da etapa: faltou a frase da historia (' + c1.frase.slice(0, 40) + ')');
+          if (!c1.luz || !c1.desenho) problemas.push(rot + ' cerimonia da etapa: faltou a cena acesa ou o desenho entregue ' + JSON.stringify(c1));
+        }
+        // um toque ANTES de 1 s nao pula; depois de 1 s, pula e mostra os dois botoes de peso igual
+        await js("CER.desde=Date.now();cerPular();0");
+        const naoPulou = await js("!document.querySelector('#folha .cer').classList.contains('tudo')||document.querySelector('#folha .cer').classList.contains('tudo')===false");
+        await js("CER.desde=Date.now()-1500;document.querySelector('#folha .cer').click();0"); await dorme(500);
+        const bt = await js("(()=>{const a=document.querySelector('#cer-ver').getBoundingClientRect(),b=document.querySelector('#cer-ok').getBoundingClientRect();return {tudo:document.querySelector('#folha .cer').classList.contains('tudo'),wa:Math.round(a.width),wb:Math.round(b.width),ha:Math.round(a.height),hb:Math.round(b.height),cl:document.querySelector('#cer-ver').className===document.querySelector('#cer-ok').className}})()");
+        if (!bt.tudo) problemas.push(rot + ' cerimonia: um toque depois de 1 s deveria pular para o fim');
+        if (Math.abs(bt.wa - bt.wb) > 6 || Math.abs(bt.ha - bt.hb) > 4 || !bt.cl) problemas.push(rot + ' cerimonia: "Ver o desenho" e "Continuar" deveriam ter o mesmo peso ' + JSON.stringify(bt));
+        await shot0('cerimonia-etapa-' + nomeTela);
+        await js("document.querySelector('#cer-ok').click();0"); await dorme(300);
+        // so uma vez
+        const denovo = await js("cerimoniaDaEtapa(UNITS[0])===false&&!document.querySelector('#folha .cer')");
+        if (!denovo) problemas.push(rot + ' cerimonia da etapa apareceu de novo');
+        // planeta: 1 estrela, depois as tres com o nome
+        await js("fecharFolha();CER.aberta=false;S.nome='Lia';S.cer=[];UNITS.forEach(u=>u.lessons.forEach(l=>S.feitas[l.id]=3));0");
+        await js("cerimoniaDoPlaneta();0"); await dorme(250);
+        const p1 = await js("(document.querySelector('#folha .cer')||{innerText:''}).innerText");
+        if (!/Planeta Numeral completo/.test(p1) || !/Estrela Cobalto voltou/.test(p1) || /constelação de Lia/.test(p1)) problemas.push(rot + ' cerimonia do planeta (1 estrela): ' + p1.slice(0, 120));
+        await js("CER.desde=Date.now()-1500;document.querySelector('#folha .cer').click();0"); await dorme(300);
+        await shot0('cerimonia-planeta1-' + nomeTela);
+        await js("document.querySelector('#cer-ok').click();0"); await dorme(200);
+        await js("S.cer=['plpt','plen'];fecharFolha();CER.aberta=false;cerimoniaDoPlaneta();0"); await dorme(250);
+        await js("CER.desde=Date.now()-1500;document.querySelector('#folha .cer').click();0"); await dorme(300);
+        const p3 = await js("(document.querySelector('#folha .cer')||{innerText:''}).innerText+'|'+(document.querySelector('#folha .nome-const')||{textContent:''}).textContent");
+        if (!/A constelação de Lia acendeu/.test(p3) || !/\|Lia$/.test(p3)) problemas.push(rot + ' cerimonia do planeta (3 estrelas): faltou o nome da crianca na constelacao: ' + p3.slice(0, 160));
+        await shot0('cerimonia-planeta3-' + nomeTela);
+        await js("document.querySelector('#cer-ok').click();0"); await dorme(200);
+        const unica = await js("cerimoniaDoPlaneta()===false");
+        if (!unica) problemas.push(rot + ' cerimonia do planeta apareceu de novo');
+        await js("fecharFolha();CER.aberta=false;S.cer=[];S.feitas={};salvar();renderTrilha();0");
+        feito.push(rot + ': cerimonias (fase em uma linha, etapa pulavel com botoes iguais, planeta com constelacao e nome), cada uma uma vez');
+      }
+
       /* 2e) PONTARIA E TOQUE REAL. Regressao de 24/10/2026: um z-index no corpo da fase cobriu o painel fixo e nenhum botao respondia,
          mas .click() por JavaScript ignora o que esta por cima. Aqui o toque vai pelo CDP (mouse no desktop, toque no celular), no ponto central
          do botao, e antes disso conferimos com elementFromPoint que o botao e mesmo o elemento ali. */

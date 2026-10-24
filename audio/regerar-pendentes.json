@@ -1,6 +1,6 @@
 {
  "gerado": "2026-10-24",
- "total": 70,
+ "total": 104,
  "itens": [
   {
    "texto": "Bom dia, explorador! Hoje o céu está limpo e a mochila está cheia.",
@@ -770,6 +770,380 @@
    "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
    "trechos_sem_clipe": [
     "Sem pressa. Pensar também é jogar."
+   ]
+  },
+  {
+   "texto": "Os saquinhos de sementes estão com a contagem trocada. Teo encontra um rastro de poeira brilhante.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa1)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "Os saquinhos de sementes estão com a contagem trocada. Teo encontra um rastro de poeira brilhante."
+   ]
+  },
+  {
+   "texto": "As conchas apareceram em pilhas erradas. O rastro de poeira continua pela areia.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa2)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "As conchas apareceram em pilhas erradas. O rastro de poeira continua pela areia."
+   ]
+  },
+  {
+   "texto": "A caravana saiu com caixas demais, ou de menos. Alguém bagunçou a carga durante a noite.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa3)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "A caravana saiu com caixas demais, ou de menos. Alguém bagunçou a carga durante a noite."
+   ]
+  },
+  {
+   "texto": "Ninguém sabe repartir os lanches. Uma risadinha vem de trás de um tronco.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa4)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "Ninguém sabe repartir os lanches. Uma risadinha vem de trás de um tronco."
+   ]
+  },
+  {
+   "texto": "As fatias sumiram da bandeja. Teo vê a cauda de um cometa passar voando.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa5)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "As fatias sumiram da bandeja. Teo vê a cauda de um cometa passar voando."
+   ]
+  },
+  {
+   "texto": "As etiquetas de preço trocaram de lugar. O Embaralho aparece rindo, em cima da barraca.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa6)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "As etiquetas de preço trocaram de lugar. O Embaralho aparece rindo, em cima da barraca."
+   ]
+  },
+  {
+   "texto": "Ele diz que só queria brincar, mas levou um pedaço da Estrela Cobalto.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa7)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "Ele diz que só queria brincar, mas levou um pedaço da Estrela Cobalto."
+   ]
+  },
+  {
+   "texto": "Para alcançar o Embaralho, o Bobby precisa construir um parquinho com as medidas certas.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa8)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "Para alcançar o Embaralho, o Bobby precisa construir um parquinho com as medidas certas."
+   ]
+  },
+  {
+   "texto": "O foguete está quase pronto. Falta o número escondido que faz ele decolar.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa9)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O foguete está quase pronto. Falta o número escondido que faz ele decolar."
+   ]
+  },
+  {
+   "texto": "O Embaralho devolve a Estrela Cobalto e pede para ir à festa. O castelo inteiro aplaude.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.mat.etapa10)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O Embaralho devolve a Estrela Cobalto e pede para ir à festa. O castelo inteiro aplaude."
+   ]
+  },
+  {
+   "texto": "As letras da caixa estão fora de ordem. Rufa suspeita de um visitante bagunceiro.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa1)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "As letras da caixa estão fora de ordem. Rufa suspeita de um visitante bagunceiro."
+   ]
+  },
+  {
+   "texto": "O trem só anda se os vagões estiverem na ordem. Alguém trocou todos de lugar.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa2)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O trem só anda se os vagões estiverem na ordem. Alguém trocou todos de lugar."
+   ]
+  },
+  {
+   "texto": "Os cartazes estão embaralhados. Rufa acha um brilho de poeira estelar no chão.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa3)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "Os cartazes estão embaralhados. Rufa acha um brilho de poeira estelar no chão."
+   ]
+  },
+  {
+   "texto": "Na oficina os sons saem trocados. Isso tem cheiro de Embaralho.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa4)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "Na oficina os sons saem trocados. Isso tem cheiro de Embaralho."
+   ]
+  },
+  {
+   "texto": "As cartas chegam sem ponto final e viram frases sem fim. Uma risadinha sai de um envelope.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa5)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "As cartas chegam sem ponto final e viram frases sem fim. Uma risadinha sai de um envelope."
+   ]
+  },
+  {
+   "texto": "O Embaralho aparece de verdade, com cauda de letras. Pega a Estrela Violeta e foge.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa6)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O Embaralho aparece de verdade, com cauda de letras. Pega a Estrela Violeta e foge."
+   ]
+  },
+  {
+   "texto": "A estrela está escondida no palco. Para entrar, o Bobby vai atuar numa peça.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa7)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "A estrela está escondida no palco. Para entrar, o Bobby vai atuar numa peça."
+   ]
+  },
+  {
+   "texto": "As palavras saem com letras trocadas. Dá para ler o recado dele se você acertar tudo.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa8)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "As palavras saem com letras trocadas. Dá para ler o recado dele se você acertar tudo."
+   ]
+  },
+  {
+   "texto": "O recado diz: quero brincar, não brigar. Rufa sorri e o jardim fica em silêncio.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa9)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O recado diz: quero brincar, não brigar. Rufa sorri e o jardim fica em silêncio."
+   ]
+  },
+  {
+   "texto": "O Embaralho devolve a Estrela Violeta e pede para ouvir uma história. Rufa lê para ele.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.pt.etapa10)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O Embaralho devolve a Estrela Violeta e pede para ouvir uma história. Rufa lê para ele."
+   ]
+  },
+  {
+   "texto": "O Bobby chega à cidade e as placas estão em inglês trocado. Otto dá as boas-vindas.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa1)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O Bobby chega à cidade e as placas estão em inglês trocado. Otto dá as boas-vindas."
+   ]
+  },
+  {
+   "texto": "As cores dos arcos estão trocadas. Otto jura que ontem eram outras.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa2)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "As cores dos arcos estão trocadas. Otto jura que ontem eram outras."
+   ]
+  },
+  {
+   "texto": "Um bilhete chegou com metade das palavras faltando. Otto fica curioso.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa3)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "Um bilhete chegou com metade das palavras faltando. Otto fica curioso."
+   ]
+  },
+  {
+   "texto": "As placas dos bichos trocaram de lugar. O macaco parece rir de alguma coisa.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa4)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "As placas dos bichos trocaram de lugar. O macaco parece rir de alguma coisa."
+   ]
+  },
+  {
+   "texto": "O cardápio chegou embaralhado e o garçom não entende o pedido. Otto traduz com paciência.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa5)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O cardápio chegou embaralhado e o garçom não entende o pedido. Otto traduz com paciência."
+   ]
+  },
+  {
+   "texto": "Uma sombra brilhante passa pelo provador. O Embaralho vestiu o manequim ao contrário.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa6)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "Uma sombra brilhante passa pelo provador. O Embaralho vestiu o manequim ao contrário."
+   ]
+  },
+  {
+   "texto": "A casa tem uma chave que abre a porta errada. Cada cômodo guarda uma pista.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa7)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "A casa tem uma chave que abre a porta errada. Cada cômodo guarda uma pista."
+   ]
+  },
+  {
+   "texto": "O Bobby segue o rastro de poeira pela cidade inteira e vê a Estrela Turquesa na ponte.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa8)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O Bobby segue o rastro de poeira pela cidade inteira e vê a Estrela Turquesa na ponte."
+   ]
+  },
+  {
+   "texto": "O Embaralho aparece e faz perguntas em inglês. Se o Bobby responder bem, ele conta onde está a estrela.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa9)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O Embaralho aparece e faz perguntas em inglês. Se o Bobby responder bem, ele conta onde está a estrela."
+   ]
+  },
+  {
+   "texto": "O Embaralho devolve a Estrela Turquesa. As três estrelas voltam e a constelação acende.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (narrativa.en.etapa10)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "O Embaralho devolve a Estrela Turquesa. As três estrelas voltam e a constelação acende."
+   ]
+  },
+  {
+   "texto": "A constelação acendeu. O céu inteiro agora tem o seu nome.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (cerimonia.planeta)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "A constelação acendeu. O céu inteiro agora tem o seu nome."
+   ]
+  },
+  {
+   "texto": "A Estrela Cobalto voltou para o céu.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (cerimonia.planeta.mat)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "A Estrela Cobalto voltou para o céu."
+   ]
+  },
+  {
+   "texto": "A Estrela Violeta voltou para o céu.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (cerimonia.planeta.pt)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "A Estrela Violeta voltou para o céu."
+   ]
+  },
+  {
+   "texto": "A Estrela Turquesa voltou para o céu.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (cerimonia.planeta.en)",
+   "classe": "feedback",
+   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "trechos_sem_clipe": [
+    "A Estrela Turquesa voltou para o céu."
    ]
   }
  ]

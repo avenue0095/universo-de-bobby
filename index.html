@@ -1628,6 +1628,38 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
 .fala-p{font-weight:700;color:var(--cor-texto);margin:0 0 var(--esp-8)}
 .fala-mini{display:block;margin-top:var(--esp-4);font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:700;color:var(--cor-texto-suave)}
 .fala-mini[hidden]{display:none}
+
+/* ---------- cerimônias: fim de fase, de etapa e de planeta ---------- */
+.estrelao.acende svg.on{animation:so-opacidade var(--mov-padrao) var(--curva-entra) both}
+.estrelao.acende svg.on:nth-child(1){animation-delay:.4s}.estrelao.acende svg.on:nth-child(2){animation-delay:.7s}.estrelao.acende svg.on:nth-child(3){animation-delay:1s}
+.linha-fim{font-weight:700;font-size:var(--t-corpo);line-height:var(--lh-corpo);margin:0 0 var(--esp-16)}
+.cer{display:grid;gap:var(--esp-8);justify-items:center;text-align:center}
+.cer-cena{width:100%;max-height:26vh;aspect-ratio:auto;height:26vh;border-radius:var(--raio-16)}
+.cer-cena .cena-base,.cer-cena .cena-luz{object-position:50% 70%}
+.cer-atores{display:flex;align-items:flex-end;justify-content:center;gap:var(--esp-16)}
+.cer-atores .mascote{width:auto;height:80px}
+.cer-guia{width:auto;height:80px}
+.cer-trofeu{display:flex;align-items:center;gap:var(--esp-8);font-weight:700}
+.cer-trofeu .ic-arte,.cer-trofeu svg{width:48px;height:48px}
+.cer .premio{max-width:100%;text-align:left}
+.cer .p1,.cer .p2,.cer .p3,.cer .p4,.cer .p5{opacity:0;transform:translateY(8px)}
+.cer.tudo .p1,.cer.tudo .p2,.cer.tudo .p3,.cer.tudo .p4,.cer.tudo .p5{opacity:1;transform:none;transition:opacity var(--mov-padrao) var(--curva-entra),transform var(--mov-padrao) var(--curva-entra)}
+.cer:not(.tudo) .p1{animation:cer-entra var(--mov-padrao) var(--curva-entra) 1.2s forwards}
+.cer:not(.tudo) .p2{animation:cer-entra var(--mov-padrao) var(--curva-entra) 2s forwards}
+.cer:not(.tudo) .p3{animation:cer-entra var(--mov-padrao) var(--curva-entra) 3.5s forwards}
+.cer:not(.tudo) .p4{animation:cer-entra var(--mov-padrao) var(--curva-entra) 5s forwards}
+.cer:not(.tudo) .p5{animation:cer-entra var(--mov-padrao) var(--curva-entra) 6.5s forwards}
+@keyframes cer-entra{to{opacity:1;transform:none}}
+.cer .folha-bts.par{width:100%}
+.cer .folha-bts.par .btn-sec{flex:1}
+.cer-ceu{width:100%;background:radial-gradient(70% 90% at 50% 20%,color-mix(in srgb,var(--materia-luz) 30%,transparent),transparent 70%),var(--cor-fundo);border-radius:var(--raio-16)}
+.constelacao{width:100%;height:auto;max-height:36vh;display:block}
+.constelacao .traco{fill:none;stroke:var(--cor-linha-forte);stroke-width:2;stroke-dasharray:4 6}
+.constelacao .traco.on{stroke:var(--cor-ouro);stroke-dasharray:none}
+.constelacao .estrela{fill:var(--cor-superficie-2);stroke:var(--cor-linha-forte);stroke-width:2}
+.constelacao .estrela.on{fill:var(--materia-base);stroke:var(--cor-ouro);stroke-width:3;filter:drop-shadow(0 0 6px var(--materia-luz))}
+.constelacao .nome-const{fill:var(--cor-ouro);font-family:var(--fonte-titulo);font-size:var(--t-destaque);font-weight:var(--peso-titulo)}
+@media (prefers-reduced-motion:reduce){.cer .p1,.cer .p2,.cer .p3,.cer .p4,.cer .p5{opacity:1;transform:none;animation:none}}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -4905,6 +4937,140 @@ function falasTodas(){
 }
 </script>
 <script>
+/* ---------- narrativa em arco: o Embaralho e as três estrelas do céu (docs/PLANO-DE-IDENTIDADE.md, seção 7.3) ----------
+   O céu do Bobby perdeu três estrelas-guia quando o Embaralho, um cometinha travesso, passou voando. Cada planeta devolve a sua estrela; com as três de volta
+   acende a constelação da criança, com o nome que ela escolheu. O Embaralho nunca é mau. Uma frase por etapa (a frase da etapa N abre quando a N-1 termina). */
+const NARRATIVA={
+ "mat": [
+  [
+   "A horta",
+   "Os saquinhos de sementes estão com a contagem trocada. Teo encontra um rastro de poeira brilhante."
+  ],
+  [
+   "A praia",
+   "As conchas apareceram em pilhas erradas. O rastro de poeira continua pela areia."
+  ],
+  [
+   "A caravana",
+   "A caravana saiu com caixas demais, ou de menos. Alguém bagunçou a carga durante a noite."
+  ],
+  [
+   "O piquenique",
+   "Ninguém sabe repartir os lanches. Uma risadinha vem de trás de um tronco."
+  ],
+  [
+   "A pizzaria",
+   "As fatias sumiram da bandeja. Teo vê a cauda de um cometa passar voando."
+  ],
+  [
+   "A feira",
+   "As etiquetas de preço trocaram de lugar. O Embaralho aparece rindo, em cima da barraca."
+  ],
+  [
+   "A loja",
+   "Ele diz que só queria brincar, mas levou um pedaço da Estrela Cobalto."
+  ],
+  [
+   "O parquinho",
+   "Para alcançar o Embaralho, o Bobby precisa construir um parquinho com as medidas certas."
+  ],
+  [
+   "A oficina",
+   "O foguete está quase pronto. Falta o número escondido que faz ele decolar."
+  ],
+  [
+   "A festa",
+   "O Embaralho devolve a Estrela Cobalto e pede para ir à festa. O castelo inteiro aplaude."
+  ]
+ ],
+ "pt": [
+  [
+   "A caixa de letras",
+   "As letras da caixa estão fora de ordem. Rufa suspeita de um visitante bagunceiro."
+  ],
+  [
+   "O trem",
+   "O trem só anda se os vagões estiverem na ordem. Alguém trocou todos de lugar."
+  ],
+  [
+   "A feira das palavras",
+   "Os cartazes estão embaralhados. Rufa acha um brilho de poeira estelar no chão."
+  ],
+  [
+   "A oficina dos sons",
+   "Na oficina os sons saem trocados. Isso tem cheiro de Embaralho."
+  ],
+  [
+   "O correio",
+   "As cartas chegam sem ponto final e viram frases sem fim. Uma risadinha sai de um envelope."
+  ],
+  [
+   "O mercado",
+   "O Embaralho aparece de verdade, com cauda de letras. Pega a Estrela Violeta e foge."
+  ],
+  [
+   "O teatro",
+   "A estrela está escondida no palco. Para entrar, o Bobby vai atuar numa peça."
+  ],
+  [
+   "A gráfica",
+   "As palavras saem com letras trocadas. Dá para ler o recado dele se você acertar tudo."
+  ],
+  [
+   "O jardim dos acentos",
+   "O recado diz: quero brincar, não brigar. Rufa sorri e o jardim fica em silêncio."
+  ],
+  [
+   "A biblioteca",
+   "O Embaralho devolve a Estrela Violeta e pede para ouvir uma história. Rufa lê para ele."
+  ]
+ ],
+ "en": [
+  [
+   "Chegando",
+   "O Bobby chega à cidade e as placas estão em inglês trocado. Otto dá as boas-vindas."
+  ],
+  [
+   "A escola nova",
+   "As cores dos arcos estão trocadas. Otto jura que ontem eram outras."
+  ],
+  [
+   "A família que recebe",
+   "Um bilhete chegou com metade das palavras faltando. Otto fica curioso."
+  ],
+  [
+   "O zoológico",
+   "As placas dos bichos trocaram de lugar. O macaco parece rir de alguma coisa."
+  ],
+  [
+   "O restaurante",
+   "O cardápio chegou embaralhado e o garçom não entende o pedido. Otto traduz com paciência."
+  ],
+  [
+   "A loja de roupas",
+   "Uma sombra brilhante passa pelo provador. O Embaralho vestiu o manequim ao contrário."
+  ],
+  [
+   "Lar doce lar",
+   "A casa tem uma chave que abre a porta errada. Cada cômodo guarda uma pista."
+  ],
+  [
+   "Um dia na cidade",
+   "O Bobby segue o rastro de poeira pela cidade inteira e vê a Estrela Turquesa na ponte."
+  ],
+  [
+   "Fazendo amigos",
+   "O Embaralho aparece e faz perguntas em inglês. Se o Bobby responder bem, ele conta onde está a estrela."
+  ],
+  [
+   "Falando como um local",
+   "O Embaralho devolve a Estrela Turquesa. As três estrelas voltam e a constelação acende."
+  ]
+ ]
+};
+const ESTRELAS_DO_CEU={mat:{n:'Estrela Cobalto',planeta:'Numeral'},pt:{n:'Estrela Violeta',planeta:'Fábula'},en:{n:'Estrela Turquesa',planeta:'Horizonte'}};
+</script>
+<script>
 /* ---------- núcleo: dia local, hash e sorteio com semente ----------
    Sem DOM e sem estado: estas funções rodam igual no navegador e nos testes em Node.
    Regra do dia: SEMPRE o calendário local do aparelho. new Date().toISOString() é UTC e, no Brasil (UTC-3),
@@ -5669,7 +5835,7 @@ function normalizaDesenhos(x,feitas){
 }
 function colecaoVazia(){return {adesivos:[],ornamentos:[],medalhas:[],poses:[],molduras:[],trilhas:[],constelacao:[]};}
 function estadoVazio(){
-  return {nome:'',faixa:'f78',materia:'mat',matEsc:false,musica:true,vibra:true,
+  return {nome:'',faixa:'f78',materia:'mat',matEsc:false,musica:true,vibra:true,cer:[],
     xp:0,moedas:0,acertosTotal:0,melhorCombo:0,
     feitas:{},errados:{},comprado:[],look:{},desenhos:desenhosVazios(),
     ofensiva:ofensivaNova(),diario:diarioVazio(''),espera:null,
@@ -5762,6 +5928,7 @@ function estadoDe(dados){
   s.faixa=FAIXAS.indexOf(d.faixa)>=0?d.faixa:'f78';
   s.materia=['mat','pt','en'].indexOf(d.materia)>=0?d.materia:'mat';
   s.matEsc=d.matEsc===true;
+  s.cer=listaDe(d.cer,60).map(x=>idSimples(x)).filter(Boolean);
   s.musica=d.musica!==false;s.vibra=d.vibra!==false;      /* música ligada por padrão em volume baixo; vibração leve só onde existe (Android) */
   s.xp=intDe(d.xp,0,1e9,0);s.moedas=intDe(d.moedas,0,1e9,0);
   s.acertosTotal=intDe(d.acertosTotal,0,1e9,0);s.melhorCombo=intDe(d.melhorCombo,0,1e6,0);
@@ -7478,7 +7645,7 @@ function pintarFim(){
   const nErr=(S.errados[MATERIA+LIC.u.n]||[]).length;
   $('#palco').innerHTML='<div class="fim surge">'+
     MASC(passou?'comemora':'incentiva')+
-    '<div class="estrelao">'+estrelasSVG(est)+'</div>'+
+    '<div class="estrelao acende">'+estrelasSVG(est)+'</div>'+
     '<h2>'+(passou?(LIC.rev?'Revisão concluída!':(LIC.erros===0?'Fase perfeita!':'Fase concluída!'))
       :'Vamos descansar e revisar')+'</h2>'+
     (passou&&!LIC.rev?'<p class="fala-p">'+falaDe(LIC.erros===0?'fasePerfeita':'faseCompleta')+'</p>':'')+
@@ -7488,14 +7655,14 @@ function pintarFim(){
       :'Os erros foram para o seu caderno e voltam amanhã na revisão. Seu progresso está guardado. Errar faz parte de aprender.')+'</p>'+
     (completouMundo?'<div class="mundo-ok">'+IC.trofeu+' Etapa '+LIC.u.n+' completa!</div><p class="fala-p">'+falaDe('etapaCompleta')+'</p>':'')+
     (passou&&!LIC.rev?premioDesenhoHTML(completouMundo):'')+
-    '<div class="placar">'+
-      '<div><span>Acertos</span><b>'+LIC.acertos+'</b></div>'+
-      '<div><span>Moedas</span><b>'+(LIC.ganhoFase||0)+'</b></div>'+
-      '<div><span>Melhor combo</span><b>'+LIC.melhorCombo+'</b></div>'+
-    '</div>'+
+    '<p class="linha-fim">'+LIC.acertos+' de '+LIC.base+' perguntas, '+(LIC.ganhoFase||0)+' moedas</p>'+
     (typeof blocoFimHTML==='function'?blocoFimHTML(bloco):'')+
     '<button class="btn fantasma" id="rever-fim">Rever a aula desta fase</button></div>';
   $('.lc-corpo').scrollTo(0,0);
+  /* cerimônia da fase (até 3 s): as estrelas ganhas acendem uma a uma, cada uma com o seu 'ding' */
+  if(passou&&!LIC.cerEstrelas){LIC.cerEstrelas=true;for(let i=0;i<est;i++)setTimeout(()=>sfx('estrela',i),400+i*300);}
+  /* depois da última fase da etapa: cerimônia da etapa e, se o planeta fechou, a do planeta (cada uma aparece uma vez) */
+  if(completouMundo&&passou&&!LIC.rev&&!LIC.cerVista){LIC.cerVista=true;setTimeout(()=>cerimoniasDoFim(LIC.u),1500);}
   $('#rever-fim').addEventListener('click',abrirRevisao);
   if(typeof ligarBlocoFim==='function')ligarBlocoFim(bloco);
   const vg=$('#ver-galeria');if(vg)vg.addEventListener('click',()=>abrirGaleria(vg.dataset.id||true));
@@ -9598,6 +9765,105 @@ function ligarMedidor(){
   def('bau','bau-fechado',svgs.bau);def('estrelaDia','rec-estrela',svgs.estrelaDia);
   def('pergaminho','rec-pergaminho','');def('bilhete','rec-bilhete','');def('presente','rec-presente','');def('trofeu','rec-trofeu',IC.bandeira);
 })();
+/* ---------- cerimônias: fim de etapa e fim de planeta (docs/PLANO-DE-IDENTIDADE.md, seção 8) ----------
+   Recompensa fixa e conhecida (nada de sorteio), pulável com um toque depois de 1 s, igual com o som desligado, sem contagem regressiva.
+   A fase concluída tem a sua (estrelas que acendem uma a uma) em licao.js. Cada cerimônia aparece uma vez (S.cer guarda quais já passaram). */
+const CER={timers:[],aberta:false,desde:0};
+const cerLimpa=()=>{CER.timers.splice(0).forEach(clearTimeout);};
+const cerAgenda=(fn,ms)=>{CER.timers.push(setTimeout(fn,ms));};
+const cerJaVista=k=>(S.cer||[]).indexOf(k)>=0;
+function cerMarca(k){S.cer=(S.cer||[]).concat([k]).slice(-60);salvar();}
+const cerReduz=()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){return false;}};
+
+/* um toque (depois de 1 s) mostra tudo e liga os botões; o fim natural faz o mesmo */
+function cerPular(){
+  if(!CER.aberta)return;
+  const f=$('#folha .cer');if(!f||f.classList.contains('tudo'))return;
+  if(Date.now()-CER.desde<1000)return;
+  cerLimpa();f.classList.add('tudo');
+  const c=$('#folha .cer-cena');if(c)c.style.setProperty('--rev','-8%');
+}
+function cerBase(html){
+  CER.aberta=true;CER.desde=Date.now();cerLimpa();
+  abrirFolha('<div class="folha-in cer'+(cerReduz()?' tudo':'')+'" id="cer">'+html+'</div>');
+  const f=$('#folha .cer');
+  f.addEventListener('click',e=>{if(!e.target.closest('button'))cerPular();});
+}
+function cerFecha(){cerLimpa();CER.aberta=false;audioParar();fecharFolha();}
+function cenaCerimonia(u){
+  const cena=cenaDaEtapa(MATERIA,u.n),pl=PLANETAS[MATERIA];
+  if(cena)return '<div class="cena cer-cena" style="--rev:70%">'+imgArte(cena.apagado,{cls:'cena-base',eager:true})+imgArte(cena.completo,{cls:'cena-luz',eager:true})+'</div>';
+  return '<div class="cena cer-cena sem-arte" style="--rev:70%"><div class="cena-ceu"></div><div class="cena-planeta cena-base">'+imgArte(pl.img,{})+'</div><div class="cena-planeta cena-luz">'+imgArte(pl.img,{})+'</div></div>';
+}
+/* etapa concluída (até 8 s): a cena acende, Bobby e o guia entram, troféu e estrelas, título e frase da história, desenho entregue, dois botões iguais */
+function cerimoniaDaEtapa(u,depois){
+  const chave=MATERIA+u.n;
+  if(cerJaVista(chave)){if(depois)depois();return false;}
+  cerMarca(chave);
+  const d=desenhoPorId(desenhoIdDe(MATERIA,u.n)),pl=PLANETAS[MATERIA];
+  const est=u.lessons.reduce((a,l)=>a+estrelasDaFase(l.id),0),prox=NARRATIVA[MATERIA]&&NARRATIVA[MATERIA][u.n];
+  const frase=prox?prox[1]:'';
+  cerBase(cenaCerimonia(u)+
+    '<div class="cer-atores p1">'+MASC('comemora')+imgArte(pl.guia+'-p02',{cls:'cer-guia',alt:''})+'</div>'+
+    '<div class="cer-trofeu p2">'+IC.trofeu+'<span>'+est+' de '+(u.lessons.length*3)+' estrelas</span></div>'+
+    '<h2 class="p3">Etapa '+u.n+' completa!</h2>'+
+    (frase?'<p class="fala-p p3">'+escapa(frase)+'</p>':'')+
+    (d?'<div class="premio p4" data-materia="'+COD_DESENHO[d.matApp]+'"><div class="mini-desenho">'+(ativo(d.id)?imgArte(d.id,{alt:''}):'<span class="des-silhueta">'+imgArte(pl.img,{})+'</span>')+'</div>'+
+       '<div><b>Você ganhou um desenho!</b><span>“'+escapa(d.nome)+'” já está na sua galeria.</span></div></div>':'')+
+    '<div class="folha-bts par p5"><button class="btn-sec" id="cer-ver"'+(d?'':' hidden')+'>Ver o desenho</button><button class="btn-sec" id="cer-ok">Continuar</button></div>');
+  const fim=()=>{cerFecha();if(depois)depois();};
+  $('#cer-ok').addEventListener('click',fim);
+  $('#cer-ver').addEventListener('click',()=>{cerFecha();if(d)abrirGaleria(d.id);});
+  /* a linha do tempo (sons e voz); com movimento reduzido tudo já está na tela, só os sons seguem */
+  sfx('pecaAcende');
+  cerAgenda(()=>{const c=$('#folha .cer-cena');if(c)c.style.setProperty('--rev','-8%');},120);
+  cerAgenda(()=>{sfx('motivo','bobby');sfx('motivo',pl.guia);},1200);
+  cerAgenda(()=>{for(let i=0;i<3;i++)setTimeout(()=>sfx('estrela',i),i*300);},2000);
+  cerAgenda(()=>{sfx('etapaOk');if(frase&&S.voz!==false)falar(frase);},3500);
+  cerAgenda(()=>{sfx('conquista');},5000);
+  cerAgenda(()=>{const f=$('#folha .cer');if(f)f.classList.add('tudo');},6500);
+  return true;
+}
+/* constelação: três estrelas (uma por planeta) ligadas por traços; acende cada uma que voltou, e com as três vem o nome da criança */
+function constelacaoSVG(voltaram,nome){
+  const pos={mat:[60,110],pt:[150,40],en:[240,100]};
+  const ordem=['mat','pt','en'];
+  let l='',e='';
+  l+='<path class="traco'+(voltaram.indexOf('mat')>=0&&voltaram.indexOf('pt')>=0?' on':'')+'" d="M60 110L150 40"/>';
+  l+='<path class="traco'+(voltaram.indexOf('pt')>=0&&voltaram.indexOf('en')>=0?' on':'')+'" d="M150 40L240 100"/>';
+  ordem.forEach(k=>{const on=voltaram.indexOf(k)>=0;e+='<g data-materia="'+MATCOD[k]+'"><circle class="estrela'+(on?' on':'')+'" cx="'+pos[k][0]+'" cy="'+pos[k][1]+'" r="'+(on?11:7)+'"/></g>';});
+  const todas=voltaram.length===3;
+  const t=todas?'<text class="nome-const" x="150" y="165" text-anchor="middle">'+escapa(nome||'explorador')+'</text>':'';
+  return '<svg class="constelacao" viewBox="0 0 300 180" role="img" aria-label="'+(todas?'Constelação de '+escapa(nome||'explorador'):voltaram.length+' de 3 estrelas de volta ao céu')+'">'+l+e+t+'</svg>';
+}
+function planetaCompleto(){return UNITS.every(u=>mundoCompleto(u));}
+/* planeta concluído (até 20 s, uma vez por planeta): a estrela volta ao céu, o Embaralho pede para ir à festa, a constelação (com o nome quando as três voltaram) */
+function cerimoniaDoPlaneta(depois){
+  const chave='pl'+MATERIA;
+  if(cerJaVista(chave)||!planetaCompleto()){if(depois)depois();return false;}
+  cerMarca(chave);
+  const voltaram=['mat','pt','en'].filter(k=>cerJaVista('pl'+k)),todas=voltaram.length===3,pl=PLANETAS[MATERIA],est=ESTRELAS_DO_CEU[MATERIA];
+  const nome=S.nome||'explorador';
+  const fala1=todas?'A constelação acendeu. O céu inteiro agora tem o seu nome.':falaDe('estrela');
+  cerBase('<div class="cer-ceu">'+constelacaoSVG(voltaram,nome)+'</div>'+
+    '<div class="cer-atores p1">'+MASC('comemora')+imgArte(pl.guia+'-p02',{cls:'cer-guia',alt:''})+'</div>'+
+    '<h2 class="p2">Planeta '+pl.n+' completo!</h2>'+
+    '<p class="fala-p p2">A '+est.n+' voltou para o céu.</p>'+
+    '<p class="fala-p p3">'+(todas?'A constelação de '+escapa(nome)+' acendeu. O céu inteiro agora tem o seu nome.':escapa(fala1))+'</p>'+
+    '<p class="fala-p p4">'+escapa(falaDe('embaralho'))+'</p>'+
+    '<p class="fala-p p5">Descansar também faz parte da aventura.</p>'+
+    '<div class="folha-bts p5"><button class="btn-acao" id="cer-ok">Voltar ao mapa</button></div>');
+  $('#cer-ok').addEventListener('click',()=>{cerFecha();if(depois)depois();});
+  cerAgenda(()=>{sfx('planetaOk');},300);
+  cerAgenda(()=>{sfx('motivo','embaralho');},4000);
+  cerAgenda(()=>{if(S.voz!==false)falar(fala1);},2600);
+  cerAgenda(()=>{const f=$('#folha .cer');if(f)f.classList.add('tudo');},6000);
+  return true;
+}
+/* depois da última fase de uma etapa: a cerimônia da etapa e, se o planeta ficou completo, a do planeta */
+function cerimoniasDoFim(u){
+  cerimoniaDaEtapa(u,()=>{if(planetaCompleto())cerimoniaDoPlaneta();});
+}
 /* ---------- confete ---------- */
 function confete(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
