@@ -118,7 +118,7 @@ function pintarLicao(){
     let h='<div class="surge"><div class="et">Mundo '+LIC.u.n+' · fase '+(LIC.li+1)+' · '+LIC.l.title+'</div>';
     h+='<div class="aula">'+blocoPasso(ps,k,true);
     h+='<div class="passinhos">';
-    ps.forEach((_,j)=>{h+='<button class="'+(j===k?'on':'')+'" data-p="'+j+'" aria-label="Parte '+(j+1)+'"></button>';});
+    ps.forEach((_,j)=>{h+='<button class="'+(j===k?'on':'')+'" data-p="'+j+'" aria-label="Parte '+(j+1)+' de '+ps.length+'"></button>';});
     h+='</div></div></div>';
     $('#palco').innerHTML=h;
     $('#palco').querySelectorAll('.passinhos button').forEach(b=>b.addEventListener('click',()=>{
@@ -136,7 +136,7 @@ function pintarLicao(){
     const fora=q.options.filter(o=>o!==q.answer);
     q.options=shufA([q.answer,fora[0],fora[1]]);q.__reduzido=true;
   }
-  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q"><div class="et">'+
+  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q">'+MASC('concentrado','avatar')+'<div class="et">'+
     (LIC.rev?'Revisão · ':'')+'Pergunta '+(LIC.i+1)+
     (q.__rep?' · <b>de novo</b>':'')+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+

@@ -156,7 +156,7 @@
   --toque-min: 48px;
   --toque-conforto: 56px;
   --toque-folga: 8px;
-  --barra-h: 72px;
+  --barra-h: 88px;
   --topo-h: 56px;
   --larg-conteudo: 640px;
   --area-segura-baixo: env(safe-area-inset-bottom, 0px);
@@ -518,8 +518,6 @@ ol.passos li::before{content:counter(p);position:absolute;left:0;top:1px;width:2
 .fala{display:flex;align-items:center;gap:8px;padding-left:4px}
 .fala .nome{font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);color:var(--cor-texto-suave);flex:1}
 .passinhos{display:flex;gap:8px;justify-content:center;padding:4px 0 0}
-.passinhos button{width:11px;height:11px;border-radius:var(--raio-pilula);background:var(--cor-superficie-2);border:2px solid var(--cor-linha);padding:0}
-.passinhos button.on{background:var(--ub);border-color:var(--materia-tinta);width:30px;border-radius:var(--raio-8)}
 
 .caixa-dica{display:flex;gap:16px;align-items:flex-start;margin-top:16px;background:var(--cor-superficie);
   border:2px dashed var(--cor-ouro);border-radius:var(--raio-16);padding:16px 16px;font-size:var(--t-pequeno);line-height:1.55}
@@ -545,7 +543,6 @@ ol.passos li::before{content:counter(p);position:absolute;left:0;top:1px;width:2
 .pe.mostra .msg{display:flex}
 .pe.mostra #dica{display:none!important}
 .pe .selo{width:52px;height:52px;flex:none}
-.pe .msg b{display:block;font-family:"Fredoka",sans-serif;font-size:var(--t-pequeno);font-weight:600}
 .pe.certo .msg b{color:var(--cor-acerto)}
 .pe.errado .msg b{color:var(--cor-ainda)}
 .pe .msg small{font-size:var(--t-legenda);color:var(--cor-texto-suave);display:block;line-height:1.35;font-weight:700}
@@ -621,7 +618,7 @@ canvas.confete{position:fixed;inset:0;pointer-events:none;z-index:60;width:100%;
 
 .marca>div{min-width:0;overflow:hidden}
 @media (max-width:480px){.marca b{font-size:var(--t-legenda)}.topo-in{gap:4px;padding:8px 8px}
-  .icobtn{width:32px;height:32px}.stat{font-size:var(--t-legenda);padding:4px 8px 4px 8px}}
+  .stat{font-size:var(--t-legenda);padding:4px 8px 4px 8px}}
 
 .caixa-dica[hidden]{display:none!important}
 
@@ -643,8 +640,7 @@ canvas.confete{position:fixed;inset:0;pointer-events:none;z-index:60;width:100%;
 .cartao-bt.novo{border-style:dashed;justify-content:center;min-height:186px}
 .cartao-bt .mais{width:74px;height:74px;border-radius:var(--raio-pilula);background:var(--cor-superficie-2);color:var(--cor-texto-suave);
   display:grid;place-items:center;font-family:"Fredoka",sans-serif;font-size:var(--t-display);font-weight:600}
-.lixo{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:var(--raio-16);color:var(--cor-texto-suave);
-  display:grid;place-items:center;background:var(--cor-superficie-2)}
+.lixo{position:absolute;top:var(--esp-8);right:var(--esp-8);width:var(--toque-min);height:var(--toque-min);border-radius:var(--raio-16);color:var(--cor-texto-suave);display:grid;place-items:center;background:var(--cor-superficie-2)}
 .lixo svg{width:17px;height:17px}
 .cartao.apagando .lixo{width:auto;padding:0 16px;background:var(--cor-ainda);color:var(--cor-superficie)}
 .lixo .conf{font-size:var(--t-legenda);font-weight:800;white-space:nowrap}
@@ -692,7 +688,7 @@ svg.cubinho{width:9.2px;height:9.2px}
 .col-md .pilha svg.barra{width:96px;height:9.6px}
 .col-md .pilha svg.cubinho{width:9.6px;height:9.6px}
 .col-md .bts{display:flex;gap:8px}
-.md-bt{width:42px;height:42px;border-radius:var(--raio-16);background:var(--cor-superficie-2);font-family:"Fredoka",sans-serif;
+.md-bt{width:48px;height:48px;border-radius:var(--raio-16);background:var(--cor-superficie-2);font-family:"Fredoka",sans-serif;
   font-size:var(--t-destaque);font-weight:600;display:grid;place-items:center;border:2px solid var(--cor-linha)}
 .md-bt.mais{background:var(--ub);color:var(--materia-sobre);border-color:transparent}
 .md-bt:active{transform:translateY(2px)}
@@ -813,7 +809,7 @@ ol.plano li{padding-left:40px}
 .linha-md .pilha svg.placa{width:52px;height:52px}
 .linha-md .pilha svg.barra{width:150px;height:15px}
 .linha-md .pilha svg.cubinho{width:15px;height:15px}
-.md-bt{width:46px;height:46px;font-size:var(--t-h3)}
+.md-bt{width:48px;height:48px;font-size:var(--t-h3)}
 .mais-ajuda{display:block;margin-top:8px;background:var(--cor-ouro);color:var(--cor-ouro-sobre);border-radius:var(--raio-16);padding:8px 16px;
   font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600}
 .alt.fora{opacity:.32;text-decoration:line-through}
@@ -825,7 +821,7 @@ ol.plano li{padding-left:40px}
 
 .dourado-linhas{display:block;margin-bottom:16px}
 .teclado.letras{grid-template-columns:repeat(7,1fr);max-width:100%;gap:8px}
-.teclado.letras .tecla{height:46px;font-size:var(--t-corpo);border-radius:var(--raio-16)}
+.teclado.letras .tecla{height:var(--toque-min);font-size:var(--t-corpo);border-radius:var(--raio-16)}
 .teclado.letras.poucas{grid-template-columns:repeat(6,1fr)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
 .chip{background:var(--cor-superficie);border:2px solid var(--ub);border-radius:var(--raio-16);
@@ -847,13 +843,11 @@ ol.plano li{padding-left:40px}
   .marca b{font-size:var(--t-legenda)}
   .stat{gap:4px;padding:4px 8px 4px 4px;font-size:var(--t-legenda)}
   .stat svg{width:16px;height:16px}
-  .icobtn{width:34px;height:34px}
   #st-fogo{display:flex}
   #som{display:grid}
 }
 @media (max-width:359px){
   .marca b{display:none}
-  .icobtn{width:32px;height:32px}
 }
 
 /* ---- figuras das aulas de português e inglês ---- */
@@ -1258,6 +1252,56 @@ body:has(#licao.on) .barra-baixo{display:none}
 .planeta .meta-barra i{background:var(--materia-base)}
 .saldo{background:var(--cor-superficie);color:var(--cor-ouro-borda);border-color:var(--cor-ouro-borda)}
 .saldo b{color:var(--cor-texto)}
+
+/* ---------- correções da revisão visual ---------- */
+/* aviso das vozes: no topo, nunca por cima da pergunta, do painel de feedback, da barra ou da Rotina */
+.aviso-voz{bottom:auto;top:calc(var(--topo-h) + var(--esp-16) + env(safe-area-inset-top,0px));z-index:var(--z-barra)}
+body:has(#licao.on) .aviso-voz{display:none}
+.stat svg{flex:none}
+/* pontinhos da aula: 11 px de desenho dentro de 48 px de toque */
+.passinhos{gap:0;padding:0}
+.passinhos button{position:relative;width:var(--toque-min);height:var(--toque-min);background:none;border:0;padding:0}
+.passinhos button::before{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;transform:translate(-50%,-50%);border-radius:var(--raio-pilula);background:var(--cor-superficie-2);border:2px solid var(--cor-linha-forte)}
+.passinhos button.on::before{width:32px;border-radius:var(--raio-8);background:var(--materia-base);border-color:var(--materia-tinta)}
+/* resposta do erro: o <b> do número fica na linha */
+.pe .msg small b{display:inline}
+/* nós do mapa: nome em até 2 linhas e Bobby ao lado, sem cobrir o disco */
+.no .rot{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;border-radius:var(--raio-16);max-width:112px;padding:0 var(--esp-8)}
+.voce{height:72px;width:50px;transform:translate(calc(-100% - 40px),-70%)}
+.voce.d{transform:translate(40px,-70%)}
+.revisao-no .bt svg{width:36px;height:36px}
+/* barra: rótulo de uma linha */
+.barra-baixo button span{white-space:nowrap}
+.barra-baixo button{justify-content:flex-start;padding-top:var(--esp-8)}
+/* colorir: ações numa faixa fixa acima da barra */
+.des-tela{max-width:min(480px,calc(44vh * .75))}
+.des-acoes{position:sticky;bottom:calc(var(--barra-h) + var(--area-segura-baixo));z-index:var(--z-cartao);grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--esp-8);
+  background:var(--cor-fundo);padding:var(--esp-8) 0;margin:0}
+.des-acoes .btn-sec{flex-direction:column;gap:0;min-height:var(--toque-conforto);padding:var(--esp-4);font-size:var(--t-legenda);line-height:var(--lh-legenda)}
+.des-acoes .btn-sec svg{width:20px;height:20px}
+.mini-pose{width:80px}
+/* tela de fase com atmosfera do planeta e o Bobby no cabeçalho da pergunta */
+[data-materia="mat"] .licao{--atmosfera:url("./assets/planetas/planeta-mat.webp")}
+[data-materia="por"] .licao{--atmosfera:url("./assets/planetas/planeta-por.webp")}
+[data-materia="ing"] .licao{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
+.licao::before{content:"";position:absolute;right:-18%;top:-4%;width:72%;aspect-ratio:1;background:var(--atmosfera) center/contain no-repeat;opacity:.14;pointer-events:none;z-index:0}
+.lc-topo,.lc-corpo{position:relative;z-index:1}
+.cabecalho-q{gap:var(--esp-16)}
+.cabecalho-q .mascote.avatar{width:56px;height:56px;flex:none}
+/* baú: ícone rico com brilho */
+.bau-fig{width:128px;height:128px;margin:0 auto var(--esp-8);background:none;border:0;border-radius:0;color:var(--cor-ouro-sobre)}
+.bau-fig svg{width:100%;height:100%;filter:drop-shadow(0 8px 10px var(--cor-sombra))}
+.bau-fig.aberto svg{filter:drop-shadow(0 0 14px var(--cor-ouro))}
+.btn-acao svg{flex:none}
+.lc-corpo{padding-bottom:calc(280px + var(--area-segura-baixo))}
+.mais-ajuda{min-height:var(--toque-min)}
+
+/* colorir: paleta e ações juntas numa faixa fixa acima da barra */
+.des-ferramentas{position:sticky;bottom:calc(-1 * var(--esp-32));z-index:var(--z-cartao);background:var(--cor-fundo);padding:var(--esp-8) 0;display:grid;gap:var(--esp-8)}
+.des-acoes{position:static;padding:0}
+.paleta{gap:var(--esp-4)}
+.des-tela{max-width:min(480px,calc(38vh * .75))}
+.barra-baixo button{height:calc(var(--barra-h) - var(--esp-16))}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -1293,7 +1337,7 @@ body:has(#licao.on) .barra-baixo{display:none}
 
 <nav class="barra-baixo" id="barra" aria-label="Navegação principal">
   <button id="bb-mapa" aria-label="Mapa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg><span>Mapa</span></button>
-  <button id="bb-pers" aria-label="Meu personagem"><span class="retrato-bb" id="retrato-bb"></span><span>Meu personagem</span></button>
+  <button id="bb-pers" aria-label="Meu personagem"><span class="retrato-bb" id="retrato-bb"></span><span>Personagem</span></button>
   <button id="bb-gal" aria-label="Meus desenhos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m5.5 17 4-5 3 3.5L16 10.5l2.6 6.5"/></svg><span>Desenhos</span><i class="ponto" id="ponto-gal" hidden></i></button>
   <button id="bb-perfil" aria-label="Perfil"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg><span>Perfil</span></button>
 </nav>
@@ -4694,7 +4738,7 @@ const CHAVE='trilha-matematica-v1';
 const IC={
  certo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.6 9.4 17.5 19.5 7"/></svg>',
  fogo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 3.2-1.3 4.6-2.7 6C7.7 9.6 6 11.2 6 14a6 6 0 0 0 12 0c0-2.4-1.2-4-2.3-5.4-.7 1-1.5 1.5-2.2 1.5.8-2.6.4-5.6-1.5-8Z"/></svg>',
- moeda:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="6.6" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6"/><path d="M13.4 8.2h-3.2v2.6h2.8v1.9h-2.8v3.1H8.3V6.3h5.1Z" fill="rgba(0,0,0,.35)"/></svg>',
+ moeda:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="6.6" fill="none" stroke="var(--cor-superficie)" stroke-width="1.6"/><path d="M13.4 8.2h-3.2v2.6h2.8v1.9h-2.8v3.1H8.3V6.3h5.1Z" fill="var(--cor-superficie)"/></svg>',
  coracao:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.6 3.9 12.8A5 5 0 0 1 12 7.1a5 5 0 0 1 8.1 5.7L12 20.6Z"/></svg>',
  estrela:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.5l-5.9 3.1 1.2-6.5L2.5 9.5l6.6-.9L12 2.6Z"/></svg>',
  cadeado:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10V8a5 5 0 0 0-10 0v2H5v11h14V10h-2ZM9 8a3 3 0 0 1 6 0v2H9V8Z"/></svg>',
@@ -4710,7 +4754,7 @@ const IC={
  baixar:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4L10 13.2V3ZM4 19h16v2H4Z"/></svg>',
  lixo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 21h10l1-14H6ZM9 3h6l1 2h4v2H4V5h4Z"/></svg>',
  volta:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>',
- medalha:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 2 6 8h4l1.2-6Zm7 0L18 8h-4l-1.2-6Z" opacity=".65"/><circle cx="12" cy="15" r="7.2"/><path d="m12 10.6 1.5 3 3.3.5-2.4 2.3.6 3.3-3-1.6-3 1.6.6-3.3-2.4-2.3 3.3-.5Z" fill="rgba(0,0,0,.3)"/></svg>'
+ medalha:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h4l1 6H8Zm6 0h4l-2 6h-4Z"/><circle cx="12" cy="15" r="7.4"/><path d="m12 10.2 1.6 3.2 3.5.5-2.5 2.5.6 3.5-3.2-1.7-3.2 1.7.6-3.5-2.5-2.5 3.5-.5Z" fill="var(--cor-ouro)"/></svg>'
 };
 
 /* ---------- arte: imagens WebP de assets/ (índice ATIVOS embutido pelo build) ----------
@@ -4754,10 +4798,11 @@ const BOBBY={
   incentiva:'bobby-p09',presente:'bobby-p10',tchau:'bobby-p11',descansa:'bobby-p12',
   feliz:'bobby-e01',radiante:'bobby-e02',curioso:'bobby-e03',surpreso:'bobby-e05',ops:'bobby-e06',concentrado:'bobby-e07',tranquilo:'bobby-e08'
 };
-const EXPRESSOES=[['bobby-e01','Alegre'],['bobby-e02','Radiante'],['bobby-e03','Curioso'],['bobby-e04','Pensativo'],
-  ['bobby-e05','Surpreso'],['bobby-e06','Incentivando'],['bobby-e07','Concentrado'],['bobby-e08','Tranquilo']];
+/* [id, nome por extenso (legenda do palco), nome curto (cabe na miniatura)] */
+const EXPRESSOES=[['bobby-e01','Alegre','Alegre'],['bobby-e02','Radiante','Radiante'],['bobby-e03','Curioso','Curioso'],['bobby-e04','Pensativo','Pensa'],
+  ['bobby-e05','Surpreso','Surpreso'],['bobby-e06','Incentivando','Anima'],['bobby-e07','Concentrado','Foco'],['bobby-e08','Tranquilo','Calmo']];
 const POSES=[['bobby-p01','Oi'],['bobby-p02','Comemora'],['bobby-p03','Pensa'],['bobby-p04','Aponta'],['bobby-p05a','Caminha'],['bobby-p06','Lê'],
-  ['bobby-p07','Escuta'],['bobby-p08','Conta'],['bobby-p09','Incentiva'],['bobby-p10','Presente'],['bobby-p11','Tchau'],['bobby-p12','Descansa']];
+  ['bobby-p07','Escuta'],['bobby-p08','Conta'],['bobby-p09','Joinha'],['bobby-p10','Presente'],['bobby-p11','Tchau'],['bobby-p12','Descansa']];
 /* imagens de frente onde o chapéu entra: [centro x, largura de orelha a orelha], em fração da largura da imagem */
 const FRONTAIS={
   'bobby-p01':[.45,.645],'bobby-p02':[.49,.58],'bobby-p08':[.60,.71],'bobby-p09':[.50,.69],'bobby-p10':[.50,.88],
@@ -4836,7 +4881,7 @@ function palcoHTML(){
      '<button class="aba'+(palcoModo==='corpo'?' on':'')+'" data-modo="corpo">Corpo inteiro</button></div>';
   const lista=palcoModo==='rosto'?EXPRESSOES:POSES;
   h+='<div class="palco-escolha" role="group" aria-label="'+(palcoModo==='rosto'?'Expressões':'Poses')+'">'+lista.map(x=>
-    '<button class="mini-pose'+(x[0]===palcoId?' on':'')+'" data-pose="'+x[0]+'" aria-label="'+x[1]+'" aria-pressed="'+(x[0]===palcoId)+'">'+imgArte(x[0],{})+'<span>'+x[1]+'</span></button>').join('')+'</div>';
+    '<button class="mini-pose'+(x[0]===palcoId?' on':'')+'" data-pose="'+x[0]+'" aria-label="'+x[1]+'" aria-pressed="'+(x[0]===palcoId)+'">'+imgArte(x[0],{})+'<span>'+(x[2]||x[1])+'</span></button>').join('')+'</div>';
   return h;
 }
 function telaLoja(){
@@ -5765,7 +5810,7 @@ function passosDe(l){
    Cada etapa (um "mundo" do código: 5 fases e a revisão) é um lugar que começa apagado e acende de baixo para cima,
    uma parte por fase concluída. Os 6 nós ficam no chão calmo da cena, em serpentina (3 embaixo, 3 em cima; o chão calmo ocupa os 40% de baixo da cena).
    Se a arte da etapa ainda não existe, o planeta da matéria faz o papel de cenário (apagado e aceso do mesmo jeito). */
-const NOS=[[20,84],[50,80],[80,84],[80,60],[50,56],[20,60]];   /* x e y em %; o 6º é a revisão */
+const NOS=[[16,80],[50,76],[84,80],[84,56],[50,52],[16,56]];   /* x e y em %; o 6º é a revisão */
 const REV_TOPO=70,REV_VAO=78;                                    /* faixa da revelação: de 70% (nada aceso) a -8% (tudo aceso) */
 const revPct=k=>(REV_TOPO-REV_VAO*Math.max(0,Math.min(5,k))/5).toFixed(1)+'%';
 const NO_ANTES={},REV_ANTES={};                                  /* onde o Bobby e a luz estavam no desenho anterior (só nesta sessão) */
@@ -5832,7 +5877,7 @@ function etapaHTML(u,ui,prox){
      '<span class="rot">Revisão'+(completo&&nErr?' · '+nErr+' para refazer':'')+'</span></div>';
   if(ehAtual){
     const ant=NO_ANTES[chave]==null?atualNo:NO_ANTES[chave];
-    const p=NOS[ant],lado=NOS[atualNo][0]<=20?'d':'e';
+    const p=NOS[ant],lado=NOS[atualNo][0]<=16?'d':'e';
     h+='<div class="voce '+lado+'" data-no="'+atualNo+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-hidden="true">'+
        imgArte('bobby-p01',{cls:'voce-pe',eager:true})+imgArte('bobby-p05a',{cls:'voce-a1',eager:true})+imgArte('bobby-p05b',{cls:'voce-a2',eager:true})+'</div>';
   }
@@ -6030,7 +6075,7 @@ function pintarLicao(){
     let h='<div class="surge"><div class="et">Mundo '+LIC.u.n+' · fase '+(LIC.li+1)+' · '+LIC.l.title+'</div>';
     h+='<div class="aula">'+blocoPasso(ps,k,true);
     h+='<div class="passinhos">';
-    ps.forEach((_,j)=>{h+='<button class="'+(j===k?'on':'')+'" data-p="'+j+'" aria-label="Parte '+(j+1)+'"></button>';});
+    ps.forEach((_,j)=>{h+='<button class="'+(j===k?'on':'')+'" data-p="'+j+'" aria-label="Parte '+(j+1)+' de '+ps.length+'"></button>';});
     h+='</div></div></div>';
     $('#palco').innerHTML=h;
     $('#palco').querySelectorAll('.passinhos button').forEach(b=>b.addEventListener('click',()=>{
@@ -6048,7 +6093,7 @@ function pintarLicao(){
     const fora=q.options.filter(o=>o!==q.answer);
     q.options=shufA([q.answer,fora[0],fora[1]]);q.__reduzido=true;
   }
-  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q"><div class="et">'+
+  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q">'+MASC('concentrado','avatar')+'<div class="et">'+
     (LIC.rev?'Revisão · ':'')+'Pergunta '+(LIC.i+1)+
     (q.__rep?' · <b>de novo</b>':'')+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+
@@ -7848,11 +7893,11 @@ function abrirDesenho(id){
       '<h3>Em breve</h3><p>O desenho “'+escapa(d.nome)+'” chega numa atualização. Ele já é seu: o planeta guarda o lugar enquanto isso.</p></div>';
   }else{
     corpo='<div class="des-tela"><canvas id="cv-des" role="img" aria-label="Desenho para colorir: '+escapa(d.nome)+'. Toque numa área para pintar."></canvas></div>'+
-      '<div class="paleta" role="radiogroup" aria-label="Cores"></div>'+
+      '<div class="des-ferramentas"><div class="paleta" role="radiogroup" aria-label="Cores"></div>'+
       '<div class="des-acoes"><button class="btn-sec" id="des-desfazer">'+IC.volta+' Desfazer</button>'+
       '<button class="btn-sec" id="des-limpar">Recomeçar</button>'+
       '<button class="btn-sec" id="des-imprimir">'+IC.impressora+' Imprimir</button>'+
-      '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar imagem</button></div><div id="aviso-baixa"></div>';
+      '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar</button></div></div><div id="aviso-baixa"></div>';
   }
   tela.innerHTML='<div class="rev-topo"><button class="icobtn" id="fechar-des" aria-label="Voltar aos desenhos">'+IC.volta+'</button>'+
     '<h2>'+escapa(d.nome)+'</h2></div><div class="rev-corpo"><div class="lc-in des-in">'+corpo+'</div></div>';
@@ -8036,7 +8081,7 @@ function confirmarRestauracao(lido){
    Cores: só tokens do DESIGN.md (var(--cor-*)); nada de hex aqui. */
 Object.assign(IC,{
  gelo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5"/></svg>',
- bau:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v2H3v-2Zm0 3h7v1.5h4V13h7v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Z"/></svg>',
+ bau:'<svg viewBox="0 0 48 48"><circle cx="24" cy="22" r="20" fill="var(--cor-ouro)" opacity=".28"/><path d="M7 25v-7a10 10 0 0 1 10-10h14a10 10 0 0 1 10 10v7Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2" stroke-linejoin="round"/><rect x="7" y="25" width="34" height="16" rx="3" fill="var(--cor-acao)" stroke="var(--cor-acao-borda)" stroke-width="2"/><rect x="20.5" y="8" width="7" height="33" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="20" y="23" width="8" height="9" rx="2" fill="var(--cor-ouro-sobre)"/><path d="m39 5 1.2 3 3 1.2-3 1.2L39 13.4l-1.2-3-3-1.2 3-1.2ZM9 3l.9 2.2 2.2.9-2.2.9L9 9.2l-.9-2.2L5.9 6.1l2.2-.9Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="1"/></svg>',
  casa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>',
  pessoa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg>',
  bobby:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><rect x="3.5" y="5.5" width="17" height="15" rx="7.5"/><circle cx="9" cy="12.5" r="1.4" fill="var(--cor-superficie)"/><circle cx="15" cy="12.5" r="1.4" fill="var(--cor-superficie)"/></svg>'
@@ -8309,7 +8354,7 @@ function semanaHTML(){
     stat(IC.fogo,r.dias+' de 7','dias com atividade')+
     stat(IC.estrela,r.min+' min','de atividade')+
     stat(IC.bandeira,r.perguntas,'perguntas feitas')+'</div>';
-  h+='<p class="galeria-intro">'+r.revisoes+' revisão'+(r.revisoes===1?'':'ões')+' feita'+(r.revisoes===1?'':'s')+
+  h+='<p class="galeria-intro">'+r.revisoes+(r.revisoes===1?' revisão feita':' revisões feitas')+
      (r.pct!==null?' e '+r.pct+'% de acerto nas perguntas da semana.':'.')+'</p>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="copia-resumo">Copiar o resumo da semana</button></div><div id="resumo-aviso"></div>';
   return h;

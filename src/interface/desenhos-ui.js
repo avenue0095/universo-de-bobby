@@ -102,11 +102,11 @@ function abrirDesenho(id){
       '<h3>Em breve</h3><p>O desenho “'+escapa(d.nome)+'” chega numa atualização. Ele já é seu: o planeta guarda o lugar enquanto isso.</p></div>';
   }else{
     corpo='<div class="des-tela"><canvas id="cv-des" role="img" aria-label="Desenho para colorir: '+escapa(d.nome)+'. Toque numa área para pintar."></canvas></div>'+
-      '<div class="paleta" role="radiogroup" aria-label="Cores"></div>'+
+      '<div class="des-ferramentas"><div class="paleta" role="radiogroup" aria-label="Cores"></div>'+
       '<div class="des-acoes"><button class="btn-sec" id="des-desfazer">'+IC.volta+' Desfazer</button>'+
       '<button class="btn-sec" id="des-limpar">Recomeçar</button>'+
       '<button class="btn-sec" id="des-imprimir">'+IC.impressora+' Imprimir</button>'+
-      '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar imagem</button></div><div id="aviso-baixa"></div>';
+      '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar</button></div></div><div id="aviso-baixa"></div>';
   }
   tela.innerHTML='<div class="rev-topo"><button class="icobtn" id="fechar-des" aria-label="Voltar aos desenhos">'+IC.volta+'</button>'+
     '<h2>'+escapa(d.nome)+'</h2></div><div class="rev-corpo"><div class="lc-in des-in">'+corpo+'</div></div>';

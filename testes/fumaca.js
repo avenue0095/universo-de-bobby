@@ -121,6 +121,10 @@ async function main() {
         if (!b || b.w < 10 || b.h < 10) problemas.push(rot + ': #' + k + ' escondido no topo');
         else if (b.r > topo.iw + 1 || b.l < -1) problemas.push(rot + ': #' + k + ' fora da tela (' + Math.round(b.l) + '..' + Math.round(b.r) + ' de ' + topo.iw + ')');
       }
+      const alvos = await js("(()=>{const r={};['#troca-materia','#som','#bb-mapa','#bb-pers','#bb-gal','#bb-perfil'].forEach(q=>{const b=document.querySelector(q).getBoundingClientRect();r[q]=Math.min(b.width,b.height)});return r})()");
+      Object.keys(alvos).forEach((q) => { if (alvos[q] < 48) problemas.push(rot + ': alvo de toque ' + q + ' com ' + Math.round(alvos[q]) + ' px (minimo 48)'); });
+      const bar = await js("Array.from(document.querySelectorAll('.barra-baixo button')).map(b=>Math.round(b.getBoundingClientRect().height))");
+      if (new Set(bar).size > 1) problemas.push(rot + ': itens da barra com alturas diferentes ' + bar.join(','));
       feito.push(rot + ': topo com ofensiva, moedas e som a vista');
 
       /* 2) joga a primeira fase de cada materia, clicando nos botoes de verdade */

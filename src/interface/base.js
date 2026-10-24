@@ -4,7 +4,7 @@ const CHAVE='trilha-matematica-v1';
 const IC={
  certo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.6 9.4 17.5 19.5 7"/></svg>',
  fogo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 3.2-1.3 4.6-2.7 6C7.7 9.6 6 11.2 6 14a6 6 0 0 0 12 0c0-2.4-1.2-4-2.3-5.4-.7 1-1.5 1.5-2.2 1.5.8-2.6.4-5.6-1.5-8Z"/></svg>',
- moeda:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="6.6" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6"/><path d="M13.4 8.2h-3.2v2.6h2.8v1.9h-2.8v3.1H8.3V6.3h5.1Z" fill="rgba(0,0,0,.35)"/></svg>',
+ moeda:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="6.6" fill="none" stroke="var(--cor-superficie)" stroke-width="1.6"/><path d="M13.4 8.2h-3.2v2.6h2.8v1.9h-2.8v3.1H8.3V6.3h5.1Z" fill="var(--cor-superficie)"/></svg>',
  coracao:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.6 3.9 12.8A5 5 0 0 1 12 7.1a5 5 0 0 1 8.1 5.7L12 20.6Z"/></svg>',
  estrela:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.5l-5.9 3.1 1.2-6.5L2.5 9.5l6.6-.9L12 2.6Z"/></svg>',
  cadeado:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10V8a5 5 0 0 0-10 0v2H5v11h14V10h-2ZM9 8a3 3 0 0 1 6 0v2H9V8Z"/></svg>',
@@ -20,6 +20,6 @@ const IC={
  baixar:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4L10 13.2V3ZM4 19h16v2H4Z"/></svg>',
  lixo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 21h10l1-14H6ZM9 3h6l1 2h4v2H4V5h4Z"/></svg>',
  volta:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>',
- medalha:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 2 6 8h4l1.2-6Zm7 0L18 8h-4l-1.2-6Z" opacity=".65"/><circle cx="12" cy="15" r="7.2"/><path d="m12 10.6 1.5 3 3.3.5-2.4 2.3.6 3.3-3-1.6-3 1.6.6-3.3-2.4-2.3 3.3-.5Z" fill="rgba(0,0,0,.3)"/></svg>'
+ medalha:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h4l1 6H8Zm6 0h4l-2 6h-4Z"/><circle cx="12" cy="15" r="7.4"/><path d="m12 10.2 1.6 3.2 3.5.5-2.5 2.5.6 3.5-3.2-1.7-3.2 1.7.6-3.5-2.5-2.5 3.5-.5Z" fill="var(--cor-ouro)"/></svg>'
 };
 

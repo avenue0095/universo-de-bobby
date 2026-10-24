@@ -145,7 +145,7 @@
   --toque-min: 48px;
   --toque-conforto: 56px;
   --toque-folga: 8px;
-  --barra-h: 72px;
+  --barra-h: 88px;
   --topo-h: 56px;
   --larg-conteudo: 640px;
   --area-segura-baixo: env(safe-area-inset-bottom, 0px);
@@ -507,8 +507,6 @@ ol.passos li::before{content:counter(p);position:absolute;left:0;top:1px;width:2
 .fala{display:flex;align-items:center;gap:8px;padding-left:4px}
 .fala .nome{font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);color:var(--cor-texto-suave);flex:1}
 .passinhos{display:flex;gap:8px;justify-content:center;padding:4px 0 0}
-.passinhos button{width:11px;height:11px;border-radius:var(--raio-pilula);background:var(--cor-superficie-2);border:2px solid var(--cor-linha);padding:0}
-.passinhos button.on{background:var(--ub);border-color:var(--materia-tinta);width:30px;border-radius:var(--raio-8)}
 
 .caixa-dica{display:flex;gap:16px;align-items:flex-start;margin-top:16px;background:var(--cor-superficie);
   border:2px dashed var(--cor-ouro);border-radius:var(--raio-16);padding:16px 16px;font-size:var(--t-pequeno);line-height:1.55}
@@ -534,7 +532,6 @@ ol.passos li::before{content:counter(p);position:absolute;left:0;top:1px;width:2
 .pe.mostra .msg{display:flex}
 .pe.mostra #dica{display:none!important}
 .pe .selo{width:52px;height:52px;flex:none}
-.pe .msg b{display:block;font-family:"Fredoka",sans-serif;font-size:var(--t-pequeno);font-weight:600}
 .pe.certo .msg b{color:var(--cor-acerto)}
 .pe.errado .msg b{color:var(--cor-ainda)}
 .pe .msg small{font-size:var(--t-legenda);color:var(--cor-texto-suave);display:block;line-height:1.35;font-weight:700}
@@ -610,7 +607,7 @@ canvas.confete{position:fixed;inset:0;pointer-events:none;z-index:60;width:100%;
 
 .marca>div{min-width:0;overflow:hidden}
 @media (max-width:480px){.marca b{font-size:var(--t-legenda)}.topo-in{gap:4px;padding:8px 8px}
-  .icobtn{width:32px;height:32px}.stat{font-size:var(--t-legenda);padding:4px 8px 4px 8px}}
+  .stat{font-size:var(--t-legenda);padding:4px 8px 4px 8px}}
 
 .caixa-dica[hidden]{display:none!important}
 
@@ -632,8 +629,7 @@ canvas.confete{position:fixed;inset:0;pointer-events:none;z-index:60;width:100%;
 .cartao-bt.novo{border-style:dashed;justify-content:center;min-height:186px}
 .cartao-bt .mais{width:74px;height:74px;border-radius:var(--raio-pilula);background:var(--cor-superficie-2);color:var(--cor-texto-suave);
   display:grid;place-items:center;font-family:"Fredoka",sans-serif;font-size:var(--t-display);font-weight:600}
-.lixo{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:var(--raio-16);color:var(--cor-texto-suave);
-  display:grid;place-items:center;background:var(--cor-superficie-2)}
+.lixo{position:absolute;top:var(--esp-8);right:var(--esp-8);width:var(--toque-min);height:var(--toque-min);border-radius:var(--raio-16);color:var(--cor-texto-suave);display:grid;place-items:center;background:var(--cor-superficie-2)}
 .lixo svg{width:17px;height:17px}
 .cartao.apagando .lixo{width:auto;padding:0 16px;background:var(--cor-ainda);color:var(--cor-superficie)}
 .lixo .conf{font-size:var(--t-legenda);font-weight:800;white-space:nowrap}
@@ -681,7 +677,7 @@ svg.cubinho{width:9.2px;height:9.2px}
 .col-md .pilha svg.barra{width:96px;height:9.6px}
 .col-md .pilha svg.cubinho{width:9.6px;height:9.6px}
 .col-md .bts{display:flex;gap:8px}
-.md-bt{width:42px;height:42px;border-radius:var(--raio-16);background:var(--cor-superficie-2);font-family:"Fredoka",sans-serif;
+.md-bt{width:48px;height:48px;border-radius:var(--raio-16);background:var(--cor-superficie-2);font-family:"Fredoka",sans-serif;
   font-size:var(--t-destaque);font-weight:600;display:grid;place-items:center;border:2px solid var(--cor-linha)}
 .md-bt.mais{background:var(--ub);color:var(--materia-sobre);border-color:transparent}
 .md-bt:active{transform:translateY(2px)}
@@ -802,7 +798,7 @@ ol.plano li{padding-left:40px}
 .linha-md .pilha svg.placa{width:52px;height:52px}
 .linha-md .pilha svg.barra{width:150px;height:15px}
 .linha-md .pilha svg.cubinho{width:15px;height:15px}
-.md-bt{width:46px;height:46px;font-size:var(--t-h3)}
+.md-bt{width:48px;height:48px;font-size:var(--t-h3)}
 .mais-ajuda{display:block;margin-top:8px;background:var(--cor-ouro);color:var(--cor-ouro-sobre);border-radius:var(--raio-16);padding:8px 16px;
   font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600}
 .alt.fora{opacity:.32;text-decoration:line-through}
@@ -814,7 +810,7 @@ ol.plano li{padding-left:40px}
 
 .dourado-linhas{display:block;margin-bottom:16px}
 .teclado.letras{grid-template-columns:repeat(7,1fr);max-width:100%;gap:8px}
-.teclado.letras .tecla{height:46px;font-size:var(--t-corpo);border-radius:var(--raio-16)}
+.teclado.letras .tecla{height:var(--toque-min);font-size:var(--t-corpo);border-radius:var(--raio-16)}
 .teclado.letras.poucas{grid-template-columns:repeat(6,1fr)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
 .chip{background:var(--cor-superficie);border:2px solid var(--ub);border-radius:var(--raio-16);
@@ -836,13 +832,11 @@ ol.plano li{padding-left:40px}
   .marca b{font-size:var(--t-legenda)}
   .stat{gap:4px;padding:4px 8px 4px 4px;font-size:var(--t-legenda)}
   .stat svg{width:16px;height:16px}
-  .icobtn{width:34px;height:34px}
   #st-fogo{display:flex}
   #som{display:grid}
 }
 @media (max-width:359px){
   .marca b{display:none}
-  .icobtn{width:32px;height:32px}
 }
 
 /* ---- figuras das aulas de português e inglês ---- */
@@ -1247,3 +1241,53 @@ body:has(#licao.on) .barra-baixo{display:none}
 .planeta .meta-barra i{background:var(--materia-base)}
 .saldo{background:var(--cor-superficie);color:var(--cor-ouro-borda);border-color:var(--cor-ouro-borda)}
 .saldo b{color:var(--cor-texto)}
+
+/* ---------- correções da revisão visual ---------- */
+/* aviso das vozes: no topo, nunca por cima da pergunta, do painel de feedback, da barra ou da Rotina */
+.aviso-voz{bottom:auto;top:calc(var(--topo-h) + var(--esp-16) + env(safe-area-inset-top,0px));z-index:var(--z-barra)}
+body:has(#licao.on) .aviso-voz{display:none}
+.stat svg{flex:none}
+/* pontinhos da aula: 11 px de desenho dentro de 48 px de toque */
+.passinhos{gap:0;padding:0}
+.passinhos button{position:relative;width:var(--toque-min);height:var(--toque-min);background:none;border:0;padding:0}
+.passinhos button::before{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;transform:translate(-50%,-50%);border-radius:var(--raio-pilula);background:var(--cor-superficie-2);border:2px solid var(--cor-linha-forte)}
+.passinhos button.on::before{width:32px;border-radius:var(--raio-8);background:var(--materia-base);border-color:var(--materia-tinta)}
+/* resposta do erro: o <b> do número fica na linha */
+.pe .msg small b{display:inline}
+/* nós do mapa: nome em até 2 linhas e Bobby ao lado, sem cobrir o disco */
+.no .rot{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;border-radius:var(--raio-16);max-width:112px;padding:0 var(--esp-8)}
+.voce{height:72px;width:50px;transform:translate(calc(-100% - 40px),-70%)}
+.voce.d{transform:translate(40px,-70%)}
+.revisao-no .bt svg{width:36px;height:36px}
+/* barra: rótulo de uma linha */
+.barra-baixo button span{white-space:nowrap}
+.barra-baixo button{justify-content:flex-start;padding-top:var(--esp-8)}
+/* colorir: ações numa faixa fixa acima da barra */
+.des-tela{max-width:min(480px,calc(44vh * .75))}
+.des-acoes{position:sticky;bottom:calc(var(--barra-h) + var(--area-segura-baixo));z-index:var(--z-cartao);grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--esp-8);
+  background:var(--cor-fundo);padding:var(--esp-8) 0;margin:0}
+.des-acoes .btn-sec{flex-direction:column;gap:0;min-height:var(--toque-conforto);padding:var(--esp-4);font-size:var(--t-legenda);line-height:var(--lh-legenda)}
+.des-acoes .btn-sec svg{width:20px;height:20px}
+.mini-pose{width:80px}
+/* tela de fase com atmosfera do planeta e o Bobby no cabeçalho da pergunta */
+[data-materia="mat"] .licao{--atmosfera:url("./assets/planetas/planeta-mat.webp")}
+[data-materia="por"] .licao{--atmosfera:url("./assets/planetas/planeta-por.webp")}
+[data-materia="ing"] .licao{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
+.licao::before{content:"";position:absolute;right:-18%;top:-4%;width:72%;aspect-ratio:1;background:var(--atmosfera) center/contain no-repeat;opacity:.14;pointer-events:none;z-index:0}
+.lc-topo,.lc-corpo{position:relative;z-index:1}
+.cabecalho-q{gap:var(--esp-16)}
+.cabecalho-q .mascote.avatar{width:56px;height:56px;flex:none}
+/* baú: ícone rico com brilho */
+.bau-fig{width:128px;height:128px;margin:0 auto var(--esp-8);background:none;border:0;border-radius:0;color:var(--cor-ouro-sobre)}
+.bau-fig svg{width:100%;height:100%;filter:drop-shadow(0 8px 10px var(--cor-sombra))}
+.bau-fig.aberto svg{filter:drop-shadow(0 0 14px var(--cor-ouro))}
+.btn-acao svg{flex:none}
+.lc-corpo{padding-bottom:calc(280px + var(--area-segura-baixo))}
+.mais-ajuda{min-height:var(--toque-min)}
+
+/* colorir: paleta e ações juntas numa faixa fixa acima da barra */
+.des-ferramentas{position:sticky;bottom:calc(-1 * var(--esp-32));z-index:var(--z-cartao);background:var(--cor-fundo);padding:var(--esp-8) 0;display:grid;gap:var(--esp-8)}
+.des-acoes{position:static;padding:0}
+.paleta{gap:var(--esp-4)}
+.des-tela{max-width:min(480px,calc(38vh * .75))}
+.barra-baixo button{height:calc(var(--barra-h) - var(--esp-16))}

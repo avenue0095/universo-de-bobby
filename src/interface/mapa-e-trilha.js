@@ -2,7 +2,7 @@
    Cada etapa (um "mundo" do código: 5 fases e a revisão) é um lugar que começa apagado e acende de baixo para cima,
    uma parte por fase concluída. Os 6 nós ficam no chão calmo da cena, em serpentina (3 embaixo, 3 em cima; o chão calmo ocupa os 40% de baixo da cena).
    Se a arte da etapa ainda não existe, o planeta da matéria faz o papel de cenário (apagado e aceso do mesmo jeito). */
-const NOS=[[20,84],[50,80],[80,84],[80,60],[50,56],[20,60]];   /* x e y em %; o 6º é a revisão */
+const NOS=[[16,80],[50,76],[84,80],[84,56],[50,52],[16,56]];   /* x e y em %; o 6º é a revisão */
 const REV_TOPO=70,REV_VAO=78;                                    /* faixa da revelação: de 70% (nada aceso) a -8% (tudo aceso) */
 const revPct=k=>(REV_TOPO-REV_VAO*Math.max(0,Math.min(5,k))/5).toFixed(1)+'%';
 const NO_ANTES={},REV_ANTES={};                                  /* onde o Bobby e a luz estavam no desenho anterior (só nesta sessão) */
@@ -69,7 +69,7 @@ function etapaHTML(u,ui,prox){
      '<span class="rot">Revisão'+(completo&&nErr?' · '+nErr+' para refazer':'')+'</span></div>';
   if(ehAtual){
     const ant=NO_ANTES[chave]==null?atualNo:NO_ANTES[chave];
-    const p=NOS[ant],lado=NOS[atualNo][0]<=20?'d':'e';
+    const p=NOS[ant],lado=NOS[atualNo][0]<=16?'d':'e';
     h+='<div class="voce '+lado+'" data-no="'+atualNo+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-hidden="true">'+
        imgArte('bobby-p01',{cls:'voce-pe',eager:true})+imgArte('bobby-p05a',{cls:'voce-a1',eager:true})+imgArte('bobby-p05b',{cls:'voce-a2',eager:true})+'</div>';
   }

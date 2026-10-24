@@ -7,10 +7,11 @@ const BOBBY={
   incentiva:'bobby-p09',presente:'bobby-p10',tchau:'bobby-p11',descansa:'bobby-p12',
   feliz:'bobby-e01',radiante:'bobby-e02',curioso:'bobby-e03',surpreso:'bobby-e05',ops:'bobby-e06',concentrado:'bobby-e07',tranquilo:'bobby-e08'
 };
-const EXPRESSOES=[['bobby-e01','Alegre'],['bobby-e02','Radiante'],['bobby-e03','Curioso'],['bobby-e04','Pensativo'],
-  ['bobby-e05','Surpreso'],['bobby-e06','Incentivando'],['bobby-e07','Concentrado'],['bobby-e08','Tranquilo']];
+/* [id, nome por extenso (legenda do palco), nome curto (cabe na miniatura)] */
+const EXPRESSOES=[['bobby-e01','Alegre','Alegre'],['bobby-e02','Radiante','Radiante'],['bobby-e03','Curioso','Curioso'],['bobby-e04','Pensativo','Pensa'],
+  ['bobby-e05','Surpreso','Surpreso'],['bobby-e06','Incentivando','Anima'],['bobby-e07','Concentrado','Foco'],['bobby-e08','Tranquilo','Calmo']];
 const POSES=[['bobby-p01','Oi'],['bobby-p02','Comemora'],['bobby-p03','Pensa'],['bobby-p04','Aponta'],['bobby-p05a','Caminha'],['bobby-p06','Lê'],
-  ['bobby-p07','Escuta'],['bobby-p08','Conta'],['bobby-p09','Incentiva'],['bobby-p10','Presente'],['bobby-p11','Tchau'],['bobby-p12','Descansa']];
+  ['bobby-p07','Escuta'],['bobby-p08','Conta'],['bobby-p09','Joinha'],['bobby-p10','Presente'],['bobby-p11','Tchau'],['bobby-p12','Descansa']];
 /* imagens de frente onde o chapéu entra: [centro x, largura de orelha a orelha], em fração da largura da imagem */
 const FRONTAIS={
   'bobby-p01':[.45,.645],'bobby-p02':[.49,.58],'bobby-p08':[.60,.71],'bobby-p09':[.50,.69],'bobby-p10':[.50,.88],
@@ -89,7 +90,7 @@ function palcoHTML(){
      '<button class="aba'+(palcoModo==='corpo'?' on':'')+'" data-modo="corpo">Corpo inteiro</button></div>';
   const lista=palcoModo==='rosto'?EXPRESSOES:POSES;
   h+='<div class="palco-escolha" role="group" aria-label="'+(palcoModo==='rosto'?'Expressões':'Poses')+'">'+lista.map(x=>
-    '<button class="mini-pose'+(x[0]===palcoId?' on':'')+'" data-pose="'+x[0]+'" aria-label="'+x[1]+'" aria-pressed="'+(x[0]===palcoId)+'">'+imgArte(x[0],{})+'<span>'+x[1]+'</span></button>').join('')+'</div>';
+    '<button class="mini-pose'+(x[0]===palcoId?' on':'')+'" data-pose="'+x[0]+'" aria-label="'+x[1]+'" aria-pressed="'+(x[0]===palcoId)+'">'+imgArte(x[0],{})+'<span>'+(x[2]||x[1])+'</span></button>').join('')+'</div>';
   return h;
 }
 function telaLoja(){

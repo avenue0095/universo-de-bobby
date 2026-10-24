@@ -4,7 +4,7 @@
    Cores: só tokens do DESIGN.md (var(--cor-*)); nada de hex aqui. */
 Object.assign(IC,{
  gelo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5"/></svg>',
- bau:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v2H3v-2Zm0 3h7v1.5h4V13h7v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Z"/></svg>',
+ bau:'<svg viewBox="0 0 48 48"><circle cx="24" cy="22" r="20" fill="var(--cor-ouro)" opacity=".28"/><path d="M7 25v-7a10 10 0 0 1 10-10h14a10 10 0 0 1 10 10v7Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2" stroke-linejoin="round"/><rect x="7" y="25" width="34" height="16" rx="3" fill="var(--cor-acao)" stroke="var(--cor-acao-borda)" stroke-width="2"/><rect x="20.5" y="8" width="7" height="33" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="20" y="23" width="8" height="9" rx="2" fill="var(--cor-ouro-sobre)"/><path d="m39 5 1.2 3 3 1.2-3 1.2L39 13.4l-1.2-3-3-1.2 3-1.2ZM9 3l.9 2.2 2.2.9-2.2.9L9 9.2l-.9-2.2L5.9 6.1l2.2-.9Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="1"/></svg>',
  casa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>',
  pessoa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg>',
  bobby:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><rect x="3.5" y="5.5" width="17" height="15" rx="7.5"/><circle cx="9" cy="12.5" r="1.4" fill="var(--cor-superficie)"/><circle cx="15" cy="12.5" r="1.4" fill="var(--cor-superficie)"/></svg>'
@@ -277,7 +277,7 @@ function semanaHTML(){
     stat(IC.fogo,r.dias+' de 7','dias com atividade')+
     stat(IC.estrela,r.min+' min','de atividade')+
     stat(IC.bandeira,r.perguntas,'perguntas feitas')+'</div>';
-  h+='<p class="galeria-intro">'+r.revisoes+' revisão'+(r.revisoes===1?'':'ões')+' feita'+(r.revisoes===1?'':'s')+
+  h+='<p class="galeria-intro">'+r.revisoes+(r.revisoes===1?' revisão feita':' revisões feitas')+
      (r.pct!==null?' e '+r.pct+'% de acerto nas perguntas da semana.':'.')+'</p>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="copia-resumo">Copiar o resumo da semana</button></div><div id="resumo-aviso"></div>';
   return h;
