@@ -425,6 +425,39 @@ async function main() {
           tem(await html('#folha'), 'bau'); await shot0('personagem-bau-' + rotulo + '-' + nomeTela);
           await js("fecharFolha();0");
         };
+        // rotulo e rosto do mesmo personagem: historia e aula sao do Bobby (rosto do Bobby, Rufa acompanha menor); a pergunta e do guia (Teo) com a Rufa
+        // pequena na bolha; o feedback mostra a Rufa e a fala nao tem a marca do Teo; a ajuda "Como fazer" e do guia e fala DESTA pergunta
+        await js("S.look={companheiro:'rufa'};S.comprado=['rufa'];salvar();fecharTelasDaBarra();usarMateria('mat');fecharFolha();abrirLicao(0,0);0"); await dorme(400);
+        const rot1 = await js("(()=>{const f=document.querySelector('.aula .fala');return {rosto:(f.querySelector('.mascote')||{}).src||'',acomp:(f.querySelector('.acompanhante img')||{}).src||'',nome:(f.querySelector('.nome')||{}).innerText||''}})()");
+        if (!/bobby-e0/.test(rot1.rosto) || !/rufa-p01/.test(rot1.acomp) || !/Bobby/.test(rot1.nome)) problemas.push(rot + ' historia: rotulo ' + rot1.nome + ' com rosto ' + rot1.rosto.slice(-20) + ' e acompanhante ' + rot1.acomp.slice(-14));
+        await shot0('rotulo-historia-' + nomeTela);
+        await js("LIC.etapa='aula';LIC.passo=0;pintarLicao();0"); await dorme(300);
+        const rot2 = await js("(()=>{const f=document.querySelector('.aula .fala');return {rosto:(f.querySelector('.mascote')||{}).src||'',acomp:(f.querySelector('.acompanhante img')||{}).src||'',nome:(f.querySelector('.nome')||{}).innerText||''}})()");
+        if (!/bobby-e0/.test(rot2.rosto) || !/rufa-p01/.test(rot2.acomp) || !/Bobby/.test(rot2.nome)) problemas.push(rot + ' aula: rotulo ' + rot2.nome + ' com rosto ' + rot2.rosto.slice(-20));
+        await shot0('rotulo-aula-' + nomeTela);
+        await js("LIC.etapa='questao';LIC.i=0;LIC.qs=[{type:'mc',prompt:'Qual número vem antes do <b>4</b>?',answer:'3',options:['3','5','2','4']}];pintarLicao();0"); await dorme(300);
+        const rot3 = await js("(()=>{return {guia:(document.querySelector('.cena-q .guia-img')||{}).src||'',amigo:(document.querySelector('.balao-topo .mascote')||{}).src||''}})()");
+        if (!/teo-p04/.test(rot3.guia) || !/rufa-p0/.test(rot3.amigo)) problemas.push(rot + ' pergunta: guia ' + rot3.guia.slice(-14) + ', amigo ' + rot3.amigo.slice(-14));
+        // nome acessivel do lembrete: fechado nao expoe o texto pela metade; aberto contem as palavras em negrito
+        const ax = async () => { const doc = await cdp('DOM.getDocument', { depth: 1 }); const q = await cdp('DOM.querySelector', { nodeId: doc.root.nodeId, selector: '.lembrete' }); const t = await cdp('Accessibility.getPartialAXTree', { nodeId: q.nodeId, fetchRelatives: false }); const ax2 = await cdp('Accessibility.getFullAXTree', {}); return ax2.nodes.filter((n) => !n.ignored && n.name && n.name.value).map((n) => n.name.value).join(' | '); };
+        await cdp('Accessibility.enable');
+        const neg = await js("Array.from(document.querySelectorAll('.lembrete b')).map(b=>b.textContent)");
+        const fechado = await ax();
+        const metade = /Cada número é sempre que o anterior/.test(fechado);
+        await js("document.querySelector('.lembrete').open=true;0"); await dorme(150);
+        const aberto = await ax();
+        const faltam = neg.filter((b) => aberto.indexOf(b) < 0);
+        if (metade || faltam.length) problemas.push(rot + ' lembrete acessivel: ' + (metade ? 'fechado le a frase sem o negrito; ' : '') + (faltam.length ? 'aberto nao le ' + faltam.join(', ') : ''));
+        await js("document.querySelector('.lembrete').open=false;LIC.resp='5';conferir();0"); await dorme(300);
+        const rot4 = await js("(()=>{const t=document.querySelector('#fb-t').innerText;return {selo:(document.querySelector('#selo .mascote')||{}).src||'',t:t,teo:/Padrão encontrado|Calculei|Número bonito|Epa, essa conta/.test(t),resposta:document.querySelector('#fb-s').innerText}})()");
+        if (!/rufa-p0/.test(rot4.selo) || rot4.teo) problemas.push(rot + ' feedback: rosto ' + rot4.selo.slice(-12) + ' com fala do Teo: ' + rot4.t);
+        if (/propósito|testar você/.test(rot4.t)) problemas.push(rot + ' fala de erro com deboche: ' + rot4.t);
+        await js("mostrarDica();0"); await dorme(250);
+        const ajuda = await js("(()=>{const c=document.querySelector('#caixa-dica');return {t:c.innerText,rosto:(c.querySelector('.mascote')||{}).src||''}})()");
+        if (!/Conte para trás a partir do 4/.test(ajuda.t) || /bolinha/.test(ajuda.t) || !/Antes do 4 vem o 3/.test(ajuda.t)) problemas.push(rot + ' ajuda: nao e da pergunta "antes do 4": ' + ajuda.t.slice(0, 120));
+        if (!/teo-p0/.test(ajuda.rosto)) problemas.push(rot + ' ajuda: o rosto deveria ser do guia (Teo): ' + ajuda.rosto.slice(-14));
+        await shot0('rotulo-ajuda-' + nomeTela);
+        await js("fecharLicao();0");
         await verifica('rufa', "S.look={companheiro:'rufa'};S.comprado=['rufa']", /rufa-p0[1-4]/);
         await verifica('coroa', "S.look={chapeu:'coroa'};S.comprado=['coroa']", /(item|ov)-coroa/);
         await verifica('explorador', "S.look={chapeu:'explorador'};S.comprado=['explorador']", /bobby-item-chapeu/);

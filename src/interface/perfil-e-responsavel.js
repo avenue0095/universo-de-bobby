@@ -10,7 +10,7 @@ function telaPerfil(){
   const feitasGeral=Object.keys(MATERIAS).reduce((a,k)=>a+feitasDaMateria(k),0);
   const niv=nivelDoExplorador();
   let h='<div class="perfil-in">';
-  h+='<div class="perfil-cabeca"><div class="perfil-bobby">'+MASC('feliz','',null,'Bobby, o ursinho')+'</div>'+
+  h+='<div class="perfil-cabeca"><div class="perfil-bobby">'+MASCB('feliz','',null,'Bobby, o ursinho')+'</div>'+
      '<h1>'+escapa(p.nome||'Jogador')+'</h1>'+
      '<span class="titulo">Explorador nível '+niv+' · '+ROTULO_FAIXA[S.faixa]+'</span></div>';
   h+='<div class="stats">'+

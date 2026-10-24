@@ -30,7 +30,7 @@ const FALAS={
   rapida:['Eita, você é rápido! Eu pisquei e a resposta já estava lá.'],
   erro:{
     bobby:['Errar faz parte da exploração. Todo mapa tem uma curva.','Essa era das difíceis mesmo. Vamos olhar juntos.','Quase todo explorador erra esse. Olha só a dica.'],
-    teo:['Epa, esse cálculo travou. Vamos reiniciar o raciocínio juntos.','Eu errei de propósito só para testar você. Quase funcionou.'],
+    teo:['Epa, essa conta travou. Vamos olhar o caminho juntos.','Ainda não. Olha o caminho: a resposta aparece com calma.'],
     rufa:['Errar faz parte da exploração. Todo mapa tem uma curva.','Essa era das difíceis mesmo. Vamos olhar juntos.'],
     otto:['Nice try! Vamos ouvir de novo, bem devagar.','Repita comigo, devagar. Quanto mais devagar, melhor o som.'],
     capi:['Respira fundo. A gente tenta de novo, sem pressa.','Uma resposta errada ajuda o cérebro a crescer. Pode ficar tranquilo.']

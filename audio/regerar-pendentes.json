@@ -366,28 +366,6 @@
    ]
   },
   {
-   "texto": "Epa, esse cálculo travou. Vamos reiniciar o raciocínio juntos.",
-   "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.teo)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
-   "trechos_sem_clipe": [
-    "Epa, esse cálculo travou. Vamos reiniciar o raciocínio juntos."
-   ]
-  },
-  {
-   "texto": "Eu errei de propósito só para testar você. Quase funcionou.",
-   "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.teo)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
-   "trechos_sem_clipe": [
-    "Eu errei de propósito só para testar você. Quase funcionou."
-   ]
-  },
-  {
    "texto": "Errar faz parte da exploração. Todo mapa tem uma curva.",
    "idioma": "pt-BR",
    "materia": "sistema",
@@ -1144,6 +1122,28 @@
    "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
    "trechos_sem_clipe": [
     "A Estrela Turquesa voltou para o céu."
+   ]
+  },
+  {
+   "texto": "Epa, essa conta travou. Vamos olhar o caminho juntos.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.teo)",
+   "classe": "feedback",
+   "motivo": "fala nova (revisao das falas de erro, 24/10/2026); gerar com a voz local",
+   "trechos_sem_clipe": [
+    "Epa, essa conta travou. Vamos olhar o caminho juntos."
+   ]
+  },
+  {
+   "texto": "Ainda não. Olha o caminho: a resposta aparece com calma.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.teo)",
+   "classe": "feedback",
+   "motivo": "fala nova (revisao das falas de erro, 24/10/2026); gerar com a voz local",
+   "trechos_sem_clipe": [
+    "Ainda não. Olha o caminho: a resposta aparece com calma."
    ]
   }
  ]

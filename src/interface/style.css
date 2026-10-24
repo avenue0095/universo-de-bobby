@@ -1648,3 +1648,10 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
 .constelacao .estrela.on{fill:var(--materia-base);stroke:var(--cor-ouro);stroke-width:3;filter:drop-shadow(0 0 6px var(--materia-luz))}
 .constelacao .nome-const{fill:var(--cor-ouro);font-family:var(--fonte-titulo);font-size:var(--t-destaque);font-weight:var(--peso-titulo)}
 @media (prefers-reduced-motion:reduce){.cer .p1,.cer .p2,.cer .p3,.cer .p4,.cer .p5{opacity:1;transform:none;animation:none}}
+
+/* companheiro acompanha onde o Bobby fala (história, aula, bilhete): menor, ao lado do rosto */
+.fala{position:relative}
+.acompanhante{display:inline-block;width:40px;height:40px;flex:none;align-self:flex-end;margin-left:calc(-1 * var(--esp-16))}
+.acompanhante img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 3px var(--cor-sombra))}
+.folha-bobby .acompanhante{width:56px;height:56px;vertical-align:bottom;margin-left:calc(-1 * var(--esp-8))}
+.guia-av{object-position:50% 10%}

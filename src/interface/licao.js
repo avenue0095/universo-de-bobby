@@ -45,7 +45,7 @@ function pintarVidas(){
 function blocoPasso(ps,k,comFala){
   const p=ps[k];
   let h='';
-  if(comFala)h+='<div class="fala">'+MASC(k===0?'feliz':(k===ps.length-1?'radiante':'pensa'),'avatar')+
+  if(comFala)h+='<div class="fala">'+MASCB(k===0?'feliz':(k===ps.length-1?'radiante':'pensa'),'avatar')+acompanhanteHTML()+
     '<span class="nome">Bobby explica</span>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(p.t+'. '+p.c)+'" aria-label="Ouvir a explicação">'+IC.falar+'</button></div>';
   h+='<div class="balao"><h2>'+p.t+'</h2><p>'+p.c+'</p>'+(p.fig?'<div class="figura">'+p.fig+'</div>':'')+'</div>';
@@ -103,7 +103,7 @@ function pintarLicao(){
     const m=LIC.miss,cap=LIC.cap;
     const abreCap=(LIC.li===0&&cap)?'<p class="cap-abre">'+cap.abre+'</p>':'';
     let h='<div class="surge"><div class="et">'+(cap?'Capítulo '+LIC.u.n+' · '+cap.t:'Mundo '+LIC.u.n)+'</div>';
-    h+='<div class="aula"><div class="fala">'+MASC('curioso','avatar')+'<span class="nome">Bobby precisa de você</span>'+
+    h+='<div class="aula"><div class="fala">'+MASCB('curioso','avatar')+acompanhanteHTML()+'<span class="nome">Bobby precisa de você</span>'+
        '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(JSON.stringify(textosDaHistoria(cap,m)))+'" aria-label="Ouvir">'+IC.falar+'</button></div>';
     h+='<div class="balao historia"><h2>'+(m?m.t:LIC.l.title)+'</h2>'+abreCap+'<p>'+(m?m.abre:'')+'</p></div>';
     h+='<div class="premio-missao">'+ITENS[(cap&&cap.item)||'estrela']+'<span>Cada resposta certa ajuda o Bobby a completar a missão.</span></div>';
@@ -154,7 +154,8 @@ function pintarLicao(){
   /* o lembrete da aula começa FECHADO (abre com um toque; abre sozinho depois de dois erros seguidos) */
   if(!LIC.rev&&LIC.i<2){
     const lem=lembreteDaAula(LIC.l);
-    if(lem)h+='<details class="lembrete"><summary class="tit">'+IC.lampada+' Lembre da aula</summary>'+lem+'</details>';
+    /* o texto vai dentro de um <div>: nó de texto solto dentro de <details> fechado era lido pelo leitor de tela sem as palavras em negrito */
+    if(lem)h+='<details class="lembrete"><summary class="tit">'+IC.lampada+' Lembre da aula</summary><div class="lembrete-txt">'+lem+'</div></details>';
   }
   if(q.figure)h+='<div class="figura">'+q.figure+'</div>';
   if(q.type==='mc'){
@@ -331,19 +332,10 @@ function lembreteDaAula(l){
   if(t.length>210)t=t.slice(0,207).replace(/\s\S*$/,'')+'...';
   return t;
 }
+/* ajuda da PERGUNTA (do gerador, não da fase): antes de responder só o caminho; depois de um erro, o caminho e a resposta */
 function dicaDaPergunta(q){
-  if(q.type==='blocos'){
-    const n=+q.answer,c=Math.floor(n/100),d=Math.floor((n%100)/10),u=n%10;
-    const pt=[];if(c)pt.push('<b>'+c+'</b> placa'+(c>1?'s':''));if(d)pt.push('<b>'+d+'</b> barrinha'+(d>1?'s':''));
-    if(u)pt.push('<b>'+u+'</b> cubinho'+(u>1?'s':''));
-    return 'Para montar o <b>'+n+'</b> você precisa de '+pt.join(', ')+'. Toque no <b>+</b> de cada coluna essa quantidade de vezes e olhe o número lá embaixo.';
-  }
-  if(q.type==='fracao')return 'Toque em <b>'+q.answer+'</b> partes da barra, contando em voz alta: 1, 2, 3...';
-  if(q.type==='grupinhos')return 'Coloque <b>'+q.alvoG+'</b> em “grupos” e <b>'+q.alvoP+'</b> em “em cada”. O total aparece sozinho.';
-  if(q.type==='dinheiro')return 'Comece pelas notas maiores e vá completando com as moedas até o visor chegar no valor pedido.';
-  if(q.type==='silabas')return 'Fale a palavra devagar batendo palma. Cada palma é uma sílaba. Toque nelas na ordem.';
-  const ps=passosDe(LIC.l);
-  return (ps[1]&&ps[1].c)||(ps[0]&&ps[0].c)||'Leia a pergunta de novo devagar.';
+  const h=ajudaDe(q);
+  return htmlSeguro(h.metodo,400)+(LIC.conferido&&h.resposta?' <b>'+htmlSeguro(h.resposta,200)+'</b>':'');
 }
 function mostrarDica(){
   /* No modo fácil a dica é agendada com 700ms de atraso depois de um erro.
@@ -356,7 +348,7 @@ function mostrarDica(){
   const cx=$('#caixa-dica');
   if(!q||!cx)return;
   const txt=dicaDaPergunta(q);
-  cx.innerHTML='<div class="mini-tuco">'+MASC('pensa','avatar')+'</div><div><span class="tit">Como fazer</span>'+txt+
+  cx.innerHTML='<div class="mini-tuco">'+guiaAvatar('p04')+'</div><div><span class="tit">Como fazer</span>'+txt+
     '<button class="mais-ajuda" id="mais-ajuda">Ainda não entendi</button></div>';
   cx.hidden=false;LIC.dica=1;
   $('#dica').style.display='none';
@@ -394,8 +386,8 @@ function ajudaForte(){
   }else if(q.type==='silabas'){
     msg='A primeira sílaba é <b>'+String(q.answer).slice(0,2)+'</b>.';
   }else msg='Leia devagar e tente de novo. Você consegue.';
-  const alvo=cx.querySelector('div:last-child');
-  cx.innerHTML='<div class="mini-tuco">'+MASC('ops','avatar')+'</div><div><span class="tit">Ajuda extra</span>'+msg+'</div>';
+  const hq=ajudaDe(q);if(hq.resposta&&LIC.conferido)msg='<b>'+htmlSeguro(hq.resposta,200)+'</b> '+msg;
+  cx.innerHTML='<div class="mini-tuco">'+guiaAvatar('p04')+'</div><div><span class="tit">Ajuda extra</span>'+msg+'</div>';
   falar(msg);
 }
 /* Pergunta irmã: mesma habilidade (mesmo gerador) com outros números ou palavras. Nunca igual a uma que a criança já viu na rodada.
@@ -423,6 +415,9 @@ function irmaDe(q){
 }
 /* quem fala: o guia da matéria (Teo, Rufa, Otto); Capi entra depois de dois erros seguidos (calma, sem pressa) */
 const guiaDaMateria=()=>(PLANETAS[MATERIA]||PLANETAS.mat).guia;
+/* o rosto do painel de feedback é o personagem escolhido (ele comemora com a criança). A fala só tem a marca do guia (Teo, Rufa, Otto)
+   quando o personagem escolhido É esse guia; senão vem do banco geral, para o rótulo e o rosto serem sempre do mesmo personagem. */
+function quemReage(){const pa=persAtivo();return pa.tipo==='comp'&&pa.id===guiaDaMateria()?pa.id:'';}
 /* fala do acerto, em ordem de peso: sequência de 5 ou de 3, volta depois de erro (irmã), uma rara a cada 8 acertos, rápida, de primeira, o guia */
 function falaDoAcerto(q,ms){
   const n=S.acertosTotal||0;
@@ -432,12 +427,17 @@ function falaDoAcerto(q,ms){
   if(n>0&&n%8===0)return falaDe('acerto.rara');
   if(ms&&ms<2500&&!q.__rep&&LIC.combo>1)return falaDe('rapida');
   if(!q.__rep&&!LIC.dica&&LIC.acertos===1)return falaDe('primeira');
-  return falaDe('acerto',guiaDaMateria());
+  return falaDe('acerto',quemReage());
 }
 function falaDoErro(q){
   if(q&&(q.__rep&&!q.__irma))return falaDe('erroIgual');
-  return falaDe('erro',(LIC.errosSeguidos||0)>=2?'capi':guiaDaMateria());
+  return falaDe('erro',(LIC.errosSeguidos||0)>=2?'capi':(quemReage()||'bobby'));
 }
+/* quem aparece em cada lugar da fase (rótulo e rosto sempre do mesmo personagem):
+   história e aula são do Bobby ("Bobby precisa de você", "Bobby explica"): rosto do Bobby, com o companheiro escolhido ao lado, menor;
+   pergunta, feedback e ajuda são do guia da matéria (Teo, Rufa, Otto): rosto do guia; o companheiro fica na bolha, como amigo. */
+function guiaAvatar(pose){const g=guiaDaMateria(),id=ativo(g+'-'+pose)?g+'-'+pose:g+'-p01';return imgArte(id,{cls:'mascote comp avatar guia-av',alt:PLANETAS[MATERIA].guiaNome});}
+function acompanhanteHTML(){const pa=persAtivo();return pa.tipo==='comp'?'<span class="acompanhante">'+imgArte(pa.id+'-p01',{alt:pa.n+' acompanha'})+'</span>':'';}
 /* troca a pose do guia na hora (mesma tarefa do toque): p02 comemora no acerto, p04 pensa na pergunta e no erro (nunca triste) */
 function guiaPose(pose){
   const i=$('#palco .guia-img'),id=PLANETAS[MATERIA].guia+'-'+pose;
@@ -485,7 +485,7 @@ function conferir(){
     if(LIC.errosSeguidos>=2){const lm=$('#palco .lembrete');if(lm)lm.open=true;}
     guardarErrado(q);
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
-    $('#selo').innerHTML=MASC('pensa','avatar');
+    $('#selo').innerHTML=(LIC.errosSeguidos||0)>=2&&ativo('capi-p04')?imgArte('capi-p04',{cls:'mascote comp avatar',alt:'Capi'}):MASC('pensa','avatar');
     const calma=falaDoErro(q);
     $('#fb-t').innerHTML=IC.refazer+'<span>'+escapa(calma)+'</span>';
     if(ehF78())falar(calma);

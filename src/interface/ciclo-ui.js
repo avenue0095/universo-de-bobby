@@ -83,7 +83,7 @@ function mostrarEntradaDoDia(){
 }
 function mostrarAvisoMigracao(depois){
   STORE.avisoVisto=true;salvarStore();
-  abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('surpreso')+'</div><h2>O Bobby ganhou novidades</h2>'+
+  abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASCB('surpreso')+'</div><h2>O Bobby ganhou novidades</h2>'+
     '<p>Seu progresso está todo aqui. Você também ganhou um congelador para guardar sua sequência.</p>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Vamos lá</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{fecharFolha();if(depois)depois();});
@@ -92,7 +92,7 @@ function mostrarBilhete(){
   const b=bilheteDeHoje();
   if(!b)return;
   sfx('motivo','fagulha');
-  abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('presente')+'</div><h2>Um bilhete do Bobby</h2>'+
+  abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASCB('presente')+acompanhanteHTML()+'</div><h2>Um bilhete do Bobby</h2>'+
     '<p class="fala-p">'+falaDe('bilhete')+'</p><p class="bilhete-texto">'+b.texto+'</p>'+
     '<ul class="folha-lista icones"><li>'+IC.presente+'<span>No baú de amanhã: '+escapa(b.presente)+'</span></li><li>'+IC.bilhete+'<span>'+b.pronto+'</span></li></ul>'+
     '<div class="folha-bts"><button class="btn-sec" id="fl-ouvir" aria-label="Ouvir o bilhete">'+IC.falar+' Ouvir</button>'+
