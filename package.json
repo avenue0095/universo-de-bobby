@@ -1,0 +1,12 @@
+{
+  "name": "universo-de-bobby",
+  "private": true,
+  "description": "O Universo de Bobby (PWA). Sem dependencias: so Node 22+ e Python 3.",
+  "scripts": {
+    "build": "python3 build/build.py",
+    "build:check": "python3 build/build.py --check",
+    "test": "python3 build/build.py --check && node testes/trava-url.js && node testes/verifica.js && node testes/regressao.js",
+    "fumaca": "node testes/fumaca.js",
+    "test:tudo": "npm test && npm run fumaca"
+  }
+}
