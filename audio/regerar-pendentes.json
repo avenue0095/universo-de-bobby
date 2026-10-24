@@ -1,2749 +1,639 @@
 {
  "gerado": "2026-10-24",
- "total": 219,
- "nota": "Lista para o agente de audio. Prioridade alta = fragmento curto reutilizado (193 quadros cobrem 3.052 de 3.600 usos de resposta falada na amostra). Cauda longa = resposta por extenso colada, pode ficar sem voz (o texto fica na tela).",
+ "total": 99,
  "itens": [
   {
-   "texto": "a resposta é",
+   "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1524,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1524 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "a resposta é"
+    "quadro:toque em cada semente para contar",
+    "quadro:quantas sementes tem aqui"
    ]
   },
   {
-   "texto": "resposta é",
+   "texto": "Leia a pergunta de novo com calma e pense no que ela pede. Compare cada opção com isso.",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 456,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 456 usos na amostra",
+   "materia": "mat",
+   "categoria": "dica (como fazer)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é"
+    "quadro:leia a pergunta de novo com calma e pense no que ela pede",
+    "quadro:compare cada opção com isso"
    ]
   },
   {
-   "texto": "o número que falta é",
+   "texto": "Você tinha 13 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 298,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 298 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "o número que falta é"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "resposta é verdadeiro",
+   "texto": "São 17 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 17?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 67,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 67 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é verdadeiro"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "palavra é",
+   "texto": "São 2 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 2?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 52,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 52 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "palavra é"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "dá",
+   "texto": "São 7 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 7?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 32,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 32 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "dá"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "a frase é verdadeiro",
+   "texto": "São 15 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 15?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 31,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 31 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "a frase é verdadeiro"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "resposta é falso",
+   "texto": "São 1 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 1?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 30,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 30 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é falso"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "a resposta é verdadeiro",
+   "texto": "São 11 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 11?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 25,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 25 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "a resposta é verdadeiro"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "a área é",
+   "texto": "Você tinha 8 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 24,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 24 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "a área é"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "a frase é",
+   "texto": "São 13 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 13?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 19,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 19 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "a frase é"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "depois do",
+   "texto": "São 3 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 3?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 18,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 18 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "depois do"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "o perímetro é",
+   "texto": "Você tinha 11 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 18,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 18 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "o perímetro é"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "vem",
+   "texto": "São 18 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 18?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 13,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 13 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "vem"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "igual a verdadeiro",
+   "texto": "São 12 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 12?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 12,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "igual a verdadeiro"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "é verdadeiro",
+   "texto": "Você tinha 18 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 12,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "é verdadeiro"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "resposta é ç",
+   "texto": "São 14 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 14?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 12,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é ç"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "frase é verdadeiro",
+   "texto": "São 8 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 8?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 12,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "frase é verdadeiro"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "resposta é feliz",
+   "texto": "São 18 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 18?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 12,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é feliz"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "resposta é porque",
+   "texto": "São 7 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 7?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 11,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 11 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é porque"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "resposta é mas",
+   "texto": "São 3 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 3?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 11,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 11 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é mas"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "a frase é falso",
+   "texto": "São 19 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 19?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 10,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "a frase é falso"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "vogais",
+   "texto": "São 11 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 11?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 10,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "vogais"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "letra que",
+   "texto": "São 6 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 6?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 10,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "letra que"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "última",
+   "texto": "São 12 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 12?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 10,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "última"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "resposta é lobo",
+   "texto": "São 20 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 20?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 10,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é lobo"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "resposta é rápido",
+   "texto": "Você tinha 5 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 10,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é rápido"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "resposta é misturar",
+   "texto": "São 16 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 16?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 10,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é misturar"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "levar ao micro ondas",
+   "texto": "São 8 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 8?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 10,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "levar ao micro ondas"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "vem o",
+   "texto": "São 6 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 6?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 9,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "vem o"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "dão",
+   "texto": "Você tinha 12 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 9,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "dão"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "não é múltiplo de",
+   "texto": "São 9 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 9?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 9,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "não é múltiplo de"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "minutos",
+   "texto": "São 2 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 2?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 9,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "minutos"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "resposta é brotos verdes",
+   "texto": "Você tinha 14 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 9,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é brotos verdes"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "resposta é dar comida para o bobby",
+   "texto": "São 17 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 17?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 9,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é dar comida para o bobby"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "o resto é",
+   "texto": "Você tinha 15 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 8,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 8 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "o resto é"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "que rima com",
+   "texto": "São 5 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 5?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 8,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 8 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "que rima com"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "plural é pães",
+   "texto": "Você tinha 10 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 8,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 8 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "plural é pães"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "resposta é papa",
+   "texto": "Você tinha 6 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 7,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é papa"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "resposta é chuva",
+   "texto": "São 10 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 10?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 7,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é chuva"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "resposta é canta",
+   "texto": "São 15 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 15?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 7,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é canta"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "resposta é quem faz",
+   "texto": "São 4 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 4?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 7,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é quem faz"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "resposta é regar",
+   "texto": "São 16 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 16?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 7,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é regar"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "para montar",
+   "texto": "São 19 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 19?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "para montar"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "o numerador é",
+   "texto": "São 5 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 5?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "o numerador é"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "o valor é",
+   "texto": "Você tinha 9 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "o valor é"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "igual a falso",
+   "texto": "São 9 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 9?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "igual a falso"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "o tem",
+   "texto": "São 13 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 13?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "o tem"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "frase é falso",
+   "texto": "São 14 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 14?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "frase é falso"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
-   "texto": "resposta é massa",
+   "texto": "Você tinha 17 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é massa"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "resposta é conpra",
+   "texto": "Você tinha 16 sementes e ganhou mais uma. Toque em cada uma para contar: com quantas ficou?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é conpra"
+    "quadro:você tinha",
+    "quadro:sementes e ganhou mais uma",
+    "quadro:toque em cada uma para contar"
    ]
   },
   {
-   "texto": "resposta é desenha",
+   "texto": "São 4 sementes e uma saiu. Toque nas que ficaram para contar: que número vem antes do 4?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é desenha"
+    "quadro:sementes e uma saiu",
+    "quadro:toque nas que ficaram para contar",
+    "quadro:que número vem antes do"
    ]
   },
   {
-   "texto": "resposta é estudo",
+   "texto": "São 10 sementes e chegou mais uma. Toque em cada uma para contar: que número vem depois do 10?",
    "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": [
-    "resposta é estudo"
-   ]
-  },
-  {
-   "texto": "ed",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 6,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
-   "trechos_sem_clipe": [
-    "ed"
-   ]
-  },
-  {
-   "texto": "o número é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 5,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
-   "trechos_sem_clipe": [
-    "o número é"
-   ]
-  },
-  {
-   "texto": "termina com",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 5,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
-   "trechos_sem_clipe": [
-    "termina com"
-   ]
-  },
-  {
-   "texto": "falso o",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 5,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
-   "trechos_sem_clipe": [
-    "falso o"
-   ]
-  },
-  {
-   "texto": "resposta é cebola",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 5,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é cebola"
-   ]
-  },
-  {
-   "texto": "resposta é banho",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 5,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é banho"
-   ]
-  },
-  {
-   "texto": "resposta é dorme",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 5,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é dorme"
-   ]
-  },
-  {
-   "texto": "resposta é luz",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 5,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é luz"
-   ]
-  },
-  {
-   "texto": "resposta é mais",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 5,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é mais"
-   ]
-  },
-  {
-   "texto": "resposta é é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 5,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é é"
-   ]
-  },
-  {
-   "texto": "antes do",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "antes do"
-   ]
-  },
-  {
-   "texto": "a terça parte de",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "a terça parte de"
-   ]
-  },
-  {
-   "texto": "a maior é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "a maior é"
-   ]
-  },
-  {
-   "texto": "moedas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "moedas"
-   ]
-  },
-  {
-   "texto": "a resposta é x igual a",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "a resposta é x igual a"
-   ]
-  },
-  {
-   "texto": "a menor é menos",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "a menor é menos"
-   ]
-  },
-  {
-   "texto": "ê se",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "ê se"
-   ]
-  },
-  {
-   "texto": "resposta é saca",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é saca"
-   ]
-  },
-  {
-   "texto": "é presa",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "é presa"
-   ]
-  },
-  {
-   "texto": "resposta é pelo som",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é pelo som"
-   ]
-  },
-  {
-   "texto": "resposta é terra",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é terra"
-   ]
-  },
-  {
-   "texto": "resposta é osso",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é osso"
-   ]
-  },
-  {
-   "texto": "resposta é campo",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é campo"
-   ]
-  },
-  {
-   "texto": "resposta é maiúscula",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é maiúscula"
-   ]
-  },
-  {
-   "texto": "ponto",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "ponto"
-   ]
-  },
-  {
-   "texto": "resposta é corre o cachorro quintal",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é corre o cachorro quintal"
-   ]
-  },
-  {
-   "texto": "resposta é pessoa",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é pessoa"
-   ]
-  },
-  {
-   "texto": "resposta é os",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é os"
-   ]
-  },
-  {
-   "texto": "plural é verdadeiro",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é verdadeiro"
-   ]
-  },
-  {
-   "texto": "plural é flores",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é flores"
-   ]
-  },
-  {
-   "texto": "resposta é professor",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é professor"
-   ]
-  },
-  {
-   "texto": "resposta é rainha",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é rainha"
-   ]
-  },
-  {
-   "texto": "resposta é os meninos altos",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é os meninos altos"
-   ]
-  },
-  {
-   "texto": "resposta é futuro",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é futuro"
-   ]
-  },
-  {
-   "texto": "resposta é presente",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é presente"
-   ]
-  },
-  {
-   "texto": "resposta é viagem",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é viagem"
-   ]
-  },
-  {
-   "texto": "resposta é mochila",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é mochila"
-   ]
-  },
-  {
-   "texto": "resposta é avô",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é avô"
-   ]
-  },
-  {
-   "texto": "resposta é separar os itens",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é separar os itens"
-   ]
-  },
-  {
-   "texto": "resposta é você",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é você"
-   ]
-  },
-  {
-   "texto": "resposta é um nome",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é um nome"
-   ]
-  },
-  {
-   "texto": "pessoa ou bicho",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 4,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
-   "trechos_sem_clipe": [
-    "pessoa ou bicho"
-   ]
-  },
-  {
-   "texto": "cubinhos",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "cubinhos"
-   ]
-  },
-  {
-   "texto": "o triplo de",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "o triplo de"
-   ]
-  },
-  {
-   "texto": "inteiro",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "inteiro"
-   ]
-  },
-  {
-   "texto": "o volume é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "o volume é"
-   ]
-  },
-  {
-   "texto": "é consoante",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "é consoante"
-   ]
-  },
-  {
-   "texto": "letra que falta é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "letra que falta é"
-   ]
-  },
-  {
-   "texto": "resposta é maçã",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é maçã"
-   ]
-  },
-  {
-   "texto": "resposta é carro",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é carro"
-   ]
-  },
-  {
-   "texto": "resposta é pêssego",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é pêssego"
-   ]
-  },
-  {
-   "texto": "resposta é filho",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é filho"
-   ]
-  },
-  {
-   "texto": "resposta é chu",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é chu"
-   ]
-  },
-  {
-   "texto": "resposta é bomba",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é bomba"
-   ]
-  },
-  {
-   "texto": "resposta é brinca",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é brinca"
-   ]
-  },
-  {
-   "texto": "resposta é onde está",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é onde está"
-   ]
-  },
-  {
-   "texto": "resposta é um aviso forte",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é um aviso forte"
-   ]
-  },
-  {
-   "texto": "resposta é lugar",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é lugar"
-   ]
-  },
-  {
-   "texto": "resposta é correr",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é correr"
-   ]
-  },
-  {
-   "texto": "resposta é bicho",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é bicho"
-   ]
-  },
-  {
-   "texto": "resposta é o",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é o"
-   ]
-  },
-  {
-   "texto": "resposta é as",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é as"
-   ]
-  },
-  {
-   "texto": "resposta é plural",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é plural"
-   ]
-  },
-  {
-   "texto": "resposta é feminino",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é feminino"
-   ]
-  },
-  {
-   "texto": "resposta é gata",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é gata"
-   ]
-  },
-  {
-   "texto": "resposta é masculino",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é masculino"
-   ]
-  },
-  {
-   "texto": "resposta é brasil",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é brasil"
-   ]
-  },
-  {
-   "texto": "resposta é bobby",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é bobby"
-   ]
-  },
-  {
-   "texto": "resposta é forte",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é forte"
-   ]
-  },
-  {
-   "texto": "resposta é vermelha",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é vermelha"
-   ]
-  },
-  {
-   "texto": "resposta é esperta",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é esperta"
-   ]
-  },
-  {
-   "texto": "resposta é estuda",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é estuda"
-   ]
-  },
-  {
-   "texto": "resposta é as casas novas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é as casas novas"
-   ]
-  },
-  {
-   "texto": "resposta é bonitas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é bonitas"
-   ]
-  },
-  {
-   "texto": "bonita",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "bonita"
-   ]
-  },
-  {
-   "texto": "resposta é vou jogar",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é vou jogar"
-   ]
-  },
-  {
-   "texto": "resposta é brinquei",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é brinquei"
-   ]
-  },
-  {
-   "texto": "resposta é passado",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é passado"
-   ]
-  },
-  {
-   "texto": "preto dorme",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "preto dorme"
-   ]
-  },
-  {
-   "texto": "parque",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "parque"
-   ]
-  },
-  {
-   "texto": "resposta é açúcar",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é açúcar"
-   ]
-  },
-  {
-   "texto": "resposta é coração",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é coração"
-   ]
-  },
-  {
-   "texto": "resposta é laço",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é laço"
-   ]
-  },
-  {
-   "texto": "resposta é maçe",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é maçe"
-   ]
-  },
-  {
-   "texto": "resposta é xícara",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é xícara"
-   ]
-  },
-  {
-   "texto": "resposta é caixa",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é caixa"
-   ]
-  },
-  {
-   "texto": "resposta é país",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é país"
-   ]
-  },
-  {
-   "texto": "resposta é casinha",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é casinha"
-   ]
-  },
-  {
-   "texto": "resposta é mau",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é mau"
-   ]
-  },
-  {
-   "texto": "resposta é quantidade",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é quantidade"
-   ]
-  },
-  {
-   "texto": "resposta é mal",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é mal"
-   ]
-  },
-  {
-   "texto": "resposta é sabiá",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é sabiá"
-   ]
-  },
-  {
-   "texto": "resposta é café",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é café"
-   ]
-  },
-  {
-   "texto": "resposta é fé",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é fé"
-   ]
-  },
-  {
-   "texto": "resposta é pão",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é pão"
-   ]
-  },
-  {
-   "texto": "resposta é mão",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é mão"
-   ]
-  },
-  {
-   "texto": "plural é limões",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é limões"
-   ]
-  },
-  {
-   "texto": "resposta é água",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é água"
-   ]
-  },
-  {
-   "texto": "resposta é médico",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é médico"
-   ]
-  },
-  {
-   "texto": "resposta é história",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é história"
-   ]
-  },
-  {
-   "texto": "resposta é também",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é também"
-   ]
-  },
-  {
-   "texto": "resposta é comprei pão leite",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é comprei pão leite"
-   ]
-  },
-  {
-   "texto": "queijo",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "queijo"
-   ]
-  },
-  {
-   "texto": "resposta é gosto",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é gosto"
-   ]
-  },
-  {
-   "texto": "resposta é ela disse",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é ela disse"
-   ]
-  },
-  {
-   "texto": "&mdash",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "&mdash"
-   ]
-  },
-  {
-   "texto": "vamos",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "vamos"
-   ]
-  },
-  {
-   "texto": "resposta é &mdash",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é &mdash"
-   ]
-  },
-  {
-   "texto": "resposta é quem escreveu",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é quem escreveu"
-   ]
-  },
-  {
-   "texto": "resposta é deixar um recado",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é deixar um recado"
-   ]
-  },
-  {
-   "texto": "que usar",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "que usar"
-   ]
-  },
-  {
-   "texto": "resposta é às cinco horas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é às cinco horas"
-   ]
-  },
-  {
-   "texto": "ordem importa",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "ordem importa"
-   ]
-  },
-  {
-   "texto": "resposta é o lugar onde acontece",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é o lugar onde acontece"
-   ]
-  },
-  {
-   "texto": "resposta é quem faz as ações",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é quem faz as ações"
-   ]
-  },
-  {
-   "texto": "resposta é um lugar",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é um lugar"
-   ]
-  },
-  {
-   "texto": "no passado fica",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "no passado fica"
-   ]
-  },
-  {
-   "texto": "a resposta é not",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "a resposta é not"
-   ]
-  },
-  {
-   "texto": "ng much",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 3,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
-   "trechos_sem_clipe": [
-    "ng much"
-   ]
-  },
-  {
-   "texto": "o denominador é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "o denominador é"
-   ]
-  },
-  {
-   "texto": "o inteiro",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "o inteiro"
-   ]
-  },
-  {
-   "texto": "é vogal",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "é vogal"
-   ]
-  },
-  {
-   "texto": "é x",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "é x"
-   ]
-  },
-  {
-   "texto": "resposta é pula",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é pula"
-   ]
-  },
-  {
-   "texto": "resposta é corre",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é corre"
-   ]
-  },
-  {
-   "texto": "resposta é limpo",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é limpo"
-   ]
-  },
-  {
-   "texto": "resposta é escreve",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é escreve"
-   ]
-  },
-  {
-   "texto": "desenha com o amigo",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "desenha com o amigo"
-   ]
-  },
-  {
-   "texto": "em inglês é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 2,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
-   "trechos_sem_clipe": [
-    "em inglês é"
-   ]
-  },
-  {
-   "texto": "a resposta é seiscentos e oitenta e um",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "a resposta é seiscentos e oitenta e um"
-   ]
-  },
-  {
-   "texto": "o é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "o é"
-   ]
-  },
-  {
-   "texto": "s é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "s é"
-   ]
-  },
-  {
-   "texto": "w é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "w é"
-   ]
-  },
-  {
-   "texto": "r é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "r é"
-   ]
-  },
-  {
-   "texto": "é q",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "é q"
-   ]
-  },
-  {
-   "texto": "t é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "t é"
-   ]
-  },
-  {
-   "texto": "ê se du",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "ê se du"
-   ]
-  },
-  {
-   "texto": "ê se bu",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "ê se bu"
-   ]
-  },
-  {
-   "texto": "vovó pula com o amigo",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "vovó pula com o amigo"
-   ]
-  },
-  {
-   "texto": "cachorro corre com o amigo",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "cachorro corre com o amigo"
-   ]
-  },
-  {
-   "texto": "resposta é come",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é come"
-   ]
-  },
-  {
-   "texto": "resposta é com o amigo",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é com o amigo"
-   ]
-  },
-  {
-   "texto": "resposta é em",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é em"
-   ]
-  },
-  {
-   "texto": "resposta é com",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "resposta é com"
-   ]
-  },
-  {
-   "texto": "plural é girafas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é girafas"
-   ]
-  },
-  {
-   "texto": "plural é portas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é portas"
-   ]
-  },
-  {
-   "texto": "plural é fadas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é fadas"
-   ]
-  },
-  {
-   "texto": "plural é estrelas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é estrelas"
-   ]
-  },
-  {
-   "texto": "plural é dedos",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é dedos"
-   ]
-  },
-  {
-   "texto": "plural é tomates",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é tomates"
-   ]
-  },
-  {
-   "texto": "plural é meninas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é meninas"
-   ]
-  },
-  {
-   "texto": "plural é ratos",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é ratos"
-   ]
-  },
-  {
-   "texto": "plural é dados",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é dados"
-   ]
-  },
-  {
-   "texto": "plural é cavalos",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é cavalos"
-   ]
-  },
-  {
-   "texto": "plural é latas",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é latas"
-   ]
-  },
-  {
-   "texto": "plural é livros",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "plural é livros"
-   ]
-  },
-  {
-   "texto": "e aí em inglês é",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "cauda longa (pode ficar sem voz)",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "e aí em inglês é"
-   ]
-  },
-  {
-   "texto": "posso pegar",
-   "idioma": "pt-BR",
-   "materia": "core",
-   "categoria": "quadro da resposta da dica",
-   "classe": "quadro-enunciado",
-   "usos_amostrados": 1,
-   "prioridade": "alta",
-   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
-   "trechos_sem_clipe": [
-    "posso pegar"
+    "quadro:sementes e chegou mais uma",
+    "quadro:toque em cada uma para contar",
+    "quadro:que número vem depois do"
    ]
   },
   {
@@ -2755,7 +645,7 @@
    "trechos_sem_clipe": []
   },
   {
-   "texto": "A resposta é oitocentos e quatro.",
+   "texto": "A resposta é setecentos e dez.",
    "idioma": "pt-BR",
    "materia": "mat",
    "categoria": "resposta da dica",
@@ -2763,7 +653,7 @@
    "trechos_sem_clipe": []
   },
   {
-   "texto": "A resposta é novecentos e oito.",
+   "texto": "A resposta é cento e sessenta e quatro.",
    "idioma": "pt-BR",
    "materia": "mat",
    "categoria": "resposta da dica",
@@ -2771,7 +661,7 @@
    "trechos_sem_clipe": []
   },
   {
-   "texto": "A resposta é trezentos e noventa e nove.",
+   "texto": "A resposta é duzentos e noventa e cinco.",
    "idioma": "pt-BR",
    "materia": "mat",
    "categoria": "resposta da dica",
@@ -2779,7 +669,7 @@
    "trechos_sem_clipe": []
   },
   {
-   "texto": "A resposta é seiscentos e noventa.",
+   "texto": "A resposta é novecentos e três.",
    "idioma": "pt-BR",
    "materia": "mat",
    "categoria": "resposta da dica",
@@ -2795,12 +685,485 @@
    "trechos_sem_clipe": []
   },
   {
+   "texto": "Toque em cada concha para contar. Quantas conchas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:toque em cada concha para contar",
+    "quadro:quantas conchas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 4 grupos de 4: arraste 4 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 5 grupos de 3: arraste 3 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 2 grupos de 5: arraste 5 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 2 grupos de 2: arraste 2 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 3 grupos de 3: arraste 3 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 2 grupos de 4: arraste 4 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 5 grupos de 4: arraste 4 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 4 grupos de 3: arraste 3 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 5 grupos de 2: arraste 2 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 4 grupos de 5: arraste 5 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 3 grupos de 2: arraste 2 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 3 grupos de 5: arraste 5 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 3 grupos de 4: arraste 4 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 4 grupos de 2: arraste 2 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Monte 2 grupos de 3: arraste 3 caixas para cada cesta. Quantas são ao todo?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste",
+    "quadro:caixas para cada cesta",
+    "quadro:quantas são ao todo"
+   ]
+  },
+  {
+   "texto": "Arraste os 8 lanches para as 2 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 9 lanches para as 3 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 12 lanches para as 4 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 8 lanches para as 4 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 18 lanches para as 3 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 12 lanches para as 3 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 12 lanches para as 2 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 20 lanches para as 4 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 10 lanches para as 5 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 10 lanches para as 2 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 6 lanches para as 2 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 24 lanches para as 3 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 16 lanches para as 4 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 6 lanches para as 3 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 20 lanches para as 5 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 24 lanches para as 4 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 4 lanches para as 2 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 14 lanches para as 2 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 15 lanches para as 3 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
+   "texto": "Arraste os 21 lanches para as 3 cestas, o mesmo tanto em cada uma. Quantos ficam em cada cesta?",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:arraste os",
+    "quadro:lanches para as",
+    "quadro:cestas o mesmo tanto em cada uma",
+    "quadro:quantos ficam em cada cesta"
+   ]
+  },
+  {
    "texto": "A frase é falso.",
    "idioma": "pt-BR",
    "materia": "mat",
    "categoria": "resposta da dica",
    "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
    "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Toque nas letras na ordem do alfabeto.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "pergunta (portugues)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:toque nas letras"
+   ]
+  },
+  {
+   "texto": "Leia a pergunta de novo com calma e pense no que ela pede. Compare cada opção com isso.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "dica (como fazer)",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:novo com calma",
+    "quadro:que ela pede",
+    "quadro:compare cada opção com isso"
+   ]
   },
   {
    "texto": "A resposta é Ela disse: &mdash; Vamos!.",

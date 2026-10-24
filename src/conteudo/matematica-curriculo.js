@@ -703,6 +703,8 @@ function genQuestions(lesson,n){
       q.__mk=mk;seen.add(key);q.reforco=true;out.push(q);
     }
   }
+  /* verbos na cena (interface/verbos.js): contar vira tocar objeto por objeto, repartir vira arrastar, letra na palavra vira tocar; e nunca 3 verbos iguais seguidos */
+  if(typeof aplicarVerbos==='function')return aplicarVerbos(out,lesson);
   return out;
 }
 /* perguntas de apoio: só das fases que a criança já passou, nunca de conteúdo mais adiantado */

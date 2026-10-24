@@ -158,7 +158,9 @@ function pintarLicao(){
     if(lem)h+='<details class="lembrete"><summary class="tit">'+IC.lampada+' Lembre da aula</summary><div class="lembrete-txt">'+lem+'</div></details>';
   }
   if(q.figure)h+='<div class="figura">'+q.figure+'</div>';
-  if(q.type==='mc'){
+  if(typeof temTelaPropria==='function'&&temTelaPropria(q)){
+    h+=verbosHTML(q);
+  }else if(q.type==='mc'){
     const curtas=q.options.length>=4&&q.options.every(o=>String(o).length<=9&&!/<|figure/.test(String(o)));
     h+='<div class="alts'+(curtas?' curtas':'')+'">';
     q.options.forEach((o,k)=>{h+='<button class="alt" data-v="'+k+'"><span class="k">'+(k+1)+'</span><span>'+htmlSeguro(o,120)+'</span></button>';});
@@ -189,7 +191,9 @@ function pintarLicao(){
   LIC.resp=null;LIC.digitado='';LIC.conferido=false;LIC.dica=false;LIC.tQ=Date.now();
   $('#acao').textContent='Verificar';$('#acao').disabled=true;
   $('#dica').style.display='grid';
-  if(q.type==='mc'){
+  if(typeof temTelaPropria==='function'&&temTelaPropria(q)){
+    ligarVerbos(q);
+  }else if(q.type==='mc'){
     $('#palco').querySelectorAll('.alt').forEach(b=>b.addEventListener('click',()=>{
       if(LIC.conferido)return;
       $('#palco').querySelectorAll('.alt').forEach(x=>x.classList.remove('sel'));
@@ -457,7 +461,8 @@ function conferir(){
   if(primeira)LIC.hist.push({q:q,ok:ok,ms:ms,dica:LIC.dica||0});
   const pe=$('#pe');pe.classList.add('mostra');
   $('#dica').style.display='none';
-  if(q.type==='mc'){
+  if(typeof temTelaPropria==='function'&&temTelaPropria(q))verbosConferir(q,ok);
+  else if(q.type==='mc'){
     $('#palco').querySelectorAll('.alt').forEach(b=>{
       const v=q.options[+b.dataset.v];b.disabled=true;b.classList.remove('sel');
       if(v===q.answer){b.classList.add('certa');b.insertAdjacentHTML('beforeend','<span class="sinal">'+IC.certo+'</span>');}
@@ -475,6 +480,7 @@ function conferir(){
     /* XP nunca diminui; moedas são o saldo que a loja gasta */
     S.xp+=ganho;S.moedas+=ganho;LIC.ganhoFase=(LIC.ganhoFase||0)+ganho;S.acertosTotal=(S.acertosTotal||0)+1;
     S.melhorCombo=Math.max(S.melhorCombo||0,LIC.combo);pe.classList.add('certo');
+    if(!temTelaPropria(q)&&typeof hitStop==='function')hitStop(()=>squash($('#palco .alt.certa')));
     $('#selo').innerHTML=MASC(LIC.combo>=3?'radiante':'feliz','avatar');
     const elogio=falaDoAcerto(q,ms);
     $('#fb-t').innerHTML=IC.certo+'<span>'+elogio+'</span>';
@@ -487,6 +493,7 @@ function conferir(){
     LIC.erros++;LIC.combo=0;LIC.vidas--;LIC.errosSeguidos=(LIC.errosSeguidos||0)+1;guiaPose('p04');regStat(LIC.l.id,'erros');pe.classList.add('errado');
     if(LIC.errosSeguidos>=2){const lm=$('#palco .lembrete');if(lm)lm.open=true;}
     guardarErrado(q);
+    if(!temTelaPropria(q)&&typeof balanca==='function')balanca($('#palco .alt.errada'));
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
     $('#selo').innerHTML=(LIC.errosSeguidos||0)>=2&&ativo('capi-p04')?imgArte('capi-p04',{cls:'mascote comp avatar',alt:'Capi'}):MASC('pensa','avatar');
     const calma=falaDoErro(q);

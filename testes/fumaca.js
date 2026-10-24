@@ -198,7 +198,8 @@ async function main() {
           if (etapa === 'fim') break;
           if (etapa === 'questao') {
             const info = await js("(()=>{const q=LIC.qs[LIC.i];return {tipo:q.type,k:q.type==='mc'?q.options.map(String).indexOf(String(q.answer)):-1,r:String(q.answer)}})()");
-            if (info.tipo === 'mc') {
+            const comAlt = await js("!!document.querySelector('.alt')");
+            if (info.tipo === 'mc' && comAlt) {
               if (info.k < 0) problemas.push(rot + ' ' + mat + ': gabarito fora das opcoes na tela');
               await js("document.querySelector('.alt[data-v=\"" + info.k + "\"]').click();0");
             } else {
@@ -623,6 +624,85 @@ async function main() {
         feito.push(rot + ': cerimonias (fase em uma linha, etapa pulavel com botoes iguais, planeta com constelacao e nome), cada uma uma vez');
       }
 
+      /* 2d7) VERBOS NA CENA (1B1): tocar objeto por objeto (numero em menos de 100 ms, permanencia), arrastar para a cesta (arraste real e
+         caminho tocar-tocar com ima), tocar a letra na palavra, ordenar cartas; pressionado no mesmo quadro; hit-stop de 60 a 80 ms; painel de
+         feedback ate 20% da altura com a cena visivel; de Verificar a proxima pergunta em ate 1,8 s; nenhuma alternativa atras do rodape. */
+      {
+        const toqueEm = async (sel) => { const c = await js("(()=>{const e=document.querySelector(" + JSON.stringify(sel) + ");if(!e)return null;e.scrollIntoView({block:'center'});const r=e.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()"); if (!c) return null;
+          if (medidas.mobile) { await cdp('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: c.x, y: c.y }] }); await cdp('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); }
+          else { await cdp('Input.dispatchMouseEvent', { type: 'mouseMoved', x: c.x, y: c.y }); await cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: c.x, y: c.y, button: 'left', clickCount: 1 }); await cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: c.x, y: c.y, button: 'left', clickCount: 1 }); }
+          await dorme(60); return c; };
+        if (medidas.mobile) await cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+        await js("fecharLicao();fecharFolha();usarMateria('mat');fecharFolha();document.querySelector('#modal').classList.remove('on');S.faixa='f910';abrirLicao(0,0);LIC.etapa='questao';LIC.i=0;LIC.qs=[comVerbo(mc('Quantas bolinhas tem aqui?',7,[8,6,9],{figure:dots(7)}),UNITS[0].lessons[0])];pintarLicao();0"); await dorme(300);
+        // tocar: cada toque mostra o numero no mesmo evento (medido no pointerdown), e fica marcado
+        await js("window.__t=[];document.querySelectorAll('.obj').forEach(o=>o.addEventListener('pointerdown',()=>{const t0=performance.now();requestAnimationFrame(()=>{window.__t.push({ms:performance.now()-t0,txt:o.querySelector('.obj-n').textContent})})}));0");
+        for (let i = 0; i < 7; i++) await toqueEm('.obj[data-i="' + i + '"]');
+        const tq = await js("({t:window.__t,marcados:document.querySelectorAll('.obj.marcado').length,cont:document.querySelector('#contagem').textContent,pressionado:!!window.__p})");
+        if (tq.marcados !== 7 || !/7 contadas/.test(tq.cont)) problemas.push(rot + ' verbo tocar: ' + JSON.stringify({ marcados: tq.marcados, cont: tq.cont }));
+        if (tq.t.length < 7 || tq.t.some((x) => x.ms > 100 || !x.txt)) problemas.push(rot + ' verbo tocar: numero nao apareceu em ate 100 ms ' + JSON.stringify(tq.t.slice(0, 3)));
+        await shot0('verbo-tocar-' + nomeTela);
+        // pressionado no mesmo quadro: classe presente no pointerdown antes do proximo quadro (20 toques)
+        const pr = await js(`(async()=>{let ok=0;const b=document.querySelector('.alt');for(let k=0;k<20;k++){b.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,pointerId:1}));const tem=b.classList.contains('pressionado');await new Promise(r=>requestAnimationFrame(r));b.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,pointerId:1}));if(tem)ok++;}return ok})()`);
+        if (pr !== 20) problemas.push(rot + ' pressionado no mesmo quadro: ' + pr + ' de 20');
+        // hit-stop de 70 ms (60 a 80) no acerto e painel ate 20% da altura com a cena visivel
+        await toqueEm('.alt:nth-child(4)');
+        const certa = await js("(()=>{const q=LIC.qs[0];const k=q.options.indexOf(q.answer);document.querySelectorAll('.alt').forEach(a=>a.classList.remove('sel'));return k})()");
+        await toqueEm('.alt[data-v="' + certa + '"]');
+        const t0 = Date.now();
+        await toqueEm('#acao'); await dorme(40);
+        const hs = await js("({parado:document.documentElement.classList.contains('hitstop'),ms:JUICE.ultimoHitStop,ok:LIC.conferido})");
+        await dorme(150);
+        const hs2 = await js("document.documentElement.classList.contains('hitstop')");
+        if (hs.ms < 60 || hs.ms > 80 || hs2) problemas.push(rot + ' hit-stop: ' + JSON.stringify({ hs, depois: hs2 }));
+        const painel = await js("(()=>{const r=document.querySelector('.pe').getBoundingClientRect();const c=document.querySelector('.cena-q').getBoundingClientRect();const y=c.top+c.height/2;const e=y>0&&y<innerHeight?document.elementFromPoint(c.left+c.width/2,y):null;return {pct:r.height/innerHeight*100,cena:!(e&&e.closest('.pe')),h:Math.round(r.height)}})()");
+        if (painel.pct > 20 || !painel.cena) problemas.push(rot + ' painel de feedback: ' + JSON.stringify(painel));
+        await shot0('verbo-feedback-' + nomeTela);
+        // de Verificar a proxima pergunta pronta em ate 1,8 s (um toque em Continuar)
+        await js("LIC.qs.push(comVerbo(mc('Quantas bolinhas tem aqui?',5,[4,6,7],{figure:dots(5)}),UNITS[0].lessons[0]));0");
+        await toqueEm('#acao');
+        const pronta = await js("!!document.querySelector('.obj')&&LIC.i===1&&!LIC.conferido");
+        const dt = Date.now() - t0;
+        if (!pronta || dt > 1800) problemas.push(rot + ' Verificar ate a proxima pergunta: ' + dt + ' ms, pronta=' + pronta);
+        // arrastar: arraste real ate a cesta (ima de 24 px) e caminho tocar-tocar
+        await js("fecharLicao();abrirLicao(3,0);LIC.etapa='questao';LIC.i=0;LIC.qs=[comVerbo(inp('6 bolinhas repartidas igualmente em 2 grupos. Quantas em cada grupo?',3),UNITS[3].lessons[0])];pintarLicao();0"); await dorme(300);
+        const pos = await js("(()=>{const o=document.querySelector('.obj[data-i=\"0\"]').getBoundingClientRect(),c=document.querySelector('.cesta[data-c=\"0\"]').getBoundingClientRect();return {ox:o.left+o.width/2,oy:o.top+o.height/2,cx:c.left+c.width/2,cy:c.top+c.height/2,cl:c.left}})()");
+        if (medidas.mobile) {
+          await cdp('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: pos.ox, y: pos.oy }] });
+          for (let k = 1; k <= 6; k++) await cdp('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: pos.ox + (pos.cl - 20 - pos.ox) * k / 6, y: pos.oy + (pos.cy - pos.oy) * k / 6 }] });
+          await cdp('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        } else {
+          await cdp('Input.dispatchMouseEvent', { type: 'mouseMoved', x: pos.ox, y: pos.oy }); await cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: pos.ox, y: pos.oy, button: 'left', clickCount: 1 });
+          for (let k = 1; k <= 6; k++) await cdp('Input.dispatchMouseEvent', { type: 'mouseMoved', x: pos.ox + (pos.cl - 20 - pos.ox) * k / 6, y: pos.oy + (pos.cy - pos.oy) * k / 6, button: 'left' });
+          await cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: pos.cl - 20, y: pos.cy, button: 'left', clickCount: 1 });
+        }
+        await dorme(120);
+        await toqueEm('.obj[data-i="1"]'); await toqueEm('.cesta[data-c="1"]');
+        const ar = await js("({c0:document.querySelector('.cesta[data-c=\"0\"] .cesta-n').textContent,c1:document.querySelector('.cesta[data-c=\"1\"] .cesta-n').textContent,soltos:document.querySelectorAll('.obj.solto').length})");
+        if (ar.c0 !== '1' || ar.c1 !== '1' || ar.soltos !== 4) problemas.push(rot + ' verbo arrastar (ima de 24 px e tocar-tocar): ' + JSON.stringify(ar));
+        for (const [i, c] of [[2, 0], [3, 1], [4, 0], [5, 1]]) { await toqueEm('.obj[data-i="' + i + '"]'); await toqueEm('.cesta[data-c="' + c + '"]'); }
+        const ar2 = await js("({resp:LIC.resp,acao:document.querySelector('#acao').disabled})");
+        if (ar2.resp !== '3' || ar2.acao) problemas.push(rot + ' verbo arrastar: resposta ' + JSON.stringify(ar2));
+        await shot0('verbo-arrastar-' + nomeTela);
+        // letra na palavra e ordenar cartas
+        await js("fecharLicao();usarMateria('pt');fecharFolha();abrirLicao(0,0);LIC.etapa='questao';LIC.i=0;LIC.qs=[comVerbo(mc('Qual é a <b>primeira vogal</b> de BOLA?','O',['A','E','U']),UNITS[0].lessons[0])];pintarLicao();0"); await dorme(250);
+        await toqueEm('.letra-t[data-i="1"]');
+        const lt = await js("({resp:LIC.resp,verbo:LIC.qs[0].verbo,sel:document.querySelectorAll('.letra-t.sel').length})");
+        if (lt.resp !== 'O' || lt.verbo !== 'tocar-letra' || lt.sel !== 1) problemas.push(rot + ' verbo tocar na letra: ' + JSON.stringify(lt));
+        await shot0('verbo-letra-' + nomeTela);
+        await js("fecharLicao();abrirLicao(0,1);LIC.etapa='questao';LIC.i=0;LIC.qs=[comVerbo(mc('Coloque em ordem: D, B, C','B C D',['D C B']),UNITS[0].lessons[1])];pintarLicao();0"); await dorme(250);
+        for (const v of ['B', 'C', 'D']) await toqueEm('.carta[data-v="' + v + '"]');
+        const od = await js("({resp:LIC.resp,acao:document.querySelector('#acao').disabled})");
+        if (od.resp !== 'B C D' || od.acao) problemas.push(rot + ' verbo ordenar: ' + JSON.stringify(od));
+        await shot0('verbo-ordenar-' + nomeTela);
+        // nenhuma alternativa atras do rodape nas perguntas com objetos (360 e 390)
+        await js("fecharLicao();usarMateria('mat');fecharFolha();abrirLicao(0,0);LIC.etapa='questao';LIC.i=0;LIC.qs=[comVerbo(mc('Quantas bolinhas tem aqui?',20,[19,21,18],{figure:dots(20)}),UNITS[0].lessons[0])];LIC.qs[0].__reduzido=true;pintarLicao();0"); await dorme(250);
+        const rod = await js("(()=>{const pe=document.querySelector('.pe').getBoundingClientRect();const u=[...document.querySelectorAll('.alt')].pop();const lc=document.querySelector('.lc-corpo');lc.scrollTop=lc.scrollHeight;const b=u.getBoundingClientRect();const t=document.elementFromPoint(b.left+b.width/2,b.top+b.height/2);return {bottom:Math.round(b.bottom),pe:Math.round(pe.top),livre:!!t&&(t===u||u.contains(t))}})()");
+        if (rod.bottom > rod.pe + 1 || !rod.livre) problemas.push(rot + ' alternativa atras do rodape (20 objetos): ' + JSON.stringify(rod));
+        await js("fecharLicao();0");
+        if (medidas.mobile) await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
+        feito.push(rot + ': verbos na cena (tocar objetos em <100 ms, arrastar com ima e tocar-tocar, letra, ordenar), pressionado no quadro, hit-stop ' + hs.ms + ' ms, painel ' + painel.pct.toFixed(0) + '% da altura');
+      }
+
       /* 2e) PONTARIA E TOQUE REAL. Regressao de 24/10/2026: um z-index no corpo da fase cobriu o painel fixo e nenhum botao respondia,
          mas .click() por JavaScript ignora o que esta por cima. Aqui o toque vai pelo CDP (mouse no desktop, toque no celular), no ponto central
          do botao, e antes disso conferimos com elementFromPoint que o botao e mesmo o elemento ali. */
@@ -645,8 +725,8 @@ async function main() {
           while (passos++ < 12 && (await js('LIC.etapa')) !== 'questao') { if (!(await toque('#acao', 'botao do rodape (' + (await js('LIC.etapa')) + ')'))) break; }
           if ((await js('LIC.etapa')) !== 'questao') { problemas.push(rot + ' ' + mat + ' toque real: nao chegou na pergunta tocando o rodape'); continue; }
           // pula ate uma pergunta de escolha (as outras sao testadas em outros blocos)
-          await js("while(LIC.qs[LIC.i].type!=='mc'&&LIC.i<LIC.qs.length-1){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0");
-          if ((await js('LIC.qs[LIC.i].type')) !== 'mc') continue;
+          await js("while((LIC.qs[LIC.i].type!=='mc'||(LIC.qs[LIC.i].verbo&&!/tocar-objetos|tocar-ouvir|nada/.test(LIC.qs[LIC.i].verbo)))&&LIC.i<LIC.qs.length-1){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0");
+          if ((await js("LIC.qs[LIC.i].type!=='mc'||(LIC.qs[LIC.i].verbo&&!/tocar-objetos|tocar-ouvir|nada/.test(LIC.qs[LIC.i].verbo))"))) continue;
           // dica
           await toque('#dica', 'botao Dica'); if (!(await js('!!LIC.dica'))) problemas.push(rot + ' ' + mat + ' toque real: tocar na dica nao abriu a dica');
           // erra de proposito com 1 coracao: aparece "continuar por 50 moedas"
@@ -664,8 +744,8 @@ async function main() {
           await toque('#acao', 'botao Continuar');
           if ((await js('LIC.i')) !== i0 + 1 && (await js('LIC.etapa')) !== 'fim') problemas.push(rot + ' ' + mat + ' toque real: Continuar nao avancou');
           // acerta a proxima de escolha: alternativa certa, Verificar, Continuar
-          await js("while(LIC.etapa==='questao'&&LIC.qs[LIC.i].type!=='mc'&&LIC.i<LIC.qs.length-1){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0");
-          if ((await js("LIC.etapa==='questao'&&LIC.qs[LIC.i].type==='mc'"))) {
+          await js("while(LIC.etapa==='questao'&&(LIC.qs[LIC.i].type!=='mc'||(LIC.qs[LIC.i].verbo&&!/tocar-objetos|tocar-ouvir|nada/.test(LIC.qs[LIC.i].verbo)))&&LIC.i<LIC.qs.length-1){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0");
+          if ((await js("LIC.etapa==='questao'&&LIC.qs[LIC.i].type==='mc'&&!(LIC.qs[LIC.i].verbo&&!/tocar-objetos|tocar-ouvir|nada/.test(LIC.qs[LIC.i].verbo))"))) {
             const certa = await js("LIC.qs[LIC.i].options.map(String).indexOf(String(LIC.qs[LIC.i].answer))");
             const ac0 = await js('LIC.acertos');
             await toque('.alt[data-v="' + certa + '"]', 'alternativa certa'); await toque('#acao', 'Verificar (certa)');
