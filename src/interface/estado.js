@@ -53,7 +53,7 @@ function normalizaDesenhos(x,feitas){
 }
 function colecaoVazia(){return {adesivos:[],ornamentos:[],medalhas:[],poses:[],molduras:[],trilhas:[],constelacao:[]};}
 function estadoVazio(){
-  return {nome:'',faixa:'f78',materia:'mat',
+  return {nome:'',faixa:'f78',materia:'mat',matEsc:false,
     xp:0,moedas:0,acertosTotal:0,melhorCombo:0,
     feitas:{},errados:{},comprado:[],look:{},desenhos:desenhosVazios(),
     ofensiva:ofensivaNova(),diario:diarioVazio(''),espera:null,
@@ -145,6 +145,7 @@ function estadoDe(dados){
   s.nome=nomeSeguro(d.nome,18);
   s.faixa=FAIXAS.indexOf(d.faixa)>=0?d.faixa:'f78';
   s.materia=['mat','pt','en'].indexOf(d.materia)>=0?d.materia:'mat';
+  s.matEsc=d.matEsc===true;
   s.xp=intDe(d.xp,0,1e9,0);s.moedas=intDe(d.moedas,0,1e9,0);
   s.acertosTotal=intDe(d.acertosTotal,0,1e9,0);s.melhorCombo=intDe(d.melhorCombo,0,1e6,0);
   const f=objDe(d.feitas);Object.keys(f).forEach(k=>{const e=estrelasDe(f[k]);if(e>0)s.feitas[k]=e;});
@@ -300,7 +301,13 @@ function usarPerfil(i){
   UNITS=MATERIAS[MATERIA].units();TOTAL_LESSONS=MATERIAS[MATERIA].total();
   CAP_ATUAL=MATERIAS[MATERIA].caps();MISS_ATUAL=MATERIAS[MATERIA].miss();
   $('#nome-materia').textContent=MATERIAS[MATERIA].n;
-  renderTrilha();telaMaterias();
+  /* quem já escolheu um planeta (ou já jogou) volta direto para o mapa dele; o seletor só abre na primeira vez */
+  renderTrilha();
+  if(!(S.matEsc||Object.keys(S.feitas||{}).length>0))telaMaterias();
+  else{   /* o que usarMateria faria ao escolher: voz da matéria e entrada do dia (bilhete, aviso da migração) */
+    if(typeof audioPrepararMateria==='function')audioPrepararMateria(MATERIA);
+    if(typeof mostrarEntradaDoDia==='function')mostrarEntradaDoDia();
+  }
 }
 function novoPerfil(nome,cor){
   const novo=estadoVazio();

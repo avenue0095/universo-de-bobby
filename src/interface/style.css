@@ -347,14 +347,6 @@ img{max-width:100%}
 .planeta .lapis svg{width:20px;height:20px}
 .lapis{display:inline-grid;place-items:center;border-radius:var(--raio-16);background:var(--cor-superficie-2);color:var(--cor-texto-suave);vertical-align:middle}
 .lapis svg{width:16px;height:16px}
-@media (max-width:430px){
-  .planeta{grid-template-columns:1fr;padding:var(--esp-16)}
-  .planeta-img{position:absolute;right:var(--esp-8);top:var(--esp-8);width:96px;z-index:0}
-  .planeta-txt{grid-row:1;position:relative;z-index:1}
-  .planeta-nome,.planeta h1,.planeta p{padding-right:var(--esp-96)}
-  .planeta-nome{font-size:var(--t-legenda)}
-  .planeta-guia{display:none}
-}
 
 /* etapa: o lugar que acende fase por fase (DESIGN 10.4) */
 .etapa{margin:0 auto var(--esp-32);max-width:480px;background:var(--cor-superficie);border:1px solid var(--cor-linha);border-radius:var(--raio-32);
@@ -1395,23 +1387,27 @@ body[data-materia="por"]{--atmosfera:url("./assets/planetas/planeta-por.webp")}
 body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 @media (min-width:900px){
   .ceu::after{content:"";position:absolute;inset:0;background:var(--atmosfera) 88% 38%/min(60vmin,560px) no-repeat;opacity:.16;filter:blur(3px) saturate(.8)}
+  .ceu::before{content:"";position:absolute;inset:0;background:var(--atmosfera) 8% 74%/min(34vmin,320px) no-repeat;opacity:.1;filter:blur(6px) saturate(.8)}
 }
 /* etiquetas: frase normal, peso 700, sem tracking nem caixa-alta */
 .planeta-nome,.etapa-n,.et,.placar span,.rot-md,.stat-card span,.mat-nome,.lembrete .tit,.semana .dia em{font-weight:700}
-/* primeira dobra: o mapa. Cabeçalho do planeta com a arte grande, rotina em faixa, a etapa do Bobby logo abaixo */
-.planeta{margin-bottom:var(--esp-16)}
-.planeta-img{width:100%}
-@media (max-width:430px){
-  .planeta{min-height:176px;padding-bottom:var(--esp-16)}
-  .planeta-img{width:144px;top:var(--esp-8);right:var(--esp-8)}
-  .planeta-guia{display:block;width:72px;right:var(--esp-4);bottom:var(--esp-4);z-index:2}
-  .planeta-nome,.planeta h1,.planeta p{padding-right:calc(var(--esp-96) + var(--esp-32))}
-  .planeta .meta-linha{padding-right:var(--esp-48)}
-}
-@media (max-height:700px){.planeta{min-height:144px}.planeta-img{width:112px}.planeta-nome,.planeta h1,.planeta p{padding-right:96px}}
-.etapa-faixa{font-family:var(--fonte-corpo);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);font-weight:700;color:var(--cor-texto-suave);margin:var(--esp-16) auto var(--esp-8);max-width:480px}
-.rotina.faixa{padding:0;margin:0 0 var(--esp-16);overflow:hidden}
-.rotina.faixa summary{display:flex;align-items:center;justify-content:space-between;gap:var(--esp-8);min-height:var(--toque-conforto);padding:var(--esp-8) var(--esp-16);cursor:pointer;list-style:none}
+/* primeira dobra: o mapa. O cabeçalho do planeta é uma linha só (planeta, nome, lápis, progresso), a rotina é uma pílula que abre e a etapa do Bobby vem logo abaixo */
+:root{--larg-mapa:480px}
+.planeta{display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:var(--esp-16);max-width:var(--larg-mapa);margin:0 auto var(--esp-8);
+  padding:var(--esp-8) var(--esp-16);min-height:0;border-radius:var(--raio-24)}
+.planeta::before{background:radial-gradient(60% 140% at 0% 50%,color-mix(in srgb,var(--materia-luz) 28%,transparent),transparent 70%)}
+.planeta-img{position:static;grid-column:1;width:40px;height:40px}
+.planeta-img img{filter:drop-shadow(0 4px 6px var(--cor-sombra))}
+.planeta-txt{display:contents}
+.planeta-nome,.planeta p,.planeta-guia{display:none}
+.planeta h1{grid-column:2;display:flex;align-items:center;gap:var(--esp-8);font-size:var(--t-destaque);line-height:var(--lh-destaque);padding:0;margin:0;min-width:0}
+.planeta .meta-linha{grid-column:3;flex-direction:column-reverse;align-items:flex-end;gap:var(--esp-4);padding:0;font-size:var(--t-legenda);line-height:var(--lh-legenda);white-space:nowrap}
+.planeta .meta-barra{flex:none;width:96px;height:var(--esp-8)}
+@media (max-width:430px){.planeta h1{font-size:var(--t-corpo);line-height:var(--lh-corpo)}.planeta .meta-barra{width:64px}}
+.etapa-faixa{font-family:var(--fonte-corpo);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);font-weight:700;color:var(--cor-texto-suave);margin:var(--esp-16) auto var(--esp-8);max-width:var(--larg-mapa)}
+.etapa-faixa.agora{position:absolute;width:1px;height:1px;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.rotina.faixa{padding:0;margin:0 auto var(--esp-8);max-width:var(--larg-mapa);overflow:hidden;border-width:1px;border-radius:var(--raio-24)}
+.rotina.faixa summary{display:flex;align-items:center;justify-content:space-between;gap:var(--esp-8);min-height:var(--toque-min);padding:var(--esp-4) var(--esp-16);cursor:pointer;list-style:none}
 .rotina.faixa summary::-webkit-details-marker{display:none}
 .rotina.faixa summary::after{content:"";width:10px;height:10px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(45deg);flex:none;color:var(--cor-texto-suave)}
 .rotina.faixa details[open] summary::after{transform:rotate(-135deg)}
@@ -1429,14 +1425,14 @@ body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 /* topo da fase: faixa sólida com fio e o conteúdo rola por baixo com esmaecimento, nunca cortado seco */
 .lc-topo{background:var(--cor-fundo);border-bottom:1px solid var(--cor-linha);z-index:2}
 .lc-corpo{scroll-padding-top:var(--esp-16);-webkit-mask-image:linear-gradient(to bottom,transparent 0,black var(--esp-16));mask-image:linear-gradient(to bottom,transparent 0,black var(--esp-16));padding-top:var(--esp-16)}
-.voce{scroll-margin-bottom:calc(var(--barra-h) + var(--esp-32))}
+.voce{scroll-margin-bottom:calc(var(--barra-h) + var(--esp-48) + var(--esp-24))}
 /* colorir: mais largo; no computador, folha e ferramentas lado a lado */
 .des-tela{max-width:min(420px,calc((100dvh - 56px - 232px - 24px) * .75))}
 .paleta{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:0;justify-items:center}
 @media (min-width:900px){
-  .desenho-tela .rev-corpo{padding-left:max(var(--esp-16),calc((100% - 880px) / 2))}
-  .des-in{grid-template-columns:minmax(0,1fr) 296px;align-items:start;gap:var(--esp-24)}
-  .des-in .des-tela{max-width:min(560px,calc((100dvh - 56px - 48px) * .75));justify-self:end}
+  .desenho-tela .rev-corpo{padding-left:max(var(--esp-16),calc((100% - 880px) / 2));padding-right:max(var(--esp-16),calc((100% - 880px) / 2))}
+  .des-in{grid-template-columns:min(560px,calc((100dvh - 104px) * .75)) 296px;justify-content:center;align-items:start;gap:var(--esp-24);width:100%;max-width:none}
+  .des-in .des-tela{max-width:none;justify-self:stretch}
   .des-ferramentas{position:sticky;top:var(--esp-16);bottom:auto}
   .des-ferramentas .paleta{grid-template-columns:repeat(5,48px);justify-content:center;gap:var(--esp-8)}
   .des-acoes{grid-template-columns:1fr 1fr}
@@ -1483,3 +1479,43 @@ body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 .linha-mundo .mn{color:var(--cor-superficie)}
 .des-mais{margin:var(--esp-16) 0 0;text-align:center;color:var(--cor-texto-suave);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
 .linha-mundo .mtx b i.agora{background:var(--materia-suave);color:var(--materia-tinta)}
+
+/* etapa do Bobby: cabeçalho enxuto (etapa, progresso e título), para o cenário começar alto na tela */
+.etapa{max-width:var(--larg-mapa)}
+.etapa-cab{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 var(--esp-8);padding:var(--esp-8) var(--esp-16)}
+.etapa-tx{display:contents}
+.etapa-n{grid-column:1;grid-row:1}
+.etapa-prog{grid-column:2;grid-row:1}
+.etapa h3{grid-column:1/-1;grid-row:2;font-size:var(--t-destaque);line-height:var(--lh-destaque)}
+.etapa-cab p{grid-column:1/-1;grid-row:3;display:none}
+@media (min-height:900px){.etapa-cab p{display:block}}
+.tela{padding-top:var(--esp-8)}
+/* avisos de download: um por tela, sem ocupar espaço quando vazios */
+#aviso-baixa-des:empty,#aviso-baixa-gal:empty{display:none}
+#aviso-baixa-des .aviso{line-height:var(--lh-pequeno);text-align:center}
+/* vitrine de looks: a figura tem altura fixa e nunca passa do cartão; nome, selo e botão vêm abaixo, por cima */
+.item-look{display:block;position:relative;height:144px;flex:none;overflow:hidden;border-radius:var(--raio-16)}
+.item-look{text-align:center;line-height:0}
+.item-look>img{display:inline-block;height:100%;width:auto;max-width:100%;object-fit:contain}
+.item-look .bobby-com-item{display:inline-block;position:relative;height:100%}
+.item-look .bobby-com-item>img:not(.item-chapeu){display:block;height:100%;width:auto;max-width:none}
+.item>b,.item>.tipo,.item>.selo,.item>button{position:relative;z-index:1}
+/* ícone de missão: arte ou SVG, sempre 32 px (SVG sem tamanho ocupava a largura toda) */
+.missoes li>svg,.missoes li>.ic-arte{width:32px;height:32px;flex:none}
+/* rótulo do nó: nunca a menos de 8 px da borda da cena nem encostado no vizinho (--nx = distância do nó à borda, em %) */
+.trilha{container-type:inline-size}
+.no .rot{max-width:min(120px,calc(var(--nx,50) * 2cqw - var(--esp-16)),calc(34cqw - var(--esp-8)))}
+/* topo em 360 ou menos: o nome da matéria aparece inteiro (o retrato do Bobby já está na barra de baixo) */
+@media (max-width:380px){.marca .sig{display:none}.marca b{font-size:var(--t-pequeno)}}
+/* prêmio do baú: nome e tipo em duas linhas; o adesivo vira um adesivo de verdade (borda branca, leve inclinação) */
+.folha-lista.premios li>span{display:grid;gap:0;min-width:0}
+.folha-lista.premios li small{font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave);font-weight:var(--peso-forte)}
+.folha-lista.premios li b{font-family:var(--fonte-corpo);font-weight:var(--peso-forte)}
+.premio-ic.adesivo{box-sizing:border-box;padding:var(--esp-4);border-radius:var(--raio-pilula);background:var(--cor-papel);border:3px solid var(--cor-papel);box-shadow:0 0 0 1px var(--cor-linha-forte),var(--sombra-1);transform:rotate(-8deg)}
+/* cena: enquanto a imagem não chega, o céu e o chão da matéria já aparecem (nunca um cartão vazio), e a arte entra com um fade */
+.cena{background:linear-gradient(to bottom,var(--materia-ceu-topo),var(--materia-ceu-horizonte) 62%,var(--materia-chao) 62%)}
+.cena>img.arte{animation:so-opacidade var(--mov-padrao) var(--curva-entra) both}
+@media (prefers-reduced-motion:reduce){.cena>img.arte{animation:none}}
+/* nome do jogador numa linha só, com reticências; o lápis nunca encolhe */
+.planeta .oi-nome{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.planeta .lapis{flex:none}

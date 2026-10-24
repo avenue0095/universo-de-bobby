@@ -104,7 +104,7 @@ document.addEventListener('keydown',e=>{
 lerStore();
 CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();
 if(STORE.perfis.length===0){telaPerfis();setTimeout(()=>pedirNome(true),300);}
-else if(STORE.perfis.length===1&&STORE.atual>=0){usarPerfil(STORE.atual);}
+else if(STORE.perfis.length===1){usarPerfil(0);}   /* um jogador só: direto para o mapa, sem 'Quem vai jogar?' */
 else{telaPerfis();if(STORE.atual>=0){S=estadoDe(STORE.perfis[STORE.atual].dados);S.nome=STORE.perfis[STORE.atual].nome;garantirDia();}
   CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();renderTrilha();}
 iniciarCiclo();

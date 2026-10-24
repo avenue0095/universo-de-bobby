@@ -359,14 +359,6 @@ img{max-width:100%}
 .planeta .lapis svg{width:20px;height:20px}
 .lapis{display:inline-grid;place-items:center;border-radius:var(--raio-16);background:var(--cor-superficie-2);color:var(--cor-texto-suave);vertical-align:middle}
 .lapis svg{width:16px;height:16px}
-@media (max-width:430px){
-  .planeta{grid-template-columns:1fr;padding:var(--esp-16)}
-  .planeta-img{position:absolute;right:var(--esp-8);top:var(--esp-8);width:96px;z-index:0}
-  .planeta-txt{grid-row:1;position:relative;z-index:1}
-  .planeta-nome,.planeta h1,.planeta p{padding-right:var(--esp-96)}
-  .planeta-nome{font-size:var(--t-legenda)}
-  .planeta-guia{display:none}
-}
 
 /* etapa: o lugar que acende fase por fase (DESIGN 10.4) */
 .etapa{margin:0 auto var(--esp-32);max-width:480px;background:var(--cor-superficie);border:1px solid var(--cor-linha);border-radius:var(--raio-32);
@@ -1407,23 +1399,27 @@ body[data-materia="por"]{--atmosfera:url("./assets/planetas/planeta-por.webp")}
 body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 @media (min-width:900px){
   .ceu::after{content:"";position:absolute;inset:0;background:var(--atmosfera) 88% 38%/min(60vmin,560px) no-repeat;opacity:.16;filter:blur(3px) saturate(.8)}
+  .ceu::before{content:"";position:absolute;inset:0;background:var(--atmosfera) 8% 74%/min(34vmin,320px) no-repeat;opacity:.1;filter:blur(6px) saturate(.8)}
 }
 /* etiquetas: frase normal, peso 700, sem tracking nem caixa-alta */
 .planeta-nome,.etapa-n,.et,.placar span,.rot-md,.stat-card span,.mat-nome,.lembrete .tit,.semana .dia em{font-weight:700}
-/* primeira dobra: o mapa. Cabeçalho do planeta com a arte grande, rotina em faixa, a etapa do Bobby logo abaixo */
-.planeta{margin-bottom:var(--esp-16)}
-.planeta-img{width:100%}
-@media (max-width:430px){
-  .planeta{min-height:176px;padding-bottom:var(--esp-16)}
-  .planeta-img{width:144px;top:var(--esp-8);right:var(--esp-8)}
-  .planeta-guia{display:block;width:72px;right:var(--esp-4);bottom:var(--esp-4);z-index:2}
-  .planeta-nome,.planeta h1,.planeta p{padding-right:calc(var(--esp-96) + var(--esp-32))}
-  .planeta .meta-linha{padding-right:var(--esp-48)}
-}
-@media (max-height:700px){.planeta{min-height:144px}.planeta-img{width:112px}.planeta-nome,.planeta h1,.planeta p{padding-right:96px}}
-.etapa-faixa{font-family:var(--fonte-corpo);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);font-weight:700;color:var(--cor-texto-suave);margin:var(--esp-16) auto var(--esp-8);max-width:480px}
-.rotina.faixa{padding:0;margin:0 0 var(--esp-16);overflow:hidden}
-.rotina.faixa summary{display:flex;align-items:center;justify-content:space-between;gap:var(--esp-8);min-height:var(--toque-conforto);padding:var(--esp-8) var(--esp-16);cursor:pointer;list-style:none}
+/* primeira dobra: o mapa. O cabeçalho do planeta é uma linha só (planeta, nome, lápis, progresso), a rotina é uma pílula que abre e a etapa do Bobby vem logo abaixo */
+:root{--larg-mapa:480px}
+.planeta{display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:var(--esp-16);max-width:var(--larg-mapa);margin:0 auto var(--esp-8);
+  padding:var(--esp-8) var(--esp-16);min-height:0;border-radius:var(--raio-24)}
+.planeta::before{background:radial-gradient(60% 140% at 0% 50%,color-mix(in srgb,var(--materia-luz) 28%,transparent),transparent 70%)}
+.planeta-img{position:static;grid-column:1;width:40px;height:40px}
+.planeta-img img{filter:drop-shadow(0 4px 6px var(--cor-sombra))}
+.planeta-txt{display:contents}
+.planeta-nome,.planeta p,.planeta-guia{display:none}
+.planeta h1{grid-column:2;display:flex;align-items:center;gap:var(--esp-8);font-size:var(--t-destaque);line-height:var(--lh-destaque);padding:0;margin:0;min-width:0}
+.planeta .meta-linha{grid-column:3;flex-direction:column-reverse;align-items:flex-end;gap:var(--esp-4);padding:0;font-size:var(--t-legenda);line-height:var(--lh-legenda);white-space:nowrap}
+.planeta .meta-barra{flex:none;width:96px;height:var(--esp-8)}
+@media (max-width:430px){.planeta h1{font-size:var(--t-corpo);line-height:var(--lh-corpo)}.planeta .meta-barra{width:64px}}
+.etapa-faixa{font-family:var(--fonte-corpo);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);font-weight:700;color:var(--cor-texto-suave);margin:var(--esp-16) auto var(--esp-8);max-width:var(--larg-mapa)}
+.etapa-faixa.agora{position:absolute;width:1px;height:1px;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.rotina.faixa{padding:0;margin:0 auto var(--esp-8);max-width:var(--larg-mapa);overflow:hidden;border-width:1px;border-radius:var(--raio-24)}
+.rotina.faixa summary{display:flex;align-items:center;justify-content:space-between;gap:var(--esp-8);min-height:var(--toque-min);padding:var(--esp-4) var(--esp-16);cursor:pointer;list-style:none}
 .rotina.faixa summary::-webkit-details-marker{display:none}
 .rotina.faixa summary::after{content:"";width:10px;height:10px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(45deg);flex:none;color:var(--cor-texto-suave)}
 .rotina.faixa details[open] summary::after{transform:rotate(-135deg)}
@@ -1441,14 +1437,14 @@ body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 /* topo da fase: faixa sólida com fio e o conteúdo rola por baixo com esmaecimento, nunca cortado seco */
 .lc-topo{background:var(--cor-fundo);border-bottom:1px solid var(--cor-linha);z-index:2}
 .lc-corpo{scroll-padding-top:var(--esp-16);-webkit-mask-image:linear-gradient(to bottom,transparent 0,black var(--esp-16));mask-image:linear-gradient(to bottom,transparent 0,black var(--esp-16));padding-top:var(--esp-16)}
-.voce{scroll-margin-bottom:calc(var(--barra-h) + var(--esp-32))}
+.voce{scroll-margin-bottom:calc(var(--barra-h) + var(--esp-48) + var(--esp-24))}
 /* colorir: mais largo; no computador, folha e ferramentas lado a lado */
 .des-tela{max-width:min(420px,calc((100dvh - 56px - 232px - 24px) * .75))}
 .paleta{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:0;justify-items:center}
 @media (min-width:900px){
-  .desenho-tela .rev-corpo{padding-left:max(var(--esp-16),calc((100% - 880px) / 2))}
-  .des-in{grid-template-columns:minmax(0,1fr) 296px;align-items:start;gap:var(--esp-24)}
-  .des-in .des-tela{max-width:min(560px,calc((100dvh - 56px - 48px) * .75));justify-self:end}
+  .desenho-tela .rev-corpo{padding-left:max(var(--esp-16),calc((100% - 880px) / 2));padding-right:max(var(--esp-16),calc((100% - 880px) / 2))}
+  .des-in{grid-template-columns:min(560px,calc((100dvh - 104px) * .75)) 296px;justify-content:center;align-items:start;gap:var(--esp-24);width:100%;max-width:none}
+  .des-in .des-tela{max-width:none;justify-self:stretch}
   .des-ferramentas{position:sticky;top:var(--esp-16);bottom:auto}
   .des-ferramentas .paleta{grid-template-columns:repeat(5,48px);justify-content:center;gap:var(--esp-8)}
   .des-acoes{grid-template-columns:1fr 1fr}
@@ -1495,6 +1491,46 @@ body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 .linha-mundo .mn{color:var(--cor-superficie)}
 .des-mais{margin:var(--esp-16) 0 0;text-align:center;color:var(--cor-texto-suave);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
 .linha-mundo .mtx b i.agora{background:var(--materia-suave);color:var(--materia-tinta)}
+
+/* etapa do Bobby: cabeçalho enxuto (etapa, progresso e título), para o cenário começar alto na tela */
+.etapa{max-width:var(--larg-mapa)}
+.etapa-cab{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 var(--esp-8);padding:var(--esp-8) var(--esp-16)}
+.etapa-tx{display:contents}
+.etapa-n{grid-column:1;grid-row:1}
+.etapa-prog{grid-column:2;grid-row:1}
+.etapa h3{grid-column:1/-1;grid-row:2;font-size:var(--t-destaque);line-height:var(--lh-destaque)}
+.etapa-cab p{grid-column:1/-1;grid-row:3;display:none}
+@media (min-height:900px){.etapa-cab p{display:block}}
+.tela{padding-top:var(--esp-8)}
+/* avisos de download: um por tela, sem ocupar espaço quando vazios */
+#aviso-baixa-des:empty,#aviso-baixa-gal:empty{display:none}
+#aviso-baixa-des .aviso{line-height:var(--lh-pequeno);text-align:center}
+/* vitrine de looks: a figura tem altura fixa e nunca passa do cartão; nome, selo e botão vêm abaixo, por cima */
+.item-look{display:block;position:relative;height:144px;flex:none;overflow:hidden;border-radius:var(--raio-16)}
+.item-look{text-align:center;line-height:0}
+.item-look>img{display:inline-block;height:100%;width:auto;max-width:100%;object-fit:contain}
+.item-look .bobby-com-item{display:inline-block;position:relative;height:100%}
+.item-look .bobby-com-item>img:not(.item-chapeu){display:block;height:100%;width:auto;max-width:none}
+.item>b,.item>.tipo,.item>.selo,.item>button{position:relative;z-index:1}
+/* ícone de missão: arte ou SVG, sempre 32 px (SVG sem tamanho ocupava a largura toda) */
+.missoes li>svg,.missoes li>.ic-arte{width:32px;height:32px;flex:none}
+/* rótulo do nó: nunca a menos de 8 px da borda da cena nem encostado no vizinho (--nx = distância do nó à borda, em %) */
+.trilha{container-type:inline-size}
+.no .rot{max-width:min(120px,calc(var(--nx,50) * 2cqw - var(--esp-16)),calc(34cqw - var(--esp-8)))}
+/* topo em 360 ou menos: o nome da matéria aparece inteiro (o retrato do Bobby já está na barra de baixo) */
+@media (max-width:380px){.marca .sig{display:none}.marca b{font-size:var(--t-pequeno)}}
+/* prêmio do baú: nome e tipo em duas linhas; o adesivo vira um adesivo de verdade (borda branca, leve inclinação) */
+.folha-lista.premios li>span{display:grid;gap:0;min-width:0}
+.folha-lista.premios li small{font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave);font-weight:var(--peso-forte)}
+.folha-lista.premios li b{font-family:var(--fonte-corpo);font-weight:var(--peso-forte)}
+.premio-ic.adesivo{box-sizing:border-box;padding:var(--esp-4);border-radius:var(--raio-pilula);background:var(--cor-papel);border:3px solid var(--cor-papel);box-shadow:0 0 0 1px var(--cor-linha-forte),var(--sombra-1);transform:rotate(-8deg)}
+/* cena: enquanto a imagem não chega, o céu e o chão da matéria já aparecem (nunca um cartão vazio), e a arte entra com um fade */
+.cena{background:linear-gradient(to bottom,var(--materia-ceu-topo),var(--materia-ceu-horizonte) 62%,var(--materia-chao) 62%)}
+.cena>img.arte{animation:so-opacidade var(--mov-padrao) var(--curva-entra) both}
+@media (prefers-reduced-motion:reduce){.cena>img.arte{animation:none}}
+/* nome do jogador numa linha só, com reticências; o lápis nunca encolhe */
+.planeta .oi-nome{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.planeta .lapis{flex:none}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -5284,7 +5320,7 @@ function usarMateria(m){
   MATERIA=m;
   UNITS=MATERIAS[m].units();TOTAL_LESSONS=MATERIAS[m].total();
   CAP_ATUAL=MATERIAS[m].caps();MISS_ATUAL=MATERIAS[m].miss();
-  S.materia=m;salvar();
+  S.materia=m;S.matEsc=true;salvar();
   $('#nome-materia').textContent=MATERIAS[m].n;
   fecharMaterias();renderTrilha();
   if(typeof audioPrepararMateria==='function')audioPrepararMateria(m);
@@ -5366,7 +5402,7 @@ function normalizaDesenhos(x,feitas){
 }
 function colecaoVazia(){return {adesivos:[],ornamentos:[],medalhas:[],poses:[],molduras:[],trilhas:[],constelacao:[]};}
 function estadoVazio(){
-  return {nome:'',faixa:'f78',materia:'mat',
+  return {nome:'',faixa:'f78',materia:'mat',matEsc:false,
     xp:0,moedas:0,acertosTotal:0,melhorCombo:0,
     feitas:{},errados:{},comprado:[],look:{},desenhos:desenhosVazios(),
     ofensiva:ofensivaNova(),diario:diarioVazio(''),espera:null,
@@ -5458,6 +5494,7 @@ function estadoDe(dados){
   s.nome=nomeSeguro(d.nome,18);
   s.faixa=FAIXAS.indexOf(d.faixa)>=0?d.faixa:'f78';
   s.materia=['mat','pt','en'].indexOf(d.materia)>=0?d.materia:'mat';
+  s.matEsc=d.matEsc===true;
   s.xp=intDe(d.xp,0,1e9,0);s.moedas=intDe(d.moedas,0,1e9,0);
   s.acertosTotal=intDe(d.acertosTotal,0,1e9,0);s.melhorCombo=intDe(d.melhorCombo,0,1e6,0);
   const f=objDe(d.feitas);Object.keys(f).forEach(k=>{const e=estrelasDe(f[k]);if(e>0)s.feitas[k]=e;});
@@ -5613,7 +5650,13 @@ function usarPerfil(i){
   UNITS=MATERIAS[MATERIA].units();TOTAL_LESSONS=MATERIAS[MATERIA].total();
   CAP_ATUAL=MATERIAS[MATERIA].caps();MISS_ATUAL=MATERIAS[MATERIA].miss();
   $('#nome-materia').textContent=MATERIAS[MATERIA].n;
-  renderTrilha();telaMaterias();
+  /* quem já escolheu um planeta (ou já jogou) volta direto para o mapa dele; o seletor só abre na primeira vez */
+  renderTrilha();
+  if(!(S.matEsc||Object.keys(S.feitas||{}).length>0))telaMaterias();
+  else{   /* o que usarMateria faria ao escolher: voz da matéria e entrada do dia (bilhete, aviso da migração) */
+    if(typeof audioPrepararMateria==='function')audioPrepararMateria(MATERIA);
+    if(typeof mostrarEntradaDoDia==='function')mostrarEntradaDoDia();
+  }
 }
 function novoPerfil(nome,cor){
   const novo=estadoVazio();
@@ -6205,12 +6248,12 @@ function noAtualDaEtapa(u){
   for(let li=0;li<u.lessons.length;li++)if(!S.feitas[u.lessons[li].id])return li;
   return 5;   /* tudo feito: ele espera na revisão */
 }
-function cenaHTML(u,k){
+function cenaHTML(u,k,agora){
   const cena=cenaDaEtapa(MATERIA,u.n),pl=PLANETAS[MATERIA];
   if(cena){
     const ant=REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n];
     return '<div class="cena" data-k="'+k+'" style="--rev:'+revPct(ant)+'">'+
-      imgArte(cena.apagado,{cls:'cena-base'})+imgArte(cena.completo,{cls:'cena-luz'});
+      imgArte(cena.apagado,{cls:'cena-base',eager:!!agora})+imgArte(cena.completo,{cls:'cena-luz',eager:!!agora});
   }
   /* sem arte da etapa: o planeta no céu da matéria; apagado por filtro, aceso pela mesma revelação */
   return '<div class="cena sem-arte" data-k="'+k+'" style="--rev:'+revPct(REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n])+'">'+
@@ -6231,7 +6274,7 @@ function etapaHTML(u,ui,prox){
   h+='<header class="etapa-cab"><div class="etapa-tx"><span class="etapa-n">Etapa '+u.n+'</span>'+
      '<h3 id="etapa-t-'+(ui+1)+'">'+tituloEmDuasLinhas(u.title)+'</h3><p>'+escapa(u.sub)+'</p></div>'+
      '<span class="etapa-prog'+(completo?' ok':'')+'">'+(completo?IC.certo+' Completa':feitasN+' de '+u.lessons.length+' fases')+'</span></header>';
-  h+=cenaHTML(u,feitasN);
+  h+=cenaHTML(u,feitasN,ehAtual);
   h+='<div class="trilha">'+trilhaPontos();
   u.lessons.forEach((l,li)=>{
     const ok=S.feitas[l.id],abr=liberada(ui,li),atual=ehAtual&&atualNo===li;
@@ -6240,16 +6283,16 @@ function etapaHTML(u,ui,prox){
     const proxTrava=ehAtual&&!abr&&li===atualNo+1;
     if(!abr)cls.push(proxTrava?'trava-prox':'trava-longe');
     const est=ok?estrelasDaFase(l.id):0;
-    h+='<div class="'+cls.join(' ')+'" style="left:'+NOS[li][0]+'%;top:'+NOS[li][1]+'%">'+
-       '<button class="bt" data-u="'+ui+'" data-l="'+li+'"'+(abr?'':' disabled aria-disabled="true"')+
+    h+='<div class="'+cls.join(' ')+'" style="left:'+NOS[li][0]+'%;top:'+NOS[li][1]+'%;--nx:'+Math.min(NOS[li][0],100-NOS[li][0])+'">'+
+       '<button class="bt" data-u="'+ui+'" data-l="'+li+'"'+(abr?'':' aria-disabled="true"')+
        ' aria-label="Fase '+(li+1)+': '+escapa(l.title)+(ok?'. Concluída com '+est+(est===1?' estrela':' estrelas'):(atual?'. Sua próxima fase':''))+'">'+
        (abr?'<b>'+(li+1)+'</b>':(proxTrava?IC.cadeado:''))+'</button>'+
        '<span class="estrelas" aria-hidden="true">'+(ok?estrelasSVG(est):'')+'</span>'+
        '<span class="rot">'+escapa(nomeCurto(l.title))+'</span></div>';
   });
   const cr=['no','revisao-no'];if(!completo)cr.push('trava','trava-longe');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
-  h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%">'+
-     '<button class="bt" data-rev="'+ui+'"'+(completo?'':' disabled aria-disabled="true"')+
+  h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%;--nx:'+Math.min(NOS[5][0],100-NOS[5][0])+'">'+
+     '<button class="bt" data-rev="'+ui+'"'+(completo?'':' aria-disabled="true"')+
      ' aria-label="Revisão da etapa '+u.n+(completo?'':'. Termine as 5 fases para abrir')+'">'+(completo?IC.medalha:'')+'</button>'+
      '<span class="estrelas" aria-hidden="true">'+(estRev?estrelasSVG(estRev):'')+'</span>'+
      '<span class="rot">Revisão'+(completo&&nErr?' · '+nErr+' para refazer':'')+'</span></div>';
@@ -6287,6 +6330,15 @@ function animarMapa(prox){
   }
 }
 
+/* aviso curto, no mesmo lugar do aviso de voz (acima da barra), que some sozinho */
+function avisoNo(txt){
+  let a=document.querySelector('#aviso-no');
+  if(!a){a=document.createElement('div');a.id='aviso-no';a.setAttribute('role','status');document.body.appendChild(a);}
+  a.className='aviso-voz';a.innerHTML='<span>'+escapa(txt)+'</span>';
+  clearTimeout(a._t);clearTimeout(a._t2);
+  a._t=setTimeout(()=>{a.classList.add('sai');},2600);
+  a._t2=setTimeout(()=>{if(a.parentNode)a.parentNode.removeChild(a);},3100);
+}
 /* ---------- tela inicial ---------- */
 function pintarTopo(){
   document.body.dataset.materia=MATCOD[MATERIA]||'mat';
@@ -6313,29 +6365,30 @@ function renderTrilha(){
   const frase=feitas()===0?'Bem-vindo ao meu universo! Cada planeta é uma matéria e cada etapa tem 5 fases. Escolha por onde começar.'
     :(p?'Sua próxima fase é “'+escapa(UNITS[p[0]].lessons[p[1]].title)+'”. Bora?'
        :'Você terminou este planeta inteiro! Pode refazer as fases ou visitar outro planeta lá em cima.');
-  const guia=(S.look&&S.look.companheiro)||pl.guia;
   const curta=feitas()===0?'Escolha por onde começar.':(p?'Próxima fase: “'+escapa(nomeCurto(UNITS[p[0]].lessons[p[1]].title))+'”.':'Você terminou este planeta inteiro!');
   let h='<section class="planeta" aria-label="Planeta '+pl.n+'">'+
     '<div class="planeta-img">'+imgArte(pl.img,{eager:true})+'</div>'+
     '<div class="planeta-txt"><span class="planeta-nome">Planeta '+pl.n+' · '+MATERIAS[MATERIA].n+'</span>'+
-    '<h1>Oi, '+nome+' <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1>'+
+    '<h1><span class="oi-nome">Oi, '+nome+'</span> <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1>'+
     '<p>'+curta+'</p>'+
     '<div class="meta-linha"><div class="meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="'+TOTAL_LESSONS+'" aria-valuenow="'+feitas()+
     '" aria-label="Fases deste planeta"><i style="width:'+pct+'%"></i></div><span>'+feitas()+' de '+TOTAL_LESSONS+' fases</span></div></div>'+
-    '<div class="planeta-guia">'+imgArte(guia+'-p01',{})+'</div></section>'+rotinaHTML();
+    '</section>'+rotinaHTML();
   /* o mapa vem primeiro: a etapa onde o Bobby está sobe para o topo da lista, e as outras seguem na ordem de sempre */
   const ordem=UNITS.map((u,i)=>i);
   if(p){ordem.splice(ordem.indexOf(p[0]),1);ordem.unshift(p[0]);}
   ordem.forEach((ui,k)=>{
-    if(p&&k===0)h+='<h2 class="etapa-faixa">Sua etapa agora</h2>';
+    if(p&&k===0)h+='<h2 class="etapa-faixa agora">Sua etapa agora</h2>';
     if(p&&k===1)h+='<h2 class="etapa-faixa">Outras etapas</h2>';
     h+=etapaHTML(UNITS[ui],ui,p);
   });
   $('#tela').innerHTML=h;
   const en=$('#editar-nome');if(en)en.addEventListener('click',telaPerfil);
   ligarRotina();
-  $('#tela').querySelectorAll('.bt:not([disabled])').forEach(b=>
+  /* nó trancado: continua no caminho do teclado (aria-disabled, não disabled) e explica o que falta em vez de ficar mudo */
+  $('#tela').querySelectorAll('.bt').forEach(b=>
     b.addEventListener('click',()=>{
+      if(b.getAttribute('aria-disabled')==='true'){avisoNo(b.dataset.rev!==undefined?'Termine as 5 fases da etapa para abrir a revisão.':'Termine a fase anterior para abrir esta.');return;}
       if(b.dataset.rev!==undefined)abrirRevisaoMundo(+b.dataset.rev);
       else abrirLicao(+b.dataset.u,+b.dataset.l);
     }));
@@ -7316,7 +7369,7 @@ const perguntasMeta=()=>Math.max(1,Math.round(S.config.metaMin*60/segPorPergunta
 
 /* ---------- recompensas do baú (tabela dos dias 1 a 30, só cosméticos) ----------
    k: adesivo | moedas | ornamento | roupa-p | roupa-g | roupa-ex | medalha | pose | moldura | trilha */
-const ADESIVOS=['Primeira visita','Estrela cadente','Cometa curioso','Lua sorridente','Foguetinho','Planeta de anéis','Aurora',
+const ADESIVOS=['Estrela de boas-vindas','Estrela cadente','Cometa curioso','Lua sorridente','Foguetinho','Planeta de anéis','Aurora',
   'Nave exploradora','Satélite amigo','Galáxia espiral','Urso astronauta','Meteoro veloz','Sol dourado','Nebulosa rosa',
   'Constelação do Urso','Estrela do mapa','Lanterna espacial','Astronauta mirim','Cristal azul','Planeta verde',
   'Cometa de gelo','Anel prateado','Lua cheia','Foguete listrado','Estrela do norte','Mapa do tesouro','Bússola',
@@ -7324,7 +7377,7 @@ const ADESIVOS=['Primeira visita','Estrela cadente','Cometa curioso','Lua sorrid
 const ORNAMENTOS=['Carimbo de estrela','Carimbo de lua','Carimbo de foguete','Carimbo de planeta','Carimbo de cometa',
   'Moldura de estrelas','Borda de nuvens','Faixa de constelação','Carimbo de nave','Carimbo de sol'];
 const BAU_TABELA={
-  1:[['adesivo','Primeira visita']],2:[['moedas',10]],3:[['adesivo'],['medalha','3 dias']],4:[['ornamento']],5:[['roupa-p']],
+  1:[['adesivo','Estrela de boas-vindas']],2:[['moedas',10]],3:[['adesivo'],['medalha','3 dias']],4:[['ornamento']],5:[['roupa-p']],
   6:[['moedas',10]],7:[['medalha','1 semana'],['pose','Pose de comemoração'],['moldura','Moldura de perfil: semana']],
   8:[['adesivo']],9:[['ornamento']],10:[['roupa-p']],11:[['moedas',15]],12:[['adesivo']],13:[['ornamento']],
   14:[['medalha','2 semanas'],['roupa-g'],['adesivo','Adesivo raro: cometa dourado']],
@@ -7912,6 +7965,37 @@ function apagarTudoPasso2(erro){
   });
 }
 /* ---------- voz e som (voz gravada: só liga/desliga, velocidade e pacotes para jogar sem internet) ---------- */
+/* ---------- jogar sem internet: arte e vozes ---------- */
+const ARTE_CACHE='bobby-arte-v1';
+const arteLista=()=>Object.keys(typeof ATIVOS==='object'?ATIVOS:{}).map(k=>ARTE_BASE+ATIVOS[k][0]);
+/* quantas imagens já estão guardadas neste aparelho (para dizer a verdade na tela) */
+async function arteContarGuardadas(){
+  try{
+    if(typeof caches==='undefined')return 0;
+    const c=await caches.open(ARTE_CACHE),lista=arteLista();let n=0;
+    for(const u of lista){if(await c.match(u))n++;}
+    return n;
+  }catch(e){return 0;}
+}
+/* guarda TODA a arte no cache da arte, 4 por vez, com progresso. As que já estão guardadas não baixam de novo. */
+async function arteGuardarTudo(progresso){
+  const lista=arteLista();
+  if(typeof caches==='undefined'||typeof fetch!=='function')return {ok:false,falhas:0,total:lista.length,semCache:true};
+  const cache=await caches.open(ARTE_CACHE);
+  let i=0,feitos=0,falhas=0;
+  const trabalha=async()=>{
+    while(i<lista.length){
+      const u=lista[i++];
+      try{
+        if(!(await cache.match(u))){const r=await fetch(u);if(!r.ok)throw new Error('HTTP '+r.status);await cache.put(u,r);}
+      }catch(e){falhas++;}
+      feitos++;
+      if(progresso)try{progresso(feitos,lista.length);}catch(e){}
+    }
+  };
+  await Promise.all([trabalha(),trabalha(),trabalha(),trabalha()]);
+  return {ok:falhas===0,falhas:falhas,total:lista.length};
+}
 function telaVoz(){
   let h='<div class="perfil-in">';
   h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
@@ -7939,7 +8023,8 @@ function telaVoz(){
        '<span class="sub-l">'+(audioIndiceCheio()?audioMB(audioTamanhoPacote(p)):'tamanho indisponível')+' · '+(ok?'guardado neste aparelho':'ainda não guardado')+'</span></div></div>';
   });
   h+='</div>';
-  h+='<div class="perfil-bts"><button class="btn laranja" id="baixar-vozes">'+IC.baixar+' Guardar todas as vozes</button></div><div id="voz-aviso"></div>';
+  h+='<p class="galeria-intro" id="arte-estado" role="status">Conferindo as imagens guardadas...</p>';
+  h+='<div class="perfil-bts"><button class="btn laranja" id="baixar-vozes">'+IC.baixar+' Guardar tudo para jogar sem internet</button></div><div id="voz-aviso" role="status" aria-live="polite"></div>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-voz">Voltar ao perfil</button></div></div>';
 
   $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-voz2" aria-label="Voltar">'+
@@ -7958,17 +8043,23 @@ function telaVoz(){
   }
   const t=$('#vel-teste');
   if(t)t.addEventListener('click',()=>falarPedido('Isso aí!'));
+  const total=arteLista().length;
+  arteContarGuardadas().then(n=>{const e=$('#arte-estado');if(e)e.textContent='Imagens guardadas neste aparelho: '+n+' de '+total+(n<total?'. Toque no botão abaixo para guardar o resto.':'. Tudo pronto para jogar sem internet.');});
   const bx=$('#baixar-vozes');
   if(bx)bx.addEventListener('click',async()=>{
     bx.disabled=true;
     const av=$('#voz-aviso');
-    await audioIniciar();
+    const diz=t=>{av.innerHTML='<div class="aviso-ok">'+t+'</div>';};
     let falhas=0;
+    const ra=await arteGuardarTudo((a2,b2)=>diz('Guardando as imagens: '+a2+' de '+b2));
+    if(!ra.ok)falhas+=ra.falhas||1;
+    await audioIniciar();
     for(const p of ['core','mat','pt','en']){
-      const r2=await audioBaixarPacote(p,(a,b)=>{av.innerHTML='<div class="aviso-ok">Guardando '+NOME_PACOTE[p]+': '+a+' de '+b+'</div>';},false);
+      const r2=await audioBaixarPacote(p,(a2,b2)=>diz('Guardando as vozes de '+NOME_PACOTE[p]+': '+a2+' de '+b2),false);
       if(r2&&!r2.ok)falhas++;
     }
-    av.innerHTML='<div class="aviso-ok">'+(falhas?'Alguns arquivos não baixaram. Tente de novo com internet.':'Pronto! As vozes estão guardadas neste aparelho.')+'</div>';
+    diz(falhas?'Alguns arquivos não baixaram. Tente de novo com internet.':'Pronto! Imagens e vozes estão guardadas neste aparelho.');
+    arteContarGuardadas().then(n=>{const e=$('#arte-estado');if(e)e.textContent='Imagens guardadas neste aparelho: '+n+' de '+total+(n<total?'. Toque no botão abaixo para guardar o resto.':'. Tudo pronto para jogar sem internet.');});
     registrarEvento('config_mudou',{chave:'vozes_offline'});
     bx.disabled=false;
   });
@@ -8304,7 +8395,7 @@ function abrirGaleria(destaque){
   let h='<p class="galeria-intro">Cada etapa concluída dá um desenho para colorir na tela ou imprimir em folha A4. '+
     'Você tem <b>'+ganhos.length+' de '+cat.length+'</b>.</p>'+
     '<div class="gal-acoes"><button class="btn-sec" id="imprimir-todos"'+(ganhos.filter(d=>ativo(d.id)).length?'':' disabled')+'>'+IC.impressora+' Imprimir meus desenhos</button></div>'+
-    '<div id="aviso-baixa"></div>';
+    '<div id="aviso-baixa-gal" role="status" aria-live="polite"></div>';
   ['mat','pt','en'].forEach(m=>{
     const pl=PLANETAS[m],lista=cat.filter(d=>d.matApp===m);
     h+='<section class="des-planeta" data-materia="'+COD_DESENHO[m]+'"><h2><span class="des-pl-img">'+imgArte(pl.img,{})+'</span>Planeta '+pl.n+
@@ -8335,7 +8426,12 @@ function fecharGaleria(){
   if(!$('#licao').classList.contains('on'))document.body.style.overflow='';
   pintarBarra();
 }
-function avisoBaixa(t){const a=$('#aviso-baixa');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
+/* dois avisos, dois ids: o da galeria e o da tela de colorir (ficam um sobre o outro). Vale o da tela que está por cima. */
+function avisoBaixa(t){
+  const des=$('#desenho-tela'),porCima=des&&des.classList.contains('on');
+  const a=$(porCima?'#aviso-baixa-des':'#aviso-baixa-gal');
+  if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';
+}
 
 /* ---------- abrir e colorir ---------- */
 function paletaDeTinta(){
@@ -8363,10 +8459,11 @@ function abrirDesenho(id){
   }else{
     corpo='<div class="des-tela"><canvas id="cv-des" role="img" aria-label="Desenho para colorir: '+escapa(d.nome)+'. Toque numa área para pintar."></canvas></div>'+
       '<div class="des-ferramentas"><div class="paleta" role="radiogroup" aria-label="Cores"></div>'+
+      '<div id="aviso-baixa-des" role="status" aria-live="polite"></div>'+
       '<div class="des-acoes"><button class="btn-sec" id="des-desfazer">'+IC.desfazer+' Desfazer</button>'+
       '<button class="btn-sec" id="des-limpar">Recomeçar</button>'+
       '<button class="btn-sec" id="des-imprimir">'+IC.impressora+' Imprimir</button>'+
-      '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar</button></div></div><div id="aviso-baixa"></div>';
+      '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar</button></div></div>';
   }
   tela.innerHTML='<div class="rev-topo"><button class="icobtn" id="fechar-des" aria-label="Voltar aos desenhos">'+IC.volta+'</button>'+
     '<h2>'+escapa(d.nome)+'</h2></div><div class="rev-corpo"><div class="lc-in des-in">'+corpo+'</div></div>';
@@ -8662,9 +8759,10 @@ function bauCena(aberto){
     (grande?imgArte(aberto?'bau-aberto':'bau-fechado',{cls:'bau-img',eager:true}):IC.bauSvg)+'</div></div>';
 }
 /* cada prêmio do baú ganha a arte 3D certa (adesivo vira estrela, medalha é medalha, moeda é moeda) */
+const ROTULO_PREMIO={adesivo:'Adesivo novo',medalha:'Medalha nova',ornamento:'Para colorir',pose:'Pose nova',moldura:'Moldura nova',trilha:'Trilha nova'};
 function iconeDoPremio(k){
   const id={moedas:'rec-moeda',medalha:'rec-medalha',adesivo:'rec-estrela',ornamento:'rec-estrela',pose:'rec-trofeu',moldura:'rec-medalha',trilha:'rec-estrela'}[k]||'rec-presente';
-  return ativo(id)?imgArte(id,{cls:'ic-arte premio-ic',eager:true}):'';
+  return ativo(id)?imgArte(id,{cls:'ic-arte premio-ic'+(k==='adesivo'?' adesivo':''),eager:true}):'';
 }
 function mostrarBau(){
   garantirDia();
@@ -8679,7 +8777,7 @@ function mostrarBau(){
 function mostrarBauAberto(){
   const b=S.diario.bau;
   abrirFolha('<div class="folha-in">'+bauCena(true)+'<h2>Você ganhou</h2>'+
-    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+iconeDoPremio(i.k)+'<span>'+escapa(i.n)+'</span></li>').join('')+'</ul>'+
+    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+iconeDoPremio(i.k)+'<span>'+(ROTULO_PREMIO[i.k]?'<small>'+ROTULO_PREMIO[i.k]+'</small>':'')+'<b>'+escapa(i.n)+'</b></span></li>').join('')+'</ul>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Continuar</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{
     fecharFolha();pintarTopo();
@@ -9011,7 +9109,7 @@ document.addEventListener('keydown',e=>{
 lerStore();
 CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();
 if(STORE.perfis.length===0){telaPerfis();setTimeout(()=>pedirNome(true),300);}
-else if(STORE.perfis.length===1&&STORE.atual>=0){usarPerfil(STORE.atual);}
+else if(STORE.perfis.length===1){usarPerfil(0);}   /* um jogador só: direto para o mapa, sem 'Quem vai jogar?' */
 else{telaPerfis();if(STORE.atual>=0){S=estadoDe(STORE.perfis[STORE.atual].dados);S.nome=STORE.perfis[STORE.atual].nome;garantirDia();}
   CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();renderTrilha();}
 iniciarCiclo();

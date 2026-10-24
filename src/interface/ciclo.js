@@ -17,7 +17,7 @@ const perguntasMeta=()=>Math.max(1,Math.round(S.config.metaMin*60/segPorPergunta
 
 /* ---------- recompensas do baú (tabela dos dias 1 a 30, só cosméticos) ----------
    k: adesivo | moedas | ornamento | roupa-p | roupa-g | roupa-ex | medalha | pose | moldura | trilha */
-const ADESIVOS=['Primeira visita','Estrela cadente','Cometa curioso','Lua sorridente','Foguetinho','Planeta de anéis','Aurora',
+const ADESIVOS=['Estrela de boas-vindas','Estrela cadente','Cometa curioso','Lua sorridente','Foguetinho','Planeta de anéis','Aurora',
   'Nave exploradora','Satélite amigo','Galáxia espiral','Urso astronauta','Meteoro veloz','Sol dourado','Nebulosa rosa',
   'Constelação do Urso','Estrela do mapa','Lanterna espacial','Astronauta mirim','Cristal azul','Planeta verde',
   'Cometa de gelo','Anel prateado','Lua cheia','Foguete listrado','Estrela do norte','Mapa do tesouro','Bússola',
@@ -25,7 +25,7 @@ const ADESIVOS=['Primeira visita','Estrela cadente','Cometa curioso','Lua sorrid
 const ORNAMENTOS=['Carimbo de estrela','Carimbo de lua','Carimbo de foguete','Carimbo de planeta','Carimbo de cometa',
   'Moldura de estrelas','Borda de nuvens','Faixa de constelação','Carimbo de nave','Carimbo de sol'];
 const BAU_TABELA={
-  1:[['adesivo','Primeira visita']],2:[['moedas',10]],3:[['adesivo'],['medalha','3 dias']],4:[['ornamento']],5:[['roupa-p']],
+  1:[['adesivo','Estrela de boas-vindas']],2:[['moedas',10]],3:[['adesivo'],['medalha','3 dias']],4:[['ornamento']],5:[['roupa-p']],
   6:[['moedas',10]],7:[['medalha','1 semana'],['pose','Pose de comemoração'],['moldura','Moldura de perfil: semana']],
   8:[['adesivo']],9:[['ornamento']],10:[['roupa-p']],11:[['moedas',15]],12:[['adesivo']],13:[['ornamento']],
   14:[['medalha','2 semanas'],['roupa-g'],['adesivo','Adesivo raro: cometa dourado']],

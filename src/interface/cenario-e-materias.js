@@ -15,7 +15,7 @@ function usarMateria(m){
   MATERIA=m;
   UNITS=MATERIAS[m].units();TOTAL_LESSONS=MATERIAS[m].total();
   CAP_ATUAL=MATERIAS[m].caps();MISS_ATUAL=MATERIAS[m].miss();
-  S.materia=m;salvar();
+  S.materia=m;S.matEsc=true;salvar();
   $('#nome-materia').textContent=MATERIAS[m].n;
   fecharMaterias();renderTrilha();
   if(typeof audioPrepararMateria==='function')audioPrepararMateria(m);

@@ -50,7 +50,7 @@ function abrirGaleria(destaque){
   let h='<p class="galeria-intro">Cada etapa concluída dá um desenho para colorir na tela ou imprimir em folha A4. '+
     'Você tem <b>'+ganhos.length+' de '+cat.length+'</b>.</p>'+
     '<div class="gal-acoes"><button class="btn-sec" id="imprimir-todos"'+(ganhos.filter(d=>ativo(d.id)).length?'':' disabled')+'>'+IC.impressora+' Imprimir meus desenhos</button></div>'+
-    '<div id="aviso-baixa"></div>';
+    '<div id="aviso-baixa-gal" role="status" aria-live="polite"></div>';
   ['mat','pt','en'].forEach(m=>{
     const pl=PLANETAS[m],lista=cat.filter(d=>d.matApp===m);
     h+='<section class="des-planeta" data-materia="'+COD_DESENHO[m]+'"><h2><span class="des-pl-img">'+imgArte(pl.img,{})+'</span>Planeta '+pl.n+
@@ -81,7 +81,12 @@ function fecharGaleria(){
   if(!$('#licao').classList.contains('on'))document.body.style.overflow='';
   pintarBarra();
 }
-function avisoBaixa(t){const a=$('#aviso-baixa');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
+/* dois avisos, dois ids: o da galeria e o da tela de colorir (ficam um sobre o outro). Vale o da tela que está por cima. */
+function avisoBaixa(t){
+  const des=$('#desenho-tela'),porCima=des&&des.classList.contains('on');
+  const a=$(porCima?'#aviso-baixa-des':'#aviso-baixa-gal');
+  if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';
+}
 
 /* ---------- abrir e colorir ---------- */
 function paletaDeTinta(){
@@ -109,10 +114,11 @@ function abrirDesenho(id){
   }else{
     corpo='<div class="des-tela"><canvas id="cv-des" role="img" aria-label="Desenho para colorir: '+escapa(d.nome)+'. Toque numa área para pintar."></canvas></div>'+
       '<div class="des-ferramentas"><div class="paleta" role="radiogroup" aria-label="Cores"></div>'+
+      '<div id="aviso-baixa-des" role="status" aria-live="polite"></div>'+
       '<div class="des-acoes"><button class="btn-sec" id="des-desfazer">'+IC.desfazer+' Desfazer</button>'+
       '<button class="btn-sec" id="des-limpar">Recomeçar</button>'+
       '<button class="btn-sec" id="des-imprimir">'+IC.impressora+' Imprimir</button>'+
-      '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar</button></div></div><div id="aviso-baixa"></div>';
+      '<button class="btn-sec" id="des-salvar">'+IC.baixar+' Salvar</button></div></div>';
   }
   tela.innerHTML='<div class="rev-topo"><button class="icobtn" id="fechar-des" aria-label="Voltar aos desenhos">'+IC.volta+'</button>'+
     '<h2>'+escapa(d.nome)+'</h2></div><div class="rev-corpo"><div class="lc-in des-in">'+corpo+'</div></div>';

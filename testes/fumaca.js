@@ -67,7 +67,7 @@ async function main() {
     const cdp = (method, params) => new Promise((ok, no) => { const i = ++id; pend.set(i, { ok, no }); ws.send(JSON.stringify({ id: i, method, params: params || {} })); });
     const js = async (expr) => {
       const r = await cdp('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
-      if (r.exceptionDetails) throw new Error('JS: ' + (r.exceptionDetails.exception && r.exceptionDetails.exception.description || r.exceptionDetails.text));
+      if (r.exceptionDetails) throw new Error('JS: ' + (r.exceptionDetails.exception && r.exceptionDetails.exception.description || r.exceptionDetails.text) + ' <= ' + String(expr).slice(0, 90));
       return r.result.value;
     };
     await cdp('Runtime.enable'); await cdp('Log.enable'); await cdp('Page.enable'); await cdp('Network.enable');
@@ -136,6 +136,43 @@ async function main() {
       const bar = await js("Array.from(document.querySelectorAll('.barra-baixo button')).map(b=>Math.round(b.getBoundingClientRect().height))");
       if (new Set(bar).size > 1) problemas.push(rot + ': itens da barra com alturas diferentes ' + bar.join(','));
       feito.push(rot + ': topo com ofensiva, moedas e som a vista');
+
+      /* 1c) PRIMEIRA DOBRA = O MAPA COM O BOBBY (4a revisao, 24/10/2026). Jogador novo, mapa sem rolar: o cenario da etapa atual comeca
+         acima de y=300 e o primeiro no e o Bobby aparecem sem rolar (390x844). Em tela mais baixa (360x640) a propria tela rola ate o Bobby e
+         conferimos que ele fica acima da barra. */
+      {
+        await js("usarMateria('mat');fecharFolha();document.querySelector('#modal').classList.remove('on');window.scrollTo(0,0);0"); await dorme(500);
+        const medeDobra = () => js("(()=>{const r=s=>{const e=document.querySelector(s);if(!e)return null;const b=e.getBoundingClientRect();return {t:Math.round(b.top),b:Math.round(b.bottom),l:Math.round(b.left),r:Math.round(b.right)}};return {cena:r('.etapa .cena'),no:r('.no.atual .bt'),voce:r('.voce'),barra:r('.barra-baixo'),ih:innerHeight}})()");
+        await js("window.scrollTo(0,0);0"); await dorme(150);
+        const d0 = await medeDobra();
+        if (!d0.cena || !d0.no || !d0.voce) problemas.push(rot + ' primeira dobra: faltou cenario, no atual ou Bobby ' + JSON.stringify(d0));
+        else {
+          if (d0.cena.t >= 300) problemas.push(rot + ' primeira dobra: o cenario comeca em y=' + d0.cena.t + ' (precisa ser menor que 300)');
+          if (medidas.height >= 800 && medidas.mobile && (d0.no.b > d0.barra.t + 1 || d0.voce.b > d0.barra.t + 1)) problemas.push(rot + ' primeira dobra sem rolar: no (y ' + d0.no.t + '..' + d0.no.b + ') ou Bobby (y ' + d0.voce.t + '..' + d0.voce.b + ') escondido pela barra em y=' + d0.barra.t);
+          if (medidas.height >= 800 && medidas.mobile && (d0.no.t >= d0.ih || d0.voce.t >= d0.ih)) problemas.push(rot + ' primeira dobra: no ou Bobby abaixo da janela (' + d0.no.t + ', ' + d0.voce.t + ' de ' + d0.ih + ')');
+        }
+        await js("renderTrilha.jaMostrou=false;renderTrilha();0"); await dorme(500);
+        const d1 = await medeDobra();
+        if (d1.no && (d1.no.t >= d1.ih || d1.no.b > d1.barra.t + 1 || d1.voce.b > d1.barra.t + 1 || d1.no.b <= 0)) problemas.push(rot + ' primeira dobra apos a rolagem do app: no (y ' + d1.no.t + '..' + d1.no.b + ') ou Bobby (' + d1.voce.t + '..' + d1.voce.b + ') fora da area visivel (barra em y=' + d1.barra.t + ')');
+        await shot0('dobra-mapa-' + nomeTela);
+        feito.push(rot + ': primeira dobra sem rolar: cenario y=' + d0.cena.t + ', 1o no y=' + d0.no.t + '..' + d0.no.b + ', Bobby y=' + d0.voce.t + '..' + d0.voce.b + ' | apos a rolagem do app: no y=' + d1.no.t + ', Bobby y=' + d1.voce.t);
+        // uma unica coluna: planeta, rotina e etapa com a mesma esquerda e largura
+        const col = await js("(()=>{const r=s=>{const b=document.querySelector(s).getBoundingClientRect();return [Math.round(b.left),Math.round(b.width)]};return [r('.planeta'),r('.rotina'),r('.etapa')]})()");
+        if (col.some((c) => Math.abs(c[0] - col[0][0]) > 1 || Math.abs(c[1] - col[0][1]) > 1 || c[1] > 480)) problemas.push(rot + ' mapa: colunas diferentes (planeta, rotina, etapa) ' + JSON.stringify(col));
+        // rotulos dos nos: pelo menos 8 px da borda da cena e sem sobrepor o vizinho
+        const rot8 = await js("(()=>{const ruins=[];document.querySelectorAll('.etapa').forEach((et,k)=>{if(k>2)return;const c=et.querySelector('.cena').getBoundingClientRect();const rs=Array.from(et.querySelectorAll('.no')).filter(n=>getComputedStyle(n.querySelector('.rot')).display!=='none').map(n=>({n:n,b:n.querySelector('.rot').getBoundingClientRect(),t:n.querySelector('.rot').textContent}));rs.forEach(a=>{if(a.b.left<c.left+7.5||a.b.right>c.right-7.5)ruins.push('borda '+a.t+' '+Math.round(a.b.left-c.left)+'/'+Math.round(c.right-a.b.right));rs.forEach(z=>{if(a!==z&&a.b.left<z.b.right&&z.b.left<a.b.right&&a.b.top<z.b.bottom&&z.b.top<a.b.bottom)ruins.push('encosta '+a.t+' em '+z.t)})})});return ruins})()");
+        if (rot8.length) problemas.push(rot + ' rotulos dos nos: ' + [...new Set(rot8)].slice(0, 5).join(' | '));
+        // nome da materia inteiro no topo
+        const nm = await js("(()=>{const e=document.querySelector('#nome-materia');return {sw:e.scrollWidth,cw:e.clientWidth}})()");
+        if (nm.sw > nm.cw + 1) problemas.push(rot + ' topo: o nome da materia esta cortado (' + nm.sw + ' > ' + nm.cw + ')');
+        // no trancado: aria-disabled de verdade, entra no caminho do teclado e explica ao ser tocado
+        const tr = await js("(()=>{const b=document.querySelector('.no.trava-prox .bt');if(!b)return null;b.click();return {aria:b.getAttribute('aria-disabled'),dis:b.disabled,foco:b.tabIndex>=0,aviso:!!document.querySelector('#aviso-no')}})()");
+        if (!tr || tr.aria !== 'true' || tr.dis || !tr.foco || !tr.aviso) problemas.push(rot + ' no trancado: ' + JSON.stringify(tr));
+        // cena com cor de fundo enquanto a imagem nao chega
+        const fundo = await js("getComputedStyle(document.querySelector('.cena')).backgroundImage");
+        if (!/gradient/.test(fundo)) problemas.push(rot + ' cena sem fundo de reserva enquanto a imagem carrega');
+        await js("(()=>{const a=document.querySelector('#aviso-no');if(a)a.remove();window.scrollTo(0,0)})()");
+      }
 
       /* 2) joga a primeira fase de cada materia, clicando nos botoes de verdade */
       for (const mat of ['mat', 'pt', 'en']) {
@@ -221,7 +258,7 @@ async function main() {
         const quebradas = async () => JSON.parse(await js("JSON.stringify(Array.from(document.querySelectorAll('img.arte')).filter(i=>i.complete&&i.naturalWidth===0&&!i.classList.contains('falhou')===false||(i.complete&&i.naturalWidth===0)).map(i=>i.src.slice(-40)))"));
         const semRolagem = async (nome) => { const l = await js('({sw:document.documentElement.scrollWidth,iw:innerWidth})'); if (l.sw > l.iw + 1) problemas.push(rot + ' ' + nome + ': rolagem horizontal ' + l.sw + ' > ' + l.iw); };
         await js("usarMateria('mat');fecharFolha();document.querySelector('#bb-mapa').click();0"); await dorme(600);
-        const mapa = await js("({etapas:document.querySelectorAll('.etapa').length,nos:document.querySelectorAll('.no .bt').length,luz:(document.querySelector('#etapa-1 .cena-luz')||{}).naturalWidth,planeta:(document.querySelector('.planeta-img img')||{}).naturalWidth,voce:!!document.querySelector('.voce'),menor:Math.min.apply(null,Array.from(document.querySelectorAll('.no .bt:not([disabled])')).map(b=>Math.min(b.getBoundingClientRect().width,b.getBoundingClientRect().height))),retrato:(document.querySelector('#retrato-bb img')||{}).naturalWidth})");
+        const mapa = await js("({etapas:document.querySelectorAll('.etapa').length,nos:document.querySelectorAll('.no .bt').length,luz:(document.querySelector('#etapa-1 .cena-luz')||{}).naturalWidth,planeta:(document.querySelector('.planeta-img img')||{}).naturalWidth,voce:!!document.querySelector('.voce'),menor:Math.min.apply(null,Array.from(document.querySelectorAll('.no .bt:not([aria-disabled=true])')).map(b=>Math.min(b.getBoundingClientRect().width,b.getBoundingClientRect().height))),retrato:(document.querySelector('#retrato-bb img')||{}).naturalWidth})");
         if (mapa.etapas !== 10 || mapa.nos !== 60) problemas.push(rot + ' mapa: ' + JSON.stringify(mapa));
         if (!mapa.luz || !mapa.planeta || !mapa.retrato) problemas.push(rot + ' mapa: imagem do cenario, do planeta ou do retrato nao carregou ' + JSON.stringify(mapa));
         if (mapa.menor < 48) problemas.push(rot + ' mapa: no de fase menor que 48 px (' + mapa.menor + ')');
@@ -261,6 +298,49 @@ async function main() {
         coleta(rot + ' visual');
         feito.push(rot + ': visual novo ok (mapa ' + mapa.etapas + ' etapas, ' + gal.cartoes + ' desenhos, colorir, Meu personagem)');
         await js("S.look={};S.desenhos.tinta={};salvar();0");
+      }
+
+      /* 2d2) correcoes da 4a revisao: aviso de download visivel, vitrine de looks sem sobreposicao, nenhum SVG gigante, colorir centralizado, arte offline */
+      {
+        const ids = await js("(()=>{const m={};document.querySelectorAll('[id]').forEach(e=>{m[e.id]=(m[e.id]||0)+1});return Object.keys(m).filter(k=>m[k]>1)})()");
+        if (ids.length) problemas.push(rot + ' ids repetidos na pagina: ' + ids.join(', '));
+        // Desenho guardado!: abre a galeria e depois o colorir (as duas telas ficam empilhadas) e confere que a mensagem aparece POR CIMA
+        await js("UNITS_MAT[0].lessons.forEach(l=>S.feitas[l.id]=3);salvar();renderTrilha();document.querySelector('#bb-gal').click();0"); await dorme(700);
+        const abriu = await js("(()=>{const c=document.querySelector('.des-card:not(.trava)');if(!c)return 'sem cartao livre: galeria '+document.querySelector('#galeria').className+', cartoes '+document.querySelectorAll('.des-card').length+', cvs '+document.querySelectorAll('#cv-des').length;c.click();return 'ok'})()"); await dorme(900);
+        if (abriu !== 'ok') problemas.push(rot + ' 2d2: ' + abriu);
+        await js("avisoBaixa('Desenho guardado! A imagem foi salva no seu aparelho, na pasta de downloads.');document.querySelector('#aviso-baixa-des').scrollIntoView({block:'center'});0"); await dorme(200);
+        const av = await js("(()=>{const e=document.querySelector('#aviso-baixa-des .aviso');if(!e)return null;const b=e.getBoundingClientRect();const t=document.elementFromPoint(b.left+b.width/2,b.top+b.height/2);const ids=['aviso-baixa-des','aviso-baixa-gal'].map(i=>document.querySelectorAll('#'+i).length);return {visivel:!!t&&(t===e||e.contains(t)),topo:t?(t.id||t.className||t.tagName):'nada',ids:ids,dentro:b.top>=0&&b.bottom<=innerHeight-"+(medidas.mobile ? 80 : 80)+"}})()");
+        if (!av || !av.visivel || !av.dentro) problemas.push(rot + ' aviso Desenho guardado!: ' + JSON.stringify(av));
+        else if (av.ids[0] !== 1 || av.ids[1] !== 1) problemas.push(rot + ' avisos de download com id repetido ' + JSON.stringify(av.ids));
+        await shot('aviso-guardado');
+        if (medidas.width >= 900) {
+          const cen = await js("(()=>{const a=document.querySelector('#cv-des').getBoundingClientRect(),b=document.querySelector('.des-ferramentas').getBoundingClientRect();return {centro:Math.round((a.left+b.right)/2),iw:innerWidth}})()");
+          if (Math.abs(cen.centro - cen.iw / 2) > 16) problemas.push(rot + ' colorir descentralizado: centro em ' + cen.centro + ' de ' + (cen.iw / 2));
+        }
+        await js("document.querySelector('#fechar-des').click();0"); await dorme(200); await js('fecharTelasDaBarra();0');
+        // vitrine de looks: figura dentro do cartao, nome, selo e botao tocaveis (nada por cima)
+        await js("S.moedas=900;document.querySelector('#bb-pers').click();0"); await dorme(500);
+        await js("document.querySelector('[data-aba=\"look\"]').click();0"); await dorme(500);
+        const lk = await js("(()=>{const ruins=[];document.querySelectorAll('.vitrine .item').forEach(it=>{const c=it.getBoundingClientRect();const f=it.querySelector('.item-img');if(f){const b=f.getBoundingClientRect();if(b.bottom>c.bottom+1||b.right>c.right+1||b.left<c.left-1)ruins.push('figura fora do cartao');}it.querySelectorAll('b,.selo,button').forEach(e=>{e.scrollIntoView({block:'center'});const q=e.getBoundingClientRect();const t=document.elementFromPoint(q.left+q.width/2,q.top+q.height/2);if(!(t&&(t===e||e.contains(t))))ruins.push((e.className||e.tagName)+' '+e.textContent.trim().slice(0,20)+' coberto por '+(t?(t.className||t.tagName):'nada'));});});return {ruins:ruins,n:document.querySelectorAll('.vitrine .item').length}})()");
+        if (lk.n < 2 || lk.ruins.length) problemas.push(rot + ' looks: ' + JSON.stringify(lk));
+        await shot('looks');
+        await js('fecharTelasDaBarra();0');
+        // nenhum SVG gigante (icone sem tamanho ocupa a largura toda) nas telas de interface
+        const svgGrande = async (nome) => { const g = await js("Array.from(document.querySelectorAll('svg')).filter(v=>!v.closest('#licao,.figura,.quadro,.aula')).map(v=>({w:Math.round(v.getBoundingClientRect().width),h:Math.round(v.getBoundingClientRect().height),c:(v.parentElement&&(v.parentElement.className||v.parentElement.tagName))||''})).filter(v=>v.w>64||v.h>64)"); if (g.length) problemas.push(rot + ' SVG gigante em ' + nome + ': ' + JSON.stringify(g.slice(0, 3))); };
+        await js("document.querySelector('#bb-mapa').click();window.scrollTo(0,0);document.querySelector('.rotina details').open=true;0"); await dorme(400); await svgGrande('mapa com a rotina aberta');
+        await js("document.querySelector('.rotina details').open=false;document.querySelector('#bb-gal').click();0"); await dorme(500); await svgGrande('galeria'); await js('fecharTelasDaBarra();0');
+        await js("document.querySelector('#bb-pers').click();0"); await dorme(400); await svgGrande('Meu personagem'); await js('fecharTelasDaBarra();0');
+        await js("document.querySelector('#bb-perfil').click();0"); await dorme(400); await svgGrande('perfil'); await js('telaResponsavel();0'); await dorme(300); await svgGrande('responsavel'); await js('telaVoz();0'); await dorme(400); await svgGrande('voz e som');
+        // arte offline: o botao existe, a conta diz a verdade e guardar tudo coloca TODA a arte no cache
+        const antes = await js("arteContarGuardadas()");
+        const tem = await js("!!document.querySelector('#baixar-vozes')&&/Guardar tudo para jogar sem internet/.test(document.querySelector('#baixar-vozes').innerText)&&/Imagens guardadas neste aparelho: \\d+ de \\d+/.test(document.querySelector('#arte-estado').innerText)");
+        if (!tem) problemas.push(rot + ' voz e som: faltou o botao "Guardar tudo para jogar sem internet" ou a linha das imagens guardadas');
+        const r = await js("arteGuardarTudo().then(r=>r)");
+        const depois = await js("arteContarGuardadas()");
+        const total = await js("arteLista().length");
+        if (!r.ok || depois !== total) problemas.push(rot + ' arte offline: ' + depois + ' de ' + total + ' guardadas (falhas ' + r.falhas + ')');
+        feito.push(rot + ': arte offline ' + antes + ' -> ' + depois + ' de ' + total + ' imagens no cache bobby-arte-v1');
+        await js('fecharTelasDaBarra();document.querySelector("#bb-mapa").click();0'); await dorme(300);
       }
 
       /* 2e) PONTARIA E TOQUE REAL. Regressao de 24/10/2026: um z-index no corpo da fase cobriu o painel fixo e nenhum botao respondia,
@@ -436,7 +516,10 @@ if(r<(grande?3:4.5)){const k=el.tagName+'.'+el.className+' '+r.toFixed(2);if(!vi
       const tela0 = await js("document.querySelector('#perfis').classList.contains('on')");
       if (!tela0) problemas.push(rot + ': com 3 perfis a tela Quem vai jogar deveria abrir');
       await js("document.querySelector('.cartao-bt[data-i=\"0\"]').click();0"); await dorme(400);
-      await js("document.querySelector('[data-m=\"mat\"]').click();0"); await dorme(400);
+      /* quem ja jogou volta direto para o mapa (sem escolher planeta de novo) */
+      const semSeletor = await js("!document.querySelector('#materias').classList.contains('on')");
+      if (!semSeletor) problemas.push(rot + ': jogador com progresso deveria voltar direto ao mapa, sem o seletor de planeta');
+      await dorme(400);
       const aviso = await js("document.querySelector('#folha').classList.contains('on')&&document.querySelector('#folha').innerText.replace(/\\s+/g,' ')");
       if (!aviso || !/ganhou novidades/.test(aviso) || !/progresso está todo aqui/.test(aviso)) problemas.push(rot + ': aviso unico da migracao nao apareceu: ' + aviso);
       if (FOTO) { const f = await cdp('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(path.join(__dirname, 'saida', 'celular-migracao-aviso.png'), Buffer.from(f.data, 'base64')); }

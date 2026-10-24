@@ -67,10 +67,10 @@ const proximoDia = (a, n) => { relogio.ms += 864e5 * (n || 1); a.avaliar('garant
     a.avaliar("Math.random=function(){throw new Error('sorteio no bau')}");
     const r = a.avaliar('JSON.parse(JSON.stringify(abrirBau()))');
     A.strictEqual(r.aberto, true); A.strictEqual(r.dia, 1);
-    A.strictEqual(r.itens[0].n, 'Primeira visita');      // dia 1 da tabela: Adesivo "Primeira visita"
+    A.strictEqual(r.itens[0].n, 'Estrela de boas-vindas');      // dia 1 da tabela: Adesivo "Estrela de boas-vindas"
     A.strictEqual(a.avaliar('abrirBau()'), null, 'abriu duas vezes');
     A.strictEqual(a.avaliar('bauPronto()'), false);
-    A.ok(a.avaliar("S.colecao.adesivos.indexOf('Primeira visita')>=0"));
+    A.ok(a.avaliar("S.colecao.adesivos.indexOf('Estrela de boas-vindas')>=0"));
   });
 
   await teste('6. tabela do bau: dias 1 a 30 definidos, so cosmeticos e moedas, e identica a cada chamada', () => {
@@ -93,7 +93,7 @@ const proximoDia = (a, n) => { relogio.ms += 864e5 * (n || 1); a.avaliar('garant
 
   await teste('7. item que ja existe vira +20 moedas (nada repete, nada se perde)', () => {
     const a = novoApp();
-    a.avaliar("S.colecao.adesivos.push('Primeira visita');S.moedas=0");
+    a.avaliar("S.colecao.adesivos.push('Estrela de boas-vindas');S.moedas=0");
     const r = JSON.parse(JSON.stringify(a.avaliar("entregarRecompensa(recompensaDoDia(1),1)")));
     A.strictEqual(a.avaliar('S.moedas'), 20); A.strictEqual(a.avaliar('S.colecao.adesivos.length'), 1);
     A.ok(/você já tem/.test(r[0].n));

@@ -30,12 +30,12 @@ function noAtualDaEtapa(u){
   for(let li=0;li<u.lessons.length;li++)if(!S.feitas[u.lessons[li].id])return li;
   return 5;   /* tudo feito: ele espera na revisão */
 }
-function cenaHTML(u,k){
+function cenaHTML(u,k,agora){
   const cena=cenaDaEtapa(MATERIA,u.n),pl=PLANETAS[MATERIA];
   if(cena){
     const ant=REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n];
     return '<div class="cena" data-k="'+k+'" style="--rev:'+revPct(ant)+'">'+
-      imgArte(cena.apagado,{cls:'cena-base'})+imgArte(cena.completo,{cls:'cena-luz'});
+      imgArte(cena.apagado,{cls:'cena-base',eager:!!agora})+imgArte(cena.completo,{cls:'cena-luz',eager:!!agora});
   }
   /* sem arte da etapa: o planeta no céu da matéria; apagado por filtro, aceso pela mesma revelação */
   return '<div class="cena sem-arte" data-k="'+k+'" style="--rev:'+revPct(REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n])+'">'+
@@ -56,7 +56,7 @@ function etapaHTML(u,ui,prox){
   h+='<header class="etapa-cab"><div class="etapa-tx"><span class="etapa-n">Etapa '+u.n+'</span>'+
      '<h3 id="etapa-t-'+(ui+1)+'">'+tituloEmDuasLinhas(u.title)+'</h3><p>'+escapa(u.sub)+'</p></div>'+
      '<span class="etapa-prog'+(completo?' ok':'')+'">'+(completo?IC.certo+' Completa':feitasN+' de '+u.lessons.length+' fases')+'</span></header>';
-  h+=cenaHTML(u,feitasN);
+  h+=cenaHTML(u,feitasN,ehAtual);
   h+='<div class="trilha">'+trilhaPontos();
   u.lessons.forEach((l,li)=>{
     const ok=S.feitas[l.id],abr=liberada(ui,li),atual=ehAtual&&atualNo===li;
@@ -65,16 +65,16 @@ function etapaHTML(u,ui,prox){
     const proxTrava=ehAtual&&!abr&&li===atualNo+1;
     if(!abr)cls.push(proxTrava?'trava-prox':'trava-longe');
     const est=ok?estrelasDaFase(l.id):0;
-    h+='<div class="'+cls.join(' ')+'" style="left:'+NOS[li][0]+'%;top:'+NOS[li][1]+'%">'+
-       '<button class="bt" data-u="'+ui+'" data-l="'+li+'"'+(abr?'':' disabled aria-disabled="true"')+
+    h+='<div class="'+cls.join(' ')+'" style="left:'+NOS[li][0]+'%;top:'+NOS[li][1]+'%;--nx:'+Math.min(NOS[li][0],100-NOS[li][0])+'">'+
+       '<button class="bt" data-u="'+ui+'" data-l="'+li+'"'+(abr?'':' aria-disabled="true"')+
        ' aria-label="Fase '+(li+1)+': '+escapa(l.title)+(ok?'. Concluída com '+est+(est===1?' estrela':' estrelas'):(atual?'. Sua próxima fase':''))+'">'+
        (abr?'<b>'+(li+1)+'</b>':(proxTrava?IC.cadeado:''))+'</button>'+
        '<span class="estrelas" aria-hidden="true">'+(ok?estrelasSVG(est):'')+'</span>'+
        '<span class="rot">'+escapa(nomeCurto(l.title))+'</span></div>';
   });
   const cr=['no','revisao-no'];if(!completo)cr.push('trava','trava-longe');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
-  h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%">'+
-     '<button class="bt" data-rev="'+ui+'"'+(completo?'':' disabled aria-disabled="true"')+
+  h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%;--nx:'+Math.min(NOS[5][0],100-NOS[5][0])+'">'+
+     '<button class="bt" data-rev="'+ui+'"'+(completo?'':' aria-disabled="true"')+
      ' aria-label="Revisão da etapa '+u.n+(completo?'':'. Termine as 5 fases para abrir')+'">'+(completo?IC.medalha:'')+'</button>'+
      '<span class="estrelas" aria-hidden="true">'+(estRev?estrelasSVG(estRev):'')+'</span>'+
      '<span class="rot">Revisão'+(completo&&nErr?' · '+nErr+' para refazer':'')+'</span></div>';
@@ -112,6 +112,15 @@ function animarMapa(prox){
   }
 }
 
+/* aviso curto, no mesmo lugar do aviso de voz (acima da barra), que some sozinho */
+function avisoNo(txt){
+  let a=document.querySelector('#aviso-no');
+  if(!a){a=document.createElement('div');a.id='aviso-no';a.setAttribute('role','status');document.body.appendChild(a);}
+  a.className='aviso-voz';a.innerHTML='<span>'+escapa(txt)+'</span>';
+  clearTimeout(a._t);clearTimeout(a._t2);
+  a._t=setTimeout(()=>{a.classList.add('sai');},2600);
+  a._t2=setTimeout(()=>{if(a.parentNode)a.parentNode.removeChild(a);},3100);
+}
 /* ---------- tela inicial ---------- */
 function pintarTopo(){
   document.body.dataset.materia=MATCOD[MATERIA]||'mat';
@@ -138,29 +147,30 @@ function renderTrilha(){
   const frase=feitas()===0?'Bem-vindo ao meu universo! Cada planeta é uma matéria e cada etapa tem 5 fases. Escolha por onde começar.'
     :(p?'Sua próxima fase é “'+escapa(UNITS[p[0]].lessons[p[1]].title)+'”. Bora?'
        :'Você terminou este planeta inteiro! Pode refazer as fases ou visitar outro planeta lá em cima.');
-  const guia=(S.look&&S.look.companheiro)||pl.guia;
   const curta=feitas()===0?'Escolha por onde começar.':(p?'Próxima fase: “'+escapa(nomeCurto(UNITS[p[0]].lessons[p[1]].title))+'”.':'Você terminou este planeta inteiro!');
   let h='<section class="planeta" aria-label="Planeta '+pl.n+'">'+
     '<div class="planeta-img">'+imgArte(pl.img,{eager:true})+'</div>'+
     '<div class="planeta-txt"><span class="planeta-nome">Planeta '+pl.n+' · '+MATERIAS[MATERIA].n+'</span>'+
-    '<h1>Oi, '+nome+' <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1>'+
+    '<h1><span class="oi-nome">Oi, '+nome+'</span> <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1>'+
     '<p>'+curta+'</p>'+
     '<div class="meta-linha"><div class="meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="'+TOTAL_LESSONS+'" aria-valuenow="'+feitas()+
     '" aria-label="Fases deste planeta"><i style="width:'+pct+'%"></i></div><span>'+feitas()+' de '+TOTAL_LESSONS+' fases</span></div></div>'+
-    '<div class="planeta-guia">'+imgArte(guia+'-p01',{})+'</div></section>'+rotinaHTML();
+    '</section>'+rotinaHTML();
   /* o mapa vem primeiro: a etapa onde o Bobby está sobe para o topo da lista, e as outras seguem na ordem de sempre */
   const ordem=UNITS.map((u,i)=>i);
   if(p){ordem.splice(ordem.indexOf(p[0]),1);ordem.unshift(p[0]);}
   ordem.forEach((ui,k)=>{
-    if(p&&k===0)h+='<h2 class="etapa-faixa">Sua etapa agora</h2>';
+    if(p&&k===0)h+='<h2 class="etapa-faixa agora">Sua etapa agora</h2>';
     if(p&&k===1)h+='<h2 class="etapa-faixa">Outras etapas</h2>';
     h+=etapaHTML(UNITS[ui],ui,p);
   });
   $('#tela').innerHTML=h;
   const en=$('#editar-nome');if(en)en.addEventListener('click',telaPerfil);
   ligarRotina();
-  $('#tela').querySelectorAll('.bt:not([disabled])').forEach(b=>
+  /* nó trancado: continua no caminho do teclado (aria-disabled, não disabled) e explica o que falta em vez de ficar mudo */
+  $('#tela').querySelectorAll('.bt').forEach(b=>
     b.addEventListener('click',()=>{
+      if(b.getAttribute('aria-disabled')==='true'){avisoNo(b.dataset.rev!==undefined?'Termine as 5 fases da etapa para abrir a revisão.':'Termine a fase anterior para abrir esta.');return;}
       if(b.dataset.rev!==undefined)abrirRevisaoMundo(+b.dataset.rev);
       else abrirLicao(+b.dataset.u,+b.dataset.l);
     }));

@@ -110,9 +110,10 @@ function bauCena(aberto){
     (grande?imgArte(aberto?'bau-aberto':'bau-fechado',{cls:'bau-img',eager:true}):IC.bauSvg)+'</div></div>';
 }
 /* cada prêmio do baú ganha a arte 3D certa (adesivo vira estrela, medalha é medalha, moeda é moeda) */
+const ROTULO_PREMIO={adesivo:'Adesivo novo',medalha:'Medalha nova',ornamento:'Para colorir',pose:'Pose nova',moldura:'Moldura nova',trilha:'Trilha nova'};
 function iconeDoPremio(k){
   const id={moedas:'rec-moeda',medalha:'rec-medalha',adesivo:'rec-estrela',ornamento:'rec-estrela',pose:'rec-trofeu',moldura:'rec-medalha',trilha:'rec-estrela'}[k]||'rec-presente';
-  return ativo(id)?imgArte(id,{cls:'ic-arte premio-ic',eager:true}):'';
+  return ativo(id)?imgArte(id,{cls:'ic-arte premio-ic'+(k==='adesivo'?' adesivo':''),eager:true}):'';
 }
 function mostrarBau(){
   garantirDia();
@@ -127,7 +128,7 @@ function mostrarBau(){
 function mostrarBauAberto(){
   const b=S.diario.bau;
   abrirFolha('<div class="folha-in">'+bauCena(true)+'<h2>Você ganhou</h2>'+
-    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+iconeDoPremio(i.k)+'<span>'+escapa(i.n)+'</span></li>').join('')+'</ul>'+
+    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+iconeDoPremio(i.k)+'<span>'+(ROTULO_PREMIO[i.k]?'<small>'+ROTULO_PREMIO[i.k]+'</small>':'')+'<b>'+escapa(i.n)+'</b></span></li>').join('')+'</ul>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Continuar</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{
     fecharFolha();pintarTopo();
