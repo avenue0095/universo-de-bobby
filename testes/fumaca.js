@@ -343,6 +343,43 @@ async function main() {
         await js('fecharTelasDaBarra();document.querySelector("#bb-mapa").click();0'); await dorme(300);
       }
 
+      /* 2d2b) MATERIAL DOURADO: em toda pergunta com barrinhas, cubinhos ou placas (figura ou construtor 'blocos') cada quadradinho tem pelo menos
+         28 px, a barra cabe na coluna, e tocar num quadradinho o marca como contado sem valer ponto. */
+      {
+        const achados = await js(`(()=>{const o=[];let n=0;
+          UNITS_MAT.forEach(u=>u.lessons.forEach(l=>{let achou=0;
+            for(let t=0;t<60&&achou<2;t++){const mk=l.makers[t%l.makers.length];let q;try{q=mk();}catch(e){continue;}
+              if(q&&(q.type==='blocos'||(q.figure&&/class="md /.test(q.figure)))){achou++;o.push([l.id,q.type,JSON.stringify(q).length]);}}}));return o;})()`);
+        if (!achados.length) problemas.push(rot + ' material dourado: nenhuma pergunta com barrinhas encontrada');
+        const ruins = [];
+        for (const [id] of achados) {
+          const r = await js(`(()=>{const l=UNITS_MAT.flatMap(u=>u.lessons).find(x=>x.id===${JSON.stringify(id)});let q=null;
+            for(let t=0;t<60;t++){let c=null;try{c=l.makers[t%l.makers.length]();}catch(e){}if(c&&(c.type==='blocos'||(c.figure&&/class="md /.test(c.figure)))){q=c;break;}}
+            if(!q)return {tipo:'sem pergunta',n:0};
+            abrirLicao(0,0);LIC.l=l;LIC.qs=[q];LIC.i=0;LIC.etapa='questao';LIC.md={c:0,d:0,u:0};pintarLicao();
+            if(q.type==='blocos'){const m=q.max||{c:9,d:9,u:9};if(m.d!==0){mdMuda('d',1);mdMuda('d',1);mdMuda('d',1);}if(m.c!==0)mdMuda('c',1);mdMuda('u',1);mdMuda('u',1);mdMuda('u',1);}
+            const area=document.querySelector('#licao .dourado-fig, #licao .dourado-linhas');
+            const qs=area?Array.from(area.querySelectorAll('svg.md:not(.placa) rect.q')):[];
+            const menor=qs.length?Math.min.apply(null,qs.map(x=>Math.min(x.getBoundingClientRect().width,x.getBoundingClientRect().height))):null;
+            const barras=area?Array.from(area.querySelectorAll('svg.barra')):[];
+            const largura=barras.length?Math.max.apply(null,barras.map(b=>b.getBoundingClientRect().width)):0;
+            const col=document.querySelector('#licao .lc-in, #licao .lc-corpo');const cw=col?col.getBoundingClientRect().width:innerWidth;
+            let toque=null;if(qs.length){const x=qs[0];const b=x.getBoundingClientRect();const t0=LIC.respondidas||0;const a0=LIC.acertos;x.dispatchEvent(new MouseEvent('click',{bubbles:true}));toque={contado:x.classList.contains('contado'),texto:(area.querySelector('.md-contagem')||{}).textContent||'',pontos:LIC.acertos===a0&&(LIC.respondidas||0)===t0};}
+            fecharLicao();return {tipo:q.type,n:qs.length,menor:menor&&Math.round(menor*10)/10,barras:barras.length,largura:Math.round(largura),cw:Math.round(cw),toque:toque};})()`);
+          if (r.n && r.menor < 28 - 0.2) ruins.push(id + ' quadradinho ' + r.menor + ' px');
+          if (r.barras && r.largura > r.cw) ruins.push(id + ' barra mais larga (' + r.largura + ') que a coluna (' + r.cw + ')');
+          if (r.toque && (!r.toque.contado || !/Contados: 1/.test(r.toque.texto) || !r.toque.pontos)) ruins.push(id + ' toque no quadradinho: ' + JSON.stringify(r.toque));
+          if (r.tipo === 'blocos' && !r.n) ruins.push(id + ' construtor sem quadradinhos');
+        }
+        if (ruins.length) problemas.push(rot + ' material dourado: ' + [...new Set(ruins)].slice(0, 6).join(' | '));
+        else feito.push(rot + ': material dourado conferido em ' + achados.length + ' perguntas (quadradinho >= 28 px, barra na coluna, toque marca sem valer ponto)');
+        await js("abrirLicao(0,0);LIC.l=UNITS_MAT[1].lessons[0];LIC.qs=[blocos('Monte <b>34</b> com as barrinhas.',34,{max:{c:0,d:9,u:9}})];LIC.i=0;LIC.etapa='questao';LIC.md={c:0,d:0,u:0};pintarLicao();mdMuda('d',1);mdMuda('d',1);mdMuda('d',1);mdMuda('u',1);mdMuda('u',1);0"); await dorme(300);
+        await shot0('barrinhas-construtor-' + nomeTela);
+        await js("LIC.qs=[inp('Quanto vale 4 barrinhas?',40,{figure:dourado(0,4,3,true)})];LIC.i=0;pintarLicao();0"); await dorme(300);
+        await shot0('barrinhas-figura-' + nomeTela);
+        await js("fecharLicao();0");
+      }
+
       /* 2d3) O PERSONAGEM ESCOLHIDO APARECE EM TODO O JOGO (regressao apontada pelo Filipe: o personagem montado em Meu personagem nao servia
          para nada). Escolhe a Rufa, depois um look (coroa) e depois o chapeu de explorador; confere por DOM que a imagem usada no topo, na barra,
          no mapa, na aula, na pergunta, na reacao de acerto e de erro, no fim da fase e no bau e a do personagem escolhido. */

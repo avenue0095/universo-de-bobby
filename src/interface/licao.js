@@ -250,8 +250,23 @@ function blocosHTML(q){
   });
   return h+'</div><div class="visor"><b id="visor-n">0</b><small id="visor-txt">monte o número</small></div>';
 }
+/* tocar num quadradinho do material dourado o marca como contado (só ajuda a contar: não vale ponto e não muda a resposta) */
+document.addEventListener('click',e=>{
+  const q=e.target&&e.target.closest?e.target.closest('svg.md rect.q'):null;
+  if(!q||q.closest('.md-legenda'))return;
+  q.classList.toggle('contado');
+  const caixa=q.closest('.dourado-fig,.pilha,.corpo-md')||q.closest('svg').parentNode;
+  if(!caixa)return;
+  const raiz=q.closest('.dourado-fig')||q.closest('.dourado-linhas')||caixa;
+  const n=raiz.querySelectorAll('svg.md rect.q.contado').length;
+  let c=raiz.querySelector('.md-contagem');
+  if(!c){c=document.createElement('div');c.className='md-contagem';c.setAttribute('role','status');raiz.appendChild(c);}
+  c.textContent=n?('Contados: '+n):'';
+  if(n)nota(560+Math.min(n,20)*14,0,.05,.04);
+});
 function atualizaBlocos(){
   const md=LIC.md;
+  const mc=document.querySelector('.md-contagem');if(mc)mc.textContent='';
   const pc=$('#p-c'),pd=$('#p-d'),pu=$('#p-u');
   if(pc)pc.innerHTML=PLACA.repeat(md.c);
   if(pd)pd.innerHTML=BARRA.repeat(md.d);

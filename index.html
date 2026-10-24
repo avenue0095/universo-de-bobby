@@ -1552,6 +1552,34 @@ body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 .mascote.comp.avatar{object-position:50% 12%}
 .fim .mascote.comp,.folha-bobby .mascote.comp,.perfil-bobby .mascote.comp,.bau-cena .mascote.comp{width:auto;object-fit:contain}
 .cabecalho-q .mascote.avatar{width:72px;height:72px}
+
+/* ---------- material dourado grande: quadradinhos de 28 px para contar, barra em 2 grupos de 5, toque marca o que já foi contado ---------- */
+svg.md{fill:color-mix(in srgb,var(--materia-base) 38%,var(--cor-superficie));stroke:var(--fig-line);stroke-width:2;overflow:visible}
+svg.md .grade{fill:none;stroke:var(--fig-line);stroke-width:1.2}
+svg.md .sep{fill:none;stroke:var(--cor-texto);stroke-width:3;stroke-linecap:round;opacity:.55}
+svg.md rect.q{cursor:pointer;transition:fill var(--mov-rapido,.12s)}
+svg.md rect.q.contado{fill:var(--materia-base);stroke:var(--cor-texto)}
+svg.barra{width:284px;max-width:100%;height:auto}
+svg.cubinho{width:28px;height:28px}
+svg.placa{width:120px;height:120px}
+.dourado-fig{gap:var(--esp-16) var(--esp-24)}
+.dourado-fig .md-col{gap:var(--esp-8);width:100%;max-width:284px}
+.dourado-fig .md-col.cubs{flex-direction:row;flex-wrap:wrap;max-width:284px;justify-content:center;gap:var(--esp-8)}
+.dourado-fig .md-col:has(svg.placa){width:auto}
+.md-contagem{flex-basis:100%;text-align:center;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);font-weight:700;color:var(--cor-texto-suave)}
+.md-legenda svg.barra{width:150px;height:14px}
+.md-legenda svg.cubinho{width:14px;height:14px}
+.md-legenda svg.md{pointer-events:none}
+.linha-md{padding:var(--esp-8)}
+.corpo-md{flex-direction:column;align-items:stretch}
+.corpo-md .pilha{flex-direction:column;align-items:center;gap:var(--esp-8);flex:none;min-height:var(--esp-48)}
+.corpo-md .pilha:has(svg.cubinho){flex-direction:row;flex-wrap:wrap;justify-content:center}
+.corpo-md .pilha:has(svg.placa){flex-direction:row;flex-wrap:wrap;justify-content:center}
+.corpo-md .bts{justify-content:center}
+.linha-md .pilha svg.placa{width:96px;height:96px}
+.linha-md .pilha svg.barra{width:284px;max-width:100%;height:auto}
+.linha-md .pilha svg.cubinho{width:28px;height:28px}
+svg.md{border:0;padding:0;background:none;border-radius:0}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -1665,12 +1693,13 @@ const CT=['','cento','duzentos','trezentos','quatrocentos','quinhentos','seiscen
 function extenso(n){if(n<20)return U20[n];if(n<100){const d=Math.floor(n/10),u=n%10;return DZ[d]+(u?' e '+U20[u]:'');}if(n===100)return 'cem';if(n<1000){const c=Math.floor(n/100),r=n%100;return CT[c]+(r?' e '+extenso(r):'');}if(n===1000)return 'mil';return String(n);}
 const mdc=(a,b)=>b?mdc(b,a%b):a;
 
-/* material dourado: cubinho, barra (10) e placa (100) */
-function _grade(n,m){let h='';for(let r=0;r<n;r++)for(let c=0;c<m;c++)
-  h+='<rect x="'+(c*9+.6)+'" y="'+(r*9+.6)+'" width="7.8" height="7.8" rx="1.6" vector-effect="non-scaling-stroke"/>';return h;}
-const PLACA='<svg class="md placa" viewBox="0 0 90 90">'+_grade(10,10)+'</svg>';
-const BARRA='<svg class="md barra" viewBox="0 0 90 9">'+_grade(1,10)+'</svg>';
-const CUBO='<svg class="md cubinho" viewBox="0 0 9 9">'+_grade(1,1)+'</svg>';
+/* material dourado: cubinho, barra (10) e placa (100). Quadradinho de 28 px para a criança conseguir contar (e tocar para marcar o que já contou).
+   Tudo em SVG simples (a figura de uma pergunta errada é guardada no caderno e só aceita SVG). A barra são 2 grupos de 5 com separador visível. */
+const _Q=(x,y,t)=>'<rect class="q" x="'+x+'" y="'+y+'" width="'+t+'" height="'+t+'" rx="5"/>';
+function _grupo(x0){let h='';for(let i=0;i<5;i++)h+=_Q(x0+i*28,0,28);return h;}
+const PLACA='<svg class="md placa" viewBox="0 0 120 120" role="img" aria-label="placa de 100"><rect x="1" y="1" width="118" height="118" rx="8"/><path class="grade" d="'+(()=>{let d='';for(let i=1;i<10;i++)d+='M'+(i*12)+' 1V119M1 '+(i*12)+'H119';return d;})()+'"/></svg>';
+const BARRA='<svg class="md barra" viewBox="0 0 284 28" role="img" aria-label="barrinha de 10">'+_grupo(0)+'<path class="sep" d="M142 -3V31"/>'+_grupo(144)+'</svg>';
+const CUBO='<svg class="md cubinho" viewBox="0 0 28 28" role="img" aria-label="cubinho de 1">'+_Q(0,0,28)+'</svg>';
 function dourado(c,d,u,rot){
   let h='<div class="dourado-fig">';
   if(c)h+='<div class="md-col">'+PLACA.repeat(c)+(rot?'<span>'+c+' centena'+(c>1?'s':'')+'</span>':'')+'</div>';
@@ -4830,7 +4859,7 @@ const ATRS_SVG=/^(viewBox|class|role|width|height|x|y|x1|y1|x2|y2|cx|cy|r|rx|ry|
 /* devolve a figura se for só SVG simples; senão null */
 function figuraSegura(f){
   f=String(f==null?'':f);
-  if(!f||f.length>6000)return null;
+  if(!f||f.length>20000)return null;
   const tags=f.match(/<[^>]*>/g)||[];
   const fora=f.replace(/<[^>]*>/g,'');
   if(/[<>]/.test(fora))return null;
@@ -6744,8 +6773,23 @@ function blocosHTML(q){
   });
   return h+'</div><div class="visor"><b id="visor-n">0</b><small id="visor-txt">monte o número</small></div>';
 }
+/* tocar num quadradinho do material dourado o marca como contado (só ajuda a contar: não vale ponto e não muda a resposta) */
+document.addEventListener('click',e=>{
+  const q=e.target&&e.target.closest?e.target.closest('svg.md rect.q'):null;
+  if(!q||q.closest('.md-legenda'))return;
+  q.classList.toggle('contado');
+  const caixa=q.closest('.dourado-fig,.pilha,.corpo-md')||q.closest('svg').parentNode;
+  if(!caixa)return;
+  const raiz=q.closest('.dourado-fig')||q.closest('.dourado-linhas')||caixa;
+  const n=raiz.querySelectorAll('svg.md rect.q.contado').length;
+  let c=raiz.querySelector('.md-contagem');
+  if(!c){c=document.createElement('div');c.className='md-contagem';c.setAttribute('role','status');raiz.appendChild(c);}
+  c.textContent=n?('Contados: '+n):'';
+  if(n)nota(560+Math.min(n,20)*14,0,.05,.04);
+});
 function atualizaBlocos(){
   const md=LIC.md;
+  const mc=document.querySelector('.md-contagem');if(mc)mc.textContent='';
   const pc=$('#p-c'),pd=$('#p-d'),pu=$('#p-u');
   if(pc)pc.innerHTML=PLACA.repeat(md.c);
   if(pd)pd.innerHTML=BARRA.repeat(md.d);

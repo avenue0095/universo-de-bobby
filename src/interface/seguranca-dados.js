@@ -26,7 +26,7 @@ const ATRS_SVG=/^(viewBox|class|role|width|height|x|y|x1|y1|x2|y2|cx|cy|r|rx|ry|
 /* devolve a figura se for só SVG simples; senão null */
 function figuraSegura(f){
   f=String(f==null?'':f);
-  if(!f||f.length>6000)return null;
+  if(!f||f.length>20000)return null;
   const tags=f.match(/<[^>]*>/g)||[];
   const fora=f.replace(/<[^>]*>/g,'');
   if(/[<>]/.test(fora))return null;
