@@ -13,6 +13,9 @@ const mulberry = (a) => () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.
 (async () => {
   const app = carregarApp(3, {});
   app.avaliar("novoPerfil('Zeca','#12A06E')");
+  /* o manifesto do audio entra no indice do app (sem rede aqui), para 'ja tem clipe' valer */
+  app.ctx.__min = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifesto-min.json'), 'utf8'));
+  app.avaliar('audioIndexar(__min)');
   const todas = JSON.parse(app.avaliar('JSON.stringify(falasTodas())'));
 
   await teste('1. regras: ate 15 palavras, sem travessao, sem "tu", sem tristeza, culpa, falta nem pedido', () => {

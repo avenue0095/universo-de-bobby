@@ -347,12 +347,13 @@ function mostrarDica(){
   const q=LIC.qs[LIC.i];
   const cx=$('#caixa-dica');
   if(!q||!cx)return;
-  const txt=dicaDaPergunta(q);
+  const txt=dicaDaPergunta(q),hq=ajudaDe(q);
   cx.innerHTML='<div class="mini-tuco">'+guiaAvatar('p04')+'</div><div><span class="tit">Como fazer</span>'+txt+
     '<button class="mais-ajuda" id="mais-ajuda">Ainda não entendi</button></div>';
   cx.hidden=false;LIC.dica=1;
   $('#dica').style.display='none';
-  falar(txt);
+  /* método e resposta são DOIS clipes em fila (nunca um texto colado: o cortador de quadros tiraria a pontuação entre eles) */
+  falar(LIC.conferido&&hq.resposta?[hq.metodo,hq.resposta]:hq.metodo);
   const ma=$('#mais-ajuda');if(ma)ma.addEventListener('click',ajudaForte);
   $('.lc-corpo').scrollTo(0,$('.lc-corpo').scrollHeight);
 }
@@ -386,9 +387,11 @@ function ajudaForte(){
   }else if(q.type==='silabas'){
     msg='A primeira sílaba é <b>'+String(q.answer).slice(0,2)+'</b>.';
   }else msg='Leia devagar e tente de novo. Você consegue.';
-  const hq=ajudaDe(q);if(hq.resposta&&LIC.conferido)msg='<b>'+htmlSeguro(hq.resposta,200)+'</b> '+msg;
+  const hq=ajudaDe(q),falas=[];
+  if(hq.resposta&&LIC.conferido){falas.push(hq.resposta);msg='<b>'+htmlSeguro(hq.resposta,200)+'</b> '+msg;}
+  falas.push(msg);
   cx.innerHTML='<div class="mini-tuco">'+guiaAvatar('p04')+'</div><div><span class="tit">Ajuda extra</span>'+msg+'</div>';
-  falar(msg);
+  falar(falas);
 }
 /* Pergunta irmã: mesma habilidade (mesmo gerador) com outros números ou palavras. Nunca igual a uma que a criança já viu na rodada.
    Se o gerador só sabe fazer aquela pergunta (Português com geradores de 1 pergunta), tenta os outros geradores da mesma fase, depois

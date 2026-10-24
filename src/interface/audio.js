@@ -215,7 +215,9 @@ async function audioBaixarPacote(nome,progresso,forcar){
   AUDIO.baixando[nome].catch(()=>{delete AUDIO.baixando[nome];});
   return AUDIO.baixando[nome];
 }
-const NOME_PACOTE={core:'vozes básicas',mat:'Matemática',pt:'Português',en:'Inglês'};
+const NOME_PACOTE={core:'vozes básicas',mat:'Matemática',pt:'Português',en:'Inglês',ajudas:'ajudas faladas'};
+/* o que 'Guardar tudo' baixa por padrão; as ajudas faladas (10 MB) só com a opção marcada, e nunca sozinhas ao entrar na matéria */
+const PACOTES_PADRAO=['core','mat','pt','en'];
 /* ao abrir uma galáxia: avisa o tamanho e guarda o pacote da matéria (uma vez) */
 async function audioPrepararMateria(m){
   try{

@@ -121,9 +121,13 @@ function audioPartes(p,mat){
   }
   const partes=[];
   let atual='';
+  const limpa=x=>x.replace(/[?!.,:;()"“”‘’→–\u2014\-=]+/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
   const fecha=()=>{
-    const q=atual.replace(/[?!.,:;()"“”‘’→–\u2014\-=]+/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
-    if(q.length>1)partes.push({t:'quadro',v:q});
+    const q=limpa(atual);
+    /* frases: o mesmo trecho cortado na pontuação de fim de frase (. ! ? ; :). Se o quadro inteiro não tiver clipe (duas frases coladas,
+       como o método da dica mais a resposta), o player tenta frase por frase, nunca no meio de uma */
+    const frases=atual.split(/(?<=[.!?;:])\s+/).map(limpa).filter(x=>x.length>1);
+    if(q.length>1)partes.push({t:'quadro',v:q,frases:frases.length>1?frases:null});
     atual='';
   };
   for(const ch of s){
@@ -166,7 +170,9 @@ function audioSequencia(html,idioma,mat){
   partes.forEach(p=>{
     if(p.t==='quadro'){
       const k=audioResolveTexto(p.v,'pt-BR',['quadro-enunciado']);
-      if(k)chaves.push(k);else faltas.push('quadro:'+p.v);
+      if(k)chaves.push(k);
+      else if(p.frases){p.frases.forEach(f=>{const kf=audioResolveTexto(f,'pt-BR',['quadro-enunciado','feedback']);if(kf)chaves.push(kf);else faltas.push('quadro:'+f);});}
+      else faltas.push('quadro:'+p.v);
     }else{const r=audioEncaixe(p);r.chaves.forEach(k=>chaves.push(k));r.faltas.forEach(f=>faltas.push(f));}
   });
   return {texto:t,chaves:chaves,faltas:faltas,composto:true};

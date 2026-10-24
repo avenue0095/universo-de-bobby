@@ -242,6 +242,26 @@ const chaveDe = (a, classe, lang, texto) => a.avaliar('audioChaveDe(' + JSON.str
     A.ok(!(b.avaliar('audioGuardado().pacotes||{}').pt), 'marcou guardado com falha');
   });
 
+  await teste('17b. peso: o que "Guardar tudo" baixa por padrao (core + 3 materias) cabe em 45 MB de AAC; as ajudas faladas sao pacote a parte, nunca baixadas sozinhas', async () => {
+    const mb = (ks) => ks.reduce((s, k) => s + Object.values(MIN.pacotes[k] || {}).reduce((t, v) => t + v[2], 0), 0) / 1e6;
+    A.ok(MIN.pacotes.ajudas && Object.keys(MIN.pacotes.ajudas).length > 100, 'pacote ajudas ausente');
+    A.ok(mb(['core', 'mat', 'pt', 'en']) <= 45, 'pacote padrao com ' + mb(['core', 'mat', 'pt', 'en']).toFixed(1) + ' MB');
+    const a = novo(); await pronto(a); await espera(30);
+    await a.avaliar("audioPrepararMateria('mat')"); await espera(30);
+    A.ok(!a.reg.fetch.some((u) => Object.keys(MIN.pacotes.ajudas).some((k) => u.indexOf(k) >= 0)), 'entrar na materia baixou quadros de ajuda');
+    A.deepStrictEqual(JSON.parse(JSON.stringify(a.avaliar('PACOTES_PADRAO'))), ['core', 'mat', 'pt', 'en']);
+  });
+
+  await teste('17c. dica fala metodo e resposta como dois clipes em fila; quadro colado sem clipe cai para as frases', async () => {
+    const a = novo(); a.avaliar('audioIndexar(' + MIN_TXT + ')');
+    const s = a.avaliar("(function(){const s=audioSequencia('Conte para trás a partir do 4. O número que você fala logo depois dele é o que vem antes. Antes do 4 vem o 3.','pt-BR','mat');return {n:s.chaves.length,f:s.faltas}})()");
+    /* as duas primeiras frases tem clipe inteiro; a terceira cai nos fragmentos 'antes do' e 'vem o' (quadros curtos, nunca a colagem das frases) */
+    A.ok(s.n >= 4 && !s.f.some((f) => f.length > 30), 'quadro colado nao foi cortado na pontuacao: ' + JSON.stringify(s));
+    const src = fs.readFileSync(path.join(RAIZ, 'src', 'interface', 'licao.js'), 'utf8');
+    A.ok(/falar\(LIC\.conferido&&hq\.resposta\?\[hq\.metodo,hq\.resposta\]:hq\.metodo\)/.test(src), 'mostrarDica deveria falar metodo e resposta em fila');
+    A.ok(/falar\(falas\)/.test(src), 'ajudaForte deveria falar a resposta e a ajuda em fila');
+  });
+
   await teste('18. sem manifesto (sem internet na 1a visita): perguntas de ouvir viram de ler; ao voltar a rede, ouvir volta', async () => {
     const a = novo({ semRede: true });
     await a.avaliar('audioIniciar()').catch(() => {});

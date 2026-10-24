@@ -9,6 +9,8 @@ VOZ = {'pt-br': dict(motor='kokoro-onnx v1.0 (int8)', voz='pm_alex', velocidade=
        'en-us': dict(motor='kokoro-onnx v1.0 (int8)', voz='am_michael', velocidade=0.9, lang='en-us')}
 def pacote(it):
     c, m = it['classe'], it['materia']
+    # quadros das ajudas faladas (dica, resposta, ajuda extra): pacote proprio, baixado so a pedido ("incluir ajudas faladas" em Guardar tudo)
+    if any(x in str(it.get('origem', '')) for x in ('dica', 'ajuda', 'resposta')): return 'ajudas'
     if c in ('numero', 'nome', 'pt-letra', 'pt-silaba', 'feedback'): return 'core'
     return m if m in ('mat', 'pt', 'en') else 'core'
 clipes = {}; mapa = {}

@@ -33,9 +33,10 @@ async function arteGuardarTudo(progresso){
 /* linhas dos pacotes de voz (repintadas depois de baixar, para a tela dizer a verdade) */
 function pacotesVozHTML(){
   const g=audioGuardado();
-  return ['core','mat','pt','en'].map(p=>{
+  return PACOTES_PADRAO.concat(['ajudas']).map(p=>{
     const ok=g.pacotes&&g.pacotes[p]&&g.formato===audioFormato();
-    return '<div class="linha-mundo"><div class="mtx"><b>'+NOME_PACOTE[p].replace(/^./,c=>c.toUpperCase())+'</b>'+
+    if(!AUDIO_INDICE.pacotes[p]&&p==='ajudas')return '';
+    return '<div class="linha-mundo"><div class="mtx"><b>'+NOME_PACOTE[p].replace(/^./,c=>c.toUpperCase())+(p==='ajudas'?' <small>(só com a opção abaixo)</small>':'')+'</b>'+
        '<span class="sub-l">'+(audioIndiceCheio()?audioMB(audioTamanhoPacote(p)):'tamanho indisponível')+' · '+(ok?'guardado neste aparelho':'ainda não guardado')+'</span></div></div>';
   }).join('');
 }
@@ -61,6 +62,7 @@ function telaVoz(){
   h+='<p class="galeria-intro">As vozes ficam guardadas neste aparelho. Cada matéria baixa uma vez, quando você entra nela. Pelo celular, o tamanho aparece antes.</p>';
   h+='<div class="mundos-lista" id="pacotes-voz">'+pacotesVozHTML()+'</div>';
   h+='<p class="galeria-intro" id="arte-estado" role="status">Conferindo as imagens guardadas...</p>';
+  h+='<label class="ctl-linha opcao-ajudas"><input type="checkbox" id="incluir-ajudas"'+(S.config&&S.config.ajudasOffline?' checked':'')+'> <b>Incluir ajudas faladas</b><small>O "Como fazer" e a "Ajuda extra" com voz também sem internet (+'+(audioIndiceCheio()&&AUDIO_INDICE.pacotes.ajudas?audioMB(audioTamanhoPacote('ajudas')):'10 MB')+'). Sem isso, elas falam só com internet.</small></label>';
   h+='<div class="perfil-bts"><button class="btn laranja" id="baixar-vozes">'+IC.baixar+' Guardar tudo para jogar sem internet</button></div><div id="voz-aviso" role="status" aria-live="polite"></div>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-voz">Voltar ao perfil</button></div></div>';
 
@@ -95,7 +97,8 @@ function telaVoz(){
     const ra=await arteGuardarTudo((a2,b2)=>diz('Guardando as imagens: '+a2+' de '+b2));
     if(!ra.ok)falhas+=ra.falhas||1;
     await audioIniciar();
-    for(const p of ['core','mat','pt','en']){
+    const comAjudas=!!($('#incluir-ajudas')&&$('#incluir-ajudas').checked);
+    for(const p of PACOTES_PADRAO.concat(comAjudas&&AUDIO_INDICE.pacotes.ajudas?['ajudas']:[])){
       const r2=await audioBaixarPacote(p,(a2,b2)=>diz('Guardando as vozes de '+NOME_PACOTE[p]+': '+a2+' de '+b2),false);
       if(r2&&!r2.ok)falhas++;
       else if(r2&&r2.ok&&typeof audioMarcarGuardado==='function')audioMarcarGuardado(p,audioFormato());

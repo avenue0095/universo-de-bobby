@@ -1,1149 +1,2817 @@
 {
  "gerado": "2026-10-24",
- "total": 104,
+ "total": 219,
+ "nota": "Lista para o agente de audio. Prioridade alta = fragmento curto reutilizado (193 quadros cobrem 3.052 de 3.600 usos de resposta falada na amostra). Cauda longa = resposta por extenso colada, pode ficar sem voz (o texto fica na tela).",
  "itens": [
   {
-   "texto": "Bom dia, explorador! Hoje o céu está limpo e a mochila está cheia.",
+   "texto": "a resposta é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (chegada.manha)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1524,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1524 usos na amostra",
    "trechos_sem_clipe": [
-    "Bom dia, explorador! Hoje o céu está limpo e a mochila está cheia."
+    "a resposta é"
    ]
   },
   {
-   "texto": "Boa tarde! Trouxe lanche, lupa e muita curiosidade. E você?",
+   "texto": "resposta é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (chegada.tarde)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 456,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 456 usos na amostra",
    "trechos_sem_clipe": [
-    "Boa tarde! Trouxe lanche, lupa e muita curiosidade. E você?"
+    "resposta é"
    ]
   },
   {
-   "texto": "Boa noite! Uma missão pequena e depois a gente descansa.",
+   "texto": "o número que falta é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (chegada.noite)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 298,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 298 usos na amostra",
    "trechos_sem_clipe": [
-    "Boa noite! Uma missão pequena e depois a gente descansa."
+    "o número que falta é"
    ]
   },
   {
-   "texto": "Que bom ver você de novo! Vamos ver o que mudou no planeta?",
+   "texto": "resposta é verdadeiro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (chegada.volta)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 67,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 67 usos na amostra",
    "trechos_sem_clipe": [
-    "Que bom ver você de novo! Vamos ver o que mudou no planeta?"
+    "resposta é verdadeiro"
    ]
   },
   {
-   "texto": "Cadê meu mapa? Ah, está na mochila. Sempre está.",
+   "texto": "palavra é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (chegada.mapa)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 52,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 52 usos na amostra",
    "trechos_sem_clipe": [
-    "Cadê meu mapa? Ah, está na mochila. Sempre está."
+    "palavra é"
    ]
   },
   {
-   "texto": "Escolha um planeta. Cada um tem um amigo esperando, com uma história para contar.",
+   "texto": "dá",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (chegada.planetas)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 32,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 32 usos na amostra",
    "trechos_sem_clipe": [
-    "Escolha um planeta. Cada um tem um amigo esperando, com uma história para contar."
+    "dá"
    ]
   },
   {
-   "texto": "Hoje a missão é curta. Eu vou junto.",
+   "texto": "a frase é verdadeiro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (chegada.curta)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 31,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 31 usos na amostra",
    "trechos_sem_clipe": [
-    "Hoje a missão é curta. Eu vou junto."
+    "a frase é verdadeiro"
    ]
   },
   {
-   "texto": "O Embaralho passou por aqui de novo. Vamos arrumar a bagunça!",
+   "texto": "resposta é falso",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (chegada.embaralho)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 30,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 30 usos na amostra",
    "trechos_sem_clipe": [
-    "O Embaralho passou por aqui de novo. Vamos arrumar a bagunça!"
+    "resposta é falso"
    ]
   },
   {
-   "texto": "Uau!",
+   "texto": "a resposta é verdadeiro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.geral)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 25,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 25 usos na amostra",
    "trechos_sem_clipe": [
-    "Uau!"
+    "a resposta é verdadeiro"
    ]
   },
   {
-   "texto": "Boa! Mandou bem.",
+   "texto": "a área é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.geral)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 24,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 24 usos na amostra",
    "trechos_sem_clipe": [
-    "Boa! Mandou bem."
+    "a área é"
    ]
   },
   {
-   "texto": "Certinho! Pode me chamar de ajudante de ouro.",
+   "texto": "a frase é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.geral)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 19,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 19 usos na amostra",
    "trechos_sem_clipe": [
-    "Certinho! Pode me chamar de ajudante de ouro."
+    "a frase é"
    ]
   },
   {
-   "texto": "Perfeito! Até a mochila ficou orgulhosa.",
+   "texto": "depois do",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.geral)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 18,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 18 usos na amostra",
    "trechos_sem_clipe": [
-    "Perfeito! Até a mochila ficou orgulhosa."
+    "depois do"
    ]
   },
   {
-   "texto": "Oba!",
+   "texto": "o perímetro é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.geral)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 18,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 18 usos na amostra",
    "trechos_sem_clipe": [
-    "Oba!"
+    "o perímetro é"
    ]
   },
   {
-   "texto": "Aí sim.",
+   "texto": "vem",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.geral)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 13,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 13 usos na amostra",
    "trechos_sem_clipe": [
-    "Aí sim."
+    "vem"
    ]
   },
   {
-   "texto": "Calculei, conferi e confirmei: você acertou.",
+   "texto": "igual a verdadeiro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.teo)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 12,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
    "trechos_sem_clipe": [
-    "Calculei, conferi e confirmei: você acertou."
+    "igual a verdadeiro"
    ]
   },
   {
-   "texto": "Padrão encontrado! Eu adoro quando os números combinam.",
+   "texto": "é verdadeiro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.teo)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 12,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
    "trechos_sem_clipe": [
-    "Padrão encontrado! Eu adoro quando os números combinam."
+    "é verdadeiro"
    ]
   },
   {
-   "texto": "Número bonito! Três e quatro, sete. Ótima conta.",
+   "texto": "resposta é ç",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.teo)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 12,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
    "trechos_sem_clipe": [
-    "Número bonito! Três e quatro, sete. Ótima conta."
+    "resposta é ç"
    ]
   },
   {
-   "texto": "Era uma vez uma resposta certa, e ela era sua.",
+   "texto": "frase é verdadeiro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.rufa)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 12,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
    "trechos_sem_clipe": [
-    "Era uma vez uma resposta certa, e ela era sua."
+    "frase é verdadeiro"
    ]
   },
   {
-   "texto": "Que final feliz! Merece até um ponto final.",
+   "texto": "resposta é feliz",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.rufa)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 12,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 12 usos na amostra",
    "trechos_sem_clipe": [
-    "Que final feliz! Merece até um ponto final."
+    "resposta é feliz"
    ]
   },
   {
-   "texto": "Essa palavra ficou linda no papel. Quer ler de novo?",
+   "texto": "resposta é porque",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.rufa)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 11,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 11 usos na amostra",
    "trechos_sem_clipe": [
-    "Essa palavra ficou linda no papel. Quer ler de novo?"
+    "resposta é porque"
    ]
   },
   {
-   "texto": "Great! Great job! Isso mesmo.",
+   "texto": "resposta é mas",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.otto)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 11,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 11 usos na amostra",
    "trechos_sem_clipe": [
-    "Great! Great job! Isso mesmo."
+    "resposta é mas"
    ]
   },
   {
-   "texto": "Say it with me: hello, hello! Agora você.",
+   "texto": "a frase é falso",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.otto)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 10,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
    "trechos_sem_clipe": [
-    "Say it with me: hello, hello! Agora você."
+    "a frase é falso"
    ]
   },
   {
-   "texto": "Duvido que você consiga. Ah, conseguiu!",
+   "texto": "vogais",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.rara)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 10,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
    "trechos_sem_clipe": [
-    "Duvido que você consiga. Ah, conseguiu!"
+    "vogais"
    ]
   },
   {
-   "texto": "Mais uma rodada? Eu não perco com graça, perco com estilo.",
+   "texto": "letra que",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (acerto.rara)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 10,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
    "trechos_sem_clipe": [
-    "Mais uma rodada? Eu não perco com graça, perco com estilo."
+    "letra que"
    ]
   },
   {
-   "texto": "Três seguidas! A mochila está chacoalhando de alegria.",
+   "texto": "última",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (sequencia3)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 10,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
    "trechos_sem_clipe": [
-    "Três seguidas! A mochila está chacoalhando de alegria."
+    "última"
    ]
   },
   {
-   "texto": "Cinco seguidas! Você está voando mais que a Brisa.",
+   "texto": "resposta é lobo",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (sequencia5)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 10,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
    "trechos_sem_clipe": [
-    "Cinco seguidas! Você está voando mais que a Brisa."
+    "resposta é lobo"
    ]
   },
   {
-   "texto": "Acertou de primeira. Eu nem tinha terminado de torcer.",
+   "texto": "resposta é rápido",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (primeira)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 10,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
    "trechos_sem_clipe": [
-    "Acertou de primeira. Eu nem tinha terminado de torcer."
+    "resposta é rápido"
    ]
   },
   {
-   "texto": "Agora sim! Tentar de novo funciona.",
+   "texto": "resposta é misturar",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (recuperou)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 10,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
    "trechos_sem_clipe": [
-    "Agora sim! Tentar de novo funciona."
+    "resposta é misturar"
    ]
   },
   {
-   "texto": "Esse foi difícil e você resolveu. Caprichou!",
+   "texto": "levar ao micro ondas",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (dificil)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 10,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 10 usos na amostra",
    "trechos_sem_clipe": [
-    "Esse foi difícil e você resolveu. Caprichou!"
+    "levar ao micro ondas"
    ]
   },
   {
-   "texto": "Eita, você é rápido! Eu pisquei e a resposta já estava lá.",
+   "texto": "vem o",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (rapida)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 9,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
    "trechos_sem_clipe": [
-    "Eita, você é rápido! Eu pisquei e a resposta já estava lá."
+    "vem o"
    ]
   },
   {
-   "texto": "Errar faz parte da exploração. Todo mapa tem uma curva.",
+   "texto": "dão",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.bobby)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 9,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
    "trechos_sem_clipe": [
-    "Errar faz parte da exploração. Todo mapa tem uma curva."
+    "dão"
    ]
   },
   {
-   "texto": "Essa era das difíceis mesmo. Vamos olhar juntos.",
+   "texto": "não é múltiplo de",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.bobby)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 9,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
    "trechos_sem_clipe": [
-    "Essa era das difíceis mesmo. Vamos olhar juntos."
+    "não é múltiplo de"
    ]
   },
   {
-   "texto": "Quase todo explorador erra esse. Olha só a dica.",
+   "texto": "minutos",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.bobby)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 9,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
    "trechos_sem_clipe": [
-    "Quase todo explorador erra esse. Olha só a dica."
+    "minutos"
    ]
   },
   {
-   "texto": "Errar faz parte da exploração. Todo mapa tem uma curva.",
+   "texto": "resposta é brotos verdes",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.rufa)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 9,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
    "trechos_sem_clipe": [
-    "Errar faz parte da exploração. Todo mapa tem uma curva."
+    "resposta é brotos verdes"
    ]
   },
   {
-   "texto": "Essa era das difíceis mesmo. Vamos olhar juntos.",
+   "texto": "resposta é dar comida para o bobby",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.rufa)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 9,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 9 usos na amostra",
    "trechos_sem_clipe": [
-    "Essa era das difíceis mesmo. Vamos olhar juntos."
+    "resposta é dar comida para o bobby"
    ]
   },
   {
-   "texto": "Nice try! Vamos ouvir de novo, bem devagar.",
+   "texto": "o resto é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.otto)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 8,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 8 usos na amostra",
    "trechos_sem_clipe": [
-    "Nice try! Vamos ouvir de novo, bem devagar."
+    "o resto é"
    ]
   },
   {
-   "texto": "Repita comigo, devagar. Quanto mais devagar, melhor o som.",
+   "texto": "que rima com",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.otto)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 8,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 8 usos na amostra",
    "trechos_sem_clipe": [
-    "Repita comigo, devagar. Quanto mais devagar, melhor o som."
+    "que rima com"
    ]
   },
   {
-   "texto": "Respira fundo. A gente tenta de novo, sem pressa.",
+   "texto": "plural é pães",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.capi)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 8,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 8 usos na amostra",
    "trechos_sem_clipe": [
-    "Respira fundo. A gente tenta de novo, sem pressa."
+    "plural é pães"
    ]
   },
   {
-   "texto": "Uma resposta errada ajuda o cérebro a crescer. Pode ficar tranquilo.",
+   "texto": "resposta é papa",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.capi)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 7,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
    "trechos_sem_clipe": [
-    "Uma resposta errada ajuda o cérebro a crescer. Pode ficar tranquilo."
+    "resposta é papa"
    ]
   },
   {
-   "texto": "Ainda não. A resposta certa é essa, e a pergunta volta mais tarde.",
+   "texto": "resposta é chuva",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erroIgual)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 7,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
    "trechos_sem_clipe": [
-    "Ainda não. A resposta certa é essa, e a pergunta volta mais tarde."
+    "resposta é chuva"
    ]
   },
   {
-   "texto": "Quer uma dica? Dica não gasta nada.",
+   "texto": "resposta é canta",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (dica)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 7,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
    "trechos_sem_clipe": [
-    "Quer uma dica? Dica não gasta nada."
+    "resposta é canta"
    ]
   },
   {
-   "texto": "Pedir ajuda é coisa de explorador esperto.",
+   "texto": "resposta é quem faz",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (dica)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 7,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
    "trechos_sem_clipe": [
-    "Pedir ajuda é coisa de explorador esperto."
+    "resposta é quem faz"
    ]
   },
   {
-   "texto": "Uma pergunta por vez. A gente chega lá.",
+   "texto": "resposta é regar",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (dica)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 7,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 7 usos na amostra",
    "trechos_sem_clipe": [
-    "Uma pergunta por vez. A gente chega lá."
+    "resposta é regar"
    ]
   },
   {
-   "texto": "Pronto. Agora vamos conferir o que a gente aprendeu nessa trilha.",
+   "texto": "para montar",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (meio)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Pronto. Agora vamos conferir o que a gente aprendeu nessa trilha."
+    "para montar"
    ]
   },
   {
-   "texto": "Ufa, que subida! Mas a vista lá de cima vale cada passo.",
+   "texto": "o numerador é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (meio)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Ufa, que subida! Mas a vista lá de cima vale cada passo."
+    "o numerador é"
    ]
   },
   {
-   "texto": "Falta pouco. Só mais uma, e depois a gente confere a mochila inteira.",
+   "texto": "o valor é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (ultima)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Falta pouco. Só mais uma, e depois a gente confere a mochila inteira."
+    "o valor é"
    ]
   },
   {
-   "texto": "Fase completa! Minha mochila quer dançar.",
+   "texto": "igual a falso",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (faseCompleta)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Fase completa! Minha mochila quer dançar."
+    "igual a falso"
    ]
   },
   {
-   "texto": "Fase perfeita! Isso merece abraço de urso.",
+   "texto": "o tem",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (fasePerfeita)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Fase perfeita! Isso merece abraço de urso."
+    "o tem"
    ]
   },
   {
-   "texto": "Etapa completa! Olha o lugar acendendo.",
+   "texto": "frase é falso",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (etapaCompleta)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Etapa completa! Olha o lugar acendendo."
+    "frase é falso"
    ]
   },
   {
-   "texto": "Uma estrela voltou para o céu. Falta pouco para a constelação.",
+   "texto": "resposta é massa",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (estrela)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Uma estrela voltou para o céu. Falta pouco para a constelação."
+    "resposta é massa"
    ]
   },
   {
-   "texto": "Seu baú do dia está pronto. Quer abrir?",
+   "texto": "resposta é conpra",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (bauPronto)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Seu baú do dia está pronto. Quer abrir?"
+    "resposta é conpra"
    ]
   },
   {
-   "texto": "Que baú bonito! Tem uma coisa nova lá dentro.",
+   "texto": "resposta é desenha",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (bauAberto)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Que baú bonito! Tem uma coisa nova lá dentro."
+    "resposta é desenha"
    ]
   },
   {
-   "texto": "Por hoje chega. Você fez um ótimo trabalho, e amanhã tem mais.",
+   "texto": "resposta é estudo",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (parada)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Por hoje chega. Você fez um ótimo trabalho, e amanhã tem mais."
+    "resposta é estudo"
    ]
   },
   {
-   "texto": "Descansar também faz parte da aventura.",
+   "texto": "ed",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (parada)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 6,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 6 usos na amostra",
    "trechos_sem_clipe": [
-    "Descansar também faz parte da aventura."
+    "ed"
    ]
   },
   {
-   "texto": "Hoje foi bastante.",
+   "texto": "o número é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (parada)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 5,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
    "trechos_sem_clipe": [
-    "Hoje foi bastante."
+    "o número é"
    ]
   },
   {
-   "texto": "Um congelador cuidou da sua sequência. Ela continua firme.",
+   "texto": "termina com",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (congelador)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 5,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
    "trechos_sem_clipe": [
-    "Um congelador cuidou da sua sequência. Ela continua firme."
+    "termina com"
    ]
   },
   {
-   "texto": "Sua sequência estava descansando. Hoje ela volta com tudo.",
+   "texto": "falso o",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (descansando)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 5,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
    "trechos_sem_clipe": [
-    "Sua sequência estava descansando. Hoje ela volta com tudo."
+    "falso o"
    ]
   },
   {
-   "texto": "Psiu! Tem um bilhete para você.",
+   "texto": "resposta é cebola",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (bilhete)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 5,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
    "trechos_sem_clipe": [
-    "Psiu! Tem um bilhete para você."
+    "resposta é cebola"
    ]
   },
   {
-   "texto": "Entreguei! Era para você mesmo.",
+   "texto": "resposta é banho",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (bilhete)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 5,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
    "trechos_sem_clipe": [
-    "Entreguei! Era para você mesmo."
+    "resposta é banho"
    ]
   },
   {
-   "texto": "Ei, esse chapéu combinou com você.",
+   "texto": "resposta é dorme",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (chapeu)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 5,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
    "trechos_sem_clipe": [
-    "Ei, esse chapéu combinou com você."
+    "resposta é dorme"
    ]
   },
   {
-   "texto": "Cócegas na orelha! Hahaha. Para, para, para.",
+   "texto": "resposta é luz",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (toque)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 5,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
    "trechos_sem_clipe": [
-    "Cócegas na orelha! Hahaha. Para, para, para."
+    "resposta é luz"
    ]
   },
   {
-   "texto": "Pode me chamar do que quiser. Eu respondo a qualquer apelido que venha com lanche.",
+   "texto": "resposta é mais",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (toque)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 5,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
    "trechos_sem_clipe": [
-    "Pode me chamar do que quiser. Eu respondo a qualquer apelido que venha com lanche."
+    "resposta é mais"
    ]
   },
   {
-   "texto": "Olha, um passarinho! Sumiu. Mas eu juro que ele estava ali.",
+   "texto": "resposta é é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (toque)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 5,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 5 usos na amostra",
    "trechos_sem_clipe": [
-    "Olha, um passarinho! Sumiu. Mas eu juro que ele estava ali."
+    "resposta é é"
    ]
   },
   {
-   "texto": "Hmm. Interessante. Muito interessante. Nenhuma ideia, mas interessante.",
+   "texto": "antes do",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (toque)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Hmm. Interessante. Muito interessante. Nenhuma ideia, mas interessante."
+    "antes do"
    ]
   },
   {
-   "texto": "Ops.",
+   "texto": "a terça parte de",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (toque)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Ops."
+    "a terça parte de"
    ]
   },
   {
-   "texto": "Hihi, troquei tudo de lugar! Ops. Desculpa.",
+   "texto": "a maior é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (embaralho)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Hihi, troquei tudo de lugar! Ops. Desculpa."
+    "a maior é"
    ]
   },
   {
-   "texto": "Você me achou! Eu não sei perder esconde-esconde.",
+   "texto": "moedas",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (embaralho)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Você me achou! Eu não sei perder esconde-esconde."
+    "moedas"
    ]
   },
   {
-   "texto": "Sem pressa. Pensar também é jogar.",
+   "texto": "a resposta é x igual a",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (ocioso)",
-   "classe": "feedback",
-   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Sem pressa. Pensar também é jogar."
+    "a resposta é x igual a"
    ]
   },
   {
-   "texto": "Os saquinhos de sementes estão com a contagem trocada. Teo encontra um rastro de poeira brilhante.",
+   "texto": "a menor é menos",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa1)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Os saquinhos de sementes estão com a contagem trocada. Teo encontra um rastro de poeira brilhante."
+    "a menor é menos"
    ]
   },
   {
-   "texto": "As conchas apareceram em pilhas erradas. O rastro de poeira continua pela areia.",
+   "texto": "ê se",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa2)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "As conchas apareceram em pilhas erradas. O rastro de poeira continua pela areia."
+    "ê se"
    ]
   },
   {
-   "texto": "A caravana saiu com caixas demais, ou de menos. Alguém bagunçou a carga durante a noite.",
+   "texto": "resposta é saca",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa3)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "A caravana saiu com caixas demais, ou de menos. Alguém bagunçou a carga durante a noite."
+    "resposta é saca"
    ]
   },
   {
-   "texto": "Ninguém sabe repartir os lanches. Uma risadinha vem de trás de um tronco.",
+   "texto": "é presa",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa4)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Ninguém sabe repartir os lanches. Uma risadinha vem de trás de um tronco."
+    "é presa"
    ]
   },
   {
-   "texto": "As fatias sumiram da bandeja. Teo vê a cauda de um cometa passar voando.",
+   "texto": "resposta é pelo som",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa5)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "As fatias sumiram da bandeja. Teo vê a cauda de um cometa passar voando."
+    "resposta é pelo som"
    ]
   },
   {
-   "texto": "As etiquetas de preço trocaram de lugar. O Embaralho aparece rindo, em cima da barraca.",
+   "texto": "resposta é terra",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa6)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "As etiquetas de preço trocaram de lugar. O Embaralho aparece rindo, em cima da barraca."
+    "resposta é terra"
    ]
   },
   {
-   "texto": "Ele diz que só queria brincar, mas levou um pedaço da Estrela Cobalto.",
+   "texto": "resposta é osso",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa7)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Ele diz que só queria brincar, mas levou um pedaço da Estrela Cobalto."
+    "resposta é osso"
    ]
   },
   {
-   "texto": "Para alcançar o Embaralho, o Bobby precisa construir um parquinho com as medidas certas.",
+   "texto": "resposta é campo",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa8)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Para alcançar o Embaralho, o Bobby precisa construir um parquinho com as medidas certas."
+    "resposta é campo"
    ]
   },
   {
-   "texto": "O foguete está quase pronto. Falta o número escondido que faz ele decolar.",
+   "texto": "resposta é maiúscula",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa9)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "O foguete está quase pronto. Falta o número escondido que faz ele decolar."
+    "resposta é maiúscula"
    ]
   },
   {
-   "texto": "O Embaralho devolve a Estrela Cobalto e pede para ir à festa. O castelo inteiro aplaude.",
+   "texto": "ponto",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.mat.etapa10)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "O Embaralho devolve a Estrela Cobalto e pede para ir à festa. O castelo inteiro aplaude."
+    "ponto"
    ]
   },
   {
-   "texto": "As letras da caixa estão fora de ordem. Rufa suspeita de um visitante bagunceiro.",
+   "texto": "resposta é corre o cachorro quintal",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa1)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "As letras da caixa estão fora de ordem. Rufa suspeita de um visitante bagunceiro."
+    "resposta é corre o cachorro quintal"
    ]
   },
   {
-   "texto": "O trem só anda se os vagões estiverem na ordem. Alguém trocou todos de lugar.",
+   "texto": "resposta é pessoa",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa2)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "O trem só anda se os vagões estiverem na ordem. Alguém trocou todos de lugar."
+    "resposta é pessoa"
    ]
   },
   {
-   "texto": "Os cartazes estão embaralhados. Rufa acha um brilho de poeira estelar no chão.",
+   "texto": "resposta é os",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa3)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Os cartazes estão embaralhados. Rufa acha um brilho de poeira estelar no chão."
+    "resposta é os"
    ]
   },
   {
-   "texto": "Na oficina os sons saem trocados. Isso tem cheiro de Embaralho.",
+   "texto": "plural é verdadeiro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa4)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Na oficina os sons saem trocados. Isso tem cheiro de Embaralho."
+    "plural é verdadeiro"
    ]
   },
   {
-   "texto": "As cartas chegam sem ponto final e viram frases sem fim. Uma risadinha sai de um envelope.",
+   "texto": "plural é flores",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa5)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "As cartas chegam sem ponto final e viram frases sem fim. Uma risadinha sai de um envelope."
+    "plural é flores"
    ]
   },
   {
-   "texto": "O Embaralho aparece de verdade, com cauda de letras. Pega a Estrela Violeta e foge.",
+   "texto": "resposta é professor",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa6)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "O Embaralho aparece de verdade, com cauda de letras. Pega a Estrela Violeta e foge."
+    "resposta é professor"
    ]
   },
   {
-   "texto": "A estrela está escondida no palco. Para entrar, o Bobby vai atuar numa peça.",
+   "texto": "resposta é rainha",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa7)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "A estrela está escondida no palco. Para entrar, o Bobby vai atuar numa peça."
+    "resposta é rainha"
    ]
   },
   {
-   "texto": "As palavras saem com letras trocadas. Dá para ler o recado dele se você acertar tudo.",
+   "texto": "resposta é os meninos altos",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa8)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "As palavras saem com letras trocadas. Dá para ler o recado dele se você acertar tudo."
+    "resposta é os meninos altos"
    ]
   },
   {
-   "texto": "O recado diz: quero brincar, não brigar. Rufa sorri e o jardim fica em silêncio.",
+   "texto": "resposta é futuro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa9)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "O recado diz: quero brincar, não brigar. Rufa sorri e o jardim fica em silêncio."
+    "resposta é futuro"
    ]
   },
   {
-   "texto": "O Embaralho devolve a Estrela Violeta e pede para ouvir uma história. Rufa lê para ele.",
+   "texto": "resposta é presente",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.pt.etapa10)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "O Embaralho devolve a Estrela Violeta e pede para ouvir uma história. Rufa lê para ele."
+    "resposta é presente"
    ]
   },
   {
-   "texto": "O Bobby chega à cidade e as placas estão em inglês trocado. Otto dá as boas-vindas.",
+   "texto": "resposta é viagem",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa1)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "O Bobby chega à cidade e as placas estão em inglês trocado. Otto dá as boas-vindas."
+    "resposta é viagem"
    ]
   },
   {
-   "texto": "As cores dos arcos estão trocadas. Otto jura que ontem eram outras.",
+   "texto": "resposta é mochila",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa2)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "As cores dos arcos estão trocadas. Otto jura que ontem eram outras."
+    "resposta é mochila"
    ]
   },
   {
-   "texto": "Um bilhete chegou com metade das palavras faltando. Otto fica curioso.",
+   "texto": "resposta é avô",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa3)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Um bilhete chegou com metade das palavras faltando. Otto fica curioso."
+    "resposta é avô"
    ]
   },
   {
-   "texto": "As placas dos bichos trocaram de lugar. O macaco parece rir de alguma coisa.",
+   "texto": "resposta é separar os itens",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa4)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "As placas dos bichos trocaram de lugar. O macaco parece rir de alguma coisa."
+    "resposta é separar os itens"
    ]
   },
   {
-   "texto": "O cardápio chegou embaralhado e o garçom não entende o pedido. Otto traduz com paciência.",
+   "texto": "resposta é você",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa5)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "O cardápio chegou embaralhado e o garçom não entende o pedido. Otto traduz com paciência."
+    "resposta é você"
    ]
   },
   {
-   "texto": "Uma sombra brilhante passa pelo provador. O Embaralho vestiu o manequim ao contrário.",
+   "texto": "resposta é um nome",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa6)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "Uma sombra brilhante passa pelo provador. O Embaralho vestiu o manequim ao contrário."
+    "resposta é um nome"
    ]
   },
   {
-   "texto": "A casa tem uma chave que abre a porta errada. Cada cômodo guarda uma pista.",
+   "texto": "pessoa ou bicho",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa7)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 4,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 4 usos na amostra",
    "trechos_sem_clipe": [
-    "A casa tem uma chave que abre a porta errada. Cada cômodo guarda uma pista."
+    "pessoa ou bicho"
    ]
   },
   {
-   "texto": "O Bobby segue o rastro de poeira pela cidade inteira e vê a Estrela Turquesa na ponte.",
+   "texto": "cubinhos",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa8)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
    "trechos_sem_clipe": [
-    "O Bobby segue o rastro de poeira pela cidade inteira e vê a Estrela Turquesa na ponte."
+    "cubinhos"
    ]
   },
   {
-   "texto": "O Embaralho aparece e faz perguntas em inglês. Se o Bobby responder bem, ele conta onde está a estrela.",
+   "texto": "o triplo de",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa9)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
    "trechos_sem_clipe": [
-    "O Embaralho aparece e faz perguntas em inglês. Se o Bobby responder bem, ele conta onde está a estrela."
+    "o triplo de"
    ]
   },
   {
-   "texto": "O Embaralho devolve a Estrela Turquesa. As três estrelas voltam e a constelação acende.",
+   "texto": "inteiro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (narrativa.en.etapa10)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
    "trechos_sem_clipe": [
-    "O Embaralho devolve a Estrela Turquesa. As três estrelas voltam e a constelação acende."
+    "inteiro"
    ]
   },
   {
-   "texto": "A constelação acendeu. O céu inteiro agora tem o seu nome.",
+   "texto": "o volume é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (cerimonia.planeta)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
    "trechos_sem_clipe": [
-    "A constelação acendeu. O céu inteiro agora tem o seu nome."
+    "o volume é"
    ]
   },
   {
-   "texto": "A Estrela Cobalto voltou para o céu.",
+   "texto": "é consoante",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (cerimonia.planeta.mat)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
    "trechos_sem_clipe": [
-    "A Estrela Cobalto voltou para o céu."
+    "é consoante"
    ]
   },
   {
-   "texto": "A Estrela Violeta voltou para o céu.",
+   "texto": "letra que falta é",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (cerimonia.planeta.pt)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
    "trechos_sem_clipe": [
-    "A Estrela Violeta voltou para o céu."
+    "letra que falta é"
    ]
   },
   {
-   "texto": "A Estrela Turquesa voltou para o céu.",
+   "texto": "resposta é maçã",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (cerimonia.planeta.en)",
-   "classe": "feedback",
-   "motivo": "fala nova (narrativa do Embaralho e cerimonias, docs/PLANO-DE-IDENTIDADE.md secoes 7.3 e 8); gerar com a voz local, sem custo",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
    "trechos_sem_clipe": [
-    "A Estrela Turquesa voltou para o céu."
+    "resposta é maçã"
    ]
   },
   {
-   "texto": "Epa, essa conta travou. Vamos olhar o caminho juntos.",
+   "texto": "resposta é carro",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.teo)",
-   "classe": "feedback",
-   "motivo": "fala nova (revisao das falas de erro, 24/10/2026); gerar com a voz local",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
    "trechos_sem_clipe": [
-    "Epa, essa conta travou. Vamos olhar o caminho juntos."
+    "resposta é carro"
    ]
   },
   {
-   "texto": "Ainda não. Olha o caminho: a resposta aparece com calma.",
+   "texto": "resposta é pêssego",
    "idioma": "pt-BR",
-   "materia": "sistema",
-   "categoria": "fala do personagem (erro.teo)",
-   "classe": "feedback",
-   "motivo": "fala nova (revisao das falas de erro, 24/10/2026); gerar com a voz local",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
    "trechos_sem_clipe": [
-    "Ainda não. Olha o caminho: a resposta aparece com calma."
+    "resposta é pêssego"
+   ]
+  },
+  {
+   "texto": "resposta é filho",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é filho"
+   ]
+  },
+  {
+   "texto": "resposta é chu",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é chu"
+   ]
+  },
+  {
+   "texto": "resposta é bomba",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é bomba"
+   ]
+  },
+  {
+   "texto": "resposta é brinca",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é brinca"
+   ]
+  },
+  {
+   "texto": "resposta é onde está",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é onde está"
+   ]
+  },
+  {
+   "texto": "resposta é um aviso forte",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é um aviso forte"
+   ]
+  },
+  {
+   "texto": "resposta é lugar",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é lugar"
+   ]
+  },
+  {
+   "texto": "resposta é correr",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é correr"
+   ]
+  },
+  {
+   "texto": "resposta é bicho",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é bicho"
+   ]
+  },
+  {
+   "texto": "resposta é o",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é o"
+   ]
+  },
+  {
+   "texto": "resposta é as",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é as"
+   ]
+  },
+  {
+   "texto": "resposta é plural",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é plural"
+   ]
+  },
+  {
+   "texto": "resposta é feminino",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é feminino"
+   ]
+  },
+  {
+   "texto": "resposta é gata",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é gata"
+   ]
+  },
+  {
+   "texto": "resposta é masculino",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é masculino"
+   ]
+  },
+  {
+   "texto": "resposta é brasil",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é brasil"
+   ]
+  },
+  {
+   "texto": "resposta é bobby",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é bobby"
+   ]
+  },
+  {
+   "texto": "resposta é forte",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é forte"
+   ]
+  },
+  {
+   "texto": "resposta é vermelha",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é vermelha"
+   ]
+  },
+  {
+   "texto": "resposta é esperta",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é esperta"
+   ]
+  },
+  {
+   "texto": "resposta é estuda",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é estuda"
+   ]
+  },
+  {
+   "texto": "resposta é as casas novas",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é as casas novas"
+   ]
+  },
+  {
+   "texto": "resposta é bonitas",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é bonitas"
+   ]
+  },
+  {
+   "texto": "bonita",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "bonita"
+   ]
+  },
+  {
+   "texto": "resposta é vou jogar",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é vou jogar"
+   ]
+  },
+  {
+   "texto": "resposta é brinquei",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é brinquei"
+   ]
+  },
+  {
+   "texto": "resposta é passado",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é passado"
+   ]
+  },
+  {
+   "texto": "preto dorme",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "preto dorme"
+   ]
+  },
+  {
+   "texto": "parque",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "parque"
+   ]
+  },
+  {
+   "texto": "resposta é açúcar",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é açúcar"
+   ]
+  },
+  {
+   "texto": "resposta é coração",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é coração"
+   ]
+  },
+  {
+   "texto": "resposta é laço",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é laço"
+   ]
+  },
+  {
+   "texto": "resposta é maçe",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é maçe"
+   ]
+  },
+  {
+   "texto": "resposta é xícara",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é xícara"
+   ]
+  },
+  {
+   "texto": "resposta é caixa",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é caixa"
+   ]
+  },
+  {
+   "texto": "resposta é país",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é país"
+   ]
+  },
+  {
+   "texto": "resposta é casinha",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é casinha"
+   ]
+  },
+  {
+   "texto": "resposta é mau",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é mau"
+   ]
+  },
+  {
+   "texto": "resposta é quantidade",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é quantidade"
+   ]
+  },
+  {
+   "texto": "resposta é mal",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é mal"
+   ]
+  },
+  {
+   "texto": "resposta é sabiá",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é sabiá"
+   ]
+  },
+  {
+   "texto": "resposta é café",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é café"
+   ]
+  },
+  {
+   "texto": "resposta é fé",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é fé"
+   ]
+  },
+  {
+   "texto": "resposta é pão",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é pão"
+   ]
+  },
+  {
+   "texto": "resposta é mão",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é mão"
+   ]
+  },
+  {
+   "texto": "plural é limões",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é limões"
+   ]
+  },
+  {
+   "texto": "resposta é água",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é água"
+   ]
+  },
+  {
+   "texto": "resposta é médico",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é médico"
+   ]
+  },
+  {
+   "texto": "resposta é história",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é história"
+   ]
+  },
+  {
+   "texto": "resposta é também",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é também"
+   ]
+  },
+  {
+   "texto": "resposta é comprei pão leite",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é comprei pão leite"
+   ]
+  },
+  {
+   "texto": "queijo",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "queijo"
+   ]
+  },
+  {
+   "texto": "resposta é gosto",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é gosto"
+   ]
+  },
+  {
+   "texto": "resposta é ela disse",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é ela disse"
+   ]
+  },
+  {
+   "texto": "&mdash",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "&mdash"
+   ]
+  },
+  {
+   "texto": "vamos",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "vamos"
+   ]
+  },
+  {
+   "texto": "resposta é &mdash",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é &mdash"
+   ]
+  },
+  {
+   "texto": "resposta é quem escreveu",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é quem escreveu"
+   ]
+  },
+  {
+   "texto": "resposta é deixar um recado",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é deixar um recado"
+   ]
+  },
+  {
+   "texto": "que usar",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "que usar"
+   ]
+  },
+  {
+   "texto": "resposta é às cinco horas",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é às cinco horas"
+   ]
+  },
+  {
+   "texto": "ordem importa",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "ordem importa"
+   ]
+  },
+  {
+   "texto": "resposta é o lugar onde acontece",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é o lugar onde acontece"
+   ]
+  },
+  {
+   "texto": "resposta é quem faz as ações",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é quem faz as ações"
+   ]
+  },
+  {
+   "texto": "resposta é um lugar",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é um lugar"
+   ]
+  },
+  {
+   "texto": "no passado fica",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "no passado fica"
+   ]
+  },
+  {
+   "texto": "a resposta é not",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "a resposta é not"
+   ]
+  },
+  {
+   "texto": "ng much",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 3,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 3 usos na amostra",
+   "trechos_sem_clipe": [
+    "ng much"
+   ]
+  },
+  {
+   "texto": "o denominador é",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "o denominador é"
+   ]
+  },
+  {
+   "texto": "o inteiro",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "o inteiro"
+   ]
+  },
+  {
+   "texto": "é vogal",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "é vogal"
+   ]
+  },
+  {
+   "texto": "é x",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "é x"
+   ]
+  },
+  {
+   "texto": "resposta é pula",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é pula"
+   ]
+  },
+  {
+   "texto": "resposta é corre",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é corre"
+   ]
+  },
+  {
+   "texto": "resposta é limpo",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é limpo"
+   ]
+  },
+  {
+   "texto": "resposta é escreve",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é escreve"
+   ]
+  },
+  {
+   "texto": "desenha com o amigo",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "desenha com o amigo"
+   ]
+  },
+  {
+   "texto": "em inglês é",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 2,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 2 usos na amostra",
+   "trechos_sem_clipe": [
+    "em inglês é"
+   ]
+  },
+  {
+   "texto": "a resposta é seiscentos e oitenta e um",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "a resposta é seiscentos e oitenta e um"
+   ]
+  },
+  {
+   "texto": "o é",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "o é"
+   ]
+  },
+  {
+   "texto": "s é",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "s é"
+   ]
+  },
+  {
+   "texto": "w é",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "w é"
+   ]
+  },
+  {
+   "texto": "r é",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "r é"
+   ]
+  },
+  {
+   "texto": "é q",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "é q"
+   ]
+  },
+  {
+   "texto": "t é",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "t é"
+   ]
+  },
+  {
+   "texto": "ê se du",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "ê se du"
+   ]
+  },
+  {
+   "texto": "ê se bu",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "ê se bu"
+   ]
+  },
+  {
+   "texto": "vovó pula com o amigo",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "vovó pula com o amigo"
+   ]
+  },
+  {
+   "texto": "cachorro corre com o amigo",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "cachorro corre com o amigo"
+   ]
+  },
+  {
+   "texto": "resposta é come",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é come"
+   ]
+  },
+  {
+   "texto": "resposta é com o amigo",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é com o amigo"
+   ]
+  },
+  {
+   "texto": "resposta é em",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é em"
+   ]
+  },
+  {
+   "texto": "resposta é com",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "resposta é com"
+   ]
+  },
+  {
+   "texto": "plural é girafas",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é girafas"
+   ]
+  },
+  {
+   "texto": "plural é portas",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é portas"
+   ]
+  },
+  {
+   "texto": "plural é fadas",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é fadas"
+   ]
+  },
+  {
+   "texto": "plural é estrelas",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é estrelas"
+   ]
+  },
+  {
+   "texto": "plural é dedos",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é dedos"
+   ]
+  },
+  {
+   "texto": "plural é tomates",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é tomates"
+   ]
+  },
+  {
+   "texto": "plural é meninas",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é meninas"
+   ]
+  },
+  {
+   "texto": "plural é ratos",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é ratos"
+   ]
+  },
+  {
+   "texto": "plural é dados",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é dados"
+   ]
+  },
+  {
+   "texto": "plural é cavalos",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é cavalos"
+   ]
+  },
+  {
+   "texto": "plural é latas",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é latas"
+   ]
+  },
+  {
+   "texto": "plural é livros",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "plural é livros"
+   ]
+  },
+  {
+   "texto": "e aí em inglês é",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "cauda longa (pode ficar sem voz)",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "e aí em inglês é"
+   ]
+  },
+  {
+   "texto": "posso pegar",
+   "idioma": "pt-BR",
+   "materia": "core",
+   "categoria": "quadro da resposta da dica",
+   "classe": "quadro-enunciado",
+   "usos_amostrados": 1,
+   "prioridade": "alta",
+   "motivo": "o app agora fala a resposta da dica como clipe separado, cortado na pontuacao; estes quadros curtos (\"a resposta e\", \"antes do\", \"vem o\", \"da\", \"o perimetro e\") ainda nao existem no manifesto e cobrem 1 usos na amostra",
+   "trechos_sem_clipe": [
+    "posso pegar"
+   ]
+  },
+  {
+   "texto": "A resposta é Verdadeiro.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "resposta da dica",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A resposta é oitocentos e quatro.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "resposta da dica",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A resposta é novecentos e oito.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "resposta da dica",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A resposta é trezentos e noventa e nove.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "resposta da dica",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A resposta é seiscentos e noventa.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "resposta da dica",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A frase é verdadeiro.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "resposta da dica",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A frase é falso.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "resposta da dica",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A resposta é Ela disse: &mdash; Vamos!.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica",
+   "motivo": "sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:resposta é ela disse",
+    "quadro:&mdash",
+    "quadro:vamos"
    ]
   }
  ]

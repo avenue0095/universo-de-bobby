@@ -22,6 +22,10 @@ const semClipe = [];
 const min = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifesto-min.json'), 'utf8'));
 const completo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifesto.json'), 'utf8'));
 const ignorados = new Set((completo.ignorados || []).map((i) => i.texto));
+/* cauda longa (manifesto.json nao_gerados.textos): quadros de ajuda que juntam a resposta por extenso e nao foram gravados de proposito; ficam sem voz
+   com o texto na tela. Contam como informativo, nao como falha. */
+const caudaLonga = new Set(((completo.nao_gerados || {}).textos) || []);
+let caudaVista = 0;
 
 const app = carregarApp(SEMENTE);
 app.ctx.__min = min;
@@ -35,7 +39,7 @@ function conta(nome, texto, lang, mat) {
   const c = cat[nome] = cat[nome] || { vistos: new Set(), ok: 0, total: 0, faltas: new Map(), usos: 0, usosOk: 0 };
   const chave = lang + '|' + mat + '|' + texto;
   const r = seq(texto, lang, mat);
-  const faltas = r.f.filter((f) => !(f.startsWith('quadro:') && ignorados.has(f.slice(7).trim()) ) && f !== 'quadro:__');
+  const faltas = r.f.filter((f) => { if (f.startsWith('quadro:') && caudaLonga.has(f.slice(7).trim())) { caudaVista++; return false; } return !(f.startsWith('quadro:') && ignorados.has(f.slice(7).trim())) && f !== 'quadro:__'; });
   c.usos++;
   const bom = r.n > 0 && !faltas.length;
   if (bom) c.usosOk++;
@@ -66,7 +70,25 @@ for (const [m, U] of UN) {
     // perguntas: como o verifica.js, varias rodadas por fase
     for (let r = 0; r < RODADAS; r++) {
       const qs = app.avaliar('genQuestions(' + U + '[' + ui + '].lessons[' + li + '],8)');
-      qs.forEach((q) => conta(m === 'mat' ? 'pergunta (matematica)' : m === 'pt' ? 'pergunta (portugues)' : 'pergunta (ingles)', q.ouvir || q.prompt, q.lang || 'pt-BR', m));
+      qs.forEach((q) => {
+        conta(m === 'mat' ? 'pergunta (matematica)' : m === 'pt' ? 'pergunta (portugues)' : 'pergunta (ingles)', q.ouvir || q.prompt, q.lang || 'pt-BR', m);
+        /* dica ("Como fazer"), resposta e "Ajuda extra": o app fala metodo e resposta como DOIS clipes, entao cada um e conferido sozinho */
+        if (r < 3) {
+          app.ctx.__q = q;
+          let h = null; try { h = app.avaliar('(function(){const h=ajudaDe(__q);return {m:String(h.metodo||""),r:String(h.resposta||"")}})()'); } catch (e) { h = null; }
+          if (h && h.m) conta('dica (como fazer)', h.m, 'pt-BR', m);
+          if (h && h.r) conta('resposta da dica', h.r, 'pt-BR', m);
+          const A = [];
+          if (q.type === 'mc') [1, 2, 3].forEach((n) => A.push('Tirei ' + n + ' resposta' + (n > 1 ? 's' : '') + ' errada' + (n > 1 ? 's' : '') + '. Agora escolha entre as que sobraram.'));
+          else if (q.type === 'blocos') A.push('Já coloquei as placas e as barrinhas para você. Agora complete só os <b>cubinhos</b>.');
+          else if (q.type === 'fracao') A.push('Pintei quase tudo. Falta pintar <b>1 parte</b>.');
+          else if (q.type === 'grupinhos') A.push('Já montei os grupos. Agora coloque <b>' + q.alvoP + '</b> em cada um.');
+          else if (q.type === 'texto' || q.type === 'input') { const a = String(q.answer); A.push('A resposta começa com <b>' + a.slice(0, 1) + '</b> e tem <b>' + a.length + '</b> ' + (a.length > 1 ? 'caracteres' : 'caractere') + '.'); }
+          else if (q.type === 'silabas') A.push('A primeira sílaba é <b>' + String(q.answer).slice(0, 2) + '</b>.');
+          else A.push('Leia devagar e tente de novo. Você consegue.');
+          A.forEach((t) => conta('ajuda extra', t, 'pt-BR', m));
+        }
+      });
     }
   }));
 }
@@ -102,6 +124,7 @@ console.log('\nAVISO: ' + faltas.length + ' trechos sem clipe (ficam sem voz; na
 const mostra = LISTA ? faltas : faltas.slice(0, 25);
 mostra.forEach(([n, f, ex]) => console.log('  [' + n + '] ' + f + '   <= ' + String(ex).replace(/<[^>]*>/g, '').slice(0, 70)));
 if (!LISTA && faltas.length > 25) console.log('  ... e mais ' + (faltas.length - 25) + ' (use --lista)');
+if (caudaVista) console.log('\nINFORMATIVO: ' + caudaVista + ' usos de ajuda com quadro de cauda longa (resposta por extenso, nao gravada de proposito): ficam sem voz, com o texto na tela.');
 console.log('\nINFORMATIVO: ' + semClipeNovas.length + ' de ' + novas.length + ' falas novas do app (bilhetes do Bobby, parada, avisos de troca) ainda nao tem clipe e ficam sem voz ate o proximo lote.');
 if (ruim.length) { console.log('\nFALHOU: cobertura abaixo de ' + MINIMO + '% em: ' + ruim.join(', ')); process.exitCode = 1; }
 else console.log('\nOK: toda categoria com pelo menos ' + MINIMO + '% dos textos distintos com clipe');

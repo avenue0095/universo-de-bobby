@@ -1655,3 +1655,8 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
 .acompanhante img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 3px var(--cor-sombra))}
 .folha-bobby .acompanhante{width:56px;height:56px;vertical-align:bottom;margin-left:calc(-1 * var(--esp-8))}
 .guia-av{object-position:50% 10%}
+
+/* Voz e som: opção das ajudas faladas */
+.opcao-ajudas{display:grid;grid-template-columns:auto 1fr;gap:var(--esp-4) var(--esp-8);align-items:center;cursor:pointer}
+.opcao-ajudas small{grid-column:2}
+.opcao-ajudas input{width:24px;height:24px;accent-color:var(--cor-acao)}
