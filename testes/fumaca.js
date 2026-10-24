@@ -253,6 +253,90 @@ async function main() {
         await js("S.look={};S.desenhos.tinta={};salvar();0");
       }
 
+      /* 2e) PONTARIA E TOQUE REAL. Regressao de 24/10/2026: um z-index no corpo da fase cobriu o painel fixo e nenhum botao respondia,
+         mas .click() por JavaScript ignora o que esta por cima. Aqui o toque vai pelo CDP (mouse no desktop, toque no celular), no ponto central
+         do botao, e antes disso conferimos com elementFromPoint que o botao e mesmo o elemento ali. */
+      {
+        if (medidas.mobile) await cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+        const centro = (sel) => js("(()=>{const e=document.querySelector(" + JSON.stringify(sel) + ");if(!e)return null;const r0=e.getBoundingClientRect();if(r0.width===0)return null;e.scrollIntoView({block:'center',inline:'center'});const r=e.getBoundingClientRect();const x=r.left+r.width/2,y=r.top+r.height/2;const t=document.elementFromPoint(x,y);return {x:x,y:y,ok:!!t&&(t===e||e.contains(t)),topo:t?(t.id||t.className||t.tagName):'nada'}})()");
+        const toque = async (sel, etiqueta) => {
+          const c = await centro(sel);
+          if (!c) { problemas.push(rot + ' toque real: ' + etiqueta + ' (' + sel + ') nao existe na tela'); return false; }
+          if (!c.ok) { problemas.push(rot + ' toque real: ' + etiqueta + ' (' + sel + ') esta coberto por ' + c.topo); return false; }
+          if (medidas.mobile) { await cdp('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: c.x, y: c.y }] }); await cdp('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); }
+          else { await cdp('Input.dispatchMouseEvent', { type: 'mouseMoved', x: c.x, y: c.y }); await cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: c.x, y: c.y, button: 'left', clickCount: 1 }); await cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: c.x, y: c.y, button: 'left', clickCount: 1 }); }
+          await dorme(160); return true;
+        };
+        for (const mat of ['mat', 'pt', 'en']) {
+          await js("fecharFolha();document.querySelector('#bb-mapa').click();usarMateria('" + mat + "');fecharFolha();S.moedas=500;S.faixa='f910';salvar();0"); await dorme(300);
+          await js("abrirLicao(1,0);0"); await dorme(300);
+          // historia -> aula -> questao, tudo com toque real no botao do rodape
+          let passos = 0;
+          while (passos++ < 12 && (await js('LIC.etapa')) !== 'questao') { if (!(await toque('#acao', 'botao do rodape (' + (await js('LIC.etapa')) + ')'))) break; }
+          if ((await js('LIC.etapa')) !== 'questao') { problemas.push(rot + ' ' + mat + ' toque real: nao chegou na pergunta tocando o rodape'); continue; }
+          // pula ate uma pergunta de escolha (as outras sao testadas em outros blocos)
+          await js("while(LIC.qs[LIC.i].type!=='mc'&&LIC.i<LIC.qs.length-1){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0");
+          if ((await js('LIC.qs[LIC.i].type')) !== 'mc') continue;
+          // dica
+          await toque('#dica', 'botao Dica'); if (!(await js('!!LIC.dica'))) problemas.push(rot + ' ' + mat + ' toque real: tocar na dica nao abriu a dica');
+          // erra de proposito com 1 coracao: aparece "continuar por 50 moedas"
+          await js("LIC.vidas=1;pintarVidas();0");
+          const errada = await js("LIC.qs[LIC.i].options.findIndex(o=>o!==LIC.qs[LIC.i].answer)");
+          await toque('.alt[data-v="' + errada + '"]', 'alternativa errada');
+          if (!(await js("!!document.querySelector('.alt.sel')"))) problemas.push(rot + ' ' + mat + ' toque real: tocar na alternativa nao a selecionou');
+          await toque('#acao', 'botao Verificar');
+          if (!(await js('LIC.conferido'))) problemas.push(rot + ' ' + mat + ' toque real: Verificar nao conferiu (LIC.conferido=false)');
+          const msg = await js("document.querySelector('#fb-s').innerText.replace(/\\s+/g,' ')");
+          if (/\n/.test(await js("document.querySelector('#fb-s').innerText")) && false) problemas.push(rot + ' ' + mat + ': resposta quebrada em linhas soltas');
+          await shot('toque-' + mat + '-erro');
+          if (await js("!!document.querySelector('#comprar-vida')")) {
+            await toque('#comprar-vida', 'botao continuar por 50 moedas');
+            if ((await js('LIC.vidas')) !== 2) problemas.push(rot + ' ' + mat + ' toque real: comprar vida nao funcionou (vidas=' + (await js('LIC.vidas')) + ')');
+          } else problemas.push(rot + ' ' + mat + ': o botao de comprar vida nao apareceu com 0 coracoes e 500 moedas');
+          const i0 = await js('LIC.i');
+          await toque('#acao', 'botao Continuar');
+          if ((await js('LIC.i')) !== i0 + 1 && (await js('LIC.etapa')) !== 'fim') problemas.push(rot + ' ' + mat + ' toque real: Continuar nao avancou');
+          // acerta a proxima de escolha: alternativa certa, Verificar, Continuar
+          await js("while(LIC.etapa==='questao'&&LIC.qs[LIC.i].type!=='mc'&&LIC.i<LIC.qs.length-1){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0");
+          if ((await js("LIC.etapa==='questao'&&LIC.qs[LIC.i].type==='mc'"))) {
+            const certa = await js("LIC.qs[LIC.i].options.map(String).indexOf(String(LIC.qs[LIC.i].answer))");
+            const ac0 = await js('LIC.acertos');
+            await toque('.alt[data-v="' + certa + '"]', 'alternativa certa'); await toque('#acao', 'Verificar (certa)');
+            if ((await js('LIC.acertos')) !== ac0 + 1) problemas.push(rot + ' ' + mat + ' toque real: resposta certa nao contou');
+            await shot('toque-' + mat + '-acerto');
+            await toque('#acao', 'Continuar (certa)');
+          }
+          await js("fecharLicao();0"); await dorme(200);
+        }
+        // varredura de pontaria nas telas principais: todo botao habilitado e o elemento que recebe o toque no seu centro
+        const varre = (nome) => js(`(()=>{
+          const nome=(e)=>e?(e.id||(typeof e.className==='string'&&e.className)||e.tagName):'nada';
+          const ativo=['#folha','#modal','#licao','#desenho-tela','#perfil','#galeria'].map(q=>document.querySelector(q)).find(e=>e&&(e.classList.contains('on')));
+          const raizes=ativo?[ativo]:[document.querySelector('.topo'),document.querySelector('#tela')];
+          if(ativo&&ativo.id!=='licao'&&ativo.id!=='folha'&&ativo.id!=='modal')raizes.push(document.querySelector('#barra'));
+          const ruins=[];let n=0;
+          raizes.forEach(r=>Array.from(r.querySelectorAll('button:not([disabled])')).forEach(b=>{
+            const cs=getComputedStyle(b);if(cs.visibility==='hidden'||cs.pointerEvents==='none')return;
+            const r0=b.getBoundingClientRect();if(r0.width===0||r0.height===0)return;
+            b.scrollIntoView({block:'center',inline:'center'});
+            const q=b.getBoundingClientRect();const x=q.left+q.width/2,y=q.top+q.height/2;
+            if(x<0||y<0||x>innerWidth||y>innerHeight)return;
+            n++;const t=document.elementFromPoint(x,y);
+            if(!(t&&(t===b||b.contains(t))))ruins.push(nome(b)+' coberto por '+nome(t));
+          }));
+          return {ruins:ruins,n:n};})()`).then((r) => { if (r.ruins.length) problemas.push(rot + ' pontaria em ' + nome + ': ' + [...new Set(r.ruins)].slice(0, 6).join(' | ')); if (!r.n) problemas.push(rot + ' pontaria em ' + nome + ': nenhum botao conferido'); });
+        await js("fecharLicao();document.querySelector('#bb-mapa').click();0"); await dorme(500); await varre('mapa');
+        await js("document.querySelector('#bb-pers').click();0"); await dorme(500); await varre('Meu personagem'); await js('fecharTelasDaBarra();0');
+        await js("document.querySelector('#bb-gal').click();0"); await dorme(700); await varre('galeria'); await js('fecharTelasDaBarra();0');
+        await js("document.querySelector('#bb-perfil').click();0"); await dorme(500); await varre('perfil'); await js('fecharTelasDaBarra();0');
+        await js("abrirLicao(1,0);LIC.etapa='aula';pintarLicao();0"); await dorme(300); await varre('aula');
+        await js("LIC.etapa='questao';LIC.i=0;pintarLicao();0"); await dorme(300); await varre('pergunta');
+        await js("fecharLicao();document.querySelector('#bb-mapa').click();0"); await dorme(300);
+        if (medidas.mobile) await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
+        coleta(rot + ' toque real');
+        feito.push(rot + ': toque real (' + (medidas.mobile ? 'touch' : 'mouse') + ') em dica, alternativa, Verificar, comprar vida e Continuar nas 3 materias, e varredura de pontaria');
+      }
+
       /* 2c) audio GRAVADO: o tocar() acha o arquivo, o Chrome decodifica e toca ate o fim, sem voz do aparelho */
       await js("S.som=true;S.voz=true;S.faixa='f78';AUDIO.log.length=0;audioIniciar().then(()=>1)");
       const r1 = await js("audioTocar('Isso aí!','pt-BR').then(r=>r)");

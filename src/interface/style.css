@@ -157,6 +157,7 @@
   --z-folha: 30;
   --z-modal: 40;
   --z-celebra: 50;
+  --z-painel: 5;     /* painel de feedback da fase: SEMPRE acima do corpo da fase (z 1), senão não recebe toque */
 }
 
 /* ---------- escuro: "Espaço" (segue o sistema, a menos que o usuário tenha escolhido claro) ---------- */
@@ -1291,3 +1292,6 @@ body:has(#licao.on) .aviso-voz{display:none}
 .paleta{gap:var(--esp-4)}
 .des-tela{max-width:min(480px,calc(38vh * .75))}
 .barra-baixo button{height:calc(var(--barra-h) - var(--esp-16))}
+
+/* o painel fixo da fase fica acima do corpo rolável (regressão de toque: ver README-FASE-3-VISUAL.md) */
+.pe{z-index:var(--z-painel)}
