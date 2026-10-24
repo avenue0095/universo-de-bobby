@@ -21,7 +21,7 @@ def _fnv(t):
     h = 0x811c9dc5
     for b in t.encode('utf8'): h = ((h ^ b) * 0x01000193) & 0xffffffff
     return '%08x' % h
-_DIR = {'quadro-enunciado': 'quadro', 'feedback': 'sistema', 'pt-glosa': 'glosa', 'pt-letra': 'letra', 'en-alvo': 'en'}
+_DIR = {'aula-passo': 'aula', 'capitulo-abre': 'historia', 'missao': 'missao', 'quadro-enunciado': 'quadro', 'feedback': 'sistema', 'pt-glosa': 'glosa', 'pt-letra': 'letra', 'en-alvo': 'en'}
 if os.path.exists(os.path.join(D, 'novos.json')):
     for n in json.load(open(os.path.join(D, 'novos.json'))):
         cl, tx = n['classe'], n['texto']
@@ -34,6 +34,10 @@ if os.path.exists(os.path.join(D, 'novos.json')):
         rows[k] = dict(arquivo=k, classe=cl, idioma=n['idioma'], materia=n['materia'] if cl != 'pt-glosa' else 'en', tipo_contagem='novo-lote2',
                        chars=str(len(tx)), origem='lote 2: ' + n['origem'], texto=tx, rodada='lote2')
 
+# orfaos: clipes cujo texto nao existe mais no app (movidos para a pasta de revisao); saem do inventario
+if os.path.exists(os.path.join(D, 'orfaos.json')):
+    _orf = set(json.load(open(os.path.join(D, 'orfaos.json'))))
+    for _k in [k for k in rows if re.sub(r'\.m4a$', '', k) in _orf]: del rows[_k]
 base_n = len(list(csv.DictReader(open(os.path.join(D, 'inventario-audio.tsv'), encoding='utf8'), delimiter='\t', quoting=csv.QUOTE_NONE)))
 
 # ---------------- numeros por extenso (pt-BR) ----------------

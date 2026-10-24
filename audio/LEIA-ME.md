@@ -6,16 +6,16 @@ Gerado em 24/10/2026. Voz provisória, 100% local, custo R$ 0. Nenhum texto saiu
 
 | Item | Valor |
 |---|---|
-| Clipes | 3.622 (pt-BR 3.185, en-US 437) |
-| Duração total | 3 h 14 min |
-| Tamanho em Opus (24 kbps, mono) | 35,1 MB |
-| Tamanho em AAC (.m4a, 24 kbps, mono) | 41,7 MB |
+| Clipes | 3.635 (pt-BR 3.195, en-US 440) |
+| Duração total | 3 h 14 min (3,24 h) |
+| Tamanho em Opus (24 kbps, mono) | 35,2 MB |
+| Tamanho em AAC (.m4a, 24 kbps, mono) | 41,9 MB |
 | Manifesto completo | `manifesto.json` (cerca de 2,4 MB): texto, arquivo, idioma, voz, duração, tamanho, hash do texto |
 | Manifesto para o app | `manifesto-min.json` (213 KB): pacotes `core`, `mat`, `pt`, `en` com `[ms, bytes_opus, bytes_m4a]` por clipe |
 
 Cada clipe existe em dois formatos, lado a lado: `pt-br/aula/<slug>-<fnv8>.opus` e `pt-br/aula/<slug>-<fnv8>.m4a`. A chave do manifesto é o caminho sem extensão. O nome segue a seção 9.4 da especificação (slug de 32 caracteres e hash FNV-1a de `classe + texto`), com a extensão trocada, e as pastas em minúsculas (`pt-br`, `en-us`), como no inventário.
 
-Pacotes (seção 9.4): `core` 171 clipes, `mat` 825, `pt` 1.074, `en` 1.552. Os valores por pacote e por formato estão em `manifesto-min.json`.
+Pacotes (seção 9.4): `core` 171 clipes, `mat` 825, `pt` 1.084, `en` 1.555. Os valores por pacote e por formato estão em `manifesto-min.json`.
 
 ## Voz, velocidade e motor
 
@@ -48,7 +48,7 @@ A especificação (seção 9.5) manda AAC-LC `.m4a` como padrão e só aceita Op
 2. Testar `.opus` num iPhone real com `decodeAudioData`. Se passar, trocar e economizar cerca de 6 MB.
 3. Não gerei MP3, porque o AAC cobre o iOS antigo e a spec não pede MP3.
 
-O pacote que vai no aparelho é um formato só. Em Opus fica em 35,1 MB e em AAC em 41,7 MB, os dois dentro da meta de 32 a 45 MB (para isso baixei o AAC de 32 para 24 kbps depois do lote 2; fala em 24 kbps AAC-LC mono é aceitável, mas vale ouvir).
+O pacote que vai no aparelho é um formato só. Em Opus fica em 35,2 MB e em AAC em 41,9 MB, os dois dentro da meta de 32 a 45 MB (para isso baixei o AAC de 32 para 24 kbps depois do lote 2; fala em 24 kbps AAC-LC mono é aceitável, mas vale ouvir).
 
 ## Tratamento do áudio
 
@@ -101,6 +101,14 @@ O teste de cobertura do repositório (`testes/cobertura-audio.js`) e uma varredu
 Amostragem: 6 semeaduras de 200 rodadas por fase (duas por execução, três execuções) e depois mais 2 de 60 para conferir. A lista de lacunas parou de crescer (as dicas fecharam em 599 quadros). Teste de cobertura do repositório com 200 rodadas por fase, semente 7: 24.370 textos distintos, 100% com clipe, 0 trechos sem clipe, 0 de 16 falas novas sem clipe. `npm test` passa inteiro.
 
 Observações: as dicas viram quadros longos sem pontuação (o corte do app tira a pontuação), então saem sem as pausas de frase; vale ouvir 3 ou 4. Os quadros do lote 2 que são só um pedaço de aula ou dica de inglês passam pela mesma detecção de inglês dos demais. A conferência final está em `manifesto.json` e `manifesto-min.json`, que ficam coerentes entre si: mesmas chaves, mesmos pacotes, mesmos tamanhos.
+
+## Lote 3 (24/10/2026): troca de travessões nos textos
+
+O agente de código trocou travessões por vírgula, dois-pontos ou ponto em textos de aulas, aberturas e perguntas. Como o nome do clipe leva o hash do texto, 97 textos ficaram sem clipe. A varredura (`ferramentas/lacunas.js`, agora também com os textos inteiros de aula, capítulo e missão) achou 107 falas sem clipe e todas foram geradas com a mesma voz e o mesmo tratamento: 86 passos de aula, 6 aberturas de capítulo, 2 missões, 10 quadros de dica e 3 frases em inglês. Mesmo hash e convenção de nome.
+
+Órfãos: 94 textos de aula, capítulo e missão com travessão deixaram de existir no app (188 arquivos, Opus e AAC). Não foram apagados: foram movidos para `~/_APAGAR DEPOIS (revisao)/2026-10-24/audio-orfaos/`, com `LOG.tsv` e `desfazer.sh`, e saíram dos dois manifestos. Ficaram 11 clipes com travessão no texto (5 fechos de missão, 3 frases em inglês e 3 glosas) que o app ainda pode usar ou que não passam pela varredura; não mexi neles.
+
+Totais após o lote 3: 3.635 clipes, Opus 35,2 MB, AAC 41,9 MB. Medido de novo em todos os arquivos: nenhum mudo, nenhum silêncio interno acima de 1,2 s, volume mediana −16,3 LUFS (faixa −18,4 a −14,7). Cobertura: `npm test` passa (exit 0) e o teste de cobertura com 200 rodadas por fase (semente 5) dá 24.424 textos distintos, 100% com clipe, 0 de 16 falas novas sem clipe. A varredura própria com 200 rodadas e semeaduras novas deu lista vazia (ver resposta do lote).
 
 ## Integração (próxima etapa, outro agente)
 

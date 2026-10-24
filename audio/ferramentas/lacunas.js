@@ -5,14 +5,16 @@ const { carregarApp } = require(REPO+'/testes/lib/carregar.js');
 const RODADAS=+process.argv[2]||40, SEMENTES=(process.argv[3]||'1').split(',').map(Number), SAIDA=process.argv[4]||'novos.json';
 const min=JSON.parse(fs.readFileSync(REPO+'/audio/manifesto-min.json','utf8'));
 const ign=new Set(['__']);
-const novos=new Map(); // chave classe|idioma|texto -> item
+const novos=new Map(); const falados=new Set(); // chave classe|idioma|texto -> item
 const add=(classe,idioma,texto,materia,origem)=>{const k=classe+'|'+idioma+'|'+texto;if(!novos.has(k))novos.set(k,{classe,idioma,texto,materia,origem});};
 for(const sem of SEMENTES){
   const app=carregarApp(sem);
   app.ctx.__min=min; app.avaliar('audioIndexar(__min)'); app.avaliar('AUDIO.semAudio=false;AUDIO.pronto=Promise.resolve(true)');
   const seq=(h,l,m)=>{app.ctx.__t=h;app.ctx.__l=l;app.ctx.__m=m;return app.avaliar('(function(){const s=audioSequencia(__t,__l,__m);return {f:s.faltas,n:s.chaves.length,t:s.texto}})()');};
+  const INT={aula:'aula-passo',capitulo:'capitulo-abre',missao:'missao'};
   const trata=(h,l,m,origem)=>{
     const r=seq(h,l,m);
+    if(INT[origem]){ falados.add(INT[origem]+'|'+r.t); if(!(r.n===1&&!r.f.length&&!r.comp)){ const r2=seq(h,l,m); if(r.f.length||!r.n||r.n>1) add(INT[origem],'pt-BR',r.t,m,origem);} return; }
     if(l==='en-US'){ if(r.f.length||!r.n) add('en-alvo','en-US',r.t,m,origem); return; }
     r.f.forEach(f=>{
       if(f.startsWith('quadro:')){const q=f.slice(7); if(!ign.has(q)) add('quadro-enunciado','pt-BR',q,m,origem);}
@@ -55,6 +57,7 @@ for(const sem of SEMENTES){
     }));
   }
 }
+fs.writeFileSync(SAIDA.replace('.json','_falados.json'),JSON.stringify([...falados]));
 const arr=[...novos.values()];
 fs.writeFileSync(SAIDA,JSON.stringify(arr,null,0));
 const c={};arr.forEach(x=>c[x.classe+'/'+x.origem]=(c[x.classe+'/'+x.origem]||0)+1);
