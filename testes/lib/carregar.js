@@ -97,12 +97,22 @@ function carregarConteudo(semente) {
 }
 
 /* O app inteiro com DOM falso: roda funcoes reais (abrirLicao, conferir, mostrarDica...). */
-function carregarApp(semente) {
+/* Date com relogio controlado: new Date() e Date.now() devolvem relogio.ms (mude relogio.ms para viajar no tempo). */
+function dateComRelogio(relogio) {
+  return class DataFalsa extends Date {
+    constructor(...a) { if (a.length === 0) super(relogio.ms); else super(...a); }
+    static now() { return relogio.ms; }
+  };
+}
+/* opcoes: {armazenamento:{chave:texto}, relogio:{ms}} */
+function carregarApp(semente, opcoes) {
+  opcoes = opcoes || {};
   const sandbox = contextoBase(semente);
-  const guarda = {};
+  if (opcoes.relogio) sandbox.Date = dateComRelogio(opcoes.relogio);
+  const guarda = Object.assign({}, opcoes.armazenamento || {});
   sandbox.localStorage = {
     getItem: (k) => (k in guarda ? guarda[k] : null),
-    setItem: (k, v) => { guarda[k] = String(v); },
+    setItem: (k, v) => { if (opcoes.recusar && opcoes.recusar(k)) throw new Error('QuotaExceededError'); guarda[k] = String(v); },
     removeItem: (k) => { delete guarda[k]; },
   };
   sandbox.document = {
@@ -123,7 +133,16 @@ function carregarApp(semente) {
   sandbox.AudioContext = undefined;
   const ctx = vm.createContext(sandbox);
   const arquivos = rodarBlocos(ctx, (f) => f !== 'interface/pwa.js');
-  return { ctx, arquivos, avaliar: (js) => vm.runInContext(js, ctx) };
+  return { ctx, arquivos, guarda, avaliar: (js) => vm.runInContext(js, ctx) };
 }
 
-module.exports = { RAIZ, SRC, ordemDosScripts, blocosDoShell, ler, carregarConteudo, carregarApp, prng, vm };
+/* Modulos puros (sem DOM, sem estado): carrega so os arquivos pedidos, em ordem, num contexto limpo
+   e devolve o que a expressao 'saida' montar, ex.: '({novo:ofensivaNova})'. */
+function carregarModulos(arquivos, saida, semente) {
+  const ctx = vm.createContext(contextoBase(semente));
+  for (const f of arquivos) vm.runInContext(ler(f), ctx, { filename: f });
+  const out = saida ? vm.runInContext(saida, ctx) : {};
+  return Object.assign({ ctx, avaliar: (js) => vm.runInContext(js, ctx) }, out);
+}
+
+module.exports = { carregarModulos, RAIZ, SRC, ordemDosScripts, blocosDoShell, ler, carregarConteudo, carregarApp, prng, vm };

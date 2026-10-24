@@ -19,7 +19,8 @@ function acertou(dado,gab){
   if(!isNaN(na)&&!isNaN(nb))return Math.abs(na-nb)<1e-9;
   return semAcento(dado)===semAcento(gab);
 }
-const feitas=()=>Object.keys(S.feitas).length;
+/* fases concluídas DA MATÉRIA ATUAL (o anel do mapa somava as três galáxias e as revisões: dava 1/50 com 3 matérias jogadas) */
+const feitas=()=>fases();
 function liberada(ui,li){
   if(li===0)return true;
   return !!S.feitas[UNITS[ui].lessons[li-1].id];

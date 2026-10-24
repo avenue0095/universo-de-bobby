@@ -211,7 +211,8 @@ async function entregar(nome,dados){
       return;
     }
   }
-  const url=URL.createObjectURL(typeof dados==='string'?new Blob([dados],{type:'image/svg+xml'}):dados);
+  const tipo=/\.json$/i.test(nome)?'application/json':(/\.ics$/i.test(nome)?'text/calendar':'image/svg+xml');
+  const url=URL.createObjectURL(typeof dados==='string'?new Blob([dados],{type:tipo}):dados);
   const a=document.createElement('a');a.href=url;a.download=nome;document.body.appendChild(a);a.click();
   setTimeout(()=>{a.remove();URL.revokeObjectURL(url);},2000);
 }

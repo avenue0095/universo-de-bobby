@@ -1,0 +1,220 @@
+{
+ "v": 3,
+ "perfis": [
+  {
+   "id": "pLUA1",
+   "nome": "Lua",
+   "cor": "#12A06E",
+   "criado": 1761264000000,
+   "dados": {
+    "nome": "Lua",
+    "xp": 1520,
+    "ganhoTotal": 2480,
+    "ofensiva": 12,
+    "melhorOfensiva": 19,
+    "ultimoDia": "2026-10-23",
+    "feitas": {
+     "1.1": 3,
+     "1.2": 2,
+     "1.3": 3,
+     "1.4": 2,
+     "1.5": 3,
+     "2.1": 3,
+     "2.2": 2,
+     "2.3": 3,
+     "2.4": 2,
+     "2.5": 3,
+     "3.1": 3,
+     "3.2": 2,
+     "3.3": 3,
+     "3.4": 2,
+     "3.5": 3,
+     "4.1": 3,
+     "4.2": 2,
+     "4.3": 3,
+     "4.4": 2,
+     "4.5": 3,
+     "5.1": 3,
+     "5.2": 2,
+     "5.3": 3,
+     "5.4": 2,
+     "5.5": 3,
+     "p1.1": 3,
+     "p1.2": 1,
+     "p1.3": 2,
+     "p1.4": 3,
+     "p1.5": 1,
+     "p2.1": 1,
+     "p2.2": 2,
+     "p2.3": 3,
+     "p2.4": 1,
+     "p2.5": 2,
+     "p3.1": 2,
+     "p3.2": 3,
+     "p3.3": 1,
+     "p3.4": 2,
+     "p3.5": 3,
+     "e1.1": 3,
+     "e1.2": 3,
+     "e1.3": 3,
+     "e1.4": 3,
+     "e1.5": 3,
+     "e2.1": 3,
+     "e2.2": 3,
+     "e2.3": 3,
+     "e2.4": 3,
+     "e2.5": 3,
+     "revmat1": 2
+    },
+    "errados": {
+     "mat3": [
+      {
+       "type": "input",
+       "prompt": "7 × 8 = ?",
+       "answer": "56"
+      },
+      {
+       "type": "mc",
+       "prompt": "Quanto é 40 + 25?",
+       "answer": "65",
+       "options": [
+        "55",
+        "65",
+        "75",
+        "60"
+       ]
+      }
+     ],
+     "pt2": [
+      {
+       "type": "mc",
+       "prompt": "Qual está certo: o veículo com quatro rodas?",
+       "answer": "carro",
+       "options": [
+        "caro",
+        "carro",
+        "karro"
+       ]
+      },
+      {
+       "type": "fracao",
+       "prompt": "Pinte 3 partes",
+       "answer": "3"
+      }
+     ]
+    },
+    "comprado": [
+     "bone",
+     "oculos"
+    ],
+    "look": {
+     "chapeu": "bone",
+     "pers": "bobby"
+    },
+    "stats": {
+     "porLicao": {
+      "1.1": {
+       "acertos": 12,
+       "erros": 3
+      },
+      "p1.1": {
+       "acertos": 8,
+       "erros": 0
+      }
+     },
+     "dias": {
+      "2026-10-22": {
+       "fases": 2,
+       "seg": 420
+      },
+      "2026-10-23": {
+       "fases": 1,
+       "seg": 300
+      }
+     },
+     "tempo": 5400
+    },
+    "acertos": 412,
+    "combo": 8,
+    "som": true,
+    "voz": true,
+    "nivel": "facil",
+    "materia": "pt",
+    "vozPt": "Luciana",
+    "vozEn": "Samantha",
+    "velocidade": 1.1
+   }
+  },
+  {
+   "id": "pTEO1",
+   "nome": "Teo",
+   "cor": "#1B93C8",
+   "criado": 1761264100000,
+   "dados": {
+    "nome": "Teo",
+    "xp": 0,
+    "ofensiva": 0,
+    "melhorOfensiva": 0,
+    "ultimoDia": "",
+    "feitas": {},
+    "errados": {},
+    "comprado": [],
+    "look": {},
+    "stats": {
+     "porLicao": {},
+     "dias": {},
+     "tempo": 0
+    },
+    "acertos": 0,
+    "combo": 0,
+    "som": false,
+    "voz": true,
+    "nivel": "forte",
+    "materia": "mat",
+    "velocidade": 1
+   }
+  },
+  {
+   "id": "pANA1",
+   "nome": "Ana",
+   "cor": "#7B5BE0",
+   "criado": 1761264200000,
+   "dados": {
+    "nome": "Ana",
+    "xp": 310,
+    "ganhoTotal": 120,
+    "ofensiva": 3,
+    "melhorOfensiva": 3,
+    "ultimoDia": "2026-10-24",
+    "feitas": {
+     "1.1": {
+      "estrelas": 2
+     },
+     "1.2": true,
+     "1.3": 3,
+     "1.4": 0
+    },
+    "errados": {},
+    "comprado": [
+     "festa"
+    ],
+    "look": {},
+    "stats": {
+     "porLicao": {},
+     "dias": {},
+     "tempo": 60
+    },
+    "acertos": 30,
+    "combo": 4,
+    "nivel": "medio",
+    "materia": "en",
+    "velocidade": 0.7
+   }
+  }
+ ],
+ "atual": 0,
+ "senha": {
+  "s": "s1a2b3",
+  "h": "zz9y8x"
+ }
+}

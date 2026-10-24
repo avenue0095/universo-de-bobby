@@ -102,67 +102,34 @@ const respLiberado=()=>!temSenha()||Date.now()<liberadoAte;
 function pedirSenha(titulo,texto,aoAcertar,criando){
   let erro='';
   const pinta=()=>{
-    $('#modal').innerHTML='<div class="modal-in senha-in">'+
+    $('#folha').innerHTML='<div class="folha-in senha-in">'+
       '<h2>'+titulo+'</h2><p class="perfis-sub">'+texto+'</p>'+
       '<input id="campo-pin" class="campo pin" type="password" inputmode="numeric" '+
       'autocomplete="off" maxlength="6" placeholder="••••" aria-label="Senha de 4 números">'+
       (erro?'<p class="erro-pin">'+erro+'</p>':'')+
       '<div class="modal-bts"><button class="link" id="pin-cancela">Cancelar</button>'+
       '<button class="btn" id="pin-ok">'+(criando?'Criar senha':'Entrar')+'</button></div></div>';
-    $('#modal').classList.add('on');
+    $('#folha').classList.add('on');
     const campo=$('#campo-pin');campo.focus();
     const tenta=()=>{
       const v=(campo.value||'').trim();
       if(criando){
         if(!/^[0-9]{4,6}$/.test(v)){erro='Use de 4 a 6 números.';pinta();return;}
         definirSenha(v);liberadoAte=Date.now()+15*60000;
-        $('#modal').classList.remove('on');aoAcertar();return;
+        $('#folha').classList.remove('on');aoAcertar();return;
       }
-      if(conferirSenha(v)){liberadoAte=Date.now()+15*60000;$('#modal').classList.remove('on');aoAcertar();}
+      if(conferirSenha(v)){liberadoAte=Date.now()+15*60000;$('#folha').classList.remove('on');aoAcertar();}
       else{erro='Senha errada. Tente de novo.';pinta();}
     };
     $('#pin-ok').addEventListener('click',tenta);
     campo.addEventListener('keydown',e=>{if(e.key==='Enter')tenta();});
-    $('#pin-cancela').addEventListener('click',()=>{$('#modal').classList.remove('on');});
+    $('#pin-cancela').addEventListener('click',()=>{$('#folha').classList.remove('on');});
   };
   pinta();
 }
 function comSenha(fn){
   if(respLiberado()){fn();return;}
   pedirSenha('Área do responsável','Digite a senha para ver os relatórios e mexer nos perfis.',fn,false);
-}
-/* backup: leva o perfil inteiro para outro aparelho */
-function baixarPerfil(){
-  const p=STORE.perfis[STORE.atual];
-  if(!p)return;
-  const pacote={app:'universo-de-bobby',versao:VERSAO_DADOS,quando:new Date().toISOString(),
-    perfil:{nome:p.nome,cor:p.cor,dados:estadoDe(p.dados)}};
-  const nome='bobby-'+String(p.nome||'perfil').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'.json';
-  entregar(nome,JSON.stringify(pacote,null,1));
-}
-function restaurarPerfil(){
-  const ent=document.createElement('input');
-  ent.type='file';ent.accept='application/json,.json';
-  ent.addEventListener('change',()=>{
-    const f=ent.files&&ent.files[0];if(!f)return;
-    const fr=new FileReader();
-    fr.onload=()=>{
-      let pac=null;
-      try{pac=JSON.parse(fr.result);}catch(e){}
-      if(!pac||pac.app!=='universo-de-bobby'||!pac.perfil){
-        alertaResp('Esse arquivo não é um backup do Universo de Bobby.');return;
-      }
-      const d=estadoDe(pac.perfil.dados);
-      const nome=String(pac.perfil.nome||'Jogador').slice(0,18);
-      STORE.perfis.push({id:'p'+Date.now().toString(36),nome:nome,
-        cor:CORES.indexOf(pac.perfil.cor)>=0?pac.perfil.cor:CORES[STORE.perfis.length%CORES.length],
-        criado:Date.now(),dados:d});
-      salvarStore();
-      alertaResp('Perfil <b>'+nome+'</b> restaurado. Ele aparece na tela "Quem vai jogar?".');
-    };
-    fr.readAsText(f);
-  });
-  ent.click();
 }
 function alertaResp(msg){
   const cx=$('#resp-aviso');
