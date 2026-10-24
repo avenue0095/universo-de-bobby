@@ -61,18 +61,18 @@ function telaVoz(){
   $('#perfil').querySelectorAll('[data-voz]').forEach(b=>b.addEventListener('click',()=>{
     const i=b.dataset.voz.indexOf('|');
     const campo=b.dataset.voz.slice(0,i),nome=b.dataset.voz.slice(i+1);
-    if(campo==='pt'){S.vozPt=nome;salvar();falar('Oi! Eu sou o Bobby. Vamos aprender juntos?');}
-    else{S.vozEn=nome;salvar();falar('Hello! My name is Bobby. Nice to meet you!','en-US');}
+    if(campo==='pt'){S.vozPt=nome;salvar();falarPedido('Oi! Eu sou o Bobby. Vamos aprender juntos?');}
+    else{S.vozEn=nome;salvar();falarPedido('Hello! My name is Bobby. Nice to meet you!','en-US');}
     telaVoz();
   }));
   const r=$('#vel');
   if(r){
     r.addEventListener('input',()=>{$('#vel-n').textContent=r.value+'%';});
     r.addEventListener('change',()=>{S.velocidade=(+r.value)/100;salvar();
-      falar('Assim está bom para você acompanhar?');});
+      falarPedido('Assim está bom para você acompanhar?');});
   }
   const t=$('#vel-teste');
-  if(t)t.addEventListener('click',()=>falar('Contar é apontar para cada coisa e falar um número em voz alta.'));
+  if(t)t.addEventListener('click',()=>falarPedido('Contar é apontar para cada coisa e falar um número em voz alta.'));
 }
 
 /* ---------- segurança e dados do perfil ---------- */

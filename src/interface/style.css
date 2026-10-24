@@ -646,10 +646,20 @@ ol.plano li{padding-left:38px}
 .pg.forte{color:var(--ub);font-weight:800}
 .item .tipo{font-size:12px;color:var(--tinta2);font-weight:700;margin-top:-4px}
 @media (max-width:430px){
-  .topo-in{gap:6px;padding:9px 10px}
-  #st-fogo,#som{display:none}
-  .marca b{font-size:14.5px}
+  /* celular: ofensiva e som continuam à vista, só ficam compactos (antes eram escondidos) */
+  .topo-in{gap:5px;padding:9px 8px}
+  .marca{gap:6px}
+  .marca .sig{width:34px;height:34px}
+  .marca b{font-size:14px}
+  .stat{gap:3px;padding:2px 7px 2px 5px;font-size:13.5px}
+  .stat svg{width:16px;height:16px}
   .icobtn{width:34px;height:34px}
+  #st-fogo{display:flex}
+  #som{display:grid}
+}
+@media (max-width:359px){
+  .marca b{display:none}
+  .icobtn{width:32px;height:32px}
 }
 
 /* ---- figuras das aulas de português e inglês ---- */

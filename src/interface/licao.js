@@ -1,6 +1,7 @@
 /* ---------- lição ---------- */
 let LIC={};
 function abrirLicao(ui,li){
+  calar();if(LIC&&LIC.tDica){clearTimeout(LIC.tDica);}
   const u=UNITS[ui],l=u.lessons[li];
   /* base = quantas perguntas a fase REALMENTE tem. Fixo em 8 fazia a fase de 6 perguntas
      dizer "você acertou 6 de 8" numa jogada perfeita e travar a barra de missão em 75%. */
@@ -35,7 +36,7 @@ function blocoPasso(ps,k,comFala){
 }
 function ligarOuvir(escopo){
   escopo.querySelectorAll('[data-ler]').forEach(b=>b.addEventListener('click',()=>{
-    falar(decodeURIComponent(b.dataset.ler),b.dataset.lang);
+    falarPedido(decodeURIComponent(b.dataset.ler),b.dataset.lang);
   }));
 }
 function tecladoHTML(){
@@ -56,7 +57,14 @@ function digitar(k){
   else if(LIC.digitado.length<7)LIC.digitado+=k;
   LIC.resp=LIC.digitado;pintarCampo();nota(700,0,.05,.05);
 }
+/* Fala agendada para depois que a tela pinta. Fica guardada no audio.js: fechar a fase, avançar ou abrir
+   outra tela cancela (antes, a fala saía 420 ms depois, com a fase já fechada). */
+function licaoAberta(){return $('#licao').classList.contains('on');}
+function falarDepois(ms,texto,lang){
+  audioAgendar(()=>{if(licaoAberta())falar(texto,lang);},ms);
+}
 function pintarLicao(){
+  calar();
   const pe=$('#pe');pe.className='pe';
   $('#prog').style.width=(LIC.etapa==='aula'?0:Math.max(4,Math.round(LIC.acertos/LIC.base*100)))+'%';
   pintarVidas();
@@ -76,7 +84,7 @@ function pintarLicao(){
     $('#palco').innerHTML=h;ligarOuvir($('#palco'));
     $('#acao').textContent='Vamos ajudar!';$('#acao').disabled=false;
     $('.lc-corpo').scrollTo(0,0);
-    if(S.nivel==='facil')setTimeout(()=>falar((cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:'')),350);
+    if(S.nivel==='facil')falarDepois(350,(cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''));
     return;
   }
   if(LIC.etapa==='aula'){
@@ -187,7 +195,7 @@ function pintarLicao(){
     pintarCampo();
     $('#palco').querySelectorAll('.tecla').forEach(b=>b.addEventListener('click',()=>digitar(b.dataset.k)));
   }
-  if(S.nivel==='facil'||q.ouvir)setTimeout(()=>falar(q.ouvir||q.prompt,q.lang),420);
+  if(S.nivel==='facil'||q.ouvir)falarDepois(420,q.ouvir||q.prompt,q.lang);
 }
 const shufA=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 function barraMissao(){

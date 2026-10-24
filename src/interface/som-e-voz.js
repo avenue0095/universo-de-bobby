@@ -3,7 +3,7 @@ let AC=null;
 function nota(f,t,dur,vol){
   if(!S.som)return;
   try{
-    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    ctxAudio();
     const o=AC.createOscillator(),g=AC.createGain();
     o.type='sine';o.frequency.value=f;o.connect(g);g.connect(AC.destination);
     const t0=AC.currentTime+t;
@@ -29,7 +29,7 @@ function emTexto(html){
      .replace(/R\$/g,' reais ').replace(/___/g,' quanto ').replace(/\s+/g,' ').trim();
   return t;
 }
-/* --- vozes: escolher uma voz de verdade do idioma pedido --- */
+/* --- vozes do aparelho: SÓ COMO RESERVA enquanto o áudio gravado não chega (ver audio.js) --- */
 let VOZES=[];
 function carregarVozes(){
   try{VOZES=speechSynthesis.getVoices()||[];}catch(e){VOZES=[];}
@@ -39,62 +39,74 @@ if(typeof speechSynthesis!=='undefined'){
   try{speechSynthesis.addEventListener('voiceschanged',carregarVozes);}catch(e){speechSynthesis.onvoiceschanged=carregarVozes;}
   setTimeout(carregarVozes,300);setTimeout(carregarVozes,1200);
 }
-const idioma=v=>String((v&&v.lang)||'').toLowerCase().replace('_','-');
-/* vozes de brincadeira do macOS/iOS: nunca servem para ler uma aula */
-const VOZ_RUIM=/albert|bad news|bahh|bells|boing|bubbles|cellos|deranged|good news|jester|junior|organ|superstar|trinoids|whisper|wobble|zarvox|ralph|fred|kathy|princess|hysterical|pipe organ|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley|novelty/i;
-/* lista de vozes de um idioma, da melhor para a pior */
+const idioma=v=>String((v&&v.lang)||'').toLowerCase().replace(/_/g,'-');
+/* nome sem o parêntese: "Eddy (Português (Brasil))" -> "eddy" */
+const nomeBase=v=>String((v&&v.name)||'').split('(')[0].replace(/^(microsoft|google|apple)\s+/i,'').trim().toLowerCase();
+/* Vozes de brincadeira do macOS/iOS (existem em vários idiomas, inclusive pt-BR e en-US).
+   Nunca servem para ler uma aula e NÃO aparecem na lista nem são escolhidas sozinhas. */
+const VOZ_PIADA=new Set(['albert','bad news','bahh','bells','boing','bubbles','cellos','deranged','eddy','flo','fred',
+  'good news','grandma','grandpa','hysterical','jester','junior','kathy','organ','pipe organ','princess','ralph','reed',
+  'rocko','sandy','shelley','superstar','trinoids','whisper','wobble','zarvox']);
+const ehVozPiada=v=>{
+  const n=nomeBase(v);
+  return VOZ_PIADA.has(n)||/\b(novelty|bad news|good news|pipe organ)\b/.test(n)||VOZ_PIADA.has(n.split(' ')[0]);
+};
+/* vozes que costumam soar bem em cada idioma (Android, iOS, macOS, Windows/Edge) */
+const VOZ_BOA={
+  'pt':/luciana|felipe|francisca|thalita|antonio|maria|google portugu[eê]s do brasil|google portuguese|pt-br-x-/,
+  'en':/samantha|ava|allison|nicky|zoe|evan|alex|aria|jenny|guy|google us english|en-us-x-/
+};
+function notaVoz(v,alvo){
+  const n=String((v&&v.name)||'').toLowerCase(),b=nomeBase(v);
+  let p=0;
+  if(idioma(v)===alvo)p+=10;                              /* sotaque certo: pt-BR não perde para pt-PT */
+  if(v.localService)p+=4;                                 /* funciona sem internet */
+  if(/premium|enhanced|neural|natural|aprimorad/.test(n))p+=8;
+  if(VOZ_BOA[alvo.slice(0,2)]&&VOZ_BOA[alvo.slice(0,2)].test(b+' '+n))p+=5;
+  if(/compact|espeak|robot/.test(n))p-=6;
+  if(v.default)p+=1;
+  return p;
+}
+/* lista de vozes de um idioma, da melhor para a pior, sem vozes de piada */
 function vozesDe(lang){
   if(!VOZES.length)carregarVozes();
-  const alvo=(lang||'pt-BR').toLowerCase(),raiz=alvo.slice(0,2);
-  let c=VOZES.filter(v=>idioma(v)===alvo);
-  if(!c.length)c=VOZES.filter(v=>idioma(v).slice(0,2)===raiz);
-  const nota=v=>{
-    let p=0;const n=(v.name||'').toLowerCase();
-    if(VOZ_RUIM.test(n))p-=40;                         /* voz de piada, fora */
-    if(v.localService)p+=4;                            /* funciona sem internet */
-    if(idioma(v)===alvo)p+=6;                          /* sotaque certo */
-    if(/premium|enhanced|neural|natural|siri/.test(n))p+=8;  /* as boas de verdade */
-    if(/samantha|ava|allison|luciana|joana|google|zira|aria|jenny|francisca/.test(n))p+=4;
-    if(/compact/.test(n))p-=3;
-    if(v.default)p+=1;
-    return p;
-  };
-  return c.slice().sort((a,b)=>nota(b)-nota(a));
+  const alvo=(lang||'pt-BR').toLowerCase().replace(/_/g,'-'),raiz=alvo.slice(0,2);
+  const limpas=VOZES.filter(v=>!ehVozPiada(v));
+  let c=limpas.filter(v=>idioma(v)===alvo);
+  /* sem a variante exata (pt-BR), aceita o mesmo idioma de outra região (pt-PT) em vez de nada */
+  if(!c.length)c=limpas.filter(v=>idioma(v).slice(0,2)===raiz);
+  return c.slice().sort((a,b)=>notaVoz(b,alvo)-notaVoz(a,alvo));
 }
 function vozDe(lang){
   const lista=vozesDe(lang);
   if(!lista.length)return null;
-  /* respeita a voz escolhida nas configurações, se ela existir neste aparelho */
+  /* respeita a voz escolhida nas configurações, se ela existir neste aparelho e não for de piada */
   const escolhida=(lang==='en-US')?S.vozEn:S.vozPt;
   if(escolhida){
-    const achou=lista.filter(v=>v.name===escolhida)[0]||
-                VOZES.filter(v=>v.name===escolhida)[0];
+    const achou=lista.filter(v=>v.name===escolhida)[0];
     if(achou)return achou;
   }
   return lista[0];
 }
 function temVoz(lang){return !!vozDe(lang);}
+/* falar(html, 'pt-BR'|'en-US'): tira as tags, troca símbolos por extenso e entrega ao audio.js.
+   Respeita S.som e S.voz: com o som desligado a voz também fica calada. */
 function falar(html,lang){
-  try{
-    if(!('speechSynthesis' in window))return;
-    speechSynthesis.cancel();
-    const ing=lang==='en-US';
-    const u=new SpeechSynthesisUtterance(ing?limpaEN(html):emTexto(html));
-    u.lang=ing?'en-US':'pt-BR';
-    const escolhida=ing?S.vozEn:S.vozPt;
-    /* Português: sem escolha, deixa o aparelho usar a voz padrão dele —
-       é o som que a criança já conhecia. Inglês é diferente: se ninguém
-       escolher, o aparelho leria com a voz portuguesa e sairia errado,
-       então aí sim procuramos uma voz inglesa de verdade. */
-    let v=null;
-    if(escolhida)v=VOZES.filter(x=>x.name===escolhida)[0]||null;
-    if(!v&&ing)v=vozDe('en-US');
-    if(ing&&!v){if(VOZES.length)avisoVoz();return;}
-    if(v)u.voice=v;
-    const vel=+S.velocidade||1;
-    u.rate=(ing?.82:.92)*vel;u.pitch=1.05;
-    speechSynthesis.speak(u);
-  }catch(e){}
+  const ing=lang==='en-US';
+  return audioTocar(ing?limpaEN(html):emTexto(html),ing?'en-US':'pt-BR');
+}
+/* fala pedida pela criança (botão de ouvir): se o som estiver desligado, avisa em vez de ficar mudo sem explicar */
+function falarPedido(html,lang){
+  if(!audioAtivo()){avisoSomDesligado();return Promise.resolve('mudo');}
+  return falar(html,lang);
+}
+let avisouSomOff=false;
+function avisoSomDesligado(){
+  if(avisouSomOff)return;avisouSomOff=true;
+  const d=document.createElement('div');d.className='aviso-voz';
+  d.innerHTML='<b>Os sons estão desligados</b><span>Toque no alto-falante lá em cima para ligar de novo.</span>';
+  document.body.appendChild(d);
+  setTimeout(()=>{d.classList.add('sai');setTimeout(()=>{d.remove();avisouSomOff=false;},400);},3500);
 }
 function limpaEN(html){
   return String(html).replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ')
@@ -109,5 +121,4 @@ function avisoVoz(){
   document.body.appendChild(d);
   setTimeout(()=>{d.classList.add('sai');setTimeout(()=>d.remove(),400);},6500);
 }
-const calar=()=>{try{speechSynthesis.cancel();}catch(e){}};
-
+const calar=()=>audioParar();

@@ -113,6 +113,15 @@ async function main() {
       const nomeNaTela = await js("document.body.innerText.includes('Teste Fumaça')");
       if (!nomeNaTela) problemas.push(rot + ': o nome do jogador nao apareceu na tela inicial');
 
+      /* 1b) ofensiva e botao de som precisam estar a vista no topo, inclusive no celular (antes eram escondidos) */
+      const topo = await js("(()=>{const r=(s)=>{const e=document.querySelector(s);if(!e)return null;const b=e.getBoundingClientRect();return {w:b.width,h:b.height,r:b.right,l:b.left}};return {fogo:r('#st-fogo'),som:r('#som'),moedas:r('#st-moedas'),iw:innerWidth}})()");
+      for (const k of ['fogo', 'som', 'moedas']) {
+        const b = topo[k];
+        if (!b || b.w < 10 || b.h < 10) problemas.push(rot + ': #' + k + ' escondido no topo');
+        else if (b.r > topo.iw + 1 || b.l < -1) problemas.push(rot + ': #' + k + ' fora da tela (' + Math.round(b.l) + '..' + Math.round(b.r) + ' de ' + topo.iw + ')');
+      }
+      feito.push(rot + ': topo com ofensiva, moedas e som a vista');
+
       /* 2) joga a primeira fase de cada materia, clicando nos botoes de verdade */
       for (const mat of ['mat', 'pt', 'en']) {
         await js("usarMateria('" + mat + "');0"); await dorme(300);

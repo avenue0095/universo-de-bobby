@@ -657,10 +657,20 @@ ol.plano li{padding-left:38px}
 .pg.forte{color:var(--ub);font-weight:800}
 .item .tipo{font-size:12px;color:var(--tinta2);font-weight:700;margin-top:-4px}
 @media (max-width:430px){
-  .topo-in{gap:6px;padding:9px 10px}
-  #st-fogo,#som{display:none}
-  .marca b{font-size:14.5px}
+  /* celular: ofensiva e som continuam à vista, só ficam compactos (antes eram escondidos) */
+  .topo-in{gap:5px;padding:9px 8px}
+  .marca{gap:6px}
+  .marca .sig{width:34px;height:34px}
+  .marca b{font-size:14px}
+  .stat{gap:3px;padding:2px 7px 2px 5px;font-size:13.5px}
+  .stat svg{width:16px;height:16px}
   .icobtn{width:34px;height:34px}
+  #st-fogo{display:flex}
+  #som{display:grid}
+}
+@media (max-width:359px){
+  .marca b{display:none}
+  .icobtn{width:32px;height:32px}
 }
 
 /* ---- figuras das aulas de português e inglês ---- */
@@ -4879,12 +4889,138 @@ function marcarDia(){
   LIC.bonusDia=b;
 }
 
+/* ---------- áudio: camada única de som falado ----------
+   API para o resto do app:
+     audioTocar(chaveOuTexto, idioma)   toca um clipe gravado (se o manifesto tiver) ou, só como RESERVA,
+                                        lê o texto com a voz do aparelho. Devolve uma Promise que diz como saiu:
+                                        'gravado' | 'reserva' | 'mudo' | 'cancelado' | 'sem-voz'
+     audioPrecarregar([chaves])         baixa e decodifica clipes antes de precisar
+     audioParar()                       para tudo: clipe em andamento, fala da voz do aparelho e
+                                        TODA fala agendada com audioAgendar() (nada sai depois de fechar a fase)
+     audioAgendar(fn, ms)               setTimeout que o audioParar() cancela
+     audioDefinirManifesto(m, base)     liga o áudio gravado. Hoje ninguém chama: o manifesto vem do módulo
+                                        de áudio (pasta audio/) e será integrado depois.
+   Regras: S.som=false ou S.voz=false silenciam TUDO (efeitos e voz). Idioma: 'pt-BR' ou 'en-US'.
+   Formato do manifesto (docs/FASE-2-especificacao.md, 9.4):
+     { v:1, clipes:{ 'pt-br/numero/vinte-1a2b3c4d.m4a':{ms,b} }, textos:{ 'pt-br|texto normalizado':'chave' } } */
+const AUDIO={manifesto:null,base:'',token:0,timers:[],fonte:null,cache:new Map(),max:48,ultimo:''};
+
+function audioAtivo(){return !!S&&S.som!==false&&S.voz!==false;}
+function ctxAudio(){
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==='suspended'&&AC.resume)AC.resume();
+    return AC;
+  }catch(e){return null;}
+}
+function audioDefinirManifesto(m,base){
+  AUDIO.manifesto=(m&&typeof m==='object'&&m.clipes)?m:null;
+  AUDIO.base=String(base||'');
+  AUDIO.cache.clear();
+}
+/* normaliza o texto como o script de build normaliza: minúsculas, sem tags, espaços simples */
+function audioNormaliza(t){
+  return String(t==null?'':t).replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
+}
+function audioChave(alvo,idioma){
+  const m=AUDIO.manifesto;
+  if(!m)return null;
+  const a=String(alvo==null?'':alvo);
+  if(m.clipes&&Object.prototype.hasOwnProperty.call(m.clipes,a))return a;
+  const lang=(idioma==='en-US')?'en-us':'pt-br';
+  const k=m.textos&&m.textos[lang+'|'+audioNormaliza(a)];
+  return (k&&m.clipes&&m.clipes[k])?k:null;
+}
+function audioCarregar(chave){
+  if(AUDIO.cache.has(chave)){const v=AUDIO.cache.get(chave);AUDIO.cache.delete(chave);AUDIO.cache.set(chave,v);return v;}
+  const ctx=ctxAudio();
+  if(!ctx||typeof fetch!=='function')return Promise.reject(new Error('sem Web Audio'));
+  const p=fetch(AUDIO.base+chave).then(r=>{
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    return r.arrayBuffer();
+  }).then(b=>new Promise((ok,no)=>{ctx.decodeAudioData(b,ok,no);}));
+  AUDIO.cache.set(chave,p);
+  /* clipe que falhou não fica no cache: a próxima tentativa baixa de novo */
+  p.catch(()=>{AUDIO.cache.delete(chave);});
+  while(AUDIO.cache.size>AUDIO.max)AUDIO.cache.delete(AUDIO.cache.keys().next().value);
+  return p;
+}
+function audioPrecarregar(chaves){
+  if(!AUDIO.manifesto)return Promise.resolve(0);
+  const lista=(chaves||[]).filter(c=>AUDIO.manifesto.clipes&&AUDIO.manifesto.clipes[c]);
+  return Promise.all(lista.map(c=>audioCarregar(c).then(()=>1,()=>0))).then(r=>r.reduce((a,b)=>a+b,0));
+}
+function audioAgendar(fn,ms){
+  const id=setTimeout(()=>{
+    const i=AUDIO.timers.indexOf(id);if(i>=0)AUDIO.timers.splice(i,1);
+    fn();
+  },ms);
+  AUDIO.timers.push(id);
+  return id;
+}
+function audioParar(){
+  AUDIO.token++;
+  AUDIO.timers.splice(0).forEach(clearTimeout);
+  if(AUDIO.fonte){try{AUDIO.fonte.onended=null;AUDIO.fonte.stop();}catch(e){}AUDIO.fonte=null;}
+  try{if(typeof speechSynthesis!=='undefined')speechSynthesis.cancel();}catch(e){}
+}
+function audioFalhou(chave,motivo){
+  try{if(typeof registrarEvento==='function')registrarEvento('audio_falha',{clip:String(chave).slice(0,80),motivo:String(motivo).slice(0,40)});}catch(e){}
+}
+/* RESERVA: voz do aparelho. Nunca chama speak() logo depois de cancel(): em vários Androids o cancel
+   engole a fala seguinte. Se havia fala em andamento, cancela e espera um instante. */
+function audioReserva(texto,idioma,tok){
+  if(typeof speechSynthesis==='undefined'||typeof SpeechSynthesisUtterance==='undefined')return Promise.resolve('sem-voz');
+  const ing=idioma==='en-US';
+  const t=String(texto||'').trim();
+  if(!t)return Promise.resolve('mudo');
+  return new Promise(ok=>{
+    const dizer=()=>{
+      if(tok!==AUDIO.token){ok('cancelado');return;}
+      try{
+        const v=vozDe(ing?'en-US':'pt-BR');
+        if(ing&&!v){if(VOZES.length)avisoVoz();ok('sem-voz');return;}
+        const u=new SpeechSynthesisUtterance(t);
+        u.lang=ing?'en-US':'pt-BR';
+        if(v){u.voice=v;if(v.lang)u.lang=v.lang;}
+        u.rate=(ing?.82:.92)*(+S.velocidade||1);u.pitch=1.05;
+        u.onend=()=>ok('reserva');u.onerror=()=>ok('reserva');
+        speechSynthesis.speak(u);
+        AUDIO.ultimo=t;
+      }catch(e){ok('sem-voz');}
+    };
+    try{
+      if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();audioAgendar(dizer,90);}
+      else dizer();
+    }catch(e){ok('sem-voz');}
+  });
+}
+function audioTocar(alvo,idioma){
+  if(!audioAtivo())return Promise.resolve('mudo');
+  audioParar();
+  const tok=AUDIO.token;
+  const lang=(idioma==='en-US')?'en-US':'pt-BR';
+  const chave=audioChave(alvo,lang);
+  if(!chave)return audioReserva(alvo,lang,tok);
+  return audioCarregar(chave).then(buf=>{
+    if(tok!==AUDIO.token)return 'cancelado';
+    const ctx=ctxAudio();
+    const fonte=ctx.createBufferSource();
+    fonte.buffer=buf;fonte.connect(ctx.destination);
+    AUDIO.fonte=fonte;
+    return new Promise(ok=>{fonte.onended=()=>{if(AUDIO.fonte===fonte)AUDIO.fonte=null;ok('gravado');};fonte.start(0);});
+  }).catch(e=>{
+    audioFalhou(chave,e&&e.message||'erro');
+    if(tok!==AUDIO.token)return 'cancelado';
+    return audioReserva(alvo,lang,tok);
+  });
+}
 /* ---------- som e voz ---------- */
 let AC=null;
 function nota(f,t,dur,vol){
   if(!S.som)return;
   try{
-    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    ctxAudio();
     const o=AC.createOscillator(),g=AC.createGain();
     o.type='sine';o.frequency.value=f;o.connect(g);g.connect(AC.destination);
     const t0=AC.currentTime+t;
@@ -4910,7 +5046,7 @@ function emTexto(html){
      .replace(/R\$/g,' reais ').replace(/___/g,' quanto ').replace(/\s+/g,' ').trim();
   return t;
 }
-/* --- vozes: escolher uma voz de verdade do idioma pedido --- */
+/* --- vozes do aparelho: SÓ COMO RESERVA enquanto o áudio gravado não chega (ver audio.js) --- */
 let VOZES=[];
 function carregarVozes(){
   try{VOZES=speechSynthesis.getVoices()||[];}catch(e){VOZES=[];}
@@ -4920,62 +5056,74 @@ if(typeof speechSynthesis!=='undefined'){
   try{speechSynthesis.addEventListener('voiceschanged',carregarVozes);}catch(e){speechSynthesis.onvoiceschanged=carregarVozes;}
   setTimeout(carregarVozes,300);setTimeout(carregarVozes,1200);
 }
-const idioma=v=>String((v&&v.lang)||'').toLowerCase().replace('_','-');
-/* vozes de brincadeira do macOS/iOS: nunca servem para ler uma aula */
-const VOZ_RUIM=/albert|bad news|bahh|bells|boing|bubbles|cellos|deranged|good news|jester|junior|organ|superstar|trinoids|whisper|wobble|zarvox|ralph|fred|kathy|princess|hysterical|pipe organ|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley|novelty/i;
-/* lista de vozes de um idioma, da melhor para a pior */
+const idioma=v=>String((v&&v.lang)||'').toLowerCase().replace(/_/g,'-');
+/* nome sem o parêntese: "Eddy (Português (Brasil))" -> "eddy" */
+const nomeBase=v=>String((v&&v.name)||'').split('(')[0].replace(/^(microsoft|google|apple)\s+/i,'').trim().toLowerCase();
+/* Vozes de brincadeira do macOS/iOS (existem em vários idiomas, inclusive pt-BR e en-US).
+   Nunca servem para ler uma aula e NÃO aparecem na lista nem são escolhidas sozinhas. */
+const VOZ_PIADA=new Set(['albert','bad news','bahh','bells','boing','bubbles','cellos','deranged','eddy','flo','fred',
+  'good news','grandma','grandpa','hysterical','jester','junior','kathy','organ','pipe organ','princess','ralph','reed',
+  'rocko','sandy','shelley','superstar','trinoids','whisper','wobble','zarvox']);
+const ehVozPiada=v=>{
+  const n=nomeBase(v);
+  return VOZ_PIADA.has(n)||/\b(novelty|bad news|good news|pipe organ)\b/.test(n)||VOZ_PIADA.has(n.split(' ')[0]);
+};
+/* vozes que costumam soar bem em cada idioma (Android, iOS, macOS, Windows/Edge) */
+const VOZ_BOA={
+  'pt':/luciana|felipe|francisca|thalita|antonio|maria|google portugu[eê]s do brasil|google portuguese|pt-br-x-/,
+  'en':/samantha|ava|allison|nicky|zoe|evan|alex|aria|jenny|guy|google us english|en-us-x-/
+};
+function notaVoz(v,alvo){
+  const n=String((v&&v.name)||'').toLowerCase(),b=nomeBase(v);
+  let p=0;
+  if(idioma(v)===alvo)p+=10;                              /* sotaque certo: pt-BR não perde para pt-PT */
+  if(v.localService)p+=4;                                 /* funciona sem internet */
+  if(/premium|enhanced|neural|natural|aprimorad/.test(n))p+=8;
+  if(VOZ_BOA[alvo.slice(0,2)]&&VOZ_BOA[alvo.slice(0,2)].test(b+' '+n))p+=5;
+  if(/compact|espeak|robot/.test(n))p-=6;
+  if(v.default)p+=1;
+  return p;
+}
+/* lista de vozes de um idioma, da melhor para a pior, sem vozes de piada */
 function vozesDe(lang){
   if(!VOZES.length)carregarVozes();
-  const alvo=(lang||'pt-BR').toLowerCase(),raiz=alvo.slice(0,2);
-  let c=VOZES.filter(v=>idioma(v)===alvo);
-  if(!c.length)c=VOZES.filter(v=>idioma(v).slice(0,2)===raiz);
-  const nota=v=>{
-    let p=0;const n=(v.name||'').toLowerCase();
-    if(VOZ_RUIM.test(n))p-=40;                         /* voz de piada, fora */
-    if(v.localService)p+=4;                            /* funciona sem internet */
-    if(idioma(v)===alvo)p+=6;                          /* sotaque certo */
-    if(/premium|enhanced|neural|natural|siri/.test(n))p+=8;  /* as boas de verdade */
-    if(/samantha|ava|allison|luciana|joana|google|zira|aria|jenny|francisca/.test(n))p+=4;
-    if(/compact/.test(n))p-=3;
-    if(v.default)p+=1;
-    return p;
-  };
-  return c.slice().sort((a,b)=>nota(b)-nota(a));
+  const alvo=(lang||'pt-BR').toLowerCase().replace(/_/g,'-'),raiz=alvo.slice(0,2);
+  const limpas=VOZES.filter(v=>!ehVozPiada(v));
+  let c=limpas.filter(v=>idioma(v)===alvo);
+  /* sem a variante exata (pt-BR), aceita o mesmo idioma de outra região (pt-PT) em vez de nada */
+  if(!c.length)c=limpas.filter(v=>idioma(v).slice(0,2)===raiz);
+  return c.slice().sort((a,b)=>notaVoz(b,alvo)-notaVoz(a,alvo));
 }
 function vozDe(lang){
   const lista=vozesDe(lang);
   if(!lista.length)return null;
-  /* respeita a voz escolhida nas configurações, se ela existir neste aparelho */
+  /* respeita a voz escolhida nas configurações, se ela existir neste aparelho e não for de piada */
   const escolhida=(lang==='en-US')?S.vozEn:S.vozPt;
   if(escolhida){
-    const achou=lista.filter(v=>v.name===escolhida)[0]||
-                VOZES.filter(v=>v.name===escolhida)[0];
+    const achou=lista.filter(v=>v.name===escolhida)[0];
     if(achou)return achou;
   }
   return lista[0];
 }
 function temVoz(lang){return !!vozDe(lang);}
+/* falar(html, 'pt-BR'|'en-US'): tira as tags, troca símbolos por extenso e entrega ao audio.js.
+   Respeita S.som e S.voz: com o som desligado a voz também fica calada. */
 function falar(html,lang){
-  try{
-    if(!('speechSynthesis' in window))return;
-    speechSynthesis.cancel();
-    const ing=lang==='en-US';
-    const u=new SpeechSynthesisUtterance(ing?limpaEN(html):emTexto(html));
-    u.lang=ing?'en-US':'pt-BR';
-    const escolhida=ing?S.vozEn:S.vozPt;
-    /* Português: sem escolha, deixa o aparelho usar a voz padrão dele —
-       é o som que a criança já conhecia. Inglês é diferente: se ninguém
-       escolher, o aparelho leria com a voz portuguesa e sairia errado,
-       então aí sim procuramos uma voz inglesa de verdade. */
-    let v=null;
-    if(escolhida)v=VOZES.filter(x=>x.name===escolhida)[0]||null;
-    if(!v&&ing)v=vozDe('en-US');
-    if(ing&&!v){if(VOZES.length)avisoVoz();return;}
-    if(v)u.voice=v;
-    const vel=+S.velocidade||1;
-    u.rate=(ing?.82:.92)*vel;u.pitch=1.05;
-    speechSynthesis.speak(u);
-  }catch(e){}
+  const ing=lang==='en-US';
+  return audioTocar(ing?limpaEN(html):emTexto(html),ing?'en-US':'pt-BR');
+}
+/* fala pedida pela criança (botão de ouvir): se o som estiver desligado, avisa em vez de ficar mudo sem explicar */
+function falarPedido(html,lang){
+  if(!audioAtivo()){avisoSomDesligado();return Promise.resolve('mudo');}
+  return falar(html,lang);
+}
+let avisouSomOff=false;
+function avisoSomDesligado(){
+  if(avisouSomOff)return;avisouSomOff=true;
+  const d=document.createElement('div');d.className='aviso-voz';
+  d.innerHTML='<b>Os sons estão desligados</b><span>Toque no alto-falante lá em cima para ligar de novo.</span>';
+  document.body.appendChild(d);
+  setTimeout(()=>{d.classList.add('sai');setTimeout(()=>{d.remove();avisouSomOff=false;},400);},3500);
 }
 function limpaEN(html){
   return String(html).replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ')
@@ -4990,8 +5138,7 @@ function avisoVoz(){
   document.body.appendChild(d);
   setTimeout(()=>{d.classList.add('sai');setTimeout(()=>d.remove(),400);},6500);
 }
-const calar=()=>{try{speechSynthesis.cancel();}catch(e){}};
-
+const calar=()=>audioParar();
 /* ---------- utilidades ---------- */
 /* O nome do perfil é digitado pela criança e entra em innerHTML em vários lugares.
    Sem escapar, um nome como <img src=x onerror=...> vira código — e o nome viaja
@@ -5138,6 +5285,7 @@ function renderTrilha(){
 /* ---------- lição ---------- */
 let LIC={};
 function abrirLicao(ui,li){
+  calar();if(LIC&&LIC.tDica){clearTimeout(LIC.tDica);}
   const u=UNITS[ui],l=u.lessons[li];
   /* base = quantas perguntas a fase REALMENTE tem. Fixo em 8 fazia a fase de 6 perguntas
      dizer "você acertou 6 de 8" numa jogada perfeita e travar a barra de missão em 75%. */
@@ -5172,7 +5320,7 @@ function blocoPasso(ps,k,comFala){
 }
 function ligarOuvir(escopo){
   escopo.querySelectorAll('[data-ler]').forEach(b=>b.addEventListener('click',()=>{
-    falar(decodeURIComponent(b.dataset.ler),b.dataset.lang);
+    falarPedido(decodeURIComponent(b.dataset.ler),b.dataset.lang);
   }));
 }
 function tecladoHTML(){
@@ -5193,7 +5341,14 @@ function digitar(k){
   else if(LIC.digitado.length<7)LIC.digitado+=k;
   LIC.resp=LIC.digitado;pintarCampo();nota(700,0,.05,.05);
 }
+/* Fala agendada para depois que a tela pinta. Fica guardada no audio.js: fechar a fase, avançar ou abrir
+   outra tela cancela (antes, a fala saía 420 ms depois, com a fase já fechada). */
+function licaoAberta(){return $('#licao').classList.contains('on');}
+function falarDepois(ms,texto,lang){
+  audioAgendar(()=>{if(licaoAberta())falar(texto,lang);},ms);
+}
 function pintarLicao(){
+  calar();
   const pe=$('#pe');pe.className='pe';
   $('#prog').style.width=(LIC.etapa==='aula'?0:Math.max(4,Math.round(LIC.acertos/LIC.base*100)))+'%';
   pintarVidas();
@@ -5213,7 +5368,7 @@ function pintarLicao(){
     $('#palco').innerHTML=h;ligarOuvir($('#palco'));
     $('#acao').textContent='Vamos ajudar!';$('#acao').disabled=false;
     $('.lc-corpo').scrollTo(0,0);
-    if(S.nivel==='facil')setTimeout(()=>falar((cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:'')),350);
+    if(S.nivel==='facil')falarDepois(350,(cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''));
     return;
   }
   if(LIC.etapa==='aula'){
@@ -5324,7 +5479,7 @@ function pintarLicao(){
     pintarCampo();
     $('#palco').querySelectorAll('.tecla').forEach(b=>b.addEventListener('click',()=>digitar(b.dataset.k)));
   }
-  if(S.nivel==='facil'||q.ouvir)setTimeout(()=>falar(q.ouvir||q.prompt,q.lang),420);
+  if(S.nivel==='facil'||q.ouvir)falarDepois(420,q.ouvir||q.prompt,q.lang);
 }
 const shufA=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 function barraMissao(){
@@ -5999,18 +6154,18 @@ function telaVoz(){
   $('#perfil').querySelectorAll('[data-voz]').forEach(b=>b.addEventListener('click',()=>{
     const i=b.dataset.voz.indexOf('|');
     const campo=b.dataset.voz.slice(0,i),nome=b.dataset.voz.slice(i+1);
-    if(campo==='pt'){S.vozPt=nome;salvar();falar('Oi! Eu sou o Bobby. Vamos aprender juntos?');}
-    else{S.vozEn=nome;salvar();falar('Hello! My name is Bobby. Nice to meet you!','en-US');}
+    if(campo==='pt'){S.vozPt=nome;salvar();falarPedido('Oi! Eu sou o Bobby. Vamos aprender juntos?');}
+    else{S.vozEn=nome;salvar();falarPedido('Hello! My name is Bobby. Nice to meet you!','en-US');}
     telaVoz();
   }));
   const r=$('#vel');
   if(r){
     r.addEventListener('input',()=>{$('#vel-n').textContent=r.value+'%';});
     r.addEventListener('change',()=>{S.velocidade=(+r.value)/100;salvar();
-      falar('Assim está bom para você acompanhar?');});
+      falarPedido('Assim está bom para você acompanhar?');});
   }
   const t=$('#vel-teste');
-  if(t)t.addEventListener('click',()=>falar('Contar é apontar para cada coisa e falar um número em voz alta.'));
+  if(t)t.addEventListener('click',()=>falarPedido('Contar é apontar para cada coisa e falar um número em voz alta.'));
 }
 
 /* ---------- segurança e dados do perfil ---------- */
