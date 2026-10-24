@@ -122,7 +122,7 @@ function audioPartes(p,mat){
   const partes=[];
   let atual='';
   const fecha=()=>{
-    const q=atual.replace(/[?!.,:;()"“”‘’→–—\-=]+/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
+    const q=atual.replace(/[?!.,:;()"“”‘’→–\u2014\-=]+/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
     if(q.length>1)partes.push({t:'quadro',v:q});
     atual='';
   };

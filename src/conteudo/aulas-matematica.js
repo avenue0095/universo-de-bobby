@@ -14,7 +14,7 @@ AULAS['1.2']=[
  P('O truque do jacaré','Os sinais &lt; e &gt; são a boca de um jacaré faminto. Ele sempre abre a boca para o <b>número maior</b>, porque quer comer mais. Assim: 34 &lt; 51.')
 ];
 AULAS['1.3']=[
- P('Contar de um em um cansa','Quando são muitas coisas, contar uma por uma dá erro: a gente pula ou repete. Por isso os matemáticos inventaram um truque — juntar sempre de <b>10 em 10</b>.',dourado(0,0,9)),
+ P('Contar de um em um cansa','Quando são muitas coisas, contar uma por uma dá erro: a gente pula ou repete. Por isso os matemáticos inventaram um truque, juntar sempre de <b>10 em 10</b>.',dourado(0,0,9)),
  P('Dez viram um só','Junte 10 cubinhos e eles viram <b>uma barrinha</b>. Essa barrinha tem um nome: <b>dezena</b>. Ela vale 10, mesmo sendo uma peça só.',dourado(0,1,0)),
  P('O jogo da troca','<ol class="passos"><li>Conte 10 cubinhos soltos.</li><li>Troque esses 10 por <b>1 barrinha</b>.</li><li>Continue com os que sobraram.</li><li>No fim, conte as barrinhas de 10 em 10: 10, 20, 30...</li></ol>'),
  P('Lendo as barrinhas','3 barrinhas valem <b>30</b>, porque são 3 grupos de 10. Se além delas houver 4 cubinhos soltos, o número é <b>34</b>: 3 dezenas e 4 unidades.',dourado(0,3,4)),
@@ -42,7 +42,7 @@ AULAS['2.1']=[
 AULAS['2.2']=[
  P('Números maiores, mesma ideia','Para somar 38 + 27 você não precisa contar de um em um. Dá para somar as partes separadas: primeiro as dezenas, depois as unidades.'),
  P('Fazendo 38 + 27 por partes','<ol class="passos"><li>Some as dezenas: 30 + 20 = <b>50</b>.</li><li>Some as unidades: 8 + 7 = <b>15</b>.</li><li>Junte tudo: 50 + 15 = <b>65</b>.</li></ol>'),
- P('E o tal do “vai um”?','Quando as unidades passam de 9 (como 8 + 7 = 15), o 10 que sobrou vira uma dezena nova — é isso que a professora chama de “vai um”. Somando por partes, isso acontece sozinho.')
+ P('E o tal do “vai um”?','Quando as unidades passam de 9 (como 8 + 7 = 15), o 10 que sobrou vira uma dezena nova, é isso que a professora chama de “vai um”. Somando por partes, isso acontece sozinho.')
 ];
 AULAS['2.3']=[
  P('Subtrair é tirar','Você tinha 52 reais e gastou 27. Subtrair é descobrir quanto sobrou. Também serve para ver a <b>diferença</b> entre dois números: quanto um tem a mais que o outro.'),
@@ -72,7 +72,7 @@ AULAS['3.2']=[
  P('Truque do 5','Multiplique por 10 e pegue a metade. 8 × 5 → 8 × 10 = 80 → metade = <b>40</b>. Funciona sempre.')
 ];
 AULAS['3.3']=[
- P('As tabuadas “difíceis”','6, 7, 8 e 9 assustam, mas têm atalhos. Ninguém precisa decorar tudo na marra — dá para montar o resultado a partir de contas que você já sabe.'),
+ P('As tabuadas “difíceis”','6, 7, 8 e 9 assustam, mas têm atalhos. Ninguém precisa decorar tudo na marra, dá para montar o resultado a partir de contas que você já sabe.'),
  P('Fazendo 7 × 8 por partes','<ol class="passos"><li>Você sabe 7 × 4 = <b>28</b>.</li><li>8 é o dobro de 4, então dobre o resultado.</li><li>Dobro de 28 = <b>56</b>. Logo 7 × 8 = 56.</li></ol>'),
  P('Truque do 9','Na tabuada do 9, os dois algarismos do resultado sempre somam 9: 9 × 6 = 54 (5 + 4 = 9); 9 × 7 = 63 (6 + 3 = 9). Serve para conferir se você lembrou certo.')
 ];
@@ -84,7 +84,7 @@ AULAS['3.4']=[
 AULAS['3.5']=[
  P('Números grandes, em pedaços','Para multiplicar por um número de dois algarismos, quebre ele em dezena e unidade. Faz duas contas fáceis no lugar de uma difícil.'),
  P('Fazendo 23 × 14','<ol class="passos"><li>Quebre o 14 em <b>10 + 4</b>.</li><li>23 × 10 = <b>230</b>.</li><li>23 × 4 = <b>92</b>.</li><li>Some os dois: 230 + 92 = <b>322</b>.</li></ol>'),
- P('Confira estimando','23 é quase 20 e 14 é quase 15. 20 × 15 = 300. Sua resposta deu 322, que é pertinho de 300 — então faz sentido.')
+ P('Confira estimando','23 é quase 20 e 14 é quase 15. 20 × 15 = 300. Sua resposta deu 322, que é pertinho de 300, então faz sentido.')
 ];
 
 /* ---- Unidade 4 ---- */
@@ -106,11 +106,11 @@ AULAS['4.3']=[
 AULAS['4.4']=[
  P('Palavras que aparecem o tempo todo','<b>Dobro</b> é multiplicar por 2. <b>Metade</b> é dividir por 2. <b>Triplo</b> é vezes 3, e <b>terça parte</b> é dividir por 3. São palavras que caem em prova e no dia a dia.'),
  P('Vendo com o número 14','<ol class="passos"><li>Dobro de 14: 14 × 2 = <b>28</b>.</li><li>Metade de 14: 14 ÷ 2 = <b>7</b>.</li><li>Triplo de 9: 9 × 3 = <b>27</b>. Terça parte de 9: 9 ÷ 3 = <b>3</b>.</li></ol>'),
- P('Cuidado com os ímpares','A metade de um número ímpar não é inteira: metade de 7 é <b>3,5</b>. Isso é normal — é meia unidade sobrando.')
+ P('Cuidado com os ímpares','A metade de um número ímpar não é inteira: metade de 7 é <b>3,5</b>. Isso é normal, é meia unidade sobrando.')
 ];
 AULAS['4.5']=[
  P('Três palavras novas','<b>Múltiplos</b> de 4 são os resultados da tabuada do 4: 4, 8, 12, 16... <b>Divisores</b> de 12 são os números que dividem 12 sem sobrar nada. <b>Primo</b> é o número que só pode ser dividido por 1 e por ele mesmo.'),
- P('Achando os divisores de 12','<ol class="passos"><li>Teste do 1 para cima: 12 ÷ 1 = 12 ✓</li><li>12 ÷ 2 = 6 ✓ &nbsp; 12 ÷ 3 = 4 ✓ &nbsp; 12 ÷ 4 = 3 ✓</li><li>12 ÷ 5 sobra resto ✗ &nbsp; 12 ÷ 6 = 2 ✓ &nbsp; 12 ÷ 12 = 1 ✓</li><li>Divisores: 1, 2, 3, 4, 6 e 12 — são <b>6</b> divisores.</li></ol>'),
+ P('Achando os divisores de 12','<ol class="passos"><li>Teste do 1 para cima: 12 ÷ 1 = 12 ✓</li><li>12 ÷ 2 = 6 ✓ &nbsp; 12 ÷ 3 = 4 ✓ &nbsp; 12 ÷ 4 = 3 ✓</li><li>12 ÷ 5 sobra resto ✗ &nbsp; 12 ÷ 6 = 2 ✓ &nbsp; 12 ÷ 12 = 1 ✓</li><li>Divisores: 1, 2, 3, 4, 6 e 12, são <b>6</b> divisores.</li></ol>'),
  P('Os primos do começo','2, 3, 5, 7, 11, 13, 17, 19. Vale decorar esses. Atenção: o <b>1 não é primo</b> (só tem um divisor) e o <b>2 é o único primo par</b>.')
 ];
 
@@ -138,12 +138,12 @@ AULAS['5.4']=[
 AULAS['5.5']=[
  P('Fração de uma quantidade','Perguntas como “quanto é três quartos de 20 figurinhas?” aparecem toda hora: em desconto, em receita, em dividir a conta.'),
  P('Fazendo '+frac(3,4)+' de 20','<ol class="passos"><li><b>Divida</b> pelo número de baixo: 20 ÷ 4 = <b>5</b>. Cada quarto vale 5.</li><li><b>Multiplique</b> pelo número de cima: 5 × 3 = <b>15</b>.</li><li>Resposta: 15 figurinhas.</li></ol>'),
- P('Pra não esquecer','Primeiro divide, depois multiplica. Sempre nessa ordem — e o resultado nunca pode ser maior que o total, a não ser que a fração passe de um inteiro.')
+ P('Pra não esquecer','Primeiro divide, depois multiplica. Sempre nessa ordem, e o resultado nunca pode ser maior que o total, a não ser que a fração passe de um inteiro.')
 ];
 
 /* ---- Unidade 6 ---- */
 AULAS['6.1']=[
- P('A vírgula parte o número em dois','Antes da vírgula fica a parte inteira (o que está completo). Depois dela ficam os pedaços que não chegaram a formar um inteiro — como os centavos do real.'),
+ P('A vírgula parte o número em dois','Antes da vírgula fica a parte inteira (o que está completo). Depois dela ficam os pedaços que não chegaram a formar um inteiro, como os centavos do real.'),
  P('Lendo o número 2,45','<ol class="passos"><li>O <b>2</b> antes da vírgula: dois inteiros.</li><li>O <b>4</b> logo depois: 4 <b>décimos</b> (o inteiro dividido em 10 partes).</li><li>O <b>5</b> em seguida: 5 <b>centésimos</b> (dividido em 100 partes).</li></ol>'),
  P('Três que valem decorar','<b>0,5</b> é metade. <b>0,25</b> é um quarto. <b>0,75</b> é três quartos. Se você guardar esses três, muita conta fica fácil.')
 ];
@@ -158,9 +158,9 @@ AULAS['6.3']=[
  P('Pra não esquecer','Vírgula embaixo de vírgula, sempre. E a vírgula do resultado desce na mesma coluna das outras duas.')
 ];
 AULAS['6.4']=[
- P('Real e centavo','No preço, os dois números depois da vírgula são os <b>centavos</b>. R$ 13,50 é treze reais e cinquenta centavos — e cinquenta centavos é meio real.'),
+ P('Real e centavo','No preço, os dois números depois da vírgula são os <b>centavos</b>. R$ 13,50 é treze reais e cinquenta centavos, e cinquenta centavos é meio real.'),
  P('Calculando o troco','<b>Comprou algo de R$ 13,50 e pagou com R$ 20,00.</b><ol class="passos"><li>Troco é o que você pagou <b>menos</b> o preço.</li><li>20,00 − 13,50.</li><li>De 13,50 até 14 falta 0,50; de 14 até 20 faltam 6.</li><li>Troco: 6 + 0,50 = <b>R$ 6,50</b>.</li></ol>'),
- P('Confira arredondando','13,50 é quase 14. E 20 − 14 = 6. Seu troco deu 6,50, que está pertinho de 6 — sinal de que a conta está certa.')
+ P('Confira arredondando','13,50 é quase 14. E 20 − 14 = 6. Seu troco deu 6,50, que está pertinho de 6, sinal de que a conta está certa.')
 ];
 AULAS['6.5']=[
  P('A vírgula caminha','Multiplicar ou dividir por 10, 100 e 1000 não muda os algarismos: só faz a vírgula <b>andar de casa</b>.'),
@@ -175,7 +175,7 @@ AULAS['7.1']=[
  P('Os valores que vale saber de cor','<b>100%</b> é tudo. <b>50%</b> é metade. <b>25%</b> é um quarto. <b>10%</b> é a décima parte. E <b>1%</b> é dividir por 100.')
 ];
 AULAS['7.2']=[
- P('Comece sempre pelos 10%','Achar 10% é só dividir por 10 — e a partir dele você monta quase todos os outros. 20% é o dobro de 10%, 5% é a metade.'),
+ P('Comece sempre pelos 10%','Achar 10% é só dividir por 10, e a partir dele você monta quase todos os outros. 20% é o dobro de 10%, 5% é a metade.'),
  P('Achando 30% de 240','<ol class="passos"><li>10% de 240 = 240 ÷ 10 = <b>24</b>.</li><li>30% é três vezes 10%.</li><li>24 × 3 = <b>72</b>.</li></ol>'),
  P('Truque de virar a conta','30% de 50 dá o mesmo que 50% de 30. Quando um lado for difícil, inverta: 50% de 30 é metade de 30, ou seja, <b>15</b>. Bem mais rápido.')
 ];
@@ -198,8 +198,8 @@ AULAS['7.5']=[
 /* ---- Unidade 8 ---- */
 AULAS['8.1']=[
  P('Polígono é forma fechada de linhas retas','Se a figura é fechada e todos os lados são retos, é um polígono. O nome dela vem da <b>quantidade de lados</b>.'),
- P('Conhecendo a turma','<ol class="passos"><li>3 lados: <b>triângulo</b>.</li><li>4 lados: <b>quadrilátero</b> — aqui entram o quadrado e o retângulo.</li><li>5 lados: <b>pentágono</b>. 6 lados: <b>hexágono</b>.</li></ol>'),
- P('Duas coisas que confundem','O <b>círculo não é polígono</b>, porque não tem lados retos. E todo <b>quadrado é um retângulo</b> — é só um retângulo com os quatro lados iguais.')
+ P('Conhecendo a turma','<ol class="passos"><li>3 lados: <b>triângulo</b>.</li><li>4 lados: <b>quadrilátero</b>: aqui entram o quadrado e o retângulo.</li><li>5 lados: <b>pentágono</b>. 6 lados: <b>hexágono</b>.</li></ol>'),
+ P('Duas coisas que confundem','O <b>círculo não é polígono</b>, porque não tem lados retos. E todo <b>quadrado é um retângulo</b>: é só um retângulo com os quatro lados iguais.')
 ];
 AULAS['8.2']=[
  P('Perímetro é o contorno','Imagine uma cerca em volta de um terreno, ou você andando na beirada de uma quadra. O perímetro é a soma de <b>todos os lados</b>.',svgRect(8,5)),
@@ -224,13 +224,13 @@ AULAS['8.5']=[
 
 /* ---- Unidade 9 ---- */
 AULAS['9.1']=[
- P('A letra é um número escondido','Quando a gente não sabe um número ainda, escreve uma letra no lugar dele — quase sempre o <b>x</b>. Descobrir quanto vale o x é resolver o mistério.'),
+ P('A letra é um número escondido','Quando a gente não sabe um número ainda, escreve uma letra no lugar dele, quase sempre o <b>x</b>. Descobrir quanto vale o x é resolver o mistério.'),
  P('Descobrindo o x em x + 7 = 12','<ol class="passos"><li>Alguma coisa mais 7 deu 12.</li><li>Para voltar, faça a operação <b>contrária</b> do +: subtraia.</li><li>12 − 7 = <b>5</b>. Então x = 5.</li><li>Confira: 5 + 7 = 12 ✓</li></ol>'),
  P('A tabela do contrário','Somou? Subtraia. Subtraiu? Some. Multiplicou? Divida. Dividiu? Multiplique. É sempre a operação inversa que revela o x.')
 ];
 AULAS['9.2']=[
  P('As contas têm ordem de chegada','Numa expressão com vários sinais, não se resolve da esquerda para a direita. Existe uma fila: primeiro <b>parênteses</b>, depois potências, depois <b>× e ÷</b>, e por último <b>+ e −</b>.'),
- P('Resolvendo 2 + 3 × 4','<ol class="passos"><li>Tem multiplicação e soma. A multiplicação vem primeiro.</li><li>3 × 4 = <b>12</b>.</li><li>Agora a soma: 2 + 12 = <b>14</b>.</li><li>Quem faz na ordem errada acha 20 — e erra.</li></ol>'),
+ P('Resolvendo 2 + 3 × 4','<ol class="passos"><li>Tem multiplicação e soma. A multiplicação vem primeiro.</li><li>3 × 4 = <b>12</b>.</li><li>Agora a soma: 2 + 12 = <b>14</b>.</li><li>Quem faz na ordem errada acha 20, e erra.</li></ol>'),
  P('Parênteses furam a fila','O que está dentro do parêntese sempre passa na frente: (2 + 3) × 4 = 5 × 4 = <b>20</b>. Por isso eles existem.')
 ];
 AULAS['9.3']=[
@@ -258,7 +258,7 @@ AULAS['10.1']=[
 AULAS['10.2']=[
  P('Gráfico é informação desenhada','Num gráfico de barras, quanto mais alta a barra, maior a quantidade. Dá para comparar tudo de uma olhada, sem ler número por número.',barras(['Seg','Ter','Qua','Qui'],[6,14,20,11])),
  P('Como ler','<ol class="passos"><li>Leia primeiro o que está <b>embaixo</b> de cada barra: o dia, o nome, a categoria.</li><li>Veja a altura de cada uma para achar a maior e a menor.</li><li>Só então faça contas: somar tudo, ver a diferença entre duas, calcular a média.</li></ol>'),
- P('Pergunta clássica de prova','“Quanto Quarta teve <b>a mais</b> que Segunda?” — “a mais” é subtração: pegue a altura de quarta e tire a de segunda.')
+ P('Pergunta clássica de prova','“Quanto Quarta teve <b>a mais</b> que Segunda?” “a mais” é subtração: pegue a altura de quarta e tire a de segunda.')
 ];
 AULAS['10.3']=[
  P('Probabilidade é medir a chance','Antes de jogar um dado, ninguém sabe o que vai sair. Mas dá para calcular a chance: quantos jeitos dão certo, divididos por quantos jeitos existem no total.'),

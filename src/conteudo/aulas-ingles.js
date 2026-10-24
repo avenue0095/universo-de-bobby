@@ -18,19 +18,19 @@ AULAS['e1.2']=[
 AULAS['e1.3']=[
  P('As palavras mágicas','<b>Please</b> quer dizer "por favor" e <b>thank you</b> quer dizer "obrigado". Nos Estados Unidos elas são usadas o tempo todo, até em coisas pequenas.',ENS(EN('please','por favor','plíz'),EN('thank you','obrigado','tênk iú'))),
  P('Respondendo','<ol class="passos"><li>Alguém diz <b>thank you</b>.</li><li>Você responde <b>you\'re welcome</b> ("iór uélcam") = de nada.</li><li>Entre amigos, também vale <b>sure</b> ou <b>no problem</b>.</li></ol>'),
- P('Thanks é a versão curta','<b>Thanks</b> ("tênks") é o mesmo que thank you, só que mais informal — como o nosso "valeu".'),
+ P('Thanks é a versão curta','<b>Thanks</b> ("tênks") é o mesmo que thank you, só que mais informal, como o nosso "valeu".'),
  P('Pra não esquecer','Please antes do pedido, thank you depois de receber. Com essas duas, você já é educado em inglês.')
 ];
 AULAS['e1.4']=[
  P('Dizendo seu nome','A frase é <b>My name is...</b> ("mái neim iz") = "Meu nome é...". Depois é só falar seu nome.',ENS(EN('my name is','meu nome é','mái neim iz'),EN('what\'s your name?','qual é seu nome?','uóts iór neim'))),
- P('Uma conversa completa','<ol class="passos"><li>— <b>Hi! What\'s your name?</b> (Oi! Qual é o seu nome?)</li><li>— <b>My name is Lívia. And you?</b> (Meu nome é Lívia. E você?)</li><li>— <b>My name is Bobby. Nice to meet you!</b> (Meu nome é Bobby. Prazer em conhecer você!)</li></ol>'),
+ P('Uma conversa completa','<ol class="passos"><li><b>Hi! What\'s your name?</b> (Oi! Qual é o seu nome?)</li><li><b>My name is Lívia. And you?</b> (Meu nome é Lívia. E você?)</li><li><b>My name is Bobby. Nice to meet you!</b> (Meu nome é Bobby. Prazer em conhecer você!)</li></ol>'),
  P('O jeito curto','No dia a dia, americanos dizem só <b>I\'m Bobby</b> ("áim Bobby") = "eu sou o Bobby". Mais rápido e igualmente correto.'),
  P('Pra não esquecer','My name is + seu nome. Essa é a frase que abre qualquer apresentação.')
 ];
 AULAS['e1.5']=[
- P('Os primeiros números','one, two, three, four, five — 1 a 5. Repare que a escrita não parece nada com o som; em inglês isso é comum.',ENS(EN('one','um','uân'),EN('two','dois','tchú'),EN('three','três','thrí'))),
- P('Como falar cada um','<ol class="passos"><li><b>one</b> = "uân"</li><li><b>two</b> = "tchú" (o W é mudo)</li><li><b>three</b> = "thrí" — a língua vai entre os dentes</li><li><b>four</b> = "fór", <b>five</b> = "fáiv"</li></ol>'),
- P('Até dez','six ("siks"), seven ("sévan"), eight ("eit" — o GH é mudo), nine ("náin"), ten ("tén").'),
+ P('Os primeiros números','one, two, three, four, five, 1 a 5. Repare que a escrita não parece nada com o som; em inglês isso é comum.',ENS(EN('one','um','uân'),EN('two','dois','tchú'),EN('three','três','thrí'))),
+ P('Como falar cada um','<ol class="passos"><li><b>one</b> = "uân"</li><li><b>two</b> = "tchú" (o W é mudo)</li><li><b>three</b> = "thrí" a língua vai entre os dentes</li><li><b>four</b> = "fór", <b>five</b> = "fáiv"</li></ol>'),
+ P('Até dez','six ("siks"), seven ("sévan"), eight ("eit", o GH é mudo), nine ("náin"), ten ("tén").'),
  P('Pra não esquecer','Conte de 1 a 10 em inglês todo dia, apontando os dedos. Em uma semana sai automático.')
 ];
 
@@ -49,25 +49,25 @@ AULAS['e2.2']=[
 AULAS['e2.3']=[
  P('Cores misturadas','<b>orange</b> (laranja), <b>purple</b> (roxo), <b>pink</b> (rosa).',ENS(EN('orange','laranja','órinj'),EN('purple','roxo','pârpol'),EN('pink','rosa','pink'))),
  P('Orange é fruta e cor','<ol class="passos"><li>An <b>orange</b> = uma laranja (a fruta).</li><li>The shirt is <b>orange</b> = a camisa é laranja (a cor).</li><li>Igual ao português: a mesma palavra serve para as duas coisas.</li></ol>'),
- P('Palavras parecidas','Repare que <b>pink</b> e <b>orange</b> parecem palavras que você já conhece do português. Muitas palavras do inglês vieram das mesmas raízes — isso vai te ajudar bastante.'),
+ P('Palavras parecidas','Repare que <b>pink</b> e <b>orange</b> parecem palavras que você já conhece do português. Muitas palavras do inglês vieram das mesmas raízes, isso vai te ajudar bastante.'),
  P('Pra não esquecer','Agora você já sabe nove cores. Dá para descrever quase qualquer coisa que você vê.')
 ];
 AULAS['e2.4']=[
  P('Material escolar','<b>book</b> (livro), <b>pencil</b> (lápis), <b>pen</b> (caneta), <b>paper</b> (papel).',ENS(EN('book','livro','buk'),EN('pencil','lápis','pênsol'))),
- P('Um ou vários','<ol class="passos"><li>Um: <b>a book</b> (um livro), <b>a pencil</b> (um lápis).</li><li>Vários: acrescente S — <b>books</b> (livros), <b>pencils</b> (lápis).</li><li>Igualzinho ao português nesse ponto.</li></ol>'),
+ P('Um ou vários','<ol class="passos"><li>Um: <b>a book</b> (um livro), <b>a pencil</b> (um lápis).</li><li>Vários: acrescente S, <b>books</b> (livros), <b>pencils</b> (lápis).</li><li>Igualzinho ao português nesse ponto.</li></ol>'),
  P('A ou an?','Usa-se <b>a</b> antes de som de consoante (<b>a book</b> = um livro) e <b>an</b> antes de som de vogal (<b>an apple</b> = uma maçã, <b>an orange</b> = uma laranja). É só para a palavra soar melhor.'),
  P('Pra não esquecer','Junte com as cores: <b>a red pencil</b> = um lápis vermelho. Cor primeiro, coisa depois.')
 ];
 AULAS['e2.5']=[
  P('Na escola','<b>school</b> (escola), <b>teacher</b> (professor/professora), <b>student</b> (aluno), <b>friend</b> (amigo).',ENS(EN('school','escola','skúl'),EN('teacher','professor(a)','tíchâr'))),
  P('Teacher vem de teach','<ol class="passos"><li><b>teach</b> = ensinar.</li><li>Acrescente <b>-er</b> e vira quem faz: <b>teacher</b> = quem ensina, o professor.</li><li>O mesmo truque: <b>play</b> (brincar) → <b>player</b> (jogador), <b>sing</b> (cantar) → <b>singer</b> (cantor), <b>work</b> (trabalhar) → <b>worker</b> (trabalhador).</li></ol>'),
- P('Não tem masculino e feminino','Em inglês, <b>teacher</b> serve para professor e professora. A língua quase não marca gênero — isso facilita muito a sua vida.'),
+ P('Não tem masculino e feminino','Em inglês, <b>teacher</b> serve para professor e professora. A língua quase não marca gênero, isso facilita muito a sua vida.'),
  P('Pra não esquecer','O sufixo <b>-er</b> transforma ação em pessoa. Guardando esse truque, você entende dezenas de palavras novas sozinho.')
 ];
 
 AULAS['e3.1']=[
- P('Mãe e pai','<b>mother</b> (mãe) e <b>father</b> (pai). No dia a dia, os americanos usam mais <b>mom</b> e <b>dad</b> — como nosso "mãe" e "pai" carinhoso.',ENS(EN('mother','mãe','mâdâr'),EN('father','pai','fádâr'))),
- P('O som do TH','<ol class="passos"><li>Em <b>mother</b> e <b>father</b>, o TH é falado com a língua entre os dentes.</li><li>Não é T nem D nem F: é um som que o português não tem.</li><li>Comece falando "mâ-DÂR" — já fica compreensível.</li></ol>'),
+ P('Mãe e pai','<b>mother</b> (mãe) e <b>father</b> (pai). No dia a dia, os americanos usam mais <b>mom</b> e <b>dad</b>: como nosso "mãe" e "pai" carinhoso.',ENS(EN('mother','mãe','mâdâr'),EN('father','pai','fádâr'))),
+ P('O som do TH','<ol class="passos"><li>Em <b>mother</b> e <b>father</b>, o TH é falado com a língua entre os dentes.</li><li>Não é T nem D nem F: é um som que o português não tem.</li><li>Comece falando "mâ-DÂR" já fica compreensível.</li></ol>'),
  P('Dizendo de quem é','Use <b>my</b> = meu/minha: <b>my mother</b>, <b>my father</b>. Não muda se é homem ou mulher, sempre "my".'),
  P('Pra não esquecer','mother/father para escrever, mom/dad para conversar.')
 ];
@@ -93,7 +93,7 @@ AULAS['e3.5']=[
  P('Menino, menina, bebê','<b>boy</b> (menino), <b>girl</b> (menina), <b>baby</b> (bebê), <b>man</b> (homem), <b>woman</b> (mulher).',ENS(EN('boy','menino','bói'),EN('girl','menina','gârl'),EN('baby','bebê','bêibi'))),
  P('Plurais irregulares','<ol class="passos"><li><b>boy</b> → <b>boys</b> (menino → meninos) e <b>girl</b> → <b>girls</b> (menina → meninas): normal, com S.</li><li><b>man</b> → <b>men</b> (homem → homens) e <b>woman</b> → <b>women</b> (mulher → mulheres): muda a letra do meio!</li><li><b>baby</b> → <b>babies</b> (bebê → bebês): o Y vira IES.</li></ol>'),
  P('Woman e women','No singular fala-se "uúman"; no plural, "uímen". A escrita muda pouco, mas o som muda bastante. Preste atenção ao ouvir.'),
- P('Pra não esquecer','A maioria dos plurais é só S. Os irregulares são poucos — e men/women são os mais usados de todos.')
+ P('Pra não esquecer','A maioria dos plurais é só S. Os irregulares são poucos, e men/women são os mais usados de todos.')
 ];
 
 AULAS['e4.1']=[
@@ -104,7 +104,7 @@ AULAS['e4.1']=[
 ];
 AULAS['e4.2']=[
  P('Pássaro e peixe','<b>bird</b> (pássaro) e <b>fish</b> (peixe).',ENS(EN('bird','pássaro','bârd'),EN('fish','peixe','fích'))),
- P('Fish não muda no plural','<ol class="passos"><li>Um peixe: <b>a fish</b>.</li><li>Muitos peixes: <b>fish</b> — sem S!</li><li>Outros assim: sheep (ovelha), deer (cervo).</li></ol>'),
+ P('Fish não muda no plural','<ol class="passos"><li>Um peixe: <b>a fish</b>.</li><li>Muitos peixes: <b>fish</b>: sem S!</li><li>Outros assim: sheep (ovelha), deer (cervo).</li></ol>'),
  P('Onde eles vivem','Birds fly in the sky. (Pássaros voam no céu.) Fish swim in the water. (Peixes nadam na água.) <b>fly</b> = voar, <b>swim</b> = nadar.'),
  P('Pra não esquecer','Palavras curtas como bird e fish são as que mais aparecem. Vale falar em voz alta várias vezes.')
 ];
@@ -121,8 +121,8 @@ AULAS['e4.4']=[
  P('Pra não esquecer','Quando uma palavra em inglês parecer com uma do português, provavelmente quer dizer a mesma coisa. Aproveite essa ajuda.')
 ];
 AULAS['e4.5']=[
- P('O urso e o coelho','<b>bear</b> (urso — como o Bobby!) e <b>rabbit</b> (coelho).',ENS(EN('bear','urso','bér'),EN('rabbit','coelho','rébit'))),
- P('Cuidado: bear e beer','<ol class="passos"><li><b>bear</b> = urso, fala-se "bér".</li><li><b>beer</b> = cerveja, fala-se "bíer".</li><li>Uma letra trocada muda tudo — igual FACA e VACA em português.</li></ol>'),
+ P('O urso e o coelho','<b>bear</b> (urso, como o Bobby!) e <b>rabbit</b> (coelho).',ENS(EN('bear','urso','bér'),EN('rabbit','coelho','rébit'))),
+ P('Cuidado: bear e beer','<ol class="passos"><li><b>bear</b> = urso, fala-se "bér".</li><li><b>beer</b> = cerveja, fala-se "bíer".</li><li>Uma letra trocada muda tudo, igual FACA e VACA em português.</li></ol>'),
  P('Apresentando o Bobby','<b>Bobby is a brown bear.</b> = O Bobby é um urso marrom.<br><b>He is my friend.</b> = Ele é meu amigo. (<b>brown</b> = marrom)'),
  P('Pra não esquecer','Você já sabe apresentar, descrever e falar de animais. Isso já é uma conversa de verdade.')
 ];
@@ -135,7 +135,7 @@ AULAS['e5.1']=[
 ];
 AULAS['e5.2']=[
  P('Pão e queijo','<b>bread</b> (pão), <b>cheese</b> (queijo), <b>butter</b> (manteiga).',ENS(EN('bread','pão','bréd'),EN('cheese','queijo','tchíz'))),
- P('Say cheese!','<ol class="passos"><li>Nos EUA, quem tira foto diz <b>Say cheese!</b> — “Diga queijo!”</li><li>É porque falar “cheese” (queijo) faz a boca sorrir.</li><li>É o nosso “diga X”.</li></ol>'),
+ P('Say cheese!','<ol class="passos"><li>Nos EUA, quem tira foto diz <b>Say cheese!</b>: “Diga queijo!”</li><li>É porque falar “cheese” (queijo) faz a boca sorrir.</li><li>É o nosso “diga X”.</li></ol>'),
  P('Montando o lanche','Bread and cheese, please. <b>and</b> = e. Com "and" você junta qualquer par de palavras.'),
  P('Pra não esquecer','and é uma das palavras mais usadas do inglês. Curtinha e essencial.')
 ];
@@ -161,7 +161,7 @@ AULAS['e5.5']=[
 AULAS['e6.1']=[
  P('Cabeça e mãos','<b>head</b> (cabeça), <b>hand</b> (mão), <b>arm</b> (braço), <b>leg</b> (perna), <b>foot</b> (pé).',ENS(EN('head','cabeça','réd'),EN('hand','mão','rénd'))),
  P('Plurais que mudam','<ol class="passos"><li>hand → hands (normal).</li><li><b>foot</b> → <b>feet</b> (pé → pés).</li><li><b>tooth</b> → <b>teeth</b> (dente → dentes).</li></ol>'),
- P('Uma música que ajuda','Existe uma canção famosa nas escolas americanas: <i>Head, shoulders, knees and toes</i> — cabeça, ombros, joelhos e dedos do pé. Cantar ajuda a decorar.'),
+ P('Uma música que ajuda','Existe uma canção famosa nas escolas americanas: <i>Head, shoulders, knees and toes</i>, cabeça, ombros, joelhos e dedos do pé. Cantar ajuda a decorar.'),
  P('Pra não esquecer','Aponte para a parte do corpo enquanto fala a palavra. O corpo aprende junto com a memória.')
 ];
 AULAS['e6.2']=[
@@ -217,13 +217,13 @@ AULAS['e7.5']=[
  P('Chave e luz','<b>key</b> (chave), <b>light</b> (luz), <b>lamp</b> (lâmpada/luminária), <b>clock</b> (relógio de parede).',ENS(EN('key','chave','kí'),EN('light','luz','láit'))),
  P('O GH mudo','<ol class="passos"><li>Em <b>light</b>, o GH não é falado: "láit".</li><li>Igual em night ("náit"), right ("ráit"), eight ("eit").</li><li>Aprendeu um, aprendeu todos.</li></ol>'),
  P('Frases úteis','Turn on the light. = Acenda a luz. Turn off the light. = Apague a luz. <b>turn on/off</b> = ligar/desligar.'),
- P('Pra não esquecer','O Bobby precisa da <b>key</b> para abrir o castelo. Guarde essa palavra — ela vai aparecer bastante.')
+ P('Pra não esquecer','O Bobby precisa da <b>key</b> para abrir o castelo. Guarde essa palavra, ela vai aparecer bastante.')
 ];
 
 AULAS['e8.1']=[
  P('Primeiros verbos','<b>run</b> (correr), <b>eat</b> (comer), <b>drink</b> (beber).',ENS(EN('run','correr','rân'),EN('eat','comer','ít'),EN('drink','beber','drink'))),
  P('Falando de você','<ol class="passos"><li><b>I run.</b> = Eu corro.</li><li><b>I eat bread.</b> = Eu como pão.</li><li><b>I drink water.</b> = Eu bebo água.</li></ol>'),
- P('A regra do S','Com he, she e it, o verbo ganha <b>S</b>: He runs. She eats. It drinks. Só nessas três pessoas — em todas as outras, o verbo fica igual.'),
+ P('A regra do S','Com he, she e it, o verbo ganha <b>S</b>: He runs. She eats. It drinks. Só nessas três pessoas, em todas as outras, o verbo fica igual.'),
  P('Pra não esquecer','I run / he runs. Essa é a diferença mais importante do presente em inglês.')
 ];
 AULAS['e8.2']=[
@@ -235,20 +235,20 @@ AULAS['e8.2']=[
 AULAS['e8.3']=[
  P('Ler e escrever','<b>read</b> (ler), <b>write</b> (escrever), <b>listen</b> (ouvir), <b>speak</b> (falar).',ENS(EN('read','ler','ríd'),EN('write','escrever','ráit'))),
  P('Letras mudas','<ol class="passos"><li>Em <b>write</b>, o W não é falado: "ráit".</li><li>Em <b>listen</b>, o T não é falado: "lísen".</li><li>O inglês tem muitas letras que se escrevem mas não se falam.</li></ol>'),
- P('As quatro habilidades','Para aprender uma língua você precisa de read, write, listen e speak. Este app treina as quatro — inclusive ouvir, no botão do som.'),
+ P('As quatro habilidades','Para aprender uma língua você precisa de read, write, listen e speak. Este app treina as quatro, inclusive ouvir, no botão do som.'),
  P('Pra não esquecer','Fale em voz alta sempre que puder. Ouvir a própria voz em inglês é o que destrava a conversa.')
 ];
 AULAS['e8.4']=[
  P('Mais ações','<b>walk</b> (andar), <b>sing</b> (cantar), <b>jump</b> (pular), <b>dance</b> (dançar).',ENS(EN('walk','andar','uók'),EN('jump','pular','djâmp'))),
  P('Dando ordens','<ol class="passos"><li>Para mandar alguém fazer algo, use o verbo sozinho.</li><li><b>Jump!</b> = Pule! <b>Sing!</b> = Cante!</li><li>Com please fica educado: <b>Sit down, please.</b></li></ol>'),
  P('Um jogo americano','Crianças nos EUA brincam de <i>Simon says</i> (“Simon diz”): alguém fala <b>Simon says jump!</b> (“Simon diz: pule!”) e todo mundo pula. É assim que se aprende verbo brincando.'),
- P('Pra não esquecer','O verbo sozinho vira ordem ou convite. Sem conjugar nada — o inglês facilita nessa parte.')
+ P('Pra não esquecer','O verbo sozinho vira ordem ou convite. Sem conjugar nada, o inglês facilita nessa parte.')
 ];
 AULAS['e8.5']=[
  P('Eu consigo, eu gosto','<b>I can</b> = eu consigo/eu sei. <b>I like</b> = eu gosto.',ENS(EN('I can','eu consigo','ái kén'),EN('I like','eu gosto','ái láik'))),
- P('Como montar','<ol class="passos"><li><b>I can swim.</b> = Eu sei nadar.</li><li><b>I like to read.</b> = Eu gosto de ler.</li><li>Depois de <b>can</b> (conseguir), o verbo vem puro: <b>can swim</b> (sabe nadar) — nunca “can to swim”.</li></ol>'),
+ P('Como montar','<ol class="passos"><li><b>I can swim.</b> = Eu sei nadar.</li><li><b>I like to read.</b> = Eu gosto de ler.</li><li>Depois de <b>can</b> (conseguir), o verbo vem puro: <b>can swim</b> (sabe nadar), nunca “can to swim”.</li></ol>'),
  P('Negando','I <b>can\'t</b> swim = eu não sei nadar. I <b>don\'t</b> like fish = eu não gosto de peixe. <b>can\'t</b> e <b>don\'t</b> são as duas negações mais usadas.'),
- P('Pra não esquecer','Com <b>I can</b> (eu consigo), <b>I like</b> (eu gosto) e <b>I don\'t like</b> (eu não gosto) você já fala sobre si mesmo — que é o assunto de toda primeira conversa.')
+ P('Pra não esquecer','Com <b>I can</b> (eu consigo), <b>I like</b> (eu gosto) e <b>I don\'t like</b> (eu não gosto) você já fala sobre si mesmo, que é o assunto de toda primeira conversa.')
 ];
 
 AULAS['e9.1']=[
@@ -260,24 +260,24 @@ AULAS['e9.1']=[
 AULAS['e9.2']=[
  P('Quem e quando','<b>who</b> = quem. <b>when</b> = quando.',ENS(EN('who','quem','rú'),EN('when','quando','uén'))),
  P('Perguntando','<ol class="passos"><li><b>Who is that?</b> = Quem é aquele?</li><li><b>When is your birthday?</b> = Quando é seu aniversário?</li><li><b>Why?</b> = Por quê? <b>Because...</b> = Porque...</li></ol>'),
- P('A família WH','what, where, who, when, why, which, how — quase todas começam com WH. Os americanos chamam de <i>wh- questions</i>.'),
+ P('A família WH','what, where, who, when, why, which, how, quase todas começam com WH. Os americanos chamam de <i>wh- questions</i>.'),
  P('Pra não esquecer','Decore a família WH e você tem a chave de qualquer conversa: dá para perguntar tudo.')
 ];
 AULAS['e9.3']=[
  P('Quantos','<b>How many</b> = quantos (para coisas que se contam). <b>How much</b> = quanto (para o que não se conta, e para preço).',ENS(EN('how many','quantos','ráu méni'),EN('how much','quanto','ráu mâtch'))),
  P('Escolhendo entre os dois','<ol class="passos"><li>Dá para contar? use <b>many</b>: How many books?</li><li>Não dá para contar? use <b>much</b>: How much water?</li><li>Preço: <b>How much is it?</b> = Quanto custa?</li></ol>'),
- P('Respondendo','How many cats? — <b>Three cats.</b> Basta o número. Não precisa repetir a frase inteira.'),
+ P('Respondendo','How many cats? <b>Three cats.</b> Basta o número. Não precisa repetir a frase inteira.'),
  P('Pra não esquecer','many para contáveis, much para não contáveis. É a mesma lógica de "some" que você já viu.')
 ];
 AULAS['e9.4']=[
  P('Como você está','<b>How are you?</b> = Como você está? É a pergunta mais comum de todas nos Estados Unidos.',ENS(EN('how are you?','como vai?','ráu ár iú'),EN('I\'m fine','estou bem','áim fáin'))),
- P('A conversa completa','<ol class="passos"><li>— <b>Hi! How are you?</b> (Oi! Como você está?)</li><li>— <b>I\'m fine, thank you. And you?</b> (Estou bem, obrigado. E você?)</li><li>— <b>I\'m good, thanks!</b> (Estou bem, valeu!)</li></ol>'),
- P('Não é bem uma pergunta','Nos EUA, <b>How are you?</b> (Como você está?) funciona quase como um “oi”. Ninguém espera uma resposta longa — responda <b>fine, thanks</b> (bem, obrigado) e siga a conversa.'),
+ P('A conversa completa','<ol class="passos"><li><b>Hi! How are you?</b> (Oi! Como você está?)</li><li><b>I\'m fine, thank you. And you?</b> (Estou bem, obrigado. E você?)</li><li><b>I\'m good, thanks!</b> (Estou bem, valeu!)</li></ol>'),
+ P('Não é bem uma pergunta','Nos EUA, <b>How are you?</b> (Como você está?) funciona quase como um “oi”. Ninguém espera uma resposta longa, responda <b>fine, thanks</b> (bem, obrigado) e siga a conversa.'),
  P('Pra não esquecer','<b>Hi</b> (oi) → <b>How are you?</b> (como você está?) → <b>I\'m fine, thank you. And you?</b> (estou bem, obrigado. E você?). Esse é o roteiro de qualquer encontro.')
 ];
 AULAS['e9.5']=[
  P('Quantos anos você tem','<b>How old are you?</b> = Quantos anos você tem? Responda: <b>I am eight years old.</b> = Eu tenho oito anos.',ENS(EN('how old are you?','quantos anos?','ráu ould ár iú'),EN('I am 8 years old','tenho 8 anos','ái ém eit íârs ould'))),
- P('Cuidado com a tradução','<ol class="passos"><li>Em português: eu <b>tenho</b> 8 anos.</li><li>Em inglês: eu <b>sou</b> 8 anos velho (I am 8 years old).</li><li>Traduzir palavra por palavra dá errado — aprenda a frase inteira.</li></ol>'),
+ P('Cuidado com a tradução','<ol class="passos"><li>Em português: eu <b>tenho</b> 8 anos.</li><li>Em inglês: eu <b>sou</b> 8 anos velho (I am 8 years old).</li><li>Traduzir palavra por palavra dá errado, aprenda a frase inteira.</li></ol>'),
  P('Frases feitas','Muitas coisas em inglês são assim: blocos prontos. <b>I\'m hungry</b> (estou com fome) também usa "I am", não "I have".'),
  P('Pra não esquecer','Guarde a frase inteira, não palavra por palavra. É assim que se fala rápido e certo.')
 ];
@@ -290,19 +290,19 @@ AULAS['e10.1']=[
 ];
 AULAS['e10.2']=[
  P('Frases do dia a dia','Essas frases prontas resolvem quase qualquer situação: <b>Excuse me</b> (com licença), <b>I\'m sorry</b> (desculpa), <b>I don\'t understand</b> (não entendi).',ENS(EN('excuse me','com licença','ikskiúz mi'),EN('I\'m sorry','desculpa','áim sóri'))),
- P('Quando usar cada uma','<ol class="passos"><li><b>Excuse me</b> — para chamar alguém ou passar.</li><li><b>I\'m sorry</b> — para pedir desculpa de verdade.</li><li><b>I don\'t understand</b> — quando não entendeu. Não tenha vergonha!</li></ol>'),
+ P('Quando usar cada uma','<ol class="passos"><li><b>Excuse me</b>: para chamar alguém ou passar.</li><li><b>I\'m sorry</b>: para pedir desculpa de verdade.</li><li><b>I don\'t understand</b>: quando não entendeu. Não tenha vergonha!</li></ol>'),
  P('Pedindo para repetir','<b>Can you say that again, please?</b> = Pode repetir, por favor? Essa frase salva qualquer conversa.'),
  P('Pra não esquecer','Quem está aprendendo precisa dessas frases mais do que de vocabulário. Elas mantêm a conversa viva.')
 ];
 AULAS['e10.3']=[
  P('Pedir e agradecer','<b>Can I have...?</b> (posso ter...?), <b>Could you help me?</b> (você pode me ajudar?), <b>Thank you so much</b> (muito obrigado).',ENS(EN('can I have...?','posso ter...?','kén ái rév'),EN('thank you so much','muito obrigado','tênk iú sou mâtch'))),
- P('Educação em inglês','<ol class="passos"><li>Sempre termine o pedido com <b>please</b>.</li><li><b>Could</b> é mais educado que <b>can</b>.</li><li>Depois de receber, <b>thank you</b> — sempre.</li></ol>'),
+ P('Educação em inglês','<ol class="passos"><li>Sempre termine o pedido com <b>please</b>.</li><li><b>Could</b> é mais educado que <b>can</b>.</li><li>Depois de receber, <b>thank you</b>: sempre.</li></ol>'),
  P('Nos EUA isso importa muito','A cultura americana valoriza bastante please e thank you. Usar as duas faz você soar simpático mesmo com pouco vocabulário.'),
  P('Pra não esquecer','Could you + verbo + please? É a fórmula mais educada de todas.')
 ];
 AULAS['e10.4']=[
  P('Palavras iguais e falsas','Muitas palavras se parecem com o português e querem dizer a mesma coisa (<b>cognatos</b>): hospital, animal, family, important. Outras enganam!',ENS(EN('important','importante','impórtant'),EN('actually','na verdade','ékchuali'))),
- P('Os falsos amigos','<ol class="passos"><li><b>actually</b> NÃO é atualmente — é "na verdade".</li><li><b>pretend</b> NÃO é pretender — é "fingir".</li><li><b>push</b> NÃO é puxar — é <b>empurrar</b>!</li><li><b>parents</b> NÃO é parentes — é "pais".</li></ol>'),
+ P('Os falsos amigos','<ol class="passos"><li><b>actually</b> NÃO é atualmente, é "na verdade".</li><li><b>pretend</b> NÃO é pretender, é "fingir".</li><li><b>push</b> NÃO é puxar, é <b>empurrar</b>!</li><li><b>parents</b> NÃO é parentes, é "pais".</li></ol>'),
  P('Como não cair na armadilha','Quando uma palavra parecida aparecer numa frase que não faz sentido, desconfie: pode ser um falso amigo. Conferir vale mais que adivinhar.'),
  P('Pra não esquecer','Cognatos ajudam muito, mas os falsos amigos são poucos e famosos. Aprenda os quatro acima e você já evita os erros mais comuns.')
 ];

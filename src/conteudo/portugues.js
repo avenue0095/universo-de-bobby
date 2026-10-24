@@ -153,7 +153,7 @@ LP('p2.2','BA','Sílabas com B, C, D',
   ()=>{const w=pick(PAL.filter(x=>'bcd'.indexOf(x.p[0])>=0));
        return mc('Qual palavra começa com a sílaba <b>'+w.s[0].toUpperCase()+'</b>?',w.p,
        shuf(PAL.filter(x=>x.s[0]!==w.s[0])).slice(0,3).map(x=>x.p));},
-  ()=>{const v=pick(VOG);return mc('BA, BE, BI, BO, BU — qual falta aqui: BA, BE, ___, BO, BU?','BI',['BU','BA','BE']);},
+  ()=>{const v=pick(VOG);return mc('BA, BE, BI, BO, BU, qual falta aqui: BA, BE, ___, BO, BU?','BI',['BU','BA','BE']);},
   ()=>{const w=pick(PAL.filter(x=>'bcd'.indexOf(x.p[0])>=0));
        return ouvirQ('Ouça e escolha a palavra.',w.p,shuf(PAL.filter(x=>x.p!==w.p)).slice(0,3).map(x=>x.p));}
  ]),
@@ -267,7 +267,7 @@ LP('p3.4','↺','Letras embaralhadas',
 LP('p3.5','≈','Palavras parecidas',
  {ideia:'Trocar uma letra só já muda a palavra inteira. Por isso é preciso ler com atenção até o fim.',
   exemplo:'PATO e GATO. BOLA e BOLO. FACA e VACA.',
-  dica:'Leia a palavra toda antes de responder — não chute pelo começo.'},
+  dica:'Leia a palavra toda antes de responder, não chute pelo começo.'},
  [
   ()=>{return ouvirQ('Ouça com atenção: qual palavra é?','pato',['gato','rato','mato']);},
   ()=>{return ouvirQ('Ouça com atenção: qual palavra é?','bola',['bolo','mola','cola']);},
@@ -282,7 +282,7 @@ LP('p3.5','≈','Palavras parecidas',
 UNITS_PT.push({n:4,title:'Os sons difíceis',sub:'C/Ç, R/RR, S/SS, CH, LH, NH e o M antes de P e B.',tone:'coral',lessons:[
 LP('p4.1','ca','CA CO CU e CE CI',
  {ideia:'A letra C tem dois sons. Com A, O, U ela soa como K: CA, CO, CU. Com E e I ela soa como S: CE, CI.',
-  exemplo:'CASA, COPO, CUCA — som de K. CEBOLA, CINEMA — som de S.',
+  exemplo:'CASA, COPO, CUCA: som de K. CEBOLA, CINEMA: som de S.',
   dica:'Se o som é de S antes de A, O, U, aí escreve-se com Ç: MAÇÃ, AÇÚCAR.'},
  [
   ()=>{return mc('Em qual palavra o C tem som de S?','cebola',['casa','copo','cuca']);},
@@ -422,7 +422,7 @@ LP('p5.5','+','Juntar duas frases',
 UNITS_PT.push({n:6,title:'Os nomes das coisas',sub:'Substantivo, artigo, singular e plural, masculino e feminino.',tone:'agua',lessons:[
 LP('p6.1','n','Substantivo',
  {ideia:'<b>Substantivo</b> é o nome das coisas, das pessoas, dos bichos e dos lugares.',
-  exemplo:'bola, menina, cachorro, escola — todos são substantivos.',
+  exemplo:'bola, menina, cachorro, escola: todos são substantivos.',
   dica:'Se dá para colocar "o" ou "a" na frente, é substantivo.'},
  [
   ()=>{const w=pick(PAL);return mc('Qual destas é o nome de uma coisa (substantivo)?',w.p,shuf(VERB).slice(0,3));},
@@ -616,7 +616,7 @@ LP('p8.5','≠','Palavras que confundem',
 UNITS_PT.push({n:9,title:'Acentos e pontuação',sub:'O acento que muda o som, o til, a vírgula e a fala nos textos.',tone:'roxo',lessons:[
 LP('p9.1','´','Para que serve o acento',
  {ideia:'O <b>acento</b> mostra qual sílaba a gente fala mais forte. Sem ele, a palavra pode virar outra.',
-  exemplo:'sabia / sabiá / sábia — três palavras diferentes.',
+  exemplo:'sabia / sabiá / sábia, três palavras diferentes.',
   dica:'Fale a palavra e sinta onde a voz sobe: é ali que mora o acento.'},
  [
   ()=>{return mc('Qual está certo: o passarinho que canta?','sabiá',['sabia','sábia']);},
@@ -634,7 +634,7 @@ LP('p9.1','´','Para que serve o acento',
 LP('p9.2','ã','O til e os sons nasais',
  {ideia:'O <b>til</b> (~) deixa o som nasal, saindo pelo nariz: ã, õ.',
   exemplo:'mão, pão, coração, limões.',
-  dica:'Tape o nariz e tente falar "mão". Não sai — é nasal mesmo.'},
+  dica:'Tape o nariz e tente falar "mão". Não sai, é nasal mesmo.'},
  [
   ()=>{return mc('Qual está certo?','mão',['mao','mãao']);},
   ()=>{return mc('Qual está certo?','pão',['pao','pãn']);},
@@ -667,14 +667,14 @@ LP('p9.4',',','A vírgula na lista',
   ()=>{return mc('Qual está certo?','Gosto de bola, boneca e livro.',['Gosto de bola boneca livro.']);},
   ()=>{return mc('Quantas vírgulas tem "pão, leite, queijo e mel"?','2',['3','1']);}
  ]),
-LP('p9.5','—','Quando alguém fala',
- {ideia:'Nos textos, a fala de um personagem começa com <b>travessão</b> (—). Os <b>dois-pontos</b> (:) anunciam que alguém vai falar ou que vem uma lista.',
-  exemplo:'A menina disse:<br>— Estou pronta!',
+LP('p9.5','&mdash;','Quando alguém fala',
+ {ideia:'Nos textos, a fala de um personagem começa com <b>travessão</b> (&mdash;). Os <b>dois-pontos</b> (:) anunciam que alguém vai falar ou que vem uma lista.',
+  exemplo:'A menina disse:<br>&mdash; Estou pronta!',
   dica:'Travessão só na fala; dois-pontos antes dela.'},
  [
-  ()=>{return mc('Qual sinal marca a fala de um personagem?','—',[',','?']);},
+  ()=>{return mc('Qual sinal marca a fala de um personagem?','&mdash;',[',','?']);},
   ()=>{return mc('Qual sinal anuncia que alguém vai falar?',':',['.','!']);},
-  ()=>{return mc('Qual está certo?','Ela disse: — Vamos!',['Ela disse — : Vamos!']);},
+  ()=>{return mc('Qual está certo?','Ela disse: &mdash; Vamos!',['Ela disse &mdash; : Vamos!']);},
   ()=>{return tf('Os dois-pontos também anunciam uma lista.',true);},
   ()=>{return mc('No texto, o travessão aparece...','no começo da fala',['no fim da frase','depois da vírgula']);},
   ()=>{return tf('A fala de um personagem começa com vírgula.',false);}

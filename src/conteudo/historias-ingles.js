@@ -11,7 +11,7 @@ const CAPITULOS_EN={
  4:{t:'Um dia no zoológico (A day at the zoo)',item:'estrela',abre:'Passeio ao zoológico! Cada placa tem o nome de um bicho em inglês.'},
  5:{t:'No restaurante (At the diner)',item:'fruta',abre:'No restaurante da esquina o Bobby vai pedir comida sozinho pela primeira vez.'},
  6:{t:'A loja de roupas (The clothes store)',item:'etiqueta',abre:'Precisa comprar roupa nova. E para isso é preciso falar do corpo e das peças.'},
- 7:{t:'Lar doce lar (Home sweet home)',item:'peca',abre:'A casa nova tem cômodos, portas e janelas — todos com nomes novos.'},
+ 7:{t:'Lar doce lar (Home sweet home)',item:'peca',abre:'A casa nova tem cômodos, portas e janelas, todos com nomes novos.'},
  8:{t:'Um dia na cidade (A day in the city)',item:'passaporte',abre:'Correr, comer, ler, brincar: o Bobby vai contar o dia dele inteiro em inglês.'},
  9:{t:'Fazendo amigos (Making friends)',item:'balao',abre:'Para fazer amizade é preciso perguntar e responder: <b>What?</b> (O quê?), <b>Where?</b> (Onde?) e <b>How old are you?</b> (Quantos anos você tem?)'},
  10:{t:'Falando como um local (Talking like a local)',item:'bandeira',abre:'A última etapa: falar como quem mora lá, com as frases do dia a dia.'}

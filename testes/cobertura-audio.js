@@ -13,6 +13,12 @@ const { carregarApp } = require('./lib/carregar.js');
 const arg = (n, p) => { const a = process.argv.find((x) => x.startsWith('--' + n + '=')); return a ? Number(a.split('=')[1]) : p; };
 const RODADAS = arg('rodadas', 40), SEMENTE = arg('semente', 1), MINIMO = arg('minimo', 99.5);
 const LISTA = process.argv.includes('--lista');
+const JSON_SAIDA = (process.argv.find((x) => x.startsWith('--json=')) || '').slice(7);
+const PENDENTES_ARQ = path.join(__dirname, '..', 'audio', 'regerar-pendentes.json');
+/* audio/regerar-pendentes.json: textos que mudaram e esperam o agente de audio regerar o clipe. Enquanto o arquivo existir, esses textos
+   contam como PENDENTES (aviso), nao como falha; qualquer texto sem clipe que NAO esteja na lista continua reprovando. */
+const pendentes = new Set(fs.existsSync(PENDENTES_ARQ) ? JSON.parse(fs.readFileSync(PENDENTES_ARQ, 'utf8')).itens.map((i) => i.idioma + '|' + i.materia + '|' + i.texto) : []);
+const semClipe = [];
 const min = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifesto-min.json'), 'utf8'));
 const completo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifesto.json'), 'utf8'));
 const ignorados = new Set((completo.ignorados || []).map((i) => i.texto));
@@ -35,7 +41,8 @@ function conta(nome, texto, lang, mat) {
   if (bom) c.usosOk++;
   if (c.vistos.has(chave)) return;
   c.vistos.add(chave); c.total++;
-  if (bom) c.ok++; else (faltas.length ? faltas : ['(nada para falar)']).forEach((f) => { if (!c.faltas.has(f)) c.faltas.set(f, texto); });
+  if (bom) c.ok++;
+  else { (faltas.length ? faltas : ['(nada para falar)']).forEach((f) => { if (!c.faltas.has(f)) c.faltas.set(f, texto); }); semClipe.push({ texto: texto, idioma: lang, materia: mat, categoria: nome, faltas: faltas.slice(0, 6), pendente: pendentes.has(lang + '|' + mat + '|' + texto) }); if (pendentes.has(lang + '|' + mat + '|' + texto)) c.pend = (c.pend || 0) + 1; }
 }
 
 const UN = [['mat', 'UNITS_MAT'], ['pt', 'UNITS_PT'], ['en', 'UNITS_EN']];
@@ -74,15 +81,23 @@ let totT = 0, totOk = 0, ruim = [];
 console.log('cobertura-audio.js | clipes indexados: ' + indexados + ' | rodadas por fase: ' + RODADAS + ' | semente ' + SEMENTE);
 console.log('categoria\ttextos distintos\tcom clipe\t%\tusos amostrados (% com clipe)');
 for (const [nome, c] of Object.entries(cat)) {
-  const p = c.total ? c.ok / c.total * 100 : 100;
+  const p = c.total ? (c.ok + (c.pend || 0)) / c.total * 100 : 100;      /* pendente de regerar nao reprova */
   totT += c.total; totOk += c.ok;
   console.log(nome + '\t' + c.total + '\t' + c.ok + '\t' + p.toFixed(2) + '%\t' + c.usos + ' (' + (c.usosOk / c.usos * 100).toFixed(2) + '%)');
   if (p < MINIMO) ruim.push(nome + ' ' + p.toFixed(2) + '%');
 }
 const pct = totOk / totT * 100;
+if (JSON_SAIDA) {
+  const vistos = new Set(), itens = [];
+  semClipe.forEach((x) => { const k = x.idioma + '|' + x.materia + '|' + x.texto; if (vistos.has(k)) return; vistos.add(k); itens.push({ texto: x.texto, idioma: x.idioma, materia: x.materia, categoria: x.categoria, motivo: 'sem clipe no manifesto: o texto mudou (troca de travessao por virgula, dois-pontos ou ponto) ou e novo; regerar com a voz local', trechos_sem_clipe: x.faltas }); });
+  fs.writeFileSync(JSON_SAIDA, JSON.stringify({ gerado: new Date().toISOString().slice(0, 10), total: itens.length, itens: itens }, null, 1) + '\n');
+  console.log('gravado ' + JSON_SAIDA + ' com ' + itens.length + ' textos');
+}
 console.log('TOTAL\t' + totT + '\t' + totOk + '\t' + pct.toFixed(2) + '%');
 const faltas = [];
 for (const [nome, c] of Object.entries(cat)) for (const [f, ex] of c.faltas) faltas.push([nome, f, ex]);
+const nPend = semClipe.filter((x) => x.pendente).length;
+if (nPend) console.log('\nPENDENTES de regerar (audio/regerar-pendentes.json): ' + nPend + ' textos');
 console.log('\nAVISO: ' + faltas.length + ' trechos sem clipe (ficam sem voz; nao ha voz do aparelho):');
 const mostra = LISTA ? faltas : faltas.slice(0, 25);
 mostra.forEach(([n, f, ex]) => console.log('  [' + n + '] ' + f + '   <= ' + String(ex).replace(/<[^>]*>/g, '').slice(0, 70)));

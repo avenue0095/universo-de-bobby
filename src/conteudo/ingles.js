@@ -86,7 +86,7 @@ function mundoEN(n,title,sub,tone,fases){
 mundoEN(1,'Hello! · Olá!','As primeiras palavras: cumprimentar, dizer o nome e contar até três.','verde',[
  {g:'hi',t:'Hello and hi (oi e olá)',teach:{ideia:'Em inglês americano, <b>hello</b> e <b>hi</b> são as duas formas de dizer oi. "Hi" é mais informal, entre amigos.',exemplo:'Hello! / Hi, Bobby!',dica:'Fala-se "rélou" e "rái".'}},
  {g:'gm',t:'Good morning, good night (bom dia, boa noite)',teach:{ideia:'O cumprimento muda com a hora: <b>good morning</b> (bom dia), <b>good afternoon</b> (boa tarde) e <b>good night</b> (boa noite).',exemplo:'Good morning, teacher!',dica:'"Good" se fala "gud".'}},
- {g:'ty',t:'Please and thank you (por favor e obrigado)',teach:{ideia:'<b>Please</b> é por favor e <b>thank you</b> é obrigado. Nos Estados Unidos essas duas aparecem o tempo todo.',exemplo:'Water, please. — Thank you!',dica:'Responder "you are welcome" é o nosso "de nada".'}},
+ {g:'ty',t:'Please and thank you (por favor e obrigado)',teach:{ideia:'<b>Please</b> é por favor e <b>thank you</b> é obrigado. Nos Estados Unidos essas duas aparecem o tempo todo.',exemplo:'Water, please. Thank you!',dica:'Responder "you are welcome" é o nosso "de nada".'}},
  {g:'me',t:'My name is... (meu nome é...)',teach:{ideia:'Para se apresentar: <b>My name is Lívia.</b> Ou, mais curto: <b>I am Lívia.</b>',exemplo:'Hi! My name is Bobby. Nice to meet you!',dica:'"Nice to meet you" é "prazer em conhecer".'}},
  {g:'123',t:'One, two, three (um, dois, três)',teach:{ideia:'Os primeiros números: <b>one</b> (1), <b>two</b> (2), <b>three</b> (3).',exemplo:'I have two dogs.',dica:'"One" se fala "uân", "two" é "tú" e "three" tem a língua entre os dentes.'}}
 ]);
@@ -105,11 +105,11 @@ mundoEN(3,'My family · Minha família','As pessoas da casa e os amigos.','ambar
  {g:'B',t:'Boy, girl, baby (menino, menina, bebê)',teach:{ideia:'<b>Boy</b> é menino, <b>girl</b> é menina e <b>baby</b> é bebê.',exemplo:'The baby is sleeping.',dica:'O plural quase sempre ganha S: boys, girls, babies.'}}
 ]);
 mundoEN(4,'Animals · Animais','Bichos de casa, da fazenda e da floresta.','coral',[
- {g:'D',t:'Dog and cat (cachorro e gato)',teach:{ideia:'<b>Dog</b> é cachorro e <b>cat</b> é gato — os dois bichos mais comuns nas casas americanas.',exemplo:'My dog is brown.',dica:'Nos Estados Unidos, o cachorro faz "woof" e o gato faz "meow".'}},
+ {g:'D',t:'Dog and cat (cachorro e gato)',teach:{ideia:'<b>Dog</b> é cachorro e <b>cat</b> é gato, os dois bichos mais comuns nas casas americanas.',exemplo:'My dog is brown.',dica:'Nos Estados Unidos, o cachorro faz "woof" e o gato faz "meow".'}},
  {g:'B',t:'Bird and fish (pássaro e peixe)',teach:{ideia:'<b>Bird</b> é pássaro e <b>fish</b> é peixe. Curiosidade: fish no plural continua fish.',exemplo:'I see three fish.',dica:'"Bird" se fala "bârd".'}},
  {g:'H',t:'Farm animals (bichos da fazenda)',teach:{ideia:'Na fazenda: <b>horse</b> (cavalo), <b>cow</b> (vaca), <b>pig</b> (porco), <b>chicken</b> (galinha).',exemplo:'The cow is white and black.',dica:'"Chicken" serve para a galinha e para o frango do prato.'}},
  {g:'L',t:'Wild animals (bichos selvagens)',teach:{ideia:'Na floresta: <b>lion</b> (leão), <b>monkey</b> (macaco), <b>elephant</b> (elefante), <b>snake</b> (cobra).',exemplo:'The elephant is very big.',dica:'"Lion" se fala "láion".'}},
- {g:'🐻',t:'Bear and rabbit (urso e coelho)',teach:{ideia:'<b>Bear</b> é urso — como o Bobby! E <b>rabbit</b> é coelho.',exemplo:'Bobby is a brown bear.',dica:'Cuidado: "bear" e "beer" (cerveja) são parecidos mas diferentes.'}}
+ {g:'🐻',t:'Bear and rabbit (urso e coelho)',teach:{ideia:'<b>Bear</b> é urso, como o Bobby! E <b>rabbit</b> é coelho.',exemplo:'Bobby is a brown bear.',dica:'Cuidado: "bear" e "beer" (cerveja) são parecidos mas diferentes.'}}
 ]);
 mundoEN(5,'Food and drinks · Comida e bebida','O que se come e o que se bebe.','roxo',[
  {g:'W',t:'Water and milk (água e leite)',teach:{ideia:'<b>Water</b> é água e <b>milk</b> é leite.',exemplo:'I drink water every day.',dica:'Nos EUA, "water" se fala quase "uórer".'}},
@@ -137,14 +137,14 @@ mundoEN(8,'What I do · O que eu faço','Os verbos do dia a dia.','ambar',[
  {g:'S',t:'Sleep and play (dormir e brincar)',teach:{ideia:'<b>Sleep</b> é dormir e <b>play</b> é brincar ou jogar.',exemplo:'I play with my dog.',dica:'"Play" serve para brincar, jogar e tocar um instrumento.'}},
  {g:'W',t:'Read and write (ler e escrever)',teach:{ideia:'<b>Read</b> é ler e <b>write</b> é escrever. O W de write é mudo.',exemplo:'I read a book every night.',dica:'Escreve-se write, mas fala-se "ráit".'}},
  {g:'J',t:'Walk, sing, jump (andar, cantar, pular)',teach:{ideia:'<b>Walk</b> é caminhar, <b>sing</b> é cantar e <b>jump</b> é pular.',exemplo:'The rabbit can jump.',dica:'O L de "walk" também é mudo: fala-se "uók".'}},
- {g:'I',t:'I can, I like (eu consigo, eu gosto)',teach:{ideia:'<b>I like</b> é eu gosto e <b>I can</b> é eu consigo/posso. Depois deles vem o verbo sem mudar nada.',exemplo:'I like to read. I can jump.',dica:'"I like dogs" — em inglês o plural aparece sem "os".'}}
+ {g:'I',t:'I can, I like (eu consigo, eu gosto)',teach:{ideia:'<b>I like</b> é eu gosto e <b>I can</b> é eu consigo/posso. Depois deles vem o verbo sem mudar nada.',exemplo:'I like to read. I can jump.',dica:'"I like dogs" em inglês o plural aparece sem "os".'}}
 ]);
 mundoEN(9,'Questions · Perguntas','Perguntar e responder.','coral',[
  {g:'?',t:'What and where (o quê e onde)',teach:{ideia:'<b>What</b> é o quê e <b>where</b> é onde.',exemplo:'What is this? Where is my book?',dica:'Toda pergunta em inglês termina com ? igual em português.'}},
  {g:'W',t:'Who and when (quem e quando)',teach:{ideia:'<b>Who</b> é quem e <b>when</b> é quando.',exemplo:'Who is she? When is the party?',dica:'O H de "who" não se pronuncia: fala-se "rú".'}},
  {g:'#',t:'How many (quantos)',teach:{ideia:'<b>How many</b> é quantos, para coisas que se podem contar.',exemplo:'How many dogs do you have?',dica:'Para o que não se conta (água, leite) usa-se "how much".'}},
- {g:'H',t:'How are you? (como você está?)',teach:{ideia:'<b>How are you?</b> é como você está. A resposta mais comum é <b>I am fine, thank you</b>.',exemplo:'— How are you? — I am fine!',dica:'Americanos costumam responder "I\'m good".'}},
- {g:'A',t:'How old are you? (quantos anos você tem?)',teach:{ideia:'<b>How old are you?</b> pergunta a idade. Responde-se <b>I am eight years old</b>.',exemplo:'— How old are you? — I am nine.',dica:'Em inglês a idade usa o verbo "to be", não "ter".'}}
+ {g:'H',t:'How are you? (como você está?)',teach:{ideia:'<b>How are you?</b> é como você está. A resposta mais comum é <b>I am fine, thank you</b>.',exemplo:'How are you? I am fine!',dica:'Americanos costumam responder "I\'m good".'}},
+ {g:'A',t:'How old are you? (quantos anos você tem?)',teach:{ideia:'<b>How old are you?</b> pergunta a idade. Responde-se <b>I am eight years old</b>.',exemplo:'How old are you? I am nine.',dica:'Em inglês a idade usa o verbo "to be", não "ter".'}}
 ]);
 const FRASES=[
  ['What\'s up?','E aí? / Tudo bem?'],['I don\'t know','Eu não sei'],['Let\'s go','Vamos'],
@@ -171,7 +171,7 @@ mundoEN(10,'Everyday English · Inglês do dia a dia','O inglês que se fala de 
    ()=>ouvirEN('Ouça e escolha.','today',['tomorrow','yesterday','tonight'])
   ]},
  {g:'💬',t:'Frases do dia a dia',teach:{ideia:'Muita coisa em inglês se aprende em bloco, como frase pronta: <b>What\'s up?</b>, <b>I don\'t know</b>, <b>Let\'s go</b>.',
-   exemplo:'— What\'s up? — Nothing much. Let\'s go!',dica:'Guarde a frase inteira, não palavra por palavra. É assim que se fala rápido.'},
+   exemplo:'What\'s up? Nothing much. Let\'s go!',dica:'Guarde a frase inteira, não palavra por palavra. É assim que se fala rápido.'},
   makers:[
    ()=>{const f=pick(FRASES);return mc('O que significa <b>'+f[0]+'</b>?',f[1],frasePares(FRASES.filter(x=>x[1]!==f[1])).map(x=>x[1]));},
    ()=>{const f=pick(FRASES);return mc('Como se diz <b>'+f[1]+'</b>?',f[0],frasePares(FRASES.filter(x=>x[0]!==f[0])).map(x=>x[0]));},
@@ -190,7 +190,7 @@ mundoEN(10,'Everyday English · Inglês do dia a dia','O inglês que se fala de 
    ()=>mc('Alguém te ajuda. O que você diz?','Thank you!',['Excuse me!','How much?']),
    ()=>mc('Como se diz "preciso de ajuda"?','I need help',['I am help','Help I need'])
   ]},
- {g:'≈',t:'Palavras iguais e falsas',teach:{ideia:'Muitas palavras em inglês são quase iguais ao português — os <b>cognatos</b>: hospital, animal, chocolate. Mas cuidado com os <b>falsos amigos</b>: <b>parents</b> é pais, não parentes.',
+ {g:'≈',t:'Palavras iguais e falsas',teach:{ideia:'Muitas palavras em inglês são quase iguais ao português, os <b>cognatos</b>: hospital, animal, chocolate. Mas cuidado com os <b>falsos amigos</b>: <b>parents</b> é pais, não parentes.',
    exemplo:'"Actually" não é atualmente: quer dizer "na verdade".',dica:'Na dúvida, confira: às vezes a palavra parecida engana.'},
   makers:[
    ()=>{const c=pick(COGN);return mc('O que significa <b>'+c[0]+'</b>?',c[1],shuf(COGN.filter(x=>x[1]!==c[1])).slice(0,3).map(x=>x[1]));},

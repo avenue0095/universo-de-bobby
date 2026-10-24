@@ -1595,7 +1595,7 @@ L('1.5','~','Reta numérica e arredondar',
 ]});
 
 /* ============ UNIDADE 2 ============ */
-UNITS_MAT.push({n:2,title:'Somar e subtrair',sub:'Juntar e tirar — as duas contas que aparecem todo dia.',tone:'agua',lessons:[
+UNITS_MAT.push({n:2,title:'Somar e subtrair',sub:'Juntar e tirar, as duas contas que aparecem todo dia.',tone:'agua',lessons:[
 L('2.1','+','Somas até 20',
  {ideia:'Somar é juntar. A ordem não muda o resultado: 3 + 5 é igual a 5 + 3.',
   exemplo:'7 + 5 → complete primeiro até 10 (7 + 3 = 10) e some o que sobrou (10 + 2 = 12).',
@@ -1659,7 +1659,7 @@ L('2.5','?','Problemas do dia a dia',
 ]});
 
 /* ============ UNIDADE 3 ============ */
-UNITS_MAT.push({n:3,title:'Multiplicação',sub:'Somar várias vezes o mesmo número — de um jeito bem mais rápido.',tone:'ambar',lessons:[
+UNITS_MAT.push({n:3,title:'Multiplicação',sub:'Somar várias vezes o mesmo número, de um jeito bem mais rápido.',tone:'ambar',lessons:[
 L('3.1','×','A ideia de multiplicar',
  {ideia:'Multiplicar é somar grupos iguais. “4 × 3” significa 4 grupos de 3.',
   exemplo:'4 × 3 = 3 + 3 + 3 + 3 = 12.',
@@ -1778,7 +1778,7 @@ L('4.4','½','Dobro, metade, triplo e terça parte',
 L('4.5','p','Múltiplos, divisores e primos',
  {ideia:'Múltiplos de um número são os resultados da sua tabuada. Divisores são os números que o dividem sem deixar resto. Número <b>primo</b> tem exatamente dois divisores: 1 e ele mesmo.',
   exemplo:'Múltiplos de 4: 4, 8, 12, 16... Divisores de 12: 1, 2, 3, 4, 6, 12. Primos: 2, 3, 5, 7, 11, 13...',
-  dica:'1 não é primo — só tem um divisor. E 2 é o único primo par.'},
+  dica:'1 não é primo, só tem um divisor. E 2 é o único primo par.'},
  [
   ()=>{const a=R(2,9),k=R(3,9);return tf(''+(a*k)+' é múltiplo de '+a+'.',true);},
   ()=>{const a=R(3,9),k=R(3,9);return tf(''+(a*k+1)+' é múltiplo de '+a+'.',false);},
@@ -1859,7 +1859,7 @@ L('5.5','⅗','Fração de uma quantidade',
 ]});
 
 /* ============ UNIDADE 6 ============ */
-UNITS_MAT.push({n:6,title:'Decimais e dinheiro',sub:'A vírgula, o real e o centavo — matemática do mercado.',tone:'agua',lessons:[
+UNITS_MAT.push({n:6,title:'Decimais e dinheiro',sub:'A vírgula, o real e o centavo, matemática do mercado.',tone:'agua',lessons:[
 L('6.1',',','Décimos e centésimos',
  {ideia:'A vírgula separa a parte inteira da parte quebrada. A primeira casa depois da vírgula são os <b>décimos</b> ('+frac(1,10)+'), a segunda são os <b>centésimos</b> ('+frac(1,100)+').',
   exemplo:'2,45 = 2 inteiros + 4 décimos + 5 centésimos. E 0,5 é o mesmo que '+frac(1,2)+'.',
@@ -1884,7 +1884,7 @@ L('6.2','0,5','Comparar decimais',
   /* começa em 2,1 (era 1,1): com 1,1 o distrator de baixo virava -0,5 e a criança
      via um número negativo numa aula de decimais, conteúdo que ela ainda não viu */
   ()=>{const a=r2(R(21,89)/10);return mc('Qual é o número decimal mais próximo de '+Math.round(a)+'?',fmt(a),[fmt(r2(a+1.4)),fmt(r2(a-1.6))]);},
-  ()=>{return mc('Coloque em ordem crescente: 0,3 — 0,03 — 0,33','0,03 &lt; 0,3 &lt; 0,33',['0,3 &lt; 0,03 &lt; 0,33','0,33 &lt; 0,3 &lt; 0,03']);}
+  ()=>{return mc('Coloque em ordem crescente: 0,3; 0,03; 0,33','0,03 &lt; 0,3 &lt; 0,33',['0,3 &lt; 0,03 &lt; 0,33','0,33 &lt; 0,3 &lt; 0,03']);}
  ]),
 L('6.3','+,','Somar e subtrair decimais',
  {ideia:'Alinhe as vírgulas uma embaixo da outra. Se faltar casa, complete com zero. Depois some ou subtraia normalmente.',
@@ -1965,7 +1965,7 @@ L('7.3','−%','Descontos e aumentos',
   ()=>{const p=R(4,15)*10;return tf('Um desconto de 100% deixa o produto de graça.',true);}
  ]),
 L('7.4',':','Razão e proporção',
- {ideia:'Razão compara duas quantidades. Proporção é quando duas razões são iguais — se uma cresce, a outra cresce junto na mesma medida.',
+ {ideia:'Razão compara duas quantidades. Proporção é quando duas razões são iguais, se uma cresce, a outra cresce junto na mesma medida.',
   exemplo:'Se 2 pães custam R$ 6, então 4 pães custam R$ 12. A razão preço/pão continua a mesma: 3.',
   dica:'Dobrou de um lado, dobra do outro. Triplicou, triplica.'},
  [
@@ -1979,7 +1979,7 @@ L('7.4',':','Razão e proporção',
 L('7.5','⇄','Regra de três',
  {ideia:'Monte as grandezas em duas colunas, multiplique em cruz e divida pelo que sobrou.',
   exemplo:'3 cadernos → R$ 21. 5 cadernos → x. Então x = (5 × 21) ÷ 3 = 35.',
-  dica:'Antes de calcular, pergunte: aumentando um, o outro aumenta? Se sim, é direta — que é o caso da grande maioria.'},
+  dica:'Antes de calcular, pergunte: aumentando um, o outro aumenta? Se sim, é direta, que é o caso da grande maioria.'},
  [
   ()=>{const u=R(3,9),a=R(2,4),b=R(5,9);return inp('Se '+a+' itens custam R$ '+(u*a)+', quanto custam '+b+' itens?',u*b);},
   ()=>{const v=R(2,8),h=R(2,5);return inp('Uma torneira enche '+(v*h)+' litros em '+h+' horas. Quantos litros em '+(h*3)+' horas?',v*h*3);},
@@ -2020,7 +2020,7 @@ L('8.2','▭','Perímetro',
   ()=>{const w=R(5,12),h=R(3,9);return tf('O perímetro de um retângulo '+w+'×'+h+' cm é '+(2*(w+h))+' cm.',true);}
  ]),
 L('8.3','□','Área',
- {ideia:'Área é a superfície ocupada — quantos quadradinhos de 1 cm cabem dentro. No retângulo: base × altura.',
+ {ideia:'Área é a superfície ocupada, quantos quadradinhos de 1 cm cabem dentro. No retângulo: base × altura.',
   exemplo:'Retângulo de 8 cm por 5 cm → 8 × 5 = 40 cm².',
   dica:'Perímetro se mede em cm; área em cm² (centímetros <b>quadrados</b>).'},
  [
@@ -2058,9 +2058,9 @@ L('8.5','km','Unidades de medida',
 ]});
 
 /* ============ UNIDADE 9 ============ */
-UNITS_MAT.push({n:9,title:'Álgebra inicial',sub:'Quando a letra entra na conta — e continua sendo só matemática.',tone:'roxo',lessons:[
+UNITS_MAT.push({n:9,title:'Álgebra inicial',sub:'Quando a letra entra na conta, e continua sendo só matemática.',tone:'roxo',lessons:[
 L('9.1','x','O número desconhecido',
- {ideia:'Quando não sabemos um número, damos um nome a ele — normalmente <b>x</b>. Descobrir x é fazer a operação contrária.',
+ {ideia:'Quando não sabemos um número, damos um nome a ele, normalmente <b>x</b>. Descobrir x é fazer a operação contrária.',
   exemplo:'x + 7 = 12 → faço 12 − 7 = 5. Então x = 5.',
   dica:'Somou? Subtraia. Multiplicou? Divida. Sempre o contrário.'},
  [
@@ -2266,7 +2266,7 @@ AULAS['1.2']=[
  P('O truque do jacaré','Os sinais &lt; e &gt; são a boca de um jacaré faminto. Ele sempre abre a boca para o <b>número maior</b>, porque quer comer mais. Assim: 34 &lt; 51.')
 ];
 AULAS['1.3']=[
- P('Contar de um em um cansa','Quando são muitas coisas, contar uma por uma dá erro: a gente pula ou repete. Por isso os matemáticos inventaram um truque — juntar sempre de <b>10 em 10</b>.',dourado(0,0,9)),
+ P('Contar de um em um cansa','Quando são muitas coisas, contar uma por uma dá erro: a gente pula ou repete. Por isso os matemáticos inventaram um truque, juntar sempre de <b>10 em 10</b>.',dourado(0,0,9)),
  P('Dez viram um só','Junte 10 cubinhos e eles viram <b>uma barrinha</b>. Essa barrinha tem um nome: <b>dezena</b>. Ela vale 10, mesmo sendo uma peça só.',dourado(0,1,0)),
  P('O jogo da troca','<ol class="passos"><li>Conte 10 cubinhos soltos.</li><li>Troque esses 10 por <b>1 barrinha</b>.</li><li>Continue com os que sobraram.</li><li>No fim, conte as barrinhas de 10 em 10: 10, 20, 30...</li></ol>'),
  P('Lendo as barrinhas','3 barrinhas valem <b>30</b>, porque são 3 grupos de 10. Se além delas houver 4 cubinhos soltos, o número é <b>34</b>: 3 dezenas e 4 unidades.',dourado(0,3,4)),
@@ -2294,7 +2294,7 @@ AULAS['2.1']=[
 AULAS['2.2']=[
  P('Números maiores, mesma ideia','Para somar 38 + 27 você não precisa contar de um em um. Dá para somar as partes separadas: primeiro as dezenas, depois as unidades.'),
  P('Fazendo 38 + 27 por partes','<ol class="passos"><li>Some as dezenas: 30 + 20 = <b>50</b>.</li><li>Some as unidades: 8 + 7 = <b>15</b>.</li><li>Junte tudo: 50 + 15 = <b>65</b>.</li></ol>'),
- P('E o tal do “vai um”?','Quando as unidades passam de 9 (como 8 + 7 = 15), o 10 que sobrou vira uma dezena nova — é isso que a professora chama de “vai um”. Somando por partes, isso acontece sozinho.')
+ P('E o tal do “vai um”?','Quando as unidades passam de 9 (como 8 + 7 = 15), o 10 que sobrou vira uma dezena nova, é isso que a professora chama de “vai um”. Somando por partes, isso acontece sozinho.')
 ];
 AULAS['2.3']=[
  P('Subtrair é tirar','Você tinha 52 reais e gastou 27. Subtrair é descobrir quanto sobrou. Também serve para ver a <b>diferença</b> entre dois números: quanto um tem a mais que o outro.'),
@@ -2324,7 +2324,7 @@ AULAS['3.2']=[
  P('Truque do 5','Multiplique por 10 e pegue a metade. 8 × 5 → 8 × 10 = 80 → metade = <b>40</b>. Funciona sempre.')
 ];
 AULAS['3.3']=[
- P('As tabuadas “difíceis”','6, 7, 8 e 9 assustam, mas têm atalhos. Ninguém precisa decorar tudo na marra — dá para montar o resultado a partir de contas que você já sabe.'),
+ P('As tabuadas “difíceis”','6, 7, 8 e 9 assustam, mas têm atalhos. Ninguém precisa decorar tudo na marra, dá para montar o resultado a partir de contas que você já sabe.'),
  P('Fazendo 7 × 8 por partes','<ol class="passos"><li>Você sabe 7 × 4 = <b>28</b>.</li><li>8 é o dobro de 4, então dobre o resultado.</li><li>Dobro de 28 = <b>56</b>. Logo 7 × 8 = 56.</li></ol>'),
  P('Truque do 9','Na tabuada do 9, os dois algarismos do resultado sempre somam 9: 9 × 6 = 54 (5 + 4 = 9); 9 × 7 = 63 (6 + 3 = 9). Serve para conferir se você lembrou certo.')
 ];
@@ -2336,7 +2336,7 @@ AULAS['3.4']=[
 AULAS['3.5']=[
  P('Números grandes, em pedaços','Para multiplicar por um número de dois algarismos, quebre ele em dezena e unidade. Faz duas contas fáceis no lugar de uma difícil.'),
  P('Fazendo 23 × 14','<ol class="passos"><li>Quebre o 14 em <b>10 + 4</b>.</li><li>23 × 10 = <b>230</b>.</li><li>23 × 4 = <b>92</b>.</li><li>Some os dois: 230 + 92 = <b>322</b>.</li></ol>'),
- P('Confira estimando','23 é quase 20 e 14 é quase 15. 20 × 15 = 300. Sua resposta deu 322, que é pertinho de 300 — então faz sentido.')
+ P('Confira estimando','23 é quase 20 e 14 é quase 15. 20 × 15 = 300. Sua resposta deu 322, que é pertinho de 300, então faz sentido.')
 ];
 
 /* ---- Unidade 4 ---- */
@@ -2358,11 +2358,11 @@ AULAS['4.3']=[
 AULAS['4.4']=[
  P('Palavras que aparecem o tempo todo','<b>Dobro</b> é multiplicar por 2. <b>Metade</b> é dividir por 2. <b>Triplo</b> é vezes 3, e <b>terça parte</b> é dividir por 3. São palavras que caem em prova e no dia a dia.'),
  P('Vendo com o número 14','<ol class="passos"><li>Dobro de 14: 14 × 2 = <b>28</b>.</li><li>Metade de 14: 14 ÷ 2 = <b>7</b>.</li><li>Triplo de 9: 9 × 3 = <b>27</b>. Terça parte de 9: 9 ÷ 3 = <b>3</b>.</li></ol>'),
- P('Cuidado com os ímpares','A metade de um número ímpar não é inteira: metade de 7 é <b>3,5</b>. Isso é normal — é meia unidade sobrando.')
+ P('Cuidado com os ímpares','A metade de um número ímpar não é inteira: metade de 7 é <b>3,5</b>. Isso é normal, é meia unidade sobrando.')
 ];
 AULAS['4.5']=[
  P('Três palavras novas','<b>Múltiplos</b> de 4 são os resultados da tabuada do 4: 4, 8, 12, 16... <b>Divisores</b> de 12 são os números que dividem 12 sem sobrar nada. <b>Primo</b> é o número que só pode ser dividido por 1 e por ele mesmo.'),
- P('Achando os divisores de 12','<ol class="passos"><li>Teste do 1 para cima: 12 ÷ 1 = 12 ✓</li><li>12 ÷ 2 = 6 ✓ &nbsp; 12 ÷ 3 = 4 ✓ &nbsp; 12 ÷ 4 = 3 ✓</li><li>12 ÷ 5 sobra resto ✗ &nbsp; 12 ÷ 6 = 2 ✓ &nbsp; 12 ÷ 12 = 1 ✓</li><li>Divisores: 1, 2, 3, 4, 6 e 12 — são <b>6</b> divisores.</li></ol>'),
+ P('Achando os divisores de 12','<ol class="passos"><li>Teste do 1 para cima: 12 ÷ 1 = 12 ✓</li><li>12 ÷ 2 = 6 ✓ &nbsp; 12 ÷ 3 = 4 ✓ &nbsp; 12 ÷ 4 = 3 ✓</li><li>12 ÷ 5 sobra resto ✗ &nbsp; 12 ÷ 6 = 2 ✓ &nbsp; 12 ÷ 12 = 1 ✓</li><li>Divisores: 1, 2, 3, 4, 6 e 12, são <b>6</b> divisores.</li></ol>'),
  P('Os primos do começo','2, 3, 5, 7, 11, 13, 17, 19. Vale decorar esses. Atenção: o <b>1 não é primo</b> (só tem um divisor) e o <b>2 é o único primo par</b>.')
 ];
 
@@ -2390,12 +2390,12 @@ AULAS['5.4']=[
 AULAS['5.5']=[
  P('Fração de uma quantidade','Perguntas como “quanto é três quartos de 20 figurinhas?” aparecem toda hora: em desconto, em receita, em dividir a conta.'),
  P('Fazendo '+frac(3,4)+' de 20','<ol class="passos"><li><b>Divida</b> pelo número de baixo: 20 ÷ 4 = <b>5</b>. Cada quarto vale 5.</li><li><b>Multiplique</b> pelo número de cima: 5 × 3 = <b>15</b>.</li><li>Resposta: 15 figurinhas.</li></ol>'),
- P('Pra não esquecer','Primeiro divide, depois multiplica. Sempre nessa ordem — e o resultado nunca pode ser maior que o total, a não ser que a fração passe de um inteiro.')
+ P('Pra não esquecer','Primeiro divide, depois multiplica. Sempre nessa ordem, e o resultado nunca pode ser maior que o total, a não ser que a fração passe de um inteiro.')
 ];
 
 /* ---- Unidade 6 ---- */
 AULAS['6.1']=[
- P('A vírgula parte o número em dois','Antes da vírgula fica a parte inteira (o que está completo). Depois dela ficam os pedaços que não chegaram a formar um inteiro — como os centavos do real.'),
+ P('A vírgula parte o número em dois','Antes da vírgula fica a parte inteira (o que está completo). Depois dela ficam os pedaços que não chegaram a formar um inteiro, como os centavos do real.'),
  P('Lendo o número 2,45','<ol class="passos"><li>O <b>2</b> antes da vírgula: dois inteiros.</li><li>O <b>4</b> logo depois: 4 <b>décimos</b> (o inteiro dividido em 10 partes).</li><li>O <b>5</b> em seguida: 5 <b>centésimos</b> (dividido em 100 partes).</li></ol>'),
  P('Três que valem decorar','<b>0,5</b> é metade. <b>0,25</b> é um quarto. <b>0,75</b> é três quartos. Se você guardar esses três, muita conta fica fácil.')
 ];
@@ -2410,9 +2410,9 @@ AULAS['6.3']=[
  P('Pra não esquecer','Vírgula embaixo de vírgula, sempre. E a vírgula do resultado desce na mesma coluna das outras duas.')
 ];
 AULAS['6.4']=[
- P('Real e centavo','No preço, os dois números depois da vírgula são os <b>centavos</b>. R$ 13,50 é treze reais e cinquenta centavos — e cinquenta centavos é meio real.'),
+ P('Real e centavo','No preço, os dois números depois da vírgula são os <b>centavos</b>. R$ 13,50 é treze reais e cinquenta centavos, e cinquenta centavos é meio real.'),
  P('Calculando o troco','<b>Comprou algo de R$ 13,50 e pagou com R$ 20,00.</b><ol class="passos"><li>Troco é o que você pagou <b>menos</b> o preço.</li><li>20,00 − 13,50.</li><li>De 13,50 até 14 falta 0,50; de 14 até 20 faltam 6.</li><li>Troco: 6 + 0,50 = <b>R$ 6,50</b>.</li></ol>'),
- P('Confira arredondando','13,50 é quase 14. E 20 − 14 = 6. Seu troco deu 6,50, que está pertinho de 6 — sinal de que a conta está certa.')
+ P('Confira arredondando','13,50 é quase 14. E 20 − 14 = 6. Seu troco deu 6,50, que está pertinho de 6, sinal de que a conta está certa.')
 ];
 AULAS['6.5']=[
  P('A vírgula caminha','Multiplicar ou dividir por 10, 100 e 1000 não muda os algarismos: só faz a vírgula <b>andar de casa</b>.'),
@@ -2427,7 +2427,7 @@ AULAS['7.1']=[
  P('Os valores que vale saber de cor','<b>100%</b> é tudo. <b>50%</b> é metade. <b>25%</b> é um quarto. <b>10%</b> é a décima parte. E <b>1%</b> é dividir por 100.')
 ];
 AULAS['7.2']=[
- P('Comece sempre pelos 10%','Achar 10% é só dividir por 10 — e a partir dele você monta quase todos os outros. 20% é o dobro de 10%, 5% é a metade.'),
+ P('Comece sempre pelos 10%','Achar 10% é só dividir por 10, e a partir dele você monta quase todos os outros. 20% é o dobro de 10%, 5% é a metade.'),
  P('Achando 30% de 240','<ol class="passos"><li>10% de 240 = 240 ÷ 10 = <b>24</b>.</li><li>30% é três vezes 10%.</li><li>24 × 3 = <b>72</b>.</li></ol>'),
  P('Truque de virar a conta','30% de 50 dá o mesmo que 50% de 30. Quando um lado for difícil, inverta: 50% de 30 é metade de 30, ou seja, <b>15</b>. Bem mais rápido.')
 ];
@@ -2450,8 +2450,8 @@ AULAS['7.5']=[
 /* ---- Unidade 8 ---- */
 AULAS['8.1']=[
  P('Polígono é forma fechada de linhas retas','Se a figura é fechada e todos os lados são retos, é um polígono. O nome dela vem da <b>quantidade de lados</b>.'),
- P('Conhecendo a turma','<ol class="passos"><li>3 lados: <b>triângulo</b>.</li><li>4 lados: <b>quadrilátero</b> — aqui entram o quadrado e o retângulo.</li><li>5 lados: <b>pentágono</b>. 6 lados: <b>hexágono</b>.</li></ol>'),
- P('Duas coisas que confundem','O <b>círculo não é polígono</b>, porque não tem lados retos. E todo <b>quadrado é um retângulo</b> — é só um retângulo com os quatro lados iguais.')
+ P('Conhecendo a turma','<ol class="passos"><li>3 lados: <b>triângulo</b>.</li><li>4 lados: <b>quadrilátero</b>: aqui entram o quadrado e o retângulo.</li><li>5 lados: <b>pentágono</b>. 6 lados: <b>hexágono</b>.</li></ol>'),
+ P('Duas coisas que confundem','O <b>círculo não é polígono</b>, porque não tem lados retos. E todo <b>quadrado é um retângulo</b>: é só um retângulo com os quatro lados iguais.')
 ];
 AULAS['8.2']=[
  P('Perímetro é o contorno','Imagine uma cerca em volta de um terreno, ou você andando na beirada de uma quadra. O perímetro é a soma de <b>todos os lados</b>.',svgRect(8,5)),
@@ -2476,13 +2476,13 @@ AULAS['8.5']=[
 
 /* ---- Unidade 9 ---- */
 AULAS['9.1']=[
- P('A letra é um número escondido','Quando a gente não sabe um número ainda, escreve uma letra no lugar dele — quase sempre o <b>x</b>. Descobrir quanto vale o x é resolver o mistério.'),
+ P('A letra é um número escondido','Quando a gente não sabe um número ainda, escreve uma letra no lugar dele, quase sempre o <b>x</b>. Descobrir quanto vale o x é resolver o mistério.'),
  P('Descobrindo o x em x + 7 = 12','<ol class="passos"><li>Alguma coisa mais 7 deu 12.</li><li>Para voltar, faça a operação <b>contrária</b> do +: subtraia.</li><li>12 − 7 = <b>5</b>. Então x = 5.</li><li>Confira: 5 + 7 = 12 ✓</li></ol>'),
  P('A tabela do contrário','Somou? Subtraia. Subtraiu? Some. Multiplicou? Divida. Dividiu? Multiplique. É sempre a operação inversa que revela o x.')
 ];
 AULAS['9.2']=[
  P('As contas têm ordem de chegada','Numa expressão com vários sinais, não se resolve da esquerda para a direita. Existe uma fila: primeiro <b>parênteses</b>, depois potências, depois <b>× e ÷</b>, e por último <b>+ e −</b>.'),
- P('Resolvendo 2 + 3 × 4','<ol class="passos"><li>Tem multiplicação e soma. A multiplicação vem primeiro.</li><li>3 × 4 = <b>12</b>.</li><li>Agora a soma: 2 + 12 = <b>14</b>.</li><li>Quem faz na ordem errada acha 20 — e erra.</li></ol>'),
+ P('Resolvendo 2 + 3 × 4','<ol class="passos"><li>Tem multiplicação e soma. A multiplicação vem primeiro.</li><li>3 × 4 = <b>12</b>.</li><li>Agora a soma: 2 + 12 = <b>14</b>.</li><li>Quem faz na ordem errada acha 20, e erra.</li></ol>'),
  P('Parênteses furam a fila','O que está dentro do parêntese sempre passa na frente: (2 + 3) × 4 = 5 × 4 = <b>20</b>. Por isso eles existem.')
 ];
 AULAS['9.3']=[
@@ -2510,7 +2510,7 @@ AULAS['10.1']=[
 AULAS['10.2']=[
  P('Gráfico é informação desenhada','Num gráfico de barras, quanto mais alta a barra, maior a quantidade. Dá para comparar tudo de uma olhada, sem ler número por número.',barras(['Seg','Ter','Qua','Qui'],[6,14,20,11])),
  P('Como ler','<ol class="passos"><li>Leia primeiro o que está <b>embaixo</b> de cada barra: o dia, o nome, a categoria.</li><li>Veja a altura de cada uma para achar a maior e a menor.</li><li>Só então faça contas: somar tudo, ver a diferença entre duas, calcular a média.</li></ol>'),
- P('Pergunta clássica de prova','“Quanto Quarta teve <b>a mais</b> que Segunda?” — “a mais” é subtração: pegue a altura de quarta e tire a de segunda.')
+ P('Pergunta clássica de prova','“Quanto Quarta teve <b>a mais</b> que Segunda?” “a mais” é subtração: pegue a altura de quarta e tire a de segunda.')
 ];
 AULAS['10.3']=[
  P('Probabilidade é medir a chance','Antes de jogar um dado, ninguém sabe o que vai sair. Mas dá para calcular a chance: quantos jeitos dão certo, divididos por quantos jeitos existem no total.'),
@@ -2547,11 +2547,11 @@ const CAPITULOS={
  1:{t:'A horta do Bobby',item:'semente',
     abre:'O Bobby resolveu plantar uma horta atrás de casa. Só que ele se atrapalha com as contas e precisa de alguém que saiba contar direito. Esse alguém é você!'},
  2:{t:'O tesouro da praia',item:'concha',
-    abre:'A maré baixou e a praia ficou cheia de conchas. O Bobby quer montar a maior coleção da vila — mas para isso vai ter que somar e subtrair sem errar.'},
+    abre:'A maré baixou e a praia ficou cheia de conchas. O Bobby quer montar a maior coleção da vila, mas para isso vai ter que somar e subtrair sem errar.'},
  3:{t:'A caravana do deserto',item:'gota',
     abre:'Atravessar o deserto exige água, e água se carrega em caixas iguais. Multiplicar é o jeito rápido de saber quanto a caravana está levando.'},
  4:{t:'O piquenique da floresta',item:'fruta',
-    abre:'Os amigos do Bobby chegaram para o piquenique. Tem comida para todo mundo — desde que alguém saiba repartir em partes iguais.'},
+    abre:'Os amigos do Bobby chegaram para o piquenique. Tem comida para todo mundo, desde que alguém saiba repartir em partes iguais.'},
  5:{t:'A pizzaria da montanha',item:'fatia',
     abre:'O Bobby abriu uma pizzaria no alto da montanha. Cada pedido chega em fatias, e é aí que as frações entram na cozinha.'},
  6:{t:'A feira da cidade',item:'moeda',
@@ -2563,22 +2563,22 @@ const CAPITULOS={
  9:{t:'A oficina de foguetes',item:'parafuso',
     abre:'No galpão do fim da rua há um foguete quase pronto. Faltam peças, e o número delas está escondido atrás de uma letra: o x.'},
  10:{t:'A festa no castelo',item:'estrela',
-    abre:'O rei convidou todo mundo para a festa no castelo. O Bobby ficou responsável por organizar os dados da festa — e por não deixar nada dar errado.'}
+    abre:'O rei convidou todo mundo para a festa no castelo. O Bobby ficou responsável por organizar os dados da festa, e por não deixar nada dar errado.'}
 };
 const MISSOES={
  '1.1':{t:'Contar as sementes',abre:'O Bobby derrubou o saquinho de sementes no canteiro. Ajude ele a contar quantas caíram.',fim:'Sementes contadas! O canteiro já pode ser plantado.'},
  '1.2':{t:'Escolher o canteiro maior',abre:'Tem dois canteiros e só dá tempo de regar um hoje. Ajude o Bobby a comparar e escolher.',fim:'Escolha certa: o canteiro maior foi regado primeiro.'},
- '1.3':{t:'Amarrar maços de 10',abre:'As mudas se perdem soltas. O Bobby amarra de 10 em 10 para não se confundir — cada maço é uma dezena.',fim:'Todos os maços amarrados. Agora dá para contar num piscar de olhos!'},
+ '1.3':{t:'Amarrar maços de 10',abre:'As mudas se perdem soltas. O Bobby amarra de 10 em 10 para não se confundir, cada maço é uma dezena.',fim:'Todos os maços amarrados. Agora dá para contar num piscar de olhos!'},
  '1.4':{t:'Encher as caixas da colheita',abre:'A colheita vai em caixas: 100 numa caixa grande, 10 num pacote, e o resto solto. Ajude o Bobby a montar os números.',fim:'Colheita organizada em centenas, dezenas e unidades!'},
  '1.5':{t:'Marcar a régua da horta',abre:'O Bobby vai marcar a fita onde as sementes ficam, de tantos em tantos passos.',fim:'Fita marcada. A horta ficou toda alinhadinha.'},
  '2.1':{t:'Juntar as conchas',abre:'O Bobby achou conchas em dois montinhos e quer saber quantas tem ao todo.',fim:'Coleção crescendo! O saquinho já está pesado.'},
  '2.2':{t:'Contar o balde cheio',abre:'O balde tem dezenas de conchas. Somar números grandes é a única forma de saber o total.',fim:'Balde contado sem errar nenhuma.'},
  '2.3':{t:'Devolver as quebradas',abre:'Algumas conchas vieram quebradas e voltam para o mar. Quantas sobram na coleção?',fim:'Só ficaram as conchas bonitas.'},
  '2.4':{t:'Fechar a conta do dia',abre:'No fim da tarde o Bobby soma tudo o que achou e tira o que perdeu.',fim:'Conta fechada, dia de sorte na praia!'},
- '2.5':{t:'Resolver a confusão',abre:'Cada amigo conta uma história diferente sobre as conchas. Descubra qual conta resolve cada caso.',fim:'Confusão desfeita — todo mundo entendeu.'},
+ '2.5':{t:'Resolver a confusão',abre:'Cada amigo conta uma história diferente sobre as conchas. Descubra qual conta resolve cada caso.',fim:'Confusão desfeita, todo mundo entendeu.'},
  '3.1':{t:'Carregar os camelos',abre:'Cada camelo leva o mesmo número de caixas. Multiplicar é somar grupos iguais.',fim:'Camelos carregados por igual. Ninguém sai sobrecarregado.'},
  '3.2':{t:'Contar os cantis',abre:'São vários pacotes com a mesma quantidade de cantis. Use a tabuada fácil.',fim:'Todos os cantis contados e guardados.'},
- '3.3':{t:'A parte difícil da carga',abre:'Agora os pacotes são maiores. As tabuadas do 6 ao 9 aparecem — mas têm atalhos.',fim:'Carga completa, mesmo com as tabuadas difíceis!'},
+ '3.3':{t:'A parte difícil da carga',abre:'Agora os pacotes são maiores. As tabuadas do 6 ao 9 aparecem, mas têm atalhos.',fim:'Carga completa, mesmo com as tabuadas difíceis!'},
  '3.4':{t:'Contar as gotas por dez',abre:'Cada barril tem dez cantis. Multiplicar por 10 é só andar uma casa.',fim:'Barris conferidos num instante.'},
  '3.5':{t:'A conta grande da viagem',abre:'A caravana inteira: dezenas de caixas com dezenas de itens. Quebre a conta em partes.',fim:'Água suficiente para atravessar o deserto!'},
  '4.1':{t:'Repartir as frutas',abre:'Cada amigo precisa receber a mesma quantidade. Ajude o Bobby a repartir sem briga.',fim:'Todo mundo ficou com a mesma quantidade.'},
@@ -2594,7 +2594,7 @@ const MISSOES={
  '6.1':{t:'Ler as etiquetas de preço',abre:'Todo preço da feira tem vírgula. Entender os centavos é o primeiro passo.',fim:'Preços lidos sem confusão.'},
  '6.2':{t:'Achar a melhor oferta',abre:'Duas barracas, dois preços parecidos. Qual é realmente mais barato?',fim:'Compra feita pelo melhor preço.'},
  '6.3':{t:'Somar a sacola',abre:'O Bobby encheu a sacola. Quanto deu tudo junto?',fim:'Conta somada certinho na hora de pagar.'},
- '6.4':{t:'Conferir o troco',abre:'Nunca saia da feira sem conferir o troco.',fim:'Troco certo — nem um centavo a menos.'},
+ '6.4':{t:'Conferir o troco',abre:'Nunca saia da feira sem conferir o troco.',fim:'Troco certo, nem um centavo a menos.'},
  '6.5':{t:'Comprar em quantidade',abre:'Dez unidades pelo preço de uma multiplicação. A vírgula vai andar.',fim:'Compra grande, conta rápida.'},
  '7.1':{t:'Entender a etiqueta',abre:'A vitrine está cheia de %. O Bobby precisa saber o que aquilo significa.',fim:'Agora nenhuma etiqueta engana o Bobby.'},
  '7.2':{t:'Calcular de cabeça',abre:'A fila é grande e não dá tempo de usar papel. Vamos de 10% em 10%.',fim:'Contas feitas na cabeça, sem calculadora!'},
@@ -2606,7 +2606,7 @@ const MISSOES={
  '8.3':{t:'Forrar o chão',abre:'O piso emborrachado cobre a superfície. Isso se chama área.',fim:'Chão forrado, criançada pode brincar.'},
  '8.4':{t:'Ajustar o escorregador',abre:'A inclinação é um ângulo. Muito aberto ou muito fechado atrapalha.',fim:'Escorregador no ângulo perfeito!'},
  '8.5':{t:'Medir tudo antes',abre:'Metro, centímetro, litro, quilo: cada coisa tem sua medida.',fim:'Medidas conferidas, obra aprovada.'},
- '9.1':{t:'Achar a peça escondida',abre:'Falta uma peça e ninguém sabe quantas são. Vamos chamá-la de x.',fim:'Peça encontrada — o x foi descoberto!'},
+ '9.1':{t:'Achar a peça escondida',abre:'Falta uma peça e ninguém sabe quantas são. Vamos chamá-la de x.',fim:'Peça encontrada, o x foi descoberto!'},
  '9.2':{t:'Seguir a ordem certa',abre:'Na oficina, a ordem das operações importa tanto quanto na montagem.',fim:'Montagem na ordem certa, sem estragar nada.'},
  '9.3':{t:'Equilibrar a balança',abre:'Os dois lados do foguete precisam pesar igual. É uma equação.',fim:'Foguete equilibrado e pronto para subir.'},
  '9.4':{t:'Calcular a potência',abre:'O motor multiplica a força por ela mesma. Isso é uma potência.',fim:'Potência calculada, motor no ponto.'},
@@ -2801,7 +2801,7 @@ LP('p2.2','BA','Sílabas com B, C, D',
   ()=>{const w=pick(PAL.filter(x=>'bcd'.indexOf(x.p[0])>=0));
        return mc('Qual palavra começa com a sílaba <b>'+w.s[0].toUpperCase()+'</b>?',w.p,
        shuf(PAL.filter(x=>x.s[0]!==w.s[0])).slice(0,3).map(x=>x.p));},
-  ()=>{const v=pick(VOG);return mc('BA, BE, BI, BO, BU — qual falta aqui: BA, BE, ___, BO, BU?','BI',['BU','BA','BE']);},
+  ()=>{const v=pick(VOG);return mc('BA, BE, BI, BO, BU, qual falta aqui: BA, BE, ___, BO, BU?','BI',['BU','BA','BE']);},
   ()=>{const w=pick(PAL.filter(x=>'bcd'.indexOf(x.p[0])>=0));
        return ouvirQ('Ouça e escolha a palavra.',w.p,shuf(PAL.filter(x=>x.p!==w.p)).slice(0,3).map(x=>x.p));}
  ]),
@@ -2915,7 +2915,7 @@ LP('p3.4','↺','Letras embaralhadas',
 LP('p3.5','≈','Palavras parecidas',
  {ideia:'Trocar uma letra só já muda a palavra inteira. Por isso é preciso ler com atenção até o fim.',
   exemplo:'PATO e GATO. BOLA e BOLO. FACA e VACA.',
-  dica:'Leia a palavra toda antes de responder — não chute pelo começo.'},
+  dica:'Leia a palavra toda antes de responder, não chute pelo começo.'},
  [
   ()=>{return ouvirQ('Ouça com atenção: qual palavra é?','pato',['gato','rato','mato']);},
   ()=>{return ouvirQ('Ouça com atenção: qual palavra é?','bola',['bolo','mola','cola']);},
@@ -2930,7 +2930,7 @@ LP('p3.5','≈','Palavras parecidas',
 UNITS_PT.push({n:4,title:'Os sons difíceis',sub:'C/Ç, R/RR, S/SS, CH, LH, NH e o M antes de P e B.',tone:'coral',lessons:[
 LP('p4.1','ca','CA CO CU e CE CI',
  {ideia:'A letra C tem dois sons. Com A, O, U ela soa como K: CA, CO, CU. Com E e I ela soa como S: CE, CI.',
-  exemplo:'CASA, COPO, CUCA — som de K. CEBOLA, CINEMA — som de S.',
+  exemplo:'CASA, COPO, CUCA: som de K. CEBOLA, CINEMA: som de S.',
   dica:'Se o som é de S antes de A, O, U, aí escreve-se com Ç: MAÇÃ, AÇÚCAR.'},
  [
   ()=>{return mc('Em qual palavra o C tem som de S?','cebola',['casa','copo','cuca']);},
@@ -3070,7 +3070,7 @@ LP('p5.5','+','Juntar duas frases',
 UNITS_PT.push({n:6,title:'Os nomes das coisas',sub:'Substantivo, artigo, singular e plural, masculino e feminino.',tone:'agua',lessons:[
 LP('p6.1','n','Substantivo',
  {ideia:'<b>Substantivo</b> é o nome das coisas, das pessoas, dos bichos e dos lugares.',
-  exemplo:'bola, menina, cachorro, escola — todos são substantivos.',
+  exemplo:'bola, menina, cachorro, escola: todos são substantivos.',
   dica:'Se dá para colocar "o" ou "a" na frente, é substantivo.'},
  [
   ()=>{const w=pick(PAL);return mc('Qual destas é o nome de uma coisa (substantivo)?',w.p,shuf(VERB).slice(0,3));},
@@ -3264,7 +3264,7 @@ LP('p8.5','≠','Palavras que confundem',
 UNITS_PT.push({n:9,title:'Acentos e pontuação',sub:'O acento que muda o som, o til, a vírgula e a fala nos textos.',tone:'roxo',lessons:[
 LP('p9.1','´','Para que serve o acento',
  {ideia:'O <b>acento</b> mostra qual sílaba a gente fala mais forte. Sem ele, a palavra pode virar outra.',
-  exemplo:'sabia / sabiá / sábia — três palavras diferentes.',
+  exemplo:'sabia / sabiá / sábia, três palavras diferentes.',
   dica:'Fale a palavra e sinta onde a voz sobe: é ali que mora o acento.'},
  [
   ()=>{return mc('Qual está certo: o passarinho que canta?','sabiá',['sabia','sábia']);},
@@ -3282,7 +3282,7 @@ LP('p9.1','´','Para que serve o acento',
 LP('p9.2','ã','O til e os sons nasais',
  {ideia:'O <b>til</b> (~) deixa o som nasal, saindo pelo nariz: ã, õ.',
   exemplo:'mão, pão, coração, limões.',
-  dica:'Tape o nariz e tente falar "mão". Não sai — é nasal mesmo.'},
+  dica:'Tape o nariz e tente falar "mão". Não sai, é nasal mesmo.'},
  [
   ()=>{return mc('Qual está certo?','mão',['mao','mãao']);},
   ()=>{return mc('Qual está certo?','pão',['pao','pãn']);},
@@ -3315,14 +3315,14 @@ LP('p9.4',',','A vírgula na lista',
   ()=>{return mc('Qual está certo?','Gosto de bola, boneca e livro.',['Gosto de bola boneca livro.']);},
   ()=>{return mc('Quantas vírgulas tem "pão, leite, queijo e mel"?','2',['3','1']);}
  ]),
-LP('p9.5','—','Quando alguém fala',
- {ideia:'Nos textos, a fala de um personagem começa com <b>travessão</b> (—). Os <b>dois-pontos</b> (:) anunciam que alguém vai falar ou que vem uma lista.',
-  exemplo:'A menina disse:<br>— Estou pronta!',
+LP('p9.5','&mdash;','Quando alguém fala',
+ {ideia:'Nos textos, a fala de um personagem começa com <b>travessão</b> (&mdash;). Os <b>dois-pontos</b> (:) anunciam que alguém vai falar ou que vem uma lista.',
+  exemplo:'A menina disse:<br>&mdash; Estou pronta!',
   dica:'Travessão só na fala; dois-pontos antes dela.'},
  [
-  ()=>{return mc('Qual sinal marca a fala de um personagem?','—',[',','?']);},
+  ()=>{return mc('Qual sinal marca a fala de um personagem?','&mdash;',[',','?']);},
   ()=>{return mc('Qual sinal anuncia que alguém vai falar?',':',['.','!']);},
-  ()=>{return mc('Qual está certo?','Ela disse: — Vamos!',['Ela disse — : Vamos!']);},
+  ()=>{return mc('Qual está certo?','Ela disse: &mdash; Vamos!',['Ela disse &mdash; : Vamos!']);},
   ()=>{return tf('Os dois-pontos também anunciam uma lista.',true);},
   ()=>{return mc('No texto, o travessão aparece...','no começo da fala',['no fim da frase','depois da vírgula']);},
   ()=>{return tf('A fala de um personagem começa com vírgula.',false);}
@@ -3415,7 +3415,7 @@ Object.assign(ITENS,{
 });
 const CAPITULOS_PT={
  1:{t:'A caixa de letras',item:'letra',
-    abre:'O Bobby achou no sótão uma caixa cheia de letras soltas. Ninguém sabe ler o que está escrito nelas — e é aí que você entra.'},
+    abre:'O Bobby achou no sótão uma caixa cheia de letras soltas. Ninguém sabe ler o que está escrito nelas, e é aí que você entra.'},
  2:{t:'O trem das sílabas',item:'balao',
     abre:'As letras se juntaram duas a duas e viraram vagões de um trem. Cada vagão é uma sílaba, e o trem só anda se a ordem estiver certa.'},
  3:{t:'A feira das palavras',item:'balao',
@@ -3429,7 +3429,7 @@ const CAPITULOS_PT={
  7:{t:'O teatro das ações',item:'estrela',
     abre:'No teatro, os personagens precisam saber COMO são e O QUE fazem. Sem adjetivo e sem verbo, a peça não acontece.'},
  8:{t:'A gráfica',item:'lapis',
-    abre:'O jornal da vila vai ser impresso hoje. Se sair um erro de ortografia, todo mundo vai ver — então nada de escorregar no Ç, no G e no X.'},
+    abre:'O jornal da vila vai ser impresso hoje. Se sair um erro de ortografia, todo mundo vai ver, então nada de escorregar no Ç, no G e no X.'},
  9:{t:'O jardim dos acentos',item:'pena',
     abre:'No jardim, cada acento é uma florzinha em cima da palavra. Sem eles, ninguém sabe onde a voz sobe.'},
  10:{t:'A biblioteca',item:'livro',
@@ -3440,12 +3440,12 @@ const MISSOES_PT={
  'p1.2':{t:'Arrumar o alfabeto',abre:'As 26 letras caíram da caixa. Coloque cada uma no lugar certo da fila.',fim:'Alfabeto arrumado do A ao Z.'},
  'p1.3':{t:'Duas roupas para cada letra',abre:'Cada letra tem a forma grande e a pequena. O Bobby confunde as duas.',fim:'Maiúsculas e minúsculas separadas direitinho.'},
  'p1.4':{t:'O som do começo',abre:'Descubra com que letra cada palavra começa, só pelo som.',fim:'Nenhuma palavra enganou você!'},
- 'p1.5':{t:'A fila do dicionário',abre:'No dicionário tudo fica em ordem alfabética. Ajude a organizar.',fim:'Fila em ordem — o dicionário está pronto.'},
+ 'p1.5':{t:'A fila do dicionário',abre:'No dicionário tudo fica em ordem alfabética. Ajude a organizar.',fim:'Fila em ordem, o dicionário está pronto.'},
  'p2.1':{t:'Bater palma nas sílabas',abre:'Cada palma é um pedaço da palavra. Vamos contar juntos.',fim:'Todas as palavras contadas na batida certa.'},
  'p2.2':{t:'Os primeiros vagões',abre:'B, C e D se juntam com as vogais e formam os primeiros vagões.',fim:'Os vagões de B, C e D já andam sozinhos.'},
  'p2.3':{t:'Mais vagões no trem',abre:'Agora F, G, L e M entram na composição.',fim:'Trem crescendo! Já dá para ler bastante coisa.'},
  'p2.4':{t:'Completando o trem',abre:'N, P, R, T e V fecham as famílias de sílabas.',fim:'Trem completo, apitando na estação.'},
- 'p2.5':{t:'A viagem inteira',abre:'Junte os vagões na ordem certa e leia a palavra que se forma.',fim:'Palavra montada — o trem chegou ao destino!'},
+ 'p2.5':{t:'A viagem inteira',abre:'Junte os vagões na ordem certa e leia a palavra que se forma.',fim:'Palavra montada, o trem chegou ao destino!'},
  'p3.1':{t:'As barracas pequenas',abre:'As primeiras barracas vendem palavras de duas sílabas.',fim:'Barracas abertas e cartazes prontos.'},
  'p3.2':{t:'As barracas grandes',abre:'Agora as palavras têm três sílabas e dão mais trabalho.',fim:'Nenhum cartaz ficou errado.'},
  'p3.3':{t:'O pedaço que sumiu',abre:'O vento levou uma sílaba de cada cartaz. Descubra qual era.',fim:'Todos os cartazes remendados.'},
@@ -3497,30 +3497,30 @@ const DUO=(a,b)=>'<div class="duo"><div><b>'+a[0]+'</b><span>'+a[1]+'</span></di
 
 AULAS['p1.1']=[
  P('As cinco vogais','Todas as letras se dividem em dois times. O time pequeno, com só cinco jogadoras, é o das <b>vogais</b>: A, E, I, O, U. Elas são especiais porque a gente consegue cantar cada uma sozinha, sem precisar de nenhuma outra letra.',TIRA(['A','E','I','O','U'])),
- P('Toda palavra tem vogal','Experimente: BOLA, CASA, PÉ, URSO. Não existe palavra em português sem pelo menos uma vogal. Elas são o ar da palavra — sem elas a boca trava.'),
- P('Vamos achar as vogais','<ol class="passos"><li>Olhe a palavra <b>CASA</b>.</li><li>Passe o dedo letra por letra: C — A — S — A.</li><li>Marque as que estão no time das vogais: o primeiro <b>A</b> e o último <b>A</b>.</li><li>CASA tem 2 vogais.</li></ol>'),
+ P('Toda palavra tem vogal','Experimente: BOLA, CASA, PÉ, URSO. Não existe palavra em português sem pelo menos uma vogal. Elas são o ar da palavra, sem elas a boca trava.'),
+ P('Vamos achar as vogais','<ol class="passos"><li>Olhe a palavra <b>CASA</b>.</li><li>Passe o dedo letra por letra: C, A, S, A.</li><li>Marque as que estão no time das vogais: o primeiro <b>A</b> e o último <b>A</b>.</li><li>CASA tem 2 vogais.</li></ol>'),
  P('Pra não esquecer','Cante A-E-I-O-U olhando no espelho: a boca muda de formato em cada uma. É esse formato diferente que ajuda o Bobby a reconhecer cada vogal.')
 ];
 AULAS['p1.2']=[
- P('O alfabeto é uma fila','O alfabeto é a fila oficial das 26 letras. Ela nunca muda de ordem — é sempre A, B, C, D... até o Z. Saber essa fila é como saber a ordem dos números.',TIRA(['A','B','C','D','E','F'])),
- P('As outras letras','Fora as cinco vogais, todas as outras são <b>consoantes</b>: B, C, D, F, G... Elas não cantam sozinhas, precisam sempre de uma vogal do lado. Tente falar só "B" — sai "bê", com um E escondido.'),
+ P('O alfabeto é uma fila','O alfabeto é a fila oficial das 26 letras. Ela nunca muda de ordem, é sempre A, B, C, D... até o Z. Saber essa fila é como saber a ordem dos números.',TIRA(['A','B','C','D','E','F'])),
+ P('As outras letras','Fora as cinco vogais, todas as outras são <b>consoantes</b>: B, C, D, F, G... Elas não cantam sozinhas, precisam sempre de uma vogal do lado. Tente falar só "B" sai "bê", com um E escondido.'),
  P('Achando a letra na fila','<ol class="passos"><li>Quer saber que letra vem depois do <b>F</b>?</li><li>Cante do começo: A, B, C, D, E, F...</li><li>A próxima é o <b>G</b>.</li><li>Com o tempo você para de cantar do início e já sabe direto.</li></ol>'),
  P('Pra não esquecer','O alfabeto tem 26 letras: 5 vogais e 21 consoantes. Ele é a base de tudo: do dicionário à lista de chamada da escola.')
 ];
 AULAS['p1.3']=[
- P('Duas roupas para a mesma letra','Cada letra tem duas formas de se vestir: a <b>maiúscula</b> (grande, do tamanho da casa) e a <b>minúscula</b> (pequena). São a mesma letra, com o mesmo som — só o tamanho muda.',TIRA(['A a','B b','C c','D d'])),
+ P('Duas roupas para a mesma letra','Cada letra tem duas formas de se vestir: a <b>maiúscula</b> (grande, do tamanho da casa) e a <b>minúscula</b> (pequena). São a mesma letra, com o mesmo som, só o tamanho muda.',TIRA(['A a','B b','C c','D d'])),
  P('Quando usar a maiúscula','Usa-se maiúscula em três casos fáceis de lembrar: no <b>começo da frase</b>, em <b>nomes de pessoas</b> (Bobby, Lívia) e em <b>nomes de lugares</b> (Brasil, São Paulo).'),
  P('Vendo na prática','<ol class="passos"><li>Frase: <b>Bobby correu no parque.</b></li><li>O <b>B</b> é maiúsculo porque é nome de alguém E é o começo da frase.</li><li>"correu", "no" e "parque" ficam minúsculos.</li><li>No fim vem o ponto.</li></ol>'),
- P('Pra não esquecer','Maiúscula não é enfeite: ela avisa o leitor que ali começa algo importante — uma frase nova ou um nome.')
+ P('Pra não esquecer','Maiúscula não é enfeite: ela avisa o leitor que ali começa algo importante, uma frase nova ou um nome.')
 ];
 AULAS['p1.4']=[
  P('O som do começo','Toda palavra começa com um som. Se você fala <b>BOLA</b> bem devagar, o primeiro pedacinho que sai da boca é o "bê". Por isso ela começa com a letra <b>B</b>.'),
  P('Fale devagar e escute','<ol class="passos"><li>Pense na palavra <b>MACACO</b>.</li><li>Fale bem devagar: <b>Mmm</b>-a-ca-co.</li><li>O primeiro som é "mmm".</li><li>Que letra faz "mmm"? O <b>M</b>. Então MACACO começa com M.</li></ol>'),
- P('Cuidado com as pegadinhas','Escutar é melhor que adivinhar. HOJE começa com H, mas o H é mudo — não faz som nenhum. Nessas horas, vale lembrar a escrita da palavra.'),
+ P('Cuidado com as pegadinhas','Escutar é melhor que adivinhar. HOJE começa com H, mas o H é mudo, não faz som nenhum. Nessas horas, vale lembrar a escrita da palavra.'),
  P('Pra não esquecer','Primeiro escute o som, depois procure a letra. Esse é o caminho que todo mundo faz quando aprende a ler.')
 ];
 AULAS['p1.5']=[
- P('Por que ordenar?','Imagine procurar uma palavra num dicionário com 70 mil palavras bagunçadas. Impossível! Por isso tudo fica em <b>ordem alfabética</b> — a ordem da fila das letras.'),
+ P('Por que ordenar?','Imagine procurar uma palavra num dicionário com 70 mil palavras bagunçadas. Impossível! Por isso tudo fica em <b>ordem alfabética</b>: a ordem da fila das letras.'),
  P('Ordenando três palavras','<ol class="passos"><li>Palavras: CASA, ABELHA, BOLA.</li><li>Olhe só a <b>primeira letra</b>: C, A, B.</li><li>Coloque na ordem do alfabeto: A, B, C.</li><li>Resultado: <b>ABELHA, BOLA, CASA</b>.</li></ol>'),
  P('E se empatar?','Se duas palavras começam com a mesma letra, olhe a <b>segunda</b>. CASA e CAVALO: as duas têm CA, mas depois vem S e V. O S vem antes do V, então CASA vem primeiro.'),
  P('Pra não esquecer','Ordem alfabética é usada na lista de chamada, na agenda do celular e na lista de produtos do mercado. É um superpoder de organização.')
@@ -3535,13 +3535,13 @@ AULAS['p2.1']=[
 AULAS['p2.2']=[
  P('Consoante + vogal','A receita mais comum de sílaba é <b>uma consoante + uma vogal</b>. Pegue o B e passeie por todas as vogais: BA, BE, BI, BO, BU.',TIRA(['BA','BE','BI','BO','BU'])),
  P('A mesma receita com C e D','Com o C: CA, CE, CI, CO, CU. Com o D: DA, DE, DI, DO, DU. A consoante é a mesma; quem muda o som é a vogal que vem depois.'),
- P('Montando palavras','<ol class="passos"><li>Junte <b>BO</b> + <b>CA</b>.</li><li>Leia colado: BOCA.</li><li>Troque a primeira sílaba por <b>DE</b>: DECA? Não existe.</li><li>Nem toda junção vira palavra — mas todas se leem igual.</li></ol>'),
+ P('Montando palavras','<ol class="passos"><li>Junte <b>BO</b> + <b>CA</b>.</li><li>Leia colado: BOCA.</li><li>Troque a primeira sílaba por <b>DE</b>: DECA? Não existe.</li><li>Nem toda junção vira palavra, mas todas se leem igual.</li></ol>'),
  P('Pra não esquecer','Aprendendo a família de uma consoante (BA-BE-BI-BO-BU), você já consegue ler qualquer palavra que tenha essas sílabas.')
 ];
 AULAS['p2.3']=[
  P('Mais famílias de sílabas','Agora as famílias do F, G, L e M: FA-FE-FI-FO-FU, GA-GUE-GUI-GO-GU, LA-LE-LI-LO-LU, MA-ME-MI-MO-MU.',TIRA(['FA','LA','MA','GA'])),
  P('O M é fácil de sentir','Coloque a mão nos lábios e fale MA. Os lábios se fecham antes do som sair. É por isso que MAMÃE é uma das primeiras palavras que todo bebê fala.'),
- P('Lendo com as famílias','<ol class="passos"><li>Palavra nova: <b>FOLHA</b>.</li><li>Quebre: FO — LHA.</li><li>FO você já conhece da família do F.</li><li>Leia devagar e junte: FOLHA.</li></ol>'),
+ P('Lendo com as famílias','<ol class="passos"><li>Palavra nova: <b>FOLHA</b>.</li><li>Quebre: FO-LHA.</li><li>FO você já conhece da família do F.</li><li>Leia devagar e junte: FOLHA.</li></ol>'),
  P('Pra não esquecer','Quanto mais famílias você souber de cor, mais rápido lê. É treino, igual a decorar a tabuada.')
 ];
 AULAS['p2.4']=[
@@ -3553,7 +3553,7 @@ AULAS['p2.4']=[
 AULAS['p2.5']=[
  P('Sílabas viram palavras','Sílaba sozinha quase nunca quer dizer nada. Junte duas e nasce uma palavra: <b>CA</b> + <b>SA</b> = CASA.',SIL('CA','SA')),
  P('Trocando uma sílaba','<ol class="passos"><li>Comece com <b>MALA</b>.</li><li>Troque a primeira sílaba por BO: <b>BOLA</b>.</li><li>Troque de novo por CO: <b>COLA</b>.</li><li>Uma sílaba muda tudo!</li></ol>'),
- P('Ordem importa','CASA e SACA têm exatamente as mesmas sílabas, mas em ordem diferente — e viram palavras diferentes. Na leitura, a ordem manda.'),
+ P('Ordem importa','CASA e SACA têm exatamente as mesmas sílabas, mas em ordem diferente, e viram palavras diferentes. Na leitura, a ordem manda.'),
  P('Pra não esquecer','Ler é juntar sílabas. Escrever é o contrário: falar devagar, ouvir cada batida e escrever a sílaba que você ouviu.')
 ];
 
@@ -3579,13 +3579,13 @@ AULAS['p3.4']=[
  P('Letras embaralhadas','As letras da palavra saíram da fila: A-S-C-A. Sua missão é colocá-las de volta na ordem certa para formar CASA.'),
  P('A estratégia','<ol class="passos"><li>Procure as <b>vogais</b>: A, A.</li><li>Toda sílaba precisa de uma; então a palavra tem umas 2 sílabas.</li><li>Teste juntar consoante + vogal: CA... SA...</li><li>CASA! Leia para conferir.</li></ol>'),
  P('Comece pelo som que você conhece','Se ver as letras P, O, A, S, pense em sílabas conhecidas: PO, SA, PA, SO. Monte com elas e teste: SA-PO. Achou.'),
- P('Pra não esquecer','Embaralhar letras treina você a enxergar sílabas dentro da palavra — exatamente o que o cérebro faz ao ler rápido.')
+ P('Pra não esquecer','Embaralhar letras treina você a enxergar sílabas dentro da palavra, exatamente o que o cérebro faz ao ler rápido.')
 ];
 AULAS['p3.5']=[
  P('Uma letra muda tudo','FACA e VACA diferem só na primeira letra, mas uma corta pão e a outra dá leite. Ler com atenção às letras evita confusão.',DUO(['FACA','corta'],['VACA','dá leite'])),
  P('Pares que confundem','<ol class="passos"><li>MALA e MALHA</li><li>BOLA e BOLO</li><li>PATO e PRATO</li><li>Leia cada par em voz alta e ache a letra diferente.</li></ol>'),
  P('Devagar no comecinho e no fim','As diferenças costumam estar na primeira ou na última letra. Passe o dedo por baixo da palavra enquanto lê, sem pular nada.'),
- P('Pra não esquecer','Boa leitura não é leitura rápida — é leitura certa. A velocidade vem sozinha depois.')
+ P('Pra não esquecer','Boa leitura não é leitura rápida, é leitura certa. A velocidade vem sozinha depois.')
 ];
 
 AULAS['p4.1']=[
@@ -3597,18 +3597,18 @@ AULAS['p4.1']=[
 AULAS['p4.2']=[
  P('O R forte e o R fraco','No começo da palavra, o R é <b>forte</b>: RATO, RIO, ROSA. No meio, entre duas vogais, ele fica <b>fraco</b>: CARA, ARARA, PERA.'),
  P('Quando usar RR','<ol class="passos"><li>Quer o som forte no <b>meio</b> da palavra?</li><li>Aí precisa de dois erres: CA<b>RR</b>O, TE<b>RR</b>A, FE<b>RR</b>O.</li><li>Com um R só, o som fica fraco: CARO é diferente de CARRO.</li></ol>',DUO(['CARO','preço alto'],['CARRO','veículo'])),
- P('Nunca no começo','Não existe palavra começando com RR. No começo, um R sozinho já tem som forte — não precisa de reforço.'),
+ P('Nunca no começo','Não existe palavra começando com RR. No começo, um R sozinho já tem som forte, não precisa de reforço.'),
  P('Pra não esquecer','Som forte no meio da palavra = RR. Som fraco no meio = R sozinho. No começo, sempre um R só.')
 ];
 AULAS['p4.3']=[
  P('O S também tem dois sons','No começo da palavra o S é sempre S: SAPO, SOL. Mas entre duas vogais ele vira som de Z: CASA (fala-se "caza"), MESA ("meza").'),
- P('Quando dobrar o S','<ol class="passos"><li>Quer som de S no meio da palavra?</li><li>Use <b>SS</b>: PÁSSARO, MASSA, PESSOA.</li><li>Com um S só, viraria "pázaro" — errado.</li></ol>'),
+ P('Quando dobrar o S','<ol class="passos"><li>Quer som de S no meio da palavra?</li><li>Use <b>SS</b>: PÁSSARO, MASSA, PESSOA.</li><li>Com um S só, viraria "pázaro" errado.</li></ol>'),
  P('Comparando','MASSA (comida) e MASA não existe; CASA tem som de Z; PASSO tem som de S. Fale em voz alta e escute onde a garganta vibra: no Z ela vibra mais.'),
  P('Pra não esquecer','SS só existe entre vogais. Nunca no começo nem no fim da palavra.')
 ];
 AULAS['p4.4']=[
  P('Duas letras, um som só','Existem duplas que fazem um som novo, diferente das letras separadas: <b>CH</b>, <b>LH</b> e <b>NH</b>.',TIRA(['CHA','LHA','NHA'])),
- P('Uma a uma','<ol class="passos"><li><b>CH</b> como em CHAVE, CHUVA — som de "x".</li><li><b>LH</b> como em FILHO, MOLHO — a língua toca o céu da boca.</li><li><b>NH</b> como em NINHO, BANHO — o som sai pelo nariz.</li></ol>'),
+ P('Uma a uma','<ol class="passos"><li><b>CH</b> como em CHAVE, CHUVA, som de "x".</li><li><b>LH</b> como em FILHO, MOLHO, a língua toca o céu da boca.</li><li><b>NH</b> como em NINHO, BANHO, o som sai pelo nariz.</li></ol>'),
  P('Não separe na hora de dividir','Ao dividir em sílabas, essas duplas andam juntas: FI-LHO, NI-NHO, CHA-VE. Nunca FIL-HO.'),
  P('Pra não esquecer','CH, LH e NH são times inseparáveis: duas letras que sempre trabalham como uma só.')
 ];
@@ -3616,13 +3616,13 @@ AULAS['p4.5']=[
  P('A regra do M','Antes das letras <b>P</b> e <b>B</b>, escreve-se sempre <b>M</b>: caMPo, teMPo, boMBa, taMBém. Antes de qualquer outra letra, é N: caNto, poNte.'),
  P('Por que existe essa regra?','Porque P e B são feitos fechando os lábios, e o M também. A boca já está na posição certa, então a língua escolhe o M naturalmente. Fale "campo" e sinta os lábios se fecharem.'),
  P('Aplicando','<ol class="passos"><li>Palavra: CA_PO (lugar de plantar).</li><li>A próxima letra é <b>P</b>.</li><li>Antes de P vai M → CAMPO.</li></ol>'),
- P('Pra não esquecer','M antes de P e B. Essa é uma das poucas regras do português que não tem exceção — pode confiar.')
+ P('Pra não esquecer','M antes de P e B. Essa é uma das poucas regras do português que não tem exceção, pode confiar.')
 ];
 
 AULAS['p5.1']=[
- P('Frase é uma ideia completa','"O gato" não é uma frase — falta saber o que ele fez. "O gato dormiu" é uma frase, porque agora a ideia está completa: alguém e o que aconteceu.'),
+ P('Frase é uma ideia completa','"O gato" não é uma frase, falta saber o que ele fez. "O gato dormiu" é uma frase, porque agora a ideia está completa: alguém e o que aconteceu.'),
  P('O teste da pergunta','<ol class="passos"><li>Leia o que está escrito.</li><li>Pergunte: <b>eu entendi o que aconteceu?</b></li><li>Se sim, é frase. Se ficou faltando algo, não é.</li></ol>'),
- P('Frases curtas também valem','"Choveu." é uma frase completa com uma palavra só, porque diz o que aconteceu. Tamanho não é o que decide — sentido é.'),
+ P('Frases curtas também valem','"Choveu." é uma frase completa com uma palavra só, porque diz o que aconteceu. Tamanho não é o que decide, sentido é.'),
  P('Pra não esquecer','Frase = ideia inteira. Se quem lê fica esperando o resto, ainda não é frase.')
 ];
 AULAS['p5.2']=[
@@ -3634,7 +3634,7 @@ AULAS['p5.2']=[
 AULAS['p5.3']=[
  P('A ordem conta a história','"O Bobby comeu o mel" e "O mel comeu o Bobby" têm as mesmas palavras, mas contam coisas bem diferentes. A ordem diz quem fez e quem recebeu.'),
  P('A ordem mais comum','<ol class="passos"><li>Primeiro: <b>quem</b> faz (o Bobby).</li><li>Depois: <b>o que faz</b> (comeu).</li><li>Por último: <b>o quê / onde</b> (o mel).</li></ol>'),
- P('Montando frases embaralhadas','Se as palavras vierem fora de ordem — "mel / o / comeu / Bobby / o" — procure primeiro quem faz a ação, depois a ação, depois o resto.'),
+ P('Montando frases embaralhadas','Se as palavras vierem fora de ordem, "mel / o / comeu / Bobby / o" procure primeiro quem faz a ação, depois a ação, depois o resto.'),
  P('Pra não esquecer','Leia a frase montada em voz alta. Se soar esquisita, provavelmente a ordem está trocada.')
 ];
 AULAS['p5.4']=[
@@ -3645,7 +3645,7 @@ AULAS['p5.4']=[
 ];
 AULAS['p5.5']=[
  P('Colando duas frases','"Bobby correu." + "Bobby caiu." podem virar uma frase só: "Bobby correu <b>e</b> caiu." A palavrinha que cola chama-se conectivo.'),
- P('Os três colas mais úteis','<ol class="passos"><li><b>e</b> — junta coisas que combinam: Ele correu e caiu.</li><li><b>mas</b> — mostra surpresa ou oposição: Ele correu, mas não caiu.</li><li><b>porque</b> — explica o motivo: Ele caiu porque correu demais.</li></ol>'),
+ P('Os três colas mais úteis','<ol class="passos"><li><b>e</b> = junta coisas que combinam: Ele correu e caiu.</li><li><b>mas</b> = mostra surpresa ou oposição: Ele correu, mas não caiu.</li><li><b>porque</b> = explica o motivo: Ele caiu porque correu demais.</li></ol>'),
  P('Não repita o nome','Ao juntar, tire o que se repete: "Bobby correu e Bobby caiu" fica melhor como "Bobby correu e caiu".'),
  P('Pra não esquecer','Frases coladas deixam o texto mais bonito de ler. Mas cuidado: colar demais cansa. Duas ou três ideias por frase basta.')
 ];
@@ -3653,12 +3653,12 @@ AULAS['p5.5']=[
 AULAS['p6.1']=[
  P('Substantivo é nome de coisa','Substantivo é a palavra que dá nome: nome de coisa (mesa), de pessoa (Lívia), de animal (gato), de lugar (praia) e até de sentimento (medo).'),
  P('O teste do artigo','<ol class="passos"><li>Coloque <b>o</b> ou <b>a</b> na frente da palavra.</li><li>"a mesa" → funciona → é substantivo.</li><li>"o correu" → não funciona → não é substantivo.</li></ol>'),
- P('Achando numa frase','Na frase "O gato subiu na árvore", os substantivos são <b>gato</b> e <b>árvore</b> — as duas coisas que existem ali.'),
+ P('Achando numa frase','Na frase "O gato subiu na árvore", os substantivos são <b>gato</b> e <b>árvore</b>: as duas coisas que existem ali.'),
  P('Pra não esquecer','Se dá para apontar ou imaginar, quase sempre é substantivo. É a palavra que nomeia o mundo.')
 ];
 AULAS['p6.2']=[
- P('Os artigos','O, A, OS, AS são <b>artigos</b>: palavrinhas que vêm antes do substantivo e avisam duas coisas — se é masculino ou feminino, e se é um ou vários.',TIRA(['o','a','os','as'])),
- P('A tabelinha','<ol class="passos"><li><b>o</b> — masculino, um: o gato</li><li><b>a</b> — feminino, uma: a gata</li><li><b>os</b> — masculino, vários: os gatos</li><li><b>as</b> — feminino, várias: as gatas</li></ol>'),
+ P('Os artigos','O, A, OS, AS são <b>artigos</b>: palavrinhas que vêm antes do substantivo e avisam duas coisas, se é masculino ou feminino, e se é um ou vários.',TIRA(['o','a','os','as'])),
+ P('A tabelinha','<ol class="passos"><li><b>o</b> = masculino, um: o gato</li><li><b>a</b> = feminino, uma: a gata</li><li><b>os</b> = masculino, vários: os gatos</li><li><b>as</b> = feminino, várias: as gatas</li></ol>'),
  P('Tudo tem que combinar','Não se diz "o casa" nem "as menino". O artigo, o substantivo e o resto da frase precisam concordar.'),
  P('Pra não esquecer','Na dúvida sobre o gênero da palavra, teste com o e a e veja qual soa natural: "a mesa" soa certo, "o mesa" soa errado.')
 ];
@@ -3671,19 +3671,19 @@ AULAS['p6.3']=[
 AULAS['p6.4']=[
  P('Masculino e feminino','Palavras masculinas aceitam <b>o</b>; femininas aceitam <b>a</b>. Muitas vezes basta trocar a letra do fim: menino → menina, gato → gata.'),
  P('Nem tudo segue a regra','<ol class="passos"><li>Alguns pares mudam a palavra inteira: homem/mulher, boi/vaca.</li><li>Outros nem mudam: o estudante / a estudante.</li><li>E objetos também têm gênero: <b>a</b> mesa, <b>o</b> livro.</li></ol>'),
- P('Objeto não tem sexo','A mesa não é menina — só a palavra é feminina. Isso é uma característica da língua, não do objeto.'),
+ P('Objeto não tem sexo','A mesa não é menina, só a palavra é feminina. Isso é uma característica da língua, não do objeto.'),
  P('Pra não esquecer','O artigo é a pista mais rápida do gênero. Quando aprender uma palavra nova, aprenda junto com o o ou a.')
 ];
 AULAS['p6.5']=[
  P('Nome próprio','Nome próprio é o nome particular de alguém ou de algum lugar: <b>Bobby</b>, <b>Lívia</b>, <b>Brasil</b>, <b>Rio de Janeiro</b>. Ele sempre começa com letra maiúscula.'),
- P('Comum x próprio','<ol class="passos"><li><b>cachorro</b> — comum, serve para todos os cachorros.</li><li><b>Rex</b> — próprio, é o nome daquele cachorro.</li><li><b>cidade</b> — comum. <b>Salvador</b> — próprio.</li></ol>'),
+ P('Comum x próprio','<ol class="passos"><li><b>cachorro</b>: comum, serve para todos os cachorros.</li><li><b>Rex</b>: próprio, é o nome daquele cachorro.</li><li><b>cidade</b>: comum. <b>Salvador</b>: próprio.</li></ol>'),
  P('No meio da frase também','Mesmo no meio da frase, o nome próprio mantém a maiúscula: "Ontem o Bobby foi ao Brasil." Duas maiúsculas no meio, e está certo.'),
- P('Pra não esquecer','Maiúscula em nome próprio é sinal de respeito com o nome — mostra que aquilo é único.')
+ P('Pra não esquecer','Maiúscula em nome próprio é sinal de respeito com o nome, mostra que aquilo é único.')
 ];
 
 AULAS['p7.1']=[
  P('Adjetivo diz como é','Adjetivo é a palavra que descreve: <b>grande</b>, <b>pequeno</b>, <b>bonito</b>, <b>rápido</b>, <b>feliz</b>. Ele dá cor e detalhe ao substantivo.'),
- P('O teste do "como é"','<ol class="passos"><li>Pense num urso.</li><li>Pergunte: <b>como ele é?</b></li><li>Marrom, grande, macio, amigável — tudo isso são adjetivos.</li></ol>'),
+ P('O teste do "como é"','<ol class="passos"><li>Pense num urso.</li><li>Pergunte: <b>como ele é?</b></li><li>Marrom, grande, macio, amigável, tudo isso são adjetivos.</li></ol>'),
  P('Combina com o substantivo','Se o substantivo é feminino plural, o adjetivo também: "as casas bonit<b>as</b>". Nunca "as casas bonito".'),
  P('Pra não esquecer','Substantivo é o quê; adjetivo é como é. Juntos formam a imagem na cabeça de quem lê.')
 ];
@@ -3701,7 +3701,7 @@ AULAS['p7.3']=[
 ];
 AULAS['p7.4']=[
  P('O verbo viaja no tempo','O mesmo verbo muda de forma conforme o tempo: <b>ontem</b> eu corri, <b>hoje</b> eu corro, <b>amanhã</b> eu vou correr.',DUO(['corri','ontem'],['corro','hoje'])),
- P('Os três tempos','<ol class="passos"><li><b>Passado</b>: já aconteceu — comeu, brincou, foi.</li><li><b>Presente</b>: acontece agora — come, brinca, vai.</li><li><b>Futuro</b>: vai acontecer — vai comer, comerá.</li></ol>'),
+ P('Os três tempos','<ol class="passos"><li><b>Passado</b>: já aconteceu (comeu, brincou, foi).</li><li><b>Presente</b>: acontece agora (come, brinca, vai).</li><li><b>Futuro</b>: vai acontecer (vai comer, comerá).</li></ol>'),
  P('A palavra do tempo ajuda','Ontem, hoje, amanhã, agora, depois: essas palavrinhas avisam o tempo antes mesmo do verbo aparecer.'),
  P('Pra não esquecer','O tempo do verbo precisa combinar com o resto da frase. "Ontem eu como" está errado; "ontem eu comi" está certo.')
 ];
@@ -3720,7 +3720,7 @@ AULAS['p8.1']=[
 ];
 AULAS['p8.2']=[
  P('G e J podem soar igual','Antes de E e I, o G tem o mesmo som do J: <b>gelo</b> e <b>jeito</b> soam parecidos no começo. Aí só a memória e a leitura ajudam.'),
- P('O G duro','<ol class="passos"><li>Antes de A, O, U o G é duro: gato, gota, gude.</li><li>Para som duro antes de E e I, entra o U mudo: <b>gue</b>rra, <b>gui</b>tarra.</li><li>Esse U não é falado — é só um escudo.</li></ol>'),
+ P('O G duro','<ol class="passos"><li>Antes de A, O, U o G é duro: gato, gota, gude.</li><li>Para som duro antes de E e I, entra o U mudo: <b>gue</b>rra, <b>gui</b>tarra.</li><li>Esse U não é falado, é só um escudo.</li></ol>'),
  P('Famílias que ajudam','Palavras da mesma família mantêm a letra: viagem/viajar mudam, mas gelo/gelado ficam com G. Quando não souber, lembre de uma palavra parecida que você já viu escrita.'),
  P('Pra não esquecer','Ler muito é o melhor jeito de decorar G e J. O olho aprende a estranhar a escrita errada.')
 ];
@@ -3746,18 +3746,18 @@ AULAS['p8.5']=[
 AULAS['p9.1']=[
  P('O acento é um aviso','O acento mostra onde a voz fica mais <b>forte</b> na palavra. Sem ele, a gente leria errado: SABIA, SABIÁ e SÁBIA são três palavras diferentes.'),
  P('Escutando a força','<ol class="passos"><li>Fale <b>CAFÉ</b>: a força está no fim, no FÉ.</li><li>Fale <b>LÁPIS</b>: a força está no começo, no LÁ.</li><li>O acento marca justamente essa sílaba forte.</li></ol>'),
- P('Nem toda palavra leva acento','A maioria não leva. O acento só aparece quando a palavra foge do padrão da língua — é uma exceção sinalizada.'),
+ P('Nem toda palavra leva acento','A maioria não leva. O acento só aparece quando a palavra foge do padrão da língua, é uma exceção sinalizada.'),
  P('Pra não esquecer','Antes de colocar acento, fale a palavra em voz alta e descubra onde sua voz aumenta.')
 ];
 AULAS['p9.2']=[
- P('O til e o nariz','O <b>til</b> (~) sobre o A ou o O faz o som sair pelo <b>nariz</b>: mãe, pão, coração, irmã. Tape o nariz e tente falar "pão" — não sai igual.'),
- P('Onde ele aparece','<ol class="passos"><li><b>ão</b> — pão, mão, coração</li><li><b>ã</b> — irmã, maçã, lã</li><li><b>õe</b> — põe, limões</li></ol>'),
+ P('O til e o nariz','O <b>til</b> (~) sobre o A ou o O faz o som sair pelo <b>nariz</b>: mãe, pão, coração, irmã. Tape o nariz e tente falar "pão" não sai igual.'),
+ P('Onde ele aparece','<ol class="passos"><li><b>ão</b>: pão, mão, coração</li><li><b>ã</b>: irmã, maçã, lã</li><li><b>õe</b>: põe, limões</li></ol>'),
  P('Plural do ÃO','Palavras terminadas em ÃO fazem plural de três jeitos: pão→pães, mão→mãos, coração→corações. Vale ir aprendendo uma a uma.'),
- P('Pra não esquecer','Til não é acento de força — é acento de som nasal. São coisas diferentes.')
+ P('Pra não esquecer','Til não é acento de força, é acento de som nasal. São coisas diferentes.')
 ];
 AULAS['p9.3']=[
  P('O acento agudo','O acento agudo (´) deixa a vogal <b>aberta</b> e forte: café, avó, público, história. É o acento mais comum do português.'),
- P('Circunflexo é o irmão fechado','<ol class="passos"><li><b>avó</b> (com agudo) — a mãe da mãe.</li><li><b>avô</b> (com circunflexo) — o pai do pai.</li><li>A boca abre mais no agudo e fecha mais no circunflexo.</li></ol>',DUO(['avó','aberto'],['avô','fechado'])),
+ P('Circunflexo é o irmão fechado','<ol class="passos"><li><b>avó</b> (com agudo), a mãe da mãe.</li><li><b>avô</b> (com circunflexo), o pai do pai.</li><li>A boca abre mais no agudo e fecha mais no circunflexo.</li></ol>',DUO(['avó','aberto'],['avô','fechado'])),
  P('Palavras do dia a dia com acento','água, história, médico, rápido, lápis, você, também. Repare que quase todas têm a força numa sílaba inesperada.'),
  P('Pra não esquecer','Acento não é enfeite: ele muda a palavra e às vezes muda o sentido inteiro da frase.')
 ];
@@ -3768,16 +3768,16 @@ AULAS['p9.4']=[
  P('Pra não esquecer','Leia a frase em voz alta: onde você respira naturalmente, provavelmente vai uma vírgula.')
 ];
 AULAS['p9.5']=[
- P('Quando alguém fala','Para mostrar que um personagem está falando, usa-se o <b>travessão</b> (—) no começo da fala, ou as <b>aspas</b> ("").'),
- P('Como escrever um diálogo','<ol class="passos"><li>Comece a linha com travessão: — Bom dia!</li><li>Depois da fala, diga quem falou: — Bom dia! — disse o Bobby.</li><li>Cada nova fala começa numa linha nova.</li></ol>'),
- P('Aspas também servem','O Bobby disse: "Encontrei a chave!" — mesma ideia, outro formato. Nos livros de história, o travessão é mais comum.'),
+ P('Quando alguém fala','Para mostrar que um personagem está falando, usa-se o <b>travessão</b> (&mdash;) no começo da fala, ou as <b>aspas</b> ("").'),
+ P('Como escrever um diálogo','<ol class="passos"><li>Comece a linha com travessão: &mdash; Bom dia!</li><li>Depois da fala, diga quem falou: &mdash; Bom dia! &mdash; disse o Bobby.</li><li>Cada nova fala começa numa linha nova.</li></ol>'),
+ P('Aspas também servem','O Bobby disse: "Encontrei a chave!", mesma ideia, outro formato. Nos livros de história, o travessão é mais comum.'),
  P('Pra não esquecer','Diálogo bem marcado deixa claro quem está falando. Sem isso, o leitor se perde na conversa.')
 ];
 
 AULAS['p10.1']=[
  P('Ler um bilhete','Bilhete é um texto curtinho com um recado. Tem três partes: para <b>quem</b> é, o <b>recado</b> e <b>quem</b> escreveu.'),
  P('Como ler','<ol class="passos"><li>Leia tudo uma vez, sem parar.</li><li>Leia de novo procurando o recado principal.</li><li>Pergunte: o que essa pessoa quer que eu faça?</li></ol>'),
- P('Os detalhes importam','Hora, lugar e data costumam estar no bilhete e são justamente o que a pergunta vai cobrar. Volte ao texto para conferir — não confie só na memória.'),
+ P('Os detalhes importam','Hora, lugar e data costumam estar no bilhete e são justamente o que a pergunta vai cobrar. Volte ao texto para conferir, não confie só na memória.'),
  P('Pra não esquecer','Ler duas vezes não é perda de tempo: é o que separa quem entendeu de quem só passou os olhos.')
 ];
 AULAS['p10.2']=[
@@ -3793,7 +3793,7 @@ AULAS['p10.3']=[
  P('Pra não esquecer','Ler história é diferente de decorar palavras: é montar um filme na cabeça.')
 ];
 AULAS['p10.4']=[
- P('Achar a informação','Muitas perguntas de prova não pedem opinião — pedem uma informação que <b>já está escrita</b> no texto. Sua missão é localizá-la.'),
+ P('Achar a informação','Muitas perguntas de prova não pedem opinião, pedem uma informação que <b>já está escrita</b> no texto. Sua missão é localizá-la.'),
  P('A técnica do caça-palavras','<ol class="passos"><li>Leia a pergunta e escolha a <b>palavra-chave</b> dela.</li><li>Procure essa palavra no texto.</li><li>Leia a frase inteira em volta dela.</li><li>A resposta quase sempre está ali.</li></ol>'),
  P('Não responda de memória','Mesmo achando que lembra, volte e confirme no texto. A memória troca detalhes; o papel não.'),
  P('Pra não esquecer','Resposta boa é resposta que você consegue apontar com o dedo no texto.')
@@ -3895,7 +3895,7 @@ function mundoEN(n,title,sub,tone,fases){
 mundoEN(1,'Hello! · Olá!','As primeiras palavras: cumprimentar, dizer o nome e contar até três.','verde',[
  {g:'hi',t:'Hello and hi (oi e olá)',teach:{ideia:'Em inglês americano, <b>hello</b> e <b>hi</b> são as duas formas de dizer oi. "Hi" é mais informal, entre amigos.',exemplo:'Hello! / Hi, Bobby!',dica:'Fala-se "rélou" e "rái".'}},
  {g:'gm',t:'Good morning, good night (bom dia, boa noite)',teach:{ideia:'O cumprimento muda com a hora: <b>good morning</b> (bom dia), <b>good afternoon</b> (boa tarde) e <b>good night</b> (boa noite).',exemplo:'Good morning, teacher!',dica:'"Good" se fala "gud".'}},
- {g:'ty',t:'Please and thank you (por favor e obrigado)',teach:{ideia:'<b>Please</b> é por favor e <b>thank you</b> é obrigado. Nos Estados Unidos essas duas aparecem o tempo todo.',exemplo:'Water, please. — Thank you!',dica:'Responder "you are welcome" é o nosso "de nada".'}},
+ {g:'ty',t:'Please and thank you (por favor e obrigado)',teach:{ideia:'<b>Please</b> é por favor e <b>thank you</b> é obrigado. Nos Estados Unidos essas duas aparecem o tempo todo.',exemplo:'Water, please. Thank you!',dica:'Responder "you are welcome" é o nosso "de nada".'}},
  {g:'me',t:'My name is... (meu nome é...)',teach:{ideia:'Para se apresentar: <b>My name is Lívia.</b> Ou, mais curto: <b>I am Lívia.</b>',exemplo:'Hi! My name is Bobby. Nice to meet you!',dica:'"Nice to meet you" é "prazer em conhecer".'}},
  {g:'123',t:'One, two, three (um, dois, três)',teach:{ideia:'Os primeiros números: <b>one</b> (1), <b>two</b> (2), <b>three</b> (3).',exemplo:'I have two dogs.',dica:'"One" se fala "uân", "two" é "tú" e "three" tem a língua entre os dentes.'}}
 ]);
@@ -3914,11 +3914,11 @@ mundoEN(3,'My family · Minha família','As pessoas da casa e os amigos.','ambar
  {g:'B',t:'Boy, girl, baby (menino, menina, bebê)',teach:{ideia:'<b>Boy</b> é menino, <b>girl</b> é menina e <b>baby</b> é bebê.',exemplo:'The baby is sleeping.',dica:'O plural quase sempre ganha S: boys, girls, babies.'}}
 ]);
 mundoEN(4,'Animals · Animais','Bichos de casa, da fazenda e da floresta.','coral',[
- {g:'D',t:'Dog and cat (cachorro e gato)',teach:{ideia:'<b>Dog</b> é cachorro e <b>cat</b> é gato — os dois bichos mais comuns nas casas americanas.',exemplo:'My dog is brown.',dica:'Nos Estados Unidos, o cachorro faz "woof" e o gato faz "meow".'}},
+ {g:'D',t:'Dog and cat (cachorro e gato)',teach:{ideia:'<b>Dog</b> é cachorro e <b>cat</b> é gato, os dois bichos mais comuns nas casas americanas.',exemplo:'My dog is brown.',dica:'Nos Estados Unidos, o cachorro faz "woof" e o gato faz "meow".'}},
  {g:'B',t:'Bird and fish (pássaro e peixe)',teach:{ideia:'<b>Bird</b> é pássaro e <b>fish</b> é peixe. Curiosidade: fish no plural continua fish.',exemplo:'I see three fish.',dica:'"Bird" se fala "bârd".'}},
  {g:'H',t:'Farm animals (bichos da fazenda)',teach:{ideia:'Na fazenda: <b>horse</b> (cavalo), <b>cow</b> (vaca), <b>pig</b> (porco), <b>chicken</b> (galinha).',exemplo:'The cow is white and black.',dica:'"Chicken" serve para a galinha e para o frango do prato.'}},
  {g:'L',t:'Wild animals (bichos selvagens)',teach:{ideia:'Na floresta: <b>lion</b> (leão), <b>monkey</b> (macaco), <b>elephant</b> (elefante), <b>snake</b> (cobra).',exemplo:'The elephant is very big.',dica:'"Lion" se fala "láion".'}},
- {g:'🐻',t:'Bear and rabbit (urso e coelho)',teach:{ideia:'<b>Bear</b> é urso — como o Bobby! E <b>rabbit</b> é coelho.',exemplo:'Bobby is a brown bear.',dica:'Cuidado: "bear" e "beer" (cerveja) são parecidos mas diferentes.'}}
+ {g:'🐻',t:'Bear and rabbit (urso e coelho)',teach:{ideia:'<b>Bear</b> é urso, como o Bobby! E <b>rabbit</b> é coelho.',exemplo:'Bobby is a brown bear.',dica:'Cuidado: "bear" e "beer" (cerveja) são parecidos mas diferentes.'}}
 ]);
 mundoEN(5,'Food and drinks · Comida e bebida','O que se come e o que se bebe.','roxo',[
  {g:'W',t:'Water and milk (água e leite)',teach:{ideia:'<b>Water</b> é água e <b>milk</b> é leite.',exemplo:'I drink water every day.',dica:'Nos EUA, "water" se fala quase "uórer".'}},
@@ -3946,14 +3946,14 @@ mundoEN(8,'What I do · O que eu faço','Os verbos do dia a dia.','ambar',[
  {g:'S',t:'Sleep and play (dormir e brincar)',teach:{ideia:'<b>Sleep</b> é dormir e <b>play</b> é brincar ou jogar.',exemplo:'I play with my dog.',dica:'"Play" serve para brincar, jogar e tocar um instrumento.'}},
  {g:'W',t:'Read and write (ler e escrever)',teach:{ideia:'<b>Read</b> é ler e <b>write</b> é escrever. O W de write é mudo.',exemplo:'I read a book every night.',dica:'Escreve-se write, mas fala-se "ráit".'}},
  {g:'J',t:'Walk, sing, jump (andar, cantar, pular)',teach:{ideia:'<b>Walk</b> é caminhar, <b>sing</b> é cantar e <b>jump</b> é pular.',exemplo:'The rabbit can jump.',dica:'O L de "walk" também é mudo: fala-se "uók".'}},
- {g:'I',t:'I can, I like (eu consigo, eu gosto)',teach:{ideia:'<b>I like</b> é eu gosto e <b>I can</b> é eu consigo/posso. Depois deles vem o verbo sem mudar nada.',exemplo:'I like to read. I can jump.',dica:'"I like dogs" — em inglês o plural aparece sem "os".'}}
+ {g:'I',t:'I can, I like (eu consigo, eu gosto)',teach:{ideia:'<b>I like</b> é eu gosto e <b>I can</b> é eu consigo/posso. Depois deles vem o verbo sem mudar nada.',exemplo:'I like to read. I can jump.',dica:'"I like dogs" em inglês o plural aparece sem "os".'}}
 ]);
 mundoEN(9,'Questions · Perguntas','Perguntar e responder.','coral',[
  {g:'?',t:'What and where (o quê e onde)',teach:{ideia:'<b>What</b> é o quê e <b>where</b> é onde.',exemplo:'What is this? Where is my book?',dica:'Toda pergunta em inglês termina com ? igual em português.'}},
  {g:'W',t:'Who and when (quem e quando)',teach:{ideia:'<b>Who</b> é quem e <b>when</b> é quando.',exemplo:'Who is she? When is the party?',dica:'O H de "who" não se pronuncia: fala-se "rú".'}},
  {g:'#',t:'How many (quantos)',teach:{ideia:'<b>How many</b> é quantos, para coisas que se podem contar.',exemplo:'How many dogs do you have?',dica:'Para o que não se conta (água, leite) usa-se "how much".'}},
- {g:'H',t:'How are you? (como você está?)',teach:{ideia:'<b>How are you?</b> é como você está. A resposta mais comum é <b>I am fine, thank you</b>.',exemplo:'— How are you? — I am fine!',dica:'Americanos costumam responder "I\'m good".'}},
- {g:'A',t:'How old are you? (quantos anos você tem?)',teach:{ideia:'<b>How old are you?</b> pergunta a idade. Responde-se <b>I am eight years old</b>.',exemplo:'— How old are you? — I am nine.',dica:'Em inglês a idade usa o verbo "to be", não "ter".'}}
+ {g:'H',t:'How are you? (como você está?)',teach:{ideia:'<b>How are you?</b> é como você está. A resposta mais comum é <b>I am fine, thank you</b>.',exemplo:'How are you? I am fine!',dica:'Americanos costumam responder "I\'m good".'}},
+ {g:'A',t:'How old are you? (quantos anos você tem?)',teach:{ideia:'<b>How old are you?</b> pergunta a idade. Responde-se <b>I am eight years old</b>.',exemplo:'How old are you? I am nine.',dica:'Em inglês a idade usa o verbo "to be", não "ter".'}}
 ]);
 const FRASES=[
  ['What\'s up?','E aí? / Tudo bem?'],['I don\'t know','Eu não sei'],['Let\'s go','Vamos'],
@@ -3980,7 +3980,7 @@ mundoEN(10,'Everyday English · Inglês do dia a dia','O inglês que se fala de 
    ()=>ouvirEN('Ouça e escolha.','today',['tomorrow','yesterday','tonight'])
   ]},
  {g:'💬',t:'Frases do dia a dia',teach:{ideia:'Muita coisa em inglês se aprende em bloco, como frase pronta: <b>What\'s up?</b>, <b>I don\'t know</b>, <b>Let\'s go</b>.',
-   exemplo:'— What\'s up? — Nothing much. Let\'s go!',dica:'Guarde a frase inteira, não palavra por palavra. É assim que se fala rápido.'},
+   exemplo:'What\'s up? Nothing much. Let\'s go!',dica:'Guarde a frase inteira, não palavra por palavra. É assim que se fala rápido.'},
   makers:[
    ()=>{const f=pick(FRASES);return mc('O que significa <b>'+f[0]+'</b>?',f[1],frasePares(FRASES.filter(x=>x[1]!==f[1])).map(x=>x[1]));},
    ()=>{const f=pick(FRASES);return mc('Como se diz <b>'+f[1]+'</b>?',f[0],frasePares(FRASES.filter(x=>x[0]!==f[0])).map(x=>x[0]));},
@@ -3999,7 +3999,7 @@ mundoEN(10,'Everyday English · Inglês do dia a dia','O inglês que se fala de 
    ()=>mc('Alguém te ajuda. O que você diz?','Thank you!',['Excuse me!','How much?']),
    ()=>mc('Como se diz "preciso de ajuda"?','I need help',['I am help','Help I need'])
   ]},
- {g:'≈',t:'Palavras iguais e falsas',teach:{ideia:'Muitas palavras em inglês são quase iguais ao português — os <b>cognatos</b>: hospital, animal, chocolate. Mas cuidado com os <b>falsos amigos</b>: <b>parents</b> é pais, não parentes.',
+ {g:'≈',t:'Palavras iguais e falsas',teach:{ideia:'Muitas palavras em inglês são quase iguais ao português, os <b>cognatos</b>: hospital, animal, chocolate. Mas cuidado com os <b>falsos amigos</b>: <b>parents</b> é pais, não parentes.',
    exemplo:'"Actually" não é atualmente: quer dizer "na verdade".',dica:'Na dúvida, confira: às vezes a palavra parecida engana.'},
   makers:[
    ()=>{const c=pick(COGN);return mc('O que significa <b>'+c[0]+'</b>?',c[1],shuf(COGN.filter(x=>x[1]!==c[1])).slice(0,3).map(x=>x[1]));},
@@ -4042,19 +4042,19 @@ AULAS['e1.2']=[
 AULAS['e1.3']=[
  P('As palavras mágicas','<b>Please</b> quer dizer "por favor" e <b>thank you</b> quer dizer "obrigado". Nos Estados Unidos elas são usadas o tempo todo, até em coisas pequenas.',ENS(EN('please','por favor','plíz'),EN('thank you','obrigado','tênk iú'))),
  P('Respondendo','<ol class="passos"><li>Alguém diz <b>thank you</b>.</li><li>Você responde <b>you\'re welcome</b> ("iór uélcam") = de nada.</li><li>Entre amigos, também vale <b>sure</b> ou <b>no problem</b>.</li></ol>'),
- P('Thanks é a versão curta','<b>Thanks</b> ("tênks") é o mesmo que thank you, só que mais informal — como o nosso "valeu".'),
+ P('Thanks é a versão curta','<b>Thanks</b> ("tênks") é o mesmo que thank you, só que mais informal, como o nosso "valeu".'),
  P('Pra não esquecer','Please antes do pedido, thank you depois de receber. Com essas duas, você já é educado em inglês.')
 ];
 AULAS['e1.4']=[
  P('Dizendo seu nome','A frase é <b>My name is...</b> ("mái neim iz") = "Meu nome é...". Depois é só falar seu nome.',ENS(EN('my name is','meu nome é','mái neim iz'),EN('what\'s your name?','qual é seu nome?','uóts iór neim'))),
- P('Uma conversa completa','<ol class="passos"><li>— <b>Hi! What\'s your name?</b> (Oi! Qual é o seu nome?)</li><li>— <b>My name is Lívia. And you?</b> (Meu nome é Lívia. E você?)</li><li>— <b>My name is Bobby. Nice to meet you!</b> (Meu nome é Bobby. Prazer em conhecer você!)</li></ol>'),
+ P('Uma conversa completa','<ol class="passos"><li><b>Hi! What\'s your name?</b> (Oi! Qual é o seu nome?)</li><li><b>My name is Lívia. And you?</b> (Meu nome é Lívia. E você?)</li><li><b>My name is Bobby. Nice to meet you!</b> (Meu nome é Bobby. Prazer em conhecer você!)</li></ol>'),
  P('O jeito curto','No dia a dia, americanos dizem só <b>I\'m Bobby</b> ("áim Bobby") = "eu sou o Bobby". Mais rápido e igualmente correto.'),
  P('Pra não esquecer','My name is + seu nome. Essa é a frase que abre qualquer apresentação.')
 ];
 AULAS['e1.5']=[
- P('Os primeiros números','one, two, three, four, five — 1 a 5. Repare que a escrita não parece nada com o som; em inglês isso é comum.',ENS(EN('one','um','uân'),EN('two','dois','tchú'),EN('three','três','thrí'))),
- P('Como falar cada um','<ol class="passos"><li><b>one</b> = "uân"</li><li><b>two</b> = "tchú" (o W é mudo)</li><li><b>three</b> = "thrí" — a língua vai entre os dentes</li><li><b>four</b> = "fór", <b>five</b> = "fáiv"</li></ol>'),
- P('Até dez','six ("siks"), seven ("sévan"), eight ("eit" — o GH é mudo), nine ("náin"), ten ("tén").'),
+ P('Os primeiros números','one, two, three, four, five, 1 a 5. Repare que a escrita não parece nada com o som; em inglês isso é comum.',ENS(EN('one','um','uân'),EN('two','dois','tchú'),EN('three','três','thrí'))),
+ P('Como falar cada um','<ol class="passos"><li><b>one</b> = "uân"</li><li><b>two</b> = "tchú" (o W é mudo)</li><li><b>three</b> = "thrí" a língua vai entre os dentes</li><li><b>four</b> = "fór", <b>five</b> = "fáiv"</li></ol>'),
+ P('Até dez','six ("siks"), seven ("sévan"), eight ("eit", o GH é mudo), nine ("náin"), ten ("tén").'),
  P('Pra não esquecer','Conte de 1 a 10 em inglês todo dia, apontando os dedos. Em uma semana sai automático.')
 ];
 
@@ -4073,25 +4073,25 @@ AULAS['e2.2']=[
 AULAS['e2.3']=[
  P('Cores misturadas','<b>orange</b> (laranja), <b>purple</b> (roxo), <b>pink</b> (rosa).',ENS(EN('orange','laranja','órinj'),EN('purple','roxo','pârpol'),EN('pink','rosa','pink'))),
  P('Orange é fruta e cor','<ol class="passos"><li>An <b>orange</b> = uma laranja (a fruta).</li><li>The shirt is <b>orange</b> = a camisa é laranja (a cor).</li><li>Igual ao português: a mesma palavra serve para as duas coisas.</li></ol>'),
- P('Palavras parecidas','Repare que <b>pink</b> e <b>orange</b> parecem palavras que você já conhece do português. Muitas palavras do inglês vieram das mesmas raízes — isso vai te ajudar bastante.'),
+ P('Palavras parecidas','Repare que <b>pink</b> e <b>orange</b> parecem palavras que você já conhece do português. Muitas palavras do inglês vieram das mesmas raízes, isso vai te ajudar bastante.'),
  P('Pra não esquecer','Agora você já sabe nove cores. Dá para descrever quase qualquer coisa que você vê.')
 ];
 AULAS['e2.4']=[
  P('Material escolar','<b>book</b> (livro), <b>pencil</b> (lápis), <b>pen</b> (caneta), <b>paper</b> (papel).',ENS(EN('book','livro','buk'),EN('pencil','lápis','pênsol'))),
- P('Um ou vários','<ol class="passos"><li>Um: <b>a book</b> (um livro), <b>a pencil</b> (um lápis).</li><li>Vários: acrescente S — <b>books</b> (livros), <b>pencils</b> (lápis).</li><li>Igualzinho ao português nesse ponto.</li></ol>'),
+ P('Um ou vários','<ol class="passos"><li>Um: <b>a book</b> (um livro), <b>a pencil</b> (um lápis).</li><li>Vários: acrescente S, <b>books</b> (livros), <b>pencils</b> (lápis).</li><li>Igualzinho ao português nesse ponto.</li></ol>'),
  P('A ou an?','Usa-se <b>a</b> antes de som de consoante (<b>a book</b> = um livro) e <b>an</b> antes de som de vogal (<b>an apple</b> = uma maçã, <b>an orange</b> = uma laranja). É só para a palavra soar melhor.'),
  P('Pra não esquecer','Junte com as cores: <b>a red pencil</b> = um lápis vermelho. Cor primeiro, coisa depois.')
 ];
 AULAS['e2.5']=[
  P('Na escola','<b>school</b> (escola), <b>teacher</b> (professor/professora), <b>student</b> (aluno), <b>friend</b> (amigo).',ENS(EN('school','escola','skúl'),EN('teacher','professor(a)','tíchâr'))),
  P('Teacher vem de teach','<ol class="passos"><li><b>teach</b> = ensinar.</li><li>Acrescente <b>-er</b> e vira quem faz: <b>teacher</b> = quem ensina, o professor.</li><li>O mesmo truque: <b>play</b> (brincar) → <b>player</b> (jogador), <b>sing</b> (cantar) → <b>singer</b> (cantor), <b>work</b> (trabalhar) → <b>worker</b> (trabalhador).</li></ol>'),
- P('Não tem masculino e feminino','Em inglês, <b>teacher</b> serve para professor e professora. A língua quase não marca gênero — isso facilita muito a sua vida.'),
+ P('Não tem masculino e feminino','Em inglês, <b>teacher</b> serve para professor e professora. A língua quase não marca gênero, isso facilita muito a sua vida.'),
  P('Pra não esquecer','O sufixo <b>-er</b> transforma ação em pessoa. Guardando esse truque, você entende dezenas de palavras novas sozinho.')
 ];
 
 AULAS['e3.1']=[
- P('Mãe e pai','<b>mother</b> (mãe) e <b>father</b> (pai). No dia a dia, os americanos usam mais <b>mom</b> e <b>dad</b> — como nosso "mãe" e "pai" carinhoso.',ENS(EN('mother','mãe','mâdâr'),EN('father','pai','fádâr'))),
- P('O som do TH','<ol class="passos"><li>Em <b>mother</b> e <b>father</b>, o TH é falado com a língua entre os dentes.</li><li>Não é T nem D nem F: é um som que o português não tem.</li><li>Comece falando "mâ-DÂR" — já fica compreensível.</li></ol>'),
+ P('Mãe e pai','<b>mother</b> (mãe) e <b>father</b> (pai). No dia a dia, os americanos usam mais <b>mom</b> e <b>dad</b>: como nosso "mãe" e "pai" carinhoso.',ENS(EN('mother','mãe','mâdâr'),EN('father','pai','fádâr'))),
+ P('O som do TH','<ol class="passos"><li>Em <b>mother</b> e <b>father</b>, o TH é falado com a língua entre os dentes.</li><li>Não é T nem D nem F: é um som que o português não tem.</li><li>Comece falando "mâ-DÂR" já fica compreensível.</li></ol>'),
  P('Dizendo de quem é','Use <b>my</b> = meu/minha: <b>my mother</b>, <b>my father</b>. Não muda se é homem ou mulher, sempre "my".'),
  P('Pra não esquecer','mother/father para escrever, mom/dad para conversar.')
 ];
@@ -4117,7 +4117,7 @@ AULAS['e3.5']=[
  P('Menino, menina, bebê','<b>boy</b> (menino), <b>girl</b> (menina), <b>baby</b> (bebê), <b>man</b> (homem), <b>woman</b> (mulher).',ENS(EN('boy','menino','bói'),EN('girl','menina','gârl'),EN('baby','bebê','bêibi'))),
  P('Plurais irregulares','<ol class="passos"><li><b>boy</b> → <b>boys</b> (menino → meninos) e <b>girl</b> → <b>girls</b> (menina → meninas): normal, com S.</li><li><b>man</b> → <b>men</b> (homem → homens) e <b>woman</b> → <b>women</b> (mulher → mulheres): muda a letra do meio!</li><li><b>baby</b> → <b>babies</b> (bebê → bebês): o Y vira IES.</li></ol>'),
  P('Woman e women','No singular fala-se "uúman"; no plural, "uímen". A escrita muda pouco, mas o som muda bastante. Preste atenção ao ouvir.'),
- P('Pra não esquecer','A maioria dos plurais é só S. Os irregulares são poucos — e men/women são os mais usados de todos.')
+ P('Pra não esquecer','A maioria dos plurais é só S. Os irregulares são poucos, e men/women são os mais usados de todos.')
 ];
 
 AULAS['e4.1']=[
@@ -4128,7 +4128,7 @@ AULAS['e4.1']=[
 ];
 AULAS['e4.2']=[
  P('Pássaro e peixe','<b>bird</b> (pássaro) e <b>fish</b> (peixe).',ENS(EN('bird','pássaro','bârd'),EN('fish','peixe','fích'))),
- P('Fish não muda no plural','<ol class="passos"><li>Um peixe: <b>a fish</b>.</li><li>Muitos peixes: <b>fish</b> — sem S!</li><li>Outros assim: sheep (ovelha), deer (cervo).</li></ol>'),
+ P('Fish não muda no plural','<ol class="passos"><li>Um peixe: <b>a fish</b>.</li><li>Muitos peixes: <b>fish</b>: sem S!</li><li>Outros assim: sheep (ovelha), deer (cervo).</li></ol>'),
  P('Onde eles vivem','Birds fly in the sky. (Pássaros voam no céu.) Fish swim in the water. (Peixes nadam na água.) <b>fly</b> = voar, <b>swim</b> = nadar.'),
  P('Pra não esquecer','Palavras curtas como bird e fish são as que mais aparecem. Vale falar em voz alta várias vezes.')
 ];
@@ -4145,8 +4145,8 @@ AULAS['e4.4']=[
  P('Pra não esquecer','Quando uma palavra em inglês parecer com uma do português, provavelmente quer dizer a mesma coisa. Aproveite essa ajuda.')
 ];
 AULAS['e4.5']=[
- P('O urso e o coelho','<b>bear</b> (urso — como o Bobby!) e <b>rabbit</b> (coelho).',ENS(EN('bear','urso','bér'),EN('rabbit','coelho','rébit'))),
- P('Cuidado: bear e beer','<ol class="passos"><li><b>bear</b> = urso, fala-se "bér".</li><li><b>beer</b> = cerveja, fala-se "bíer".</li><li>Uma letra trocada muda tudo — igual FACA e VACA em português.</li></ol>'),
+ P('O urso e o coelho','<b>bear</b> (urso, como o Bobby!) e <b>rabbit</b> (coelho).',ENS(EN('bear','urso','bér'),EN('rabbit','coelho','rébit'))),
+ P('Cuidado: bear e beer','<ol class="passos"><li><b>bear</b> = urso, fala-se "bér".</li><li><b>beer</b> = cerveja, fala-se "bíer".</li><li>Uma letra trocada muda tudo, igual FACA e VACA em português.</li></ol>'),
  P('Apresentando o Bobby','<b>Bobby is a brown bear.</b> = O Bobby é um urso marrom.<br><b>He is my friend.</b> = Ele é meu amigo. (<b>brown</b> = marrom)'),
  P('Pra não esquecer','Você já sabe apresentar, descrever e falar de animais. Isso já é uma conversa de verdade.')
 ];
@@ -4159,7 +4159,7 @@ AULAS['e5.1']=[
 ];
 AULAS['e5.2']=[
  P('Pão e queijo','<b>bread</b> (pão), <b>cheese</b> (queijo), <b>butter</b> (manteiga).',ENS(EN('bread','pão','bréd'),EN('cheese','queijo','tchíz'))),
- P('Say cheese!','<ol class="passos"><li>Nos EUA, quem tira foto diz <b>Say cheese!</b> — “Diga queijo!”</li><li>É porque falar “cheese” (queijo) faz a boca sorrir.</li><li>É o nosso “diga X”.</li></ol>'),
+ P('Say cheese!','<ol class="passos"><li>Nos EUA, quem tira foto diz <b>Say cheese!</b>: “Diga queijo!”</li><li>É porque falar “cheese” (queijo) faz a boca sorrir.</li><li>É o nosso “diga X”.</li></ol>'),
  P('Montando o lanche','Bread and cheese, please. <b>and</b> = e. Com "and" você junta qualquer par de palavras.'),
  P('Pra não esquecer','and é uma das palavras mais usadas do inglês. Curtinha e essencial.')
 ];
@@ -4185,7 +4185,7 @@ AULAS['e5.5']=[
 AULAS['e6.1']=[
  P('Cabeça e mãos','<b>head</b> (cabeça), <b>hand</b> (mão), <b>arm</b> (braço), <b>leg</b> (perna), <b>foot</b> (pé).',ENS(EN('head','cabeça','réd'),EN('hand','mão','rénd'))),
  P('Plurais que mudam','<ol class="passos"><li>hand → hands (normal).</li><li><b>foot</b> → <b>feet</b> (pé → pés).</li><li><b>tooth</b> → <b>teeth</b> (dente → dentes).</li></ol>'),
- P('Uma música que ajuda','Existe uma canção famosa nas escolas americanas: <i>Head, shoulders, knees and toes</i> — cabeça, ombros, joelhos e dedos do pé. Cantar ajuda a decorar.'),
+ P('Uma música que ajuda','Existe uma canção famosa nas escolas americanas: <i>Head, shoulders, knees and toes</i>, cabeça, ombros, joelhos e dedos do pé. Cantar ajuda a decorar.'),
  P('Pra não esquecer','Aponte para a parte do corpo enquanto fala a palavra. O corpo aprende junto com a memória.')
 ];
 AULAS['e6.2']=[
@@ -4241,13 +4241,13 @@ AULAS['e7.5']=[
  P('Chave e luz','<b>key</b> (chave), <b>light</b> (luz), <b>lamp</b> (lâmpada/luminária), <b>clock</b> (relógio de parede).',ENS(EN('key','chave','kí'),EN('light','luz','láit'))),
  P('O GH mudo','<ol class="passos"><li>Em <b>light</b>, o GH não é falado: "láit".</li><li>Igual em night ("náit"), right ("ráit"), eight ("eit").</li><li>Aprendeu um, aprendeu todos.</li></ol>'),
  P('Frases úteis','Turn on the light. = Acenda a luz. Turn off the light. = Apague a luz. <b>turn on/off</b> = ligar/desligar.'),
- P('Pra não esquecer','O Bobby precisa da <b>key</b> para abrir o castelo. Guarde essa palavra — ela vai aparecer bastante.')
+ P('Pra não esquecer','O Bobby precisa da <b>key</b> para abrir o castelo. Guarde essa palavra, ela vai aparecer bastante.')
 ];
 
 AULAS['e8.1']=[
  P('Primeiros verbos','<b>run</b> (correr), <b>eat</b> (comer), <b>drink</b> (beber).',ENS(EN('run','correr','rân'),EN('eat','comer','ít'),EN('drink','beber','drink'))),
  P('Falando de você','<ol class="passos"><li><b>I run.</b> = Eu corro.</li><li><b>I eat bread.</b> = Eu como pão.</li><li><b>I drink water.</b> = Eu bebo água.</li></ol>'),
- P('A regra do S','Com he, she e it, o verbo ganha <b>S</b>: He runs. She eats. It drinks. Só nessas três pessoas — em todas as outras, o verbo fica igual.'),
+ P('A regra do S','Com he, she e it, o verbo ganha <b>S</b>: He runs. She eats. It drinks. Só nessas três pessoas, em todas as outras, o verbo fica igual.'),
  P('Pra não esquecer','I run / he runs. Essa é a diferença mais importante do presente em inglês.')
 ];
 AULAS['e8.2']=[
@@ -4259,20 +4259,20 @@ AULAS['e8.2']=[
 AULAS['e8.3']=[
  P('Ler e escrever','<b>read</b> (ler), <b>write</b> (escrever), <b>listen</b> (ouvir), <b>speak</b> (falar).',ENS(EN('read','ler','ríd'),EN('write','escrever','ráit'))),
  P('Letras mudas','<ol class="passos"><li>Em <b>write</b>, o W não é falado: "ráit".</li><li>Em <b>listen</b>, o T não é falado: "lísen".</li><li>O inglês tem muitas letras que se escrevem mas não se falam.</li></ol>'),
- P('As quatro habilidades','Para aprender uma língua você precisa de read, write, listen e speak. Este app treina as quatro — inclusive ouvir, no botão do som.'),
+ P('As quatro habilidades','Para aprender uma língua você precisa de read, write, listen e speak. Este app treina as quatro, inclusive ouvir, no botão do som.'),
  P('Pra não esquecer','Fale em voz alta sempre que puder. Ouvir a própria voz em inglês é o que destrava a conversa.')
 ];
 AULAS['e8.4']=[
  P('Mais ações','<b>walk</b> (andar), <b>sing</b> (cantar), <b>jump</b> (pular), <b>dance</b> (dançar).',ENS(EN('walk','andar','uók'),EN('jump','pular','djâmp'))),
  P('Dando ordens','<ol class="passos"><li>Para mandar alguém fazer algo, use o verbo sozinho.</li><li><b>Jump!</b> = Pule! <b>Sing!</b> = Cante!</li><li>Com please fica educado: <b>Sit down, please.</b></li></ol>'),
  P('Um jogo americano','Crianças nos EUA brincam de <i>Simon says</i> (“Simon diz”): alguém fala <b>Simon says jump!</b> (“Simon diz: pule!”) e todo mundo pula. É assim que se aprende verbo brincando.'),
- P('Pra não esquecer','O verbo sozinho vira ordem ou convite. Sem conjugar nada — o inglês facilita nessa parte.')
+ P('Pra não esquecer','O verbo sozinho vira ordem ou convite. Sem conjugar nada, o inglês facilita nessa parte.')
 ];
 AULAS['e8.5']=[
  P('Eu consigo, eu gosto','<b>I can</b> = eu consigo/eu sei. <b>I like</b> = eu gosto.',ENS(EN('I can','eu consigo','ái kén'),EN('I like','eu gosto','ái láik'))),
- P('Como montar','<ol class="passos"><li><b>I can swim.</b> = Eu sei nadar.</li><li><b>I like to read.</b> = Eu gosto de ler.</li><li>Depois de <b>can</b> (conseguir), o verbo vem puro: <b>can swim</b> (sabe nadar) — nunca “can to swim”.</li></ol>'),
+ P('Como montar','<ol class="passos"><li><b>I can swim.</b> = Eu sei nadar.</li><li><b>I like to read.</b> = Eu gosto de ler.</li><li>Depois de <b>can</b> (conseguir), o verbo vem puro: <b>can swim</b> (sabe nadar), nunca “can to swim”.</li></ol>'),
  P('Negando','I <b>can\'t</b> swim = eu não sei nadar. I <b>don\'t</b> like fish = eu não gosto de peixe. <b>can\'t</b> e <b>don\'t</b> são as duas negações mais usadas.'),
- P('Pra não esquecer','Com <b>I can</b> (eu consigo), <b>I like</b> (eu gosto) e <b>I don\'t like</b> (eu não gosto) você já fala sobre si mesmo — que é o assunto de toda primeira conversa.')
+ P('Pra não esquecer','Com <b>I can</b> (eu consigo), <b>I like</b> (eu gosto) e <b>I don\'t like</b> (eu não gosto) você já fala sobre si mesmo, que é o assunto de toda primeira conversa.')
 ];
 
 AULAS['e9.1']=[
@@ -4284,24 +4284,24 @@ AULAS['e9.1']=[
 AULAS['e9.2']=[
  P('Quem e quando','<b>who</b> = quem. <b>when</b> = quando.',ENS(EN('who','quem','rú'),EN('when','quando','uén'))),
  P('Perguntando','<ol class="passos"><li><b>Who is that?</b> = Quem é aquele?</li><li><b>When is your birthday?</b> = Quando é seu aniversário?</li><li><b>Why?</b> = Por quê? <b>Because...</b> = Porque...</li></ol>'),
- P('A família WH','what, where, who, when, why, which, how — quase todas começam com WH. Os americanos chamam de <i>wh- questions</i>.'),
+ P('A família WH','what, where, who, when, why, which, how, quase todas começam com WH. Os americanos chamam de <i>wh- questions</i>.'),
  P('Pra não esquecer','Decore a família WH e você tem a chave de qualquer conversa: dá para perguntar tudo.')
 ];
 AULAS['e9.3']=[
  P('Quantos','<b>How many</b> = quantos (para coisas que se contam). <b>How much</b> = quanto (para o que não se conta, e para preço).',ENS(EN('how many','quantos','ráu méni'),EN('how much','quanto','ráu mâtch'))),
  P('Escolhendo entre os dois','<ol class="passos"><li>Dá para contar? use <b>many</b>: How many books?</li><li>Não dá para contar? use <b>much</b>: How much water?</li><li>Preço: <b>How much is it?</b> = Quanto custa?</li></ol>'),
- P('Respondendo','How many cats? — <b>Three cats.</b> Basta o número. Não precisa repetir a frase inteira.'),
+ P('Respondendo','How many cats? <b>Three cats.</b> Basta o número. Não precisa repetir a frase inteira.'),
  P('Pra não esquecer','many para contáveis, much para não contáveis. É a mesma lógica de "some" que você já viu.')
 ];
 AULAS['e9.4']=[
  P('Como você está','<b>How are you?</b> = Como você está? É a pergunta mais comum de todas nos Estados Unidos.',ENS(EN('how are you?','como vai?','ráu ár iú'),EN('I\'m fine','estou bem','áim fáin'))),
- P('A conversa completa','<ol class="passos"><li>— <b>Hi! How are you?</b> (Oi! Como você está?)</li><li>— <b>I\'m fine, thank you. And you?</b> (Estou bem, obrigado. E você?)</li><li>— <b>I\'m good, thanks!</b> (Estou bem, valeu!)</li></ol>'),
- P('Não é bem uma pergunta','Nos EUA, <b>How are you?</b> (Como você está?) funciona quase como um “oi”. Ninguém espera uma resposta longa — responda <b>fine, thanks</b> (bem, obrigado) e siga a conversa.'),
+ P('A conversa completa','<ol class="passos"><li><b>Hi! How are you?</b> (Oi! Como você está?)</li><li><b>I\'m fine, thank you. And you?</b> (Estou bem, obrigado. E você?)</li><li><b>I\'m good, thanks!</b> (Estou bem, valeu!)</li></ol>'),
+ P('Não é bem uma pergunta','Nos EUA, <b>How are you?</b> (Como você está?) funciona quase como um “oi”. Ninguém espera uma resposta longa, responda <b>fine, thanks</b> (bem, obrigado) e siga a conversa.'),
  P('Pra não esquecer','<b>Hi</b> (oi) → <b>How are you?</b> (como você está?) → <b>I\'m fine, thank you. And you?</b> (estou bem, obrigado. E você?). Esse é o roteiro de qualquer encontro.')
 ];
 AULAS['e9.5']=[
  P('Quantos anos você tem','<b>How old are you?</b> = Quantos anos você tem? Responda: <b>I am eight years old.</b> = Eu tenho oito anos.',ENS(EN('how old are you?','quantos anos?','ráu ould ár iú'),EN('I am 8 years old','tenho 8 anos','ái ém eit íârs ould'))),
- P('Cuidado com a tradução','<ol class="passos"><li>Em português: eu <b>tenho</b> 8 anos.</li><li>Em inglês: eu <b>sou</b> 8 anos velho (I am 8 years old).</li><li>Traduzir palavra por palavra dá errado — aprenda a frase inteira.</li></ol>'),
+ P('Cuidado com a tradução','<ol class="passos"><li>Em português: eu <b>tenho</b> 8 anos.</li><li>Em inglês: eu <b>sou</b> 8 anos velho (I am 8 years old).</li><li>Traduzir palavra por palavra dá errado, aprenda a frase inteira.</li></ol>'),
  P('Frases feitas','Muitas coisas em inglês são assim: blocos prontos. <b>I\'m hungry</b> (estou com fome) também usa "I am", não "I have".'),
  P('Pra não esquecer','Guarde a frase inteira, não palavra por palavra. É assim que se fala rápido e certo.')
 ];
@@ -4314,19 +4314,19 @@ AULAS['e10.1']=[
 ];
 AULAS['e10.2']=[
  P('Frases do dia a dia','Essas frases prontas resolvem quase qualquer situação: <b>Excuse me</b> (com licença), <b>I\'m sorry</b> (desculpa), <b>I don\'t understand</b> (não entendi).',ENS(EN('excuse me','com licença','ikskiúz mi'),EN('I\'m sorry','desculpa','áim sóri'))),
- P('Quando usar cada uma','<ol class="passos"><li><b>Excuse me</b> — para chamar alguém ou passar.</li><li><b>I\'m sorry</b> — para pedir desculpa de verdade.</li><li><b>I don\'t understand</b> — quando não entendeu. Não tenha vergonha!</li></ol>'),
+ P('Quando usar cada uma','<ol class="passos"><li><b>Excuse me</b>: para chamar alguém ou passar.</li><li><b>I\'m sorry</b>: para pedir desculpa de verdade.</li><li><b>I don\'t understand</b>: quando não entendeu. Não tenha vergonha!</li></ol>'),
  P('Pedindo para repetir','<b>Can you say that again, please?</b> = Pode repetir, por favor? Essa frase salva qualquer conversa.'),
  P('Pra não esquecer','Quem está aprendendo precisa dessas frases mais do que de vocabulário. Elas mantêm a conversa viva.')
 ];
 AULAS['e10.3']=[
  P('Pedir e agradecer','<b>Can I have...?</b> (posso ter...?), <b>Could you help me?</b> (você pode me ajudar?), <b>Thank you so much</b> (muito obrigado).',ENS(EN('can I have...?','posso ter...?','kén ái rév'),EN('thank you so much','muito obrigado','tênk iú sou mâtch'))),
- P('Educação em inglês','<ol class="passos"><li>Sempre termine o pedido com <b>please</b>.</li><li><b>Could</b> é mais educado que <b>can</b>.</li><li>Depois de receber, <b>thank you</b> — sempre.</li></ol>'),
+ P('Educação em inglês','<ol class="passos"><li>Sempre termine o pedido com <b>please</b>.</li><li><b>Could</b> é mais educado que <b>can</b>.</li><li>Depois de receber, <b>thank you</b>: sempre.</li></ol>'),
  P('Nos EUA isso importa muito','A cultura americana valoriza bastante please e thank you. Usar as duas faz você soar simpático mesmo com pouco vocabulário.'),
  P('Pra não esquecer','Could you + verbo + please? É a fórmula mais educada de todas.')
 ];
 AULAS['e10.4']=[
  P('Palavras iguais e falsas','Muitas palavras se parecem com o português e querem dizer a mesma coisa (<b>cognatos</b>): hospital, animal, family, important. Outras enganam!',ENS(EN('important','importante','impórtant'),EN('actually','na verdade','ékchuali'))),
- P('Os falsos amigos','<ol class="passos"><li><b>actually</b> NÃO é atualmente — é "na verdade".</li><li><b>pretend</b> NÃO é pretender — é "fingir".</li><li><b>push</b> NÃO é puxar — é <b>empurrar</b>!</li><li><b>parents</b> NÃO é parentes — é "pais".</li></ol>'),
+ P('Os falsos amigos','<ol class="passos"><li><b>actually</b> NÃO é atualmente, é "na verdade".</li><li><b>pretend</b> NÃO é pretender, é "fingir".</li><li><b>push</b> NÃO é puxar, é <b>empurrar</b>!</li><li><b>parents</b> NÃO é parentes, é "pais".</li></ol>'),
  P('Como não cair na armadilha','Quando uma palavra parecida aparecer numa frase que não faz sentido, desconfie: pode ser um falso amigo. Conferir vale mais que adivinhar.'),
  P('Pra não esquecer','Cognatos ajudam muito, mas os falsos amigos são poucos e famosos. Aprenda os quatro acima e você já evita os erros mais comuns.')
 ];
@@ -4344,7 +4344,7 @@ AULAS['e10.5']=[
 const LEX={
 'e1.1':[['hello','olá','rélou','Hello! Nice to meet you.','Olá! Prazer em conhecer você.'],['hi','oi','rái','Hi, Bobby!','Oi, Bobby!'],['goodbye','tchau','gudbái','Goodbye! See you tomorrow.','Tchau! Até amanhã.'],['bye','tchau','bái','Bye, mom!','Tchau, mãe!']],
 'e1.2':[['good morning','bom dia','gud mórnin','Good morning, teacher!','Bom dia, professora!'],['good afternoon','boa tarde','gud áftârnun','Good afternoon, class.','Boa tarde, turma.'],['good evening','boa noite (ao chegar)','gud ívnin','Good evening, everyone.','Boa noite, pessoal.'],['good night','boa noite (ao dormir)','gud náit','Good night, sleep well.','Boa noite, durma bem.']],
-'e1.3':[['please','por favor','plíz','Water, please.','Água, por favor.'],['thank you','obrigado','tênk iú','Thank you for the book.','Obrigado pelo livro.'],['you are welcome','de nada','iór uélcam','Thank you! — You are welcome.','Obrigado! — De nada.'],['sorry','desculpe','sóri','Sorry, I am late.','Desculpe, estou atrasado.']],
+'e1.3':[['please','por favor','plíz','Water, please.','Água, por favor.'],['thank you','obrigado','tênk iú','Thank you for the book.','Obrigado pelo livro.'],['you are welcome','de nada','iór uélcam','Thank you! You are welcome.','Obrigado! De nada.'],['sorry','desculpe','sóri','Sorry, I am late.','Desculpe, estou atrasado.']],
 'e1.4':[['my name is','meu nome é','mái neim iz','My name is Bobby.','Meu nome é Bobby.'],['what is your name','qual é o seu nome','uóts iór neim','Hi! What is your name?','Oi! Qual é o seu nome?'],['nice to meet you','prazer em conhecer','náis tu mít iú','Nice to meet you, Lívia.','Prazer em conhecer você, Lívia.'],['I am','eu sou / eu estou','áim','I am Bobby.','Eu sou o Bobby.']],
 'e1.5':[['one','um','uân','I have one dog.','Eu tenho um cachorro.'],['two','dois','tchú','Two apples, please.','Duas maçãs, por favor.'],['three','três','thrí','Three books on the table.','Três livros na mesa.'],['four','quatro','fór','Four chairs.','Quatro cadeiras.'],['five','cinco','fáiv','Five fingers on my hand.','Cinco dedos na minha mão.']],
 'e2.1':[['red','vermelho','réd','The apple is red.','A maçã é vermelha.'],['blue','azul','blú','The sky is blue.','O céu é azul.'],['green','verde','grín','The tree is green.','A árvore é verde.']],
@@ -4382,9 +4382,9 @@ const LEX={
 'e8.3':[['read','ler','ríd','I read a book.','Eu leio um livro.'],['write','escrever','ráit','Write your name.','Escreva o seu nome.'],['listen','ouvir','lísen','Listen to the teacher.','Escute a professora.'],['speak','falar','spík','I speak English.','Eu falo inglês.']],
 'e8.4':[['walk','andar','uók','I walk to school.','Eu vou andando para a escola.'],['sing','cantar','sing','She can sing.','Ela sabe cantar.'],['jump','pular','djâmp','The rabbit can jump.','O coelho sabe pular.'],['dance','dançar','déns','We dance together.','A gente dança junto.']],
 'e8.5':[['I can','eu consigo / eu sei','ái kén','I can swim.','Eu sei nadar.'],['I like','eu gosto','ái láik','I like dogs.','Eu gosto de cachorros.'],['I do not like','eu não gosto','ái dont láik','I do not like fish.','Eu não gosto de peixe.'],['I cannot','eu não consigo','ái ként','I cannot fly.','Eu não consigo voar.']],
-'e9.1':[['what','o quê','uót','What is this?','O que é isto?'],['where','onde','uér','Where is the key?','Onde está a chave?'],['what is this','o que é isto','uót iz dis','What is this? — A book.','O que é isto? — Um livro.']],
+'e9.1':[['what','o quê','uót','What is this?','O que é isto?'],['where','onde','uér','Where is the key?','Onde está a chave?'],['what is this','o que é isto','uót iz dis','What is this? A book.','O que é isto? Um livro.']],
 'e9.2':[['who','quem','rú','Who is that?','Quem é aquele?'],['when','quando','uén','When is your birthday?','Quando é o seu aniversário?'],['why','por quê','uái','Why are you sad?','Por que você está triste?'],['because','porque','bicóz','Because I am tired.','Porque eu estou cansado.']],
-'e9.3':[['how many','quantos','ráu méni','How many books?','Quantos livros?'],['how much','quanto','ráu mâtch','How much water?','Quanta água?'],['how much is it','quanto custa','ráu mâtch iz it','How much is it? — Five dollars.','Quanto custa? — Cinco dólares.']],
+'e9.3':[['how many','quantos','ráu méni','How many books?','Quantos livros?'],['how much','quanto','ráu mâtch','How much water?','Quanta água?'],['how much is it','quanto custa','ráu mâtch iz it','How much is it? Five dollars.','Quanto custa? Cinco dólares.']],
 'e9.4':[['how are you','como você está','ráu ár iú','Hi! How are you?','Oi! Como você está?'],['I am fine','estou bem','áim fáin','I am fine, thank you.','Eu estou bem, obrigado.'],['and you','e você','énd iú','I am fine. And you?','Eu estou bem. E você?']],
 'e9.5':[['how old are you','quantos anos você tem','ráu ould ár iú','How old are you?','Quantos anos você tem?'],['I am eight years old','eu tenho oito anos','ái ém eit íârs ould','I am eight years old.','Eu tenho oito anos.'],['birthday','aniversário','bârthdei','My birthday is in May.','Meu aniversário é em maio.']],
 'e10.1':[['yesterday','ontem','iéstârdei','Yesterday I played.','Ontem eu brinquei.'],['today','hoje','tudêi','Today is Monday.','Hoje é segunda-feira.'],['tomorrow','amanhã','tumórou','See you tomorrow!','Até amanhã!']],
@@ -4439,7 +4439,7 @@ function enMakers(id){
    /* 1. apresentação: a resposta está escrita no enunciado — aqui a criança aprende, não adivinha */
    ()=>{const w=gira();
      const ex=w.frase&&w.frasePt?'<span class="trad">Exemplo: '+w.frase+' = '+w.frasePt+'</span>':'';
-     return mc('Em inglês, <b>'+w.pt+'</b> se diz <b>'+w.en+'</b> — fala-se “'+w.fala+'”.'+ex+'<br>Agora toque em <b>'+w.pt+'</b> escrito em inglês:',
+     return mc('Em inglês, <b>'+w.pt+'</b> se diz <b>'+w.en+'</b>: fala-se “'+w.fala+'”.'+ex+'<br>Agora toque em <b>'+w.pt+'</b> escrito em inglês:',
        w.en,_outrasEN(id,w,'en'),{ouvir:w.en,lang:'en-US',dica:'A resposta está escrita no enunciado: <b>'+w.en+'</b>.'});},
    /* 2. reconhecer: vê o inglês, escolhe o significado */
    ()=>{let w=gira(),n=0;
@@ -4525,7 +4525,7 @@ const CAPITULOS_EN={
  4:{t:'Um dia no zoológico (A day at the zoo)',item:'estrela',abre:'Passeio ao zoológico! Cada placa tem o nome de um bicho em inglês.'},
  5:{t:'No restaurante (At the diner)',item:'fruta',abre:'No restaurante da esquina o Bobby vai pedir comida sozinho pela primeira vez.'},
  6:{t:'A loja de roupas (The clothes store)',item:'etiqueta',abre:'Precisa comprar roupa nova. E para isso é preciso falar do corpo e das peças.'},
- 7:{t:'Lar doce lar (Home sweet home)',item:'peca',abre:'A casa nova tem cômodos, portas e janelas — todos com nomes novos.'},
+ 7:{t:'Lar doce lar (Home sweet home)',item:'peca',abre:'A casa nova tem cômodos, portas e janelas, todos com nomes novos.'},
  8:{t:'Um dia na cidade (A day in the city)',item:'passaporte',abre:'Correr, comer, ler, brincar: o Bobby vai contar o dia dele inteiro em inglês.'},
  9:{t:'Fazendo amigos (Making friends)',item:'balao',abre:'Para fazer amizade é preciso perguntar e responder: <b>What?</b> (O quê?), <b>Where?</b> (Onde?) e <b>How old are you?</b> (Quantos anos você tem?)'},
  10:{t:'Falando como um local (Talking like a local)',item:'bandeira',abre:'A última etapa: falar como quem mora lá, com as frases do dia a dia.'}
@@ -5660,7 +5660,7 @@ function audioPartes(p,mat){
   const partes=[];
   let atual='';
   const fecha=()=>{
-    const q=atual.replace(/[?!.,:;()"“”‘’→–—\-=]+/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
+    const q=atual.replace(/[?!.,:;()"“”‘’→–\u2014\-=]+/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
     if(q.length>1)partes.push({t:'quadro',v:q});
     atual='';
   };

@@ -248,6 +248,15 @@ const intervalos = [1, 3, 7, 14, 30];
     A.ok(!/Zeca/.test(c));
   });
 
+  await teste('X. nenhum travessao (U+2014) em texto de tela: src/conteudo, src/interface e shell.html, fora de comentarios', () => {
+    const fs = require('fs'), path = require('path');
+    const raiz = path.join(__dirname, '..', 'src');
+    const arqs = ['conteudo', 'interface'].flatMap((d) => fs.readdirSync(path.join(raiz, d)).map((f) => path.join(raiz, d, f))).filter((f) => /\.(js|html)$/.test(f));
+    const sem = (t) => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/<!--[\s\S]*?-->/g, '').replace(/(^|[^:'"\\])\/\/.*$/gm, '$1');
+    const ruins = [];
+    arqs.forEach((f) => sem(fs.readFileSync(f, 'utf8')).split('\n').forEach((l, i) => { if (l.includes('\u2014')) ruins.push(path.basename(f) + ': ' + l.trim().slice(0, 90)); }));
+    A.ok(ruins.length === 0, ruins.length + ' linhas com travessao: ' + ruins.slice(0, 5).join(' | '));
+  });
   resumo('revisao.js');
 })();
 function bloco(a, u, l) {

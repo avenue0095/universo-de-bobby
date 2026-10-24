@@ -65,7 +65,7 @@ L('1.5','~','Reta numérica e arredondar',
 ]});
 
 /* ============ UNIDADE 2 ============ */
-UNITS_MAT.push({n:2,title:'Somar e subtrair',sub:'Juntar e tirar — as duas contas que aparecem todo dia.',tone:'agua',lessons:[
+UNITS_MAT.push({n:2,title:'Somar e subtrair',sub:'Juntar e tirar, as duas contas que aparecem todo dia.',tone:'agua',lessons:[
 L('2.1','+','Somas até 20',
  {ideia:'Somar é juntar. A ordem não muda o resultado: 3 + 5 é igual a 5 + 3.',
   exemplo:'7 + 5 → complete primeiro até 10 (7 + 3 = 10) e some o que sobrou (10 + 2 = 12).',
@@ -129,7 +129,7 @@ L('2.5','?','Problemas do dia a dia',
 ]});
 
 /* ============ UNIDADE 3 ============ */
-UNITS_MAT.push({n:3,title:'Multiplicação',sub:'Somar várias vezes o mesmo número — de um jeito bem mais rápido.',tone:'ambar',lessons:[
+UNITS_MAT.push({n:3,title:'Multiplicação',sub:'Somar várias vezes o mesmo número, de um jeito bem mais rápido.',tone:'ambar',lessons:[
 L('3.1','×','A ideia de multiplicar',
  {ideia:'Multiplicar é somar grupos iguais. “4 × 3” significa 4 grupos de 3.',
   exemplo:'4 × 3 = 3 + 3 + 3 + 3 = 12.',
@@ -248,7 +248,7 @@ L('4.4','½','Dobro, metade, triplo e terça parte',
 L('4.5','p','Múltiplos, divisores e primos',
  {ideia:'Múltiplos de um número são os resultados da sua tabuada. Divisores são os números que o dividem sem deixar resto. Número <b>primo</b> tem exatamente dois divisores: 1 e ele mesmo.',
   exemplo:'Múltiplos de 4: 4, 8, 12, 16... Divisores de 12: 1, 2, 3, 4, 6, 12. Primos: 2, 3, 5, 7, 11, 13...',
-  dica:'1 não é primo — só tem um divisor. E 2 é o único primo par.'},
+  dica:'1 não é primo, só tem um divisor. E 2 é o único primo par.'},
  [
   ()=>{const a=R(2,9),k=R(3,9);return tf(''+(a*k)+' é múltiplo de '+a+'.',true);},
   ()=>{const a=R(3,9),k=R(3,9);return tf(''+(a*k+1)+' é múltiplo de '+a+'.',false);},
@@ -329,7 +329,7 @@ L('5.5','⅗','Fração de uma quantidade',
 ]});
 
 /* ============ UNIDADE 6 ============ */
-UNITS_MAT.push({n:6,title:'Decimais e dinheiro',sub:'A vírgula, o real e o centavo — matemática do mercado.',tone:'agua',lessons:[
+UNITS_MAT.push({n:6,title:'Decimais e dinheiro',sub:'A vírgula, o real e o centavo, matemática do mercado.',tone:'agua',lessons:[
 L('6.1',',','Décimos e centésimos',
  {ideia:'A vírgula separa a parte inteira da parte quebrada. A primeira casa depois da vírgula são os <b>décimos</b> ('+frac(1,10)+'), a segunda são os <b>centésimos</b> ('+frac(1,100)+').',
   exemplo:'2,45 = 2 inteiros + 4 décimos + 5 centésimos. E 0,5 é o mesmo que '+frac(1,2)+'.',
@@ -354,7 +354,7 @@ L('6.2','0,5','Comparar decimais',
   /* começa em 2,1 (era 1,1): com 1,1 o distrator de baixo virava -0,5 e a criança
      via um número negativo numa aula de decimais, conteúdo que ela ainda não viu */
   ()=>{const a=r2(R(21,89)/10);return mc('Qual é o número decimal mais próximo de '+Math.round(a)+'?',fmt(a),[fmt(r2(a+1.4)),fmt(r2(a-1.6))]);},
-  ()=>{return mc('Coloque em ordem crescente: 0,3 — 0,03 — 0,33','0,03 &lt; 0,3 &lt; 0,33',['0,3 &lt; 0,03 &lt; 0,33','0,33 &lt; 0,3 &lt; 0,03']);}
+  ()=>{return mc('Coloque em ordem crescente: 0,3; 0,03; 0,33','0,03 &lt; 0,3 &lt; 0,33',['0,3 &lt; 0,03 &lt; 0,33','0,33 &lt; 0,3 &lt; 0,03']);}
  ]),
 L('6.3','+,','Somar e subtrair decimais',
  {ideia:'Alinhe as vírgulas uma embaixo da outra. Se faltar casa, complete com zero. Depois some ou subtraia normalmente.',
@@ -435,7 +435,7 @@ L('7.3','−%','Descontos e aumentos',
   ()=>{const p=R(4,15)*10;return tf('Um desconto de 100% deixa o produto de graça.',true);}
  ]),
 L('7.4',':','Razão e proporção',
- {ideia:'Razão compara duas quantidades. Proporção é quando duas razões são iguais — se uma cresce, a outra cresce junto na mesma medida.',
+ {ideia:'Razão compara duas quantidades. Proporção é quando duas razões são iguais, se uma cresce, a outra cresce junto na mesma medida.',
   exemplo:'Se 2 pães custam R$ 6, então 4 pães custam R$ 12. A razão preço/pão continua a mesma: 3.',
   dica:'Dobrou de um lado, dobra do outro. Triplicou, triplica.'},
  [
@@ -449,7 +449,7 @@ L('7.4',':','Razão e proporção',
 L('7.5','⇄','Regra de três',
  {ideia:'Monte as grandezas em duas colunas, multiplique em cruz e divida pelo que sobrou.',
   exemplo:'3 cadernos → R$ 21. 5 cadernos → x. Então x = (5 × 21) ÷ 3 = 35.',
-  dica:'Antes de calcular, pergunte: aumentando um, o outro aumenta? Se sim, é direta — que é o caso da grande maioria.'},
+  dica:'Antes de calcular, pergunte: aumentando um, o outro aumenta? Se sim, é direta, que é o caso da grande maioria.'},
  [
   ()=>{const u=R(3,9),a=R(2,4),b=R(5,9);return inp('Se '+a+' itens custam R$ '+(u*a)+', quanto custam '+b+' itens?',u*b);},
   ()=>{const v=R(2,8),h=R(2,5);return inp('Uma torneira enche '+(v*h)+' litros em '+h+' horas. Quantos litros em '+(h*3)+' horas?',v*h*3);},
@@ -490,7 +490,7 @@ L('8.2','▭','Perímetro',
   ()=>{const w=R(5,12),h=R(3,9);return tf('O perímetro de um retângulo '+w+'×'+h+' cm é '+(2*(w+h))+' cm.',true);}
  ]),
 L('8.3','□','Área',
- {ideia:'Área é a superfície ocupada — quantos quadradinhos de 1 cm cabem dentro. No retângulo: base × altura.',
+ {ideia:'Área é a superfície ocupada, quantos quadradinhos de 1 cm cabem dentro. No retângulo: base × altura.',
   exemplo:'Retângulo de 8 cm por 5 cm → 8 × 5 = 40 cm².',
   dica:'Perímetro se mede em cm; área em cm² (centímetros <b>quadrados</b>).'},
  [
@@ -528,9 +528,9 @@ L('8.5','km','Unidades de medida',
 ]});
 
 /* ============ UNIDADE 9 ============ */
-UNITS_MAT.push({n:9,title:'Álgebra inicial',sub:'Quando a letra entra na conta — e continua sendo só matemática.',tone:'roxo',lessons:[
+UNITS_MAT.push({n:9,title:'Álgebra inicial',sub:'Quando a letra entra na conta, e continua sendo só matemática.',tone:'roxo',lessons:[
 L('9.1','x','O número desconhecido',
- {ideia:'Quando não sabemos um número, damos um nome a ele — normalmente <b>x</b>. Descobrir x é fazer a operação contrária.',
+ {ideia:'Quando não sabemos um número, damos um nome a ele, normalmente <b>x</b>. Descobrir x é fazer a operação contrária.',
   exemplo:'x + 7 = 12 → faço 12 − 7 = 5. Então x = 5.',
   dica:'Somou? Subtraia. Multiplicou? Divida. Sempre o contrário.'},
  [
