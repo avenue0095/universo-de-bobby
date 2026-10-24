@@ -5,6 +5,7 @@ Uso:
   python3 build/build.py            grava index.html na raiz
   python3 build/build.py --check    nao grava; sai com erro se index.html da raiz diferir de src/
   python3 build/build.py --sha      imprime o sha256 do resultado
+  python3 build/build.py --sem-minificar   index.html legivel (so para depurar; o --check compara com a versao minificada)
 
 Como funciona: src/interface/shell.html tem marcadores no lugar do <style> e de cada <script>:
   <!--@style interface/style.css-->
@@ -14,11 +15,14 @@ A ORDEM dos marcadores e dos arquivos e a ordem de execucao no navegador. Nao re
 """
 import hashlib, re, sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from minificar import minificar_js, minificar_css
 
 RAIZ = Path(__file__).resolve().parent.parent
 SRC = RAIZ / 'src'
 MARCADOR = re.compile(r'<!--@(style|script)\s+(.*?)\s*-->', re.S)
 ATIVOS_MARCA = '<!--@ativos-->'
+MINIFICAR = '--sem-minificar' not in sys.argv
 
 
 def ler(rel):
@@ -43,6 +47,9 @@ def montar():
         if not lista:
             raise SystemExit('marcador vazio no shell.html')
         corpo = ''.join(ler(f) for f in lista)
+        # D8: JS e CSS saem minificados (comentarios, recuo e espacos); o src/ continua legivel. --sem-minificar mostra o index.html legivel.
+        if MINIFICAR:
+            corpo = minificar_css(corpo) if tag == 'style' else minificar_js(corpo)
         return '<%s>\n%s</%s>' % (tag, corpo, tag)
 
     html = MARCADOR.sub(troca, shell)

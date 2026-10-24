@@ -88,3 +88,6 @@ Dois caminhos, nenhum feito por este repositório:
 1. **GitHub Pages por Actions** (recomendado): um workflow que roda `python3 build/build.py && python3 build/site.py` e publica `dist/site` com `actions/upload-pages-artifact` e `actions/deploy-pages`. Como o Pages não lê `_headers`, a CSP vai só pela `<meta>` (sem `frame-ancestors`).
 2. **Branch `gh-pages`** com o conteúdo de `dist/site` na raiz (`git subtree` ou cópia manual).
 Em Cloudflare Pages ou Netlify o `_headers` vale e traz todos os cabeçalhos. Antes de qualquer publicação: `npm test`, `npm run fumaca`, gitleaks e semgrep, e a ordem do Filipe.
+
+### Build minificado (D8, 24/10/2026)
+`python3 build/build.py` agora minifica o JS e o CSS que entram no `index.html` (`build/minificar.py`, sem dependências: tira comentários, recuo e espaços; não renomeia nada). O `src/` continua legível. `--sem-minificar` gera o `index.html` legível só para depurar (o `--check` compara com a versão minificada). Ganho medido: 728 KB para 647 KB (-11%), 225 KB para 195 KB com gzip (-13%). `testes/minificar.js` confere que todo script compila e que amostras difíceis (regex com `//`, template aninhado) dão o mesmo resultado.
