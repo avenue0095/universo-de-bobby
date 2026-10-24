@@ -143,5 +143,6 @@ function renderTrilha(){
       if(b.dataset.rev!==undefined)abrirRevisaoMundo(+b.dataset.rev);
       else abrirLicao(+b.dataset.u,+b.dataset.l);
     }));
+  pintarPontoGaleria();
   animarMapa(p);
 }

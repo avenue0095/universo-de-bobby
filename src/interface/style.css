@@ -36,6 +36,9 @@
   --cor-acao-sobre: #16213A;
   --cor-acao-borda: #B4510A;
   --cor-papel: #FFFFFF;
+  /* paleta de colorir (o desenho é papel: as cores valem nos dois modos) */
+  --tinta-1: #E53935; --tinta-2: #FB8C00; --tinta-3: #FDD835; --tinta-4: #9CCC3C; --tinta-5: #2E9E4F; --tinta-6: #1CB5A8; --tinta-7: #5BB8F0;
+  --tinta-8: #2A5BD7; --tinta-9: #7E4CD6; --tinta-10: #F06BA8; --tinta-11: #8D5A34; --tinta-12: #7C8594; --tinta-13: #FFFFFF;
   --cor-gelo: #CDEEFF;
   --cor-gelo-sobre: #16213A;
   --cor-gelo-borda: #1F6F99;
@@ -614,25 +617,6 @@ svg.mascote{width:100%;height:100%;display:block}
 .galeria-tela.on{display:flex}
 .galeria-intro{background:var(--cor-superficie);border:2px solid var(--cor-linha);border-radius:var(--raio-16);padding:16px 16px;
   font-size:var(--t-pequeno);margin:0 0 16px;color:var(--cor-texto-suave);font-weight:700}
-.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
-.quadro{margin:0;background:var(--cor-papel);border:2px solid var(--ub);border-radius:var(--raio-16);overflow:hidden;
-  box-shadow:var(--sombra-1)}
-.quadro svg.colorir{width:100%;height:auto;display:block;background:var(--cor-papel)}
-.quadro figcaption{padding:8px 8px 8px;font-size:var(--t-legenda);line-height:1.35;color:var(--cor-texto);
-  background:var(--cor-superficie);border-top:2px solid var(--cor-linha);font-weight:700}
-.quadro figcaption b{display:block;font-family:"Fredoka",sans-serif;font-weight:600;font-size:var(--t-legenda);
-  color:var(--materia-tinta);text-transform:uppercase;letter-spacing:.05em}
-.quadro figcaption i{display:block;font-style:normal;font-size:var(--t-legenda);color:var(--cor-texto-suave);margin-top:4px}
-.quadro.trava{border-color:var(--cor-linha);background:var(--cor-superficie-2)}
-.quadro .fechado{aspect-ratio:600/848;display:grid;place-items:center;background:var(--cor-superficie-2);color:var(--cor-texto-suave)}
-.quadro .fechado svg{width:40px;height:40px}
-.premio{display:flex;gap:16px;align-items:center;text-align:left;background:var(--cor-superficie);
-  border:2px solid var(--cor-ouro);border-radius:var(--raio-24);padding:16px 16px;margin:0 0 16px}
-.premio .mini-desenho{width:78px;flex:none;border:2px solid var(--cor-linha);border-radius:var(--raio-16);overflow:hidden;background:var(--cor-papel)}
-.premio .mini-desenho svg{width:100%;height:auto;display:block}
-.premio b{display:block;font-family:"Fredoka",sans-serif;font-size:var(--t-pequeno);font-weight:600;color:var(--cor-ouro-borda)}
-.premio span{display:block;font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:700;line-height:1.35}
-.premio .btn.fantasma{padding:8px 0;font-size:var(--t-legenda)}
 
 .marca>div{min-width:0;overflow:hidden}
 @media (max-width:480px){.marca b{font-size:var(--t-legenda)}.topo-in{gap:4px;padding:8px 8px}
@@ -730,11 +714,6 @@ svg.cubinho{width:9.2px;height:9.2px}
 
 .col-md .pilha svg,.dourado-fig svg.md{flex:none;align-self:center}
 .dourado-fig .md-col{flex:none}
-.gal-acoes{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
-.gal-acoes .btn{padding:8px 16px;font-size:var(--t-pequeno)}
-.quadro figcaption .baixar{display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:var(--ub);
-  color:var(--materia-sobre);border-radius:var(--raio-16);padding:8px 16px;font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600}
-.quadro figcaption .baixar svg{width:15px;height:15px}
 .aviso{background:var(--cor-superficie);border:2px dashed var(--cor-ouro);border-radius:var(--raio-16);padding:8px 16px;font-size:var(--t-legenda);
   font-weight:700;color:var(--cor-texto-suave);margin:0 0 16px}
 
@@ -1106,3 +1085,81 @@ ol.plano li{padding-left:40px}
 .cartao-bt.materia b{font-size:var(--t-h3);line-height:var(--lh-h3);margin:0}
 .cartao-bt.materia .pg{font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave)}
 .cartao-bt.materia .pg.forte{color:var(--materia-tinta);font-weight:var(--peso-forte)}
+
+/* ---------- novidade na barra (DESIGN 10.1): ponto sem número, nunca pisca ---------- */
+.barra-baixo button{position:relative}
+.ponto{position:absolute;top:var(--esp-4);right:calc(50% - 20px);width:12px;height:12px;border-radius:var(--raio-pilula);background:var(--cor-acao);border:2px solid var(--cor-superficie)}
+.ponto[hidden]{display:none}
+
+/* ---------- galeria de desenhos: um por etapa ---------- */
+.galeria-intro{background:var(--cor-superficie);border:1px solid var(--cor-linha);border-radius:var(--raio-16);padding:var(--esp-16);margin:0 0 var(--esp-16);color:var(--cor-texto-suave);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
+.gal-acoes{display:flex;gap:var(--esp-8);flex-wrap:wrap;margin:0 0 var(--esp-24)}
+.gal-acoes .btn-sec{width:auto}
+.gal-acoes .btn-sec[disabled]{background:var(--cor-superficie-2);color:var(--cor-texto-suave);border-color:var(--cor-linha);cursor:not-allowed}
+.des-planeta{margin:0 0 var(--esp-32)}
+.des-planeta h2{display:flex;align-items:center;gap:var(--esp-8);font-size:var(--t-h3);line-height:var(--lh-h3);color:var(--materia-tinta);margin:0 0 var(--esp-16)}
+.des-planeta h2 small{margin-left:auto;font-family:var(--fonte-corpo);font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave);font-weight:var(--peso-forte)}
+.des-pl-img{width:40px;height:40px;flex:none}
+.des-pl-img img{width:100%;height:100%;object-fit:contain}
+.galeria{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--esp-16)}
+@media (min-width:640px){.galeria{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.des-card{display:flex;flex-direction:column;gap:var(--esp-8);text-align:left;background:var(--cor-superficie);border:2px solid var(--cor-linha-forte);border-radius:var(--raio-24);padding:var(--esp-8);min-height:var(--toque-conforto)}
+.des-card:hover{border-color:var(--materia-base)}
+.des-card.novo{border-color:var(--cor-acao-borda)}
+.des-card.destaque{box-shadow:0 0 0 3px var(--cor-foco)}
+.des-folha{position:relative;display:block;aspect-ratio:3/4;background:var(--cor-papel);border-radius:var(--raio-16);overflow:hidden;display:grid;place-items:center}
+.des-folha img{width:100%;height:100%;object-fit:contain}
+.des-card.trava .des-folha{background:var(--cor-superficie-2)}
+.des-card.trava .des-folha img{filter:blur(6px) grayscale(1);opacity:.35}
+.des-cadeado{position:absolute;inset:0;display:grid;place-items:center;color:var(--cor-texto-suave)}
+.des-cadeado svg{width:40px;height:40px}
+.des-nome{font-family:var(--fonte-titulo);font-weight:var(--peso-titulo);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto);padding:0 var(--esp-8)}
+.des-rot{font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave);font-weight:var(--peso-forte);padding:0 var(--esp-8) var(--esp-8)}
+.des-rot.novo{color:var(--cor-acao-borda)}
+/* planeta em contorno: o lugar do desenho que ainda não chegou (silhueta branca com traço escuro, só por filtro) */
+.des-silhueta{display:grid;place-items:center;width:100%;height:100%;background:var(--cor-papel)}
+.des-silhueta img{width:78%;height:78%;object-fit:contain;
+  filter:brightness(0) invert(1) drop-shadow(1px 0 0 var(--cor-texto)) drop-shadow(-1px 0 0 var(--cor-texto)) drop-shadow(0 1px 0 var(--cor-texto)) drop-shadow(0 -1px 0 var(--cor-texto))}
+.des-silhueta.grande{width:min(60vw,240px);height:min(60vw,240px);margin:0 auto var(--esp-16);border-radius:var(--raio-24);border:2px solid var(--cor-linha)}
+
+/* ---------- ver e colorir ---------- */
+.desenho-tela{z-index:66}
+.des-in{display:grid;gap:var(--esp-16)}
+.des-tela{background:var(--cor-papel);border:2px solid var(--materia-base);border-radius:var(--raio-16);overflow:hidden;line-height:0;justify-self:center;width:100%;max-width:480px}
+.des-tela canvas{width:100%;height:auto;display:block;touch-action:manipulation;cursor:crosshair}
+.paleta{display:flex;flex-wrap:wrap;gap:var(--esp-8);justify-content:center}
+.tinta{width:var(--toque-min);height:var(--toque-min);border-radius:var(--raio-pilula);background:var(--cor-da-tinta);border:2px solid var(--cor-linha-forte);display:grid;place-items:center;color:var(--cor-texto)}
+.tinta.on{box-shadow:0 0 0 3px var(--cor-superficie),0 0 0 6px var(--materia-base)}
+.tinta span{display:grid;place-items:center;width:24px;height:24px;border-radius:var(--raio-pilula);background:var(--cor-vidro)}
+.tinta span:empty{background:none}
+.tinta svg{width:16px;height:16px}
+.des-acoes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--esp-8)}
+@media (min-width:640px){.des-acoes{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.des-acoes .btn-sec{width:100%;padding:var(--esp-8)}
+.des-breve{text-align:center;padding:var(--esp-24) 0}
+.des-breve h3{font-size:var(--t-h3);line-height:var(--lh-h3);margin:0 0 var(--esp-8)}
+.des-breve p{margin:0 auto;max-width:36ch;color:var(--cor-texto-suave);font-size:var(--t-corpo);line-height:var(--lh-corpo)}
+
+/* prêmio no fim da fase */
+.premio{display:flex;gap:var(--esp-16);align-items:center;text-align:left;background:var(--cor-superficie);border:2px solid var(--cor-ouro-borda);border-radius:var(--raio-24);padding:var(--esp-16);margin:0 0 var(--esp-16)}
+.premio .mini-desenho{width:88px;flex:none;aspect-ratio:3/4;border:2px solid var(--cor-linha);border-radius:var(--raio-16);overflow:hidden;background:var(--cor-papel)}
+.premio .mini-desenho img{width:100%;height:100%;object-fit:contain}
+.premio b{display:block;font-family:var(--fonte-titulo);font-size:var(--t-destaque);line-height:var(--lh-destaque);font-weight:var(--peso-titulo);color:var(--cor-texto)}
+.premio span{display:block;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto-suave);margin:0 0 var(--esp-8)}
+.premio .btn-sec{width:auto;min-height:var(--toque-min);padding:var(--esp-4) var(--esp-16);font-size:var(--t-pequeno)}
+.premio-falta{display:flex;align-items:center;justify-content:center;gap:var(--esp-8);margin:0 0 var(--esp-16);color:var(--cor-texto-suave);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);font-weight:var(--peso-forte)}
+.premio-falta svg{width:24px;height:24px;color:var(--materia-tinta);flex:none}
+
+/* ---------- impressão: uma folha A4 por desenho ---------- */
+#impressao{display:none}
+@media print{
+  @page{size:A4;margin:12mm}
+  body>*:not(#impressao){display:none!important}
+  body{background:var(--cor-papel)}
+  #impressao{display:block}
+  .folha-a4{break-after:page;display:flex;flex-direction:column;align-items:center;gap:var(--esp-8);color:var(--cor-texto)}
+  .folha-a4:last-child{break-after:auto}
+  .folha-a4 h2{font-size:var(--t-h3);line-height:var(--lh-h3);margin:0}
+  .folha-a4 img{width:100%;max-height:245mm;object-fit:contain}
+  .folha-a4 p{margin:0;font-size:var(--t-legenda);line-height:var(--lh-legenda)}
+}

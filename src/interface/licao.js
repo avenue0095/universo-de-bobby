@@ -447,6 +447,20 @@ function regFim(){
   const dia=diaDeStats();
   dia.fases=(dia.fases||0)+1;dia.seg=(dia.seg||0)+seg;
 }
+/* o desenho é da etapa: ao concluir a última fase, ele é ganho; antes disso, mostra quanto falta (sem pressão) */
+function premioDesenhoHTML(completouMundo){
+  const d=desenhoPorId(desenhoIdDe(MATERIA,LIC.u.n));if(!d)return '';
+  if(completouMundo){
+    const tem=!!ativo(d.id);
+    return '<div class="premio" data-materia="'+COD_DESENHO[d.matApp]+'"><div class="mini-desenho">'+
+      (tem?imgArte(d.id,{alt:''}):'<span class="des-silhueta">'+imgArte(PLANETAS[d.matApp].img,{})+'</span>')+'</div>'+
+      '<div><b>Você ganhou um desenho!</b><span>“'+escapa(d.nome)+'” '+(tem?'já está na sua galeria, pronto para colorir.':'é seu. A imagem chega numa atualização.')+'</span>'+
+      '<button class="btn-sec" id="ver-galeria" data-id="'+d.id+'">Ver meus desenhos</button></div></div>';
+  }
+  const falta=LIC.u.lessons.filter(l=>!S.feitas[l.id]).length;
+  if(!falta)return '';
+  return '<p class="premio-falta">'+IC.quadro+' '+(falta===1?'Falta 1 fase':'Faltam '+falta+' fases')+' para ganhar o desenho “'+escapa(d.nome)+'”.</p>';
+}
 function pintarFim(){
   const passou=LIC.vidas>0;
   const est=!passou?0:(LIC.erros===0?3:(LIC.erros<=2?2:1));
@@ -488,10 +502,8 @@ function pintarFim(){
     '<p class="sub">'+(passou?'Você acertou '+LIC.acertos+' de '+LIC.base+' perguntas.'+
         (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros. Volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
       :'Tudo bem! Vamos rever a aula e tentar de novo. Errar faz parte de aprender.')+'</p>'+
-    (completouMundo?'<div class="mundo-ok">'+IC.bandeira+' Mundo '+LIC.u.n+' completo!</div>':'')+
-    (passou&&!LIC.rev?'<div class="premio"><div class="mini-desenho">'+DESENHO(LIC.ui,LIC.li).svg+'</div>'+
-      '<div><b>Você ganhou um desenho!</b><span>Ele foi para a sua galeria, pronto para colorir.</span>'+
-      '<button class="btn fantasma" id="ver-galeria">Ver meus desenhos</button></div></div>':'')+
+    (completouMundo?'<div class="mundo-ok">'+IC.bandeira+' Etapa '+LIC.u.n+' completa!</div>':'')+
+    (passou&&!LIC.rev?premioDesenhoHTML(completouMundo):'')+
     '<div class="placar">'+
       '<div><span>Acertos</span><b>'+LIC.acertos+'</b></div>'+
       '<div><span>Moedas</span><b>'+(LIC.ganhoFase||0)+'</b></div>'+
@@ -502,7 +514,7 @@ function pintarFim(){
   $('.lc-corpo').scrollTo(0,0);
   $('#rever-fim').addEventListener('click',abrirRevisao);
   if(typeof ligarBlocoFim==='function')ligarBlocoFim(bloco);
-  const vg=$('#ver-galeria');if(vg)vg.addEventListener('click',()=>abrirGaleria(true));
+  const vg=$('#ver-galeria');if(vg)vg.addEventListener('click',()=>abrirGaleria(vg.dataset.id||true));
   $('#pe').className='pe';
   $('#acao').textContent=passou?'Voltar para o mapa':'Tentar de novo';
   if(!passou&&LIC.rev)$('#acao').textContent='Tentar a revisão de novo';

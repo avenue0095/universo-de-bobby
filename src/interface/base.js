@@ -15,6 +15,7 @@ const IC={
  quadro:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m5.5 17 4-5 3 3.5L16 10.5l2.6 6.5"/><circle cx="8.6" cy="9" r="1.6" fill="currentColor" stroke="none"/></svg>',
  apagar:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 4 2 12l7 8h13V4Zm10.6 10.2-1.4 1.4L15.5 13l-2.7 2.6-1.4-1.4L14 11.5l-2.6-2.7 1.4-1.4L15.5 10l2.7-2.6 1.4 1.4L17 11.5Z"/></svg>',
  lapis:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 17.2V20h2.8L17 9.8 14.2 7 4 17.2ZM19.7 7.3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0L15.3 5.7 18.3 8.7l1.4-1.4Z"/></svg>',
+ impressora:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M7 9V3h10v6M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="7" y="14" width="10" height="7" rx="1"/></svg>',
  baixar:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4L10 13.2V3ZM4 19h16v2H4Z"/></svg>',
  lixo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 21h10l1-14H6ZM9 3h6l1 2h4v2H4V5h4Z"/></svg>',
  volta:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>',

@@ -41,7 +41,7 @@ const HEX = /#[0-9a-fA-F]{3,8}\b/;
   });
   await teste('2. todo var(--x) do CSS existe como token (ou e definido inline pelo componente)', () => {
     const definidos = new Set(limpo.match(/--[a-z0-9-]+(?=\s*:)/g) || []);
-    ['--p', '--e', '--ub', '--c1', '--c2', '--x', '--y', '--aro', '--d', '--w'].forEach((x) => definidos.add(x));
+    ['--p', '--e', '--ub', '--c1', '--c2', '--x', '--y', '--aro', '--d', '--w', '--cor-da-tinta'].forEach((x) => definidos.add(x));
     const usados = new Set((limpo.match(/var\((--[a-z0-9-]+)/g) || []).map((x) => x.slice(4)));
     const faltam = [...usados].filter((u) => !definidos.has(u));
     vazio(faltam, 'token inexistente: ');
@@ -74,7 +74,7 @@ const HEX = /#[0-9a-fA-F]{3,8}\b/;
     ['Fredoka-variavel-latin.woff2', 'Nunito-variavel-latin.woff2', 'OFL-Fredoka.txt', 'OFL-Nunito.txt'].forEach((f) => A.ok(fs.existsSync(path.join(__dirname, '..', 'assets', 'fontes', f)), f));
   });
   await teste('8. JavaScript da interface nao pinta com hex (dados de cor do perfil ficam em estado.js)', () => {
-    const livres = ['estado.js', 'cenario-e-materias.js', 'personagem.js', 'telas-auxiliares.js']; /* os tres ultimos saem nas etapas do mapa, do personagem e do desenho */
+    const livres = ['estado.js', 'personagem.js']; /* o ultimo sai na etapa do personagem */
     const ruins = [];
     for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.js') && !livres.includes(x))) {
       const src = semComentario(fs.readFileSync(path.join(dir, f), 'utf8')).replace(/&#\d+;/g, '');

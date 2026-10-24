@@ -5,7 +5,7 @@ function feitasDaMateria(k){
 }
 function telaPerfil(){
   const p=perfilAtual();
-  const desenhos=fases();
+  const desenhos=desenhosGanhos().length;
   const totalGeral=Object.keys(MATERIAS).reduce((a,k)=>a+MATERIAS[k].total(),0);
   const feitasGeral=Object.keys(MATERIAS).reduce((a,k)=>a+feitasDaMateria(k),0);
   const niv=nivelDoExplorador();
@@ -19,7 +19,7 @@ function telaPerfil(){
     stat(IC.moeda,S.moedas,'moedas')+
     stat(IC.fogo,S.ofensiva.atual,'dias seguidos')+
     stat(IC.coracao,S.ofensiva.melhor,'recorde de dias')+
-    stat(IC.quadro,desenhos,'desenhos')+'</div>';
+    stat(IC.quadro,desenhos+'/'+desenhosCatalogo().length,'desenhos')+'</div>';
 
   /* progresso das três galáxias, sempre visível */
   h+='<h2 class="sec">Suas galáxias</h2><div class="mundos-lista">';

@@ -33,43 +33,6 @@ function fecharPerfis(){
   apagando=-1;$('#perfis').classList.remove('on');document.body.style.overflow='';
 }
 
-/* ---------- galeria de desenhos ---------- */
-function abrirGaleria(destaque){
-  const prontos=[];
-  let h='<p class="galeria-intro">Cada fase concluída libera um desenho novo para colorir, em folha A4. '+
-    'Toque em “baixar” para salvar e imprimir.</p>'+
-    '<div class="gal-acoes"><button class="btn" id="baixar-todos">'+IC.baixar+' Baixar todos os desenhos</button></div>'+
-    '<div id="aviso-baixa"></div><div class="galeria">';
-  UNITS.forEach((u,ui)=>{
-    u.lessons.forEach((l,li)=>{
-      const ok=S.feitas[l.id];
-      const d=ok?DESENHO(ui,li):null;
-      h+='<figure class="quadro'+(ok?'':' trava')+'" style="--ub:'+corUnidade(u)+'">'+
-         (ok?d.svg:'<div class="fechado">'+IC.cadeado+'</div>')+
-         '<figcaption><b>'+(ok?d.mundo:'Mundo '+u.n+' · Fase '+(li+1))+'</b>'+l.title+
-         (ok?'<i>'+d.tarefa+'</i><button class="baixar" data-ui="'+ui+'" data-li="'+li+'">'+IC.baixar+' baixar</button>'
-            :'<i>Conclua a fase para liberar</i>')+'</figcaption></figure>';
-    if(ok)prontos.push([ui,li]);
-    });
-  });
-  h+='</div>';
-  $('#gal-corpo').innerHTML='<div class="lc-in">'+h+'</div>';
-  $('#galeria').classList.add('on');
-  document.body.style.overflow='hidden';
-  $('#gal-corpo').querySelectorAll('.baixar').forEach(b=>b.addEventListener('click',()=>
-    baixarDesenhos([[+b.dataset.ui,+b.dataset.li]],b)));
-  $('#baixar-todos').addEventListener('click',(e)=>{
-    if(!prontos.length){avisoBaixa('Conclua pelo menos uma fase para liberar um desenho.');return;}
-    baixarDesenhos(prontos,e.currentTarget);
-  });
-  if(destaque){const el=$('#gal-corpo').querySelectorAll('.quadro:not(.trava)');
-    if(el.length)el[el.length-1].scrollIntoView({block:'center'});}
-}
-function fecharGaleria(){
-  $('#galeria').classList.remove('on');
-  if(!$('#licao').classList.contains('on'))document.body.style.overflow='';
-}
-
 /* ---------- letras e sílabas ---------- */
 const LETRAS='ABCDEFGHIJKLMNOPQRSTUVWXYZÇ'.split('');
 function letrasHTML(q){
@@ -154,50 +117,6 @@ function atualizaDinheiro(){
   if(!LIC.conferido)$('#acao').disabled=(tot===0);
 }
 
-/* ---------- baixar desenhos ---------- */
-function avisoBaixa(t){const a=$('#aviso-baixa');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
-function svgCompleto(svg){return svg.replace('<svg ','<svg width="600" height="900" ');}
-function svgParaPng(svg){
-  return new Promise((res,rej)=>{
-    const img=new Image();
-    img.onload=()=>{
-      const cv=document.createElement('canvas');cv.width=1000;cv.height=1500;
-      const cx=cv.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,1000,1500);
-      cx.drawImage(img,0,0,1000,1500);
-      try{res(cv.toDataURL('image/png'));}catch(e){rej(e);}
-    };
-    img.onerror=rej;
-    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgCompleto(svg));
-  });
-}
-async function baixarDesenhos(lista,bt){
-  const txt=bt?bt.innerHTML:'';
-  if(bt){bt.disabled=true;bt.innerHTML='preparando...';}
-  avisoBaixa('');
-  try{
-    const gx=({mat:'matematica',pt:'portugues',en:'ingles'})[MATERIA]||'matematica';
-    const nome=lista.length===1
-      ?'desenho-'+gx+'-mundo'+UNITS[lista[0][0]].n+'-fase'+(lista[0][1]+1)+'.pdf'
-      :'caderno-'+gx+'.pdf';
-    const jsPDFok=window.jspdf&&window.jspdf.jsPDF;
-    if(jsPDFok){
-      const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
-      for(let k=0;k<lista.length;k++){
-        const d=DESENHO(lista[k][0],lista[k][1]);
-        const png=await svgParaPng(d.svg);
-        if(k)doc.addPage();
-        doc.addImage(png,'PNG',10,6,190,285);
-      }
-      await entregar(nome,doc.output('blob'));
-    }else{
-      const d=DESENHO(lista[0][0],lista[0][1]);
-      await entregar(nome.replace('.pdf','.svg'),svgCompleto(d.svg));
-    }
-  }catch(e){
-    avisoBaixa('Não consegui preparar o arquivo agora. Tente de novo em instantes.');
-  }
-  if(bt){bt.disabled=false;bt.innerHTML=txt;}
-}
 async function entregar(nome,dados){
   let cap=null;
   try{cap=window.claude&&claude.use?await claude.use('downloads'):null;}catch(e){cap=null;}
@@ -211,7 +130,7 @@ async function entregar(nome,dados){
       return;
     }
   }
-  const tipo=/\.json$/i.test(nome)?'application/json':(/\.ics$/i.test(nome)?'text/calendar':'image/svg+xml');
+  const tipo=/\.json$/i.test(nome)?'application/json':(/\.ics$/i.test(nome)?'text/calendar':(/\.png$/i.test(nome)?'image/png':'image/svg+xml'));
   const url=URL.createObjectURL(typeof dados==='string'?new Blob([dados],{type:tipo}):dados);
   const a=document.createElement('a');a.href=url;a.download=nome;document.body.appendChild(a);a.click();
   setTimeout(()=>{a.remove();URL.revokeObjectURL(url);},2000);

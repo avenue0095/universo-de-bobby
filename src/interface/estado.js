@@ -28,11 +28,34 @@ function diarioVazio(dia){
     bau:{aberto:false,dia:0,itens:[]},missoes:[],paradaVista:false,paradaAcao:'',c:contadoresVazios()};
 }
 function revisaoVazia(){return {itens:{},congelados:{},ultimoAquecimento:''};}
+/* desenhos (1 por etapa): herdado = etapas que já tinham fase concluída antes do modelo novo (mantêm o direito),
+   vistos = desenhos já abertos (para o ponto de novidade), tinta = jogadas de colorir [x,y,cor] por desenho */
+function desenhosVazios(){return {herdado:[],vistos:[],tinta:{}};}
+const ID_DESENHO=/^des-(mat|por|ing)(0[1-9]|10)$/;
+function desenhosHerdados(feitas){
+  const r=[];
+  [['mat',UNITS_MAT],['por',UNITS_PT],['ing',UNITS_EN]].forEach(par=>par[1].forEach((u,i)=>{
+    if(u.lessons.some(l=>feitas[l.id]))r.push('des-'+par[0]+('0'+(i+1)).slice(-2));
+  }));
+  return r;
+}
+function normalizaDesenhos(x,feitas){
+  const d=desenhosVazios();
+  if(!x||typeof x!=='object'||Array.isArray(x)){d.herdado=desenhosHerdados(feitas||{});return d;}   /* estado de antes do modelo novo */
+  d.herdado=listaDe(x.herdado,30).filter(i=>typeof i==='string'&&ID_DESENHO.test(i));
+  d.vistos=listaDe(x.vistos,30).filter(i=>typeof i==='string'&&ID_DESENHO.test(i));
+  const t=objDe(x.tinta);
+  Object.keys(t).filter(k=>ID_DESENHO.test(k)).slice(0,30).forEach(k=>{
+    if(!Array.isArray(t[k]))return;
+    d.tinta[k]=t[k].slice(0,600).filter(o=>Array.isArray(o)&&o.length===3).map(o=>[intDe(o[0],0,4000,0),intDe(o[1],0,4000,0),intDe(o[2],0,15,0)]);
+  });
+  return d;
+}
 function colecaoVazia(){return {adesivos:[],ornamentos:[],medalhas:[],poses:[],molduras:[],trilhas:[],constelacao:[]};}
 function estadoVazio(){
   return {nome:'',faixa:'f78',materia:'mat',
     xp:0,moedas:0,acertosTotal:0,melhorCombo:0,
-    feitas:{},errados:{},comprado:[],look:{},
+    feitas:{},errados:{},comprado:[],look:{},desenhos:desenhosVazios(),
     ofensiva:ofensivaNova(),diario:diarioVazio(''),espera:null,
     config:configPadrao(),revisao:revisaoVazia(),colecao:colecaoVazia(),
     semana:{chave:'',estrelas:0,aulaRevista:0,constelacao:false},
@@ -128,6 +151,7 @@ function estadoDe(dados){
   const er=objDe(d.errados);Object.keys(er).forEach(k=>{if(Array.isArray(er[k]))s.errados[k]=er[k].filter(q=>q&&typeof q==='object'&&q.prompt!==undefined).slice(-30);});
   s.comprado=textosDe(d.comprado,400,40);
   s.look=objDe(d.look);
+  s.desenhos=normalizaDesenhos(d.desenhos,s.feitas);
   s.ofensiva=normalizaOfensiva(d.ofensiva);
   s.diario=normalizaDiario(d.diario);
   const e=objDe(d.espera);
