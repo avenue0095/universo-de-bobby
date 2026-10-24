@@ -6,13 +6,16 @@
   "documento": "BNCC, versão final homologada (arquivo BNCC_EI_EF_110518_versaofinal_site.pdf), 600 páginas",
   "como": "PDF baixado em 24/10/2026, texto extraído com pdftotext; código e descrição vêm do texto em ordem de leitura; unidade temática (ou prática de linguagem / eixo), objeto de conhecimento e campo vêm do pareamento por coordenada entre a página do quadro e a página de habilidades."
  },
- "regras": {
-  "conferido_true": "código existe no PDF oficial e a descrição é a do PDF, sem edição",
-  "sem_codigo_claro": "a fase ou o maker não corresponde com clareza a nenhuma habilidade; o app não deve citar código",
-  "revisao": "fase que sorteia perguntas de outras fases; herda o código da fase de origem",
-  "ingles": "a BNCC só tem Língua Inglesa a partir do 6º ano; para 7 a 10 anos toda fase de inglês é \"fora da BNCC, extra\"; os códigos EF06LI valem só para 11 a 12 anos",
-  "unidade_tematica_em_LP_e_LI": "em Língua Portuguesa o campo unidade_tematica traz a prática de linguagem e campo_ou_eixo traz o campo de atuação; em Língua Inglesa traz a unidade temática e campo_ou_eixo traz o eixo"
- },
+ "regras": [
+  {
+   "conferido_true": "código existe no PDF oficial e a descrição é a do PDF, sem edição",
+   "sem_codigo_claro": "a fase ou o maker não corresponde com clareza a nenhuma habilidade; o app não deve citar código",
+   "revisao": "fase que sorteia perguntas de outras fases; herda o código da fase de origem",
+   "ingles": "a BNCC só tem Língua Inglesa a partir do 6º ano; para 7 a 10 anos toda fase de inglês é \"fora da BNCC, extra\"; os códigos EF06LI valem só para 11 a 12 anos",
+   "unidade_tematica_em_LP_e_LI": "em Língua Portuguesa o campo unidade_tematica traz a prática de linguagem e campo_ou_eixo traz o campo de atuação; em Língua Inglesa traz a unidade temática e campo_ou_eixo traz o eixo"
+  },
+  "Relatório dos pais: só cita código com conferido:true e citavel:true; mostra o ano do código; usa 'habilidade relacionada', nunca 'cumprida'; fases sem código, revisões e inglês de 7 a 10 anos não citam (conferência por amostra em 24/10/2026)."
+ ],
  "totais": {
   "fases": 150,
   "fases_mapeadas": 142,
@@ -133,7 +136,8 @@
      "objeto_de_conhecimento": "Quantificação de elementos de uma coleção: estimativas, contagem um a um, pareamento ou outros agrupamentos e comparação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 281,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01MA04",
@@ -148,7 +152,8 @@
      "objeto_de_conhecimento": "Leitura, escrita e comparação de números naturais (até 100)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 281,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01MA10",
@@ -163,7 +168,8 @@
      "objeto_de_conhecimento": "Sequências recursivas: observação de regras usadas utilizadas em seriações numéricas (mais 1, mais 2, menos 1, menos 2, por exemplo)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 281,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -227,7 +233,8 @@
      "objeto_de_conhecimento": "Leitura, escrita, comparação e ordenação de números de até três ordens pela compreensão de características do sistema de numeração decimal (valor posicional e papel do zero)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01MA05",
@@ -242,7 +249,8 @@
      "objeto_de_conhecimento": "Reta numérica",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 281,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -307,7 +315,8 @@
      "objeto_de_conhecimento": "Composição e decomposição de números naturais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 281,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02MA04",
@@ -322,7 +331,8 @@
      "objeto_de_conhecimento": "Composição e decomposição de números naturais (até 1000)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -386,7 +396,8 @@
      "objeto_de_conhecimento": "Leitura, escrita, comparação e ordenação de números de até três ordens pela compreensão de características do sistema de numeração decimal (valor posicional e papel do zero)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02MA04",
@@ -401,7 +412,8 @@
      "objeto_de_conhecimento": "Composição e decomposição de números naturais (até 1000)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA01",
@@ -416,7 +428,8 @@
      "objeto_de_conhecimento": "Leitura, escrita, comparação e ordenação de números naturais de quatro ordens",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -480,7 +493,8 @@
      "objeto_de_conhecimento": "Identificação e descrição de regularidades em sequências numéricas recursivas",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA04",
@@ -495,7 +509,9 @@
      "objeto_de_conhecimento": "Reta numérica",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": false,
+     "motivo_nao_citar": "maker 3 (ponto médio na reta) é correspondência frouxa"
     },
     {
      "codigo": "EF06MA12",
@@ -510,7 +526,8 @@
      "objeto_de_conhecimento": "Aproximação de números para múltiplos de potências de 10",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -575,7 +592,8 @@
      "objeto_de_conhecimento": "Construção de fatos básicos da adição",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 281,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02MA05",
@@ -590,7 +608,8 @@
      "objeto_de_conhecimento": "Construção de fatos fundamentais da adição e da subtração",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -655,7 +674,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da adição e da subtração (juntar, acrescentar, separar, retirar)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA05",
@@ -670,7 +690,8 @@
      "objeto_de_conhecimento": "Procedimentos de cálculo (mental e escrito) com números naturais: adição e subtração",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -733,7 +754,8 @@
      "objeto_de_conhecimento": "Construção de fatos fundamentais da adição e da subtração",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02MA06",
@@ -748,7 +770,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da adição e da subtração (juntar, acrescentar, separar, retirar)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA05",
@@ -763,7 +786,8 @@
      "objeto_de_conhecimento": "Procedimentos de cálculo (mental e escrito) com números naturais: adição e subtração",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -827,7 +851,8 @@
      "objeto_de_conhecimento": "Procedimentos de cálculo (mental e escrito) com números naturais: adição e subtração",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA03",
@@ -842,7 +867,8 @@
      "objeto_de_conhecimento": "Propriedades das operações para o desenvolvimento de diferentes estratégias de cálculo com números naturais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -908,7 +934,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da adição e da subtração (juntar, acrescentar, separar, retirar)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA06",
@@ -923,7 +950,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo significados da adição e da subtração: juntar, acrescentar, separar, retirar, comparar e completar quantidades",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA03",
@@ -938,7 +966,8 @@
      "objeto_de_conhecimento": "Propriedades das operações para o desenvolvimento de diferentes estratégias de cálculo com números naturais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1002,7 +1031,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo adição de parcelas iguais (multiplicação)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA07",
@@ -1017,7 +1047,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, repartição em partes iguais e medida",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1092,7 +1123,8 @@
      "objeto_de_conhecimento": "Construção de fatos fundamentais da adição, subtração e multiplicação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA07",
@@ -1107,7 +1139,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, repartição em partes iguais e medida",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02MA08",
@@ -1122,7 +1155,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo significados de dobro, metade, triplo e terça parte",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1192,7 +1226,8 @@
      "objeto_de_conhecimento": "Construção de fatos fundamentais da adição, subtração e multiplicação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1255,7 +1290,8 @@
      "objeto_de_conhecimento": "Composição e decomposição de um número natural de até cinco ordens, por meio de adições e multiplicações por potências de 10",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA05",
@@ -1270,7 +1306,8 @@
      "objeto_de_conhecimento": "Propriedades das operações para o desenvolvimento de diferentes estratégias de cálculo com números naturais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1333,7 +1370,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, proporcionalidade, repartição equitativa e medida",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA05",
@@ -1348,7 +1386,8 @@
      "objeto_de_conhecimento": "Propriedades das operações para o desenvolvimento de diferentes estratégias de cálculo com números naturais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1411,7 +1450,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, repartição em partes iguais e medida",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA13",
@@ -1426,7 +1466,8 @@
      "objeto_de_conhecimento": "Relações entre adição e subtração e entre multiplicação e divisão",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1487,7 +1528,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, repartição em partes iguais e medida",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA07",
@@ -1502,7 +1544,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, proporcionalidade, repartição equitativa e medida",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1565,7 +1608,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, repartição em partes iguais e medida",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA07",
@@ -1580,7 +1624,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, proporcionalidade, repartição equitativa e medida",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1644,7 +1689,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo significados de dobro, metade, triplo e terça parte",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 285,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA09",
@@ -1659,7 +1705,8 @@
      "objeto_de_conhecimento": "Significados de metade, terça parte, quarta parte, quinta parte e décima parte",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1724,7 +1771,8 @@
      "objeto_de_conhecimento": "Múltiplos e divisores de um número natural",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA06",
@@ -1739,7 +1787,8 @@
      "objeto_de_conhecimento": "Números primos e compostos",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA11",
@@ -1754,7 +1803,8 @@
      "objeto_de_conhecimento": "Sequência numérica recursiva formada por múltiplos de um número natural",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1819,7 +1869,8 @@
      "objeto_de_conhecimento": "Números racionais: frações unitárias mais usuais (1/2, 1/3, 1/4, 1/5, 1/10 e 1/100)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF05MA03",
@@ -1834,7 +1885,8 @@
      "objeto_de_conhecimento": "Representação fracionária dos números racionais: reconhecimento, significados, leitura e representação na reta numérica",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1910,7 +1962,8 @@
      "objeto_de_conhecimento": "Comparação e ordenação de números racionais na representação decimal e na fracionária utilizando a noção de equivalência",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA07",
@@ -1925,7 +1978,8 @@
      "objeto_de_conhecimento": "Frações: significados (parte/todo, quociente), equivalência, comparação, adição e subtração; cálculo da fração de um número natural; adição e subtração de frações",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -1995,7 +2049,8 @@
      "objeto_de_conhecimento": "Comparação e ordenação de números racionais na representação decimal e na fracionária utilizando a noção de equivalência",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA07",
@@ -2010,7 +2065,8 @@
      "objeto_de_conhecimento": "Frações: significados (parte/todo, quociente), equivalência, comparação, adição e subtração; cálculo da fração de um número natural; adição e subtração de frações",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2075,7 +2131,8 @@
      "objeto_de_conhecimento": "Frações: significados (parte/todo, quociente), equivalência, comparação, adição e subtração; cálculo da fração de um número natural; adição e subtração de frações",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2138,7 +2195,8 @@
      "objeto_de_conhecimento": "Frações: significados (parte/todo, quociente), equivalência, comparação, adição e subtração; cálculo da fração de um número natural; adição e subtração de frações",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA09",
@@ -2153,7 +2211,8 @@
      "objeto_de_conhecimento": "Significados de metade, terça parte, quarta parte, quinta parte e décima parte",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 289,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2224,7 +2283,8 @@
      "objeto_de_conhecimento": "Números racionais: representação decimal para escrever valores do sistema monetário brasileiro",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF05MA02",
@@ -2239,7 +2299,8 @@
      "objeto_de_conhecimento": "Números racionais expressos na forma decimal e sua representação na reta numérica",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA08",
@@ -2254,7 +2315,8 @@
      "objeto_de_conhecimento": "Frações: significados (parte/todo, quociente), equivalência, comparação, adição e subtração; cálculo da fração de um número natural; adição e subtração de frações",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2319,7 +2381,8 @@
      "objeto_de_conhecimento": "Números racionais expressos na forma decimal e sua representação na reta numérica",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF05MA05",
@@ -2334,7 +2397,8 @@
      "objeto_de_conhecimento": "Comparação e ordenação de números racionais na representação decimal e na fracionária utilizando a noção de equivalência",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2397,7 +2461,8 @@
      "objeto_de_conhecimento": "Problemas: adição e subtração de números naturais e números racionais cuja representação decimal é finita",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02MA20",
@@ -2412,7 +2477,8 @@
      "objeto_de_conhecimento": "Sistema monetário brasileiro: reconhecimento de cédulas e moedas e equivalência de valores",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 287,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2482,7 +2548,8 @@
      "objeto_de_conhecimento": "Problemas utilizando o sistema monetário brasileiro",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 295,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF05MA08",
@@ -2497,7 +2564,8 @@
      "objeto_de_conhecimento": "Problemas: multiplicação e divisão de números racionais cuja representação decimal é finita por números naturais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02MA20",
@@ -2512,7 +2580,8 @@
      "objeto_de_conhecimento": "Sistema monetário brasileiro: reconhecimento de cédulas e moedas e equivalência de valores",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 287,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2586,7 +2655,8 @@
      "objeto_de_conhecimento": "Problemas: multiplicação e divisão de números racionais cuja representação decimal é finita por números naturais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2649,7 +2719,8 @@
      "objeto_de_conhecimento": "Cálculo de porcentagens e representação fracionária",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA13",
@@ -2664,7 +2735,8 @@
      "objeto_de_conhecimento": "Cálculo de porcentagens por meio de estratégias diversas, sem fazer uso da “regra de três”",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2728,7 +2800,8 @@
      "objeto_de_conhecimento": "Cálculo de porcentagens e representação fracionária",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA13",
@@ -2743,7 +2816,8 @@
      "objeto_de_conhecimento": "Cálculo de porcentagens por meio de estratégias diversas, sem fazer uso da “regra de três”",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2806,7 +2880,8 @@
      "objeto_de_conhecimento": "Cálculo de porcentagens e de acréscimos e decréscimos simples",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 309,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA25",
@@ -2821,7 +2896,8 @@
      "objeto_de_conhecimento": "Problemas utilizando o sistema monetário brasileiro",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 295,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2885,7 +2961,8 @@
      "objeto_de_conhecimento": "Grandezas diretamente proporcionais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF07MA09",
@@ -2900,7 +2977,8 @@
      "objeto_de_conhecimento": "Fração e seus significados: como parte de inteiros, resultado da divisão, razão e operador",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 309,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -2963,7 +3041,8 @@
      "objeto_de_conhecimento": "Problemas envolvendo grandezas diretamente proporcionais e grandezas inversamente proporcionais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 309,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF05MA12",
@@ -2978,7 +3057,8 @@
      "objeto_de_conhecimento": "Grandezas diretamente proporcionais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3043,7 +3123,8 @@
      "objeto_de_conhecimento": "Figuras geométricas planas (triângulo, quadrado, retângulo, trapézio e paralelogramo): reconhecimento e análise de características",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 291,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF05MA17",
@@ -3058,7 +3139,8 @@
      "objeto_de_conhecimento": "Figuras geométricas planas: características, representações e ângulos",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 299,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA20",
@@ -3073,7 +3155,8 @@
      "objeto_de_conhecimento": "Polígonos: classificações quanto ao número de vértices, às medidas de lados e ângulos e ao paralelismo e perpendicularismo dos lados",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 305,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3137,7 +3220,8 @@
      "objeto_de_conhecimento": "Medidas de comprimento, massa e capacidade: estimativas, utilização de instrumentos de medida e de unidades de medida convencionais mais usuais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 295,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA24",
@@ -3152,7 +3236,8 @@
      "objeto_de_conhecimento": "Problemas sobre medidas envolvendo grandezas como comprimento, massa, tempo, temperatura, área, capacidade e volume",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 305,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3216,7 +3301,9 @@
      "objeto_de_conhecimento": "Problemas sobre medidas envolvendo grandezas como comprimento, massa, tempo, temperatura, área, capacidade e volume",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 305,
-     "conferido": true
+     "conferido": true,
+     "citavel": false,
+     "motivo_nao_citar": "EF06MA24 pede \"sem uso de fórmulas\"; o app ensina base x altura; citar EF07MA31"
     },
     {
      "codigo": "EF07MA31",
@@ -3231,7 +3318,8 @@
      "objeto_de_conhecimento": "Equivalência de área de figuras planas: cálculo de áreas de figuras que podem ser decompostas por outras, cujas áreas podem ser facilmente determinadas como triângulos e quadriláteros",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 311,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA29",
@@ -3246,7 +3334,8 @@
      "objeto_de_conhecimento": "Perímetro de um quadrado como grandeza proporcional à medida do lado",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 305,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3310,7 +3399,8 @@
      "objeto_de_conhecimento": "Ângulos: noção, usos e medida",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 305,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF07MA24",
@@ -3325,7 +3415,8 @@
      "objeto_de_conhecimento": "Triângulos: construção, condição de existência e soma das medidas dos ângulos internos",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 311,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04MA18",
@@ -3340,7 +3431,8 @@
      "objeto_de_conhecimento": "Ângulos retos e não retos: uso de dobraduras, esquadros e softwares",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 295,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3405,7 +3497,8 @@
      "objeto_de_conhecimento": "Medidas de comprimento, área, massa, tempo, temperatura e capacidade: utilização de unidades convencionais e relações entre as unidades de medida mais usuais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 299,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF07MA30",
@@ -3420,7 +3513,8 @@
      "objeto_de_conhecimento": "Cálculo de volume de blocos retangulares, utilizando unidades de medida convencionais mais usuais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 311,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3483,7 +3577,8 @@
      "objeto_de_conhecimento": "Propriedades da igualdade",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 293,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF05MA11",
@@ -3498,7 +3593,8 @@
      "objeto_de_conhecimento": "Propriedades da igualdade e noção de equivalência",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 297,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3603,7 +3699,8 @@
      "objeto_de_conhecimento": "Equações polinomiais do 1º grau",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 309,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA14",
@@ -3618,7 +3715,8 @@
      "objeto_de_conhecimento": "Propriedades da igualdade",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 305,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3682,7 +3780,9 @@
      "objeto_de_conhecimento": "Operações (adição, subtração, multiplicação, divisão e potenciação) com números naturais",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 303,
-     "conferido": true
+     "conferido": true,
+     "citavel": false,
+     "motivo_nao_citar": "correspondência fraca: potenciação só no objeto de conhecimento (conferido 24/10)"
     }
    ],
    "makers": {
@@ -3787,7 +3887,8 @@
      "objeto_de_conhecimento": "Estatística: média e amplitude de um conjunto de dados",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 313,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3850,7 +3951,8 @@
      "objeto_de_conhecimento": "Leitura, interpretação e representação de dados em tabelas de dupla entrada e gráficos de barras",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 291,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03MA27",
@@ -3865,7 +3967,8 @@
      "objeto_de_conhecimento": "Leitura, interpretação e representação de dados em tabelas de dupla entrada e gráficos de barras",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 291,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF07MA35",
@@ -3880,7 +3983,8 @@
      "objeto_de_conhecimento": "Estatística: média e amplitude de um conjunto de dados",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 313,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -3943,7 +4047,8 @@
      "objeto_de_conhecimento": "Cálculo de probabilidade de eventos equiprováveis",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 299,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06MA30",
@@ -3958,7 +4063,8 @@
      "objeto_de_conhecimento": "Cálculo de probabilidade como a razão entre o número de resultados favoráveis e o total de resultados possíveis em um espaço amostral equiprovável Cálculo de probabilidade por meio de muitas repetições de um experimento (frequências de ocorrências e probabilidade frequentista)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 307,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4023,7 +4129,8 @@
      "objeto_de_conhecimento": "Números inteiros: usos, história, ordenação, associação com pontos da reta numérica e operações",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 309,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF07MA04",
@@ -4038,7 +4145,8 @@
      "objeto_de_conhecimento": "Números inteiros: usos, história, ordenação, associação com pontos da reta numérica e operações",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 309,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4142,7 +4250,8 @@
      "objeto_de_conhecimento": "Conhecimento do alfabeto do português do Brasil",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01LP07",
@@ -4157,7 +4266,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4220,7 +4330,8 @@
      "objeto_de_conhecimento": "Conhecimento do alfabeto do português do Brasil",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4283,7 +4394,8 @@
      "objeto_de_conhecimento": "Conhecimento das diversas grafias do alfabeto/ Acentuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP01",
@@ -4298,7 +4410,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético/ Convenções da escrita",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4361,7 +4474,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01LP07",
@@ -4376,7 +4490,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01LP13",
@@ -4391,7 +4506,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4454,7 +4570,8 @@
      "objeto_de_conhecimento": "Conhecimento do alfabeto do português do Brasil",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4517,7 +4634,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP02",
@@ -4532,7 +4650,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03LP05",
@@ -4547,7 +4666,8 @@
      "objeto_de_conhecimento": "Segmentação de palavras/Classificação de palavras por número de sílabas",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4611,7 +4731,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP03",
@@ -4626,7 +4747,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP04",
@@ -4641,7 +4763,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4706,7 +4829,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP03",
@@ -4721,7 +4845,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP04",
@@ -4736,7 +4861,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4801,7 +4927,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP03",
@@ -4816,7 +4943,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP04",
@@ -4831,7 +4959,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4896,7 +5025,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF12LP01",
@@ -4912,7 +5042,8 @@
      "objeto_de_conhecimento": "Decodificação/Fluência de leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -4976,7 +5107,8 @@
      "objeto_de_conhecimento": "Decodificação/Fluência de leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP04",
@@ -4991,7 +5123,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01LP02",
@@ -5006,7 +5139,8 @@
      "objeto_de_conhecimento": "Correspondência fonema-grafema",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5069,7 +5203,8 @@
      "objeto_de_conhecimento": "Decodificação/Fluência de leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP04",
@@ -5084,7 +5219,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03LP05",
@@ -5099,7 +5235,8 @@
      "objeto_de_conhecimento": "Segmentação de palavras/Classificação de palavras por número de sílabas",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5162,7 +5299,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01LP08",
@@ -5177,7 +5315,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF12LP01",
@@ -5193,7 +5332,8 @@
      "objeto_de_conhecimento": "Decodificação/Fluência de leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5257,7 +5397,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01LP08",
@@ -5272,7 +5413,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5337,7 +5479,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01LP13",
@@ -5352,7 +5495,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF12LP19",
@@ -5368,7 +5512,8 @@
      "objeto_de_conhecimento": "Formas de composição de textos poéticos",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 113,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5431,7 +5576,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP03",
@@ -5446,7 +5592,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04LP01",
@@ -5461,7 +5608,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5525,7 +5673,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5588,7 +5737,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5651,7 +5801,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5715,7 +5866,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03LP01",
@@ -5730,7 +5882,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5793,7 +5946,8 @@
      "objeto_de_conhecimento": "Morfologia/Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5852,7 +6006,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético/ Convenções da escrita",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP09",
@@ -5867,7 +6022,8 @@
      "objeto_de_conhecimento": "Pontuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5930,7 +6086,8 @@
      "objeto_de_conhecimento": "Morfologia/Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -5990,7 +6147,8 @@
      "objeto_de_conhecimento": "Pontuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF01LP14",
@@ -6005,7 +6163,8 @@
      "objeto_de_conhecimento": "Pontuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03LP07",
@@ -6020,7 +6179,8 @@
      "objeto_de_conhecimento": "Pontuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6084,7 +6244,8 @@
      "objeto_de_conhecimento": "Morfologia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 121,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6147,7 +6308,8 @@
      "objeto_de_conhecimento": "Morfologia/Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6210,7 +6372,8 @@
      "objeto_de_conhecimento": "Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 121,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6355,7 +6518,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético/ Convenções da escrita",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 101,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6418,7 +6582,8 @@
      "objeto_de_conhecimento": "Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 121,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6481,7 +6646,8 @@
      "objeto_de_conhecimento": "Morfologia/Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6544,7 +6710,8 @@
      "objeto_de_conhecimento": "Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 121,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6607,7 +6774,8 @@
      "objeto_de_conhecimento": "Morfologia/Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP17",
@@ -6622,7 +6790,8 @@
      "objeto_de_conhecimento": "Forma de composição do texto",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 107,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6686,7 +6855,8 @@
      "objeto_de_conhecimento": "Morfologia/Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03LP09",
@@ -6701,7 +6871,8 @@
      "objeto_de_conhecimento": "Morfossintaxe",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 121,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6761,7 +6932,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6824,7 +6996,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF35LP13",
@@ -6841,7 +7014,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04LP08",
@@ -6856,7 +7030,8 @@
      "objeto_de_conhecimento": "Morfologia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 121,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -6922,7 +7097,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF35LP13",
@@ -6939,7 +7115,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7002,7 +7179,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF35LP13",
@@ -7019,7 +7197,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7084,7 +7263,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF05LP07",
@@ -7099,7 +7279,8 @@
      "objeto_de_conhecimento": "Morfologia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 121,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7163,7 +7344,8 @@
      "objeto_de_conhecimento": "Conhecimento das diversas grafias do alfabeto/ Acentuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03LP06",
@@ -7178,7 +7360,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7242,7 +7425,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 103,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03LP01",
@@ -7257,7 +7441,8 @@
      "objeto_de_conhecimento": "Construção do sistema alfabético e da ortografia",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 117,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7320,7 +7505,8 @@
      "objeto_de_conhecimento": "Conhecimento das diversas grafias do alfabeto/ Acentuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03LP04",
@@ -7335,7 +7521,8 @@
      "objeto_de_conhecimento": "Conhecimento das diversas grafias do alfabeto/ Acentuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7400,7 +7587,8 @@
      "objeto_de_conhecimento": "Pontuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7463,7 +7651,8 @@
      "objeto_de_conhecimento": "Pontuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF04LP05",
@@ -7478,7 +7667,8 @@
      "objeto_de_conhecimento": "Pontuação",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 119,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7543,7 +7733,8 @@
      "objeto_de_conhecimento": "Compreensão em leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 105,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF15LP03",
@@ -7562,7 +7753,8 @@
      "objeto_de_conhecimento": "Estratégia de leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 97,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF02LP16",
@@ -7577,7 +7769,8 @@
      "objeto_de_conhecimento": "Forma de composição do texto",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 107,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7643,7 +7836,8 @@
      "objeto_de_conhecimento": "Compreensão em leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 121,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF15LP03",
@@ -7662,7 +7856,8 @@
      "objeto_de_conhecimento": "Estratégia de leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 97,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF03LP16",
@@ -7677,7 +7872,8 @@
      "objeto_de_conhecimento": "Forma de composição do texto",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 125,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7743,7 +7939,8 @@
      "objeto_de_conhecimento": "Formas de composição de narrativas",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 113,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF15LP03",
@@ -7762,7 +7959,8 @@
      "objeto_de_conhecimento": "Estratégia de leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 97,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF15LP16",
@@ -7781,7 +7979,8 @@
      "objeto_de_conhecimento": "Leitura colaborativa e autônoma",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 99,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7851,7 +8050,8 @@
      "objeto_de_conhecimento": "Estratégia de leitura",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 97,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -7957,7 +8157,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8024,7 +8225,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8091,7 +8293,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8158,7 +8361,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06LI05",
@@ -8173,7 +8377,8 @@
      "objeto_de_conhecimento": "Produção de textos orais, com a mediação do professor",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8246,7 +8451,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8313,7 +8519,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8380,7 +8587,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8447,7 +8655,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8514,7 +8723,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8581,7 +8791,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8648,7 +8859,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8715,7 +8927,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8782,7 +8995,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8849,7 +9063,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8916,7 +9131,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -8983,7 +9199,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9050,7 +9267,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9117,7 +9335,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9184,7 +9403,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9251,7 +9471,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9318,7 +9539,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9385,7 +9607,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9452,7 +9675,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9519,7 +9743,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9586,7 +9811,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9653,7 +9879,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9720,7 +9947,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9787,7 +10015,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9854,7 +10083,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9921,7 +10151,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -9988,7 +10219,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10055,7 +10287,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10122,7 +10355,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10189,7 +10423,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10256,7 +10491,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10323,7 +10559,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10390,7 +10627,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10457,7 +10695,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10524,7 +10763,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10591,7 +10831,8 @@
      "objeto_de_conhecimento": "Produção de textos orais, com a mediação do professor",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06LI17",
@@ -10606,7 +10847,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10679,7 +10921,8 @@
      "objeto_de_conhecimento": "Construção de laços afetivos e convívio social",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10746,7 +10989,8 @@
      "objeto_de_conhecimento": "Construção de laços afetivos e convívio social",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10813,7 +11057,8 @@
      "objeto_de_conhecimento": "Construção de laços afetivos e convívio social",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10880,7 +11125,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06LI02",
@@ -10895,7 +11141,8 @@
      "objeto_de_conhecimento": "Construção de laços afetivos e convívio social",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -10968,7 +11215,8 @@
      "objeto_de_conhecimento": "Produção de textos orais, com a mediação do professor",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06LI02",
@@ -10983,7 +11231,8 @@
      "objeto_de_conhecimento": "Construção de laços afetivos e convívio social",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -11078,7 +11327,7 @@
      ]
     }
    },
-   "observacao": "Passado simples (-ed) é habilidade do 7º ano (EF07LI18, EF07LI15, EF07LI16), não do 6º. Futuro com will não aparece do 6º ao 9º ano. Para 11 anos (6º ano) é conteúdo adiantado; para 12 anos (7º ano) cabe EF07LI18.",
+   "observacao": "Passado simples (-ed) é habilidade do 7º ano (EF07LI18, EF07LI15, EF07LI16), não do 6º. Futuro com will: a palavra não aparece no texto, mas o futuro é conteúdo do 8º ano (EF08LI14, EF08LI12); segue sem código no 6º e 7º. Para 11 anos (6º ano) é conteúdo adiantado; para 12 anos (7º ano) cabe EF07LI18.",
    "faixa_7_a_10": "fora da BNCC, extra",
    "faixa_11_a_12": "sem código claro"
   },
@@ -11102,7 +11351,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -11167,7 +11417,8 @@
      "objeto_de_conhecimento": "Construção de repertório lexical",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 253,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
@@ -11233,7 +11484,8 @@
      "objeto_de_conhecimento": "Compreensão geral e específica: leitura rápida (skimming, scanning)",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     },
     {
      "codigo": "EF06LI04",
@@ -11248,7 +11500,8 @@
      "objeto_de_conhecimento": "Estratégias de compreensão de textos orais: palavras cognatas e pistas do contexto discursivo",
      "fonte": "https://cdn.mec.gov.br/basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
      "pdf_pagina": 251,
-     "conferido": true
+     "conferido": true,
+     "citavel": true
     }
    ],
    "makers": {
