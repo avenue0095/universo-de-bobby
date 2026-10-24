@@ -4,24 +4,35 @@
    - a página do app: primeiro tenta a internet (para pegar a versão nova),
      e só usa o cache se estiver sem sinal;
    - ícones e manifesto: primeiro o cache, porque quase nunca mudam.  */
-const CACHE='bobby-v4';
+const CACHE='bobby-v5';
 /* Áudio gravado: cache próprio. O prefixo 'bobby-audio-' NUNCA é apagado na ativação (o app só guarda áudio aqui, por pacote:
    core, mat, pt, en). Troca de versão do app não faz a criança baixar 40 MB de novo. */
 const CACHE_AUDIO='bobby-audio-v1';
+/* Arte (WebP em assets/): cache próprio, também protegido na ativação ('bobby-arte-'). A camada 'inicial' do assets/manifesto.json
+   entra na instalação; o resto entra sozinho, na primeira vez que a criança vê a imagem. */
+const CACHE_ARTE='bobby-arte-v1';
 const ARQUIVOS=['./','./index.html','./manifest.webmanifest','./icone-192.png','./icone-512.png','./icone-maskable.png'];
 
+/* nunca derruba a instalação: se a arte não chegar agora, ela entra sob demanda depois */
+function preCarregarArte(){
+  return fetch('./assets/manifesto.json').then(r=>r.json()).then(m=>{
+    const lista=Object.keys(m.itens||{}).filter(k=>m.itens[k].inicial).map(k=>'./assets/'+m.itens[k].a);
+    return caches.open(CACHE_ARTE).then(c=>Promise.all(lista.map(u=>c.add(u).catch(()=>null))));
+  }).catch(()=>null);
+}
 self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ARQUIVOS)).then(()=>self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ARQUIVOS)).then(()=>preCarregarArte()).then(()=>self.skipWaiting()));
 });
 
 self.addEventListener('activate',e=>{
   e.waitUntil(caches.keys().then(ks=>Promise.all(
-    /* só apaga caches antigos DESTA app (bobby-v*); 'bobby-audio-*' (áudio gravado) e caches de outros nunca são apagados */
-    ks.filter(k=>k.startsWith('bobby-')&&!k.startsWith('bobby-audio-')&&k!==CACHE).map(k=>caches.delete(k))
+    /* só apaga caches antigos DESTA app (bobby-v*); 'bobby-audio-*' (áudio gravado), 'bobby-arte-*' (arte) e caches de outros nunca são apagados */
+    ks.filter(k=>k.startsWith('bobby-')&&!k.startsWith('bobby-audio-')&&!k.startsWith('bobby-arte-')&&k!==CACHE).map(k=>caches.delete(k))
   )).then(()=>self.clients.claim()));
 });
 
 const ehAudio=url=>/\/audio\/.+\.(m4a|opus)$/.test(url.pathname);
+const ehArte=url=>/\/assets\/(personagens|expressoes|itens|companheiros|planetas|cenarios|desenhos)\/.+\.webp$/.test(url.pathname);
 const ehManifestoAudio=url=>/\/audio\/manifesto-min\.json$/.test(url.pathname);
 
 const ehPagina=req=>req.mode==='navigate'||
@@ -36,6 +47,14 @@ self.addEventListener('fetch',e=>{
   /* clipe de áudio: cache primeiro (o nome muda quando o texto muda, então nunca fica velho) */
   if(url&&ehAudio(url)){
     e.respondWith(caches.open(CACHE_AUDIO).then(c=>c.match(req).then(r=>r||fetch(req).then(resp=>{
+      if(resp&&resp.status===200)c.put(req,resp.clone());
+      return resp;
+    }))));
+    return;
+  }
+  /* arte: cache primeiro, guarda na primeira vez (o arquivo só muda de nome quando muda a imagem) */
+  if(url&&ehArte(url)){
+    e.respondWith(caches.open(CACHE_ARTE).then(c=>c.match(req).then(r=>r||fetch(req).then(resp=>{
       if(resp&&resp.status===200)c.put(req,resp.clone());
       return resp;
     }))));

@@ -1,0 +1,711 @@
+{
+ "itens": {
+  "bobby-e01": {
+   "a": "expressoes/bobby-e01.webp",
+   "alfa": true,
+   "b": 81106,
+   "fonte": "BOBBY-E01.png",
+   "g": "expressao",
+   "h": 750,
+   "inicial": true,
+   "w": 768
+  },
+  "bobby-e02": {
+   "a": "expressoes/bobby-e02.webp",
+   "alfa": true,
+   "b": 71116,
+   "fonte": "BOBBY-E02.png",
+   "g": "expressao",
+   "h": 722,
+   "inicial": true,
+   "w": 710
+  },
+  "bobby-e03": {
+   "a": "expressoes/bobby-e03.webp",
+   "alfa": true,
+   "b": 65808,
+   "fonte": "BOBBY-E03.png",
+   "g": "expressao",
+   "h": 735,
+   "inicial": false,
+   "w": 725
+  },
+  "bobby-e04": {
+   "a": "expressoes/bobby-e04.webp",
+   "alfa": true,
+   "b": 88746,
+   "fonte": "BOBBY-E04.png",
+   "g": "expressao",
+   "h": 768,
+   "inicial": false,
+   "w": 740
+  },
+  "bobby-e05": {
+   "a": "expressoes/bobby-e05.webp",
+   "alfa": true,
+   "b": 90590,
+   "fonte": "BOBBY-E05.png",
+   "g": "expressao",
+   "h": 766,
+   "inicial": false,
+   "w": 768
+  },
+  "bobby-e06": {
+   "a": "expressoes/bobby-e06.webp",
+   "alfa": true,
+   "b": 92510,
+   "fonte": "BOBBY-E06.png",
+   "g": "expressao",
+   "h": 757,
+   "inicial": true,
+   "w": 768
+  },
+  "bobby-e07": {
+   "a": "expressoes/bobby-e07.webp",
+   "alfa": true,
+   "b": 82162,
+   "fonte": "BOBBY-E07.png",
+   "g": "expressao",
+   "h": 741,
+   "inicial": false,
+   "w": 768
+  },
+  "bobby-e08": {
+   "a": "expressoes/bobby-e08.webp",
+   "alfa": true,
+   "b": 89968,
+   "fonte": "BOBBY-E08.png",
+   "g": "expressao",
+   "h": 744,
+   "inicial": false,
+   "w": 768
+  },
+  "bobby-item-chapeu": {
+   "a": "itens/bobby-item-chapeu.webp",
+   "alfa": true,
+   "b": 22188,
+   "fonte": "BOBBY-ITEM-CHAPEU.png",
+   "g": "item",
+   "h": 292,
+   "inicial": false,
+   "w": 512
+  },
+  "bobby-p01": {
+   "a": "personagens/bobby-p01.webp",
+   "alfa": true,
+   "b": 57642,
+   "fonte": "BOBBY-P01.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": true,
+   "w": 521
+  },
+  "bobby-p02": {
+   "a": "personagens/bobby-p02.webp",
+   "alfa": true,
+   "b": 63744,
+   "fonte": "BOBBY-P02.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 612
+  },
+  "bobby-p03": {
+   "a": "personagens/bobby-p03.webp",
+   "alfa": true,
+   "b": 48868,
+   "fonte": "BOBBY-P03.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 383
+  },
+  "bobby-p04": {
+   "a": "personagens/bobby-p04.webp",
+   "alfa": true,
+   "b": 57132,
+   "fonte": "BOBBY-P04.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 556
+  },
+  "bobby-p05a": {
+   "a": "personagens/bobby-p05a.webp",
+   "alfa": true,
+   "b": 48712,
+   "fonte": "BOBBY-P05A.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": true,
+   "w": 506
+  },
+  "bobby-p05b": {
+   "a": "personagens/bobby-p05b.webp",
+   "alfa": true,
+   "b": 53182,
+   "fonte": "BOBBY-P05B.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": true,
+   "w": 486
+  },
+  "bobby-p06": {
+   "a": "personagens/bobby-p06.webp",
+   "alfa": true,
+   "b": 45948,
+   "fonte": "BOBBY-P06.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 422
+  },
+  "bobby-p07": {
+   "a": "personagens/bobby-p07.webp",
+   "alfa": true,
+   "b": 53728,
+   "fonte": "BOBBY-P07.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 459
+  },
+  "bobby-p08": {
+   "a": "personagens/bobby-p08.webp",
+   "alfa": true,
+   "b": 54000,
+   "fonte": "BOBBY-P08.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 449
+  },
+  "bobby-p09": {
+   "a": "personagens/bobby-p09.webp",
+   "alfa": true,
+   "b": 53502,
+   "fonte": "BOBBY-P09.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 483
+  },
+  "bobby-p10": {
+   "a": "personagens/bobby-p10.webp",
+   "alfa": true,
+   "b": 46436,
+   "fonte": "BOBBY-P10.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 378
+  },
+  "bobby-p11": {
+   "a": "personagens/bobby-p11.webp",
+   "alfa": true,
+   "b": 54236,
+   "fonte": "BOBBY-P11.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 507
+  },
+  "bobby-p12": {
+   "a": "personagens/bobby-p12.webp",
+   "alfa": true,
+   "b": 66696,
+   "fonte": "BOBBY-P12.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 671
+  },
+  "bobby-sheet-frente": {
+   "a": "personagens/bobby-sheet-frente.webp",
+   "alfa": true,
+   "b": 65412,
+   "fonte": "BOBBY-SHEET-FRENTE.png",
+   "g": "personagem",
+   "h": 768,
+   "inicial": false,
+   "w": 685
+  },
+  "brisa-p01": {
+   "a": "companheiros/brisa-p01.webp",
+   "alfa": true,
+   "b": 47486,
+   "fonte": "BRISA-P01.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 574
+  },
+  "brisa-p02": {
+   "a": "companheiros/brisa-p02.webp",
+   "alfa": true,
+   "b": 54216,
+   "fonte": "BRISA-P02.jpg",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 557
+  },
+  "brisa-p03": {
+   "a": "companheiros/brisa-p03.webp",
+   "alfa": true,
+   "b": 39822,
+   "fonte": "BRISA-P03.jpg",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 444
+  },
+  "brisa-p04": {
+   "a": "companheiros/brisa-p04.webp",
+   "alfa": true,
+   "b": 43702,
+   "fonte": "BRISA-P04.jpg",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 473
+  },
+  "capi-p01": {
+   "a": "companheiros/capi-p01.webp",
+   "alfa": true,
+   "b": 61040,
+   "fonte": "CAPI-P01.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 518
+  },
+  "capi-p02": {
+   "a": "companheiros/capi-p02.webp",
+   "alfa": true,
+   "b": 71400,
+   "fonte": "CAPI-P02.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 520
+  },
+  "capi-p03": {
+   "a": "companheiros/capi-p03.webp",
+   "alfa": true,
+   "b": 71358,
+   "fonte": "CAPI-P03.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 512
+  },
+  "capi-p04": {
+   "a": "companheiros/capi-p04.webp",
+   "alfa": true,
+   "b": 61240,
+   "fonte": "CAPI-P04.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 548
+  },
+  "cen-ing01-apagado": {
+   "a": "cenarios/cen-ing01-apagado.webp",
+   "alfa": false,
+   "b": 62208,
+   "fonte": "CEN-ING01-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": true,
+   "w": 765
+  },
+  "cen-ing01-completo": {
+   "a": "cenarios/cen-ing01-completo.webp",
+   "alfa": false,
+   "b": 88366,
+   "fonte": "CEN-ING01-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": true,
+   "w": 765
+  },
+  "cen-mat01-apagado": {
+   "a": "cenarios/cen-mat01-apagado.webp",
+   "alfa": false,
+   "b": 47766,
+   "fonte": "CEN-MAT01-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": true,
+   "w": 765
+  },
+  "cen-mat01-completo": {
+   "a": "cenarios/cen-mat01-completo.webp",
+   "alfa": false,
+   "b": 89044,
+   "fonte": "CEN-MAT01-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": true,
+   "w": 765
+  },
+  "cen-por01-apagado": {
+   "a": "cenarios/cen-por01-apagado.webp",
+   "alfa": false,
+   "b": 44754,
+   "fonte": "CEN-POR01-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": true,
+   "w": 765
+  },
+  "cen-por01-completo": {
+   "a": "cenarios/cen-por01-completo.webp",
+   "alfa": false,
+   "b": 63130,
+   "fonte": "CEN-POR01-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": true,
+   "w": 765
+  },
+  "des-ing01": {
+   "a": "desenhos/des-ing01.webp",
+   "alfa": false,
+   "b": 75042,
+   "fonte": "DES-ING01.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-ing02": {
+   "a": "desenhos/des-ing02.webp",
+   "alfa": false,
+   "b": 64932,
+   "fonte": "DES-ING02.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-ing03": {
+   "a": "desenhos/des-ing03.webp",
+   "alfa": false,
+   "b": 88096,
+   "fonte": "DES-ING03.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-ing04": {
+   "a": "desenhos/des-ing04.webp",
+   "alfa": false,
+   "b": 99436,
+   "fonte": "DES-ING04.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-ing05": {
+   "a": "desenhos/des-ing05.webp",
+   "alfa": false,
+   "b": 95416,
+   "fonte": "DES-ING05.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-ing06": {
+   "a": "desenhos/des-ing06.webp",
+   "alfa": false,
+   "b": 74848,
+   "fonte": "DES-ING06.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-ing07": {
+   "a": "desenhos/des-ing07.webp",
+   "alfa": false,
+   "b": 80062,
+   "fonte": "DES-ING07.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-ing08": {
+   "a": "desenhos/des-ing08.webp",
+   "alfa": false,
+   "b": 77736,
+   "fonte": "DES-ING08.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-ing09": {
+   "a": "desenhos/des-ing09.webp",
+   "alfa": false,
+   "b": 69980,
+   "fonte": "DES-ING09.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-ing10": {
+   "a": "desenhos/des-ing10.webp",
+   "alfa": false,
+   "b": 57188,
+   "fonte": "DES-ING10.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-mat01": {
+   "a": "desenhos/des-mat01.webp",
+   "alfa": false,
+   "b": 131416,
+   "fonte": "DES-MAT01.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-mat02": {
+   "a": "desenhos/des-mat02.webp",
+   "alfa": false,
+   "b": 103146,
+   "fonte": "DES-MAT02.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-mat03": {
+   "a": "desenhos/des-mat03.webp",
+   "alfa": false,
+   "b": 74276,
+   "fonte": "DES-MAT03.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-mat04": {
+   "a": "desenhos/des-mat04.webp",
+   "alfa": false,
+   "b": 93354,
+   "fonte": "DES-MAT04.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "fagulha-p01": {
+   "a": "companheiros/fagulha-p01.webp",
+   "alfa": true,
+   "b": 33684,
+   "fonte": "FAGULHA-P01.png",
+   "g": "companheiro",
+   "h": 765,
+   "inicial": false,
+   "w": 600
+  },
+  "fagulha-p02": {
+   "a": "companheiros/fagulha-p02.webp",
+   "alfa": true,
+   "b": 35162,
+   "fonte": "FAGULHA-P02.jpg",
+   "g": "companheiro",
+   "h": 754,
+   "inicial": false,
+   "w": 643
+  },
+  "fagulha-p03": {
+   "a": "companheiros/fagulha-p03.webp",
+   "alfa": true,
+   "b": 28614,
+   "fonte": "FAGULHA-P03.jpg",
+   "g": "companheiro",
+   "h": 688,
+   "inicial": false,
+   "w": 547
+  },
+  "fagulha-p04": {
+   "a": "companheiros/fagulha-p04.webp",
+   "alfa": true,
+   "b": 46976,
+   "fonte": "FAGULHA-P04.jpg",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 605
+  },
+  "otto-p01": {
+   "a": "companheiros/otto-p01.webp",
+   "alfa": true,
+   "b": 52426,
+   "fonte": "OTTO-P01.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 427
+  },
+  "otto-p02": {
+   "a": "companheiros/otto-p02.webp",
+   "alfa": true,
+   "b": 62510,
+   "fonte": "OTTO-P02.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 499
+  },
+  "otto-p03": {
+   "a": "companheiros/otto-p03.webp",
+   "alfa": true,
+   "b": 55610,
+   "fonte": "OTTO-P03.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 497
+  },
+  "otto-p04": {
+   "a": "companheiros/otto-p04.webp",
+   "alfa": true,
+   "b": 54930,
+   "fonte": "OTTO-P04.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 429
+  },
+  "planeta-ing": {
+   "a": "planetas/planeta-ing.webp",
+   "alfa": true,
+   "b": 96820,
+   "fonte": "PLANETA-ING.jpg",
+   "g": "planeta",
+   "h": 725,
+   "inicial": true,
+   "w": 730
+  },
+  "planeta-mat": {
+   "a": "planetas/planeta-mat.webp",
+   "alfa": true,
+   "b": 99410,
+   "fonte": "PLANETA-MAT.jpg",
+   "g": "planeta",
+   "h": 748,
+   "inicial": true,
+   "w": 848
+  },
+  "planeta-por": {
+   "a": "planetas/planeta-por.webp",
+   "alfa": true,
+   "b": 138306,
+   "fonte": "PLANETA-POR.jpg",
+   "g": "planeta",
+   "h": 910,
+   "inicial": true,
+   "w": 766
+  },
+  "rufa-p01": {
+   "a": "companheiros/rufa-p01.webp",
+   "alfa": true,
+   "b": 49550,
+   "fonte": "RUFA-P01.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 491
+  },
+  "rufa-p02": {
+   "a": "companheiros/rufa-p02.webp",
+   "alfa": true,
+   "b": 52036,
+   "fonte": "RUFA-P02.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 506
+  },
+  "rufa-p03": {
+   "a": "companheiros/rufa-p03.webp",
+   "alfa": true,
+   "b": 47152,
+   "fonte": "RUFA-P03.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 526
+  },
+  "rufa-p04": {
+   "a": "companheiros/rufa-p04.webp",
+   "alfa": true,
+   "b": 43146,
+   "fonte": "RUFA-P04.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 382
+  },
+  "teo-p01": {
+   "a": "companheiros/teo-p01.webp",
+   "alfa": true,
+   "b": 34412,
+   "fonte": "TEO-P01.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 403
+  },
+  "teo-p02": {
+   "a": "companheiros/teo-p02.webp",
+   "alfa": true,
+   "b": 35876,
+   "fonte": "TEO-P02.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 542
+  },
+  "teo-p03": {
+   "a": "companheiros/teo-p03.webp",
+   "alfa": true,
+   "b": 33182,
+   "fonte": "TEO-P03.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 373
+  },
+  "teo-p04": {
+   "a": "companheiros/teo-p04.webp",
+   "alfa": true,
+   "b": 35130,
+   "fonte": "TEO-P04.png",
+   "g": "companheiro",
+   "h": 768,
+   "inicial": false,
+   "w": 398
+  }
+ },
+ "totais": {
+  "demanda_bytes": 3384752,
+  "inicial_bytes": 1134072,
+  "itens": 70,
+  "total_bytes": 4518824
+ },
+ "versao": 1
+}

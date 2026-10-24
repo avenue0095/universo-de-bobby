@@ -18,11 +18,21 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 SRC = RAIZ / 'src'
 MARCADOR = re.compile(r'<!--@(style|script)\s+(.*?)\s*-->', re.S)
+ATIVOS_MARCA = '<!--@ativos-->'
 
 
 def ler(rel):
     # newline='' e bytes: nada de converter fim de linha
     return (SRC / rel).read_bytes().decode('utf-8')
+
+
+def ativos_js():
+    """Embute o indice de ativos (assets/manifesto.json) como constante ATIVOS: id -> [caminho, largura, altura, alfa, inicial]."""
+    import json
+    arq = RAIZ / 'assets' / 'manifesto.json'
+    itens = json.loads(arq.read_text(encoding='utf-8'))['itens'] if arq.exists() else {}
+    mini = {k: [v['a'], v['w'], v['h']] for k, v in sorted(itens.items())}
+    return '<script>const ATIVOS=%s;</script>' % json.dumps(mini, separators=(',', ':'), ensure_ascii=False)
 
 
 def montar():
@@ -35,7 +45,8 @@ def montar():
         corpo = ''.join(ler(f) for f in lista)
         return '<%s>\n%s</%s>' % (tag, corpo, tag)
 
-    return MARCADOR.sub(troca, shell)
+    html = MARCADOR.sub(troca, shell)
+    return html.replace(ATIVOS_MARCA, ativos_js())
 
 
 def main(argv):

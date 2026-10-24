@@ -25,11 +25,11 @@ async function ativar(existentes) {
 }
 (async () => {
   await teste('1. ativacao apaga so cache antigo da app (bobby-v*) e preserva o atual', async () => {
-    const ap = await ativar(['bobby-v1', 'bobby-v2', 'bobby-v3', 'bobby-v4']);
+    const ap = await ativar(['bobby-v1', 'bobby-v2', 'bobby-v3', 'bobby-v5']);
     A.strictEqual(JSON.stringify(ap), JSON.stringify(['bobby-v1', 'bobby-v2', 'bobby-v3']));
   });
   await teste('2. nunca apaga bobby-audio-* (cache de audio gravado)', async () => {
-    const ap = await ativar(['bobby-v2', 'bobby-v4', 'bobby-audio-v1', 'bobby-audio-core-v1', 'bobby-audio-en-v1']);
+    const ap = await ativar(['bobby-v2', 'bobby-v5', 'bobby-audio-v1', 'bobby-audio-core-v1', 'bobby-audio-en-v1', 'bobby-arte-v1']);
     A.strictEqual(JSON.stringify(ap), JSON.stringify(['bobby-v2']));
   });
   await teste('3. nao mexe em cache que nao e da app', async () => {
@@ -58,7 +58,28 @@ async function ativar(existentes) {
     A.strictEqual(rede.length, 2, 'a pagina tem que ir a rede primeiro');
     await pede('https://x.test/audio/manifesto-min.json');
     A.strictEqual(rede.length, 3, 'o manifesto vai a rede primeiro');
-    A.ok(!Object.keys(guardado).some((k) => k.startsWith('bobby-v4|') && /audio/.test(k)), 'audio caiu no cache da app');
+    A.ok(!Object.keys(guardado).some((k) => k.startsWith('bobby-v5|') && /audio/.test(k)), 'audio caiu no cache da app');
+  });
+  await teste('5. arte: cache primeiro em bobby-arte-v1, nunca no cache da app; precache so da camada inicial', async () => {
+    const guardado = {}; const rede = [];
+    const mk = (nome) => ({ match: async (r) => guardado[nome + '|' + (r.url || r)] || null, put: async (r) => { guardado[nome + '|' + (r.url || r)] = 1; }, add: async (u) => { guardado[nome + '|' + u] = 1; }, addAll: async () => {} });
+    const ouvintes = {};
+    const manifesto = { itens: { a: { a: 'x/a.webp', inicial: true }, b: { a: 'x/b.webp', inicial: false } } };
+    const sandbox = {
+      self: { addEventListener: (n, f) => { ouvintes[n] = f; }, clients: { claim: async () => {} }, skipWaiting: async () => {} },
+      caches: { keys: async () => [], delete: async () => true, open: async (n) => mk(n), match: async () => null },
+      fetch: async (req) => { const u = req.url || req; rede.push(u); return { status: 200, type: 'basic', clone() { return this; }, json: async () => manifesto }; },
+      URL, console,
+    };
+    vm.createContext(sandbox);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'sw.js'), 'utf8'), sandbox);
+    let espera; ouvintes.install({ waitUntil: (p) => { espera = p; } }); await espera;
+    A.ok(guardado['bobby-arte-v1|./assets/x/a.webp'], 'a camada inicial nao foi guardada');
+    A.ok(!guardado['bobby-arte-v1|./assets/x/b.webp'], 'a camada sob demanda foi guardada na instalacao');
+    const img = 'https://x.test/assets/cenarios/cen-mat01-completo.webp';
+    let r; ouvintes.fetch({ request: { url: img, method: 'GET', mode: 'no-cors', destination: 'image', headers: { get: () => '' } }, respondWith: (p) => { r = p; } }); await r;
+    A.ok(guardado['bobby-arte-v1|' + img], 'imagem nao entrou em bobby-arte-v1');
+    A.ok(!Object.keys(guardado).some((k) => k.startsWith('bobby-v5|') && /assets/.test(k)), 'arte caiu no cache da app');
   });
   resumo('sw.js');
 })();
