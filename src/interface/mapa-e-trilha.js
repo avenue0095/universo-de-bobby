@@ -5,6 +5,8 @@
 const NOS=[[16,78],[50,74],[84,78],[84,52],[50,48],[16,52]];   /* x e y em %; o 6º é a revisão */
 const REV_TOPO=70,REV_VAO=78;                                    /* faixa da revelação: de 70% (nada aceso) a -8% (tudo aceso) */
 const revPct=k=>(REV_TOPO-REV_VAO*Math.max(0,Math.min(5,k))/5).toFixed(1)+'%';
+/* cenas cujo "apagado" saiu fora de enquadramento (arte a realinhar): acendem por cross-fade, não por máscara */
+const CENA_FADE=['mat06','mat07','por09'];
 const NO_ANTES={},REV_ANTES={};                                  /* onde o Bobby e a luz estavam no desenho anterior (só nesta sessão) */
 
 function trilhaPontos(){
@@ -26,7 +28,9 @@ function noAtualDaEtapa(u){
 function cenaHTML(u,k){
   const cena=cenaDaEtapa(MATERIA,u.n),pl=PLANETAS[MATERIA];
   if(cena){
-    return '<div class="cena" data-k="'+k+'" style="--rev:'+revPct(REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n])+'">'+
+    const ant=REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n];
+    const fade=CENA_FADE.indexOf(PLANETAS[MATERIA].cena+('0'+u.n).slice(-2))>=0;
+    return '<div class="cena'+(fade?' fade':'')+'" data-k="'+k+'" style="--rev:'+revPct(ant)+';--op:'+(ant/5).toFixed(2)+'">'+
       imgArte(cena.apagado,{cls:'cena-base'})+imgArte(cena.completo,{cls:'cena-luz'});
   }
   /* sem arte da etapa: o planeta no céu da matéria; apagado por filtro, aceso pela mesma revelação */
@@ -83,9 +87,10 @@ function animarMapa(prox){
     const sec=el.closest('.etapa'),ui=+sec.id.replace('etapa-','')-1,chave=MATERIA+UNITS[ui].n,k=+el.dataset.k;
     const antes=REV_ANTES[chave];REV_ANTES[chave]=k;
     if(antes!=null&&antes!==k){
-      if(reduz)el.style.setProperty('--rev',revPct(k));
-      else requestAnimationFrame(()=>requestAnimationFrame(()=>el.style.setProperty('--rev',revPct(k))));
-    }else el.style.setProperty('--rev',revPct(k));
+      const acende=()=>{el.style.setProperty('--rev',revPct(k));el.style.setProperty('--op',(k/5).toFixed(2));};
+      if(reduz)acende();
+      else requestAnimationFrame(()=>requestAnimationFrame(acende));
+    }else{el.style.setProperty('--rev',revPct(k));el.style.setProperty('--op',(k/5).toFixed(2));}
   });
   const v=document.querySelectorAll('.voce')[0];
   if(v&&prox&&isFinite(+v.dataset.no)){

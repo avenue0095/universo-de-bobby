@@ -1321,3 +1321,7 @@ body:has(#licao.on) .aviso-voz{display:none}
   .pe.mostra .msg{flex:1 1 100%}
   .pe.mostra #acao{flex:1 1 100%;margin:0}
 }
+
+/* cenas com o apagado fora de enquadramento: a luz entra por opacidade (cross-fade) */
+.cena.fade .cena-luz{-webkit-mask-image:none;mask-image:none;opacity:var(--op,0);transition:opacity var(--mov-lento) var(--curva-move)}
+@media (prefers-reduced-motion:reduce){.cena.fade .cena-luz{transition:none}}

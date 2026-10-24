@@ -220,6 +220,16 @@
    "inicial": false,
    "w": 671
   },
+  "bobby-sheet": {
+   "a": "personagens/bobby-sheet.webp",
+   "alfa": true,
+   "b": 46604,
+   "fonte": "BOBBY-SHEET.png",
+   "g": "personagem",
+   "h": 337,
+   "inicial": false,
+   "w": 768
+  },
   "bobby-sheet-frente": {
    "a": "personagens/bobby-sheet-frente.webp",
    "alfa": true,
@@ -270,6 +280,16 @@
    "inicial": false,
    "w": 473
   },
+  "brisa-sheet": {
+   "a": "companheiros/brisa-sheet.webp",
+   "alfa": true,
+   "b": 53952,
+   "fonte": "BRISA-SHEET.png",
+   "g": "companheiro",
+   "h": 338,
+   "inicial": false,
+   "w": 768
+  },
   "capi-p01": {
    "a": "companheiros/capi-p01.webp",
    "alfa": true,
@@ -310,6 +330,16 @@
    "inicial": false,
    "w": 548
   },
+  "capi-sheet": {
+   "a": "companheiros/capi-sheet.webp",
+   "alfa": true,
+   "b": 57484,
+   "fonte": "CAPI-SHEET.png",
+   "g": "companheiro",
+   "h": 326,
+   "inicial": false,
+   "w": 768
+  },
   "cen-ing01-apagado": {
    "a": "cenarios/cen-ing01-apagado.webp",
    "alfa": false,
@@ -328,6 +358,186 @@
    "g": "cenario",
    "h": 1024,
    "inicial": true,
+   "w": 765
+  },
+  "cen-ing02-apagado": {
+   "a": "cenarios/cen-ing02-apagado.webp",
+   "alfa": false,
+   "b": 61766,
+   "fonte": "CEN-ING02-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing02-completo": {
+   "a": "cenarios/cen-ing02-completo.webp",
+   "alfa": false,
+   "b": 92734,
+   "fonte": "CEN-ING02-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing03-apagado": {
+   "a": "cenarios/cen-ing03-apagado.webp",
+   "alfa": false,
+   "b": 59846,
+   "fonte": "CEN-ING03-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing03-completo": {
+   "a": "cenarios/cen-ing03-completo.webp",
+   "alfa": false,
+   "b": 88100,
+   "fonte": "CEN-ING03-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing04-apagado": {
+   "a": "cenarios/cen-ing04-apagado.webp",
+   "alfa": false,
+   "b": 69456,
+   "fonte": "CEN-ING04-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing04-completo": {
+   "a": "cenarios/cen-ing04-completo.webp",
+   "alfa": false,
+   "b": 105224,
+   "fonte": "CEN-ING04-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing05-apagado": {
+   "a": "cenarios/cen-ing05-apagado.webp",
+   "alfa": false,
+   "b": 59224,
+   "fonte": "CEN-ING05-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing05-completo": {
+   "a": "cenarios/cen-ing05-completo.webp",
+   "alfa": false,
+   "b": 85548,
+   "fonte": "CEN-ING05-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing06-apagado": {
+   "a": "cenarios/cen-ing06-apagado.webp",
+   "alfa": false,
+   "b": 56484,
+   "fonte": "CEN-ING06-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing06-completo": {
+   "a": "cenarios/cen-ing06-completo.webp",
+   "alfa": false,
+   "b": 89176,
+   "fonte": "CEN-ING06-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing07-apagado": {
+   "a": "cenarios/cen-ing07-apagado.webp",
+   "alfa": false,
+   "b": 61792,
+   "fonte": "CEN-ING07-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing07-completo": {
+   "a": "cenarios/cen-ing07-completo.webp",
+   "alfa": false,
+   "b": 85968,
+   "fonte": "CEN-ING07-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing08-apagado": {
+   "a": "cenarios/cen-ing08-apagado.webp",
+   "alfa": false,
+   "b": 63622,
+   "fonte": "CEN-ING08-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing08-completo": {
+   "a": "cenarios/cen-ing08-completo.webp",
+   "alfa": false,
+   "b": 91492,
+   "fonte": "CEN-ING08-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing09-apagado": {
+   "a": "cenarios/cen-ing09-apagado.webp",
+   "alfa": false,
+   "b": 65620,
+   "fonte": "CEN-ING09-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing09-completo": {
+   "a": "cenarios/cen-ing09-completo.webp",
+   "alfa": false,
+   "b": 89668,
+   "fonte": "CEN-ING09-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing10-apagado": {
+   "a": "cenarios/cen-ing10-apagado.webp",
+   "alfa": false,
+   "b": 67004,
+   "fonte": "CEN-ING10-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-ing10-completo": {
+   "a": "cenarios/cen-ing10-completo.webp",
+   "alfa": false,
+   "b": 90916,
+   "fonte": "CEN-ING10-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
    "w": 765
   },
   "cen-mat01-apagado": {
@@ -350,6 +560,186 @@
    "inicial": true,
    "w": 765
   },
+  "cen-mat02-apagado": {
+   "a": "cenarios/cen-mat02-apagado.webp",
+   "alfa": false,
+   "b": 44202,
+   "fonte": "CEN-MAT02-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat02-completo": {
+   "a": "cenarios/cen-mat02-completo.webp",
+   "alfa": false,
+   "b": 76874,
+   "fonte": "CEN-MAT02-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat03-apagado": {
+   "a": "cenarios/cen-mat03-apagado.webp",
+   "alfa": false,
+   "b": 53650,
+   "fonte": "CEN-MAT03-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat03-completo": {
+   "a": "cenarios/cen-mat03-completo.webp",
+   "alfa": false,
+   "b": 83620,
+   "fonte": "CEN-MAT03-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat04-apagado": {
+   "a": "cenarios/cen-mat04-apagado.webp",
+   "alfa": false,
+   "b": 52476,
+   "fonte": "CEN-MAT04-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat04-completo": {
+   "a": "cenarios/cen-mat04-completo.webp",
+   "alfa": false,
+   "b": 80106,
+   "fonte": "CEN-MAT04-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat05-apagado": {
+   "a": "cenarios/cen-mat05-apagado.webp",
+   "alfa": false,
+   "b": 46014,
+   "fonte": "CEN-MAT05-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat05-completo": {
+   "a": "cenarios/cen-mat05-completo.webp",
+   "alfa": false,
+   "b": 73214,
+   "fonte": "CEN-MAT05-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat06-apagado": {
+   "a": "cenarios/cen-mat06-apagado.webp",
+   "alfa": false,
+   "b": 56666,
+   "fonte": "CEN-MAT06-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat06-completo": {
+   "a": "cenarios/cen-mat06-completo.webp",
+   "alfa": false,
+   "b": 92642,
+   "fonte": "CEN-MAT06-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat07-apagado": {
+   "a": "cenarios/cen-mat07-apagado.webp",
+   "alfa": false,
+   "b": 47170,
+   "fonte": "CEN-MAT07-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat07-completo": {
+   "a": "cenarios/cen-mat07-completo.webp",
+   "alfa": false,
+   "b": 79854,
+   "fonte": "CEN-MAT07-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat08-apagado": {
+   "a": "cenarios/cen-mat08-apagado.webp",
+   "alfa": false,
+   "b": 64232,
+   "fonte": "CEN-MAT08-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat08-completo": {
+   "a": "cenarios/cen-mat08-completo.webp",
+   "alfa": false,
+   "b": 80952,
+   "fonte": "CEN-MAT08-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat09-apagado": {
+   "a": "cenarios/cen-mat09-apagado.webp",
+   "alfa": false,
+   "b": 55564,
+   "fonte": "CEN-MAT09-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat09-completo": {
+   "a": "cenarios/cen-mat09-completo.webp",
+   "alfa": false,
+   "b": 89450,
+   "fonte": "CEN-MAT09-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat10-apagado": {
+   "a": "cenarios/cen-mat10-apagado.webp",
+   "alfa": false,
+   "b": 46556,
+   "fonte": "CEN-MAT10-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-mat10-completo": {
+   "a": "cenarios/cen-mat10-completo.webp",
+   "alfa": false,
+   "b": 76830,
+   "fonte": "CEN-MAT10-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
   "cen-por01-apagado": {
    "a": "cenarios/cen-por01-apagado.webp",
    "alfa": false,
@@ -368,6 +758,186 @@
    "g": "cenario",
    "h": 1024,
    "inicial": true,
+   "w": 765
+  },
+  "cen-por02-apagado": {
+   "a": "cenarios/cen-por02-apagado.webp",
+   "alfa": false,
+   "b": 76204,
+   "fonte": "CEN-POR02-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por02-completo": {
+   "a": "cenarios/cen-por02-completo.webp",
+   "alfa": false,
+   "b": 93172,
+   "fonte": "CEN-POR02-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por03-apagado": {
+   "a": "cenarios/cen-por03-apagado.webp",
+   "alfa": false,
+   "b": 85406,
+   "fonte": "CEN-POR03-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por03-completo": {
+   "a": "cenarios/cen-por03-completo.webp",
+   "alfa": false,
+   "b": 104912,
+   "fonte": "CEN-POR03-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por04-apagado": {
+   "a": "cenarios/cen-por04-apagado.webp",
+   "alfa": false,
+   "b": 76354,
+   "fonte": "CEN-POR04-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por04-completo": {
+   "a": "cenarios/cen-por04-completo.webp",
+   "alfa": false,
+   "b": 87000,
+   "fonte": "CEN-POR04-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por05-apagado": {
+   "a": "cenarios/cen-por05-apagado.webp",
+   "alfa": false,
+   "b": 78192,
+   "fonte": "CEN-POR05-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por05-completo": {
+   "a": "cenarios/cen-por05-completo.webp",
+   "alfa": false,
+   "b": 91106,
+   "fonte": "CEN-POR05-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por06-apagado": {
+   "a": "cenarios/cen-por06-apagado.webp",
+   "alfa": false,
+   "b": 74986,
+   "fonte": "CEN-POR06-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por06-completo": {
+   "a": "cenarios/cen-por06-completo.webp",
+   "alfa": false,
+   "b": 92530,
+   "fonte": "CEN-POR06-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por07-apagado": {
+   "a": "cenarios/cen-por07-apagado.webp",
+   "alfa": false,
+   "b": 58056,
+   "fonte": "CEN-POR07-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por07-completo": {
+   "a": "cenarios/cen-por07-completo.webp",
+   "alfa": false,
+   "b": 79970,
+   "fonte": "CEN-POR07-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por08-apagado": {
+   "a": "cenarios/cen-por08-apagado.webp",
+   "alfa": false,
+   "b": 59180,
+   "fonte": "CEN-POR08-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por08-completo": {
+   "a": "cenarios/cen-por08-completo.webp",
+   "alfa": false,
+   "b": 78978,
+   "fonte": "CEN-POR08-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por09-apagado": {
+   "a": "cenarios/cen-por09-apagado.webp",
+   "alfa": false,
+   "b": 76684,
+   "fonte": "CEN-POR09-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por09-completo": {
+   "a": "cenarios/cen-por09-completo.webp",
+   "alfa": false,
+   "b": 82180,
+   "fonte": "CEN-POR09-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por10-apagado": {
+   "a": "cenarios/cen-por10-apagado.webp",
+   "alfa": false,
+   "b": 62390,
+   "fonte": "CEN-POR10-APAGADO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "cen-por10-completo": {
+   "a": "cenarios/cen-por10-completo.webp",
+   "alfa": false,
+   "b": 80528,
+   "fonte": "CEN-POR10-COMPLETO.jpg",
+   "g": "cenario",
+   "h": 1024,
+   "inicial": false,
    "w": 765
   },
   "des-ing01": {
@@ -510,6 +1080,166 @@
    "inicial": false,
    "w": 765
   },
+  "des-mat05": {
+   "a": "desenhos/des-mat05.webp",
+   "alfa": false,
+   "b": 88088,
+   "fonte": "DES-MAT05.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-mat06": {
+   "a": "desenhos/des-mat06.webp",
+   "alfa": false,
+   "b": 80882,
+   "fonte": "DES-MAT06.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-mat07": {
+   "a": "desenhos/des-mat07.webp",
+   "alfa": false,
+   "b": 92532,
+   "fonte": "DES-MAT07.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-mat08": {
+   "a": "desenhos/des-mat08.webp",
+   "alfa": false,
+   "b": 115504,
+   "fonte": "DES-MAT08.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-mat09": {
+   "a": "desenhos/des-mat09.webp",
+   "alfa": false,
+   "b": 77930,
+   "fonte": "DES-MAT09.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-mat10": {
+   "a": "desenhos/des-mat10.webp",
+   "alfa": false,
+   "b": 71358,
+   "fonte": "DES-MAT10.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por01": {
+   "a": "desenhos/des-por01.webp",
+   "alfa": false,
+   "b": 99108,
+   "fonte": "DES-POR01.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por02": {
+   "a": "desenhos/des-por02.webp",
+   "alfa": false,
+   "b": 89796,
+   "fonte": "DES-POR02.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por03": {
+   "a": "desenhos/des-por03.webp",
+   "alfa": false,
+   "b": 87368,
+   "fonte": "DES-POR03.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por04": {
+   "a": "desenhos/des-por04.webp",
+   "alfa": false,
+   "b": 97012,
+   "fonte": "DES-POR04.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por05": {
+   "a": "desenhos/des-por05.webp",
+   "alfa": false,
+   "b": 74938,
+   "fonte": "DES-POR05.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por06": {
+   "a": "desenhos/des-por06.webp",
+   "alfa": false,
+   "b": 111588,
+   "fonte": "DES-POR06.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por07": {
+   "a": "desenhos/des-por07.webp",
+   "alfa": false,
+   "b": 90030,
+   "fonte": "DES-POR07.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por08": {
+   "a": "desenhos/des-por08.webp",
+   "alfa": false,
+   "b": 94670,
+   "fonte": "DES-POR08.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por09": {
+   "a": "desenhos/des-por09.webp",
+   "alfa": false,
+   "b": 91372,
+   "fonte": "DES-POR09.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
+  "des-por10": {
+   "a": "desenhos/des-por10.webp",
+   "alfa": false,
+   "b": 77212,
+   "fonte": "DES-POR10.jpg",
+   "g": "desenho",
+   "h": 1024,
+   "inicial": false,
+   "w": 765
+  },
   "fagulha-p01": {
    "a": "companheiros/fagulha-p01.webp",
    "alfa": true,
@@ -550,6 +1280,16 @@
    "inicial": false,
    "w": 605
   },
+  "fagulha-sheet": {
+   "a": "companheiros/fagulha-sheet.webp",
+   "alfa": true,
+   "b": 37854,
+   "fonte": "FAGULHA-SHEET.png",
+   "g": "companheiro",
+   "h": 282,
+   "inicial": false,
+   "w": 768
+  },
   "otto-p01": {
    "a": "companheiros/otto-p01.webp",
    "alfa": true,
@@ -589,6 +1329,16 @@
    "h": 768,
    "inicial": false,
    "w": 429
+  },
+  "otto-sheet": {
+   "a": "companheiros/otto-sheet.webp",
+   "alfa": true,
+   "b": 55492,
+   "fonte": "OTTO-SHEET.png",
+   "g": "companheiro",
+   "h": 366,
+   "inicial": false,
+   "w": 768
   },
   "planeta-ing": {
    "a": "planetas/planeta-ing.webp",
@@ -660,6 +1410,16 @@
    "inicial": false,
    "w": 382
   },
+  "rufa-sheet": {
+   "a": "companheiros/rufa-sheet.webp",
+   "alfa": true,
+   "b": 47754,
+   "fonte": "RUFA-SHEET.png",
+   "g": "companheiro",
+   "h": 357,
+   "inicial": false,
+   "w": 768
+  },
   "teo-p01": {
    "a": "companheiros/teo-p01.webp",
    "alfa": true,
@@ -699,13 +1459,24 @@
    "h": 768,
    "inicial": false,
    "w": 398
+  },
+  "teo-sheet": {
+   "a": "companheiros/teo-sheet.webp",
+   "alfa": true,
+   "b": 33894,
+   "fonte": "TEO-SHEET.png",
+   "g": "companheiro",
+   "h": 362,
+   "inicial": false,
+   "w": 768
   }
  },
+ "manifesto_arte_lido": true,
  "totais": {
-  "demanda_bytes": 3384752,
+  "demanda_bytes": 9178714,
   "inicial_bytes": 1134072,
-  "itens": 70,
-  "total_bytes": 4518824
+  "itens": 147,
+  "total_bytes": 10312786
  },
  "versao": 1
 }
