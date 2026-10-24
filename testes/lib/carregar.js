@@ -50,6 +50,8 @@ function prng(semente) {
 }
 
 /* Elemento falso que aceita qualquer leitura/chamada: serve para o app rodar sem DOM. */
+/* tudo o que o app escreve em innerHTML ou insertAdjacentHTML fica aqui, para os testes de seguranca olharem */
+const HTML_LOG = [];
 function elementoFalso() {
   const fn = function () {};
   const alvo = new Proxy(fn, {
@@ -61,11 +63,12 @@ function elementoFalso() {
       if (prop === 'value') return '';
       if (prop === 'style') return { setProperty() {}, };
       if (prop === 'classList') return { add() {}, remove() {}, toggle() {}, contains() { return false; } };
+      if (prop === 'insertAdjacentHTML') return (_p, h) => { HTML_LOG.push(String(h)); };
       if (prop === 'querySelectorAll') return () => [];
       if (prop === 'forEach') return () => {};
       return alvo;
     },
-    set() { return true; },
+    set(_, prop, val) { if (prop === 'innerHTML' || prop === 'outerHTML') HTML_LOG.push(String(val)); return true; },
     apply() { return alvo; },
   });
   return alvo;
@@ -145,4 +148,4 @@ function carregarModulos(arquivos, saida, semente) {
   return Object.assign({ ctx, avaliar: (js) => vm.runInContext(js, ctx) }, out);
 }
 
-module.exports = { carregarModulos, RAIZ, SRC, ordemDosScripts, blocosDoShell, ler, carregarConteudo, carregarApp, prng, vm };
+module.exports = { HTML_LOG, carregarModulos, RAIZ, SRC, ordemDosScripts, blocosDoShell, ler, carregarConteudo, carregarApp, prng, vm };

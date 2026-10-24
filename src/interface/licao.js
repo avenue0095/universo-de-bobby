@@ -140,18 +140,18 @@ function pintarLicao(){
     (LIC.rev?'Revisão · ':'')+'Pergunta '+(LIC.i+1)+
     (q.__rep?' · <b>de novo</b>':'')+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+
-    (q.lang?' data-lang="'+q.lang+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>';
+    (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>';
   /* nas duas primeiras perguntas a regra da aula fica na tela: nunca cobrar antes de ensinar */
   if(!LIC.rev&&LIC.i<2){
     const lem=lembreteDaAula(LIC.l);
     /* telas baixas (celular): o lembrete começa fechado para a alternativa 3 não ir parar embaixo do painel */
     if(lem)h+='<details class="lembrete"'+(innerHeight>=820?' open':'')+'><summary class="tit">'+IC.lampada+' Lembre da aula</summary>'+lem+'</details>';
   }
-  h+='<h2 class="pergunta">'+q.prompt+'</h2>';
+  h+='<h2 class="pergunta">'+htmlSeguro(q.prompt,500)+'</h2>';
   if(q.figure)h+='<div class="figura">'+q.figure+'</div>';
   if(q.type==='mc'){
     h+='<div class="alts">';
-    q.options.forEach((o,k)=>{h+='<button class="alt" data-v="'+k+'"><span class="k">'+(k+1)+'</span><span>'+o+'</span></button>';});
+    q.options.forEach((o,k)=>{h+='<button class="alt" data-v="'+k+'"><span class="k">'+(k+1)+'</span><span>'+htmlSeguro(o,120)+'</span></button>';});
     h+='</div>';
   }else if(q.type==='blocos'){
     h+=blocosHTML(q);
@@ -407,7 +407,7 @@ function conferir(){
     $('#selo').innerHTML=MASC('ops','avatar');
     $('#fb-t').innerHTML=IC.refazer+'<span>Quase!</span>';
     if(ehF78())falar('Quase!');
-    $('#fb-s').innerHTML='A resposta certa é <b>'+q.answer+'</b>.'+
+    $('#fb-s').innerHTML='A resposta certa é <b>'+htmlSeguro(q.answer,120)+'</b>.'+
       (LIC.vidas>0?' Esta pergunta volta no fim para você tentar de novo.':'');
     if(!q.__rep&&LIC.vidas>0){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);}
     somErro();pintarVidas();

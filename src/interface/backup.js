@@ -10,16 +10,17 @@ function montarPacote(p){
 /* Lê o texto de um arquivo de backup. Devolve {ok:false,erro} ou
    {ok:true,versao,id,nome,cor,dados,somaConfere}. Aceita as versões 3 e 4 (a 3 passa pela migração). */
 function lerPacote(texto){
+  if(typeof texto!=='string'||texto.length>TETO_BACKUP_BYTES)return {ok:false,erro:'Esse arquivo é grande demais para ser um backup do Universo de Bobby.'};
   let pac=null;
-  try{pac=JSON.parse(texto);}catch(e){}
+  try{pac=JSON.parse(texto,semChavesPerigosas);}catch(e){}
   if(!pac||pac.app!=='universo-de-bobby'||!pac.perfil||typeof pac.perfil!=='object')
     return {ok:false,erro:'Esse arquivo não é um backup do Universo de Bobby.'};
   const v=+pac.versao;
   if(v!==3&&v!==4)return {ok:false,erro:v>4?'Esse backup vem de uma versão mais nova do app. Atualize o app e tente de novo.':'Não reconheci a versão desse backup.'};
   const pf=pac.perfil;
   const somaConfere=v===4?(String(pac.soma||'')===somaDoPerfil(pf)):true;
-  const nome=String(pf.nome||'Jogador').slice(0,18);
-  return {ok:true,versao:v,id:v===4&&pf.id?String(pf.id).slice(0,40):'',nome:nome,
+  const nome=nomeSeguro(pf.nome||'Jogador',18)||'Jogador';
+  return {ok:true,versao:v,id:v===4&&pf.id?String(pf.id).replace(/[^A-Za-z0-9_-]/g,'').slice(0,40):'',nome:nome,
     cor:CORES.indexOf(pf.cor)>=0?pf.cor:null,dados:estadoDe(pf.dados),somaConfere:somaConfere};
 }
 /* coloca o perfil lido no armazenamento. modo: 'substituir' (troca o de mesmo id) ou 'novo' (cria outro) */
@@ -48,6 +49,7 @@ function restaurarPerfil(){
   ent.type='file';ent.accept='application/json,.json';
   ent.addEventListener('change',()=>{
     const f=ent.files&&ent.files[0];if(!f)return;
+    if(f.size>TETO_BACKUP_BYTES){alertaResp('Esse arquivo é grande demais para ser um backup do Universo de Bobby.');return;}
     const fr=new FileReader();
     fr.onload=()=>{
       const lido=lerPacote(String(fr.result));

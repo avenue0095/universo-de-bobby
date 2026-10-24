@@ -87,7 +87,7 @@ function mostrarBilhete(){
   if(!b)return;
   abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('presente')+'</div><h2>Um bilhete do Bobby</h2>'+
     '<p class="bilhete-texto">'+b.texto+'</p>'+
-    '<ul class="folha-lista"><li>No baú de amanhã: '+b.presente+'</li><li>'+b.pronto+'</li></ul>'+
+    '<ul class="folha-lista"><li>No baú de amanhã: '+escapa(b.presente)+'</li><li>'+b.pronto+'</li></ul>'+
     '<div class="folha-bts"><button class="btn-sec" id="fl-ouvir" aria-label="Ouvir o bilhete">'+IC.falar+' Ouvir</button>'+
     '<button class="btn-acao" id="fl-ok">Vamos jogar</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{marcarBilheteVisto();fecharFolha();});

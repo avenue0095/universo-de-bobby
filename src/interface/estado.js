@@ -64,7 +64,7 @@ function estadoVazio(){
     legado:{nivel:'',errados:{},vozPt:'',vozEn:'',migradoEm:''}};
 }
 function clonar(o){
-  try{return JSON.parse(JSON.stringify(o));}catch(e){return null;}
+  try{return JSON.parse(JSON.stringify(o),semChavesPerigosas);}catch(e){return null;}
 }
 function normalizaOfensiva(x){
   x=objDe(x);const o=ofensivaNova();
@@ -107,7 +107,7 @@ function normalizaDiario(x){
 }
 function normalizaRevisao(x){
   x=objDe(x);const r=revisaoVazia(),it=objDe(x.itens),cg=objDe(x.congelados);
-  Object.keys(cg).slice(0,1500).forEach(k=>{const q=objDe(cg[k]);if(typeof q.prompt==='string'&&q.answer!==undefined)r.congelados[k]=q;});
+  Object.keys(cg).slice(0,1500).forEach(k=>{if(!chaveOk(k)||!/^[a-zA-Z0-9:._|-]{1,80}$/.test(k))return;const q=perguntaSegura(cg[k]);if(q)r.congelados[k]=Object.assign(q,{m:['mat','pt','en'].indexOf(objDe(cg[k]).m)>=0?objDe(cg[k]).m:'mat'});});
   Object.keys(it).slice(0,2500).forEach(k=>{
     const a=it[k];if(!Array.isArray(a)||a.length<5||!ehDia(a[1]))return;
     if(k.indexOf('er:')===0&&!r.congelados[k])return;          /* erro sem a pergunta guardada não dá para refazer */
@@ -142,20 +142,20 @@ function estadoDe(dados){
   if(d&&ehDadosV3(d))d=migrarDadosV3(d,hoje());
   const s=estadoVazio();
   d=d||{};
-  s.nome=String(d.nome||'').slice(0,18);
+  s.nome=nomeSeguro(d.nome,18);
   s.faixa=FAIXAS.indexOf(d.faixa)>=0?d.faixa:'f78';
   s.materia=['mat','pt','en'].indexOf(d.materia)>=0?d.materia:'mat';
   s.xp=intDe(d.xp,0,1e9,0);s.moedas=intDe(d.moedas,0,1e9,0);
   s.acertosTotal=intDe(d.acertosTotal,0,1e9,0);s.melhorCombo=intDe(d.melhorCombo,0,1e6,0);
   const f=objDe(d.feitas);Object.keys(f).forEach(k=>{const e=estrelasDe(f[k]);if(e>0)s.feitas[k]=e;});
-  const er=objDe(d.errados);Object.keys(er).forEach(k=>{if(Array.isArray(er[k]))s.errados[k]=er[k].filter(q=>q&&typeof q==='object'&&q.prompt!==undefined).slice(-30);});
-  s.comprado=textosDe(d.comprado,400,40);
-  s.look=objDe(d.look);
+  const er=objDe(d.errados);Object.keys(er).forEach(k=>{if(!chaveOk(k)||!/^(mat|pt|en)[0-9]{1,2}$/.test(k))return;if(Array.isArray(er[k]))s.errados[k]=er[k].map(perguntaSegura).filter(Boolean).slice(-30);});
+  s.comprado=listaDe(d.comprado,400).map(x=>idSimples(x)).filter(Boolean);
+  s.look={};const lk=objDe(d.look);['chapeu','rosto','pescoco','pelo','pers','companheiro'].forEach(k=>{if(lk[k]!==undefined){const v=k==='pelo'||lk[k]===''?String(lk[k]).replace(/[^a-z0-9-]/g,'').slice(0,24):idSimples(lk[k]);s.look[k]=v;}});
   s.desenhos=normalizaDesenhos(d.desenhos,s.feitas);
   s.ofensiva=normalizaOfensiva(d.ofensiva);
   s.diario=normalizaDiario(d.diario);
   const e=objDe(d.espera);
-  s.espera=d.espera&&typeof d.espera==='object'?{bilhete:String(e.bilhete||'').slice(0,20),presente:String(e.presente||'').slice(0,40),desde:diaOuVazio(e.desde),vistoEm:diaOuVazio(e.vistoEm),mundoNovo:!!e.mundoNovo,erroDificil:!!e.erroDificil,usouCongelador:diaOuVazio(e.usouCongelador)}:null;
+  s.espera=d.espera&&typeof d.espera==='object'?{bilhete:String(e.bilhete||'').slice(0,20),presente:textoCurtoSeguro(e.presente,40),desde:diaOuVazio(e.desde),vistoEm:diaOuVazio(e.vistoEm),mundoNovo:!!e.mundoNovo,erroDificil:!!e.erroDificil,usouCongelador:diaOuVazio(e.usouCongelador)}:null;
   s.config=normalizaConfig(d.config);
   s.revisao=normalizaRevisao(d.revisao);
   s.colecao=normalizaColecao(d.colecao);
@@ -190,7 +190,7 @@ function arrumarStore(x){
     st.perfis.push({
       id:String(p.id||('p'+Date.now().toString(36)+i.toString(36))),
       pid:String(p.pid||sorteioId(12)).slice(0,24),
-      nome:String(p.nome||('Jogador '+(i+1))).slice(0,18),
+      nome:nomeSeguro(p.nome||('Jogador '+(i+1)),18)||('Jogador '+(i+1)),
       cor:CORES.indexOf(p.cor)>=0?p.cor:CORES[i%CORES.length],
       criado:+p.criado||Date.now(),
       dados:estadoDe(p.dados)
