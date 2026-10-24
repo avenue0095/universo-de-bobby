@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+<meta name="theme-color" content="#12A06E">
+<meta name="description" content="O Universo de Bobby: matematica, portugues e ingles para criancas de 8 a 13 anos.">
+<title>O Universo de Bobby</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap">
+<!--@style interface/style.css-->
+
+<div class="ceu" id="ceu" aria-hidden="true"></div>
+
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="512x512" href="./icone-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./icone-192.png">
+<link rel="icon" type="image/png" href="./icone-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Bobby">
+<meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+<header class="topo">
+  <div class="topo-in">
+    <div class="marca">
+      <div class="sig" id="logo"></div>
+      <div><b id="nome-materia">Matemática</b><span>O universo de Bobby</span></div>
+    </div>
+    <div class="stat fogo" id="st-fogo" title="Dias seguidos jogando"></div>
+    <div class="stat moedas" id="st-moedas" title="Moedas"></div>
+    <button class="icobtn" id="troca-materia" aria-label="Trocar de matéria" title="Trocar de galáxia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3.4"/><ellipse cx="12" cy="12" rx="10" ry="4.6" transform="rotate(-30 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.6" transform="rotate(30 12 12)"/></svg></button>
+    <button class="icobtn" id="galeria-bt" aria-label="Meus desenhos" title="Meus desenhos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m5.5 17 4-5 3 3.5L16 10.5l2.6 6.5"/><circle cx="8.6" cy="9" r="1.6" fill="currentColor" stroke="none"/></svg></button>
+    <button class="icobtn" id="trocar-nome" aria-label="Trocar de jogador" title="Trocar de jogador"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg></button>
+    <button class="icobtn" id="som" aria-label="Sons"></button>
+  </div>
+</header>
+
+<section class="perfis" id="perfis"></section>
+<section class="perfis" id="materias"></section>
+<section class="galeria-tela" id="perfil"></section>
+
+<main class="tela" id="tela"></main>
+
+<section class="licao" id="licao" aria-live="polite">
+  <div class="lc-topo">
+    <button class="icobtn" id="fechar" aria-label="Sair da fase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="barra"><i id="prog"></i></div>
+    <button class="icobtn" id="rever" aria-label="Rever a aula" title="Rever a aula"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2ZM9 19h6v1.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 20.5V19Z"/></svg></button>
+    <div class="vidas" id="vidas" title="Corações desta fase"></div>
+  </div>
+  <div class="lc-corpo"><div class="lc-in" id="palco"></div></div>
+  <div class="pe" id="pe">
+    <div class="pe-in">
+      <button id="dica" aria-label="Pedir uma dica" title="Pedir uma dica"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2ZM9 19h6v1.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 20.5V19Z"/></svg></button>
+      <div class="msg"><span class="selo" id="selo"></span><div><b id="fb-t"></b><small id="fb-s"></small></div></div>
+      <button class="btn" id="acao">Verificar</button>
+    </div>
+  </div>
+
+  <div class="revisao" id="revisao">
+    <div class="rev-topo">
+      <button class="icobtn" id="fechar-rev" aria-label="Voltar aos exercícios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg></button>
+      <h2 id="rev-titulo">Aula</h2>
+    </div>
+    <div class="rev-corpo" id="rev-corpo"></div>
+  </div>
+</section>
+
+<section class="galeria-tela" id="galeria">
+  <div class="rev-topo">
+    <button class="icobtn" id="fechar-gal" aria-label="Fechar a galeria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg></button>
+    <h2>Meus desenhos para colorir</h2>
+  </div>
+  <div class="rev-corpo" id="gal-corpo"></div>
+</section>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="tt-nome">
+  <div class="cx">
+    <div class="mascote-cx" id="masc-modal" style="width:96px;height:96px;margin:0 auto"></div>
+    <h2 id="tt-nome">Novo jogador</h2>
+    <p id="txt-nome">Escolha um nome e a cor do seu Bobby.</p>
+    <input id="campo-nome" maxlength="18" placeholder="Seu nome" autocomplete="off">
+    <div class="cores" id="cores"></div>
+    <div class="niveis" id="niveis"></div>
+    <div class="linha">
+      <button class="btn fantasma" id="pular-nome">Cancelar</button>
+      <button class="btn" id="salvar-nome">Pronto!</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!--@script conteudo/matematica-motor.js conteudo/matematica-curriculo.js-->
+<!--@script conteudo/aulas-matematica.js-->
+<!--@script conteudo/historias-matematica.js-->
+<!--@script conteudo/desenhos.js-->
+<!--@script conteudo/portugues.js-->
+<!--@script conteudo/historias-portugues.js-->
+<!--@script conteudo/aulas-portugues.js-->
+<!--@script conteudo/ingles.js-->
+<!--@script conteudo/aulas-ingles.js-->
+<!--@script conteudo/lexico-ingles.js-->
+<!--@script conteudo/historias-ingles.js-->
+<!--@script
+  interface/base.js
+  interface/personagem.js
+  interface/cenario-e-materias.js
+  interface/estado.js
+  interface/som-e-voz.js
+  interface/utilidades.js
+  interface/mapa-e-trilha.js
+  interface/licao.js
+  interface/caderno-e-revisao.js
+  interface/loja-e-conquistas.js
+  interface/perfil-e-responsavel.js
+  interface/voz-e-seguranca.js
+  interface/telas-auxiliares.js
+  interface/ligacoes.js
+  interface/enfeite-ceu.js
+-->
+
+<!--@script interface/pwa.js-->
+</body>
+</html>
