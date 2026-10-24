@@ -10,12 +10,14 @@ O arquivo que o navegador abre, `index.html`, **é gerado**. A fonte está em `s
 ```
 src/interface/shell.html   o HTML da página, com marcadores no lugar do estilo e dos scripts
 src/interface/style.css    todo o CSS
+assets/                    arte em WebP, fontes (OFL) e manifesto.json: gerados por build/ativos.py a partir de arte/
 audio/                     clipes gravados (.m4a e .opus), manifesto-min.json, ferramentas do gerador e LEIA-ME.md
 src/interface/*.js         o aplicativo (telas, lição, perfil, loja, voz, PWA...). Núcleo sem DOM, testado em Node:
                            nucleo.js (dia local, hash), ofensiva.js, migracao.js, estado.js (v4), revisao-espacada.js,
                            ciclo.js (meta, baú, missões, bilhete), medicao.js, audio.js, backup.js. Telas do ciclo: ciclo-ui.js
 src/conteudo/*.js          currículo, aulas, histórias, desenhos, léxico (mat, pt, en)
 build/build.py             junta tudo e grava /index.html
+build/ativos.py            converte arte/ em assets/*.webp (precisa de Pillow, NumPy e SciPy; so quando a arte muda)
 testes/                    verificações em Node
 ```
 
@@ -44,7 +46,9 @@ Precisa de Node 22+ e Python 3. Nada para instalar. `npm test` roda tudo menos o
 | `node testes/revisao.js` | caixas 1, 3, 7, 14, 30, teto de 10 por dia, aquecimento, freios |
 | `node testes/medicao.js` | eventos sem dado pessoal, D1/D7/D30, teto de 4.000 eventos |
 | `node testes/sw.js` | a ativação do service worker só apaga caches `bobby-v*` antigos e preserva `bobby-audio-*` |
-| `node testes/tokens.js` | hex solto e token inexistente no CSS novo |
+| `node testes/tokens.js` | CSS inteiro: sem hex fora do :root, fonte e espaco por token, contraste AA |
+| `node testes/ativos.js` | manifesto bate com os arquivos, teto por imagem, app inicial abaixo de 3 MB |
+| `node testes/desenhos.js` | 30 desenhos, direito herdado, balde de tinta, ativos coerentes |
 | `node testes/fumaca.js [--foto]` | Chrome de verdade (sem pacote, via DevTools): joga uma fase de cada matéria, o ciclo do dia inteiro (bilhete, rotina, Meu personagem, baú, parada) e a migração de um estado v3, em desktop e celular. Falha se houver erro de console |
 | `python3 build/build.py --check` | falha se `index.html` não for o que `src/` gera |
 
@@ -59,7 +63,7 @@ Quem já instalou o app depende destes endereços. `node testes/trava-url.js` fa
 - `manifest.webmanifest`: `"start_url": "./index.html"` e `"scope": "./"`;
 - `sw.js` guarda `./` e `./index.html`; HTML vai sempre à rede primeiro (versão nova chega sozinha).
 
-Se mexer em `sw.js`, suba o número de `CACHE` (hoje `bobby-v4`). O áudio gravado vive em `bobby-audio-v1`, que a ativação nunca apaga.
+Se mexer em `sw.js`, suba o número de `CACHE` (hoje `bobby-v5`). O áudio gravado vive em `bobby-audio-v1` e a arte em `bobby-arte-v1`; a ativação nunca apaga nenhum dos dois.
 
 ## Pastas que não são do app
 

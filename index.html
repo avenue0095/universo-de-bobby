@@ -283,18 +283,12 @@
 
 
 
-/* ---------- legado temporário: o cenário procedural e o urso de SVG saem junto com o mapa novo e o Bobby de imagem ---------- */
-:root{
-  --m1:#A9713F; --m2:#8A5A2E; --m3:#F7E3C7; --m-olho:#3A2417;
-  --folha:#2FA96B; --folha2:#4CC98B; --tronco:#8B5E34; --pedra:#94A5BE;
-  --flor1:#FF5E7A; --flor2:#FF9EB2; --nuvem:#FFFFFF;
-  --fig-fill:rgba(18,160,110,.14); --fig-line:#12A06E; --fig-text:#17283F; --fig-acc:#FF8A2B;
-}
-
 /* ---------- base ---------- */
 *{box-sizing:border-box}
 body{
   --ub:var(--materia-base);
+  /* figuras das aulas (SVG do conteúdo) seguem a matéria e o modo claro ou escuro */
+  --fig-fill:color-mix(in srgb,var(--materia-base) 16%,transparent);--fig-line:var(--materia-base);--fig-text:var(--cor-texto);--fig-acc:var(--cor-acao-borda);
   margin:0;color:var(--cor-texto);background:var(--cor-fundo);
   font-family:var(--fonte-corpo);font-size:var(--t-corpo);line-height:var(--lh-corpo);font-weight:var(--peso-corpo);
   -webkit-tap-highlight-color:transparent;
@@ -365,8 +359,10 @@ img{max-width:100%}
 .lapis svg{width:16px;height:16px}
 @media (max-width:430px){
   .planeta{grid-template-columns:1fr;padding:var(--esp-16)}
-  .planeta-img{grid-column:1;grid-row:1;width:144px;justify-self:end;margin:calc(-1 * var(--esp-8)) calc(-1 * var(--esp-8)) calc(-1 * var(--esp-48)) 0}
-  .planeta-txt{grid-row:2}
+  .planeta-img{position:absolute;right:var(--esp-8);top:var(--esp-8);width:96px;z-index:0}
+  .planeta-txt{grid-row:1;position:relative;z-index:1}
+  .planeta-nome,.planeta h1,.planeta p{padding-right:var(--esp-96)}
+  .planeta-nome{font-size:var(--t-legenda)}
   .planeta-guia{display:none}
 }
 
@@ -640,7 +636,7 @@ canvas.confete{position:fixed;inset:0;pointer-events:none;z-index:60;width:100%;
 .cartao-bt{width:100%;background:var(--cor-superficie);border:2px solid var(--cor-linha);
   border-radius:var(--raio-24);padding:16px 8px 16px;display:flex;flex-direction:column;align-items:center;gap:4px;
   transition:transform .12s}
-.cartao-bt:hover{transform:translateY(-3px);border-color:var(--m1)}
+.cartao-bt:hover{transform:translateY(-3px);border-color:var(--materia-base)}
 .cartao-bt .rosto{width:86px;height:86px;display:block}
 .cartao-bt b{font-family:"Fredoka",sans-serif;font-size:var(--t-corpo);font-weight:600;margin-top:4px}
 .cartao-bt .pg{font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:700}
