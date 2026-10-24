@@ -60,6 +60,24 @@ async function ativar(existentes) {
     A.strictEqual(rede.length, 3, 'o manifesto vai a rede primeiro');
     A.ok(!Object.keys(guardado).some((k) => k.startsWith('bobby-v5|') && /audio/.test(k)), 'audio caiu no cache da app');
   });
+  await teste('5b. origem: audio e arte de OUTRO dominio nao entram no cache; rota que nao e o inicio nao troca o index.html', async () => {
+    const guardado = {}; const ouvintes = {};
+    const mk = (nome) => ({ match: async (r) => guardado[nome + '|' + (r.url || r)] || null, put: async (r) => { guardado[nome + '|' + (r.url || r)] = 1; }, add: async () => {}, addAll: async () => {} });
+    const sandbox = {
+      self: { location: { origin: 'https://app.test', href: 'https://app.test/jogo/sw.js' }, addEventListener: (n, f) => { ouvintes[n] = f; }, clients: { claim: async () => {} }, skipWaiting: async () => {} },
+      caches: { keys: async () => [], delete: async () => true, open: async (n) => mk(n), match: async () => null },
+      fetch: async () => ({ status: 200, type: 'basic', clone() { return this; } }), URL, console,
+    };
+    vm.createContext(sandbox);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'sw.js'), 'utf8'), sandbox);
+    const pede = async (url, extra) => { let r; ouvintes.fetch({ request: Object.assign({ url, method: 'GET', mode: 'cors', destination: '', headers: { get: () => '' } }, extra || {}), respondWith: (p) => { r = p; } }); return r && await r; };
+    await pede('https://outro.test/audio/x/y.m4a'); await pede('https://outro.test/assets/cenarios/a.webp');
+    A.ok(!Object.keys(guardado).some((k) => /outro\.test/.test(k)), 'guardou recurso de outro dominio: ' + Object.keys(guardado));
+    await pede('https://app.test/jogo/outra-rota', { mode: 'navigate' }); await new Promise((r) => setTimeout(r, 20));
+    A.ok(!guardado['bobby-v5|./index.html'], 'rota estranha trocou o index.html do cache');
+    await pede('https://app.test/jogo/index.html', { mode: 'navigate' }); await new Promise((r) => setTimeout(r, 20));
+    A.ok(guardado['bobby-v5|./index.html'], 'o inicio do app deveria atualizar o index.html guardado');
+  });
   await teste('5. arte: cache primeiro em bobby-arte-v1, nunca no cache da app; precache so da camada inicial', async () => {
     const guardado = {}; const rede = [];
     const mk = (nome) => ({ match: async (r) => guardado[nome + '|' + (r.url || r)] || null, put: async (r) => { guardado[nome + '|' + (r.url || r)] = 1; }, add: async (u) => { guardado[nome + '|' + u] = 1; }, addAll: async () => {} });

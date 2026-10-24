@@ -7,7 +7,7 @@ function imgArte(id,o){
   o=o||{};const a=ativo(id);if(!a)return '';
   return '<img class="arte'+(o.cls?' '+o.cls:'')+'" src="'+ARTE_BASE+a[0]+'" width="'+a[1]+'" height="'+a[2]+'" alt="'+escapa(o.alt||'')+
     '" decoding="async" loading="'+(o.eager?'eager':'lazy')+'"'+(o.style?' style="'+o.style+'"':'')+
-    ' onerror="this.classList.add(\'falhou\')">';
+    '>';
 }
 
 /* planeta e guia de cada matéria (código do app: mat, pt, en) */
@@ -30,3 +30,7 @@ function cenaDaEtapa(mat,n){
   const ap='cen-'+cod+k+'-apagado',co='cen-'+cod+k+'-completo';
   return (ativo(ap)&&ativo(co))?{apagado:ap,completo:co}:null;
 }
+/* imagem que não carregou fica neutra e o jogo segue (sem atributo onerror inline: a CSP não depende dele) */
+if(typeof document!=='undefined'&&document.addEventListener)document.addEventListener('error',e=>{
+  const t=e&&e.target;if(t&&t.classList&&t.classList.contains('arte'))t.classList.add('falhou');
+},true);

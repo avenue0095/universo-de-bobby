@@ -31,9 +31,13 @@ self.addEventListener('activate',e=>{
   )).then(()=>self.clients.claim()));
 });
 
-const ehAudio=url=>/\/audio\/.+\.(m4a|opus)$/.test(url.pathname);
-const ehArte=url=>/\/assets\/(personagens|expressoes|itens|companheiros|planetas|cenarios|desenhos)\/.+\.webp$/.test(url.pathname);
-const ehManifestoAudio=url=>/\/audio\/manifesto-min\.json$/.test(url.pathname);
+/* só guarda o que é desta origem: uma resposta de outro domínio com caminho /audio/x.m4a nunca entra no cache */
+const ORIGEM=(self.location&&self.location.origin)||'';
+const MESMA=url=>!ORIGEM||url.origin===ORIGEM;
+const INICIO=(()=>{try{return new URL('./',self.location.href).pathname;}catch(e){return '/';}})();
+const ehAudio=url=>MESMA(url)&&/\/audio\/.+\.(m4a|opus)$/.test(url.pathname);
+const ehArte=url=>/\/assets\/(personagens|expressoes|itens|companheiros|planetas|cenarios|desenhos|recompensas)\/.+\.webp$/.test(url.pathname);
+const ehManifestoAudio=url=>MESMA(url)&&/\/audio\/manifesto-min\.json$/.test(url.pathname);
 
 const ehPagina=req=>req.mode==='navigate'||
   (req.destination==='document')||
@@ -44,6 +48,8 @@ self.addEventListener('fetch',e=>{
   if(req.method!=='GET')return;
 
   let url=null;try{url=new URL(req.url);}catch(e){}
+  /* outra origem: o service worker não toca (vai direto à rede) */
+  if(url&&!MESMA(url))return;
   /* clipe de áudio: cache primeiro (o nome muda quando o texto muda, então nunca fica velho) */
   if(url&&ehAudio(url)){
     e.respondWith(caches.open(CACHE_AUDIO).then(c=>c.match(req).then(r=>r||fetch(req).then(resp=>{
@@ -74,7 +80,8 @@ self.addEventListener('fetch',e=>{
       fetch(req).then(resp=>{
         if(resp&&resp.status===200){
           const copia=resp.clone();
-          caches.open(CACHE).then(c=>{c.put('./index.html',copia);});
+          /* só a página inicial do app substitui o index.html guardado (outra rota que devolva 200 não pode trocá-lo) */
+          if(url&&MESMA(url)&&(url.pathname===INICIO||url.pathname===INICIO+'index.html'))caches.open(CACHE).then(c=>{c.put('./index.html',copia);});
         }
         return resp;
       }).catch(()=>caches.match('./index.html').then(r=>r||caches.match('./')))

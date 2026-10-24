@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
 <meta name="theme-color" content="#12A06E">
 <meta name="description" content="O Universo de Bobby: matematica, portugues e ingles para criancas de 8 a 13 anos.">
@@ -4885,7 +4886,7 @@ function imgArte(id,o){
   o=o||{};const a=ativo(id);if(!a)return '';
   return '<img class="arte'+(o.cls?' '+o.cls:'')+'" src="'+ARTE_BASE+a[0]+'" width="'+a[1]+'" height="'+a[2]+'" alt="'+escapa(o.alt||'')+
     '" decoding="async" loading="'+(o.eager?'eager':'lazy')+'"'+(o.style?' style="'+o.style+'"':'')+
-    ' onerror="this.classList.add(\'falhou\')">';
+    '>';
 }
 
 /* planeta e guia de cada matéria (código do app: mat, pt, en) */
@@ -4908,6 +4909,10 @@ function cenaDaEtapa(mat,n){
   const ap='cen-'+cod+k+'-apagado',co='cen-'+cod+k+'-completo';
   return (ativo(ap)&&ativo(co))?{apagado:ap,completo:co}:null;
 }
+/* imagem que não carregou fica neutra e o jogo segue (sem atributo onerror inline: a CSP não depende dele) */
+if(typeof document!=='undefined'&&document.addEventListener)document.addEventListener('error',e=>{
+  const t=e&&e.target;if(t&&t.classList&&t.classList.contains('arte'))t.classList.add('falhou');
+},true);
 /* ---------- o personagem: Bobby, o ursinho (arte semirrealista em WebP) e a tela "Meu personagem" ----------
    O Bobby agora é imagem: 12 poses de corpo inteiro (P01 a P12) e 8 expressões de retrato (E01 a E08).
    Chapéu é sobreposição e só aparece em imagem de frente (a cabeça virada pediria uma imagem nova por pose).

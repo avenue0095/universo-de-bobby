@@ -103,5 +103,16 @@ function backupMalicioso() {
     A.ok(!/__proto__|<img|<script|onerror/.test(t.replace(/&lt;/g, '')) || !/<img|<script/.test(t), 'sobrou marcacao viva');
     A.ok(!/<img|<script/.test(t));
   });
+  await teste('9. CSP no HTML: sem origem externa, sem unsafe-eval, saida de dados so para a propria origem', () => {
+    const fs = require('fs'), path = require('path');
+    const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+    const m = html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)"/);
+    A.ok(m, 'faltou a meta CSP no index.html');
+    const csp = m[1];
+    A.ok(!/unsafe-eval|https?:|\*/.test(csp), 'CSP com origem externa, curinga ou unsafe-eval: ' + csp);
+    ['default-src \'none\'', 'connect-src \'self\'', 'form-action \'none\'', 'object-src \'none\'', 'base-uri \'none\'', 'worker-src \'self\''].forEach((d) => A.ok(csp.includes(d), 'falta ' + d));
+    A.ok(csp.indexOf('<meta') < 0 && html.indexOf('Content-Security-Policy') < html.indexOf('<style'), 'a CSP precisa vir antes do estilo e dos scripts');
+    A.ok(!/\son[a-z]+="/i.test(html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '')), 'atributo de evento inline no HTML do shell');
+  });
   resumo('seguranca.js');
 })();
