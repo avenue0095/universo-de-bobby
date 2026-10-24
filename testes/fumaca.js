@@ -23,7 +23,7 @@ const CHROME = arg('chrome') || process.env.CHROME_BIN || [
 if (!CHROME) { console.log('SEM CHROME: instale o Chrome ou passe --chrome=/caminho. Teste NAO rodou.'); process.exit(2); }
 if (typeof WebSocket === 'undefined') { console.log('Precisa de Node 22+ (WebSocket nativo). Teste NAO rodou.'); process.exit(2); }
 
-const TIPOS = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.webmanifest': 'application/manifest+json', '.json': 'application/json', '.m4a': 'audio/mp4', '.opus': 'audio/ogg' };
+const TIPOS = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.webp': 'image/webp', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.webmanifest': 'application/manifest+json', '.json': 'application/json', '.m4a': 'audio/mp4', '.opus': 'audio/ogg' };
 const servidor = http.createServer((req, res) => {
   let rel = decodeURIComponent(req.url.split('?')[0]);
   if (rel === '/') rel = '/index.html';
