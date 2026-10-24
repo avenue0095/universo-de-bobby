@@ -37,7 +37,7 @@ function dinQ(prompt,v,o){return Object.assign({type:'dinheiro',prompt:prompt,an
 function mc(prompt,correct,wrongs,o){
   o=o||{};correct=String(correct);
   const set=[correct];
-  (wrongs||[]).forEach(w=>{const s=String(w);if(!set.includes(s)&&set.length<4)set.push(s);});
+  (wrongs||[]).forEach(w=>{const s=String(w);if(!set.some(x=>x.trim()===s.trim())&&set.length<4)set.push(s);});
   /* Completa as opções quando a fase não mandou distratores suficientes.
      Três regras, porque criança de 8 a 13 anos ainda não estuda negativo e o app
      escreve decimal com vírgula:

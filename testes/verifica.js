@@ -84,18 +84,19 @@ for (const [mat, unidades] of materias) {
           if (q.type === 'mc') {
             if (!Array.isArray(q.options) || q.options.length < 2) { falha(l.id, 'mc com menos de 2 opcoes: ' + q.prompt.slice(0, 50)); continue; }
             if (!q.options.map(String).includes(String(q.answer))) falha(l.id, 'gabarito fora das opcoes: ' + q.prompt.slice(0, 50));
+            if (q.options.some((o) => String(o) !== String(o).trim())) falha(l.id, 'opcao com espaco no fim ou no comeco: ' + q.options.map((o) => JSON.stringify(String(o))).join(' | '));
             const norm = q.options.map((o) => String(o).trim());
             if (new Set(norm).size !== norm.length) falha(l.id, 'opcao repetida: ' + q.prompt.slice(0, 50) + ' -> ' + norm.join(' | '));
             /* decimal com virgula no gabarito: nenhuma opcao pode usar ponto */
             if (/^\d+,\d+$/.test(String(q.answer)) && q.options.some((o) => /^\d+\.\d+$/.test(String(o)))) {
               falha(l.id, 'opcao com ponto decimal: ' + q.options.join(' | '));
             }
-            if (!NEGATIVO_PERMITIDO.has(l.id) && !NEG.test(q.prompt)) {
+            if (!NEGATIVO_PERMITIDO.has(l.id) && !q.negativo && !NEG.test(q.prompt)) {
               if (q.options.some((o) => NEG.test(' ' + o)) || NEG.test(' ' + q.answer)) {
                 falha(l.id, 'opcao negativa fora da fase de negativos: ' + q.options.join(' | '));
               }
             }
-          } else if (!NEGATIVO_PERMITIDO.has(l.id) && /^\s*[−-]\d/.test(String(q.answer))) {
+          } else if (!NEGATIVO_PERMITIDO.has(l.id) && !q.negativo && /^\s*[−-]\d/.test(String(q.answer))) {
             falha(l.id, 'gabarito negativo fora da fase de negativos: ' + q.prompt.slice(0, 50));
           }
         }

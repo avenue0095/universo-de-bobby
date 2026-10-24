@@ -910,7 +910,7 @@ function dinQ(prompt,v,o){return Object.assign({type:'dinheiro',prompt:prompt,an
 function mc(prompt,correct,wrongs,o){
   o=o||{};correct=String(correct);
   const set=[correct];
-  (wrongs||[]).forEach(w=>{const s=String(w);if(!set.includes(s)&&set.length<4)set.push(s);});
+  (wrongs||[]).forEach(w=>{const s=String(w);if(!set.some(x=>x.trim()===s.trim())&&set.length<4)set.push(s);});
   /* Completa as opções quando a fase não mandou distratores suficientes.
      Três regras, porque criança de 8 a 13 anos ainda não estuda negativo e o app
      escreve decimal com vírgula:
@@ -1051,7 +1051,7 @@ L('2.4','±','Contas até 1000',
  [
   ()=>{const a=R(120,480),b=R(120,480);return inp(a+' + '+b+' = ?',a+b);},
   ()=>{const a=R(300,900),b=R(110,290);return inp(a+' − '+b+' = ?',a-b);},
-  ()=>{const a=R(2,9)*100,b=R(110,390);return inp(a+' − '+b+' = ?',a-b);},
+  ()=>{const a=R(2,9)*100,b=R(110,Math.min(390,a-10));return inp(a+' − '+b+' = ?',a-b);},
   ()=>{const a=R(150,450),b=R(150,450),c=R(20,90);return inp(a+' + '+b+' − '+c+' = ?',a+b-c);},
   ()=>{const a=R(200,700);const b=R(120,280);return mc('Quanto é '+a+' + '+b+'?',a+b,[a+b+100,a+b-10,a+b+10]);},
   ()=>{const a=R(300,800),t=a+R(100,190);return inp(a+' + ___ = '+t,t-a);}
@@ -1307,7 +1307,7 @@ L('6.3','+,','Somar e subtrair decimais',
   ()=>{const v=r2(R(3,28)/2);return dinQ('Monte <b>'+money(v)+'</b> com as notas e moedas.',fmt(v));},
   ()=>{const a=r2(R(100,900)/100),b=r2(R(100,900)/100);return inp(fmt(a)+' + '+fmt(b)+' = ?',fmt(r2(a+b)));},
   ()=>{const a=r2(R(50,99)/10),b=r2(R(10,49)/10);return inp(fmt(a)+' − '+fmt(b)+' = ?',fmt(r2(a-b)));},
-  ()=>{const a=R(2,9),b=r2(R(105,395)/100);return inp(a+',00 − '+fmt(b)+' = ?',fmt(r2(a-b)));},
+  ()=>{const a=R(4,9),b=r2(R(105,395)/100);return inp(a+',00 − '+fmt(b)+' = ?',fmt(r2(a-b)));},
   ()=>{const a=r2(R(10,90)/10);return mc('Quanto é '+fmt(a)+' + 0,5?',fmt(r2(a+0.5)),[fmt(r2(a+5)),fmt(r2(a+0.05))]);},
   ()=>{const a=r2(R(15,45)/10);return inp('Quanto falta para '+fmt(a)+' chegar a 10?',fmt(r2(10-a)));}
  ]),
@@ -1490,7 +1490,7 @@ L('9.2','()','Ordem das operações',
  [
   ()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return inp(a+' + '+b+' × '+c+' = ?',a+b*c);},
   ()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return inp('('+a+' + '+b+') × '+c+' = ?',(a+b)*c);},
-  ()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return inp(a+' × '+b+' − '+c+' = ?',a*b-c);},
+  ()=>{const a=R(2,9),b=R(2,9),c=R(1,Math.min(9,a*b-1));return inp(a+' × '+b+' − '+c+' = ?',a*b-c);},
   ()=>{const b=R(2,9),c=R(2,6);return inp(''+(b*c)+' ÷ '+c+' + '+b+' = ?',b+b);},
   ()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return mc('Quanto é '+a+' + '+b+' × '+c+'?',a+b*c,[(a+b)*c,a*b+c]);},
   ()=>{const a=R(2,9),b=R(2,9);return tf('('+a+' + '+b+') × 2 dá o mesmo que '+a+' + '+b+' × 2.',false);}
@@ -1599,7 +1599,10 @@ L('10.5','★','Desafio final',
  ])
 ]});
 
-function pool(minU,maxU){const ls=[];UNITS_MAT.forEach(u=>{if(u.n>=minU&&u.n<=maxU)u.lessons.forEach(l=>{if(l.id!=='10.5')ls.push.apply(ls,l.makers);});});return ls;}
+/* A fase 10.4 ensina números negativos. Quando o Desafio final (10.5) revisa essa fase, as perguntas vêm
+   marcadas com q.negativo=true: negativo ali é conteúdo. Em qualquer outra pergunta, negativo é defeito. */
+const marcaNegativo=mk=>()=>{const q=mk();if(q&&typeof q==='object')q.negativo=true;return q;};
+function pool(minU,maxU){const ls=[];UNITS_MAT.forEach(u=>{if(u.n>=minU&&u.n<=maxU)u.lessons.forEach(l=>{if(l.id!=='10.5')ls.push.apply(ls,l.id==='10.4'?l.makers.map(marcaNegativo):l.makers);});});return ls;}
 function hardMaker(){return pick(pool(6,10))();}
 function anyMaker(){return pick(pool(1,10))();}
 
@@ -2925,7 +2928,7 @@ LP('p4.2','rr','R e RR',
   exemplo:'CARRO (forte) e CARO (fraco). ERRO e ERA.',
   dica:'Fale as duas em voz alta. O som forte é o que "ronca".'},
  [
-  ()=>{return mc('Qual está certo: o veículo com quatro rodas?','carro',['caro','caro ','karro']);},
+  ()=>{return mc('Qual está certo: o veículo com quatro rodas?','carro',['caro','carru','karro']);},
   ()=>{return mc('Qual palavra tem som forte de R no meio?','terra',['tera','cara','arara']);},
   ()=>{return tf('No começo da palavra basta um R para o som forte.',true);},
   ()=>{return mc('Como se escreve o nome do animal que é um roedor pequeno?','rato',['rrato','hrato']);},
@@ -2940,7 +2943,7 @@ LP('p4.3','ss','S, SS e o S com som de Z',
   ()=>{return mc('Em qual palavra o S tem som de Z?','casa',['massa','sapo','sino']);},
   ()=>{return mc('Como se escreve o alimento feito de farinha?','massa',['masa','maça','maza']);},
   ()=>{return tf('Entre duas vogais, um S sozinho soa como Z.',true);},
-  ()=>{return mc('Qual está certo?','pêssego',['pêsego','pessego ','pêzego']);},
+  ()=>{return mc('Qual está certo?','pêssego',['pêsego','pessego','pêzego']);},
   ()=>{return txtQ('Complete com S ou SS: PA__ARINHO','SS',{teclado:'letra'});},
   ()=>{return mc('Qual palavra tem som de S entre vogais?','osso',['rosa','casa','mesa']);}
  ]),
@@ -2949,9 +2952,9 @@ LP('p4.4','ch','CH, LH e NH',
   exemplo:'CHAVE, MOLHO, SONHO.',
   dica:'Elas nunca se separam na hora de dividir a sílaba: CHU-VA, FI-LHO, BA-NHO.'},
  [
-  ()=>{return mc('Como se escreve o que cai do céu na chuvarada?','chuva',['xuva','chuva ','tchuva']);},
-  ()=>{return mc('Qual palavra tem LH?','filho',['fio','fila','folha ']);},
-  ()=>{return mc('Qual palavra tem NH?','banho',['bano','banha ','bamho']);},
+  ()=>{return mc('Como se escreve o que cai do céu na chuvarada?','chuva',['xuva','cuva','tchuva']);},
+  ()=>{return mc('Qual palavra tem LH?','filho',['fio','fila','faca']);},
+  ()=>{return mc('Qual palavra tem NH?','banho',['bano','bana','bamho']);},
   ()=>{return mc('Como se separa CHUVA em sílabas?','chu - va',['c - hu - va','ch - u - va']);},
   ()=>{return txtQ('Complete: SO__O (o que a gente tem dormindo)','NH',{teclado:'letra'});},
   ()=>{return tf('O CH tem som de X em chave.',true);}
@@ -3078,7 +3081,7 @@ LP('p6.3','s','Singular e plural',
  [
   ()=>{const w=pick(pal2());return txtQ('Escreva o plural de '+w.p.toUpperCase()+'.',w.p+'s',{teclado:'letra'});},
   ()=>{const w=pick(pal3());return mc('Qual é o plural de "'+w.p+'"?',w.p+'s',[w.p,w.p+'es']);},
-  ()=>{return mc('Qual é o plural de "pão"?','pães',['pãos','pães ','pans']);},
+  ()=>{return mc('Qual é o plural de "pão"?','pães',['pãos','pões','pans']);},
   ()=>{return mc('Qual é o plural de "flor"?','flores',['flors','florses']);},
   ()=>{return mc('"Meninas" está em qual forma?','plural',['singular']);},
   ()=>{return tf('O plural quase sempre termina em S.',true);}
@@ -3101,10 +3104,10 @@ LP('p6.5','Nn','Nomes próprios',
   dica:'Nome comum: menina. Nome próprio: Lívia.'},
  [
   ()=>{return mc('Qual é um nome próprio?','Brasil',['país','cidade','rua']);},
-  ()=>{return mc('Qual está escrito corretamente?','Lívia',['lívia','LÍVIA ']);},
+  ()=>{return mc('Qual está escrito corretamente?','Lívia',['lívia','LÍVIA']);},
   ()=>{return tf('Nome de cachorro também é nome próprio e leva maiúscula.',true);},
   ()=>{return mc('Qual é nome comum?','menina',['Lívia','Bobby','Brasil']);},
-  ()=>{return mc('Como se escreve o nome do nosso ursinho?','Bobby',['bobby','BOBBY ']);},
+  ()=>{return mc('Como se escreve o nome do nosso ursinho?','Bobby',['bobby','BOBBY']);},
   ()=>{return tf('Nomes de cidades começam com letra minúscula.',false);}
  ])
 ]});
@@ -5461,7 +5464,9 @@ function ajudaForte(){
 }
 function conferir(){
   const q=LIC.qs[LIC.i];LIC.conferido=true;
-  const ok=acertou(LIC.resp,q.answer);
+  /* escolha: compara o texto exato da opcao (Lívia e lívia são opções diferentes de propósito);
+     o resto passa por acertou(), que aceita 1,5 e 1.5 e ignora acento e maiúscula na digitação */
+  const ok=q.type==='mc'?String(LIC.resp)===String(q.answer):acertou(LIC.resp,q.answer);
   const pe=$('#pe');pe.classList.add('mostra');
   $('#dica').style.display='none';
   if(q.type==='mc'){

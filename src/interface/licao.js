@@ -327,7 +327,9 @@ function ajudaForte(){
 }
 function conferir(){
   const q=LIC.qs[LIC.i];LIC.conferido=true;
-  const ok=acertou(LIC.resp,q.answer);
+  /* escolha: compara o texto exato da opcao (Lívia e lívia são opções diferentes de propósito);
+     o resto passa por acertou(), que aceita 1,5 e 1.5 e ignora acento e maiúscula na digitação */
+  const ok=q.type==='mc'?String(LIC.resp)===String(q.answer):acertou(LIC.resp,q.answer);
   const pe=$('#pe');pe.classList.add('mostra');
   $('#dica').style.display='none';
   if(q.type==='mc'){

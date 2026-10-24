@@ -298,7 +298,7 @@ LP('p4.2','rr','R e RR',
   exemplo:'CARRO (forte) e CARO (fraco). ERRO e ERA.',
   dica:'Fale as duas em voz alta. O som forte é o que "ronca".'},
  [
-  ()=>{return mc('Qual está certo: o veículo com quatro rodas?','carro',['caro','caro ','karro']);},
+  ()=>{return mc('Qual está certo: o veículo com quatro rodas?','carro',['caro','carru','karro']);},
   ()=>{return mc('Qual palavra tem som forte de R no meio?','terra',['tera','cara','arara']);},
   ()=>{return tf('No começo da palavra basta um R para o som forte.',true);},
   ()=>{return mc('Como se escreve o nome do animal que é um roedor pequeno?','rato',['rrato','hrato']);},
@@ -313,7 +313,7 @@ LP('p4.3','ss','S, SS e o S com som de Z',
   ()=>{return mc('Em qual palavra o S tem som de Z?','casa',['massa','sapo','sino']);},
   ()=>{return mc('Como se escreve o alimento feito de farinha?','massa',['masa','maça','maza']);},
   ()=>{return tf('Entre duas vogais, um S sozinho soa como Z.',true);},
-  ()=>{return mc('Qual está certo?','pêssego',['pêsego','pessego ','pêzego']);},
+  ()=>{return mc('Qual está certo?','pêssego',['pêsego','pessego','pêzego']);},
   ()=>{return txtQ('Complete com S ou SS: PA__ARINHO','SS',{teclado:'letra'});},
   ()=>{return mc('Qual palavra tem som de S entre vogais?','osso',['rosa','casa','mesa']);}
  ]),
@@ -322,9 +322,9 @@ LP('p4.4','ch','CH, LH e NH',
   exemplo:'CHAVE, MOLHO, SONHO.',
   dica:'Elas nunca se separam na hora de dividir a sílaba: CHU-VA, FI-LHO, BA-NHO.'},
  [
-  ()=>{return mc('Como se escreve o que cai do céu na chuvarada?','chuva',['xuva','chuva ','tchuva']);},
-  ()=>{return mc('Qual palavra tem LH?','filho',['fio','fila','folha ']);},
-  ()=>{return mc('Qual palavra tem NH?','banho',['bano','banha ','bamho']);},
+  ()=>{return mc('Como se escreve o que cai do céu na chuvarada?','chuva',['xuva','cuva','tchuva']);},
+  ()=>{return mc('Qual palavra tem LH?','filho',['fio','fila','faca']);},
+  ()=>{return mc('Qual palavra tem NH?','banho',['bano','bana','bamho']);},
   ()=>{return mc('Como se separa CHUVA em sílabas?','chu - va',['c - hu - va','ch - u - va']);},
   ()=>{return txtQ('Complete: SO__O (o que a gente tem dormindo)','NH',{teclado:'letra'});},
   ()=>{return tf('O CH tem som de X em chave.',true);}
@@ -451,7 +451,7 @@ LP('p6.3','s','Singular e plural',
  [
   ()=>{const w=pick(pal2());return txtQ('Escreva o plural de '+w.p.toUpperCase()+'.',w.p+'s',{teclado:'letra'});},
   ()=>{const w=pick(pal3());return mc('Qual é o plural de "'+w.p+'"?',w.p+'s',[w.p,w.p+'es']);},
-  ()=>{return mc('Qual é o plural de "pão"?','pães',['pãos','pães ','pans']);},
+  ()=>{return mc('Qual é o plural de "pão"?','pães',['pãos','pões','pans']);},
   ()=>{return mc('Qual é o plural de "flor"?','flores',['flors','florses']);},
   ()=>{return mc('"Meninas" está em qual forma?','plural',['singular']);},
   ()=>{return tf('O plural quase sempre termina em S.',true);}
@@ -474,10 +474,10 @@ LP('p6.5','Nn','Nomes próprios',
   dica:'Nome comum: menina. Nome próprio: Lívia.'},
  [
   ()=>{return mc('Qual é um nome próprio?','Brasil',['país','cidade','rua']);},
-  ()=>{return mc('Qual está escrito corretamente?','Lívia',['lívia','LÍVIA ']);},
+  ()=>{return mc('Qual está escrito corretamente?','Lívia',['lívia','LÍVIA']);},
   ()=>{return tf('Nome de cachorro também é nome próprio e leva maiúscula.',true);},
   ()=>{return mc('Qual é nome comum?','menina',['Lívia','Bobby','Brasil']);},
-  ()=>{return mc('Como se escreve o nome do nosso ursinho?','Bobby',['bobby','BOBBY ']);},
+  ()=>{return mc('Como se escreve o nome do nosso ursinho?','Bobby',['bobby','BOBBY']);},
   ()=>{return tf('Nomes de cidades começam com letra minúscula.',false);}
  ])
 ]});

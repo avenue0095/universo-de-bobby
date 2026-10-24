@@ -109,7 +109,7 @@ L('2.4','±','Contas até 1000',
  [
   ()=>{const a=R(120,480),b=R(120,480);return inp(a+' + '+b+' = ?',a+b);},
   ()=>{const a=R(300,900),b=R(110,290);return inp(a+' − '+b+' = ?',a-b);},
-  ()=>{const a=R(2,9)*100,b=R(110,390);return inp(a+' − '+b+' = ?',a-b);},
+  ()=>{const a=R(2,9)*100,b=R(110,Math.min(390,a-10));return inp(a+' − '+b+' = ?',a-b);},
   ()=>{const a=R(150,450),b=R(150,450),c=R(20,90);return inp(a+' + '+b+' − '+c+' = ?',a+b-c);},
   ()=>{const a=R(200,700);const b=R(120,280);return mc('Quanto é '+a+' + '+b+'?',a+b,[a+b+100,a+b-10,a+b+10]);},
   ()=>{const a=R(300,800),t=a+R(100,190);return inp(a+' + ___ = '+t,t-a);}
@@ -365,7 +365,7 @@ L('6.3','+,','Somar e subtrair decimais',
   ()=>{const v=r2(R(3,28)/2);return dinQ('Monte <b>'+money(v)+'</b> com as notas e moedas.',fmt(v));},
   ()=>{const a=r2(R(100,900)/100),b=r2(R(100,900)/100);return inp(fmt(a)+' + '+fmt(b)+' = ?',fmt(r2(a+b)));},
   ()=>{const a=r2(R(50,99)/10),b=r2(R(10,49)/10);return inp(fmt(a)+' − '+fmt(b)+' = ?',fmt(r2(a-b)));},
-  ()=>{const a=R(2,9),b=r2(R(105,395)/100);return inp(a+',00 − '+fmt(b)+' = ?',fmt(r2(a-b)));},
+  ()=>{const a=R(4,9),b=r2(R(105,395)/100);return inp(a+',00 − '+fmt(b)+' = ?',fmt(r2(a-b)));},
   ()=>{const a=r2(R(10,90)/10);return mc('Quanto é '+fmt(a)+' + 0,5?',fmt(r2(a+0.5)),[fmt(r2(a+5)),fmt(r2(a+0.05))]);},
   ()=>{const a=r2(R(15,45)/10);return inp('Quanto falta para '+fmt(a)+' chegar a 10?',fmt(r2(10-a)));}
  ]),
@@ -548,7 +548,7 @@ L('9.2','()','Ordem das operações',
  [
   ()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return inp(a+' + '+b+' × '+c+' = ?',a+b*c);},
   ()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return inp('('+a+' + '+b+') × '+c+' = ?',(a+b)*c);},
-  ()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return inp(a+' × '+b+' − '+c+' = ?',a*b-c);},
+  ()=>{const a=R(2,9),b=R(2,9),c=R(1,Math.min(9,a*b-1));return inp(a+' × '+b+' − '+c+' = ?',a*b-c);},
   ()=>{const b=R(2,9),c=R(2,6);return inp(''+(b*c)+' ÷ '+c+' + '+b+' = ?',b+b);},
   ()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return mc('Quanto é '+a+' + '+b+' × '+c+'?',a+b*c,[(a+b)*c,a*b+c]);},
   ()=>{const a=R(2,9),b=R(2,9);return tf('('+a+' + '+b+') × 2 dá o mesmo que '+a+' + '+b+' × 2.',false);}
@@ -657,7 +657,10 @@ L('10.5','★','Desafio final',
  ])
 ]});
 
-function pool(minU,maxU){const ls=[];UNITS_MAT.forEach(u=>{if(u.n>=minU&&u.n<=maxU)u.lessons.forEach(l=>{if(l.id!=='10.5')ls.push.apply(ls,l.makers);});});return ls;}
+/* A fase 10.4 ensina números negativos. Quando o Desafio final (10.5) revisa essa fase, as perguntas vêm
+   marcadas com q.negativo=true: negativo ali é conteúdo. Em qualquer outra pergunta, negativo é defeito. */
+const marcaNegativo=mk=>()=>{const q=mk();if(q&&typeof q==='object')q.negativo=true;return q;};
+function pool(minU,maxU){const ls=[];UNITS_MAT.forEach(u=>{if(u.n>=minU&&u.n<=maxU)u.lessons.forEach(l=>{if(l.id!=='10.5')ls.push.apply(ls,l.id==='10.4'?l.makers.map(marcaNegativo):l.makers);});});return ls;}
 function hardMaker(){return pick(pool(6,10))();}
 function anyMaker(){return pick(pool(1,10))();}
 
