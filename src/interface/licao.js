@@ -44,7 +44,7 @@ function pintarVidas(){
 function blocoPasso(ps,k,comFala){
   const p=ps[k];
   let h='';
-  if(comFala)h+='<div class="fala">'+MASC(k===0?'oi':(k===ps.length-1?'feliz':'pensa'))+
+  if(comFala)h+='<div class="fala">'+MASC(k===0?'feliz':(k===ps.length-1?'radiante':'pensa'),'avatar')+
     '<span class="nome">Bobby explica</span>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(p.t+'. '+p.c)+'" aria-label="Ouvir a explicação">'+IC.falar+'</button></div>';
   h+='<div class="balao"><h2>'+p.t+'</h2><p>'+p.c+'</p>'+(p.fig?'<div class="figura">'+p.fig+'</div>':'')+'</div>';
@@ -102,7 +102,7 @@ function pintarLicao(){
     const m=LIC.miss,cap=LIC.cap;
     const abreCap=(LIC.li===0&&cap)?'<p class="cap-abre">'+cap.abre+'</p>':'';
     let h='<div class="surge"><div class="et">'+(cap?'Capítulo '+LIC.u.n+' · '+cap.t:'Mundo '+LIC.u.n)+'</div>';
-    h+='<div class="aula"><div class="fala">'+MASC('oi')+'<span class="nome">Bobby precisa de você</span>'+
+    h+='<div class="aula"><div class="fala">'+MASC('curioso','avatar')+'<span class="nome">Bobby precisa de você</span>'+
        '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(JSON.stringify(textosDaHistoria(cap,m)))+'" aria-label="Ouvir">'+IC.falar+'</button></div>';
     h+='<div class="balao historia"><h2>'+(m?m.t:LIC.l.title)+'</h2>'+abreCap+'<p>'+(m?m.abre:'')+'</p></div>';
     h+='<div class="premio-missao">'+ITENS[(cap&&cap.item)||'estrela']+'<span>Cada resposta certa ajuda o Bobby a completar a missão.</span></div>';
@@ -320,7 +320,7 @@ function mostrarDica(){
   const cx=$('#caixa-dica');
   if(!q||!cx)return;
   const txt=dicaDaPergunta(q);
-  cx.innerHTML='<div class="mini-tuco">'+MASC('pensa')+'</div><div><span class="tit">Como fazer</span>'+txt+
+  cx.innerHTML='<div class="mini-tuco">'+MASC('pensa','avatar')+'</div><div><span class="tit">Como fazer</span>'+txt+
     '<button class="mais-ajuda" id="mais-ajuda">Ainda não entendi</button></div>';
   cx.hidden=false;LIC.dica=1;
   $('#dica').style.display='none';
@@ -359,7 +359,7 @@ function ajudaForte(){
     msg='A primeira sílaba é <b>'+String(q.answer).slice(0,2)+'</b>.';
   }else msg='Leia devagar e tente de novo. Você consegue.';
   const alvo=cx.querySelector('div:last-child');
-  cx.innerHTML='<div class="mini-tuco">'+MASC('feliz')+'</div><div><span class="tit">Ajuda extra</span>'+msg+'</div>';
+  cx.innerHTML='<div class="mini-tuco">'+MASC('ops','avatar')+'</div><div><span class="tit">Ajuda extra</span>'+msg+'</div>';
   falar(msg);
 }
 function conferir(){
@@ -376,8 +376,8 @@ function conferir(){
   if(q.type==='mc'){
     $('#palco').querySelectorAll('.alt').forEach(b=>{
       const v=q.options[+b.dataset.v];b.disabled=true;b.classList.remove('sel');
-      if(v===q.answer)b.classList.add('certa');
-      else if(v===LIC.resp)b.classList.add('errada');
+      if(v===q.answer){b.classList.add('certa');b.insertAdjacentHTML('beforeend','<span class="sinal">'+IC.certo+'</span>');}
+      else if(v===LIC.resp){b.classList.add('errada');b.insertAdjacentHTML('beforeend','<span class="sinal">'+IC.refazer+'</span>');}
     });
   }
   if(ok){
@@ -391,9 +391,9 @@ function conferir(){
     /* XP nunca diminui; moedas são o saldo que a loja gasta */
     S.xp+=ganho;S.moedas+=ganho;LIC.ganhoFase=(LIC.ganhoFase||0)+ganho;S.acertosTotal=(S.acertosTotal||0)+1;
     S.melhorCombo=Math.max(S.melhorCombo||0,LIC.combo);pe.classList.add('certo');
-    $('#selo').innerHTML=MASC('feliz');
+    $('#selo').innerHTML=MASC(LIC.combo>=3?'radiante':'feliz','avatar');
     const elogio=pick2(['Isso aí!','Boa!','Perfeito!','Mandou bem!','Certinho!','Show!']);
-    $('#fb-t').textContent=elogio;
+    $('#fb-t').innerHTML=IC.certo+'<span>'+elogio+'</span>';
     if(ehF78())falar(elogio);
     $('#fb-s').innerHTML='+'+ganho+' moedas'+extra;
     somCerto();somMoeda();
@@ -403,15 +403,14 @@ function conferir(){
     LIC.erros++;LIC.combo=0;LIC.vidas--;regStat(LIC.l.id,'erros');pe.classList.add('errado');
     guardarErrado(q);
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
-    $('#selo').innerHTML=MASC('ops');
-    $('#fb-t').textContent='Quase!';
+    $('#selo').innerHTML=MASC('ops','avatar');
+    $('#fb-t').innerHTML=IC.refazer+'<span>Quase!</span>';
     if(ehF78())falar('Quase!');
     $('#fb-s').innerHTML='A resposta certa é <b>'+q.answer+'</b>.'+
       (LIC.vidas>0?' Esta pergunta volta no fim para você tentar de novo.':'');
     if(!q.__rep&&LIC.vidas>0){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);}
     somErro();pintarVidas();
     if(ehF78()&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
-    const p=$('#palco').firstElementChild;if(p){p.classList.add('tremer');setTimeout(()=>p.classList.remove('tremer'),460);}
   }
   cicloPergunta(q,{ok:ok,ms:ms,dica:LIC.dica||0});
   if(primeira&&(LIC.diaria||q.__aquec)){const st=diaDeStats();st.rev=(st.rev||0)+1;if(ok)st.revAc=(st.revAc||0)+1;}
@@ -494,7 +493,7 @@ function pintarFim(){
   completouMundo=!!LIC.completouMundo;
   const nErr=(S.errados[MATERIA+LIC.u.n]||[]).length;
   $('#palco').innerHTML='<div class="fim surge">'+
-    MASC(passou?'feliz':'ops',passou?'pula':'')+
+    MASC(passou?'comemora':'incentiva')+
     '<div class="estrelao">'+estrelasSVG(est)+'</div>'+
     '<h2>'+(passou?(LIC.rev?'Revisão concluída!':(LIC.erros===0?'Fase perfeita!':'Fase concluída!'))
       :'Acabaram os corações')+'</h2>'+

@@ -62,7 +62,7 @@ function ligarRotina(){
   const bau=$('#rt-bau');if(bau)bau.addEventListener('click',mostrarBau);
   const kit=$('#rt-kit');if(kit)kit.addEventListener('click',()=>{
     const itens=pegarKit();renderTrilha();
-    if(itens)abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('feliz')+'</div><h2>Seu Kit de volta</h2><ul class="folha-lista">'+
+    if(itens)abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('presente')+'</div><h2>Seu Kit de volta</h2><ul class="folha-lista">'+
       itens.map(i=>'<li>'+escapa(i.n)+'</li>').join('')+'</ul><div class="folha-bts"><button class="btn-acao" id="fl-ok">Continuar</button></div></div>');
     const ok=$('#fl-ok');if(ok)ok.addEventListener('click',fecharFolha);
   });
@@ -77,7 +77,7 @@ function mostrarEntradaDoDia(){
 }
 function mostrarAvisoMigracao(depois){
   STORE.avisoVisto=true;salvarStore();
-  abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('oi')+'</div><h2>O Bobby ganhou novidades</h2>'+
+  abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('surpreso')+'</div><h2>O Bobby ganhou novidades</h2>'+
     '<p>Seu progresso está todo aqui. Você também ganhou um congelador para guardar sua sequência.</p>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Vamos lá</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{fecharFolha();if(depois)depois();});
@@ -85,7 +85,7 @@ function mostrarAvisoMigracao(depois){
 function mostrarBilhete(){
   const b=bilheteDeHoje();
   if(!b)return;
-  abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('oi')+'</div><h2>Um bilhete do Bobby</h2>'+
+  abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('presente')+'</div><h2>Um bilhete do Bobby</h2>'+
     '<p class="bilhete-texto">'+b.texto+'</p>'+
     '<ul class="folha-lista"><li>No baú de amanhã: '+b.presente+'</li><li>'+b.pronto+'</li></ul>'+
     '<div class="folha-bts"><button class="btn-sec" id="fl-ouvir" aria-label="Ouvir o bilhete">'+IC.falar+' Ouvir</button>'+
@@ -122,7 +122,7 @@ function mostrarBauAberto(){
 function mostrarParada(limite){
   garantirDia();
   if(limite){
-    abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('feliz')+'</div><h2>Por hoje chega!</h2>'+
+    abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('tchau')+'</div><h2>Por hoje chega!</h2>'+
       '<p>Você fez um ótimo trabalho. Amanhã tem mais.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
       '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Até amanhã</button>'+
       '<button class="link-resp" id="fl-resp">Sou o responsável</button></div></div>');
@@ -133,14 +133,14 @@ function mostrarParada(limite){
     });
     return;
   }
-  abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('feliz','pula')+'</div><h2>Por hoje chega!</h2>'+
+  abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('tchau')+'</div><h2>Por hoje chega!</h2>'+
     '<p>Você fez um ótimo trabalho.</p><p>Amanhã tem mais. O baú de amanhã já está guardado.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
     '<div class="folha-bts par"><button class="btn-acao" id="fl-fim">Terminar por hoje</button>'+
     '<button class="btn-acao" id="fl-segue">Continuar explorando</button></div></div>');
   if(ehF78())falarDepois2(400,'Por hoje chega! Você fez um ótimo trabalho.');
   $('#fl-fim').addEventListener('click',()=>{
     registrarParada('terminar');
-    abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('feliz')+'</div><h2>Até amanhã!</h2>'+
+    abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('descansa')+'</div><h2>Até amanhã!</h2>'+
       '<p>Pode fechar o app. O Bobby guarda tudo para você.</p>'+
       '<div class="folha-bts"><button class="btn-sec" id="fl-mapa">Ver o mapa</button></div></div>');
     $('#fl-mapa').addEventListener('click',()=>{fecharFolha();renderTrilha();});
@@ -176,18 +176,36 @@ function ligarBlocoFim(){
   const b=$('#fim-abrir-bau');if(b)b.addEventListener('click',mostrarBau);
 }
 
-/* ---------- barra de baixo ---------- */
+/* ---------- barra de baixo (DESIGN 10.1): Mapa, Meu personagem, Desenhos, Perfil. Fica à vista fora das fases ---------- */
+function pintarBarra(){
+  let atual='bb-mapa';
+  if($('#galeria').classList.contains('on'))atual='bb-gal';
+  else if($('#perfil').classList.contains('on'))atual=$('#perfil').dataset.tela==='loja'?'bb-pers':'bb-perfil';
+  ['bb-mapa','bb-pers','bb-gal','bb-perfil'].forEach(id=>{
+    const bt=$('#'+id);if(!bt)return;
+    const on=id===atual;
+    bt.classList.toggle('ativo',on);
+    if(on)bt.setAttribute('aria-current','page');else bt.removeAttribute('aria-current');
+  });
+  pintarPontoGaleria();
+}
+/* fecha o que estiver aberto por cima do mapa, para a barra sempre levar direto ao destino */
+function fecharTelasDaBarra(){
+  const dt=$('#desenho-tela');if(dt)dt.classList.remove('on');
+  if($('#galeria').classList.contains('on'))fecharGaleria();
+  if($('#perfil').classList.contains('on')){$('#perfil').classList.remove('on');$('#perfil').dataset.tela='';document.body.style.overflow='';}
+}
 function ligarBarra(){
   const mapa=$('#bb-mapa'),pers=$('#bb-pers'),gal=$('#bb-gal'),perfil=$('#bb-perfil');
   if(mapa)mapa.addEventListener('click',()=>{
-    if($('#perfil').classList.contains('on'))fecharPerfil2();
-    if($('#galeria').classList.contains('on'))fecharGaleria();
+    fecharTelasDaBarra();renderTrilha();pintarBarra();
     window.scrollTo&&window.scrollTo(0,0);
   });
-  /* Meu personagem: 1 toque até o guarda-roupa */
-  if(pers)pers.addEventListener('click',()=>{lojaOrigem='barra';telaLoja();});
-  if(gal)gal.addEventListener('click',()=>abrirGaleria(false));
-  if(perfil)perfil.addEventListener('click',telaPerfil);
+  /* Meu personagem: 1 toque até o guarda-roupa, de qualquer tela */
+  if(pers)pers.addEventListener('click',()=>{fecharTelasDaBarra();lojaOrigem='barra';telaLoja();});
+  if(gal)gal.addEventListener('click',()=>{fecharTelasDaBarra();abrirGaleria(false);pintarBarra();});
+  if(perfil)perfil.addEventListener('click',()=>{fecharTelasDaBarra();telaPerfil();});
+  pintarBarra();
 }
 
 /* ---------- abertura e fechamento da sessão ---------- */

@@ -82,5 +82,22 @@ const HEX = /#[0-9a-fA-F]{3,8}\b/;
     }
     vazio(ruins);
   });
+  await teste('9. contraste AA dos pares do DESIGN.md (2.5), calculado nos tokens do CSS, claro e escuro', () => {
+    const bloco = (ini) => { const i = css.indexOf(ini); const f = css.indexOf('}', i); return css.slice(i, f); };
+    const lerHex = (b) => { const m = {}; for (const x of b.matchAll(/(--[a-z0-9-]+):\s*(#[0-9A-Fa-f]{6})/g)) m[x[1]] = x[2]; return m; };
+    const claro = lerHex(bloco(':root {\n  color-scheme'));
+    const escuro = Object.assign({}, claro, lerHex(bloco(':root[data-theme="dark"] {')));
+    const lum = (h) => { const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4))); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+    const razao = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+    const texto = [['cor-texto', 'cor-fundo'], ['cor-texto', 'cor-superficie'], ['cor-texto', 'cor-superficie-2'], ['cor-texto-suave', 'cor-fundo'], ['cor-texto-suave', 'cor-superficie'], ['cor-texto-suave', 'cor-superficie-2'],
+      ['cor-acerto', 'cor-superficie'], ['cor-texto', 'cor-acerto-suave'], ['cor-ainda', 'cor-superficie'], ['cor-texto', 'cor-ainda-suave'], ['cor-ouro-sobre', 'cor-ouro'], ['cor-acao-sobre', 'cor-acao'], ['cor-gelo-sobre', 'cor-gelo'],
+      ['cor-ouro-borda', 'cor-superficie'], ['cor-acao-borda', 'cor-superficie'], ['cor-texto', 'mat-suave'], ['cor-texto', 'por-suave'], ['cor-texto', 'ing-suave']];
+    ['mat', 'por', 'ing'].forEach((m) => { texto.push([m + '-sobre', m + '-base'], [m + '-tinta', 'cor-superficie'], [m + '-tinta', m + '-suave']); });
+    A.ok(Object.keys(claro).length > 40 && Object.keys(escuro).length > 40, 'nao li os tokens');
+    const nao = [];
+    [['claro', claro], ['escuro', escuro]].forEach(([nome, t]) => texto.forEach(([f, b]) => { const r = razao(t['--' + f], t['--' + b]); if (!(r >= 4.5)) nao.push(nome + ' ' + f + '/' + b + ' ' + r.toFixed(2)); }));
+    [['claro', claro], ['escuro', escuro]].forEach(([nome, t]) => [['cor-linha-forte', 'cor-superficie'], ['cor-foco', 'cor-fundo'], ['cor-foco', 'cor-superficie']].forEach(([f, b]) => { const r = razao(t['--' + f], t['--' + b]); if (!(r >= 3)) nao.push(nome + ' ' + f + '/' + b + ' ' + r.toFixed(2)); }));
+    vazio(nao, 'abaixo do minimo: ');
+  });
   resumo('tokens.js');
 })();

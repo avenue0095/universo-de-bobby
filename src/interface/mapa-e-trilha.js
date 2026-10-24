@@ -113,7 +113,8 @@ function pintarTopo(){
   $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
   $('#som').innerHTML=S.som?IC.falar:IC.somOff;
   $('#som').setAttribute('aria-label',S.som?'Desligar sons':'Ligar sons');
-  $('#logo').innerHTML=imgArte('bobby-e01',{eager:true});
+  $('#logo').innerHTML=retratoBobby();
+  const rb=$('#retrato-bb');if(rb&&!rb.firstChild)rb.innerHTML=retratoBobby();
 }
 function renderTrilha(){
   pintarTopo();calar();

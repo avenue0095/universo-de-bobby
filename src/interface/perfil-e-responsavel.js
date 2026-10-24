@@ -10,7 +10,7 @@ function telaPerfil(){
   const feitasGeral=Object.keys(MATERIAS).reduce((a,k)=>a+feitasDaMateria(k),0);
   const niv=nivelDoExplorador();
   let h='<div class="perfil-in">';
-  h+='<div class="perfil-cabeca"><div class="perfil-bobby">'+MASC('feliz')+'</div>'+
+  h+='<div class="perfil-cabeca"><div class="perfil-bobby">'+MASC('feliz','',null,'Bobby, o ursinho')+'</div>'+
      '<h1>'+escapa(p.nome||'Jogador')+'</h1>'+
      '<span class="titulo">Explorador nível '+niv+' · '+ROTULO_FAIXA[S.faixa]+'</span></div>';
   h+='<div class="stats">'+
@@ -57,6 +57,7 @@ function telaPerfil(){
      '<button class="btn fantasma" id="tr-jogador">Trocar de jogador</button></div>';
   h+='</div>';
   $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="fechar-perfil" aria-label="Voltar">'+IC.volta+'</button><h2>Meu perfil</h2></div><div class="rev-corpo">'+h+'</div>';
+  $('#perfil').dataset.tela='perfil';
   $('#perfil').classList.add('on');document.body.style.overflow='hidden';
   $('#fechar-perfil').addEventListener('click',fecharPerfil2);
   $('#perfil').querySelectorAll('[data-gal]').forEach(b=>b.addEventListener('click',()=>{
@@ -70,7 +71,7 @@ function telaPerfil(){
   $('#tr-jogador').addEventListener('click',()=>{fecharPerfil2();telaPerfis();});
 }
 function stat(ic,v,r){return '<div class="stat-card">'+ic+'<b>'+v+'</b><span>'+r+'</span></div>';}
-function fecharPerfil2(){$('#perfil').classList.remove('on');document.body.style.overflow='';renderTrilha();}
+function fecharPerfil2(){$('#perfil').classList.remove('on');$('#perfil').dataset.tela='';document.body.style.overflow='';renderTrilha();pintarBarra();}
 
 /* ---------- área do responsável ---------- */
 function fmtTempo(seg){

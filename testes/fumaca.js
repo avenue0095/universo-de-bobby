@@ -172,7 +172,7 @@ async function main() {
       if (barra.fixa !== 'fixed' || Math.abs(barra.bottom - barra.ih) > 2) problemas.push(rot + ': barra de baixo nao esta fixa no rodape');
       if (barra.h < 44) problemas.push(rot + ': botao Meu personagem menor que 44 px de altura (' + barra.h + ')');
       await js("document.querySelector('#bb-pers').click();0"); await dorme(250);
-      const loja = await js("document.querySelector('#perfil').classList.contains('on')&&/Guarda-roupa/.test(document.querySelector('#perfil').innerText)");
+      const loja = await js("document.querySelector('#perfil').classList.contains('on')&&/Meu personagem/.test(document.querySelector('#perfil').innerText)&&!!document.querySelector('.palco')");
       if (!loja) problemas.push(rot + ': Meu personagem nao abriu o guarda-roupa em 1 toque');
       await shot('ciclo-3-guarda-roupa');
       await js("document.querySelector('#volta-perfil').click();0"); await dorme(200);
@@ -201,6 +201,53 @@ async function main() {
       feito.push(rot + ': ciclo completo ' + estado);
       await js("window.scrollTo(0,0);0"); await dorme(100); await shot('ciclo-8-mapa-final');
       coleta(rot + ' ciclo');
+
+      /* 2d) telas do visual novo: mapa com planeta e cenario, desenhos (colorir), Meu personagem; sem imagem quebrada nem rolagem lateral */
+      {
+        const quebradas = async () => JSON.parse(await js("JSON.stringify(Array.from(document.querySelectorAll('img.arte')).filter(i=>i.complete&&i.naturalWidth===0&&!i.classList.contains('falhou')===false||(i.complete&&i.naturalWidth===0)).map(i=>i.src.slice(-40)))"));
+        const semRolagem = async (nome) => { const l = await js('({sw:document.documentElement.scrollWidth,iw:innerWidth})'); if (l.sw > l.iw + 1) problemas.push(rot + ' ' + nome + ': rolagem horizontal ' + l.sw + ' > ' + l.iw); };
+        await js("usarMateria('mat');fecharFolha();document.querySelector('#bb-mapa').click();0"); await dorme(600);
+        const mapa = await js("({etapas:document.querySelectorAll('.etapa').length,nos:document.querySelectorAll('.no .bt').length,luz:(document.querySelector('#etapa-1 .cena-luz')||{}).naturalWidth,planeta:(document.querySelector('.planeta-img img')||{}).naturalWidth,voce:!!document.querySelector('.voce'),menor:Math.min.apply(null,Array.from(document.querySelectorAll('.no .bt')).map(b=>Math.min(b.getBoundingClientRect().width,b.getBoundingClientRect().height))),retrato:(document.querySelector('#retrato-bb img')||{}).naturalWidth})");
+        if (mapa.etapas !== 10 || mapa.nos !== 60) problemas.push(rot + ' mapa: ' + JSON.stringify(mapa));
+        if (!mapa.luz || !mapa.planeta || !mapa.retrato) problemas.push(rot + ' mapa: imagem do cenario, do planeta ou do retrato nao carregou ' + JSON.stringify(mapa));
+        if (mapa.menor < 48) problemas.push(rot + ' mapa: no de fase menor que 48 px (' + mapa.menor + ')');
+        await js("document.querySelector('#etapa-1').scrollIntoView();window.scrollBy(0,-70);0"); await dorme(500);
+        await shot('visual-1-mapa-etapa'); await semRolagem('mapa');
+        await js("window.scrollTo(0,0);0"); await dorme(200); await shot('visual-1b-mapa-topo');
+        // desenhos: etapa 1 completa libera o desenho; abre, pinta, guarda e volta
+        await js("UNITS_MAT[0].lessons.forEach(l=>S.feitas[l.id]=3);S.desenhos.herdado=[];S.desenhos.vistos=[];salvar();renderTrilha();0"); await dorme(300);
+        const ponto = await js("!document.querySelector('#ponto-gal').hidden");
+        if (!ponto) problemas.push(rot + ' desenhos: faltou o ponto de novidade na barra');
+        await js("document.querySelector('#bb-gal').click();0"); await dorme(900);
+        const gal = await js("({cartoes:document.querySelectorAll('.des-card').length,livres:document.querySelectorAll('.des-card:not(.trava)').length,icone:Math.max.apply(null,Array.from(document.querySelectorAll('#gal-corpo svg')).map(v=>v.getBoundingClientRect().width))})");
+        if (gal.cartoes !== 30 || gal.livres < 1) problemas.push(rot + ' desenhos: galeria ' + JSON.stringify(gal));
+        if (gal.icone > 64) problemas.push(rot + ' desenhos: icone gigante na galeria (' + gal.icone + ' px)');
+        await shot('visual-2-galeria'); await semRolagem('galeria');
+        await js("document.querySelector('.des-card:not(.trava)').click();0"); await dorme(1200);
+        const pint = await js("(()=>{const c=document.querySelector('#cv-des');if(!c)return null;DES.cor=1;pintarEm(DES.w*0.5,DES.h*0.9);DES.cor=4;pintarEm(DES.w*0.2,DES.h*0.8);return {w:c.width,jog:DES.jogadas.length,guard:(S.desenhos.tinta[DES.id]||[]).length}})()");
+        if (!pint || !pint.w || pint.guard < 1) problemas.push(rot + ' desenhos: colorir nao funcionou ' + JSON.stringify(pint));
+        await shot('visual-3-colorir'); await semRolagem('colorir');
+        await js("document.querySelector('#fechar-des').click();0"); await dorme(300);
+        // Meu personagem: expressao, chapeu e companheiro
+        await js("S.moedas=500;document.querySelector('#bb-pers').click();0"); await dorme(500);
+        await js("document.querySelector('[data-pose=\"bobby-e03\"]').click();0"); await dorme(200);
+        await js("document.querySelector('[data-aba=\"chapeu\"]').click();0"); await dorme(200);
+        await js("document.querySelector('[data-buy]').click();0"); await dorme(300);
+        const roupa = await js("({chapeu:!!document.querySelector('.palco .item-chapeu'),look:S.look.chapeu,moedas:S.moedas})");
+        if (!roupa.chapeu || roupa.look !== 'explorador') problemas.push(rot + ' personagem: chapeu nao apareceu ' + JSON.stringify(roupa));
+        await js("document.querySelector('[data-aba=\"comp\"]').click();0"); await dorme(200);
+        await js("document.querySelector('[data-comp=\"rufa\"]').click();0"); await dorme(300);
+        await js("document.querySelector('#palco-bobby').click();0"); await dorme(300);
+        await shot('visual-4-meu-personagem'); await semRolagem('personagem');
+        await js("document.querySelector('[data-modo=\"corpo\"]').click();0"); await dorme(500);
+        await shot('visual-5-corpo');
+        await js("document.querySelector('#bb-mapa').click();0"); await dorme(500);
+        const ruins = await quebradas();
+        if (ruins.length) problemas.push(rot + ' imagens quebradas: ' + ruins.join(', '));
+        coleta(rot + ' visual');
+        feito.push(rot + ': visual novo ok (mapa ' + mapa.etapas + ' etapas, ' + gal.cartoes + ' desenhos, colorir, Meu personagem)');
+        await js("S.look={};S.desenhos.tinta={};salvar();0");
+      }
 
       /* 2c) audio GRAVADO: o tocar() acha o arquivo, o Chrome decodifica e toca ate o fim, sem voz do aparelho */
       await js("S.som=true;S.voz=true;S.faixa='f78';AUDIO.log.length=0;audioIniciar().then(()=>1)");

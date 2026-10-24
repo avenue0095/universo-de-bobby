@@ -433,7 +433,7 @@ img{max-width:100%}
 .lc-topo{display:flex;align-items:center;gap:8px;padding:16px 16px;max-width:640px;margin:0 auto;width:100%}
 .barra{flex:1;height:16px;border-radius:var(--raio-8);background:var(--cor-superficie-2);overflow:hidden;border:2px solid var(--cor-linha)}
 .barra i{display:block;height:100%;width:0;border-radius:var(--raio-8);background:var(--materia-base);
-  transition:width .35s cubic-bezier(.3,1.2,.5,1)}
+  }
 .vidas{display:flex;gap:4px;color:var(--cor-ainda)}
 .vidas svg{width:21px;height:21px;transition:transform .2s,opacity .2s}
 .vidas svg.off{opacity:.22;transform:scale(.8)}
@@ -509,7 +509,6 @@ ol.passos li::before{content:counter(p);position:absolute;left:0;top:1px;width:2
   background:var(--ub);color:var(--materia-sobre);display:grid;place-items:center;
   font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600}
 .fala{display:flex;align-items:center;gap:8px;padding-left:4px}
-.fala .mascote{width:82px;height:82px;flex:none}
 .fala .nome{font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);color:var(--cor-texto-suave);flex:1}
 .passinhos{display:flex;gap:8px;justify-content:center;padding:4px 0 0}
 .passinhos button{width:11px;height:11px;border-radius:var(--raio-pilula);background:var(--cor-superficie-2);border:2px solid var(--cor-linha);padding:0}
@@ -517,7 +516,6 @@ ol.passos li::before{content:counter(p);position:absolute;left:0;top:1px;width:2
 
 .caixa-dica{display:flex;gap:16px;align-items:flex-start;margin-top:16px;background:var(--cor-superficie);
   border:2px dashed var(--cor-ouro);border-radius:var(--raio-16);padding:16px 16px;font-size:var(--t-pequeno);line-height:1.55}
-.caixa-dica .mini-tuco{width:56px;height:56px;flex:none}
 .caixa-dica b{display:block;color:var(--cor-ouro-borda);font-family:"Fredoka",sans-serif;font-weight:600;font-size:var(--t-pequeno);
   margin-bottom:4px}
 
@@ -557,7 +555,6 @@ ol.passos li::before{content:counter(p);position:absolute;left:0;top:1px;width:2
 
 /* ---------- fim ---------- */
 .fim{text-align:center;padding:8px 0}
-.fim .mascote{width:150px;height:150px;margin:0 auto 4px}
 .fim h2{font-size:var(--t-h1);letter-spacing:-.02em;margin-bottom:8px}
 .fim .sub{color:var(--cor-texto-suave);font-size:var(--t-pequeno);margin-bottom:16px;font-weight:700}
 .mundo-ok{display:inline-flex;align-items:center;gap:8px;background:var(--cor-ouro);color:var(--cor-ouro-sobre);
@@ -586,16 +583,13 @@ canvas.confete{position:fixed;inset:0;pointer-events:none;z-index:60;width:100%;
 .cx input:focus{outline:none;border-color:var(--materia-base)}
 .cx .linha{display:flex;gap:8px;justify-content:center;align-items:center}
 
-svg.mascote{width:100%;height:100%;display:block}
 
 @media (max-width:430px){
   .pergunta{font-size:var(--t-destaque)}
   .marca span{display:none}
   .marca b{font-size:var(--t-legenda)}
   .btn{padding:16px 16px;font-size:var(--t-pequeno)}
-  .fala .mascote{width:70px;height:70px}
-  .ola .mini{width:64px;height:64px}
-  .fase{width:112px}
+    .fase{width:112px}
   .fase .rot{font-size:var(--t-legenda)}
   .cenario{width:54px;height:54px}
 }
@@ -666,8 +660,7 @@ svg.mascote{width:100%;height:100%;display:block}
 .missao .it svg{width:100%;height:100%;display:block}
 .missao .it.on{color:var(--materia-tinta);transform:scale(1.12)}
 .balao.historia h2{color:var(--cor-texto)}
-.cap-abre{margin:0 0 16px;font-size:var(--t-pequeno);line-height:1.6;color:var(--cor-texto-suave);border-left:4px solid var(--ub);
-  padding-left:16px}
+.cap-abre{margin:0 0 16px;font-size:var(--t-pequeno);line-height:1.6;color:var(--cor-texto);background:var(--materia-suave);border-radius:var(--raio-16);padding:var(--esp-8) var(--esp-16)}
 .premio-missao{display:flex;align-items:center;gap:8px;background:var(--cor-superficie-2);border-radius:var(--raio-16);padding:8px 16px;
   font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:700}
 .premio-missao svg{width:26px;height:26px;color:var(--materia-tinta);flex:none}
@@ -721,7 +714,6 @@ svg.cubinho{width:9.2px;height:9.2px}
 #perfil{z-index:72}
 .perfil-in{max-width:640px;margin:0 auto}
 .perfil-cabeca{text-align:center;margin-bottom:24px}
-.perfil-bobby{width:118px;height:118px;margin:0 auto 8px}
 .perfil-cabeca h1{font-size:var(--t-h2);letter-spacing:-.02em}
 .perfil-cabeca .titulo{font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:800}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
@@ -751,7 +743,6 @@ h2.sec{font-size:var(--t-corpo);margin:0 0 16px}
 .medalha.on svg{color:var(--cor-ouro-borda)}
 .perfil-bts{display:grid;gap:8px;margin-bottom:24px}
 .loja-topo{display:flex;gap:16px;align-items:center;margin-bottom:16px}
-.loja-bobby{width:92px;height:92px;flex:none}
 .loja-topo h1{font-size:var(--t-h3)}
 .saldo{display:inline-flex;align-items:center;gap:8px;background:var(--cor-superficie);border:2px solid var(--cor-ouro);
   color:var(--cor-ouro-borda);border-radius:var(--raio-pilula);padding:4px 16px;margin-top:8px;font-weight:800}
@@ -761,7 +752,6 @@ h2.sec{font-size:var(--t-corpo);margin:0 0 16px}
 .item{background:var(--cor-superficie);border:2px solid var(--cor-linha);border-radius:var(--raio-16);padding:16px 8px;
   text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
 .item.equipado{border-color:var(--materia-base);background:color-mix(in srgb,var(--materia-base) 8%,var(--cor-superficie))}
-.item-bobby{width:88px;height:88px}
 .item b{font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600}
 .item .btn{width:100%;padding:8px 8px;font-size:var(--t-legenda);display:flex;align-items:center;justify-content:center;gap:4px}
 .item .btn svg{width:16px;height:16px}
@@ -889,7 +879,7 @@ ol.plano li{padding-left:40px}
 .cartao-en:active{transform:translateY(2px);}
 .cartao-en .fala{display:inline-flex;align-items:center;gap:4px}
 .cartao-en .fala svg{width:13px;height:13px}
-.aviso-voz{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:120;
+.aviso-voz{position:fixed;left:50%;bottom:calc(var(--barra-h) + var(--esp-16) + var(--area-segura-baixo));transform:translateX(-50%);z-index:120;
   width:min(360px,calc(100vw - 28px));display:flex;flex-direction:column;gap:4px;
   padding:16px 16px;border-radius:var(--raio-16);background:var(--cor-superficie);border:2px solid var(--cor-linha);
   box-shadow:var(--sombra-1);animation:sobe .28s ease}
@@ -912,20 +902,6 @@ ol.plano li{padding-left:40px}
 .lembrete b{color:var(--cor-texto)}
 
 /* ---- guarda-roupa: prévia do personagem sempre à vista ---- */
-.previa{display:flex;align-items:center;gap:16px;min-width:0;
-  background:var(--cor-superficie);border:2px solid var(--cor-linha);
-  border-radius:var(--raio-24);padding:16px 16px;margin-bottom:16px}
-.previa-bobby{width:92px;height:92px;flex:none}
-.previa-bobby svg{width:100%;height:100%;display:block}
-.previa-tx{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:4px}
-.previa-tx .rot{font-size:var(--t-legenda);font-weight:800;text-transform:uppercase;
-  letter-spacing:.05em;color:var(--cor-texto-suave)}
-.previa-tx b{font-family:Fredoka,Nunito,sans-serif;font-size:var(--t-destaque);font-weight:600;line-height:1.15}
-.previa-tx .usando{font-size:var(--t-legenda);font-weight:700;color:var(--cor-texto-suave);line-height:1.3;
-  overflow-wrap:anywhere;margin-bottom:8px}
-.previa .saldo{align-self:flex-start}
-.rot-abas{display:block;margin:0 0 8px;font-size:var(--t-legenda);font-weight:800;
-  text-transform:uppercase;letter-spacing:.05em;color:var(--cor-texto-suave);text-align:center}
 .vitrine{grid-template-columns:repeat(auto-fill,minmax(0,1fr))}
 @media(min-width:340px){.vitrine{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:560px){.vitrine{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -989,7 +965,7 @@ ol.plano li{padding-left:40px}
    Componentes do ciclo diário (Fase 2, lógica). Só tokens do DESIGN.md. Acabamento visual vem com a arte.
    ====================================================================== */
 .tela{padding-bottom:calc(var(--barra-h) + var(--esp-32) + var(--area-segura-baixo))}
-.barra-baixo{position:fixed;left:0;right:0;bottom:0;z-index:var(--z-barra);display:flex;justify-content:center;gap:var(--esp-4);
+.barra-baixo{position:fixed;left:0;right:0;bottom:0;z-index:73;display:flex;justify-content:center;gap:var(--esp-4);
   padding:var(--esp-8) max(var(--esp-8),calc((100% - var(--larg-conteudo)) / 2)) calc(var(--esp-8) + var(--area-segura-baixo));
   background:var(--cor-superficie);border-top:1px solid var(--cor-linha)}
 .barra-baixo button{flex:1 1 0;min-height:var(--toque-min);display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -998,7 +974,6 @@ ol.plano li{padding-left:40px}
 .barra-baixo button svg{width:24px;height:24px}
 .barra-baixo button:hover{background:var(--cor-superficie-2);color:var(--cor-texto)}
 .barra-baixo button:focus-visible{outline:3px solid var(--cor-foco);outline-offset:2px}
-.barra-baixo #bb-pers{color:var(--cor-acao-sobre);background:var(--cor-acao);border:2px solid var(--cor-acao-borda)}
 
 .rotina{background:var(--cor-superficie);color:var(--cor-texto);border:2px solid var(--cor-linha);border-radius:var(--raio-24);
   padding:var(--esp-16);margin:0 0 var(--esp-24);box-shadow:var(--sombra-1)}
@@ -1010,7 +985,7 @@ ol.plano li{padding-left:40px}
 .rotina-of.descansa{background:var(--cor-gelo);color:var(--cor-gelo-sobre)}
 .meta-linha{display:flex;align-items:center;gap:var(--esp-8);font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave);font-weight:var(--peso-forte)}
 .meta-barra{flex:1;height:var(--esp-16);border-radius:var(--raio-pilula);background:var(--cor-superficie-2);border:1px solid var(--cor-linha-forte);overflow:hidden}
-.meta-barra i{display:block;height:100%;background:var(--cor-acerto);border-radius:var(--raio-pilula);transition:width var(--mov-padrao) var(--curva-move)}
+.meta-barra i{display:block;height:100%;background:var(--cor-acerto);border-radius:var(--raio-pilula)}
 .rotina-vivo{margin:var(--esp-8) 0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto-suave)}
 .missoes{list-style:none;margin:0 0 var(--esp-8);padding:0;display:grid;gap:var(--esp-8)}
 .missoes li{display:flex;align-items:center;gap:var(--esp-8);padding:var(--esp-8) var(--esp-16);border-radius:var(--raio-16);background:var(--cor-superficie-2);
@@ -1163,3 +1138,116 @@ ol.plano li{padding-left:40px}
   .folha-a4 img{width:100%;max-height:245mm;object-fit:contain}
   .folha-a4 p{margin:0;font-size:var(--t-legenda);line-height:var(--lh-legenda)}
 }
+
+/* ---------- o Bobby (imagem) nas telas ---------- */
+.mascote{display:block;width:100%;height:auto}
+.fala .bobby-com-item{flex:none}
+.caixa-dica .mini-tuco{flex:none;height:72px;display:grid;place-items:center}
+.caixa-dica .mini-tuco .mascote{height:72px}
+.fim{text-align:center}
+.fim .mascote,.fim .bobby-com-item{display:block;width:auto;height:200px;margin:0 auto var(--esp-8)}
+.fim .bobby-com-item .mascote{height:100%}
+.folha-bobby{display:grid;place-items:center;width:auto;height:120px;margin:0 auto var(--esp-8)}
+.folha-bobby .mascote{width:auto;height:120px}
+.perfil-bobby{display:grid;place-items:center;height:144px;margin:0 auto var(--esp-8)}
+.perfil-bobby .mascote{width:auto;height:144px}
+.bobby-com-item{position:relative;display:inline-block;line-height:0}
+.bobby-com-item .item-chapeu{position:absolute;height:auto;transform:translate(-50%,-100%);pointer-events:none}
+.retrato{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 18%;border-radius:var(--raio-pilula);background:var(--materia-suave)}
+.rosto .retrato{width:96px;height:96px;border:3px solid var(--aro,var(--cor-linha-forte))}
+.mascote-cx{width:96px;height:96px;margin:0 auto var(--esp-8);border-radius:var(--raio-pilula);border:3px solid var(--aro,var(--cor-linha-forte));overflow:hidden}
+.mascote-cx .retrato{border-radius:0}
+.cores .cor{background:var(--cor-da-tinta);border-width:3px;width:var(--toque-min);height:var(--toque-min)}
+.cores{flex-wrap:wrap}
+
+/* ---------- barra de baixo: item ativo e retrato vivo do personagem (DESIGN 10.1 e 10.2) ---------- */
+.barra-baixo{min-height:var(--barra-h)}
+.barra-baixo button.ativo{background:var(--materia-suave);color:var(--materia-tinta)}
+.barra-baixo button.ativo::before{content:"";position:absolute;left:var(--esp-16);right:var(--esp-16);top:0;height:4px;border-radius:var(--raio-pilula);background:var(--materia-base)}
+.retrato-bb{display:block;width:40px;height:40px;border-radius:var(--raio-pilula);border:3px solid var(--cor-linha-forte);overflow:hidden;background:var(--cor-superficie-2)}
+.barra-baixo button.ativo .retrato-bb{border-color:var(--materia-base)}
+.retrato-bb .retrato{border-radius:0}
+body:has(#licao.on) .barra-baixo{display:none}
+.galeria-tela .rev-corpo,#perfil .rev-corpo{padding-bottom:calc(var(--barra-h) + var(--esp-32) + var(--area-segura-baixo))}
+.perfis,.materias{z-index:75}
+
+/* ---------- Meu personagem: palco, expressões, poses e itens ---------- */
+.palco{position:relative;display:grid;justify-items:center;gap:var(--esp-8);margin:0 0 var(--esp-16);padding:var(--esp-16);border-radius:var(--raio-32);
+  background:radial-gradient(70% 70% at 50% 40%,color-mix(in srgb,var(--materia-luz) 30%,transparent),transparent 75%),var(--cor-superficie);
+  border:1px solid var(--cor-linha);box-shadow:var(--sombra-2)}
+.palco-bobby{display:grid;place-items:center;border-radius:var(--raio-24);padding:var(--esp-24) var(--esp-16) var(--esp-8);min-height:var(--toque-conforto)}
+.palco-bobby .bobby-com-item,.palco-bobby .mascote{display:block}
+.palco-bobby.rosto .mascote{height:min(46vw,240px);width:auto}
+.palco-bobby.corpo .mascote{height:min(78vw,340px);width:auto}
+.palco-bobby .bobby-com-item .mascote{height:100%}
+.palco-bobby.rosto .bobby-com-item{height:min(46vw,240px);margin-top:var(--esp-48)}
+.palco-bobby.corpo .bobby-com-item{height:min(78vw,340px);margin-top:var(--esp-48)}
+.palco-comp{position:absolute;right:var(--esp-16);bottom:var(--esp-48);width:min(24vw,112px);pointer-events:none}
+.palco-comp img{width:100%;height:auto;filter:drop-shadow(0 6px 8px var(--cor-sombra))}
+.palco-nome{margin:0;text-align:center;font-size:var(--t-corpo);line-height:var(--lh-corpo);color:var(--cor-texto)}
+.palco-nome small{display:block;font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave);font-weight:var(--peso-forte)}
+.palco-modos{display:flex;gap:var(--esp-8);justify-content:center;margin:0 0 var(--esp-8)}
+.palco-escolha{display:flex;gap:var(--esp-8);overflow-x:auto;padding:var(--esp-4) var(--esp-4) var(--esp-8);margin:0 0 var(--esp-16);scroll-snap-type:x proximity}
+.mini-pose{flex:none;display:grid;grid-template-rows:56px auto;justify-items:center;gap:var(--esp-4);width:72px;padding:var(--esp-4);border-radius:var(--raio-16);
+  border:2px solid var(--cor-linha);background:var(--cor-superficie);scroll-snap-align:start;min-height:var(--toque-conforto)}
+.mini-pose img{width:56px;height:56px;object-fit:contain}
+.mini-pose span{font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);color:var(--cor-texto-suave);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mini-pose.on{border-color:var(--materia-base);background:var(--materia-suave)}
+.mini-pose.on span{color:var(--materia-tinta)}
+.saldo-linha{display:flex;justify-content:center;margin:0 0 var(--esp-16)}
+.saldo{display:inline-flex;align-items:center;gap:var(--esp-8);background:var(--cor-ouro);color:var(--cor-ouro-sobre);border:2px solid var(--cor-ouro-borda);
+  border-radius:var(--raio-pilula);padding:var(--esp-4) var(--esp-16);font-weight:var(--peso-forte)}
+.saldo b{font-family:var(--fonte-titulo);font-weight:var(--peso-titulo)}
+.item{display:flex;flex-direction:column;align-items:center;gap:var(--esp-8);padding:var(--esp-16) var(--esp-8) var(--esp-8)}
+.item-img{width:100%;height:112px;display:grid;place-items:center}
+.item-img img{max-width:100%;max-height:100%;width:auto;height:100%;object-fit:contain}
+.item-img.item-peca img{height:auto;width:84%;filter:drop-shadow(0 6px 6px var(--cor-sombra))}
+.item .btn-sec,.item .btn-acao{width:100%;min-height:var(--toque-min);padding:var(--esp-4) var(--esp-8);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
+.item.vazio{grid-column:1/-1;text-align:center;border-style:dashed;padding:var(--esp-24)}
+.guardados{margin:var(--esp-16) 0 0;padding:var(--esp-16);border:1px dashed var(--cor-linha-forte);border-radius:var(--raio-16);font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave)}
+.guardados b{color:var(--cor-texto)}
+.abas{gap:var(--esp-8)}
+.aba{min-height:var(--toque-min);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
+
+/* o retrato é cortado no peito: some devagar em vez de acabar numa linha reta */
+.palco-bobby.rosto .mascote{-webkit-mask-image:linear-gradient(to bottom,black 80%,transparent);mask-image:linear-gradient(to bottom,black 80%,transparent)}
+
+/* ---------- feedback: painel que sobe da base, com o Bobby real e check ou seta (DESIGN 10.9) ---------- */
+.pe{border-top:2px solid var(--cor-linha-forte);border-radius:var(--raio-24) var(--raio-24) 0 0;box-shadow:var(--sombra-3);padding:var(--esp-16) var(--esp-16) calc(var(--esp-16) + var(--area-segura-baixo))}
+.pe.mostra{animation:painel-sobe var(--mov-padrao) var(--curva-entra) both}
+.pe.certo{background:var(--cor-acerto-suave);border-top-color:var(--cor-acerto)}
+.pe.errado{background:var(--cor-ainda-suave);border-top-color:var(--cor-ainda)}
+.pe .selo{width:56px;height:56px;border-radius:var(--raio-pilula);overflow:hidden;background:var(--cor-superficie);border:2px solid var(--cor-linha-forte)}
+.pe .selo .mascote{width:100%;height:100%;object-fit:cover;object-position:50% 18%;animation:aparece var(--mov-padrao) var(--curva-entra) both}
+.pe #fb-t{display:flex;align-items:center;gap:var(--esp-8);font-size:var(--t-destaque);line-height:var(--lh-destaque);color:var(--cor-texto)}
+.pe #fb-t svg{width:24px;height:24px;flex:none}
+.pe.certo #fb-t svg{color:var(--cor-acerto)}
+.pe.errado #fb-t svg{color:var(--cor-ainda)}
+.pe .msg small b{font-weight:var(--peso-forte);color:var(--cor-texto)}
+.pe .msg small{font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto);font-weight:var(--peso-corpo)}
+@keyframes painel-sobe{from{transform:translateY(24px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes aparece{from{transform:scale(.88);opacity:0}to{transform:none;opacity:1}}
+.alt{min-height:var(--toque-conforto);align-items:center}
+.alt:active:not([disabled]){transform:scale(.98)}
+.alt.sel{border-width:3px;background:var(--materia-suave)}
+.alt.certa{background:var(--cor-acerto-suave);border-color:var(--cor-acerto)}
+.alt.errada{background:var(--cor-ainda-suave);border-color:var(--cor-ainda)}
+.alt .sinal{margin-left:auto;display:grid;place-items:center;width:32px;height:32px;flex:none}
+.alt.certa .sinal{color:var(--cor-acerto)}
+.alt.errada .sinal{color:var(--cor-ainda)}
+.alt .sinal svg{width:24px;height:24px}
+@media (prefers-reduced-motion:reduce){.pe.mostra,.pe .selo .mascote{animation:none}}
+
+/* botão principal (DESIGN 10.3) */
+.btn{min-height:var(--toque-conforto);font-size:var(--t-corpo);line-height:var(--lh-corpo);border-radius:var(--raio-16);box-shadow:var(--sombra-1);border:2px solid transparent}
+.btn[disabled]{box-shadow:none;border-color:var(--cor-linha)}
+.btn.fantasma{min-height:var(--toque-min);font-size:var(--t-pequeno);border:0}
+
+.mascote.avatar{width:80px;height:80px;object-fit:cover;object-position:50% 18%;border-radius:var(--raio-pilula);border:2px solid var(--materia-base);background:var(--materia-suave)}
+.fala .mascote.avatar{flex:none}
+.caixa-dica .mini-tuco .mascote.avatar{width:64px;height:64px}
+.pe .selo .mascote.avatar{width:100%;height:100%;border:0}
+
+.planeta .meta-barra i{background:var(--materia-base)}
+.saldo{background:var(--cor-superficie);color:var(--cor-ouro-borda);border-color:var(--cor-ouro-borda)}
+.saldo b{color:var(--cor-texto)}

@@ -22,19 +22,19 @@ function confete(){
 let corEscolhida=CORES[0],criando=false,faixaEscolhida='f78';
 function pintarCores(){
   $('#cores').innerHTML=CORES.map(c=>'<button class="cor'+(c===corEscolhida?' on':'')+
-    '" data-c="'+c+'" style="background:'+c+'" aria-label="Cor"></button>').join('');
+    '" data-c="'+c+'" style="--cor-da-tinta:'+c+'" aria-label="Cor '+(CORES.indexOf(c)+1)+'" aria-pressed="'+(c===corEscolhida)+'"></button>').join('');
   $('#cores').querySelectorAll('.cor').forEach(b=>b.addEventListener('click',()=>{
     corEscolhida=b.dataset.c;pintarCores();
-    $('#masc-modal').style.setProperty('--m1',corEscolhida);
+    $('#masc-modal').style.setProperty('--aro',corEscolhida);
   }));
 }
 function pedirNome(nova){
   criando=!!nova;
   corEscolhida=nova?CORES[STORE.perfis.length%CORES.length]:perfilAtual().cor;
-  $('#masc-modal').innerHTML=MASC('oi');
-  $('#masc-modal').style.setProperty('--m1',corEscolhida);
+  $('#masc-modal').innerHTML=retratoBobby();
+  $('#masc-modal').style.setProperty('--aro',corEscolhida);
   $('#tt-nome').textContent=nova?'Novo jogador':'Trocar o nome';
-  $('#txt-nome').textContent=nova?'Escolha um nome e a cor do seu Bobby.':'Você pode mudar seu nome e sua cor.';
+  $('#txt-nome').textContent=nova?'Escolha um nome e uma cor para o seu retrato.':'Você pode mudar seu nome e sua cor.';
   pintarCores();faixaEscolhida=nova?'f78':(S.faixa||'f78');pintarNiveis();
   $('#modal').classList.add('on');
   const c=$('#campo-nome');c.value=criando?'':(perfilAtual().nome||'');

@@ -130,11 +130,11 @@ const J = (x) => JSON.parse(JSON.stringify(x));
   await teste('13. XP nunca diminui; gastar na loja so mexe nas moedas', () => {
     const a = abrir({ 'mundo-numeros-v2': FIX });
     a.avaliar('usarPerfil(0)');
-    a.avaliar("S.moedas=500;S.xp=2480;comprar('chapeu','festa')");
+    a.avaliar("S.moedas=500;S.xp=2480;comprar('chapeu','explorador')");
     A.strictEqual(a.avaliar('S.xp'), 2480);
-    A.strictEqual(a.avaliar('S.moedas'), 320);
-    A.ok(a.avaliar("S.comprado.indexOf('festa')>=0"));
-    a.avaliar("S.moedas=10;comprar('chapeu','coroa')");   // sem saldo: nao compra, nao mexe
+    A.strictEqual(a.avaliar('S.moedas'), 400);
+    A.ok(a.avaliar("S.comprado.indexOf('explorador')>=0"));
+    a.avaliar("S.moedas=10;S.comprado=[];comprar('chapeu','explorador');comprar('chapeu','coroa')");   // sem saldo (ou item sem arte nova): nao compra, nao mexe
     A.strictEqual(a.avaliar('S.moedas'), 10); A.strictEqual(a.avaliar('S.xp'), 2480);
   });
 

@@ -61,7 +61,8 @@ const COLECAO_DE={adesivo:'adesivos',ornamento:'ornamentos',medalha:'medalhas',p
 /* peças do guarda-roupa por faixa de preço: pequena, maior e exclusiva (a mais cara que a criança ainda não tem) */
 function pecaParaBau(tam){
   const todas=[];
-  ['chapeu','rosto','pescoco'].forEach(sl=>Object.keys(PECAS[sl]||{}).forEach(id=>todas.push({id:id,n:PECAS[sl][id].n,p:PECAS[sl][id].p})));
+  /* só peça com arte nova entra no baú: dar o que a criança não consegue ver seria promessa vazia */
+  ['chapeu','rosto','pescoco'].forEach(sl=>Object.keys(PECAS[sl]||{}).forEach(id=>{if(PECAS[sl][id].arte)todas.push({id:id,n:PECAS[sl][id].n,p:PECAS[sl][id].p});}));
   const livres=todas.filter(x=>S.comprado.indexOf(x.id)<0).sort((a,b)=>a.p-b.p||(a.id<b.id?-1:1));
   if(!livres.length)return null;
   if(tam==='roupa-p')return livres.find(x=>x.p<=220)||null;

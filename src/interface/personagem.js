@@ -1,113 +1,154 @@
-/* ---------- o personagem: Bobby, o ursinho ---------- */
+/* ---------- o personagem: Bobby, o ursinho (arte semirrealista em WebP) e a tela "Meu personagem" ----------
+   O Bobby agora é imagem: 12 poses de corpo inteiro (P01 a P12) e 8 expressões de retrato (E01 a E08).
+   Chapéu é sobreposição e só aparece em imagem de frente (a cabeça virada pediria uma imagem nova por pose).
+   Companheiros: 6, cada um com 4 poses (a primeira é a que aparece nas telas). Itens novos entram em ITENS, sem mexer no resto. */
+const BOBBY={
+  oi:'bobby-p01',comemora:'bobby-p02',pensa:'bobby-e04',aponta:'bobby-p04',anda:'bobby-p05a',le:'bobby-p06',escuta:'bobby-p07',conta:'bobby-p08',
+  incentiva:'bobby-p09',presente:'bobby-p10',tchau:'bobby-p11',descansa:'bobby-p12',
+  feliz:'bobby-e01',radiante:'bobby-e02',curioso:'bobby-e03',surpreso:'bobby-e05',ops:'bobby-e06',concentrado:'bobby-e07',tranquilo:'bobby-e08'
+};
+const EXPRESSOES=[['bobby-e01','Alegre'],['bobby-e02','Radiante'],['bobby-e03','Curioso'],['bobby-e04','Pensativo'],
+  ['bobby-e05','Surpreso'],['bobby-e06','Incentivando'],['bobby-e07','Concentrado'],['bobby-e08','Tranquilo']];
+const POSES=[['bobby-p01','Oi'],['bobby-p02','Comemora'],['bobby-p03','Pensa'],['bobby-p04','Aponta'],['bobby-p05a','Caminha'],['bobby-p06','Lê'],
+  ['bobby-p07','Escuta'],['bobby-p08','Conta'],['bobby-p09','Incentiva'],['bobby-p10','Presente'],['bobby-p11','Tchau'],['bobby-p12','Descansa']];
+/* imagens de frente onde o chapéu entra: [centro x, largura de orelha a orelha], em fração da largura da imagem */
+const FRONTAIS={
+  'bobby-p01':[.45,.645],'bobby-p02':[.49,.58],'bobby-p08':[.60,.71],'bobby-p09':[.50,.69],'bobby-p10':[.50,.88],
+  'bobby-e01':[.5,.94],'bobby-e02':[.5,.92],'bobby-e03':[.5,.94],'bobby-e04':[.5,.92],'bobby-e05':[.5,.92],'bobby-e06':[.5,.92],'bobby-e07':[.5,.87],'bobby-e08':[.5,.92]
+};
+/* catálogo do guarda-roupa. 'arte' = existe imagem nova (o item aparece de verdade). Sem 'arte' = item da versão antiga:
+   quem já tinha comprado continua com o direito e vê o item guardado ("volta com a arte nova"); ninguém compra o que não tem arte. */
 const PECAS={
- chapeu:{
-  bone:{n:'Boné azul',p:120,c:['#2C6FD1','#1B4E9B'],
-    d:'<path d="M20 36a41 30 0 0 1 82 0Z" fill="var(--c1)"/><path d="M96 36h22a6 6 0 0 1 0 10H96Z" fill="var(--c2)"/>'},
-  festa:{n:'Chapéu de festa',p:180,c:['#F0455F','#FFD84D'],
-    d:'<path d="M61 -6 84 34H38Z" fill="var(--c1)"/><circle cx="61" cy="-8" r="8" fill="var(--c2)"/><circle cx="52" cy="18" r="4" fill="var(--c2)"/><circle cx="70" cy="26" r="4" fill="var(--c2)"/>'},
-  chef:{n:'Chapéu de chef',p:240,c:['#FFFFFF','#E4E9F2'],
-    d:'<path d="M30 36V16a15 15 0 0 1 24-9 16 16 0 0 1 26 0 15 15 0 0 1 24 9v20Z" fill="var(--c1)" stroke="var(--c2)" stroke-width="2"/><rect x="30" y="30" width="62" height="10" rx="4" fill="var(--c2)"/>'},
-  espacial:{n:'Capacete espacial',p:400,c:['#BFD4EE','#8FB4E0'],
-    d:'<circle cx="61" cy="62" r="54" fill="none" stroke="var(--c1)" stroke-width="6" opacity=".9"/><path d="M112 52l14-6v26Z" fill="var(--c2)"/>'},
-  pirata:{n:'Chapéu de pirata',p:320,c:['#2B3A55','#FFD84D'],
-    d:'<path d="M14 38q47-34 94 0q-47 12-94 0Z" fill="var(--c1)"/><circle cx="61" cy="24" r="7" fill="var(--c2)"/>'},
-  coroa:{n:'Coroa do rei',p:600,c:['#F2B617','#FF6B8A'],
-    d:'<path d="M22 34 28 2l16 16L61 -2l17 20 16-16 6 32Z" fill="var(--c1)"/><circle cx="44" cy="20" r="5" fill="var(--c2)"/><circle cx="78" cy="20" r="5" fill="var(--c2)"/>'}
- },
- rosto:{
-  oculos:{n:'Óculos redondos',p:150,c:['#2B3A55','#2B3A55'],
-    d:'<circle cx="44" cy="58" r="16" fill="none" stroke="var(--c1)" stroke-width="4.5"/><circle cx="78" cy="58" r="16" fill="none" stroke="var(--c1)" stroke-width="4.5"/><path d="M60 58h2M12 54l16 4M110 54l-16 4" stroke="var(--c1)" stroke-width="4.5" fill="none" stroke-linecap="round"/>'},
-  sol:{n:'Óculos de sol',p:220,c:['#1D2739','#3E5A86'],
-    d:'<path d="M24 48h74l-4 16a13 13 0 0 1-24 3 8 8 0 0 0-18 0 13 13 0 0 1-24-3Z" fill="var(--c1)"/><path d="M28 52h20l-2 8Z" fill="var(--c2)"/>'},
-  heroi:{n:'Máscara de herói',p:280,c:['#F0455F','#FFD84D'],
-    d:'<path d="M20 46h82l-6 22H26Z" fill="var(--c1)"/><circle cx="44" cy="58" r="10" fill="#fff"/><circle cx="78" cy="58" r="10" fill="#fff"/><circle cx="44" cy="58" r="5" fill="var(--m-olho)"/><circle cx="78" cy="58" r="5" fill="var(--m-olho)"/>'},
-  tapaolho:{n:'Tapa-olho',p:200,c:['#1D2739','#1D2739'],
-    d:'<path d="M8 44 96 52" stroke="var(--c1)" stroke-width="4" fill="none"/><rect x="66" y="46" width="26" height="22" rx="8" fill="var(--c1)"/>'}
- },
- pescoco:{
-  cachecol:{n:'Cachecol',p:180,c:['#E14D5A','#FFD84D'],
-    d:'<path d="M18 96q43 22 86 0l4 16q-45 22-94 0Z" fill="var(--c1)"/><path d="M96 108l10 26h14l-10-28Z" fill="var(--c2)"/>'},
-  gravata:{n:'Gravata-borboleta',p:140,c:['#7B5BE0','#5B3FC0'],
-    d:'<path d="M61 108 40 96v24Zm0 0 21-12v24Z" fill="var(--c1)"/><circle cx="61" cy="108" r="7" fill="var(--c2)"/>'},
-  medalha:{n:'Medalha de ouro',p:350,c:['#F2B617','#FFE59B'],
-    d:'<path d="M48 92 58 112M74 92 64 112" stroke="var(--c1)" stroke-width="5" fill="none"/><circle cx="61" cy="118" r="13" fill="var(--c1)"/><circle cx="61" cy="118" r="7" fill="var(--c2)"/>'},
-  capa:{n:'Capa de herói',p:450,c:['#2C6FD1','#7FB2F0'],atras:true,
-    d:'<path d="M18 44q43 26 86 0l14 78q-57 22-114 0Z" fill="var(--c1)"/><path d="M42 46q19 10 38 0l6 74q-25 8-50 0Z" fill="var(--c2)" opacity=".55"/>'}
- },
- pelo:{
-  mel:{n:'Pelo mel',p:100,cor:'#D9A24A'},
-  cinza:{n:'Pelo cinza',p:150,cor:'#8C93A3'},
-  panda:{n:'Pelo panda',p:260,cor:'#2E3849'},
-  polar:{n:'Pelo polar',p:300,cor:'#E7EDF7'},
-  rosa:{n:'Pelo rosa',p:220,cor:'#E7789A'},
-  choco:{n:'Chocolate',p:180,cor:'#7A4A25'}
- }
+  chapeu:{
+    explorador:{n:'Chapéu de explorador',p:100,arte:'bobby-item-chapeu'},
+    bone:{n:'Boné azul',p:120},festa:{n:'Chapéu de festa',p:180},chef:{n:'Chapéu de chef',p:240},
+    espacial:{n:'Capacete espacial',p:400},pirata:{n:'Chapéu de pirata',p:320},coroa:{n:'Coroa do rei',p:600}
+  },
+  rosto:{oculos:{n:'Óculos redondos',p:150},sol:{n:'Óculos de sol',p:220},heroi:{n:'Máscara de herói',p:280},tapaolho:{n:'Tapa-olho',p:200}},
+  pescoco:{cachecol:{n:'Cachecol',p:180},gravata:{n:'Gravata-borboleta',p:140},medalha:{n:'Medalha de ouro',p:350},capa:{n:'Capa de herói',p:450}},
+  pelo:{mel:{n:'Pelo mel',p:100},cinza:{n:'Pelo cinza',p:150},panda:{n:'Pelo panda',p:260},polar:{n:'Pelo polar',p:300},rosa:{n:'Pelo rosa',p:220},choco:{n:'Chocolate',p:180}},
+  pers:{nina:{n:'Nina, a coelhinha',p:180},pim:{n:'Pim, o gatinho',p:220},zeca:{n:'Zeca, o macaquinho',p:260},lulu:{n:'Lulu, a corujinha',p:320}}
 };
-const PERS={
- bobby:{n:'Bobby',tipo:'ursinho',p:0,cor:'#A9713F',
-  topo:'<circle cx="28" cy="34" r="18" fill="var(--m1)"/><circle cx="94" cy="34" r="18" fill="var(--m1)"/>'+
-       '<circle cx="28" cy="34" r="9" fill="var(--m3)"/><circle cx="94" cy="34" r="9" fill="var(--m3)"/>',extra:''},
- nina:{n:'Nina',tipo:'coelhinha',p:180,cor:'#E7B7C6',
-  topo:'<ellipse cx="34" cy="14" rx="11" ry="26" fill="var(--m1)"/><ellipse cx="88" cy="14" rx="11" ry="26" fill="var(--m1)"/>'+
-       '<ellipse cx="34" cy="16" rx="5" ry="17" fill="var(--m3)"/><ellipse cx="88" cy="16" rx="5" ry="17" fill="var(--m3)"/>',extra:''},
- pim:{n:'Pim',tipo:'gatinho',p:220,cor:'#8C93A3',
-  topo:'<path d="M14 40 20 8l26 16Z" fill="var(--m1)"/><path d="M108 40 102 8 76 24Z" fill="var(--m1)"/>'+
-       '<path d="M22 34 25 18l13 8Z" fill="var(--m3)"/><path d="M100 34 97 18 84 26Z" fill="var(--m3)"/>',
-  extra:'<g stroke="var(--m-olho)" stroke-width="2.4" stroke-linecap="round" opacity=".7">'+
-        '<path d="M28 78h-16M28 86h-16M94 78h16M94 86h16"/></g>'},
- zeca:{n:'Zeca',tipo:'macaquinho',p:260,cor:'#8A5A2E',
-  topo:'<circle cx="20" cy="58" r="16" fill="var(--m1)"/><circle cx="102" cy="58" r="16" fill="var(--m1)"/>'+
-       '<circle cx="20" cy="58" r="8" fill="var(--m3)"/><circle cx="102" cy="58" r="8" fill="var(--m3)"/>',
-  extra:'<path d="M61 30q-26 4-26 26h52q0-22-26-26Z" fill="var(--m3)" opacity=".55"/>'},
- lulu:{n:'Lulu',tipo:'corujinha',p:320,cor:'#7B8FB5',
-  topo:'<path d="M20 34 30 12l16 14Z" fill="var(--m1)"/><path d="M102 34 92 12 76 26Z" fill="var(--m1)"/>',
-  extra:'<circle cx="44" cy="58" r="18" fill="none" stroke="var(--m3)" stroke-width="4"/>'+
-        '<circle cx="78" cy="58" r="18" fill="none" stroke="var(--m3)" stroke-width="4"/>'}
-};
-const SLOTS=[['pers','Personagem'],['chapeu','Chapéus'],['rosto','No rosto'],['pescoco','No pescoço'],['pelo','Cor do pelo']];
-function pecaSVG(slot,id){
-  const it=PECAS[slot]&&PECAS[slot][id];
-  if(!it||!it.d)return '';
-  return '<g style="--c1:'+it.c[0]+';--c2:'+it.c[1]+'">'+it.d+'</g>';
-}
-function MASC(exp,cls,look){
-  const e=exp||'oi';
-  const L=look||(typeof S!=='undefined'&&S.look)||{};
-  const P0=PERS[L.pers]||PERS.bobby;
-  const corPelo=(PECAS.pelo[L.pelo]&&PECAS.pelo[L.pelo].cor)||(L.pers&&P0.cor)||null;
-  const olhosAb='<circle cx="44" cy="58" r="12" fill="#fff"/><circle cx="78" cy="58" r="12" fill="#fff"/>';
-  const pup=(dx,dy)=>'<circle cx="'+(44+dx)+'" cy="'+(58+dy)+'" r="5.6" fill="var(--m-olho)"/>'+
-    '<circle cx="'+(78+dx)+'" cy="'+(58+dy)+'" r="5.6" fill="var(--m-olho)"/>'+
-    '<circle cx="'+(42+dx)+'" cy="'+(56+dy)+'" r="2" fill="#fff"/>'+
-    '<circle cx="'+(76+dx)+'" cy="'+(56+dy)+'" r="2" fill="#fff"/>';
-  let olhos,boca;
-  if(e==='feliz'){
-    olhos='<path d="M36 60q8-11 16 0" fill="none" stroke="var(--m-olho)" stroke-width="4.6" stroke-linecap="round"/>'+
-          '<path d="M70 60q8-11 16 0" fill="none" stroke="var(--m-olho)" stroke-width="4.6" stroke-linecap="round"/>';
-    boca='<path d="M50 86q11 15 22 0Z" fill="var(--m-olho)"/><path d="M56 94q5 5 10 0Z" fill="#FF9AA8"/>';
-  }else if(e==='ops'){
-    olhos=olhosAb+pup(0,3);
-    boca='<path d="M52 96q9-9 18 0" fill="none" stroke="var(--m-olho)" stroke-width="4" stroke-linecap="round"/>';
-  }else if(e==='pensa'){
-    olhos=olhosAb+pup(-3,-4);
-    boca='<ellipse cx="61" cy="90" rx="5" ry="5.5" fill="var(--m-olho)"/>';
-  }else{
-    olhos=olhosAb+pup(0,1);
-    boca='<path d="M61 82v6"/><path d="M61 88q-8 9-16 1" fill="none" stroke="var(--m-olho)" stroke-width="3.6" stroke-linecap="round"/>'+
-         '<path d="M61 88q8 9 16 1" fill="none" stroke="var(--m-olho)" stroke-width="3.6" stroke-linecap="round"/>';
-  }
-  const pesc=L.pescoco||'',atras=PECAS.pescoco[pesc]&&PECAS.pescoco[pesc].atras;
-  return '<svg class="mascote '+(cls||'')+'" viewBox="0 0 122 140" role="img" aria-label="Bobby, o ursinho"'+
-    (corPelo?' style="--m1:'+corPelo+'"':'')+'>'+
-    (atras?pecaSVG('pescoco',pesc):'')+P0.topo+
-    '<ellipse cx="34" cy="116" rx="15" ry="9" fill="var(--m3)"/><ellipse cx="88" cy="116" rx="15" ry="9" fill="var(--m3)"/>'+
-    '<rect x="13" y="26" width="96" height="88" rx="44" fill="var(--m1)"/>'+
-    '<ellipse cx="61" cy="88" rx="30" ry="21" fill="var(--m3)"/>'+
-    '<circle cx="26" cy="76" r="7.5" fill="#FF9AA8" opacity=".7"/>'+
-    '<circle cx="96" cy="76" r="7.5" fill="#FF9AA8" opacity=".7"/>'+
-    (L.pers==='lulu'?'<path d="M61 66 74 82H48Z" fill="#F2B617"/>':'<ellipse cx="61" cy="74" rx="11" ry="8.5" fill="var(--m-olho)"/>')+
-    P0.extra+olhos+'<g stroke="var(--m-olho)" stroke-width="3.6" stroke-linecap="round" fill="none">'+boca+'</g>'+
-    (atras?'':pecaSVG('pescoco',pesc))+pecaSVG('rosto',L.rosto)+pecaSVG('chapeu',L.chapeu)+
-    '</svg>';
-}
+const ABAS_LOJA=[['comp','Companheiro'],['chapeu','Chapéus'],['rosto','Rosto'],['pescoco','Pescoço']];
 
+/* O Bobby numa tela. exp: nome de BOBBY (oi, feliz, ops...). Devolve <img>, com o chapéu por cima se estiver equipado e a imagem for de frente.
+   alt vazio = decorativo (o texto ao lado já diz tudo). */
+function MASC(exp,cls,look,alt){
+  const id=BOBBY[exp]||(ativo(exp)?exp:BOBBY.oi);
+  const L=look||(typeof S!=='undefined'&&S.look)||{};
+  const img=imgArte(id,{cls:'mascote'+(cls?' '+cls:''),alt:alt||''});
+  const peca=L.chapeu&&PECAS.chapeu[L.chapeu],anc=FRONTAIS[id],a=ativo(id);
+  if(!peca||!peca.arte||!anc||!a||!ativo(peca.arte)||/avatar/.test(cls||''))return img;   /* avatar redondo: sem chapéu */
+  const larg=anc[1]*.66,topo=.34*anc[1]*a[1]/a[2];
+  return '<span class="bobby-com-item">'+img+imgArte(peca.arte,{cls:'item-chapeu',style:'left:'+(anc[0]*100).toFixed(1)+'%;top:'+(topo*100).toFixed(1)+'%;width:'+(larg*100).toFixed(1)+'%'})+'</span>';
+}
+/* retrato redondo do jogador (barra, topo, perfis): sempre a expressão alegre, sem chapéu (cabe num círculo) */
+const retratoBobby=cls=>imgArte('bobby-e01',{cls:'retrato'+(cls?' '+cls:''),eager:true});
+
+/* ---------- Meu personagem ---------- */
+let abaLoja='comp',lojaOrigem='perfil',palcoModo='rosto',palcoId='bobby-e01';
+const temItem=id=>(S.comprado||[]).indexOf(id)>=0;
+function comprar(slot,id){
+  const it=PECAS[slot][id];
+  if(!it||!it.arte)return;
+  if(S.moedas<it.p){lojaAviso('Faltam '+(it.p-S.moedas)+' moedas para “'+it.n+'”. Cada resposta certa vale 10 moedas.');return;}
+  S.moedas-=it.p;S.comprado=(S.comprado||[]).concat([id]);
+  S.look=Object.assign({},S.look);S.look[slot]=id;
+  salvar();somMoeda();somFim();telaLoja();
+}
+function equipar(slot,id){
+  S.look=Object.assign({},S.look);
+  S.look[slot]=(S.look[slot]===id?'':id);
+  salvar();somPasso();telaLoja();
+}
+function escolherCompanheiro(id){
+  S.look=Object.assign({},S.look);S.look.companheiro=id;
+  salvar();somPasso();telaLoja();
+}
+function lojaAviso(t){const a=$('#loja-aviso');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
+/* itens que o jogador já comprou na versão antiga e ainda não têm arte nova: ficam guardados */
+function guardadosDa(slot){
+  const r=[];
+  Object.keys(PECAS[slot]||{}).forEach(id=>{const it=PECAS[slot][id];if(!it.arte&&temItem(id))r.push(it.n);});
+  if(slot==='comp')['pers','pelo'].forEach(sl=>Object.keys(PECAS[sl]).forEach(id=>{if(temItem(id))r.push(PECAS[sl][id].n);}));
+  return r;
+}
+function palcoHTML(){
+  const L=S.look||{};
+  const ex=EXPRESSOES.concat(POSES);
+  const nomeAtual=(ex.filter(x=>x[0]===palcoId)[0]||['','Alegre'])[1];
+  const comp=COMPANHEIROS.filter(c=>c.id===L.companheiro)[0]||null;
+  const chapeuEq=L.chapeu&&PECAS.chapeu[L.chapeu]&&PECAS.chapeu[L.chapeu].arte;
+  const semChapeu=chapeuEq&&!FRONTAIS[palcoId];
+  const grande=MASC(palcoId,'bobby-grande',L,'Bobby, o ursinho explorador, '+nomeAtual.toLowerCase()+(chapeuEq&&FRONTAIS[palcoId]?', de chapéu':''));
+  let h='<section class="palco" aria-label="Seu personagem">'+
+    '<button class="palco-bobby '+(palcoModo==='corpo'?'corpo':'rosto')+'" id="palco-bobby" aria-label="Bobby, '+nomeAtual.toLowerCase()+'. Toque para mudar a expressão">'+grande+'</button>';
+  if(comp)h+='<div class="palco-comp">'+imgArte(comp.id+'-p01',{alt:comp.n+', '+comp.quem})+'</div>';
+  h+='<p class="palco-nome" aria-live="polite"><b>Bobby</b> · '+nomeAtual+(semChapeu?'<small>O chapéu aparece nas imagens de frente.</small>':'')+'</p></section>';
+  h+='<div class="palco-modos" role="group" aria-label="O que mostrar"><button class="aba'+(palcoModo==='rosto'?' on':'')+'" data-modo="rosto">Rosto</button>'+
+     '<button class="aba'+(palcoModo==='corpo'?' on':'')+'" data-modo="corpo">Corpo inteiro</button></div>';
+  const lista=palcoModo==='rosto'?EXPRESSOES:POSES;
+  h+='<div class="palco-escolha" role="group" aria-label="'+(palcoModo==='rosto'?'Expressões':'Poses')+'">'+lista.map(x=>
+    '<button class="mini-pose'+(x[0]===palcoId?' on':'')+'" data-pose="'+x[0]+'" aria-label="'+x[1]+'" aria-pressed="'+(x[0]===palcoId)+'">'+imgArte(x[0],{})+'<span>'+x[1]+'</span></button>').join('')+'</div>';
+  return h;
+}
+function telaLoja(){
+  const L=S.look||{};
+  let h='<div class="perfil-in guarda">'+palcoHTML();
+  h+='<div class="saldo-linha"><span class="saldo">'+IC.moeda+'<b>'+S.moedas+'</b> moedas</span></div>';
+  h+='<div class="abas" role="tablist" aria-label="O que você quer trocar">'+ABAS_LOJA.map(sl=>
+    '<button class="aba'+(abaLoja===sl[0]?' on':'')+'" role="tab" aria-selected="'+(abaLoja===sl[0])+'" data-aba="'+sl[0]+'">'+sl[1]+'</button>').join('')+'</div>';
+  h+='<div id="loja-aviso"></div><div class="vitrine">';
+  if(abaLoja==='comp'){
+    COMPANHEIROS.forEach(c=>{
+      const eq=(L.companheiro||'')===c.id;
+      h+='<div class="item'+(eq?' equipado':'')+'">'+(eq?'<span class="selo">'+IC.certo+' com você</span>':'')+
+        '<div class="item-img">'+imgArte(c.id+'-p01',{})+'</div><b>'+c.n+'</b><span class="tipo">'+c.quem+'</span>'+
+        '<button class="btn-sec" data-comp="'+c.id+'"'+(eq?' aria-pressed="true"':'')+'>'+(eq?'Tirar':'Chamar')+'</button></div>';
+    });
+  }else{
+    Object.keys(PECAS[abaLoja]).forEach(id=>{
+      const it=PECAS[abaLoja][id];
+      if(!it.arte)return;
+      const tem=temItem(id),eq=L[abaLoja]===id;
+      const bt=tem?'<button class="btn-sec" data-eq="'+abaLoja+'|'+id+'">'+(eq?'Tirar':'Usar')+'</button>'
+                  :'<button class="'+(S.moedas<it.p?'btn-sec':'btn-acao')+'" data-buy="'+abaLoja+'|'+id+'">'+IC.moeda+' '+it.p+'</button>';
+      h+='<div class="item'+(eq?' equipado':'')+'">'+(eq?'<span class="selo">'+IC.certo+' em uso</span>':'')+
+        '<div class="item-img item-peca">'+imgArte(it.arte,{})+'</div><b>'+it.n+'</b>'+bt+'</div>';
+    });
+    if(!Object.keys(PECAS[abaLoja]).some(id=>PECAS[abaLoja][id].arte))
+      h+='<div class="item vazio"><b>Chega em breve</b><span class="tipo">Esta parte do guarda-roupa ainda está sendo desenhada.</span></div>';
+  }
+  h+='</div>';
+  h+='<p class="dica-loja">'+(abaLoja==='comp'?'O companheiro aparece no mapa e na sua tela.':'Cada resposta certa vale 10 moedas. Mais peças chegam em breve, e o baú do dia também traz roupas.')+'</p>';
+  const guard=guardadosDa(abaLoja);
+  if(guard.length)h+='<p class="guardados"><b>Guardados para a arte nova:</b> '+guard.map(escapa).join(', ')+'. Eles continuam seus e voltam quando ficarem prontos.</p>';
+  h+='</div>';
+  $('#perfil').dataset.tela='loja';
+  $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-perfil" aria-label="Voltar">'+IC.volta+
+    '</button><h2>Meu personagem</h2></div><div class="rev-corpo">'+h+'</div>';
+  $('#perfil').classList.add('on');document.body.style.overflow='hidden';
+  const P=$('#perfil');
+  $('#volta-perfil').addEventListener('click',()=>{if(lojaOrigem==='barra'){lojaOrigem='perfil';fecharPerfil2();}else telaPerfil();});
+  P.querySelectorAll('[data-aba]').forEach(b=>b.addEventListener('click',()=>{abaLoja=b.dataset.aba;telaLoja();}));
+  P.querySelectorAll('[data-modo]').forEach(b=>b.addEventListener('click',()=>{
+    palcoModo=b.dataset.modo;palcoId=palcoModo==='rosto'?'bobby-e01':'bobby-p01';telaLoja();}));
+  P.querySelectorAll('[data-pose]').forEach(b=>b.addEventListener('click',()=>{palcoId=b.dataset.pose;trocarPalco();}));
+  const pb=$('#palco-bobby');
+  if(pb)pb.addEventListener('click',()=>{
+    /* tocar no Bobby troca a expressão (ou a pose): vai para a próxima da lista */
+    const lista=(palcoModo==='rosto'?EXPRESSOES:POSES).map(x=>x[0]);
+    palcoId=lista[(lista.indexOf(palcoId)+1)%lista.length];trocarPalco();
+  });
+  P.querySelectorAll('[data-comp]').forEach(b=>b.addEventListener('click',()=>escolherCompanheiro(S.look&&S.look.companheiro===b.dataset.comp?'':b.dataset.comp)));
+  P.querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.buy.split('|');comprar(q[0],q[1]);}));
+  P.querySelectorAll('[data-eq]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.eq.split('|');equipar(q[0],q[1]);}));
+  if(typeof pintarBarra==='function')pintarBarra();
+}
+/* troca só o palco (sem refazer a tela inteira) para a expressão mudar na hora, sem pulo na rolagem */
+function trocarPalco(){
+  const alvo=$('.palco');if(!alvo){telaLoja();return;}
+  const rolagem=$('#perfil .rev-corpo').scrollTop;
+  telaLoja();
+  const rc=$('#perfil .rev-corpo');if(rc)rc.scrollTop=rolagem;
+}

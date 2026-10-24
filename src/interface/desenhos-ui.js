@@ -66,13 +66,14 @@ function abrirGaleria(destaque){
   const it=$('#imprimir-todos');
   if(it)it.addEventListener('click',()=>imprimirDesenhos(ganhos.filter(d=>ativo(d.id))));
   /* os vistos só entram quando o jogador abre o desenho; o ponto da barra some quando não há novidade */
-  pintarPontoGaleria();
+  pintarBarra();
   const foco=alvo&&$('#gal-corpo').querySelector('[data-des="'+alvo+'"]');
   if(foco&&foco.scrollIntoView)foco.scrollIntoView({block:'center'});
 }
 function fecharGaleria(){
   $('#galeria').classList.remove('on');
   if(!$('#licao').classList.contains('on'))document.body.style.overflow='';
+  pintarBarra();
 }
 function avisoBaixa(t){const a=$('#aviso-baixa');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
 
