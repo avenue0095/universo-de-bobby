@@ -343,6 +343,43 @@ async function main() {
         await js('fecharTelasDaBarra();document.querySelector("#bb-mapa").click();0'); await dorme(300);
       }
 
+      /* 2d3) O PERSONAGEM ESCOLHIDO APARECE EM TODO O JOGO (regressao apontada pelo Filipe: o personagem montado em Meu personagem nao servia
+         para nada). Escolhe a Rufa, depois um look (coroa) e depois o chapeu de explorador; confere por DOM que a imagem usada no topo, na barra,
+         no mapa, na aula, na pergunta, na reacao de acerto e de erro, no fim da fase e no bau e a do personagem escolhido. */
+      {
+        const verifica = async (rotulo, ajuste, esperado) => {
+          await js(ajuste + ";salvar();fecharTelasDaBarra();fecharFolha();pintarTopo();renderTrilha.jaMostrou=false;renderTrilha();0"); await dorme(500);
+          const tem = (html, onde) => { if (!esperado.test(html)) problemas.push(rot + ' personagem (' + rotulo + '): ' + onde + ' nao usa o personagem escolhido [' + esperado + ']: ' + html.slice(0, 150)); };
+          const html = (q) => js("(()=>{const e=document.querySelector(" + JSON.stringify(q) + ");return e?e.innerHTML:''})()");
+          tem(await html('#logo'), 'topo'); tem(await html('#retrato-bb'), 'barra'); tem(await html('.voce'), 'mapa (Bobby andando)');
+          await shot0('personagem-mapa-' + rotulo + '-' + nomeTela);
+          await js("abrirLicao(0,0);LIC.etapa='aula';LIC.passo=0;pintarLicao();0"); await dorme(350);
+          tem(await html('.aula'), 'aula'); await shot0('personagem-aula-' + rotulo + '-' + nomeTela);
+          await js("LIC.etapa='questao';LIC.i=0;pintarLicao();0"); await dorme(350);
+          tem(await html('.cabecalho-q'), 'pergunta'); await shot0('personagem-pergunta-' + rotulo + '-' + nomeTela);
+          await js("LIC.resp='__errada__';conferir();0"); await dorme(250);
+          tem(await html('#selo'), 'reacao de erro'); await shot0('personagem-erro-' + rotulo + '-' + nomeTela);
+          await js("avancar();LIC.resp=LIC.qs[LIC.i].answer;conferir();0"); await dorme(250);
+          tem(await html('#selo'), 'reacao de acerto'); await shot0('personagem-acerto-' + rotulo + '-' + nomeTela);
+          await js("while(LIC.etapa==='questao'){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0"); await dorme(500);
+          tem(await html('.fim'), 'fim de fase'); await shot0('personagem-fim-' + rotulo + '-' + nomeTela);
+          await js("fecharLicao();abrirFolha('<div class=\"folha-in\">'+bauCena(true)+'<h2>Voce ganhou</h2></div>');0"); await dorme(300);
+          tem(await html('#folha'), 'bau'); await shot0('personagem-bau-' + rotulo + '-' + nomeTela);
+          await js("fecharFolha();0");
+        };
+        await verifica('rufa', "S.look={companheiro:'rufa'};S.comprado=['rufa']", /rufa-p0[1-4]/);
+        await verifica('coroa', "S.look={chapeu:'coroa'};S.comprado=['coroa']", /(item|ov)-coroa/);
+        await verifica('explorador', "S.look={chapeu:'explorador'};S.comprado=['explorador']", /bobby-item-chapeu/);
+        // trocar em Meu personagem muda tudo na hora (o topo e a barra mudam sem recarregar)
+        await js("S.look={};fecharTelasDaBarra();document.querySelector('#bb-pers').click();0"); await dorme(400);
+        await js("document.querySelector('[data-aba=\"comp\"]').click();0"); await dorme(250);
+        await js("document.querySelector('[data-comp=\"otto\"]').click();0"); await dorme(300);
+        const trocou = await js("document.querySelector('#logo').innerHTML.indexOf('otto-p01')>=0&&document.querySelector('#retrato-bb').innerHTML.indexOf('otto-p01')>=0");
+        if (!trocou) problemas.push(rot + ' personagem: trocar de companheiro em Meu personagem nao mudou o topo e a barra na hora');
+        await js("fecharTelasDaBarra();S.look={};salvar();pintarTopo();0"); await dorme(200);
+        feito.push(rot + ': personagem escolhido (Rufa, coroa e chapeu de explorador) usado no topo, barra, mapa, aula, pergunta, acerto, erro, fim e bau');
+      }
+
       /* 2e) PONTARIA E TOQUE REAL. Regressao de 24/10/2026: um z-index no corpo da fase cobriu o painel fixo e nenhum botao respondia,
          mas .click() por JavaScript ignora o que esta por cima. Aqui o toque vai pelo CDP (mouse no desktop, toque no celular), no ponto central
          do botao, e antes disso conferimos com elementFromPoint que o botao e mesmo o elemento ali. */

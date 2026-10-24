@@ -112,6 +112,67 @@ def desenho_limpo(src):
     return g.point(lambda v: 0 if v < 110 else (255 if v > 190 else int((v - 110) * 255 / 80)))
 
 
+def _hsv(a):
+    r, g, b = a[..., 0] / 255., a[..., 1] / 255., a[..., 2] / 255.
+    mx = np.maximum(np.maximum(r, g), b)
+    d = mx - np.minimum(np.minimum(r, g), b)
+    h = np.zeros_like(mx)
+    m = d > 1e-6
+    rc = (mx == r) & m
+    gc = (mx == g) & m & ~rc
+    bc = m & ~rc & ~gc
+    h[rc] = ((g - b)[rc] / d[rc]) % 6
+    h[gc] = (b - r)[gc] / d[gc] + 2
+    h[bc] = (r - g)[bc] / d[bc] + 4
+    return h * 60, np.where(mx > 0, d / np.maximum(mx, 1e-6), 0), mx
+
+
+def sobreposicao(nome):
+    """Recorta o ITEM (boné, coroa, óculos) da imagem do look, por cor, para ele poder ser posto sobre outras poses de frente.
+    O look inteiro só existe na pose frontal; o item sozinho vai por cima da cabeça do Bobby nas outras poses (tabela OVERLAYS em personagem.js)."""
+    im = Image.open(SAIDA / 'looks' / ('item-%s.webp' % nome)).convert('RGBA')
+    a = np.asarray(im).copy()
+    h, w = a.shape[:2]
+    H, S, V = _hsv(a.astype(float))
+    al = a[..., 3] > 128
+    xlim = (0, w)
+    if nome == 'coroa':
+        m = (H > 35) & (H < 65) & (S > .45) & (V > .7)
+        reg = .16
+    elif nome == 'bone':
+        m = ((H > 28) & (H < 70) & (S < .55) & (V > .5)) | ((H > 8) & (H < 38) & (S > .5) & (V > .7))
+        reg, xlim = .13, (125, 292)
+    else:  # oculos: so o metal das lentes e a ponte
+        m = (S < .25) & (V > .15) & (V < .95)
+        reg = .13
+    m &= al
+    m[int(h * reg):] = False
+    m[:, :xlim[0]] = False
+    m[:, xlim[1]:] = False
+    m = ndimage.binary_opening(m, iterations=1)
+    m = ndimage.binary_closing(m, iterations=6 if nome == 'oculos' else 4)
+    m = ndimage.binary_fill_holes(m)
+    lab, k = ndimage.label(m)
+    if k > 1:
+        tam = ndimage.sum(m, lab, range(1, k + 1))
+        m = np.isin(lab, [i + 1 for i, t in enumerate(tam) if t > .2 * max(tam)])
+    if nome == 'bone':   # o boné é uma peça convexa: o fecho convexo tapa as mordidas da cor
+        from scipy.spatial import ConvexHull
+        from PIL import ImageDraw
+        ys, xs = np.nonzero(m)
+        pts = np.stack([xs, ys], 1)
+        hull = ConvexHull(pts)
+        poly = Image.new('L', (w, h), 0)
+        ImageDraw.Draw(poly).polygon([tuple(map(int, pts[i])) for i in hull.vertices], fill=255)
+        m = np.asarray(poly) > 0
+    alfa = ndimage.gaussian_filter(m.astype(float), 1.0)
+    a[..., 3] = (np.clip(alfa, 0, 1) * 255).astype('uint8')
+    out = Image.fromarray(a)
+    bb = out.getchannel('A').point(lambda v: 255 if v > 8 else 0).getbbox()
+    sobreposicao.bbox = bb      # posicao do item dentro do look (para calcular a ancoragem)
+    return out.crop(bb)
+
+
 def plano():
     """Lista de (id, fonte, grupo, funcao que devolve a imagem, tamanho maximo, alfa, sem_perda)."""
     itens = []
@@ -154,6 +215,11 @@ def plano():
         itens.append((slug(f.stem), f, 'cenario', (lambda p=f: Image.open(p).convert('RGB')), MAX_CENA, False, False))
     for f in sorted(apr.glob('DES-*.jpg')):
         itens.append((slug(f.stem), f, 'desenho', (lambda p=f: desenho_limpo(p)), MAX_CENA, False, True))
+    # sobreposicoes: o item (bone, coroa, oculos) recortado do look, para as poses que nao tem look proprio
+    for nome in ('bone', 'coroa', 'oculos'):
+        look = SAIDA / 'looks' / ('item-%s.webp' % nome)
+        if look.exists():
+            itens.append(('ov-' + nome, look, 'item', (lambda n=nome: sobreposicao(n)), MAX_ITEM, True, False))
     return itens
 
 

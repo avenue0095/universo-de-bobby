@@ -45,10 +45,39 @@ function lookEmUso(L){
   for(const sl of SLOTS_LOOK){const id=L[sl];const p=id&&PECAS[sl][id];if(p&&p.arte&&ativo(p.arte))return {slot:sl,id:id,peca:p};}
   return null;
 }
-/* O Bobby numa tela. exp: nome de BOBBY (oi, feliz, ops...). Devolve a imagem (ou o recorte da cabeça, ou a imagem com o chapéu por cima).
-   alt vazio = decorativo (o texto ao lado já diz tudo). Look de urso inteiro só existe numa pose (a frontal, 'oi') e vira retrato recortado
-   nas expressões; outras poses ficam com a base. */
+/* Itens de look (boné, coroa, óculos) que existem como imagem de look inteiro (só na pose de frente) ganham também uma SOBREPOSIÇÃO recortada
+   do próprio look (assets/itens/ov-*.webp, feita por build/ativos.py), para aparecer nas outras poses de frente (Comemora, Conta, Joinha, Presente).
+   Ancoragem definida UMA vez, em unidades da largura de orelha a orelha (W) do Bobby da pose: k = largura do item / W; dx = deslocamento do
+   centro do item em relação ao centro da cabeça / W; dy = topo do item em relação ao topo da orelha / W. Capa, capacete e lenço não têm
+   sobreposição (o capacete e a capa são o corpo inteiro): nas outras poses o Bobby aparece sem eles. */
+const OVERLAYS={bone:{arte:'ov-bone',k:.535,dx:-.013,dy:-.116},coroa:{arte:'ov-coroa',k:.369,dx:-.036,dy:-.167},oculos:{arte:'ov-oculos',k:.723,dx:-.039,dy:.016}};
+/* topo da orelha em cada pose de frente, em fração da altura da imagem (a maioria começa no topo) */
+const TOPO_ORELHA={'bobby-p02':.014};
+/* companheiros: P01 Oi, P02 Comemora, P03 Caminha, P04 Pensa. O que cada situação do jogo mostra (erro é Pensa, nunca triste) */
+const POSE_COMP={oi:'p01',feliz:'p02',radiante:'p02',comemora:'p02',incentiva:'p02',pensa:'p04',concentrado:'p04',curioso:'p04',ops:'p04',anda:'p03'};
+/* quem a criança escolheu: o companheiro (se tiver um e a arte existir) ou o Bobby com o look em uso */
+function persAtivo(L){
+  L=L||(typeof S!=='undefined'&&S.look)||{};
+  const c=L.companheiro&&COMPANHEIROS.filter(x=>x.id===L.companheiro)[0];
+  return (c&&ativo(c.id+'-p01'))?{tipo:'comp',id:c.id,n:c.n,quem:c.quem}:{tipo:'bobby'};
+}
+function overlayDoLook(uso){return uso&&OVERLAYS[uso.id]&&ativo(OVERLAYS[uso.id].arte)?OVERLAYS[uso.id]:null;}
+/* O personagem escolhido numa tela. exp: nome de BOBBY (oi, feliz, ops...). Com companheiro escolhido ele toma o lugar do Bobby em todo o jogo
+   (mapa, aula, pergunta, reações, baú, bilhete, fim de fase); só a tela Meu personagem passa o look explícito e continua mostrando o Bobby.
+   alt vazio = decorativo (o texto ao lado já diz tudo). */
 function MASC(exp,cls,look,alt){
+  if(look===undefined||look===null){
+    const pa=persAtivo();
+    if(pa.tipo==='comp'){
+      const pose=POSE_COMP[exp]||'p01',id=ativo(pa.id+'-'+pose)?pa.id+'-'+pose:pa.id+'-p01';
+      return imgArte(id,{cls:'mascote comp'+(cls?' '+cls:''),alt:alt||''});
+    }
+  }
+  return MASCB(exp,cls,look,alt);
+}
+/* O Bobby (sempre o Bobby, com o look em uso). Look de urso inteiro só existe numa pose (a frontal, 'oi') e vira retrato recortado
+   nas expressões; nas outras poses de frente entra a sobreposição do item (boné, coroa, óculos) ou o chapéu de explorador. */
+function MASCB(exp,cls,look,alt){
   const id=BOBBY[exp]||(ativo(exp)?exp:BOBBY.oi);
   const L=look||(typeof S!=='undefined'&&S.look)||{};
   const uso=lookEmUso(L),avatar=/avatar/.test(cls||'');
@@ -58,12 +87,36 @@ function MASC(exp,cls,look,alt){
     if(exp==='oi'||id==='bobby-p01')return imgArte(uso.peca.arte,{cls:'mascote look-corpo'+(cls?' '+cls:''),alt:alt||''});
   }
   const img=imgArte(id,{cls:'mascote'+(cls?' '+cls:''),alt:alt||''});
-  const peca=uso&&uso.peca.modo==='sobrepor'?uso.peca:null,anc=FRONTAIS[id],a=ativo(id);
-  if(!peca||!anc||!a||avatar)return img;   /* avatar redondo: sem chapéu */
-  const larg=anc[1]*.66,topo=.34*anc[1]*a[1]/a[2];
-  return '<span class="bobby-com-item">'+img+imgArte(peca.arte,{cls:'item-chapeu',style:'left:'+(anc[0]*100).toFixed(1)+'%;top:'+(topo*100).toFixed(1)+'%;width:'+(larg*100).toFixed(1)+'%'})+'</span>';
+  const anc=FRONTAIS[id],a=ativo(id);
+  if(!uso||!anc||!a)return img;
+  if(uso.peca.modo==='sobrepor'){
+    if(avatar){   /* círculo: o Bobby de frente com o chapéu, encolhido para o chapéu caber dentro do aro */
+      const fr=MASCB('oi','',L);
+      return '<span class="mascote ret-pers'+(cls?' '+cls:'')+'"><span class="ret-in">'+fr+'</span></span>';
+    }
+    const larg=anc[1]*.66,topo=.34*anc[1]*a[1]/a[2];
+    return '<span class="bobby-com-item">'+img+imgArte(uso.peca.arte,{cls:'item-chapeu',style:'left:'+(anc[0]*100).toFixed(1)+'%;top:'+(topo*100).toFixed(1)+'%;width:'+(larg*100).toFixed(1)+'%'})+'</span>';
+  }
+  const ov=overlayDoLook(uso);
+  if(!ov||avatar)return img;      /* capa, capacete, lenço: sem item fora da pose de frente */
+  const cx=(anc[0]+ov.dx*anc[1])*100,larg=ov.k*anc[1]*100,topo=((TOPO_ORELHA[id]||0)+ov.dy*anc[1]*a[1]/a[2])*100;
+  return '<span class="bobby-com-item">'+img+imgArte(ov.arte,{cls:'item-ov',style:'left:'+cx.toFixed(1)+'%;top:'+topo.toFixed(1)+'%;width:'+larg.toFixed(1)+'%'})+'</span>';
 }
-/* retrato redondo do jogador (barra, topo, perfis): sempre a expressão alegre, sem item (cabe num círculo) */
+/* retrato redondo do personagem em uso (topo, barra, cartões de jogador): o companheiro, o Bobby com o look de urso inteiro (recortado na
+   cabeça) ou o Bobby com o chapéu/boné/coroa/óculos. Nunca fica sem o look. look = o do jogador (cartões de outros jogadores). */
+function retratoPers(cls,look){
+  const L=look||(typeof S!=='undefined'&&S.look)||{};
+  const pa=persAtivo(L);
+  if(pa.tipo==='comp')return imgArte(pa.id+'-p01',{cls:'retrato retrato-comp'+(cls?' '+cls:''),eager:true,alt:pa.n});
+  const uso=lookEmUso(L);
+  if(uso&&uso.peca.modo!=='sobrepor')return imgArte(uso.peca.arte,{cls:'retrato retrato-look'+(cls?' '+cls:''),eager:true});
+  if(uso){
+    /* só o chapéu de explorador chega aqui (boné, coroa e óculos têm look inteiro) */
+    return '<span class="retrato ret-pers'+(cls?' '+cls:'')+'"><span class="ret-in">'+MASCB('oi','',L)+'</span></span>';
+  }
+  return imgArte('bobby-e01',{cls:'retrato'+(cls?' '+cls:''),eager:true});
+}
+/* o Bobby de sempre (cartão de novo jogador, onde ainda não há look nem companheiro) */
 const retratoBobby=cls=>imgArte('bobby-e01',{cls:'retrato'+(cls?' '+cls:''),eager:true});
 
 /* ---------- Meu personagem ---------- */
@@ -81,15 +134,15 @@ function comprar(slot,id){
   if(S.moedas<it.p){lojaAviso('Faltam '+(it.p-S.moedas)+' moedas para “'+it.n+'”. Cada resposta certa vale 10 moedas.');return;}
   S.moedas-=it.p;S.comprado=(S.comprado||[]).concat([id]);
   vestir(slot,id);
-  salvar();somMoeda();somFim();telaLoja();
+  salvar();somMoeda();somFim();pintarTopo();telaLoja();
 }
 function equipar(slot,id){
   vestir(slot,(S.look||{})[slot]===id?'':id);
-  salvar();somPasso();telaLoja();
+  salvar();somPasso();pintarTopo();telaLoja();
 }
 function escolherCompanheiro(id){
   S.look=Object.assign({},S.look);S.look.companheiro=id;
-  salvar();somPasso();telaLoja();
+  salvar();somPasso();pintarTopo();telaLoja();
 }
 function lojaAviso(t){const a=$('#loja-aviso');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
 /* itens que o jogador já comprou na versão antiga e ainda não têm arte nova: ficam guardados */
@@ -178,7 +231,7 @@ function telaLoja(){
   P.querySelectorAll('[data-comp]').forEach(b=>b.addEventListener('click',()=>escolherCompanheiro(S.look&&S.look.companheiro===b.dataset.comp?'':b.dataset.comp)));
   P.querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.buy.split('|');comprar(q[0],q[1]);}));
   P.querySelectorAll('[data-eq]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.eq.split('|');equipar(q[0],q[1]);}));
-  P.querySelectorAll('[data-semlook]').forEach(b=>b.addEventListener('click',()=>{vestir('',''); salvar();somPasso();telaLoja();}));
+  P.querySelectorAll('[data-semlook]').forEach(b=>b.addEventListener('click',()=>{vestir('',''); salvar();somPasso();pintarTopo();telaLoja();}));
   if(typeof pintarBarra==='function')pintarBarra();
 }
 /* troca só o palco (sem refazer a tela inteira) para a expressão mudar na hora, sem pulo na rolagem */

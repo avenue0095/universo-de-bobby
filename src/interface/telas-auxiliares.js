@@ -9,7 +9,7 @@ function telaPerfis(){
     const n=Object.keys(d.feitas||{}).filter(k=>k.indexOf('rev')!==0).length;
     h+='<div class="cartao'+(apagando===i?' apagando':'')+'">'+
        '<button class="cartao-bt" data-i="'+i+'" style="--aro:'+p.cor+'">'+
-       '<span class="rosto">'+retratoBobby()+'</span><b>'+escapa(p.nome)+'</b>'+
+       '<span class="rosto">'+retratoPers('',d.look)+'</span><b>'+escapa(p.nome)+'</b>'+
        '<span class="pg">'+n+' de '+totalGeral+' fases</span></button>'+
        '<button class="lixo" data-del="'+i+'" aria-label="Apagar jogador '+escapa(p.nome)+'">'+IC.lixo+'</button>'+
        (apagando===i?'<div class="apagar-conf" role="alertdialog" aria-label="Apagar jogador"><span>Apagar este jogador?</span><div><button class="btn-acao" data-sim="'+i+'">Sim, apagar</button><button class="btn-sec" data-nao="1">Não</button></div></div>':'')+'</div>';

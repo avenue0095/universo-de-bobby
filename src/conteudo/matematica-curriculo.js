@@ -675,15 +675,17 @@ function genQuestions(lesson,n){
     for(let t=0;t<14;t++){
       const j=t%bag.length;
       let q0;try{q0=bag[j]();}catch(e){continue;}
-      if(q0&&q0.type==='mc'){out.push(q0);seen.add(q0.prompt+'|'+q0.answer);break;}
+      if(q0&&q0.type==='mc'){q0.__mk=bag[j];out.push(q0);seen.add(q0.prompt+'|'+q0.answer);break;}
     }
   }
   while(out.length<n&&guard++<n*12){
     if(i>=bag.length){bag=novaSacola();i=0;}
-    let q;try{q=bag[i++]();}catch(e){continue;}
+    const mk=bag[i++];let q;try{q=mk();}catch(e){continue;}
     if(!q)continue;
     const key=q.prompt+'|'+q.answer;
     if(seen.has(key))continue;
+    /* __mk: o gerador que fez a pergunta (para a pergunta irmã quando a criança errar) */
+    q.__mk=mk;
     seen.add(key);out.push(q);
   }
   /* Algumas fases têm poucas perguntas possíveis (p6.2 só consegue montar 6).
@@ -694,11 +696,11 @@ function genQuestions(lesson,n){
     const extra=reforco(lesson);
     let g2=0;
     while(out.length<n&&extra.length&&g2++<n*20){
-      let q;try{q=pick(extra)();}catch(e){continue;}
+      const mk=pick(extra);let q;try{q=mk();}catch(e){continue;}
       if(!q)continue;
       const key=q.prompt+'|'+q.answer;
       if(seen.has(key))continue;
-      seen.add(key);q.reforco=true;out.push(q);
+      q.__mk=mk;seen.add(key);q.reforco=true;out.push(q);
     }
   }
   return out;

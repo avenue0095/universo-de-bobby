@@ -1430,6 +1430,36 @@
    "inicial": false,
    "w": 768
   },
+  "ov-bone": {
+   "a": "itens/ov-bone.webp",
+   "alfa": true,
+   "b": 3288,
+   "fonte": "item-bone.webp",
+   "g": "item",
+   "h": 99,
+   "inicial": false,
+   "w": 170
+  },
+  "ov-coroa": {
+   "a": "itens/ov-coroa.webp",
+   "alfa": true,
+   "b": 3290,
+   "fonte": "item-coroa.webp",
+   "g": "item",
+   "h": 98,
+   "inicial": false,
+   "w": 128
+  },
+  "ov-oculos": {
+   "a": "itens/ov-oculos.webp",
+   "alfa": true,
+   "b": 5566,
+   "fonte": "item-oculos.webp",
+   "g": "item",
+   "h": 95,
+   "inicial": false,
+   "w": 224
+  },
   "planeta-ing": {
    "a": "planetas/planeta-ing.webp",
    "alfa": true,
@@ -1643,10 +1673,10 @@
  },
  "manifesto_arte_lido": true,
  "totais": {
-  "demanda_bytes": 8459544,
+  "demanda_bytes": 8471688,
   "inicial_bytes": 2287818,
-  "itens": 164,
-  "total_bytes": 10747362
+  "itens": 167,
+  "total_bytes": 10759506
  },
  "versao": 1
 }

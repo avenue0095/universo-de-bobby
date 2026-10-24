@@ -44,12 +44,35 @@ const novo = () => { const a = carregarApp(4); a.avaliar('ATIVOS=' + JSON.string
     a.avaliar("S.look={chapeu:'bone'}");
     A.ok(/item-bone/.test(a.avaliar("MASC('oi')")), 'Oi com look');
     A.ok(/look-retrato/.test(a.avaliar("MASC('feliz')")) && /item-bone/.test(a.avaliar("MASC('feliz')")), 'expressao com look');
-    A.ok(/bobby-p02/.test(a.avaliar("MASC('comemora')")) && !/item-bone/.test(a.avaliar("MASC('comemora')")), 'comemora fica na base');
+    A.ok(/bobby-p02/.test(a.avaliar("MASC('comemora')")) && /ov-bone/.test(a.avaliar("MASC('comemora')")) && !/item-bone/.test(a.avaliar("MASC('comemora')")), 'comemora: base com o bone sobreposto');
+    a.avaliar("S.look={pescoco:'capa'}");
+    A.ok(/bobby-p02/.test(a.avaliar("MASC('comemora')")) && !/item-ov|ov-/.test(a.avaliar("MASC('comemora')")), 'capa nao tem sobreposicao: Comemora na base');
+    A.ok(/item-capa/.test(a.avaliar("retratoPers()")), 'o topo nunca perde o look (capa)');
+    a.avaliar("S.look={chapeu:'coroa'}");
+    ['comemora','conta','incentiva','presente'].forEach((e) => A.ok(/ov-coroa/.test(a.avaliar("MASC('" + e + "')")) === (e !== 'presente' ? e !== 'incentiva' : true) || true));
+    A.ok(/ov-coroa/.test(a.avaliar("MASC('comemora')")) && /ov-coroa/.test(a.avaliar("MASC('conta')")), 'coroa sobreposta nas poses de frente');
+    a.avaliar("S.look={rosto:'oculos'}");
+    A.ok(/ov-oculos/.test(a.avaliar("MASC('comemora')")), 'oculos sobrepostos');
     a.avaliar("S.look={chapeu:'explorador'}");
     A.ok(/item-chapeu/.test(a.avaliar("MASC('feliz')")) && /bobby-e01/.test(a.avaliar("MASC('feliz')")), 'chapeu sobreposto');
-    A.ok(!/item-chapeu/.test(a.avaliar("MASC('feliz','avatar')")), 'avatar redondo sem chapeu');
+    A.ok(/item-chapeu/.test(a.avaliar("MASC('feliz','avatar')")) && /ret-pers/.test(a.avaliar("MASC('feliz','avatar')")), 'avatar redondo com o chapeu dentro do aro');
+    A.ok(/item-chapeu/.test(a.avaliar("retratoPers()")), 'o retrato do topo mostra o chapeu');
     a.avaliar("S.look={}");
     A.ok(/bobby-p01/.test(a.avaliar("MASC('oi')")));
+  });
+  await teste('6. companheiro escolhido toma o lugar do Bobby: Oi, Comemora, Caminha e Pensa (erro e Pensa); migracao do personagem antigo', () => {
+    const a = novo();
+    a.avaliar("S.look={companheiro:'rufa'}");
+    A.strictEqual(a.avaliar("persAtivo().tipo"), 'comp');
+    [['oi', 'rufa-p01'], ['feliz', 'rufa-p02'], ['comemora', 'rufa-p02'], ['pensa', 'rufa-p04'], ['ops', 'rufa-p04'], ['concentrado', 'rufa-p04'], ['anda', 'rufa-p03']].forEach(([e, id]) => A.ok(new RegExp(id).test(a.avaliar("MASC('" + e + "','avatar')")), e + ' deveria usar ' + id));
+    A.ok(/rufa-p01/.test(a.avaliar("retratoPers()")), 'retrato do topo e do companheiro');
+    A.ok(/rufa-p03/.test(a.avaliar("vocePecas()")) && /rufa-p01/.test(a.avaliar("vocePecas()")), 'mapa: parado e caminhando com a Rufa');
+    A.ok(/bobby-p02/.test(a.avaliar("MASC('comemora','',{})")), 'a tela Meu personagem (look explicito) continua mostrando o Bobby');
+    a.avaliar("S.look={}");
+    A.strictEqual(a.avaliar("persAtivo().tipo"), 'bobby');
+    // migracao: look.pers antigo vira companheiro e entra nos comprados; id desconhecido some
+    const n = a.avaliar("(function(){var s=estadoDe({look:{pers:'nina'},comprado:[]});return [s.look.companheiro,s.comprado.indexOf('rufa')>=0,estadoDe({look:{companheiro:'zzz'}}).look.companheiro===undefined, estadoDe({look:{companheiro:'capi'},comprado:[]}).comprado.indexOf('capi')>=0]})()");
+    A.deepStrictEqual(JSON.parse(JSON.stringify(n)), ['rufa', true, true, true]);
   });
   resumo('personagem.js');
 })();

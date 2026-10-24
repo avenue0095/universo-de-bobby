@@ -1531,6 +1531,27 @@ body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 /* nome do jogador numa linha só, com reticências; o lápis nunca encolhe */
 .planeta .oi-nome{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .planeta .lapis{flex:none}
+
+/* ---------- o personagem escolhido aparece em todo o jogo (mapa, aula, pergunta, reações, topo e barra) ---------- */
+.item-ov{position:absolute;height:auto;transform:translate(-50%,0);pointer-events:none}
+.voce .item-chapeu{transform:translate(-50%,-100%);bottom:auto;height:auto;max-height:none;width:auto}
+.voce{height:76px;width:52px}
+/* retrato redondo com o chapéu de explorador dentro do aro (encolhe o Bobby de frente) */
+.ret-pers{display:block;position:relative;overflow:hidden;border-radius:var(--raio-pilula);background:var(--materia-suave);aspect-ratio:1/1}
+.ret-pers .ret-in{position:absolute;left:-2%;top:30%;width:104%}
+.ret-pers .ret-in .bobby-com-item{display:block;width:100%;height:auto}
+.ret-pers .ret-in .mascote{display:block;width:100%;height:auto;border:0;border-radius:0;object-fit:contain}
+.rosto .ret-pers{width:96px;height:96px;border:3px solid var(--aro,var(--cor-linha-forte))}
+.marca .sig .ret-pers,.retrato-bb .ret-pers{width:100%;height:100%;border:0}
+/* look de urso inteiro e companheiro cortados na cabeça */
+.retrato-look,.retrato-comp{transform-origin:50% 8%;transform:scale(1.75);object-position:50% 4%}
+.retrato-comp{transform:scale(1.35);object-position:50% 10%}
+.rosto .retrato-look,.rosto .retrato-comp{overflow:hidden}
+.marca .sig,.retrato-bb,.rosto{overflow:hidden}
+/* companheiro no lugar do Bobby nas reações e avatares */
+.mascote.comp.avatar{object-position:50% 12%}
+.fim .mascote.comp,.folha-bobby .mascote.comp,.perfil-bobby .mascote.comp,.bau-cena .mascote.comp{width:auto;object-fit:contain}
+.cabecalho-q .mascote.avatar{width:72px;height:72px}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -1624,7 +1645,7 @@ body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 
 <div class="modal folha" id="folha" role="dialog" aria-modal="true"></div>
 
-<script>const ATIVOS={"bau-aberto":["recompensas/bau-aberto.webp",512,509],"bau-fechado":["recompensas/bau-fechado.webp",512,443],"bobby-e01":["expressoes/bobby-e01.webp",768,750],"bobby-e02":["expressoes/bobby-e02.webp",710,722],"bobby-e03":["expressoes/bobby-e03.webp",725,735],"bobby-e04":["expressoes/bobby-e04.webp",740,768],"bobby-e05":["expressoes/bobby-e05.webp",768,766],"bobby-e06":["expressoes/bobby-e06.webp",768,757],"bobby-e07":["expressoes/bobby-e07.webp",768,741],"bobby-e08":["expressoes/bobby-e08.webp",768,744],"bobby-item-chapeu":["itens/bobby-item-chapeu.webp",512,292],"bobby-p01":["personagens/bobby-p01.webp",521,768],"bobby-p02":["personagens/bobby-p02.webp",612,768],"bobby-p03":["personagens/bobby-p03.webp",383,768],"bobby-p04":["personagens/bobby-p04.webp",556,768],"bobby-p05a":["personagens/bobby-p05a.webp",506,768],"bobby-p05b":["personagens/bobby-p05b.webp",486,768],"bobby-p06":["personagens/bobby-p06.webp",422,768],"bobby-p07":["personagens/bobby-p07.webp",459,768],"bobby-p08":["personagens/bobby-p08.webp",449,768],"bobby-p09":["personagens/bobby-p09.webp",483,768],"bobby-p10":["personagens/bobby-p10.webp",378,768],"bobby-p11":["personagens/bobby-p11.webp",507,768],"bobby-p12":["personagens/bobby-p12.webp",671,768],"bobby-sheet":["personagens/bobby-sheet.webp",768,337],"bobby-sheet-frente":["personagens/bobby-sheet-frente.webp",685,768],"brisa-p01":["companheiros/brisa-p01.webp",574,768],"brisa-p02":["companheiros/brisa-p02.webp",557,768],"brisa-p03":["companheiros/brisa-p03.webp",444,768],"brisa-p04":["companheiros/brisa-p04.webp",473,768],"brisa-sheet":["companheiros/brisa-sheet.webp",768,338],"capi-p01":["companheiros/capi-p01.webp",513,768],"capi-p02":["companheiros/capi-p02.webp",519,768],"capi-p03":["companheiros/capi-p03.webp",509,768],"capi-p04":["companheiros/capi-p04.webp",550,768],"capi-sheet":["companheiros/capi-sheet.webp",768,326],"cen-ing01-apagado":["cenarios/cen-ing01-apagado.webp",765,1024],"cen-ing01-completo":["cenarios/cen-ing01-completo.webp",765,1024],"cen-ing02-apagado":["cenarios/cen-ing02-apagado.webp",765,1024],"cen-ing02-completo":["cenarios/cen-ing02-completo.webp",765,1024],"cen-ing03-apagado":["cenarios/cen-ing03-apagado.webp",765,1024],"cen-ing03-completo":["cenarios/cen-ing03-completo.webp",765,1024],"cen-ing04-apagado":["cenarios/cen-ing04-apagado.webp",765,1024],"cen-ing04-completo":["cenarios/cen-ing04-completo.webp",765,1024],"cen-ing05-apagado":["cenarios/cen-ing05-apagado.webp",765,1024],"cen-ing05-completo":["cenarios/cen-ing05-completo.webp",765,1024],"cen-ing06-apagado":["cenarios/cen-ing06-apagado.webp",765,1024],"cen-ing06-completo":["cenarios/cen-ing06-completo.webp",765,1024],"cen-ing07-apagado":["cenarios/cen-ing07-apagado.webp",765,1024],"cen-ing07-completo":["cenarios/cen-ing07-completo.webp",765,1024],"cen-ing08-apagado":["cenarios/cen-ing08-apagado.webp",765,1024],"cen-ing08-completo":["cenarios/cen-ing08-completo.webp",765,1024],"cen-ing09-apagado":["cenarios/cen-ing09-apagado.webp",765,1024],"cen-ing09-completo":["cenarios/cen-ing09-completo.webp",765,1024],"cen-ing10-apagado":["cenarios/cen-ing10-apagado.webp",765,1024],"cen-ing10-completo":["cenarios/cen-ing10-completo.webp",765,1024],"cen-mat01-apagado":["cenarios/cen-mat01-apagado.webp",765,1024],"cen-mat01-completo":["cenarios/cen-mat01-completo.webp",765,1024],"cen-mat02-apagado":["cenarios/cen-mat02-apagado.webp",765,1024],"cen-mat02-completo":["cenarios/cen-mat02-completo.webp",765,1024],"cen-mat03-apagado":["cenarios/cen-mat03-apagado.webp",765,1024],"cen-mat03-completo":["cenarios/cen-mat03-completo.webp",765,1024],"cen-mat04-apagado":["cenarios/cen-mat04-apagado.webp",765,1024],"cen-mat04-completo":["cenarios/cen-mat04-completo.webp",765,1024],"cen-mat05-apagado":["cenarios/cen-mat05-apagado.webp",765,1024],"cen-mat05-completo":["cenarios/cen-mat05-completo.webp",765,1024],"cen-mat06-apagado":["cenarios/cen-mat06-apagado.webp",765,1024],"cen-mat06-completo":["cenarios/cen-mat06-completo.webp",765,1024],"cen-mat07-apagado":["cenarios/cen-mat07-apagado.webp",765,1024],"cen-mat07-completo":["cenarios/cen-mat07-completo.webp",765,1024],"cen-mat08-apagado":["cenarios/cen-mat08-apagado.webp",765,1024],"cen-mat08-completo":["cenarios/cen-mat08-completo.webp",765,1024],"cen-mat09-apagado":["cenarios/cen-mat09-apagado.webp",765,1024],"cen-mat09-completo":["cenarios/cen-mat09-completo.webp",765,1024],"cen-mat10-apagado":["cenarios/cen-mat10-apagado.webp",765,1024],"cen-mat10-completo":["cenarios/cen-mat10-completo.webp",765,1024],"cen-por01-apagado":["cenarios/cen-por01-apagado.webp",765,1024],"cen-por01-completo":["cenarios/cen-por01-completo.webp",765,1024],"cen-por02-apagado":["cenarios/cen-por02-apagado.webp",765,1024],"cen-por02-completo":["cenarios/cen-por02-completo.webp",765,1024],"cen-por03-apagado":["cenarios/cen-por03-apagado.webp",765,1024],"cen-por03-completo":["cenarios/cen-por03-completo.webp",765,1024],"cen-por04-apagado":["cenarios/cen-por04-apagado.webp",765,1024],"cen-por04-completo":["cenarios/cen-por04-completo.webp",765,1024],"cen-por05-apagado":["cenarios/cen-por05-apagado.webp",765,1024],"cen-por05-completo":["cenarios/cen-por05-completo.webp",765,1024],"cen-por06-apagado":["cenarios/cen-por06-apagado.webp",765,1024],"cen-por06-completo":["cenarios/cen-por06-completo.webp",765,1024],"cen-por07-apagado":["cenarios/cen-por07-apagado.webp",765,1024],"cen-por07-completo":["cenarios/cen-por07-completo.webp",765,1024],"cen-por08-apagado":["cenarios/cen-por08-apagado.webp",765,1024],"cen-por08-completo":["cenarios/cen-por08-completo.webp",765,1024],"cen-por09-apagado":["cenarios/cen-por09-apagado.webp",765,1024],"cen-por09-completo":["cenarios/cen-por09-completo.webp",765,1024],"cen-por10-apagado":["cenarios/cen-por10-apagado.webp",765,1024],"cen-por10-completo":["cenarios/cen-por10-completo.webp",765,1024],"des-ing01":["desenhos/des-ing01.webp",765,1024],"des-ing02":["desenhos/des-ing02.webp",765,1024],"des-ing03":["desenhos/des-ing03.webp",765,1024],"des-ing04":["desenhos/des-ing04.webp",765,1024],"des-ing05":["desenhos/des-ing05.webp",765,1024],"des-ing06":["desenhos/des-ing06.webp",765,1024],"des-ing07":["desenhos/des-ing07.webp",765,1024],"des-ing08":["desenhos/des-ing08.webp",765,1024],"des-ing09":["desenhos/des-ing09.webp",765,1024],"des-ing10":["desenhos/des-ing10.webp",765,1024],"des-mat01":["desenhos/des-mat01.webp",765,1024],"des-mat02":["desenhos/des-mat02.webp",765,1024],"des-mat03":["desenhos/des-mat03.webp",765,1024],"des-mat04":["desenhos/des-mat04.webp",765,1024],"des-mat05":["desenhos/des-mat05.webp",765,1024],"des-mat06":["desenhos/des-mat06.webp",765,1024],"des-mat07":["desenhos/des-mat07.webp",765,1024],"des-mat08":["desenhos/des-mat08.webp",765,1024],"des-mat09":["desenhos/des-mat09.webp",765,1024],"des-mat10":["desenhos/des-mat10.webp",765,1024],"des-por01":["desenhos/des-por01.webp",765,1024],"des-por02":["desenhos/des-por02.webp",765,1024],"des-por03":["desenhos/des-por03.webp",765,1024],"des-por04":["desenhos/des-por04.webp",765,1024],"des-por05":["desenhos/des-por05.webp",765,1024],"des-por06":["desenhos/des-por06.webp",765,1024],"des-por07":["desenhos/des-por07.webp",765,1024],"des-por08":["desenhos/des-por08.webp",765,1024],"des-por09":["desenhos/des-por09.webp",765,1024],"des-por10":["desenhos/des-por10.webp",765,1024],"fagulha-p01":["companheiros/fagulha-p01.webp",600,765],"fagulha-p02":["companheiros/fagulha-p02.webp",643,754],"fagulha-p03":["companheiros/fagulha-p03.webp",547,688],"fagulha-p04":["companheiros/fagulha-p04.webp",605,768],"fagulha-sheet":["companheiros/fagulha-sheet.webp",768,282],"item-base":["looks/item-base.webp",415,768],"item-bone":["looks/item-bone.webp",431,768],"item-capa":["looks/item-capa.webp",462,768],"item-capacete":["looks/item-capacete.webp",432,768],"item-coroa":["looks/item-coroa.webp",450,768],"item-lenco":["looks/item-lenco.webp",458,768],"item-oculos":["looks/item-oculos.webp",439,768],"otto-p01":["companheiros/otto-p01.webp",427,768],"otto-p02":["companheiros/otto-p02.webp",499,768],"otto-p03":["companheiros/otto-p03.webp",497,768],"otto-p04":["companheiros/otto-p04.webp",429,768],"otto-sheet":["companheiros/otto-sheet.webp",768,366],"planeta-ing":["planetas/planeta-ing.webp",730,725],"planeta-mat":["planetas/planeta-mat.webp",848,748],"planeta-por":["planetas/planeta-por.webp",766,910],"rec-bilhete":["recompensas/rec-bilhete.webp",192,160],"rec-congelador":["recompensas/rec-congelador.webp",133,192],"rec-estrela":["recompensas/rec-estrela.webp",192,185],"rec-medalha":["recompensas/rec-medalha.webp",110,192],"rec-moeda":["recompensas/rec-moeda.webp",176,192],"rec-pergaminho":["recompensas/rec-pergaminho.webp",157,192],"rec-presente":["recompensas/rec-presente.webp",178,192],"rec-trofeu":["recompensas/rec-trofeu.webp",189,192],"rufa-p01":["companheiros/rufa-p01.webp",491,768],"rufa-p02":["companheiros/rufa-p02.webp",506,768],"rufa-p03":["companheiros/rufa-p03.webp",526,768],"rufa-p04":["companheiros/rufa-p04.webp",382,768],"rufa-sheet":["companheiros/rufa-sheet.webp",768,357],"teo-p01":["companheiros/teo-p01.webp",401,768],"teo-p02":["companheiros/teo-p02.webp",541,768],"teo-p03":["companheiros/teo-p03.webp",515,712],"teo-p04":["companheiros/teo-p04.webp",397,768],"teo-sheet":["companheiros/teo-sheet.webp",768,361]};</script>
+<script>const ATIVOS={"bau-aberto":["recompensas/bau-aberto.webp",512,509],"bau-fechado":["recompensas/bau-fechado.webp",512,443],"bobby-e01":["expressoes/bobby-e01.webp",768,750],"bobby-e02":["expressoes/bobby-e02.webp",710,722],"bobby-e03":["expressoes/bobby-e03.webp",725,735],"bobby-e04":["expressoes/bobby-e04.webp",740,768],"bobby-e05":["expressoes/bobby-e05.webp",768,766],"bobby-e06":["expressoes/bobby-e06.webp",768,757],"bobby-e07":["expressoes/bobby-e07.webp",768,741],"bobby-e08":["expressoes/bobby-e08.webp",768,744],"bobby-item-chapeu":["itens/bobby-item-chapeu.webp",512,292],"bobby-p01":["personagens/bobby-p01.webp",521,768],"bobby-p02":["personagens/bobby-p02.webp",612,768],"bobby-p03":["personagens/bobby-p03.webp",383,768],"bobby-p04":["personagens/bobby-p04.webp",556,768],"bobby-p05a":["personagens/bobby-p05a.webp",506,768],"bobby-p05b":["personagens/bobby-p05b.webp",486,768],"bobby-p06":["personagens/bobby-p06.webp",422,768],"bobby-p07":["personagens/bobby-p07.webp",459,768],"bobby-p08":["personagens/bobby-p08.webp",449,768],"bobby-p09":["personagens/bobby-p09.webp",483,768],"bobby-p10":["personagens/bobby-p10.webp",378,768],"bobby-p11":["personagens/bobby-p11.webp",507,768],"bobby-p12":["personagens/bobby-p12.webp",671,768],"bobby-sheet":["personagens/bobby-sheet.webp",768,337],"bobby-sheet-frente":["personagens/bobby-sheet-frente.webp",685,768],"brisa-p01":["companheiros/brisa-p01.webp",574,768],"brisa-p02":["companheiros/brisa-p02.webp",557,768],"brisa-p03":["companheiros/brisa-p03.webp",444,768],"brisa-p04":["companheiros/brisa-p04.webp",473,768],"brisa-sheet":["companheiros/brisa-sheet.webp",768,338],"capi-p01":["companheiros/capi-p01.webp",513,768],"capi-p02":["companheiros/capi-p02.webp",519,768],"capi-p03":["companheiros/capi-p03.webp",509,768],"capi-p04":["companheiros/capi-p04.webp",550,768],"capi-sheet":["companheiros/capi-sheet.webp",768,326],"cen-ing01-apagado":["cenarios/cen-ing01-apagado.webp",765,1024],"cen-ing01-completo":["cenarios/cen-ing01-completo.webp",765,1024],"cen-ing02-apagado":["cenarios/cen-ing02-apagado.webp",765,1024],"cen-ing02-completo":["cenarios/cen-ing02-completo.webp",765,1024],"cen-ing03-apagado":["cenarios/cen-ing03-apagado.webp",765,1024],"cen-ing03-completo":["cenarios/cen-ing03-completo.webp",765,1024],"cen-ing04-apagado":["cenarios/cen-ing04-apagado.webp",765,1024],"cen-ing04-completo":["cenarios/cen-ing04-completo.webp",765,1024],"cen-ing05-apagado":["cenarios/cen-ing05-apagado.webp",765,1024],"cen-ing05-completo":["cenarios/cen-ing05-completo.webp",765,1024],"cen-ing06-apagado":["cenarios/cen-ing06-apagado.webp",765,1024],"cen-ing06-completo":["cenarios/cen-ing06-completo.webp",765,1024],"cen-ing07-apagado":["cenarios/cen-ing07-apagado.webp",765,1024],"cen-ing07-completo":["cenarios/cen-ing07-completo.webp",765,1024],"cen-ing08-apagado":["cenarios/cen-ing08-apagado.webp",765,1024],"cen-ing08-completo":["cenarios/cen-ing08-completo.webp",765,1024],"cen-ing09-apagado":["cenarios/cen-ing09-apagado.webp",765,1024],"cen-ing09-completo":["cenarios/cen-ing09-completo.webp",765,1024],"cen-ing10-apagado":["cenarios/cen-ing10-apagado.webp",765,1024],"cen-ing10-completo":["cenarios/cen-ing10-completo.webp",765,1024],"cen-mat01-apagado":["cenarios/cen-mat01-apagado.webp",765,1024],"cen-mat01-completo":["cenarios/cen-mat01-completo.webp",765,1024],"cen-mat02-apagado":["cenarios/cen-mat02-apagado.webp",765,1024],"cen-mat02-completo":["cenarios/cen-mat02-completo.webp",765,1024],"cen-mat03-apagado":["cenarios/cen-mat03-apagado.webp",765,1024],"cen-mat03-completo":["cenarios/cen-mat03-completo.webp",765,1024],"cen-mat04-apagado":["cenarios/cen-mat04-apagado.webp",765,1024],"cen-mat04-completo":["cenarios/cen-mat04-completo.webp",765,1024],"cen-mat05-apagado":["cenarios/cen-mat05-apagado.webp",765,1024],"cen-mat05-completo":["cenarios/cen-mat05-completo.webp",765,1024],"cen-mat06-apagado":["cenarios/cen-mat06-apagado.webp",765,1024],"cen-mat06-completo":["cenarios/cen-mat06-completo.webp",765,1024],"cen-mat07-apagado":["cenarios/cen-mat07-apagado.webp",765,1024],"cen-mat07-completo":["cenarios/cen-mat07-completo.webp",765,1024],"cen-mat08-apagado":["cenarios/cen-mat08-apagado.webp",765,1024],"cen-mat08-completo":["cenarios/cen-mat08-completo.webp",765,1024],"cen-mat09-apagado":["cenarios/cen-mat09-apagado.webp",765,1024],"cen-mat09-completo":["cenarios/cen-mat09-completo.webp",765,1024],"cen-mat10-apagado":["cenarios/cen-mat10-apagado.webp",765,1024],"cen-mat10-completo":["cenarios/cen-mat10-completo.webp",765,1024],"cen-por01-apagado":["cenarios/cen-por01-apagado.webp",765,1024],"cen-por01-completo":["cenarios/cen-por01-completo.webp",765,1024],"cen-por02-apagado":["cenarios/cen-por02-apagado.webp",765,1024],"cen-por02-completo":["cenarios/cen-por02-completo.webp",765,1024],"cen-por03-apagado":["cenarios/cen-por03-apagado.webp",765,1024],"cen-por03-completo":["cenarios/cen-por03-completo.webp",765,1024],"cen-por04-apagado":["cenarios/cen-por04-apagado.webp",765,1024],"cen-por04-completo":["cenarios/cen-por04-completo.webp",765,1024],"cen-por05-apagado":["cenarios/cen-por05-apagado.webp",765,1024],"cen-por05-completo":["cenarios/cen-por05-completo.webp",765,1024],"cen-por06-apagado":["cenarios/cen-por06-apagado.webp",765,1024],"cen-por06-completo":["cenarios/cen-por06-completo.webp",765,1024],"cen-por07-apagado":["cenarios/cen-por07-apagado.webp",765,1024],"cen-por07-completo":["cenarios/cen-por07-completo.webp",765,1024],"cen-por08-apagado":["cenarios/cen-por08-apagado.webp",765,1024],"cen-por08-completo":["cenarios/cen-por08-completo.webp",765,1024],"cen-por09-apagado":["cenarios/cen-por09-apagado.webp",765,1024],"cen-por09-completo":["cenarios/cen-por09-completo.webp",765,1024],"cen-por10-apagado":["cenarios/cen-por10-apagado.webp",765,1024],"cen-por10-completo":["cenarios/cen-por10-completo.webp",765,1024],"des-ing01":["desenhos/des-ing01.webp",765,1024],"des-ing02":["desenhos/des-ing02.webp",765,1024],"des-ing03":["desenhos/des-ing03.webp",765,1024],"des-ing04":["desenhos/des-ing04.webp",765,1024],"des-ing05":["desenhos/des-ing05.webp",765,1024],"des-ing06":["desenhos/des-ing06.webp",765,1024],"des-ing07":["desenhos/des-ing07.webp",765,1024],"des-ing08":["desenhos/des-ing08.webp",765,1024],"des-ing09":["desenhos/des-ing09.webp",765,1024],"des-ing10":["desenhos/des-ing10.webp",765,1024],"des-mat01":["desenhos/des-mat01.webp",765,1024],"des-mat02":["desenhos/des-mat02.webp",765,1024],"des-mat03":["desenhos/des-mat03.webp",765,1024],"des-mat04":["desenhos/des-mat04.webp",765,1024],"des-mat05":["desenhos/des-mat05.webp",765,1024],"des-mat06":["desenhos/des-mat06.webp",765,1024],"des-mat07":["desenhos/des-mat07.webp",765,1024],"des-mat08":["desenhos/des-mat08.webp",765,1024],"des-mat09":["desenhos/des-mat09.webp",765,1024],"des-mat10":["desenhos/des-mat10.webp",765,1024],"des-por01":["desenhos/des-por01.webp",765,1024],"des-por02":["desenhos/des-por02.webp",765,1024],"des-por03":["desenhos/des-por03.webp",765,1024],"des-por04":["desenhos/des-por04.webp",765,1024],"des-por05":["desenhos/des-por05.webp",765,1024],"des-por06":["desenhos/des-por06.webp",765,1024],"des-por07":["desenhos/des-por07.webp",765,1024],"des-por08":["desenhos/des-por08.webp",765,1024],"des-por09":["desenhos/des-por09.webp",765,1024],"des-por10":["desenhos/des-por10.webp",765,1024],"fagulha-p01":["companheiros/fagulha-p01.webp",600,765],"fagulha-p02":["companheiros/fagulha-p02.webp",643,754],"fagulha-p03":["companheiros/fagulha-p03.webp",547,688],"fagulha-p04":["companheiros/fagulha-p04.webp",605,768],"fagulha-sheet":["companheiros/fagulha-sheet.webp",768,282],"item-base":["looks/item-base.webp",415,768],"item-bone":["looks/item-bone.webp",431,768],"item-capa":["looks/item-capa.webp",462,768],"item-capacete":["looks/item-capacete.webp",432,768],"item-coroa":["looks/item-coroa.webp",450,768],"item-lenco":["looks/item-lenco.webp",458,768],"item-oculos":["looks/item-oculos.webp",439,768],"otto-p01":["companheiros/otto-p01.webp",427,768],"otto-p02":["companheiros/otto-p02.webp",499,768],"otto-p03":["companheiros/otto-p03.webp",497,768],"otto-p04":["companheiros/otto-p04.webp",429,768],"otto-sheet":["companheiros/otto-sheet.webp",768,366],"ov-bone":["itens/ov-bone.webp",170,99],"ov-coroa":["itens/ov-coroa.webp",128,98],"ov-oculos":["itens/ov-oculos.webp",224,95],"planeta-ing":["planetas/planeta-ing.webp",730,725],"planeta-mat":["planetas/planeta-mat.webp",848,748],"planeta-por":["planetas/planeta-por.webp",766,910],"rec-bilhete":["recompensas/rec-bilhete.webp",192,160],"rec-congelador":["recompensas/rec-congelador.webp",133,192],"rec-estrela":["recompensas/rec-estrela.webp",192,185],"rec-medalha":["recompensas/rec-medalha.webp",110,192],"rec-moeda":["recompensas/rec-moeda.webp",176,192],"rec-pergaminho":["recompensas/rec-pergaminho.webp",157,192],"rec-presente":["recompensas/rec-presente.webp",178,192],"rec-trofeu":["recompensas/rec-trofeu.webp",189,192],"rufa-p01":["companheiros/rufa-p01.webp",491,768],"rufa-p02":["companheiros/rufa-p02.webp",506,768],"rufa-p03":["companheiros/rufa-p03.webp",526,768],"rufa-p04":["companheiros/rufa-p04.webp",382,768],"rufa-sheet":["companheiros/rufa-sheet.webp",768,357],"teo-p01":["companheiros/teo-p01.webp",401,768],"teo-p02":["companheiros/teo-p02.webp",541,768],"teo-p03":["companheiros/teo-p03.webp",515,712],"teo-p04":["companheiros/teo-p04.webp",397,768],"teo-sheet":["companheiros/teo-sheet.webp",768,361]};</script>
 <script>
 /* ===== Motor de conteúdo — Trilha da Matemática ===== */
 const R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
@@ -2372,15 +2393,17 @@ function genQuestions(lesson,n){
     for(let t=0;t<14;t++){
       const j=t%bag.length;
       let q0;try{q0=bag[j]();}catch(e){continue;}
-      if(q0&&q0.type==='mc'){out.push(q0);seen.add(q0.prompt+'|'+q0.answer);break;}
+      if(q0&&q0.type==='mc'){q0.__mk=bag[j];out.push(q0);seen.add(q0.prompt+'|'+q0.answer);break;}
     }
   }
   while(out.length<n&&guard++<n*12){
     if(i>=bag.length){bag=novaSacola();i=0;}
-    let q;try{q=bag[i++]();}catch(e){continue;}
+    const mk=bag[i++];let q;try{q=mk();}catch(e){continue;}
     if(!q)continue;
     const key=q.prompt+'|'+q.answer;
     if(seen.has(key))continue;
+    /* __mk: o gerador que fez a pergunta (para a pergunta irmã quando a criança errar) */
+    q.__mk=mk;
     seen.add(key);out.push(q);
   }
   /* Algumas fases têm poucas perguntas possíveis (p6.2 só consegue montar 6).
@@ -2391,11 +2414,11 @@ function genQuestions(lesson,n){
     const extra=reforco(lesson);
     let g2=0;
     while(out.length<n&&extra.length&&g2++<n*20){
-      let q;try{q=pick(extra)();}catch(e){continue;}
+      const mk=pick(extra);let q;try{q=mk();}catch(e){continue;}
       if(!q)continue;
       const key=q.prompt+'|'+q.answer;
       if(seen.has(key))continue;
-      seen.add(key);q.reforco=true;out.push(q);
+      q.__mk=mk;seen.add(key);q.reforco=true;out.push(q);
     }
   }
   return out;
@@ -5160,10 +5183,39 @@ function lookEmUso(L){
   for(const sl of SLOTS_LOOK){const id=L[sl];const p=id&&PECAS[sl][id];if(p&&p.arte&&ativo(p.arte))return {slot:sl,id:id,peca:p};}
   return null;
 }
-/* O Bobby numa tela. exp: nome de BOBBY (oi, feliz, ops...). Devolve a imagem (ou o recorte da cabeça, ou a imagem com o chapéu por cima).
-   alt vazio = decorativo (o texto ao lado já diz tudo). Look de urso inteiro só existe numa pose (a frontal, 'oi') e vira retrato recortado
-   nas expressões; outras poses ficam com a base. */
+/* Itens de look (boné, coroa, óculos) que existem como imagem de look inteiro (só na pose de frente) ganham também uma SOBREPOSIÇÃO recortada
+   do próprio look (assets/itens/ov-*.webp, feita por build/ativos.py), para aparecer nas outras poses de frente (Comemora, Conta, Joinha, Presente).
+   Ancoragem definida UMA vez, em unidades da largura de orelha a orelha (W) do Bobby da pose: k = largura do item / W; dx = deslocamento do
+   centro do item em relação ao centro da cabeça / W; dy = topo do item em relação ao topo da orelha / W. Capa, capacete e lenço não têm
+   sobreposição (o capacete e a capa são o corpo inteiro): nas outras poses o Bobby aparece sem eles. */
+const OVERLAYS={bone:{arte:'ov-bone',k:.535,dx:-.013,dy:-.116},coroa:{arte:'ov-coroa',k:.369,dx:-.036,dy:-.167},oculos:{arte:'ov-oculos',k:.723,dx:-.039,dy:.016}};
+/* topo da orelha em cada pose de frente, em fração da altura da imagem (a maioria começa no topo) */
+const TOPO_ORELHA={'bobby-p02':.014};
+/* companheiros: P01 Oi, P02 Comemora, P03 Caminha, P04 Pensa. O que cada situação do jogo mostra (erro é Pensa, nunca triste) */
+const POSE_COMP={oi:'p01',feliz:'p02',radiante:'p02',comemora:'p02',incentiva:'p02',pensa:'p04',concentrado:'p04',curioso:'p04',ops:'p04',anda:'p03'};
+/* quem a criança escolheu: o companheiro (se tiver um e a arte existir) ou o Bobby com o look em uso */
+function persAtivo(L){
+  L=L||(typeof S!=='undefined'&&S.look)||{};
+  const c=L.companheiro&&COMPANHEIROS.filter(x=>x.id===L.companheiro)[0];
+  return (c&&ativo(c.id+'-p01'))?{tipo:'comp',id:c.id,n:c.n,quem:c.quem}:{tipo:'bobby'};
+}
+function overlayDoLook(uso){return uso&&OVERLAYS[uso.id]&&ativo(OVERLAYS[uso.id].arte)?OVERLAYS[uso.id]:null;}
+/* O personagem escolhido numa tela. exp: nome de BOBBY (oi, feliz, ops...). Com companheiro escolhido ele toma o lugar do Bobby em todo o jogo
+   (mapa, aula, pergunta, reações, baú, bilhete, fim de fase); só a tela Meu personagem passa o look explícito e continua mostrando o Bobby.
+   alt vazio = decorativo (o texto ao lado já diz tudo). */
 function MASC(exp,cls,look,alt){
+  if(look===undefined||look===null){
+    const pa=persAtivo();
+    if(pa.tipo==='comp'){
+      const pose=POSE_COMP[exp]||'p01',id=ativo(pa.id+'-'+pose)?pa.id+'-'+pose:pa.id+'-p01';
+      return imgArte(id,{cls:'mascote comp'+(cls?' '+cls:''),alt:alt||''});
+    }
+  }
+  return MASCB(exp,cls,look,alt);
+}
+/* O Bobby (sempre o Bobby, com o look em uso). Look de urso inteiro só existe numa pose (a frontal, 'oi') e vira retrato recortado
+   nas expressões; nas outras poses de frente entra a sobreposição do item (boné, coroa, óculos) ou o chapéu de explorador. */
+function MASCB(exp,cls,look,alt){
   const id=BOBBY[exp]||(ativo(exp)?exp:BOBBY.oi);
   const L=look||(typeof S!=='undefined'&&S.look)||{};
   const uso=lookEmUso(L),avatar=/avatar/.test(cls||'');
@@ -5173,12 +5225,36 @@ function MASC(exp,cls,look,alt){
     if(exp==='oi'||id==='bobby-p01')return imgArte(uso.peca.arte,{cls:'mascote look-corpo'+(cls?' '+cls:''),alt:alt||''});
   }
   const img=imgArte(id,{cls:'mascote'+(cls?' '+cls:''),alt:alt||''});
-  const peca=uso&&uso.peca.modo==='sobrepor'?uso.peca:null,anc=FRONTAIS[id],a=ativo(id);
-  if(!peca||!anc||!a||avatar)return img;   /* avatar redondo: sem chapéu */
-  const larg=anc[1]*.66,topo=.34*anc[1]*a[1]/a[2];
-  return '<span class="bobby-com-item">'+img+imgArte(peca.arte,{cls:'item-chapeu',style:'left:'+(anc[0]*100).toFixed(1)+'%;top:'+(topo*100).toFixed(1)+'%;width:'+(larg*100).toFixed(1)+'%'})+'</span>';
+  const anc=FRONTAIS[id],a=ativo(id);
+  if(!uso||!anc||!a)return img;
+  if(uso.peca.modo==='sobrepor'){
+    if(avatar){   /* círculo: o Bobby de frente com o chapéu, encolhido para o chapéu caber dentro do aro */
+      const fr=MASCB('oi','',L);
+      return '<span class="mascote ret-pers'+(cls?' '+cls:'')+'"><span class="ret-in">'+fr+'</span></span>';
+    }
+    const larg=anc[1]*.66,topo=.34*anc[1]*a[1]/a[2];
+    return '<span class="bobby-com-item">'+img+imgArte(uso.peca.arte,{cls:'item-chapeu',style:'left:'+(anc[0]*100).toFixed(1)+'%;top:'+(topo*100).toFixed(1)+'%;width:'+(larg*100).toFixed(1)+'%'})+'</span>';
+  }
+  const ov=overlayDoLook(uso);
+  if(!ov||avatar)return img;      /* capa, capacete, lenço: sem item fora da pose de frente */
+  const cx=(anc[0]+ov.dx*anc[1])*100,larg=ov.k*anc[1]*100,topo=((TOPO_ORELHA[id]||0)+ov.dy*anc[1]*a[1]/a[2])*100;
+  return '<span class="bobby-com-item">'+img+imgArte(ov.arte,{cls:'item-ov',style:'left:'+cx.toFixed(1)+'%;top:'+topo.toFixed(1)+'%;width:'+larg.toFixed(1)+'%'})+'</span>';
 }
-/* retrato redondo do jogador (barra, topo, perfis): sempre a expressão alegre, sem item (cabe num círculo) */
+/* retrato redondo do personagem em uso (topo, barra, cartões de jogador): o companheiro, o Bobby com o look de urso inteiro (recortado na
+   cabeça) ou o Bobby com o chapéu/boné/coroa/óculos. Nunca fica sem o look. look = o do jogador (cartões de outros jogadores). */
+function retratoPers(cls,look){
+  const L=look||(typeof S!=='undefined'&&S.look)||{};
+  const pa=persAtivo(L);
+  if(pa.tipo==='comp')return imgArte(pa.id+'-p01',{cls:'retrato retrato-comp'+(cls?' '+cls:''),eager:true,alt:pa.n});
+  const uso=lookEmUso(L);
+  if(uso&&uso.peca.modo!=='sobrepor')return imgArte(uso.peca.arte,{cls:'retrato retrato-look'+(cls?' '+cls:''),eager:true});
+  if(uso){
+    /* só o chapéu de explorador chega aqui (boné, coroa e óculos têm look inteiro) */
+    return '<span class="retrato ret-pers'+(cls?' '+cls:'')+'"><span class="ret-in">'+MASCB('oi','',L)+'</span></span>';
+  }
+  return imgArte('bobby-e01',{cls:'retrato'+(cls?' '+cls:''),eager:true});
+}
+/* o Bobby de sempre (cartão de novo jogador, onde ainda não há look nem companheiro) */
 const retratoBobby=cls=>imgArte('bobby-e01',{cls:'retrato'+(cls?' '+cls:''),eager:true});
 
 /* ---------- Meu personagem ---------- */
@@ -5196,15 +5272,15 @@ function comprar(slot,id){
   if(S.moedas<it.p){lojaAviso('Faltam '+(it.p-S.moedas)+' moedas para “'+it.n+'”. Cada resposta certa vale 10 moedas.');return;}
   S.moedas-=it.p;S.comprado=(S.comprado||[]).concat([id]);
   vestir(slot,id);
-  salvar();somMoeda();somFim();telaLoja();
+  salvar();somMoeda();somFim();pintarTopo();telaLoja();
 }
 function equipar(slot,id){
   vestir(slot,(S.look||{})[slot]===id?'':id);
-  salvar();somPasso();telaLoja();
+  salvar();somPasso();pintarTopo();telaLoja();
 }
 function escolherCompanheiro(id){
   S.look=Object.assign({},S.look);S.look.companheiro=id;
-  salvar();somPasso();telaLoja();
+  salvar();somPasso();pintarTopo();telaLoja();
 }
 function lojaAviso(t){const a=$('#loja-aviso');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
 /* itens que o jogador já comprou na versão antiga e ainda não têm arte nova: ficam guardados */
@@ -5293,7 +5369,7 @@ function telaLoja(){
   P.querySelectorAll('[data-comp]').forEach(b=>b.addEventListener('click',()=>escolherCompanheiro(S.look&&S.look.companheiro===b.dataset.comp?'':b.dataset.comp)));
   P.querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.buy.split('|');comprar(q[0],q[1]);}));
   P.querySelectorAll('[data-eq]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.eq.split('|');equipar(q[0],q[1]);}));
-  P.querySelectorAll('[data-semlook]').forEach(b=>b.addEventListener('click',()=>{vestir('',''); salvar();somPasso();telaLoja();}));
+  P.querySelectorAll('[data-semlook]').forEach(b=>b.addEventListener('click',()=>{vestir('',''); salvar();somPasso();pintarTopo();telaLoja();}));
   if(typeof pintarBarra==='function')pintarBarra();
 }
 /* troca só o palco (sem refazer a tela inteira) para a expressão mudar na hora, sem pulo na rolagem */
@@ -5501,6 +5577,12 @@ function estadoDe(dados){
   const er=objDe(d.errados);Object.keys(er).forEach(k=>{if(!chaveOk(k)||!/^(mat|pt|en)[0-9]{1,2}$/.test(k))return;if(Array.isArray(er[k]))s.errados[k]=er[k].map(perguntaSegura).filter(Boolean).slice(-30);});
   s.comprado=listaDe(d.comprado,400).map(x=>idSimples(x)).filter(Boolean);
   s.look={};const lk=objDe(d.look);['chapeu','rosto','pescoco','pelo','pers','companheiro'].forEach(k=>{if(lk[k]!==undefined){const v=k==='pelo'||lk[k]===''?String(lk[k]).replace(/[^a-z0-9-]/g,'').slice(0,24):idSimples(lk[k]);s.look[k]=v;}});
+  /* personagem escolhido na versão antiga (look.pers: nina, pim, zeca, lulu) vira o companheiro equivalente; quem já tinha um companheiro escolhido
+     o mantém, e ele entra na lista de comprados (a partir de agora companheiro novo custa moedas do jogo) */
+  const V3_COMP={nina:'rufa',pim:'otto',zeca:'capi',lulu:'brisa'},IDS_COMP=['teo','rufa','otto','capi','brisa','fagulha'];
+  if(!s.look.companheiro&&V3_COMP[s.look.pers])s.look.companheiro=V3_COMP[s.look.pers];
+  if(s.look.companheiro&&IDS_COMP.indexOf(s.look.companheiro)<0)delete s.look.companheiro;
+  if(s.look.companheiro&&s.comprado.indexOf(s.look.companheiro)<0)s.comprado.push(s.look.companheiro);
   s.desenhos=normalizaDesenhos(d.desenhos,s.feitas);
   s.ofensiva=normalizaOfensiva(d.ofensiva);
   s.diario=normalizaDiario(d.diario);
@@ -6262,6 +6344,20 @@ function cenaHTML(u,k,agora){
     '<div class="cena-planeta cena-luz">'+imgArte(pl.img,{})+'</div>'+
     '<span class="cena-breve">Lugar novo em breve</span>';
 }
+/* o personagem escolhido no mapa: parado (Oi, com o look) e andando (Caminha). Companheiro: P01 e P03. Bobby: o look de frente parado e a
+   caminhada do Bobby de sempre (a caminhada é de três quartos; o item só aparece nas poses de frente). */
+function vocePecas(){
+  const pa=persAtivo();
+  if(pa.tipo==='comp'){
+    const c=pa.id;
+    return imgArte(c+'-p01',{cls:'voce-pe',eager:true})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a1',eager:true})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a2',eager:true});
+  }
+  const uso=lookEmUso(S.look||{});
+  let parado=imgArte('bobby-p01',{cls:'voce-pe',eager:true});
+  if(uso&&uso.peca.modo!=='sobrepor')parado=imgArte(uso.peca.arte,{cls:'voce-pe',eager:true});
+  else if(uso){const an=FRONTAIS['bobby-p01'],a1=ativo('bobby-p01');parado+=imgArte(uso.peca.arte,{cls:'item-chapeu voce-pe',eager:true,style:'left:'+(an[0]*100).toFixed(1)+'%;top:'+(.34*an[1]*a1[1]/a1[2]*100).toFixed(1)+'%;width:'+(an[1]*.66*100).toFixed(1)+'%'});}
+  return parado+imgArte('bobby-p05a',{cls:'voce-a1',eager:true})+imgArte('bobby-p05b',{cls:'voce-a2',eager:true});
+}
 function etapaHTML(u,ui,prox){
   const feitasN=u.lessons.filter(l=>S.feitas[l.id]).length;
   const completo=mundoCompleto(u);
@@ -6299,8 +6395,7 @@ function etapaHTML(u,ui,prox){
   if(ehAtual){
     const ant=NO_ANTES[chave]==null?atualNo:NO_ANTES[chave];
     const p=NOS[ant],lado=NOS[atualNo][0]<=16?'d':'e';
-    h+='<div class="voce '+lado+'" data-no="'+atualNo+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-hidden="true">'+
-       imgArte('bobby-p01',{cls:'voce-pe',eager:true})+imgArte('bobby-p05a',{cls:'voce-a1',eager:true})+imgArte('bobby-p05b',{cls:'voce-a2',eager:true})+'</div>';
+    h+='<div class="voce '+lado+'" data-no="'+atualNo+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-hidden="true">'+vocePecas()+'</div>';
   }
   h+='</div></div></section>';
   return h;
@@ -6352,8 +6447,9 @@ function pintarTopo(){
   $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
   $('#som').innerHTML=S.som?IC.falar:IC.somOff;
   $('#som').setAttribute('aria-label',S.som?'Desligar sons':'Ligar sons');
-  $('#logo').innerHTML=retratoBobby();
-  const rb=$('#retrato-bb');if(rb&&!rb.firstChild)rb.innerHTML=retratoBobby();
+  /* o retrato do topo e da barra é o do personagem em uso (companheiro ou Bobby com o look), sempre atualizado */
+  $('#logo').innerHTML=retratoPers();
+  const rb=$('#retrato-bb');if(rb)rb.innerHTML=retratoPers();
 }
 function renderTrilha(){
   pintarTopo();calar();
@@ -6534,9 +6630,9 @@ function pintarLicao(){
     const fora=q.options.filter(o=>o!==q.answer);
     q.options=shufA([q.answer,fora[0],fora[1]]);q.__reduzido=true;
   }
-  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q">'+MASC('concentrado','avatar')+'<div class="et">'+
+  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q">'+MASC('pensa','avatar')+'<div class="et">'+
     (LIC.rev?'Revisão · ':'')+'Pergunta '+(LIC.i+1)+
-    (q.__rep?' · <b>de novo</b>':'')+'</div>'+
+    (q.__irma?' · <b>parecida</b>':(q.__rep?' · <b>de novo</b>':''))+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+
     (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>';
   /* nas duas primeiras perguntas a regra da aula fica na tela: nunca cobrar antes de ensinar */
@@ -6761,6 +6857,29 @@ function ajudaForte(){
   cx.innerHTML='<div class="mini-tuco">'+MASC('ops','avatar')+'</div><div><span class="tit">Ajuda extra</span>'+msg+'</div>';
   falar(msg);
 }
+/* Pergunta irmã: mesma habilidade (mesmo gerador) com outros números ou palavras. Nunca igual a uma que a criança já viu na rodada.
+   Se o gerador só sabe fazer aquela pergunta (Português com geradores de 1 pergunta), tenta os outros geradores da mesma fase, depois
+   os das fases já vistas. Sem nenhuma irmã possível devolve null e quem chamou repete a original. */
+function irmaDe(q){
+  if(q.__item||q.__aquec||(LIC.rev&&typeof q.__mk!=='function'))return null;   /* item do caderno: é a própria pergunta que volta amanhã */
+  const vistos=new Set(LIC.qs.map(x=>x.prompt+'|'+x.answer));
+  const serve=(c,tipo)=>c&&typeof c==='object'&&c.prompt!==undefined&&!vistos.has(c.prompt+'|'+c.answer)&&(!tipo||c.type===tipo);
+  const tenta=(mk,n,tipo)=>{for(let t=0;t<n;t++){let c;try{c=mk();}catch(e){continue;}if(serve(c,tipo)){c.__mk=mk;return c;}}return null;};
+  const l=LIC.l,fases=(l&&l.makers)?l.makers:[];
+  let c=null;
+  if(typeof q.__mk==='function')c=tenta(q.__mk,30,q.type)||tenta(q.__mk,10,null);
+  for(const tipo of [q.type,null]){
+    if(c)break;
+    for(const mk of shufA(fases)){c=tenta(mk,8,tipo);if(c)break;}
+  }
+  if(!c&&typeof reforco==='function'&&l){
+    const ex=reforco(l);
+    for(let t=0;t<40&&!c&&ex.length;t++)c=tenta(pick2(ex),1,t<20?q.type:null);
+  }
+  if(!c)return null;
+  c.__rep=true;c.__irma=true;c.reforco=true;
+  return c;
+}
 function conferir(){
   const q=LIC.qs[LIC.i];LIC.conferido=true;
   /* escolha: compara o texto exato da opcao (Lívia e lívia são opções diferentes de propósito);
@@ -6802,12 +6921,19 @@ function conferir(){
     LIC.erros++;LIC.combo=0;LIC.vidas--;regStat(LIC.l.id,'erros');pe.classList.add('errado');
     guardarErrado(q);
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
-    $('#selo').innerHTML=MASC('ops','avatar');
+    $('#selo').innerHTML=MASC('pensa','avatar');
     $('#fb-t').innerHTML=IC.refazer+'<span>Quase!</span>';
     if(ehF78())falar('Quase!');
+    /* o erro NÃO repete a mesma pergunta (isso mede memória da resposta): volta uma IRMÃ, do mesmo gerador, com outros números ou palavras,
+       2 perguntas depois. O item errado em si já foi para o caderno (guardarErrado) e volta amanhã na revisão espaçada. */
+    let voltaIrma=false,voltaIgual=false;
+    if(!q.__rep&&LIC.vidas>0){
+      const irma=irmaDe(q);
+      if(irma){LIC.qs.splice(Math.min(LIC.qs.length,LIC.i+3),0,irma);voltaIrma=true;}
+      else{const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);voltaIgual=true;}
+    }
     $('#fb-s').innerHTML='A resposta certa é <b>'+htmlSeguro(q.answer,120)+'</b>.'+
-      (LIC.vidas>0?' Esta pergunta volta no fim para você tentar de novo.':'');
-    if(!q.__rep&&LIC.vidas>0){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);}
+      (voltaIrma?' Vamos treinar uma parecida daqui a pouco.':(voltaIgual?' Esta pergunta volta no fim para você tentar de novo.':''));
     somErro();pintarVidas();
     if(ehF78()&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
   }
@@ -6928,7 +7054,7 @@ function guardarErrado(q){
   if(!lista.some(x=>chaveQ(x)===k)){
     /* guarda a pergunta inteira (fração precisa de 'partes', sílabas de 'pecas'...) e não só o texto */
     const c={};
-    Object.keys(q).forEach(c2=>{if(c2.indexOf('__')!==0&&typeof q[c2]!=='function')c[c2]=q[c2];});
+    Object.keys(q).forEach(c2=>{if(c2.indexOf('__')!==0&&c2!=='reforco'&&typeof q[c2]!=='function')c[c2]=q[c2];});
     lista.push(JSON.parse(JSON.stringify(c)));
   }
   S.errados[n]=lista.slice(-30);salvar();
@@ -8170,7 +8296,7 @@ function telaPerfis(){
     const n=Object.keys(d.feitas||{}).filter(k=>k.indexOf('rev')!==0).length;
     h+='<div class="cartao'+(apagando===i?' apagando':'')+'">'+
        '<button class="cartao-bt" data-i="'+i+'" style="--aro:'+p.cor+'">'+
-       '<span class="rosto">'+retratoBobby()+'</span><b>'+escapa(p.nome)+'</b>'+
+       '<span class="rosto">'+retratoPers('',d.look)+'</span><b>'+escapa(p.nome)+'</b>'+
        '<span class="pg">'+n+' de '+totalGeral+' fases</span></button>'+
        '<button class="lixo" data-del="'+i+'" aria-label="Apagar jogador '+escapa(p.nome)+'">'+IC.lixo+'</button>'+
        (apagando===i?'<div class="apagar-conf" role="alertdialog" aria-label="Apagar jogador"><span>Apagar este jogador?</span><div><button class="btn-acao" data-sim="'+i+'">Sim, apagar</button><button class="btn-sec" data-nao="1">Não</button></div></div>':'')+'</div>';

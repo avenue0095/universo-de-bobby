@@ -44,6 +44,20 @@ function cenaHTML(u,k,agora){
     '<div class="cena-planeta cena-luz">'+imgArte(pl.img,{})+'</div>'+
     '<span class="cena-breve">Lugar novo em breve</span>';
 }
+/* o personagem escolhido no mapa: parado (Oi, com o look) e andando (Caminha). Companheiro: P01 e P03. Bobby: o look de frente parado e a
+   caminhada do Bobby de sempre (a caminhada é de três quartos; o item só aparece nas poses de frente). */
+function vocePecas(){
+  const pa=persAtivo();
+  if(pa.tipo==='comp'){
+    const c=pa.id;
+    return imgArte(c+'-p01',{cls:'voce-pe',eager:true})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a1',eager:true})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a2',eager:true});
+  }
+  const uso=lookEmUso(S.look||{});
+  let parado=imgArte('bobby-p01',{cls:'voce-pe',eager:true});
+  if(uso&&uso.peca.modo!=='sobrepor')parado=imgArte(uso.peca.arte,{cls:'voce-pe',eager:true});
+  else if(uso){const an=FRONTAIS['bobby-p01'],a1=ativo('bobby-p01');parado+=imgArte(uso.peca.arte,{cls:'item-chapeu voce-pe',eager:true,style:'left:'+(an[0]*100).toFixed(1)+'%;top:'+(.34*an[1]*a1[1]/a1[2]*100).toFixed(1)+'%;width:'+(an[1]*.66*100).toFixed(1)+'%'});}
+  return parado+imgArte('bobby-p05a',{cls:'voce-a1',eager:true})+imgArte('bobby-p05b',{cls:'voce-a2',eager:true});
+}
 function etapaHTML(u,ui,prox){
   const feitasN=u.lessons.filter(l=>S.feitas[l.id]).length;
   const completo=mundoCompleto(u);
@@ -81,8 +95,7 @@ function etapaHTML(u,ui,prox){
   if(ehAtual){
     const ant=NO_ANTES[chave]==null?atualNo:NO_ANTES[chave];
     const p=NOS[ant],lado=NOS[atualNo][0]<=16?'d':'e';
-    h+='<div class="voce '+lado+'" data-no="'+atualNo+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-hidden="true">'+
-       imgArte('bobby-p01',{cls:'voce-pe',eager:true})+imgArte('bobby-p05a',{cls:'voce-a1',eager:true})+imgArte('bobby-p05b',{cls:'voce-a2',eager:true})+'</div>';
+    h+='<div class="voce '+lado+'" data-no="'+atualNo+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-hidden="true">'+vocePecas()+'</div>';
   }
   h+='</div></div></section>';
   return h;
@@ -134,8 +147,9 @@ function pintarTopo(){
   $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
   $('#som').innerHTML=S.som?IC.falar:IC.somOff;
   $('#som').setAttribute('aria-label',S.som?'Desligar sons':'Ligar sons');
-  $('#logo').innerHTML=retratoBobby();
-  const rb=$('#retrato-bb');if(rb&&!rb.firstChild)rb.innerHTML=retratoBobby();
+  /* o retrato do topo e da barra é o do personagem em uso (companheiro ou Bobby com o look), sempre atualizado */
+  $('#logo').innerHTML=retratoPers();
+  const rb=$('#retrato-bb');if(rb)rb.innerHTML=retratoPers();
 }
 function renderTrilha(){
   pintarTopo();calar();

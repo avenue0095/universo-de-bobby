@@ -1519,3 +1519,24 @@ body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 /* nome do jogador numa linha só, com reticências; o lápis nunca encolhe */
 .planeta .oi-nome{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .planeta .lapis{flex:none}
+
+/* ---------- o personagem escolhido aparece em todo o jogo (mapa, aula, pergunta, reações, topo e barra) ---------- */
+.item-ov{position:absolute;height:auto;transform:translate(-50%,0);pointer-events:none}
+.voce .item-chapeu{transform:translate(-50%,-100%);bottom:auto;height:auto;max-height:none;width:auto}
+.voce{height:76px;width:52px}
+/* retrato redondo com o chapéu de explorador dentro do aro (encolhe o Bobby de frente) */
+.ret-pers{display:block;position:relative;overflow:hidden;border-radius:var(--raio-pilula);background:var(--materia-suave);aspect-ratio:1/1}
+.ret-pers .ret-in{position:absolute;left:-2%;top:30%;width:104%}
+.ret-pers .ret-in .bobby-com-item{display:block;width:100%;height:auto}
+.ret-pers .ret-in .mascote{display:block;width:100%;height:auto;border:0;border-radius:0;object-fit:contain}
+.rosto .ret-pers{width:96px;height:96px;border:3px solid var(--aro,var(--cor-linha-forte))}
+.marca .sig .ret-pers,.retrato-bb .ret-pers{width:100%;height:100%;border:0}
+/* look de urso inteiro e companheiro cortados na cabeça */
+.retrato-look,.retrato-comp{transform-origin:50% 8%;transform:scale(1.75);object-position:50% 4%}
+.retrato-comp{transform:scale(1.35);object-position:50% 10%}
+.rosto .retrato-look,.rosto .retrato-comp{overflow:hidden}
+.marca .sig,.retrato-bb,.rosto{overflow:hidden}
+/* companheiro no lugar do Bobby nas reações e avatares */
+.mascote.comp.avatar{object-position:50% 12%}
+.fim .mascote.comp,.folha-bobby .mascote.comp,.perfil-bobby .mascote.comp,.bau-cena .mascote.comp{width:auto;object-fit:contain}
+.cabecalho-q .mascote.avatar{width:72px;height:72px}

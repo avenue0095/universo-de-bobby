@@ -6,7 +6,7 @@ function guardarErrado(q){
   if(!lista.some(x=>chaveQ(x)===k)){
     /* guarda a pergunta inteira (fração precisa de 'partes', sílabas de 'pecas'...) e não só o texto */
     const c={};
-    Object.keys(q).forEach(c2=>{if(c2.indexOf('__')!==0&&typeof q[c2]!=='function')c[c2]=q[c2];});
+    Object.keys(q).forEach(c2=>{if(c2.indexOf('__')!==0&&c2!=='reforco'&&typeof q[c2]!=='function')c[c2]=q[c2];});
     lista.push(JSON.parse(JSON.stringify(c)));
   }
   S.errados[n]=lista.slice(-30);salvar();

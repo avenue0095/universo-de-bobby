@@ -152,6 +152,12 @@ function estadoDe(dados){
   const er=objDe(d.errados);Object.keys(er).forEach(k=>{if(!chaveOk(k)||!/^(mat|pt|en)[0-9]{1,2}$/.test(k))return;if(Array.isArray(er[k]))s.errados[k]=er[k].map(perguntaSegura).filter(Boolean).slice(-30);});
   s.comprado=listaDe(d.comprado,400).map(x=>idSimples(x)).filter(Boolean);
   s.look={};const lk=objDe(d.look);['chapeu','rosto','pescoco','pelo','pers','companheiro'].forEach(k=>{if(lk[k]!==undefined){const v=k==='pelo'||lk[k]===''?String(lk[k]).replace(/[^a-z0-9-]/g,'').slice(0,24):idSimples(lk[k]);s.look[k]=v;}});
+  /* personagem escolhido na versão antiga (look.pers: nina, pim, zeca, lulu) vira o companheiro equivalente; quem já tinha um companheiro escolhido
+     o mantém, e ele entra na lista de comprados (a partir de agora companheiro novo custa moedas do jogo) */
+  const V3_COMP={nina:'rufa',pim:'otto',zeca:'capi',lulu:'brisa'},IDS_COMP=['teo','rufa','otto','capi','brisa','fagulha'];
+  if(!s.look.companheiro&&V3_COMP[s.look.pers])s.look.companheiro=V3_COMP[s.look.pers];
+  if(s.look.companheiro&&IDS_COMP.indexOf(s.look.companheiro)<0)delete s.look.companheiro;
+  if(s.look.companheiro&&s.comprado.indexOf(s.look.companheiro)<0)s.comprado.push(s.look.companheiro);
   s.desenhos=normalizaDesenhos(d.desenhos,s.feitas);
   s.ofensiva=normalizaOfensiva(d.ofensiva);
   s.diario=normalizaDiario(d.diario);

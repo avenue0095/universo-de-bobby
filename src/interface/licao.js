@@ -136,9 +136,9 @@ function pintarLicao(){
     const fora=q.options.filter(o=>o!==q.answer);
     q.options=shufA([q.answer,fora[0],fora[1]]);q.__reduzido=true;
   }
-  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q">'+MASC('concentrado','avatar')+'<div class="et">'+
+  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q">'+MASC('pensa','avatar')+'<div class="et">'+
     (LIC.rev?'Revisão · ':'')+'Pergunta '+(LIC.i+1)+
-    (q.__rep?' · <b>de novo</b>':'')+'</div>'+
+    (q.__irma?' · <b>parecida</b>':(q.__rep?' · <b>de novo</b>':''))+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+
     (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>';
   /* nas duas primeiras perguntas a regra da aula fica na tela: nunca cobrar antes de ensinar */
@@ -363,6 +363,29 @@ function ajudaForte(){
   cx.innerHTML='<div class="mini-tuco">'+MASC('ops','avatar')+'</div><div><span class="tit">Ajuda extra</span>'+msg+'</div>';
   falar(msg);
 }
+/* Pergunta irmã: mesma habilidade (mesmo gerador) com outros números ou palavras. Nunca igual a uma que a criança já viu na rodada.
+   Se o gerador só sabe fazer aquela pergunta (Português com geradores de 1 pergunta), tenta os outros geradores da mesma fase, depois
+   os das fases já vistas. Sem nenhuma irmã possível devolve null e quem chamou repete a original. */
+function irmaDe(q){
+  if(q.__item||q.__aquec||(LIC.rev&&typeof q.__mk!=='function'))return null;   /* item do caderno: é a própria pergunta que volta amanhã */
+  const vistos=new Set(LIC.qs.map(x=>x.prompt+'|'+x.answer));
+  const serve=(c,tipo)=>c&&typeof c==='object'&&c.prompt!==undefined&&!vistos.has(c.prompt+'|'+c.answer)&&(!tipo||c.type===tipo);
+  const tenta=(mk,n,tipo)=>{for(let t=0;t<n;t++){let c;try{c=mk();}catch(e){continue;}if(serve(c,tipo)){c.__mk=mk;return c;}}return null;};
+  const l=LIC.l,fases=(l&&l.makers)?l.makers:[];
+  let c=null;
+  if(typeof q.__mk==='function')c=tenta(q.__mk,30,q.type)||tenta(q.__mk,10,null);
+  for(const tipo of [q.type,null]){
+    if(c)break;
+    for(const mk of shufA(fases)){c=tenta(mk,8,tipo);if(c)break;}
+  }
+  if(!c&&typeof reforco==='function'&&l){
+    const ex=reforco(l);
+    for(let t=0;t<40&&!c&&ex.length;t++)c=tenta(pick2(ex),1,t<20?q.type:null);
+  }
+  if(!c)return null;
+  c.__rep=true;c.__irma=true;c.reforco=true;
+  return c;
+}
 function conferir(){
   const q=LIC.qs[LIC.i];LIC.conferido=true;
   /* escolha: compara o texto exato da opcao (Lívia e lívia são opções diferentes de propósito);
@@ -404,12 +427,19 @@ function conferir(){
     LIC.erros++;LIC.combo=0;LIC.vidas--;regStat(LIC.l.id,'erros');pe.classList.add('errado');
     guardarErrado(q);
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
-    $('#selo').innerHTML=MASC('ops','avatar');
+    $('#selo').innerHTML=MASC('pensa','avatar');
     $('#fb-t').innerHTML=IC.refazer+'<span>Quase!</span>';
     if(ehF78())falar('Quase!');
+    /* o erro NÃO repete a mesma pergunta (isso mede memória da resposta): volta uma IRMÃ, do mesmo gerador, com outros números ou palavras,
+       2 perguntas depois. O item errado em si já foi para o caderno (guardarErrado) e volta amanhã na revisão espaçada. */
+    let voltaIrma=false,voltaIgual=false;
+    if(!q.__rep&&LIC.vidas>0){
+      const irma=irmaDe(q);
+      if(irma){LIC.qs.splice(Math.min(LIC.qs.length,LIC.i+3),0,irma);voltaIrma=true;}
+      else{const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);voltaIgual=true;}
+    }
     $('#fb-s').innerHTML='A resposta certa é <b>'+htmlSeguro(q.answer,120)+'</b>.'+
-      (LIC.vidas>0?' Esta pergunta volta no fim para você tentar de novo.':'');
-    if(!q.__rep&&LIC.vidas>0){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);}
+      (voltaIrma?' Vamos treinar uma parecida daqui a pouco.':(voltaIgual?' Esta pergunta volta no fim para você tentar de novo.':''));
     somErro();pintarVidas();
     if(ehF78()&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
   }
