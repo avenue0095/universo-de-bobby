@@ -221,7 +221,7 @@ async function main() {
         const quebradas = async () => JSON.parse(await js("JSON.stringify(Array.from(document.querySelectorAll('img.arte')).filter(i=>i.complete&&i.naturalWidth===0&&!i.classList.contains('falhou')===false||(i.complete&&i.naturalWidth===0)).map(i=>i.src.slice(-40)))"));
         const semRolagem = async (nome) => { const l = await js('({sw:document.documentElement.scrollWidth,iw:innerWidth})'); if (l.sw > l.iw + 1) problemas.push(rot + ' ' + nome + ': rolagem horizontal ' + l.sw + ' > ' + l.iw); };
         await js("usarMateria('mat');fecharFolha();document.querySelector('#bb-mapa').click();0"); await dorme(600);
-        const mapa = await js("({etapas:document.querySelectorAll('.etapa').length,nos:document.querySelectorAll('.no .bt').length,luz:(document.querySelector('#etapa-1 .cena-luz')||{}).naturalWidth,planeta:(document.querySelector('.planeta-img img')||{}).naturalWidth,voce:!!document.querySelector('.voce'),menor:Math.min.apply(null,Array.from(document.querySelectorAll('.no .bt')).map(b=>Math.min(b.getBoundingClientRect().width,b.getBoundingClientRect().height))),retrato:(document.querySelector('#retrato-bb img')||{}).naturalWidth})");
+        const mapa = await js("({etapas:document.querySelectorAll('.etapa').length,nos:document.querySelectorAll('.no .bt').length,luz:(document.querySelector('#etapa-1 .cena-luz')||{}).naturalWidth,planeta:(document.querySelector('.planeta-img img')||{}).naturalWidth,voce:!!document.querySelector('.voce'),menor:Math.min.apply(null,Array.from(document.querySelectorAll('.no .bt:not([disabled])')).map(b=>Math.min(b.getBoundingClientRect().width,b.getBoundingClientRect().height))),retrato:(document.querySelector('#retrato-bb img')||{}).naturalWidth})");
         if (mapa.etapas !== 10 || mapa.nos !== 60) problemas.push(rot + ' mapa: ' + JSON.stringify(mapa));
         if (!mapa.luz || !mapa.planeta || !mapa.retrato) problemas.push(rot + ' mapa: imagem do cenario, do planeta ou do retrato nao carregou ' + JSON.stringify(mapa));
         if (mapa.menor < 48) problemas.push(rot + ' mapa: no de fase menor que 48 px (' + mapa.menor + ')');
@@ -234,7 +234,7 @@ async function main() {
         if (!ponto) problemas.push(rot + ' desenhos: faltou o ponto de novidade na barra');
         await js("document.querySelector('#bb-gal').click();0"); await dorme(900);
         const gal = await js("({cartoes:document.querySelectorAll('.des-card').length,livres:document.querySelectorAll('.des-card:not(.trava)').length,icone:Math.max.apply(null,Array.from(document.querySelectorAll('#gal-corpo svg')).map(v=>v.getBoundingClientRect().width))})");
-        if (gal.cartoes !== 30 || gal.livres < 1) problemas.push(rot + ' desenhos: galeria ' + JSON.stringify(gal));
+        if (gal.cartoes < 3 || gal.cartoes > 30 || gal.livres < 1) problemas.push(rot + ' desenhos: galeria ' + JSON.stringify(gal));
         if (gal.icone > 64) problemas.push(rot + ' desenhos: icone gigante na galeria (' + gal.icone + ' px)');
         await shot('visual-2-galeria'); await semRolagem('galeria');
         await js("document.querySelector('.des-card:not(.trava)').click();0"); await dorme(1200);
@@ -346,6 +346,42 @@ async function main() {
         if (medidas.mobile) await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
         coleta(rot + ' toque real');
         feito.push(rot + ': toque real (' + (medidas.mobile ? 'touch' : 'mouse') + ') em dica, alternativa, Verificar, comprar vida e Continuar nas 3 materias, e varredura de pontaria');
+      }
+
+      /* 2f) CONTRASTE REAL (cores calculadas no navegador, claro e escuro) nas telas principais: texto 4,5:1, texto grande 3:1.
+         O detector estatico do impeccable mistura as duas paletas e acusa pares que nao existem; este mede o que a tela mostra. */
+      if (nomeTela === 'celular') {
+        const MEDE = `window.__contr=()=>{const parse=c=>{const cs=c.match(/color\\(srgb ([^)]+)\\)/);if(cs){const p=cs[1].split(/[ \\/]+/).filter(Boolean).map(Number);return {r:p[0]*255,g:p[1]*255,b:p[2]*255,a:p[3]===undefined?1:p[3]};}const m=c.match(/rgba?\\(([^)]+)\\)/);if(!m)return null;const p=m[1].split(/[ ,\\/]+/).filter(Boolean).map(Number);return {r:p[0],g:p[1],b:p[2],a:p[3]===undefined?1:p[3]}};
+const lin=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)};const L=c=>.2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b);
+const over=(f,b)=>({r:f.r*f.a+b.r*(1-f.a),g:f.g*f.a+b.g*(1-f.a),b:f.b*f.a+b.b*(1-f.a),a:1});
+const fundo=el=>{const chain=[];for(let e=el;e;e=e.parentElement){const cs=getComputedStyle(e);const c=parse(cs.backgroundColor);if(c&&c.a>0)chain.push(c);if(cs.backgroundImage!=='none'&&!/gradient/.test(cs.backgroundImage)&&e!==document.body)return null;if(c&&c.a===1)break;}
+let base=parse(getComputedStyle(document.body).backgroundColor)||{r:255,g:255,b:255,a:1};if(base.a<1)base=over(base,{r:255,g:255,b:255,a:1});let cur=chain.length&&chain[chain.length-1].a===1?chain.pop():base;while(chain.length)cur=over(chain.pop(),cur);return cur};
+const ruins=[];const vistos=new Set();
+document.querySelectorAll('body *').forEach(el=>{const cs=getComputedStyle(el);if(cs.display==='none')return;const rr=el.getBoundingClientRect();if(!rr.width||!rr.height)return;
+const tem=Array.from(el.childNodes).some(n=>n.nodeType===3&&n.textContent.trim().length>1);if(!tem||cs.visibility==='hidden'||+cs.opacity===0)return;
+const f=parse(cs.color),b=fundo(el);if(!f||!b)return;const fc=over(f,b);const l1=L(fc),l2=L(b),r=(Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05);
+const px=parseFloat(cs.fontSize),peso=+cs.fontWeight;const grande=px>=24||(px>=18.66&&peso>=700);
+if(r<(grande?3:4.5)){const k=el.tagName+'.'+el.className+' '+r.toFixed(2);if(!vistos.has(k)){vistos.add(k);ruins.push(k+' | '+el.textContent.trim().slice(0,30)+' | cor '+cs.color+' sobre '+(b.r|0)+','+(b.g|0)+','+(b.b|0)+' | fundo do elemento '+cs.backgroundColor);}}});return ruins.slice(0,10);};0`;
+        for (const esquema of ['light', 'dark']) {
+          await cdp('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: esquema }] });
+          await js(MEDE);
+          const telasC = [
+            ["fecharTelasDaBarra();document.querySelector('#bb-mapa').click()", 'mapa'],
+            ["document.querySelector('#bb-pers').click()", 'Meu personagem'], ["fecharTelasDaBarra();document.querySelector('#bb-gal').click()", 'galeria'],
+            ["fecharTelasDaBarra();document.querySelector('#bb-perfil').click()", 'perfil'], ['telaResponsavel()', 'responsavel'], ['telaVoz()', 'voz'],
+            ["fecharTelasDaBarra();abrirLicao(1,0);LIC.etapa='aula';pintarLicao()", 'aula'], ["LIC.etapa='questao';LIC.i=0;pintarLicao()", 'pergunta'],
+            ["fecharLicao();abrirFolha('<div class=\"folha-in\">'+bauCena(true)+'<h2>Voce ganhou</h2><ul class=\"folha-lista premios\"><li>'+iconeDoPremio('moedas')+'<span>+10 moedas</span></li></ul><div class=\"folha-bts\"><button class=\"btn-acao\">Continuar</button></div></div>')", 'bau'],
+          ];
+          for (const [cmd, nome] of telasC) {
+            await js(cmd + ';0'); await dorme(350);
+            const ruins = await js('window.__contr()');
+            if (ruins.length) problemas.push(rot + ' contraste (' + esquema + ') em ' + nome + ': ' + ruins.slice(0, 4).join(' || '));
+            if (nome === 'bau') await js('fecharFolha();0');
+          }
+          await js("fecharTelasDaBarra();fecharLicao();document.querySelector('#bb-mapa').click();0"); await dorme(200);
+        }
+        await cdp('Emulation.setEmulatedMedia', { features: [] });
+        feito.push(rot + ': contraste real conferido (claro e escuro) em 9 telas');
       }
 
       /* 2c) audio GRAVADO: o tocar() acha o arquivo, o Chrome decodifica e toca ate o fim, sem voz do aparelho */

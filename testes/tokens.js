@@ -99,5 +99,22 @@ const HEX = /#[0-9a-fA-F]{3,8}\b/;
     [['claro', claro], ['escuro', escuro]].forEach(([nome, t]) => [['cor-linha-forte', 'cor-superficie'], ['cor-foco', 'cor-fundo'], ['cor-foco', 'cor-superficie']].forEach(([f, b]) => { const r = razao(t['--' + f], t['--' + b]); if (!(r >= 3)) nao.push(nome + ' ' + f + '/' + b + ' ' + r.toFixed(2)); }));
     vazio(nao, 'abaixo do minimo: ');
   });
+  await teste('10. foco visivel cobre os componentes tocaveis (nos, alternativas, teclas, chips, swatches, barra) e hover so com ponteiro', () => {
+    const fv = (fora.match(/:focus-visible/g) || []).length;
+    A.ok(fv >= 12, 'poucos :focus-visible: ' + fv);
+    ['.no .bt', '.alt', '.tecla', '.chip-ctl', '.tinta', '.barra-baixo button', '.mini-pose', '.des-card'].forEach((sel) => A.ok(fora.includes(sel + ':focus-visible'), 'sem foco em ' + sel));
+    const hovers = fora.split('\n').filter((l) => /:hover/.test(l));
+    const soPonteiro = fora.slice(fora.indexOf('@media (hover:hover)'));
+    A.ok(soPonteiro.includes('.alt:hover') && soPonteiro.includes('.tecla:hover'), 'hover de alternativa e tecla fora de (hover:hover)');
+    A.ok(hovers.length > 6);
+  });
+  await teste('11. icones de svg com largura e altura em multiplos de 4 px (as figuras das aulas ficam fora)', () => {
+    const ruins = [];
+    for (const m of fora.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      if (!/svg|ic-arte/.test(m[1]) || /\.fig|\.md|\.barra|\.cubinho|\.placa|\.cen|\.chart/.test(m[1])) continue;
+      for (const n of m[2].matchAll(/(?:width|height):\s*(\d+)px/g)) if (+n[1] % 4) ruins.push(m[1].trim().slice(0, 40) + ' ' + n[0]);
+    }
+    vazio(ruins);
+  });
   resumo('tokens.js');
 })();

@@ -115,7 +115,7 @@ function telaResponsavel(){
   if(!lista.length)h+='<p class="galeria-intro">Ainda não há erros registrados. Assim que o jogo rolar, os assuntos difíceis aparecem aqui.</p>';
   else{h+='<div class="mundos-lista">';
     lista.slice(0,5).forEach(x=>{
-      h+='<div class="linha-mundo" style="--ub:var(--coral)"><span class="mn">'+Math.round(x.taxa*100)+'%</span>'+
+      h+='<div class="linha-mundo" style="--ub:var(--cor-ainda)"><span class="mn">'+Math.round(x.taxa*100)+'%</span>'+
          '<div class="mtx"><b>'+x.t+'</b><span class="sub-l">Mundo '+x.m+' · '+x.e+' erro'+(x.e>1?'s':'')+' e '+x.a+' acerto'+(x.a===1?'':'s')+'</span></div></div>';
     });
     h+='</div>';}

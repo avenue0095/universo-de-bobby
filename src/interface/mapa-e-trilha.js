@@ -61,18 +61,21 @@ function etapaHTML(u,ui,prox){
   u.lessons.forEach((l,li)=>{
     const ok=S.feitas[l.id],abr=liberada(ui,li),atual=ehAtual&&atualNo===li;
     const cls=['no'];if(!abr)cls.push('trava');if(ok)cls.push('feito');if(atual)cls.push('atual');
+    /* só o PRÓXIMO nó da etapa atual mostra o cadeado grande; os outros trancados viram pontos (menos cadeado cobrindo o cenário) */
+    const proxTrava=ehAtual&&!abr&&li===atualNo+1;
+    if(!abr)cls.push(proxTrava?'trava-prox':'trava-longe');
     const est=ok?estrelasDaFase(l.id):0;
     h+='<div class="'+cls.join(' ')+'" style="left:'+NOS[li][0]+'%;top:'+NOS[li][1]+'%">'+
        '<button class="bt" data-u="'+ui+'" data-l="'+li+'"'+(abr?'':' disabled aria-disabled="true"')+
        ' aria-label="Fase '+(li+1)+': '+escapa(l.title)+(ok?'. Concluída com '+est+(est===1?' estrela':' estrelas'):(atual?'. Sua próxima fase':''))+'">'+
-       (abr?'<b>'+(li+1)+'</b>':IC.cadeado)+'</button>'+
+       (abr?'<b>'+(li+1)+'</b>':(proxTrava?IC.cadeado:''))+'</button>'+
        '<span class="estrelas" aria-hidden="true">'+(ok?estrelasSVG(est):'')+'</span>'+
        '<span class="rot">'+escapa(nomeCurto(l.title))+'</span></div>';
   });
-  const cr=['no','revisao-no'];if(!completo)cr.push('trava');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
+  const cr=['no','revisao-no'];if(!completo)cr.push('trava','trava-longe');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
   h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%">'+
      '<button class="bt" data-rev="'+ui+'"'+(completo?'':' disabled aria-disabled="true"')+
-     ' aria-label="Revisão da etapa '+u.n+(completo?'':'. Termine as 5 fases para abrir')+'">'+(completo?IC.medalha:IC.cadeado)+'</button>'+
+     ' aria-label="Revisão da etapa '+u.n+(completo?'':'. Termine as 5 fases para abrir')+'">'+(completo?IC.medalha:'')+'</button>'+
      '<span class="estrelas" aria-hidden="true">'+(estRev?estrelasSVG(estRev):'')+'</span>'+
      '<span class="rot">Revisão'+(completo&&nErr?' · '+nErr+' para refazer':'')+'</span></div>';
   if(ehAtual){
@@ -136,15 +139,23 @@ function renderTrilha(){
     :(p?'Sua próxima fase é “'+escapa(UNITS[p[0]].lessons[p[1]].title)+'”. Bora?'
        :'Você terminou este planeta inteiro! Pode refazer as fases ou visitar outro planeta lá em cima.');
   const guia=(S.look&&S.look.companheiro)||pl.guia;
+  const curta=feitas()===0?'Escolha por onde começar.':(p?'Próxima fase: “'+escapa(nomeCurto(UNITS[p[0]].lessons[p[1]].title))+'”.':'Você terminou este planeta inteiro!');
   let h='<section class="planeta" aria-label="Planeta '+pl.n+'">'+
     '<div class="planeta-img">'+imgArte(pl.img,{eager:true})+'</div>'+
     '<div class="planeta-txt"><span class="planeta-nome">Planeta '+pl.n+' · '+MATERIAS[MATERIA].n+'</span>'+
     '<h1>Oi, '+nome+' <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1>'+
-    '<p>'+frase+'</p>'+
+    '<p>'+curta+'</p>'+
     '<div class="meta-linha"><div class="meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="'+TOTAL_LESSONS+'" aria-valuenow="'+feitas()+
     '" aria-label="Fases deste planeta"><i style="width:'+pct+'%"></i></div><span>'+feitas()+' de '+TOTAL_LESSONS+' fases</span></div></div>'+
     '<div class="planeta-guia">'+imgArte(guia+'-p01',{})+'</div></section>'+rotinaHTML();
-  UNITS.forEach((u,ui)=>{h+=etapaHTML(u,ui,p);});
+  /* o mapa vem primeiro: a etapa onde o Bobby está sobe para o topo da lista, e as outras seguem na ordem de sempre */
+  const ordem=UNITS.map((u,i)=>i);
+  if(p){ordem.splice(ordem.indexOf(p[0]),1);ordem.unshift(p[0]);}
+  ordem.forEach((ui,k)=>{
+    if(p&&k===0)h+='<h2 class="etapa-faixa">Sua etapa agora</h2>';
+    if(p&&k===1)h+='<h2 class="etapa-faixa">Outras etapas</h2>';
+    h+=etapaHTML(UNITS[ui],ui,p);
+  });
   $('#tela').innerHTML=h;
   const en=$('#editar-nome');if(en)en.addEventListener('click',telaPerfil);
   ligarRotina();
@@ -155,4 +166,5 @@ function renderTrilha(){
     }));
   pintarPontoGaleria();
   animarMapa(p);
+  if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelectorAll('.voce')[0];if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}
 }

@@ -10,8 +10,8 @@ const BOBBY={
 /* [id, nome por extenso (legenda do palco), nome curto (cabe na miniatura)] */
 const EXPRESSOES=[['bobby-e01','Alegre','Alegre'],['bobby-e02','Radiante','Radiante'],['bobby-e03','Curioso','Curioso'],['bobby-e04','Pensativo','Pensa'],
   ['bobby-e05','Surpreso','Surpreso'],['bobby-e06','Incentivando','Anima'],['bobby-e07','Concentrado','Foco'],['bobby-e08','Tranquilo','Calmo']];
-const POSES=[['bobby-p01','Oi'],['bobby-p02','Comemora'],['bobby-p03','Pensa'],['bobby-p04','Aponta'],['bobby-p05a','Caminha'],['bobby-p06','Lê'],
-  ['bobby-p07','Escuta'],['bobby-p08','Conta'],['bobby-p09','Joinha'],['bobby-p10','Presente'],['bobby-p11','Tchau'],['bobby-p12','Descansa']];
+const POSES=[['bobby-p01','Oi','Oi'],['bobby-p02','Comemora','Festa'],['bobby-p03','Pensa','Pensa'],['bobby-p04','Aponta','Aponta'],['bobby-p05a','Caminha','Anda'],['bobby-p06','Lê','Lê'],
+  ['bobby-p07','Escuta','Escuta'],['bobby-p08','Conta','Conta'],['bobby-p09','Joinha','Joinha'],['bobby-p10','Presente','Presente'],['bobby-p11','Tchau','Tchau'],['bobby-p12','Descansa','Soneca']];
 /* imagens de frente onde o chapéu entra: [centro x, largura de orelha a orelha], em fração da largura da imagem */
 const FRONTAIS={
   'bobby-p01':[.45,.645],'bobby-p02':[.49,.58],'bobby-p08':[.60,.71],'bobby-p09':[.50,.69],'bobby-p10':[.50,.88],

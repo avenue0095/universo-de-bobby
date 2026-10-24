@@ -26,37 +26,43 @@ function textoOfensiva(){
 }
 
 /* ---------- Rotina de hoje (cartão do mapa) ---------- */
+/* ícone de cada missão (um por tipo, em arte 3D) */
+const ICONE_MISSAO={revisao:'medalha',fase:'trofeu',combo:'estrela',['en-audio']:'bilhete',galaxias:'presente'};
+function icoMissao(m){const d=missaoPorId(m.id),k=ICONE_MISSAO[d&&d.g]||'pergaminho';return IC[k]||IC.pergaminho;}
 function rotinaHTML(){
   garantirDia();
   const d=S.diario,meta=perguntasMeta();
   const pct=Math.min(100,Math.round(d.perguntas/meta*100));
-  let h='<section class="rotina" aria-label="Rotina de hoje"><div class="rotina-topo"><h2>Rotina de hoje</h2>';
-  if(S.config.ofensivaLigada){
-    h+='<span class="rotina-of'+(S.ofensiva.descansando?' descansa':'')+'">'+IC.fogo+textoOfensiva()+'</span>';
-  }
-  h+='</div>';
+  const feitasM=d.missoes.filter(m=>m.ok).length;
+  /* faixa compacta: meta e missões numa linha; o detalhe abre ao tocar. As ações (baú, kit, revisão) ficam sempre à vista. */
+  let h='<section class="rotina faixa" aria-label="Rotina de hoje"><details><summary><span class="rotina-t">Rotina de hoje</span>'+
+    '<span class="rotina-mini"><span class="meta-barra mini" aria-hidden="true"><i style="width:'+pct+'%"></i></span>'+Math.min(d.perguntas,meta)+' de '+meta+
+    (S.config.missoesLigadas&&d.missoes.length?' · '+feitasM+' de '+d.missoes.length+' missões':'')+'</span></summary>';
+  h+='<div class="rotina-corpo">';
+  if(S.config.ofensivaLigada)h+='<span class="rotina-of'+(S.ofensiva.descansando?' descansa':'')+'">'+IC.fogo+textoOfensiva()+'</span>';
   h+='<div class="meta-linha"><div class="meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="'+meta+'" aria-valuenow="'+Math.min(meta,d.perguntas)+
      '" aria-label="Meta do dia"><i style="width:'+pct+'%"></i></div><span>'+Math.min(d.perguntas,meta)+' de '+meta+' perguntas</span></div>';
   h+='<p class="rotina-vivo">'+(d.blocos>0?'Seu dia está vivo. Você já jogou hoje.':'Jogue uma fase e o dia fica vivo.')+'</p>';
   if(S.config.missoesLigadas&&d.missoes.length){
     h+='<ul class="missoes">';
     d.missoes.forEach(m=>{
-      h+='<li class="'+(m.ok?'ok':'')+'">'+IC.pergaminho+'<span class="mt">'+textoDaMissao(m)+'</span><small>'+m.prog+' de '+m.alvo+'</small>'+(m.ok?'<span class="mk">'+IC.certo+'</span>':'')+'</li>';
+      h+='<li class="'+(m.ok?'ok':'')+'">'+icoMissao(m)+'<span class="mt">'+textoDaMissao(m)+'</span><small>'+m.prog+' de '+m.alvo+'</small>'+(m.ok?'<span class="mk">'+IC.certo+'</span>':'')+'</li>';
     });
     h+='</ul>';
     if(d.estrela)h+='<p class="rotina-estrela">'+IC.estrelaDia+' Estrela do dia conquistada!</p>';
   }
-  h+='<div class="rotina-acoes">';
-  if(bauPronto())h+='<button class="btn-acao" id="rt-bau">'+IC.bau+' Abrir o baú do dia</button>';
-  if(d.kit===1)h+='<button class="btn-acao" id="rt-kit">Pegar o Kit de volta</button>';
-  const rev=revisaoDoDiaPronta();
-  if(rev>0&&revisaoRestanteDoDia()>0)h+='<button class="btn-sec" id="rt-rev">Revisão do dia · '+rev+' pergunta'+(rev>1?'s':'')+'</button>';
-  h+='</div>';
   h+='<p class="rotina-rodape">';
   if(S.config.ofensivaLigada)h+='<span class="gelo-chip" title="Congeladores guardam sua sequência">'+IC.gelo+'Congeladores: '+S.ofensiva.congeladores+'</span> ';
-  h+=d.bau.aberto?'<span>Amanhã no baú: '+categoriaDoBau(Math.max(1,S.ofensiva.atual)+1)+'</span></p></section>'
-    :'<span>No baú de hoje: '+categoriaDoBau(Math.max(1,S.ofensiva.atual))+'</span></p></section>';
-  return h;
+  h+=d.bau.aberto?'<span>Amanhã no baú: '+categoriaDoBau(Math.max(1,S.ofensiva.atual)+1)+'</span></p>'
+    :'<span>No baú de hoje: '+categoriaDoBau(Math.max(1,S.ofensiva.atual))+'</span></p>';
+  h+='</div></details>';
+  let acoes='';
+  if(bauPronto())acoes+='<button class="btn-acao" id="rt-bau">'+IC.bau+' Abrir o baú do dia</button>';
+  if(d.kit===1)acoes+='<button class="btn-acao" id="rt-kit">Pegar o Kit de volta</button>';
+  const rev=revisaoDoDiaPronta();
+  if(rev>0&&revisaoRestanteDoDia()>0)acoes+='<button class="btn-sec" id="rt-rev">Revisão do dia · '+rev+' pergunta'+(rev>1?'s':'')+'</button>';
+  if(acoes)h+='<div class="rotina-acoes">'+acoes+'</div>';
+  return h+'</section>';
 }
 function ligarRotina(){
   const bau=$('#rt-bau');if(bau)bau.addEventListener('click',mostrarBau);

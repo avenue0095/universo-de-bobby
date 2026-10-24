@@ -61,3 +61,13 @@ Nada foi apagado: o que saiu do código está em `~/_APAGAR DEPOIS (revisao)/202
 - **Cenas MAT06, MAT07 e POR09:** o apagado refeito alinhou (a máscara não mostra mais imagem dobrada); `CENA_FADE` saiu.
 - **Peso:** 164 itens, 10,2 MB; app inicial 1,86 MB (índice 628 KB + fontes 67 KB + arte 1,2 MB).
 - **Segurança:** XSS por backup, CSP, `build/site.py`, PIN com PBKDF2 e espera, apagar tudo, rastros do perfil, faixa 7 a 12, métricas "sem nome": ver a seção "Segurança e privacidade" do `README.md`. gitleaks: nenhum achado. semgrep: 3 avisos `detect-non-literal-regexp` em `audio-clipes.js` (as listas de palavras vêm do próprio app, não de entrada do usuário).
+
+## 4ª passada de acabamento (revisões 3 e 4)
+
+- **Texto de entrega sem travessão:** 136 trechos de `src/conteudo` trocados por vírgula, dois-pontos, ponto, parênteses ou ponto e vírgula (números); `testes/revisao.js` reprova U+2014 fora de comentário. O travessão que é o assunto da aula de diálogo vai como `&mdash;`. Os textos mudaram, então os clipes de áudio deles saíram do manifesto: `audio/regerar-pendentes.json` lista os 97 textos (texto, idioma, matéria, categoria, motivo) para o agente de áudio regerar; `testes/cobertura-audio.js` trata esses como pendentes e reprova qualquer outro texto sem clipe. Apague o arquivo depois de regerar.
+- **Mapa como primeira dobra:** cabeçalho do planeta com a arte grande e o guia, rotina em faixa compacta (abre ao tocar; baú, kit e revisão ficam sempre à vista), "Sua etapa agora" logo abaixo, as outras etapas na ordem de sempre; na primeira abertura a tela rola o mínimo para o Bobby aparecer. Só o próximo nó mostra cadeado; os outros trancados são pontos sem nome. Nome do nó sem a tradução entre parênteses (a tradução fica na aula e no rótulo de acessibilidade).
+- **Aviso das vozes** não é mais um balão: aparece como linha de estado só na tela Voz e som.
+- **Coluna única** (`--margem-col`): topo, telas, rodapé e cartões usam a mesma margem da coluna de 640 px; no computador a arte do planeta aparece desfocada ao fundo.
+- **Etiquetas** sem caixa-alta e sem espaçamento de letras; ícones em múltiplos de 4 px (teste); foco visível e hover só com ponteiro em todos os componentes tocáveis (teste).
+- **Contraste:** a fumaça mede o contraste calculado no navegador (claro e escuro) em 9 telas. O detector estático do impeccable mistura as duas paletas e acusava dois pares que não existem na tela; a medição achou um problema real (`.mn` do responsável usava a variável antiga `--coral` e ficava branco sobre branco), já corrigido.
+- **Decisão sobre "Por hoje chega":** o principal é "Terminar por hoje" e "Continuar explorando" é secundário, do mesmo tamanho (a escolha de parar não é empurrada para segundo plano).

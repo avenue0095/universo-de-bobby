@@ -23,6 +23,11 @@ function faltaParaDesenho(u){
 }
 
 /* ---------- galeria ---------- */
+/* os desenhos ganhos e só os 3 próximos bloqueados: o resto vira uma linha, em vez de uma parede de cadeados */
+function mostradosDoPlaneta(lista){
+  let trancados=0;
+  return lista.filter(d=>{if(desenhoGanho(d))return true;trancados++;return trancados<=3;});
+}
 function desenhoCartao(d,destaque){
   const ganho=desenhoGanho(d),tem=!!ativo(d.id),novo=ganho&&tem&&S.desenhos.vistos.indexOf(d.id)<0;
   const pl=PLANETAS[d.matApp];
@@ -50,7 +55,8 @@ function abrirGaleria(destaque){
     const pl=PLANETAS[m],lista=cat.filter(d=>d.matApp===m);
     h+='<section class="des-planeta" data-materia="'+COD_DESENHO[m]+'"><h2><span class="des-pl-img">'+imgArte(pl.img,{})+'</span>Planeta '+pl.n+
        ' <small>'+lista.filter(desenhoGanho).length+' de '+lista.length+'</small></h2><div class="galeria">'+
-       lista.map(d=>desenhoCartao(d,alvo)).join('')+'</div></section>';
+       mostradosDoPlaneta(lista).map(d=>desenhoCartao(d,alvo)).join('')+'</div>'+
+       (lista.length>mostradosDoPlaneta(lista).length?'<p class="des-mais">E mais '+(lista.length-mostradosDoPlaneta(lista).length)+' desenhos esperam por você nas próximas etapas.</p>':'')+'</section>';
   });
   $('#gal-corpo').innerHTML='<div class="lc-in">'+h+'</div>';
   $('#galeria').classList.add('on');
