@@ -32,7 +32,8 @@ if os.path.exists(os.path.join(D, 'novos.json')):
         k = f"{lg}/{_DIR[cl]}/{_slug(tx)}-{_fnv(cl + tx)}.m4a"
         if k in rows: continue
         rows[k] = dict(arquivo=k, classe=cl, idioma=n['idioma'], materia=n['materia'] if cl != 'pt-glosa' else 'en', tipo_contagem='novo-lote2',
-                       chars=str(len(tx)), origem='lote 2: ' + n['origem'], texto=tx, rodada='lote2')
+                       chars=str(len(tx)), origem=(n['origem'] if n['origem'].startswith('lote ') else 'lote 2: ' + n['origem']), texto=tx, rodada='lote2',
+                       personagem=n.get('personagem'), situacao=n.get('situacao'), segs_fixos=n.get('segs'))
 
 # orfaos: clipes cujo texto nao existe mais no app (movidos para a pasta de revisao); saem do inventario
 if os.path.exists(os.path.join(D, 'orfaos.json')):
@@ -84,7 +85,7 @@ def toks(s): return [m.group(0).lower() for m in tok_re.finditer(s)]
 PTPURE = set()
 for r in rows.values():
     if r['classe'] in ('en-alvo',): continue
-    if r['materia'] == 'en' and r['classe'] in ('aula-passo', 'missao', 'capitulo-abre', 'quadro-enunciado', 'missao-fim'): continue
+    if r['materia'] == 'en' and r['classe'] in ('aula-passo', 'missao', 'capitulo-abre', 'quadro-enunciado', 'missao-fim', 'feedback'): continue
     PTPURE.update(toks(r['texto']))
 ENA = set()
 for r in rows.values():
@@ -94,7 +95,7 @@ WEAK = set("a an i me my is am are the to in on at he she it we you no yes so as
 STOP = set("""casa mar pare dar ver ter cada era bola sala foi bom bem teta sol sede cola lia lava nada soma sino lua
 pia pira fila rima tema asa uva ala ave ovo ele ela eles elas mais que quem sem com um uma uns umas aqui ali la
 vem vai fica fim sim nao ate hoje agora vez nome gato rato pato mala tela vela rede dado fada nata rua sapo meia
-paz luz mel americana aula cantor chamar colada cueca escolar fazenda formal informal inclusive local mora pretender responde termine universal viva viver lou ed er ing ning th""".split())
+paz luz mel otto teo rufa capi brisa fagulha embaralho bobby arcos jura curioso americana aula cantor chamar colada cueca escolar fazenda formal informal inclusive local mora pretender responde termine universal viva viver lou ed er ing ning th""".split())
 ENX = {'simon', 'says', 'bobby'}  # bobby nao: nome do personagem, fica em pt
 ENX.discard('bobby')
 def strong(w):
@@ -229,7 +230,9 @@ for k, r in rows.items():
         if classe == 'pt-letra':
             segs = [['pt-br', LETRA[texto.lower()]]]
         else:
-            if classe == 'pt-silaba':
+            if r.get('segs_fixos'):
+                segs = [[lg, tx] for lg, tx in r['segs_fixos']]
+            elif classe == 'pt-silaba':
                 segs = [['pt-br', SILFALA.get(texto, texto)]]
             elif classe == 'pt-palavra':
                 segs = [['pt-br', texto]]
@@ -246,7 +249,8 @@ for k, r in rows.items():
     # arquivo sem extensao
     aid = re.sub(r'\.m4a$', '', k)
     items.append(dict(id=aid, classe=classe, idioma=idi, materia=r['materia'], tipo=r['tipo_contagem'], origem=r['origem'],
-                      texto=texto, segs=segs, pad=fp(classe), inventario=(r['rodada'] != 'lote2'), rodada=r['rodada']))
+                      texto=texto, segs=segs, pad=fp(classe), inventario=(r['rodada'] != 'lote2'), rodada=r['rodada'],
+                      personagem=r.get('personagem'), situacao=r.get('situacao')))
 
 # ---------------- extras de nucleo (nao estao no TSV; necessarios para o audio composto) ----------------
 def slug(t): return re.sub(r'^-|-$', '', re.sub(r'[^a-z0-9]+', '-', unicodedata.normalize('NFD', t.lower()).encode('ascii', 'ignore').decode()))[:32]

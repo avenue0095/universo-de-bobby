@@ -1,10 +1,12 @@
 // Varre o app (somente leitura) atras de falas sem clipe. Uso: node lacunas.js <rodadas> <sementes separadas por virgula> <saida.json>
 const fs=require('fs'),path=require('path');
-const REPO='/Users/filipealvesesilva/Projetos/universo-de-bobby';
+const REPO=process.env.BOBBY_REPO||path.resolve(__dirname,'..','..');   // audio/ferramentas -> raiz do repositorio
 const { carregarApp } = require(REPO+'/testes/lib/carregar.js');
 const RODADAS=+process.argv[2]||40, SEMENTES=(process.argv[3]||'1').split(',').map(Number), SAIDA=process.argv[4]||'novos.json';
 const min=JSON.parse(fs.readFileSync(REPO+'/audio/manifesto-min.json','utf8'));
 const ign=new Set(['__']);
+const completo=JSON.parse(fs.readFileSync(REPO+'/audio/manifesto.json','utf8'));
+const caudaLonga=new Set(((completo.nao_gerados||{}).textos)||[]); let caudaVista=0;
 const novos=new Map(); const falados=new Set(); // chave classe|idioma|texto -> item
 const add=(classe,idioma,texto,materia,origem)=>{const k=classe+'|'+idioma+'|'+texto;if(!novos.has(k))novos.set(k,{classe,idioma,texto,materia,origem});};
 for(const sem of SEMENTES){
@@ -17,11 +19,15 @@ for(const sem of SEMENTES){
     if(INT[origem]){ falados.add(INT[origem]+'|'+r.t); if(!(r.n===1&&!r.f.length&&!r.comp)){ const r2=seq(h,l,m); if(r.f.length||!r.n||r.n>1) add(INT[origem],'pt-BR',r.t,m,origem);} return; }
     if(l==='en-US'){ if(r.f.length||!r.n) add('en-alvo','en-US',r.t,m,origem); return; }
     r.f.forEach(f=>{
-      if(f.startsWith('quadro:')){const q=f.slice(7); if(!ign.has(q)) add('quadro-enunciado','pt-BR',q,m,origem);}
+      if(f.startsWith('quadro:')){const q=f.slice(7); if(caudaLonga.has(q)){caudaVista++;return;} if(!ign.has(q)) add('quadro-enunciado','pt-BR',q,m,origem);}
       else add('?'+f.split(':')[0],'pt-BR',f.slice(f.indexOf(':')+1),m,origem);
     });
   };
   // frases inteiras novas
+  // lote 4: banco de falas por personagem, narrativa do Embaralho e frases faladas das cerimonias
+  try{ app.avaliar('falasTodas()').forEach(f=>{const r=seq(f.texto,'pt-BR','mat'); if(!r.n||r.f.length) add('feedback','pt-BR',r.t,'core','lote 4: fala do personagem ('+f.situacao+')');}); }catch(e){console.error('falasTodas',e.message);}
+  try{ const N=app.avaliar('NARRATIVA'); for(const m of Object.keys(N)) N[m].forEach((par,i)=>{const r=seq(par[1],'pt-BR',m); if(!r.n||r.f.length) add('feedback','pt-BR',r.t,'core','lote 4: narrativa.'+m+'.etapa'+(i+1));}); }catch(e){console.error('NARRATIVA',e.message);}
+  try{ const E=app.avaliar('ESTRELAS_DO_CEU'); ['A constelação acendeu. O céu inteiro agora tem o seu nome.'].concat(Object.keys(E).map(k=>'A '+E[k].n+' voltou para o céu.')).forEach(t=>{const r=seq(t,'pt-BR','mat'); if(!r.n||r.f.length) add('feedback','pt-BR',r.t,'core','lote 4: cerimonia.planeta');}); }catch(e){console.error('ESTRELAS',e.message);}
   const frases=Object.values(app.avaliar('BILHETES')).concat(['Por hoje chega! Você fez um ótimo trabalho.','10 unidades viraram 1 dezena!','10 dezenas viraram 1 centena!']);
   frases.forEach(t=>{const r=seq(t,'pt-BR','mat'); if(!r.n||r.f.length) add('feedback','pt-BR',r.t,'core','falas novas da Fase 2');});
   const UN=[['mat','UNITS_MAT'],['pt','UNITS_PT'],['en','UNITS_EN']];
@@ -35,14 +41,18 @@ for(const sem of SEMENTES){
       app.avaliar('LIC.l='+U+'['+ui+'].lessons['+li+']');
       if(li===0&&caps[u.n]) trata(caps[u.n].abre,'pt-BR',m,'capitulo');
       if(miss[l.id]) trata(miss[l.id].t+'. '+miss[l.id].abre,'pt-BR',m,'missao');
+      try{ if(app.avaliar('typeof reforco')==='function'){ const ex=app.avaliar('(reforco('+U+'['+ui+'].lessons['+li+'])||[])'); for(let r=0;r<Math.min(RODADAS,40);r++) ex.forEach((mk,k)=>{let q;try{q=app.avaliar('reforco('+U+'['+ui+'].lessons['+li+'])['+k+']()');}catch(e){} if(q&&(q.ouvir||q.prompt)) trata(q.ouvir||q.prompt,q.lang||'pt-BR',m,'pergunta irma (reforco)');}); } }catch(e){}
       for(let r=0;r<RODADAS;r++){
         const qs=app.avaliar('genQuestions('+U+'['+ui+'].lessons['+li+'],8)');
         qs.forEach((q,qi)=>{
           trata(q.ouvir||q.prompt,q.lang||'pt-BR',m,'pergunta');
           app.ctx.__q=q;
-          // dica e ajuda extra
-          let d=''; try{ d=app.avaliar('dicaDaPergunta(__q)'); }catch(e){}
-          if(d) trata(d,'pt-BR',m,'dica');
+          // dica ("Como fazer") e "Ajuda extra": vem do gerador (ajudaDe), antes de responder (conferido=false) e depois de um erro (conferido=true, com a resposta)
+          let d0='',d1='',resp='';
+          try{ app.avaliar('LIC.conferido=false'); d0=app.avaliar('dicaDaPergunta(__q)'); app.avaliar('LIC.conferido=true'); d1=app.avaliar('dicaDaPergunta(__q)'); resp=app.avaliar('(ajudaDe(__q).resposta||"")'); }catch(e){}
+          if(d0) trata(d0,'pt-BR',m,'dica');
+          if(resp) trata(resp,'pt-BR',m,'resposta (sozinha)');
+          if(d1&&d1!==d0) trata(d1,'pt-BR',m,'dica (apos erro)');
           const A=[];
           if(q.type==='mc'){[1,2,3].forEach(n=>A.push('Tirei '+n+' resposta'+(n>1?'s':'')+' errada'+(n>1?'s':'')+'. Agora escolha entre as que sobraram.'));}
           else if(q.type==='blocos')A.push('Já coloquei as placas e as barrinhas para você. Agora complete só os <b>cubinhos</b>.');
@@ -51,7 +61,7 @@ for(const sem of SEMENTES){
           else if(q.type==='texto'||q.type==='input'){const a=String(q.answer);A.push('A resposta começa com <b>'+a.slice(0,1)+'</b> e tem <b>'+a.length+'</b> '+(a.length>1?'caracteres':'caractere')+'.');}
           else if(q.type==='silabas')A.push('A primeira sílaba é <b>'+String(q.answer).slice(0,2)+'</b>.');
           else A.push('Leia devagar e tente de novo. Você consegue.');
-          A.forEach(a=>trata(a,'pt-BR',m,'ajuda extra'));
+          A.forEach(a=>{trata(a,'pt-BR',m,'ajuda extra'); if(resp) trata('<b>'+resp+'</b> '+a,'pt-BR',m,'ajuda extra (apos erro)');});
         });
       }
     }));
@@ -61,4 +71,4 @@ fs.writeFileSync(SAIDA.replace('.json','_falados.json'),JSON.stringify([...falad
 const arr=[...novos.values()];
 fs.writeFileSync(SAIDA,JSON.stringify(arr,null,0));
 const c={};arr.forEach(x=>c[x.classe+'/'+x.origem]=(c[x.classe+'/'+x.origem]||0)+1);
-console.log(arr.length,JSON.stringify(c));
+console.log(arr.length,JSON.stringify(c),'| cauda longa ja registrada como nao gerada (nao conta como lacuna):',caudaVista);

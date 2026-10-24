@@ -6,16 +6,16 @@ Gerado em 24/10/2026. Voz provisória, 100% local, custo R$ 0. Nenhum texto saiu
 
 | Item | Valor |
 |---|---|
-| Clipes | 3.635 (pt-BR 3.195, en-US 440) |
-| Duração total | 3 h 14 min (3,24 h) |
-| Tamanho em Opus (24 kbps, mono) | 35,2 MB |
-| Tamanho em AAC (.m4a, 24 kbps, mono) | 41,9 MB |
+| Clipes | 4.432 (pt-BR 3.992, en-US 440) |
+| Duração total | 3 h 48 min (3,79 h) |
+| Tamanho em Opus (24 kbps, mono) | 41,4 MB |
+| Tamanho em AAC (.m4a, 24 kbps, mono) | 49,1 MB |
 | Manifesto completo | `manifesto.json` (cerca de 2,4 MB): texto, arquivo, idioma, voz, duração, tamanho, hash do texto |
-| Manifesto para o app | `manifesto-min.json` (213 KB): pacotes `core`, `mat`, `pt`, `en` com `[ms, bytes_opus, bytes_m4a]` por clipe |
+| Manifesto para o app | `manifesto-min.json` (270 KB): pacotes `core`, `mat`, `pt`, `en` com `[ms, bytes_opus, bytes_m4a]` por clipe |
 
 Cada clipe existe em dois formatos, lado a lado: `pt-br/aula/<slug>-<fnv8>.opus` e `pt-br/aula/<slug>-<fnv8>.m4a`. A chave do manifesto é o caminho sem extensão. O nome segue a seção 9.4 da especificação (slug de 32 caracteres e hash FNV-1a de `classe + texto`), com a extensão trocada, e as pastas em minúsculas (`pt-br`, `en-us`), como no inventário.
 
-Pacotes (seção 9.4): `core` 171 clipes, `mat` 825, `pt` 1.084, `en` 1.555. Os valores por pacote e por formato estão em `manifesto-min.json`.
+Pacotes (seção 9.4): `core` 273 clipes, `mat` 1.103, `pt` 1.263, `en` 1.793. Os valores por pacote e por formato estão em `manifesto-min.json`.
 
 ## Voz, velocidade e motor
 
@@ -48,7 +48,7 @@ A especificação (seção 9.5) manda AAC-LC `.m4a` como padrão e só aceita Op
 2. Testar `.opus` num iPhone real com `decodeAudioData`. Se passar, trocar e economizar cerca de 6 MB.
 3. Não gerei MP3, porque o AAC cobre o iOS antigo e a spec não pede MP3.
 
-O pacote que vai no aparelho é um formato só. Em Opus fica em 35,2 MB e em AAC em 41,9 MB, os dois dentro da meta de 32 a 45 MB (para isso baixei o AAC de 32 para 24 kbps depois do lote 2; fala em 24 kbps AAC-LC mono é aceitável, mas vale ouvir).
+O pacote que vai no aparelho é um formato só. Em Opus fica em 41,4 MB, dentro da meta de 32 a 45 MB; em AAC fica em 49,1 MB, 4 MB acima da meta por causa das ajudas faladas do lote 5 (ver abaixo). Se o pacote final for AAC, as saídas são testar Opus no iPhone, ou servir os quadros de ajuda sob demanda (para isso baixei o AAC de 32 para 24 kbps depois do lote 2; fala em 24 kbps AAC-LC mono é aceitável, mas vale ouvir).
 
 ## Tratamento do áudio
 
@@ -109,6 +109,30 @@ O agente de código trocou travessões por vírgula, dois-pontos ou ponto em tex
 Órfãos: 94 textos de aula, capítulo e missão com travessão deixaram de existir no app (188 arquivos, Opus e AAC). Não foram apagados: foram movidos para `~/_APAGAR DEPOIS (revisao)/2026-10-24/audio-orfaos/`, com `LOG.tsv` e `desfazer.sh`, e saíram dos dois manifestos. Ficaram 11 clipes com travessão no texto (5 fechos de missão, 3 frases em inglês e 3 glosas) que o app ainda pode usar ou que não passam pela varredura; não mexi neles.
 
 Totais após o lote 3: 3.635 clipes, Opus 35,2 MB, AAC 41,9 MB. Medido de novo em todos os arquivos: nenhum mudo, nenhum silêncio interno acima de 1,2 s, volume mediana −16,3 LUFS (faixa −18,4 a −14,7). Cobertura: `npm test` passa (exit 0) e o teste de cobertura com 200 rodadas por fase (semente 5) dá 24.424 textos distintos, 100% com clipe, 0 de 16 falas novas sem clipe. A varredura própria com 200 rodadas e semeaduras novas deu lista vazia (ver resposta do lote).
+
+## Lote 4 (24/10/2026): falas por personagem e narrativa do Embaralho
+
+O código novo (`src/conteudo/falas.js` e `src/conteudo/narrativa.js`) trouxe o banco de falas com humor por personagem e as 30 frases da narrativa do Embaralho. A lista `regerar-pendentes.json` tinha 104 textos, dos quais 2 eram repetidos ("Descansar também faz parte da aventura." aparece na parada e na cerimônia; "Errar faz parte da exploração..." é do Bobby e da Rufa). Gerados 102 clipes, todos na classe `feedback` (pasta `sistema`, pacote `core`), mesma voz, mesmo tratamento, mesmo hash e convenção de nome: 68 falas do banco, 30 frases da narrativa (10 por planeta) e 4 frases faladas das cerimônias de planeta ("A constelação acendeu..." e "A Estrela ... voltou para o céu.").
+
+Campo `personagem` no manifesto: cada clipe desse lote traz `personagem` e `situacao` em `manifesto.json`, e `manifesto-min.json` ganhou o mapa `personagens` (arquivo para personagem). Por enquanto todos usam a mesma voz (pm_alex, e am_michael nos trechos em inglês do Otto); a decisão D5 do Filipe sobre uma voz por personagem fica pendente, e com esse campo dá para trocar só as falas de um personagem sem regerar o resto. Contagem após o lote 5: Bobby 79 (inclui as 30 frases da narrativa e as 4 das cerimônias, que são narração), Teo 5, Rufa 5, Otto 4, Embaralho 3, Brisa 2, Capi 2, Fagulha 2. As duas falas de erro que o Bobby e a Rufa compartilham têm um clipe só, registrado como Rufa.
+
+Inglês dentro das falas do Otto: "Great! Great job!", "Say it with me: hello, hello!" e "Nice try!" saem na voz am_michael, e o restante da frase em pm_alex. A detecção automática não resolvia "me:" nem os nomes dos personagens citados na narrativa ("Otto" era tomado por inglês), então essas três falas têm a segmentação fixada à mão em `ferramentas/prep.py` (via `novos.json`) e os nomes dos personagens entraram na lista de palavras protegidas.
+
+Pergunta irmã e telas novas: `ferramentas/lacunas.js` passou a amostrar também as perguntas de `reforco()` (caminho da pergunta irmã), o banco de falas (`falasTodas()`), a narrativa e as frases faladas das cerimônias. Três varreduras com 200 rodadas por fase e semeaduras novas (71 a 83) feitas depois da geração: lista vazia. `npm test` passa.
+
+Totais após o lote 4: 3.737 clipes, Opus 36,4 MB, AAC 43,2 MB, 3 h 21 min. Medido de novo em todos os arquivos: nenhum mudo, nenhum silêncio interno acima de 1,2 s, volume mediana −16,3 LUFS (faixa −18,4 a −14,7; os 102 novos entre −17,6 e −15,4). O `regerar-pendentes.json` atendido tem cópia em `~/_APAGAR DEPOIS (revisao)/2026-10-24/audio-pendentes/` (com `LOG.tsv` e `desfazer.sh`), mas continua em `audio/` porque `testes/falas.js` (testes 5 e 6) lê esse arquivo e exige que toda frase da narrativa esteja nele. Quando o teste passar a aceitar "já tem clipe" como suficiente, o arquivo pode sair de `audio/`.
+
+## Lote 5 (24/10/2026): ajustes do commit d6931b9 e as ajudas faladas
+
+Falas do Teo: duas falas de erro saíram do banco ("Eu errei de propósito só para testar você. Quase funcionou." e "Epa, esse cálculo travou. Vamos reiniciar o raciocínio juntos.") e duas entraram ("Epa, essa conta travou. Vamos olhar o caminho juntos." e "Ainda não. Olha o caminho: a resposta aparece com calma."). As novas foram geradas com `personagem: teo`; as antigas viraram órfãs e foram movidas para `~/_APAGAR DEPOIS (revisao)/2026-10-24/audio-orfaos/` (LOG e desfazer atualizados).
+
+Ajudas faladas: `src/conteudo/ajudas.js` gera a dica ("Como fazer") e a "Ajuda extra" a partir da pergunta, e o app fala as duas (`falar(txt)` em `mostrarDica`, `falar(msg)` em `ajudaForte`). São compostas por quadros. A varredura passou a falar, para cada pergunta amostrada: a dica antes de responder, a dica depois do erro (método mais resposta), a resposta sozinha e a ajuda extra com e sem a resposta na frente. Foram gerados 695 clipes: 370 quadros de dica, 163 fragmentos da resposta falada sozinha ("antes do", "vem o", "a resposta é", "dá"), 162 grafias fonéticas usadas pelas ajudas de inglês ("bái", "gud mórnin", como `pt-glosa`). Critério de entrada: o quadro precisa aparecer em todas as varreduras de pelo menos um trio de semeaduras (nove varreduras de 200 rodadas por fase, semeaduras 91 a 133).
+
+O que ficou de fora, por decisão, e por quê (3.189 quadros, registrados em `manifesto.json` no campo `nao_gerados`, com motivo e lista):
+- Colagem (2.451): o app cola a resposta ao método da dica, e a resposta à ajuda extra, com um espaço, e o cortador de quadros tira a pontuação. Nasce um quadro que junta duas frases ("...o que vem antes antes do", "a resposta é falso tirei"). Cada dica ganharia duas versões longas quase iguais, e as combinações com a resposta são quase infinitas. Isso dobrava o tamanho do lote (chegou a 48,9 MB em Opus antes do corte). Os 973 clipes desse tipo que chegaram a ser gerados foram movidos para `~/_APAGAR DEPOIS (revisao)/2026-10-24/audio-excluidos-lote5/` com LOG e desfazer. Pedido ao código: falar o método e a resposta como dois clipes separados (duas chamadas de `falar`, ou cortar o quadro na pontuação de fim de frase). Com isso, os fragmentos de resposta já gravados cobrem o caso e a colagem some.
+- Cauda longa (738): quadros cuja resposta vem por extenso dentro do texto ("a resposta é quinhentos e dez"), gerados por perguntas de escrever o número por extenso. Não se repetem entre semeaduras e não saturam. Enquanto o código não separar os clipes, essas falas de ajuda ficam sem voz (o app mostra o texto; nunca usa a voz do aparelho).
+
+Cobertura: `npm test` passa e o teste de cobertura do repositório (que amostra perguntas, aulas, aberturas, cartões e elogios) dá 100% a 200 rodadas. A varredura própria, que também fala dicas e ajudas, foi repetida três vezes depois da geração (200 rodadas por fase, semeaduras 141 a 153): sobraram de 47 a 58 textos por varredura, todos com a resposta por extenso (nenhum sem número), isto é, só a cauda longa descrita acima; esses 91 também foram somados a `nao_gerados`. Fora dela, a lista de lacunas está vazia. Medido de novo em todos os 4.432 arquivos: nenhum mudo, nenhum silêncio interno acima de 1,2 s, volume mediana −16,3 LUFS.
 
 ## Integração (próxima etapa, outro agente)
 
