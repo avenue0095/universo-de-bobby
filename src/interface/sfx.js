@@ -4,7 +4,7 @@
    ACERTO (6 dB a menos) e não tem energia abaixo de 250 Hz, e a voz manda: com uma fala tocando, efeitos e música caem 10 dB.
    Cada receita recebe (contexto, saída, instante) e devolve a duração, assim o mesmo código toca ao vivo e renderiza em OfflineAudioContext
    para o teste medir pico, duração e energia. */
-const SFXG={ctx:null,mestre:null,efeitos:null,musica:null,gesto:false,voz:false,ruido:null,musicaTimer:null,musicaPlaneta:'',musicaProx:0,musicaPasso:0};
+const SFXG={ctx:null,mestre:null,efeitos:null,musica:null,gesto:false,voz:false,ruido:null};
 const SFX_PENT=[523.25,587.33,659.25,783.99,880,1046.5];       /* C5 D5 E5 G5 A5 C6 */
 const sfxDb=db=>Math.pow(10,db/20);
 
@@ -17,7 +17,7 @@ function sfxMontaGrafo(c){
   const comp=c.createDynamicsCompressor();
   comp.threshold.value=-18;comp.knee.value=12;comp.ratio.value=5;comp.attack.value=.004;comp.release.value=.2;
   const mestre=c.createGain();mestre.gain.value=.9;
-  const ef=c.createGain(),mu=c.createGain();ef.gain.value=1;mu.gain.value=.5;
+  const ef=c.createGain(),mu=c.createGain();ef.gain.value=1;mu.gain.value=1;
   ef.connect(comp);mu.connect(comp);comp.connect(mestre);mestre.connect(c.destination);
   SFXG.ctx=c;SFXG.mestre=mestre;SFXG.efeitos=ef;SFXG.musica=mu;SFXG.ruido=null;
   return SFXG;
@@ -28,6 +28,7 @@ function sfxVoz(fala){
   const g=SFXG.ctx&&SFXG.mestre;if(!g)return;
   const t=SFXG.ctx.currentTime;
   try{g.gain.cancelScheduledValues(t);g.gain.setTargetAtTime(fala?.9*sfxDb(-10):.9,t,fala?.03:.15);}catch(e){}
+  if(typeof musicaDucking==='function')musicaDucking();
 }
 /* ---------- instrumentos ---------- */
 function sfxRuidoBuf(c){
@@ -68,10 +69,10 @@ const SFX={
   clique:(c,o,t)=>{sRuido(c,o,t,.012,{de:1200,vol:.14,q:2});sTom(c,o,t,330,.06,{vol:.16});return .06;},                     /* 1 (-14) */
   seleciona:(c,o,t)=>{sTom(c,o,t,1200,.04,{vol:.2});return .04;},                                                       /* 2 (-14) */
   verifica:(c,o,t)=>{sTom(c,o,t,520,.09,{vol:.24,ate:700});return .09;},                                                 /* 3 (-12) */
-  acerto:(c,o,t,n)=>{n=Math.max(1,n||1);const i=Math.min(n-1,5);                                                        /* 4 e 5 (-6): sobe a escala a cada seguida */
-    if(n<=1){sSino(c,o,t,783.99,.35,.3);sSino(c,o,t+.09,1046.5,.4,.3);}
-    else{sSino(c,o,t,SFX_PENT[i],.4,.28);sSino(c,o,t+.09,SFX_PENT[Math.min(i+2,5)],.45,.28);}
-    sRuido(c,o,t+.05,.2,{tipo:'highpass',de:6000,vol:.02});return .55;},
+  acerto:(c,o,t,n)=>{n=Math.max(1,n||1);const i=Math.min(n-1,4);                                                        /* 4 e 5 (-6): sobe a escala a cada seguida; curto (ate 400 ms) e sem agudo acima de A5 */
+    if(n<=1){sSino(c,o,t,659.25,.26,.3);sSino(c,o,t+.08,783.99,.3,.3);}
+    else{sSino(c,o,t,SFX_PENT[i],.26,.28);sSino(c,o,t+.08,SFX_PENT[Math.min(i+1,4)],.3,.28);}
+    return .4;},
   erro:(c,o,t)=>{sTom(c,o,t,392,.18,{tipo:'triangle',vol:.13,ate:349,filtro:['lowpass',1200]});return .18;},                /* 6 (-12): toc de madeira G4 a F4, nada abaixo de 250 Hz */
   dica:(c,o,t)=>{sSino(c,o,t,659.25,.25,.2);sSino(c,o,t+.1,880,.3,.2);return .35;},                                      /* 7 */
   moeda:(c,o,t)=>{sTom(c,o,t,987.8,.12,{vol:.28,ataque:.005});sTom(c,o,t+.06,1318.5,.16,{vol:.28,ataque:.005});return .22;}, /* 8 */
@@ -141,49 +142,61 @@ function vibrar(ms){
     return navigator.vibrate(ms||10);
   }catch(e){return false;}
 }
-/* ---------- música por planeta: um laço leve gerado no navegador (volume baixo, interruptor próprio) ---------- */
-const MUSICA={
-  mat:{escala:[293.66,329.63,392,440,523.25,587.33],tipo:'sine',bpm:72,sino:true,fundo:'engrenagem'},     /* Numeral: sinos e madeira */
-  pt:{escala:[220,246.94,261.63,329.63,392,440],tipo:'triangle',bpm:66,sino:false,fundo:'vento'},          /* Fábula: caixa de música e flauta */
-  en:{escala:[261.63,293.66,329.63,392,440,523.25],tipo:'triangle',bpm:80,sino:false,fundo:'onda'}         /* Horizonte: pluck e gotas */
-};
-function musicaNota(c,o,t,m,passo){
-  const e=m.escala,b=60/m.bpm;
-  /* passeio melódico determinístico (sem sorteio): o mesmo laço em toda volta */
-  const i=[0,2,1,3,2,4,3,1,0,2,4,5,3,2,1,0][passo%16];
-  if(passo%2===0)sTom(c,o,t,e[i],b*1.6,{tipo:m.tipo,vol:.18,ataque:.02,h2:m.sino?.25:.08});
-  if(passo%8===0){[e[0]/2,e[2]/2].forEach(f=>sTom(c,o,t,f,b*6,{tipo:'sine',vol:.1,ataque:.5}));}
-  if(passo%4===3)sTom(c,o,t+b*.5,e[(i+2)%6]*2,b*.6,{tipo:'sine',vol:.06,ataque:.01});
+/* ---------- música por planeta: faixas CC0 (assets/musica/*.m4a, ver LICENCAS.md), sob demanda, em loop, volume baixo ----------
+   A trilha sintetizada anterior saiu (o Filipe achou irritante, 24/10/2026). Carrega a faixa só quando a música está ligada (nunca na carga
+   inicial), toca em loop com fade de 1,5 s, a -18 dB do cheio; enquanto um clipe de voz toca, cai para -28 dB (ducking). */
+const MUSICA={mat:'assets/musica/mat.m4a',pt:'assets/musica/pt.m4a',en:'assets/musica/en.m4a'};
+const MUSICA_GANHO=sfxDb(-18),MUSICA_GANHO_VOZ=sfxDb(-28),MUSICA_FADE=1.5;
+const MUS={buffers:{},fonte:null,ganho:null,planeta:'',pedido:0};
+async function musicaCarregar(planeta){
+  if(MUS.buffers[planeta])return MUS.buffers[planeta];
+  const g=sfxGrafo();if(!g||!MUSICA[planeta]||typeof fetch!=='function')return null;
+  const r=await fetch(MUSICA[planeta]);if(!r.ok)throw new Error('HTTP '+r.status);
+  const b=await g.ctx.decodeAudioData(await r.arrayBuffer());
+  MUS.buffers[planeta]=b;return b;
 }
-function musicaAgenda(){
-  const g=sfxGrafo();if(!g||!SFXG.musicaPlaneta)return;
-  const m=MUSICA[SFXG.musicaPlaneta]||MUSICA.mat,b=60/m.bpm/2,c=g.ctx;
-  if(SFXG.musicaProx<c.currentTime)SFXG.musicaProx=c.currentTime+.05;
-  while(SFXG.musicaProx<c.currentTime+.6){musicaNota(c,g.musica,SFXG.musicaProx,m,SFXG.musicaPasso++);SFXG.musicaProx+=b;}
-}
+function musicaGanhoAlvo(){return SFXG.voz?MUSICA_GANHO_VOZ:MUSICA_GANHO;}
 function musicaLigar(planeta){
   if(!S||S.musica===false||!SFXG.gesto)return musicaDesligar();
   const g=sfxGrafo();if(!g)return;
-  if(SFXG.musicaTimer&&SFXG.musicaPlaneta===planeta)return;
+  if(MUS.fonte&&MUS.planeta===planeta)return;
   musicaDesligar(true);
-  SFXG.musicaPlaneta=planeta;SFXG.musicaPasso=0;SFXG.musicaProx=0;
-  SFXG.musicaTimer=setInterval(musicaAgenda,150);musicaAgenda();
+  MUS.planeta=planeta;const pedido=++MUS.pedido;
+  musicaCarregar(planeta).then(buf=>{
+    if(!buf||pedido!==MUS.pedido||!S||S.musica===false)return;
+    const c=g.ctx,f=c.createBufferSource(),ga=c.createGain();
+    f.buffer=buf;f.loop=true;f.connect(ga);ga.connect(g.musica);
+    const t=c.currentTime;ga.gain.setValueAtTime(0.0001,t);ga.gain.exponentialRampToValueAtTime(musicaGanhoAlvo(),t+MUSICA_FADE);
+    f.start(t);MUS.fonte=f;MUS.ganho=ga;
+  }).catch(()=>{});   /* sem rede ou sem arquivo: fica sem música, sem erro */
 }
 function musicaDesligar(manterPlaneta){
-  if(SFXG.musicaTimer){clearInterval(SFXG.musicaTimer);SFXG.musicaTimer=null;}
-  if(!manterPlaneta)SFXG.musicaPlaneta='';
+  MUS.pedido++;
+  const f=MUS.fonte,ga=MUS.ganho,c=SFXG.ctx;
+  if(f&&ga&&c){try{const t=c.currentTime;ga.gain.cancelScheduledValues(t);ga.gain.setValueAtTime(Math.max(.0001,ga.gain.value),t);ga.gain.exponentialRampToValueAtTime(.0001,t+.6);f.stop(t+.65);}catch(e){try{f.stop();}catch(e2){}}}
+  MUS.fonte=null;MUS.ganho=null;
+  if(!manterPlaneta)MUS.planeta='';
 }
-const musicaTocando=()=>!!SFXG.musicaTimer;
+const musicaTocando=()=>!!MUS.fonte;
+/* a voz manda: a música cai para -28 dB enquanto a fala toca (chamado por sfxVoz) */
+function musicaDucking(){const ga=MUS.ganho,c=SFXG.ctx;if(!ga||!c)return;try{const t=c.currentTime;ga.gain.cancelScheduledValues(t);ga.gain.setTargetAtTime(musicaGanhoAlvo(),t,SFXG.voz?.05:.3);}catch(e){}}
+/* liga ou desliga só a música, em um toque (botão do topo) */
+function musicaAlternar(){
+  S.musica=!(S.musica!==false);salvar();
+  if(S.musica){SFXG.gesto=true;sfxGrafo();musicaLigar(typeof MATERIA!=='undefined'?MATERIA:'mat');}else musicaDesligar();
+  if(typeof pintarTopo==='function')pintarTopo();
+  return S.musica;
+}
 /* o primeiro toque destrava o áudio do navegador e liga a música do planeta; aba escondida pausa a música */
 function sfxDestravar(){
   if(SFXG.gesto)return;
   SFXG.gesto=true;ctxAudio();sfxGrafo();
-  if(typeof MATERIA!=='undefined')musicaLigar(MATERIA);
+  if(typeof MATERIA!=='undefined'&&S&&S.musica)musicaLigar(MATERIA);
 }
 if(typeof document!=='undefined'&&document.addEventListener){
   document.addEventListener('pointerdown',sfxDestravar,{passive:true});
   document.addEventListener('keydown',sfxDestravar);
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)musicaDesligar(true);else if(SFXG.musicaPlaneta||SFXG.gesto)musicaLigar(typeof MATERIA!=='undefined'?MATERIA:'mat');});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)musicaDesligar(true);else if(MUS.planeta&&S&&S.musica)musicaLigar(typeof MATERIA!=='undefined'?MATERIA:'mat');});
   /* toque em qualquer botão: o som certo para cada tipo (opção, verificar, aba, nó trancado, o resto) */
   document.addEventListener('pointerdown',e=>{
     const b=e.target&&e.target.closest?e.target.closest('button,.alt,.tecla,.chip'):null;

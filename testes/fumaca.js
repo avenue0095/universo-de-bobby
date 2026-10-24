@@ -94,6 +94,7 @@ async function main() {
       }
     };
 
+    const toqueSimples = async (sel) => { const c = await js("(()=>{const e=document.querySelector(" + JSON.stringify(sel) + ");const r=e.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()"); await cdp('Input.dispatchMouseEvent', { type: 'mouseMoved', x: c.x, y: c.y }); await cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: c.x, y: c.y, button: 'left', clickCount: 1 }); await cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: c.x, y: c.y, button: 'left', clickCount: 1 }); };
     const telas = [['desktop', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false }], ['celular', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }], ['celular360', { width: 360, height: 640, deviceScaleFactor: 2, mobile: true }]];
     const shot0 = async (nome) => { if (!FOTO) return; fs.mkdirSync(path.join(__dirname, 'saida'), { recursive: true }); const f = await cdp('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(path.join(__dirname, 'saida', 'modal-' + nome + '.png'), Buffer.from(f.data, 'base64')); };
     for (const [nomeTela, medidas] of telas) {
@@ -515,7 +516,7 @@ async function main() {
       /* 2d5) SOM SINTETIZADO: cada efeito e renderizado em OfflineAudioContext e medido (pico ate -6 dBFS, duracao dentro da tabela do plano);
          o erro e 6 dB mais baixo que o acerto e sem energia abaixo de 250 Hz; tres interruptores independentes; vibracao respeita o movimento reduzido. */
       {
-        const tabela = { clique: .06, seleciona: .04, verifica: .09, acerto: .45, erro: .18, dica: .25, moeda: .2, faseOk: .9, estrela: .3, pecaAcende: .7, etapaOk: 3, planetaOk: 6, passo: .27, abre: .22, fecha: .13, aba: .07, bauRange: .35, bauTampa: .12, bauMoedas: .7, bauRevela: .8, cadeado: .09, desbloqueia: .35, gelo: .5, missao: .3, pega: .05, encaixa: .15, solta: .12, conquista: .6, parada: 1.5 };
+        const tabela = { clique: .06, seleciona: .04, verifica: .09, acerto: .4, erro: .18, dica: .25, moeda: .2, faseOk: .9, estrela: .3, pecaAcende: .7, etapaOk: 3, planetaOk: 6, passo: .27, abre: .22, fecha: .13, aba: .07, bauRange: .35, bauTampa: .12, bauMoedas: .7, bauRevela: .8, cadeado: .09, desbloqueia: .35, gelo: .5, missao: .3, pega: .05, encaixa: .15, solta: .12, conquista: .6, parada: 1.5 };
         const medidas = await js(`(async()=>{const t=${JSON.stringify(tabela)},r={};for(const n of Object.keys(t)){const x=await sfxRender(n,n==='acerto'?3:(n==='passo'?'grama':0));let pico=0,ult=0;for(let i=0;i<x.amostras.length;i++){const v=Math.abs(x.amostras[i]);if(v>pico)pico=v;if(v>.01)ult=i;}r[n]={pico:pico,fim:ult/44100-.01};}return r})()`);
         const ruins = [];
         Object.keys(tabela).forEach((n) => {
@@ -532,23 +533,46 @@ async function main() {
           return {dif:20*Math.log10(rms(ac.amostras)/rms(er.amostras)),baixo:baixo/tot}})()`);
         if (er.dif < 6) problemas.push(rot + ' sfx: o erro deveria ser pelo menos 6 dB mais baixo que o acerto (' + er.dif.toFixed(1) + ' dB)');
         if (er.baixo > .02) problemas.push(rot + ' sfx: o erro tem energia abaixo de 250 Hz (' + (er.baixo * 100).toFixed(1) + '%)');
-        // interruptores independentes
+        // acerto, erro e UI: curtos (ate 400 ms) e sem agudo (pico espectral abaixo de 1,2 kHz no acerto e no erro)
+        const curtos = ['clique', 'seleciona', 'verifica', 'acerto', 'erro', 'moeda', 'abre', 'fecha', 'aba', 'dica'].filter((n) => medidas[n].fim > .4 + .02);
+        if (curtos.length) problemas.push(rot + ' sfx: sons de acerto, erro ou UI acima de 400 ms: ' + curtos.join(', '));
+        const agudo = await js(`(async()=>{const r={};for(const n of ['acerto','erro']){const x=await sfxRender(n,n==='acerto'?6:0);const N=8820,w=i=>.5-.5*Math.cos(2*Math.PI*i/(N-1));const pot=f=>{let re=0,im=0;for(let i=0;i<N;i++){const v=x.amostras[i]*w(i),a=2*Math.PI*f*i/44100;re+=v*Math.cos(a);im-=v*Math.sin(a);}return re*re+im*im};let best=0,bf=0;for(let f=60;f<=4000;f+=20){const p=pot(f);if(p>best){best=p;bf=f;}}r[n]=bf;}return r})()`);
+        if (agudo.acerto > 1200 || agudo.erro > 600) problemas.push(rot + ' sfx: pico espectral agudo demais (acerto ' + agudo.acerto + ' Hz, erro ' + agudo.erro + ' Hz)');
+        // interruptores independentes: Efeitos nao calam a Voz; Musica tem interruptor e botao proprios, DESLIGADA por padrao
         const sw = await js(`(async()=>{const o={};S.som=false;S.voz=true;o.efeitoMudo=sfx('acerto',1)===false;S.som=true;o.efeitoToca=sfx('acerto',1)===true;
           S.voz=false;o.vozMuda=(await falar('Boa!'))==='mudo';S.voz=true;
-          SFXG.gesto=true;S.musica=true;musicaLigar('pt');o.musicaLiga=musicaTocando()&&SFXG.musicaPlaneta==='pt';musicaLigar('en');o.troca=SFXG.musicaPlaneta==='en';
-          S.musica=false;musicaLigar('en');o.musicaDesliga=!musicaTocando();S.musica=true;
+          o.padraoDesligada=estadoVazio().musica===false&&estadoDe({}).musica===false;
           return o})()`);
         Object.keys(sw).forEach((k) => { if (!sw[k]) problemas.push(rot + ' interruptores de som: falhou ' + k + ' ' + JSON.stringify(sw)); });
-        // o primeiro toque destrava o audio e liga a musica do planeta
-        const un = await js(`(()=>{musicaDesligar();SFXG.gesto=false;S.musica=true;document.dispatchEvent(new Event('pointerdown'));return {gesto:SFXG.gesto,estado:AC&&AC.state,musica:musicaTocando()}})()`);
-        if (!un.gesto || un.estado === 'suspended' && false || !un.musica) problemas.push(rot + ' som: o primeiro toque nao destravou o audio e ligou a musica ' + JSON.stringify(un));
+        // botao de um toque no topo: 48 px, estado no aria-label, liga a faixa CC0 do planeta (sob demanda) e desliga sem abrir tela
+        const bt = await js("(()=>{const b=document.querySelector('#musica'),r=b.getBoundingClientRect();return {w:Math.round(r.width),h:Math.round(r.height),rot:b.getAttribute('aria-label'),pressed:b.getAttribute('aria-pressed'),visivel:r.width>0&&r.top>=0&&r.top<innerHeight}})()");
+        if (bt.w < 48 || bt.h < 48 || bt.rot !== 'Música: desligada' || bt.pressed !== 'false' || !bt.visivel) problemas.push(rot + ' botao da musica: ' + JSON.stringify(bt));
+        const plan = await js('MATERIA');
+        await js("S.musica=false;SFXG.gesto=true;0");
+        await toqueSimples('#musica'); await dorme(2400);
+        const lig = await js("(()=>{const b=document.querySelector('#musica');return {rot:b.getAttribute('aria-label'),pressed:b.getAttribute('aria-pressed'),on:b.classList.contains('on'),S:S.musica,planeta:MUS.planeta,tocando:musicaTocando(),ganho:MUS.ganho?+MUS.ganho.gain.value.toFixed(3):null,tela:document.querySelector('#perfil').classList.contains('on')}})()");
+        if (lig.rot !== 'Música: ligada' || lig.pressed !== 'true' || !lig.on || !lig.S || lig.tela) problemas.push(rot + ' botao da musica (ligar): ' + JSON.stringify(lig));
+        if (!lig.tocando || lig.planeta !== plan) problemas.push(rot + ' musica: a faixa do planeta nao comecou a tocar em 2,4 s ' + JSON.stringify(lig));
+        if (lig.ganho !== null && (lig.ganho > 0.13 || lig.ganho < 0.09)) problemas.push(rot + ' musica: ganho esperado -18 dB (0,126), veio ' + lig.ganho);
+        const duck = await js("(()=>{sfxVoz(true);const a=MUS.ganho?MUS.ganho.gain.value:null;sfxVoz(false);return a})()");
+        // setTargetAtTime: o alvo e -28 dB (0,040); confere o alvo pela funcao, nao pelo valor instantaneo
+        const alvo = await js("(()=>{SFXG.voz=true;const a=+musicaGanhoAlvo().toFixed(3);SFXG.voz=false;return a})()");
+        if (Math.abs(alvo - 0.04) > 0.005) problemas.push(rot + ' musica: ducking deveria ir a -28 dB (0,040), alvo ' + alvo);
+        const faixa = await js("(()=>{const b=MUS.buffers[MATERIA];return b?{dur:Math.round(b.duration),ch:b.numberOfChannels}:null})()");
+        if (!faixa || faixa.dur < 60 || faixa.dur > 90) problemas.push(rot + ' musica: a faixa assets/musica/' + plan + '.m4a nao foi baixada e decodificada (60 a 90 s): ' + JSON.stringify(faixa));
+        await toqueSimples('#musica'); await dorme(800);
+        const des = await js("(()=>{const b=document.querySelector('#musica');return {rot:b.getAttribute('aria-label'),S:S.musica,tocando:musicaTocando()}})()");
+        if (des.rot !== 'Música: desligada' || des.S || des.tocando) problemas.push(rot + ' botao da musica (desligar): ' + JSON.stringify(des));
+        // a faixa nunca entra na carga inicial (nem na camada inicial da arte, nem no pre-cache do service worker)
+        const sw2 = await js("fetch('./sw.js').then(r=>r.text()).then(t=>/assets\\/musica/.test(t))");
+        if (sw2) problemas.push(rot + ' musica: assets/musica aparece no service worker (carga inicial)');
         // vibracao: leve, com interruptor e sem movimento reduzido
         await cdp('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
         const vb = await js(`(()=>{Object.defineProperty(navigator,'userActivation',{value:{hasBeenActive:true},configurable:true});navigator.vibrate=()=>true;const o={};S.vibra=true;o.reduzido=vibrar(10)===false;return o})()`);
         await cdp('Emulation.setEmulatedMedia', { features: [] });
         const vb2 = await js(`(()=>{navigator.vibrate=()=>true;S.vibra=true;const a=vibrar(10)===true;S.vibra=false;const b=vibrar(10)===false;S.vibra=true;return a&&b})()`);
         if (!vb.reduzido || !vb2) problemas.push(rot + ' vibracao: deveria respeitar movimento reduzido e o interruptor (' + JSON.stringify(vb) + ',' + vb2 + ')');
-        await js("musicaDesligar();0");
+        await js("musicaDesligar();S.musica=false;salvar();pintarTopo();0");
         feito.push(rot + ': som sintetizado (' + Object.keys(tabela).length + ' efeitos medidos em OfflineAudioContext, erro ' + er.dif.toFixed(1) + ' dB abaixo do acerto)');
       }
 

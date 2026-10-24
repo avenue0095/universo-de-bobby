@@ -2,6 +2,8 @@
 const $=s=>document.querySelector(s);
 const CHAVE='trilha-matematica-v1';
 const IC={
+ nota:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 3v12.1a3.6 3.6 0 1 0 2 3.2V8l8-2v6.1a3.6 3.6 0 1 0 2 3.2V3l-12 3Z"/></svg>',
+ notaOff:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 15V5l12-3v12"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="18.5" cy="15.5" r="2.5"/><path d="M3 3l18 18"/></svg>',
  certo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.6 9.4 17.5 19.5 7"/></svg>',
  fogo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 3.2-1.3 4.6-2.7 6C7.7 9.6 6 11.2 6 14a6 6 0 0 0 12 0c0-2.4-1.2-4-2.3-5.4-.7 1-1.5 1.5-2.2 1.5.8-2.6.4-5.6-1.5-8Z"/></svg>',
  moeda:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="6.6" fill="none" stroke="var(--cor-superficie)" stroke-width="1.6"/><path d="M13.4 8.2h-3.2v2.6h2.8v1.9h-2.8v3.1H8.3V6.3h5.1Z" fill="var(--cor-superficie)"/></svg>',

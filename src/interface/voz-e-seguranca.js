@@ -49,7 +49,7 @@ function telaVoz(){
      '<button class="chip-ctl'+(on?' on':'')+'" '+atr+'="1" aria-pressed="'+on+'">'+txtOn+'</button>'+
      '<button class="chip-ctl'+(!on?' on':'')+'" '+atr+'="0" aria-pressed="'+(!on)+'">'+txtOff+'</button></div>'+(dica?'<small>'+dica+'</small>':'')+'</div>';
   h+=chave('Efeitos','data-som',S.som!==false,'Ligados','Desligados','Cliques, acertos, passos e o baú.');
-  h+=chave('Música','data-musica',S.musica!==false,'Ligada','Desligada','Uma música leve de cada planeta, em volume baixo.');
+  h+=chave('Música','data-musica',S.musica===true,'Ligada','Desligada','Uma música calma de cada planeta (faixas livres, CC0), em volume baixo. A nota musical do topo liga e desliga com um toque.');
   h+=chave('Voz','data-voz',S.voz!==false,'Ligada','Desligada','A voz do Bobby e dos amigos. Funciona sozinha, mesmo sem os efeitos.');
   h+=chave('Vibração','data-vibra',S.vibra!==false,'Ligada','Desligada','Uma vibração bem curta ao acertar, só em aparelhos que têm (Android).');
   h+='</div>';

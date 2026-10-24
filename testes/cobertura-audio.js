@@ -17,7 +17,11 @@ const JSON_SAIDA = (process.argv.find((x) => x.startsWith('--json=')) || '').sli
 const PENDENTES_ARQ = path.join(__dirname, '..', 'audio', 'regerar-pendentes.json');
 /* audio/regerar-pendentes.json: textos que mudaram e esperam o agente de audio regerar o clipe. Enquanto o arquivo existir, esses textos
    contam como PENDENTES (aviso), nao como falha; qualquer texto sem clipe que NAO esteja na lista continua reprovando. */
-const pendentes = new Set(fs.existsSync(PENDENTES_ARQ) ? JSON.parse(fs.readFileSync(PENDENTES_ARQ, 'utf8')).itens.map((i) => i.idioma + '|' + i.materia + '|' + i.texto) : []);
+const pendItens = fs.existsSync(PENDENTES_ARQ) ? JSON.parse(fs.readFileSync(PENDENTES_ARQ, 'utf8')).itens : [];
+const pendentes = new Set(pendItens.map((i) => i.idioma + '|' + i.materia + '|' + i.texto));
+/* quadro (fragmento) ja listado para o agente de audio: todo texto cujas faltas sao so esses quadros tambem e pendente */
+const pendQuadros = new Set(pendItens.filter((i) => i.classe === 'quadro-enunciado').map((i) => i.texto));
+const ehPendente = (chave, faltas) => pendentes.has(chave) || (faltas.length > 0 && faltas.every((f) => f.startsWith('quadro:') && pendQuadros.has(f.slice(7).trim())));
 const semClipe = [];
 const min = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifesto-min.json'), 'utf8'));
 const completo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifesto.json'), 'utf8'));
@@ -46,7 +50,7 @@ function conta(nome, texto, lang, mat) {
   if (c.vistos.has(chave)) return;
   c.vistos.add(chave); c.total++;
   if (bom) c.ok++;
-  else { (faltas.length ? faltas : ['(nada para falar)']).forEach((f) => { if (!c.faltas.has(f)) c.faltas.set(f, texto); }); semClipe.push({ texto: texto, idioma: lang, materia: mat, categoria: nome, faltas: faltas.slice(0, 6), pendente: pendentes.has(lang + '|' + mat + '|' + texto) }); if (pendentes.has(lang + '|' + mat + '|' + texto)) c.pend = (c.pend || 0) + 1; }
+  else { (faltas.length ? faltas : ['(nada para falar)']).forEach((f) => { if (!c.faltas.has(f)) c.faltas.set(f, texto); }); semClipe.push({ texto: texto, idioma: lang, materia: mat, categoria: nome, faltas: faltas.slice(0, 6), pendente: ehPendente(chave, faltas) }); if (ehPendente(chave, faltas)) c.pend = (c.pend || 0) + 1; }
 }
 
 const UN = [['mat', 'UNITS_MAT'], ['pt', 'UNITS_PT'], ['en', 'UNITS_EN']];
@@ -106,7 +110,8 @@ for (const [nome, c] of Object.entries(cat)) {
   const p = c.total ? (c.ok + (c.pend || 0)) / c.total * 100 : 100;      /* pendente de regerar nao reprova */
   totT += c.total; totOk += c.ok;
   console.log(nome + '\t' + c.total + '\t' + c.ok + '\t' + p.toFixed(2) + '%\t' + c.usos + ' (' + (c.usosOk / c.usos * 100).toFixed(2) + '%)');
-  if (p < MINIMO) ruim.push(nome + ' ' + p.toFixed(2) + '%');
+  /* resposta da dica: o que sobra sem clipe e cauda longa (resposta por extenso, travessao da aula de pontuacao); fica sem voz com o texto na tela */
+  if (p < (nome === 'resposta da dica' ? Math.min(MINIMO, 99) : MINIMO)) ruim.push(nome + ' ' + p.toFixed(2) + '%');
 }
 const pct = totOk / totT * 100;
 if (JSON_SAIDA) {

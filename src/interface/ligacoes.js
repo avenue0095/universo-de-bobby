@@ -81,6 +81,7 @@ $('#dica').addEventListener('click',mostrarDica);
 $('#fechar-rev').addEventListener('click',()=>{calar();$('#revisao').classList.remove('on');});
 /* o alto-falante do topo abre Voz e som, com os três interruptores (Efeitos, Música, Voz) e a vibração */
 $('#som').addEventListener('click',()=>{fecharTelasDaBarra();lojaOrigem='perfil';telaVoz();});
+$('#musica').addEventListener('click',()=>{musicaAlternar();});
 $('#salvar-nome').addEventListener('click',salvarNome);
 $('#pular-nome').addEventListener('click',()=>{$('#modal').classList.remove('on');if(criando&&STORE.atual<0)telaPerfis();});
 $('#campo-nome').addEventListener('keydown',e=>{if(e.key==='Enter')salvarNome();});

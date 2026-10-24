@@ -1,0 +1,16 @@
+# Música de fundo: faixas, origem e licença
+
+Acesso em 24/10/2026. As três faixas vêm do pacote **"JRPG Pack 4 Calm"**, de **SubspaceAudio** (o zip assina Juhani Junkala), publicado em OpenGameArt.org em 14/05/2017.
+
+- Página do pacote: https://opengameart.org/content/jrpg-pack-4-calm
+- Linha exata da licença na página: `License(s): CC0` (ícone cc0.png e link para https://opengameart.org/content/cc0-2)
+- Texto da licença (CC0 1.0 Universal, domínio público): https://creativecommons.org/publicdomain/zero/1.0/ . Em resumo: o autor renunciou a todos os direitos; uso comercial, cópia, modificação e redistribuição livres, sem obrigação de crédito. O crédito aqui é cortesia.
+- Cópia da página salva: `docs/licencas/pagina-opengameart-jrpg-pack-4-calm-2026-10-24.html` (fora do site publicado).
+
+| Planeta | Arquivo no app | Faixa original | SHA-256 do .ogg baixado | SHA-256 do .m4a | Duração | Tamanho |
+|---|---|---|---|---|---|---|
+| Numeral (mat) | `mat.m4a` | Calm3 - Peaceful Days.ogg | dc4ad1cdf78debc20534fdd391cd2adb94b53cdcfae68ee8ab64ecffd157d170 | 6bcdc8bbdc4e2309db306049d7ef87efe7c23298e5c2e98500f3faceae24ccb5 | 64 s | 529 KB |
+| Fábula (pt) | `pt.m4a` | Calm4 - Sand Castles.ogg | 3c2a13c19f7cbdaad338c1f17225700da37d89c02f4cedae34d79ca92d5c69df | 49433015229d450399d234f46d55c91ca97fe033f78d96ff57a79e446c1f141a | 71 s | 589 KB |
+| Horizonte (en) | `en.m4a` | Calm5 - Summer Memories.ogg | 25a4de0e070f5fe9a79a36460796dea62837ce3671aecbc77f46cf32b32af094 | e286c997bdb8e4a4793d5cc80c5fc580b84f95312d6d52243e1578ccbee50514 | 65 s | 541 KB |
+
+Conversão: `ffmpeg -i faixa.ogg -ac 1 -ar 44100 -c:a aac -b:a 64k -movflags +faststart planeta.m4a` (AAC-LC, 64 kbps, mono). Total: 1,66 MB, carregados sob demanda (nunca na carga inicial). No app a música toca a -18 dB do volume cheio, com fade de 1,5 s, e cai para -28 dB enquanto um clipe de voz toca. Nenhuma faixa foi ouvida por nós; a escolha foi por nome, duração (60 a 90 s) e a etiqueta "calm" do pacote.

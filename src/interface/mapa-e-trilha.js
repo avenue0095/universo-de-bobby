@@ -147,10 +147,13 @@ function pintarTopo(){
   fogo.setAttribute('aria-label',textoOfensiva()+'. Congeladores: '+o.congeladores);
   $('#st-moedas').innerHTML=IC.moeda+'<em>'+S.moedas+'</em>';
   $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
-  const algumSom=S.som!==false||S.voz!==false||S.musica!==false;
+  const algumSom=S.som!==false||S.voz!==false;
   $('#som').innerHTML=algumSom?IC.falar:IC.somOff;
   $('#som').setAttribute('aria-label','Voz e som');
-  if(typeof musicaLigar==='function'&&SFXG.gesto&&(SFXG.musicaPlaneta!==MATERIA||!musicaTocando()))musicaLigar(MATERIA);
+  /* botão de um toque da música, com o estado à vista */
+  const bm=$('#musica');
+  if(bm){const on=S.musica===true;bm.innerHTML=on?IC.nota:IC.notaOff;bm.classList.toggle('on',on);bm.setAttribute('aria-label','Música: '+(on?'ligada':'desligada'));bm.setAttribute('aria-pressed',on?'true':'false');}
+  if(typeof musicaLigar==='function'&&SFXG.gesto&&S.musica===true&&(MUS.planeta!==MATERIA||!musicaTocando()))musicaLigar(MATERIA);
   /* o retrato do topo e da barra é o do personagem em uso (companheiro ou Bobby com o look), sempre atualizado */
   $('#logo').innerHTML=retratoPers();
   const rb=$('#retrato-bb');if(rb)rb.innerHTML=retratoPers();

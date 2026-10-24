@@ -1660,3 +1660,11 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
 .opcao-ajudas{display:grid;grid-template-columns:auto 1fr;gap:var(--esp-4) var(--esp-8);align-items:center;cursor:pointer}
 .opcao-ajudas small{grid-column:2}
 .opcao-ajudas input{width:24px;height:24px;accent-color:var(--cor-acao)}
+
+/* botão de música do topo: 48 px, estado à vista */
+#musica{display:grid;width:var(--toque-min);height:var(--toque-min)}
+#musica.on{color:var(--materia-tinta);background:var(--materia-suave)}
+#musica svg{width:24px;height:24px}
+@media (max-width:430px){#musica{display:grid}}
+/* topo no celular: com o botão da música, a margem lateral cai para 8 px e o nome da matéria continua inteiro */
+@media (max-width:430px){.topo-in{padding-left:var(--esp-8);padding-right:var(--esp-8)}}
