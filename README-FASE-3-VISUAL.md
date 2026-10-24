@@ -34,3 +34,21 @@ Nada foi apagado: o que saiu do código está em `~/_APAGAR DEPOIS (revisao)/202
 - Colorir refaz o balde de todas as jogadas ao abrir (até 600); em aparelho fraco pode levar alguns décimos de segundo.
 - `window.print()` e o PDF do iOS não foram conferidos em papel.
 - Peso: o `index.html` caiu de 615 KB para cerca de 600 KB; arte total 4,5 MB em `assets/` (camada inicial 1,1 MB).
+
+## Aprendizado: z-index sobre painel fixo e teste de pontaria (24/10/2026)
+
+**O que quebrou.** Para a atmosfera do planeta ficar atrás do conteúdo da fase, dei `position:relative;z-index:1` ao `.lc-corpo`. O painel de feedback `.pe` é `position:fixed` com `z-index:auto`, então passou a ficar **embaixo** do corpo da fase: Verificar, Continuar, dica e "continuar por 50 moedas" deixaram de receber toque em todas as fases. A fumaça passou porque usava `.click()` por JavaScript, que dispara o evento no elemento mesmo que haja outra coisa por cima.
+
+**Regra.** Elemento fixo que recebe toque (`.pe`, barra, folhas) tem `z-index` por token (`--z-painel`, `--z-barra`...) e fica acima de qualquer camada de conteúdo. Camada decorativa usa `pointer-events:none` e `z-index:0` ou negativo, nunca eleva o conteúdo.
+
+**Teste.** `testes/fumaca.js` agora (1) confere com `document.elementFromPoint` que o botão é o elemento no centro dele antes de tocar, (2) toca de verdade pelo CDP (mouse no 1280, touch no 390) em dica, alternativa, Verificar, comprar vida e Continuar nas 3 matérias, e (3) varre todos os botões habilitados da tela visível (mapa, Meu personagem, galeria, perfil, aula e pergunta). Provado: sem a correção ele falha com "#acao coberto por lc-corpo" em 1280 e 390.
+
+## Revisão 2 e integração da arte nova
+
+- Painel de erro em duas linhas de ação no celular (texto, "continuar por 50 moedas" e o botão principal em largura cheia), espaço de 280 px abaixo da última alternativa, lembrete da aula recolhível (aberto só em tela alta).
+- Aviso das vozes: um por vez, acima da barra, sem capturar toque, escondido durante a fase.
+- Barra: Perfil e Responsável marcam "Perfil" (observador de `#perfil`, `#galeria`, `#desenho-tela`); ícones e retrato na mesma caixa de 40 px, rótulos alinhados.
+- Baú: Bobby comemorando (pose P02) com o baú em SVG de gradiente, luz e sombra, até chegar a arte 3D.
+- Mapa: rótulo de nó em até 3 linhas, cena em 5:8, Bobby menor ao lado do nó.
+- Arte nova integrada: 30 desenhos e cenários 2 a 10 (147 itens, 9,8 MB; app inicial 1,73 MB). CEN-MAT06, CEN-MAT07 e CEN-POR09 acendem por cross-fade (`CENA_FADE` em `mapa-e-trilha.js`) até o agente de arte realinhar o apagado.
+- **Armado, não verificado:** `ativos.py` já converte `BOBBY-ITEM-*` e `ICONE-*` novos e o catálogo do Meu personagem liga os itens `bobby-item-bone|capacete|coroa|oculos|capa|lenco` quando existirem em `ATIVOS`. A ancoragem de óculos, capa e lenço na pose frontal e o uso dos ícones de recompensa (baú, "Por hoje chega", missões, congelador, bilhete) dependem de ver a arte e ficam para a próxima passada.

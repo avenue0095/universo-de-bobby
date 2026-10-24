@@ -30,6 +30,10 @@ const PECAS={
   pelo:{mel:{n:'Pelo mel',p:100},cinza:{n:'Pelo cinza',p:150},panda:{n:'Pelo panda',p:260},polar:{n:'Pelo polar',p:300},rosa:{n:'Pelo rosa',p:220},choco:{n:'Chocolate',p:180}},
   pers:{nina:{n:'Nina, a coelhinha',p:180},pim:{n:'Pim, o gatinho',p:220},zeca:{n:'Zeca, o macaquinho',p:260},lulu:{n:'Lulu, a corujinha',p:320}}
 };
+/* itens que o agente de arte entrega depois: o app só passa a mostrar quando o arquivo existe em ATIVOS (python3 build/ativos.py).
+   Nomes esperados: bobby-item-<nome>. Ancoragem de rosto e pescoço ainda por conferir quando a arte chegar. */
+const ARTE_ESPERADA={chapeu:{bone:'bobby-item-bone',espacial:'bobby-item-capacete',coroa:'bobby-item-coroa'},rosto:{oculos:'bobby-item-oculos'},pescoco:{capa:'bobby-item-capa',cachecol:'bobby-item-lenco'}};
+Object.keys(ARTE_ESPERADA).forEach(sl=>Object.keys(ARTE_ESPERADA[sl]).forEach(id=>{if(ativo(ARTE_ESPERADA[sl][id])&&PECAS[sl][id])PECAS[sl][id].arte=ARTE_ESPERADA[sl][id];}));
 const ABAS_LOJA=[['comp','Companheiro'],['chapeu','Chapéus'],['rosto','Rosto'],['pescoco','Pescoço']];
 
 /* O Bobby numa tela. exp: nome de BOBBY (oi, feliz, ops...). Devolve <img>, com o chapéu por cima se estiver equipado e a imagem for de frente.
