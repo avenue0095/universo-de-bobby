@@ -19,7 +19,7 @@ const novo = () => { const a = carregarApp(4); a.avaliar('ATIVOS=' + JSON.string
     const a = novo();
     a.avaliar("S.moedas=1000;S.comprado=[];comprar('chapeu','bone');comprar('rosto','oculos')");
     A.strictEqual(a.avaliar('S.look.rosto'), 'oculos'); A.strictEqual(a.avaliar('S.look.chapeu'), '');
-    A.strictEqual(a.avaliar('S.moedas'), 1000 - 120 - 150);
+    A.strictEqual(a.avaliar('S.moedas'), 1000 - a.avaliar('PRECOS.look.bone') - a.avaliar('PRECOS.look.oculos'));
     a.avaliar("equipar('rosto','oculos')");                 // de novo: tira
     A.strictEqual(a.avaliar('S.look.rosto'), '');
   });

@@ -422,9 +422,9 @@ function conferir(){
   if(ok){
     LIC.acertos++;LIC.combo++;regStat(LIC.l.id,'acertos');
     LIC.melhorCombo=Math.max(LIC.melhorCombo,LIC.combo);
-    let ganho=10,extra='';
-    if(LIC.combo>=3&&LIC.combo%3===0&&bonusDeComboAtivo()){
-      ganho+=5;extra=' · <b>'+LIC.combo+' seguidas!</b> +5 de bônus';
+    let ganho=ECON.ganhoAcerto,extra='';
+    if(LIC.combo>=ECON.sequenciaDe&&LIC.combo%ECON.sequenciaDe===0&&bonusDeComboAtivo()){
+      ganho+=ECON.bonusSequencia;extra=' · <b>'+LIC.combo+' seguidas!</b> +'+ECON.bonusSequencia+' de bônus';
       if(LIC.vidas<5){LIC.vidas++;extra+=' e +1 coração';somVida();pintarVidas();}
     }
     /* XP nunca diminui; moedas são o saldo que a loja gasta */
@@ -517,7 +517,7 @@ function pintarFim(){
   if(passou&&!LIC.fimPago){
     LIC.fimPago=true;
     /* bônus de fase perfeita (+20) e de revisão (+5): soma em XP e em moedas, e entra no placar */
-    const bonus=(LIC.erros===0?20:0)+(LIC.diaria?5:0);
+    const bonus=(LIC.erros===0?ECON.bonusFasePerfeita:0)+(LIC.diaria?ECON.bonusRevisao:0);
     S.xp+=bonus;S.moedas+=bonus;LIC.ganhoFase=(LIC.ganhoFase||0)+bonus;
     if(!LIC.rev){const antes=S.feitas[LIC.l.id]||0;if(est>antes)S.feitas[LIC.l.id]=est;}
     regFim();

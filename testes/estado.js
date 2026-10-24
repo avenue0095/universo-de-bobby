@@ -132,7 +132,7 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     a.avaliar('usarPerfil(0)');
     a.avaliar("S.moedas=500;S.xp=2480;comprar('chapeu','explorador')");
     A.strictEqual(a.avaliar('S.xp'), 2480);
-    A.strictEqual(a.avaliar('S.moedas'), 400);
+    A.strictEqual(a.avaliar('S.moedas'), 500 - a.avaliar('PRECOS.look.explorador'));
     A.ok(a.avaliar("S.comprado.indexOf('explorador')>=0"));
     a.avaliar("S.moedas=10;S.comprado=[];comprar('chapeu','explorador');comprar('chapeu','coroa')");   // sem saldo (ou item sem arte nova): nao compra, nao mexe
     A.strictEqual(a.avaliar('S.moedas'), 10); A.strictEqual(a.avaliar('S.xp'), 2480);

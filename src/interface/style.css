@@ -1568,3 +1568,9 @@ svg.placa{width:120px;height:120px}
 .linha-md .pilha svg.barra{width:284px;max-width:100%;height:auto}
 .linha-md .pilha svg.cubinho{width:28px;height:28px}
 svg.md{border:0;padding:0;background:none;border-radius:0}
+
+/* confirmação de compra: calma, sem urgência */
+.aviso.confirma{display:grid;gap:var(--esp-8);justify-items:center;text-align:center;border-style:solid}
+.aviso.confirma span{color:var(--cor-texto);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
+.confirma-bts{display:flex;gap:var(--esp-8);flex-wrap:wrap;justify-content:center}
+.item.bloqueado .item-img{opacity:.78}

@@ -24,12 +24,12 @@ const FRONTAIS={
    Só um look por vez. Dono de item antigo é dono do look que o substitui (DONOS). */
 const PECAS={
   chapeu:{
-    explorador:{n:'Chapéu de explorador',p:100,arte:'bobby-item-chapeu',modo:'sobrepor'},
-    bone:{n:'Boné',p:120,arte:'item-bone'},capacete:{n:'Capacete aberto',p:400,arte:'item-capacete'},coroa:{n:'Coroa de papel',p:600,arte:'item-coroa'},
+    explorador:{n:'Chapéu de explorador',p:PRECOS.look.explorador,arte:'bobby-item-chapeu',modo:'sobrepor'},
+    bone:{n:'Boné',p:PRECOS.look.bone,arte:'item-bone'},capacete:{n:'Capacete aberto',p:PRECOS.look.capacete,arte:'item-capacete'},coroa:{n:'Coroa de papel',p:PRECOS.look.coroa,arte:'item-coroa'},
     festa:{n:'Chapéu de festa',p:180},chef:{n:'Chapéu de chef',p:240},espacial:{n:'Capacete espacial',p:400},pirata:{n:'Chapéu de pirata',p:320}
   },
-  rosto:{oculos:{n:'Óculos de astronauta',p:150,arte:'item-oculos'},sol:{n:'Óculos de sol',p:220},heroi:{n:'Máscara de herói',p:280},tapaolho:{n:'Tapa-olho',p:200}},
-  pescoco:{lenco:{n:'Lenço',p:180,arte:'item-lenco'},capa:{n:'Capa azul',p:450,arte:'item-capa'},cachecol:{n:'Cachecol',p:180},gravata:{n:'Gravata-borboleta',p:140},medalha:{n:'Medalha de ouro',p:350}},
+  rosto:{oculos:{n:'Óculos de astronauta',p:PRECOS.look.oculos,arte:'item-oculos'},sol:{n:'Óculos de sol',p:220},heroi:{n:'Máscara de herói',p:280},tapaolho:{n:'Tapa-olho',p:200}},
+  pescoco:{lenco:{n:'Lenço',p:PRECOS.look.lenco,arte:'item-lenco'},capa:{n:'Capa azul',p:PRECOS.look.capa,arte:'item-capa'},cachecol:{n:'Cachecol',p:180},gravata:{n:'Gravata-borboleta',p:140},medalha:{n:'Medalha de ouro',p:350}},
   pelo:{mel:{n:'Pelo mel',p:100},cinza:{n:'Pelo cinza',p:150},panda:{n:'Pelo panda',p:260},polar:{n:'Pelo polar',p:300},rosa:{n:'Pelo rosa',p:220},choco:{n:'Chocolate',p:180}},
   pers:{nina:{n:'Nina, a coelhinha',p:180},pim:{n:'Pim, o gatinho',p:220},zeca:{n:'Zeca, o macaquinho',p:260},lulu:{n:'Lulu, a corujinha',p:320}}
 };
@@ -140,7 +140,27 @@ function equipar(slot,id){
   vestir(slot,(S.look||{})[slot]===id?'':id);
   salvar();somPasso();pintarTopo();telaLoja();
 }
+const companheiroComprado=id=>(S.comprado||[]).indexOf(id)>=0;
+/* companheiro novo custa moedas do jogo (o Bobby é grátis). Pede confirmação, sem pressa e sem culpa. */
+function pedirCompraCompanheiro(id){
+  const c=COMPANHEIROS.filter(x=>x.id===id)[0],preco=precoDoCompanheiro(id);
+  if(!c||companheiroComprado(id))return;
+  const a=$('#loja-aviso');if(!a)return;
+  if(S.moedas<preco){a.innerHTML='<div class="aviso">Faltam '+(preco-S.moedas)+' moedas para levar '+escapa(c.n)+'. Cada resposta certa vale '+ECON.ganhoAcerto+' moedas, sem pressa.</div>';return;}
+  a.innerHTML='<div class="aviso confirma" role="alertdialog" aria-label="Levar '+escapa(c.n)+'"><span>Quer levar '+escapa(c.n)+' por '+preco+' moedas?</span>'+
+    '<div class="confirma-bts"><button class="btn-acao" id="comp-sim">Sim, levar</button><button class="btn-sec" id="comp-nao">Agora não</button></div></div>';
+  $('#comp-sim').addEventListener('click',()=>comprarCompanheiro(id));
+  $('#comp-nao').addEventListener('click',()=>{a.innerHTML='';});
+}
+function comprarCompanheiro(id){
+  const preco=precoDoCompanheiro(id);
+  if(!preco||companheiroComprado(id)||S.moedas<preco)return;
+  S.moedas-=preco;S.comprado=(S.comprado||[]).concat([id]);
+  S.look=Object.assign({},S.look);S.look.companheiro=id;
+  salvar();somMoeda();somFim();pintarTopo();telaLoja();
+}
 function escolherCompanheiro(id){
+  if(id&&!companheiroComprado(id))return;
   S.look=Object.assign({},S.look);S.look.companheiro=id;
   salvar();somPasso();pintarTopo();telaLoja();
 }
@@ -194,10 +214,11 @@ function telaLoja(){
   h+='<div id="loja-aviso"></div><div class="vitrine">';
   if(abaLoja==='comp'){
     COMPANHEIROS.forEach(c=>{
-      const eq=(L.companheiro||'')===c.id;
-      h+='<div class="item'+(eq?' equipado':'')+'">'+(eq?'<span class="selo">'+IC.certo+' com você</span>':'')+
+      const eq=(L.companheiro||'')===c.id,tem=companheiroComprado(c.id),preco=precoDoCompanheiro(c.id);
+      h+='<div class="item'+(eq?' equipado':'')+(tem?'':' bloqueado')+'">'+(eq?'<span class="selo">'+IC.certo+' com você</span>':'')+
         '<div class="item-img">'+imgArte(c.id+'-p01',{})+'</div><b>'+c.n+'</b><span class="tipo">'+c.quem+'</span>'+
-        '<button class="btn-sec" data-comp="'+c.id+'"'+(eq?' aria-pressed="true"':'')+'>'+(eq?'Tirar':'Chamar')+'</button></div>';
+        (tem?'<button class="btn-sec" data-comp="'+c.id+'"'+(eq?' aria-pressed="true"':'')+'>'+(eq?'Tirar':'Chamar')+'</button>'
+            :'<button class="'+(S.moedas<preco?'btn-sec':'btn-acao')+'" data-buycomp="'+c.id+'" aria-label="'+escapa(c.n)+', '+preco+' moedas">'+IC.moeda+' '+preco+'</button>')+'</div>';
     });
   }else{
     const nenhum=!lookEmUso(L);
@@ -228,6 +249,7 @@ function telaLoja(){
     const lista=(palcoModo==='rosto'?EXPRESSOES:POSES).map(x=>x[0]);
     palcoId=lista[(lista.indexOf(palcoId)+1)%lista.length];trocarPalco();
   });
+  P.querySelectorAll('[data-buycomp]').forEach(b=>b.addEventListener('click',()=>pedirCompraCompanheiro(b.dataset.buycomp)));
   P.querySelectorAll('[data-comp]').forEach(b=>b.addEventListener('click',()=>escolherCompanheiro(S.look&&S.look.companheiro===b.dataset.comp?'':b.dataset.comp)));
   P.querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.buy.split('|');comprar(q[0],q[1]);}));
   P.querySelectorAll('[data-eq]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.eq.split('|');equipar(q[0],q[1]);}));

@@ -51,3 +51,24 @@ Nada foi publicado, nenhum áudio ou imagem foi gerado, nenhum crédito foi gast
 - **Tela Voz e som**: só liga/desliga de sons e narração, velocidade e pacotes. `vozPt`/`vozEn` foram para `legado`; velocidade antiga é recortada para 0,8 a 1,2.
 - **Cobertura**: ver o relatório de `node testes/cobertura-audio.js`. Ficam sem clipe de propósito: dicas e "Ajuda extra", avisos de troca de dezena, bilhetes do Bobby, tela "Por hoje chega" e textos novos da Fase 2 (16 falas no teste, informativo). Entram no próximo lote do agente de áudio.
 - **Pendente**: ouvir as vozes (o Filipe ainda não ouviu), testar `.m4a` e Web Audio em iPhone real, testar `.opus` antes de trocar de formato, parecer de advogado sobre a licença do Kokoro.
+
+## Decisões de 24/10/2026 (feedback do Filipe, nota 5)
+
+**Pergunta irmã no lugar da repetição.** Erro não repete a mesma pergunta (isso mede memória da resposta). Volta uma pergunta do mesmo gerador (`q.__mk`) com outros números ou palavras, 3 posições depois (duas perguntas no meio), marcada `reforco`, `__rep` e `__irma`, nunca igual a uma que a criança já viu na rodada. Gerador de uma pergunta só (Português): usa outro gerador da mesma fase, depois os das fases já vistas, e só sem nada disso repete a original. O item original errado continua indo para o caderno de erros (revisão espaçada, caixas 1, 3, 7, 14, 30). Cada erro gera no máximo uma reaparição. Item do caderno e aquecimento não ganham irmã. `testes/irmas.js` cobre as 150 fases.
+
+**Economia e companheiros pagos com moedas do jogo.** Moedas só se ganham jogando; nunca dinheiro real nem compra em loja (ECA Digital). O Bobby é grátis. Os 6 companheiros ficam bloqueados com preço visível, pedem confirmação ("Quer levar a Rufa por 900 moedas?", botão "Agora não", sem culpa nem urgência). Tabela única em `src/interface/economia.js` (`PRECOS`, `ECON`). Ganho medido por `testes/economia.js` (criança média, 80% de acerto, 20 perguntas por dia): cerca de 186 moedas por dia.
+
+| Companheiro | Preço | Prazo do zero (criança média) |
+|---|---|---|
+| Teo | 500 | 3 dias |
+| Rufa | 900 | 5 dias |
+| Otto | 1000 | 6 dias |
+| Capi | 1500 | 9 dias |
+| Brisa | 2000 | 11 dias |
+| Fagulha | 2500 | 14 dias |
+
+Looks (menores): chapéu de explorador 150, boné 200, óculos 250, lenço 300, capacete 450, capa 600, coroa 900. O primeiro presente do baú continua grátis. Quem já tinha companheiro escolhido (inclusive o personagem antigo `nina`, `pim`, `zeca`, `lulu`, que migra para Rufa, Otto, Capi e Brisa) mantém e ele entra na lista de comprados. Interpretação a confirmar com o Filipe: os prazos de 3, 5 e 10 a 14 dias contam juntando do zero para cada um, não acumulados. Reversível: é só mudar `PRECOS`.
+
+**Pendente de advogado.** O botão "continuar por 50 moedas" (corações): ver decisão D1 do coordenador (remover).
+
+**O personagem escolhido aparece em todo o jogo** (mapa, aula, pergunta, reações, baú, bilhete, fim de fase, topo e barra). Companheiro toma o lugar do Bobby; Bobby usa o look de frente onde a pose é de frente, e boné, coroa e óculos são sobrepostos (recortados do próprio look por `build/ativos.py`, ancorados uma vez em `OVERLAYS`) nas outras poses de frente. Capa, capacete e lenço só aparecem na pose de frente. Caminhada do Bobby no mapa é a base (pose de três quartos): o item não aparece andando. Pendente de arte: poses Comemora, Caminha e Pensa de cada look.

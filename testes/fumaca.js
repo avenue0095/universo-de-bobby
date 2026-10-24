@@ -287,7 +287,15 @@ async function main() {
         const roupa = await js("({chapeu:!!document.querySelector('.palco .item-chapeu'),look:S.look.chapeu,moedas:S.moedas})");
         if (!roupa.chapeu || roupa.look !== 'explorador') problemas.push(rot + ' personagem: chapeu nao apareceu ' + JSON.stringify(roupa));
         await js("document.querySelector('[data-aba=\"comp\"]').click();0"); await dorme(200);
-        await js("document.querySelector('[data-comp=\"rufa\"]').click();0"); await dorme(300);
+        // companheiro novo custa moedas do jogo: bloqueado com preco visivel, confirma a compra, depois escolhe
+        const preco = await js("(()=>{const b=document.querySelector('[data-buycomp=\"rufa\"]');return b?b.innerText.trim():null})()");
+        if (!preco || !/\d{3,4}/.test(preco)) problemas.push(rot + ' companheiros: a Rufa deveria estar bloqueada com o preco em moedas visivel (' + preco + ')');
+        await js("S.moedas=3000;telaLoja();document.querySelector('[data-buycomp=\"rufa\"]').click();0"); await dorme(250);
+        const conf = await js("(document.querySelector('#loja-aviso')||{}).innerText||''");
+        if (!/Quer levar Rufa por \d+ moedas\?/.test(conf)) problemas.push(rot + ' companheiros: faltou a confirmacao da compra: ' + conf);
+        await js("document.querySelector('#comp-sim').click();0"); await dorme(300);
+        if (!(await js("S.look.companheiro==='rufa'&&S.comprado.indexOf('rufa')>=0"))) problemas.push(rot + ' companheiros: comprar a Rufa nao a escolheu');
+        await js("document.querySelector('[data-aba=\"comp\"]').click();0"); await dorme(150);
         await js("document.querySelector('#palco-bobby').click();0"); await dorme(300);
         await shot('visual-4-meu-personagem'); await semRolagem('personagem');
         await js("document.querySelector('[data-modo=\"corpo\"]').click();0"); await dorme(500);
@@ -408,7 +416,7 @@ async function main() {
         await verifica('coroa', "S.look={chapeu:'coroa'};S.comprado=['coroa']", /(item|ov)-coroa/);
         await verifica('explorador', "S.look={chapeu:'explorador'};S.comprado=['explorador']", /bobby-item-chapeu/);
         // trocar em Meu personagem muda tudo na hora (o topo e a barra mudam sem recarregar)
-        await js("S.look={};fecharTelasDaBarra();document.querySelector('#bb-pers').click();0"); await dorme(400);
+        await js("S.look={};S.comprado=['otto'];fecharTelasDaBarra();document.querySelector('#bb-pers').click();0"); await dorme(400);
         await js("document.querySelector('[data-aba=\"comp\"]').click();0"); await dorme(250);
         await js("document.querySelector('[data-comp=\"otto\"]').click();0"); await dorme(300);
         const trocou = await js("document.querySelector('#logo').innerHTML.indexOf('otto-p01')>=0&&document.querySelector('#retrato-bb').innerHTML.indexOf('otto-p01')>=0");
