@@ -21,16 +21,26 @@ function acertou(dado,gab){
 }
 /* fases concluídas DA MATÉRIA ATUAL (o anel do mapa somava as três galáxias e as revisões: dava 1/50 com 3 matérias jogadas) */
 const feitas=()=>fases();
+/* Decisão do Filipe (24/10/2026, rodada 2): a etapa N só abre depois da REVISÃO da etapa N-1. Reversível: TRANCAR_ETAPAS=false volta a abrir a 1ª fase de toda etapa. */
+const TRANCAR_ETAPAS=true;
+const revisaoFeita=ui=>!!S.feitas['rev'+MATERIA+UNITS[ui].n];
 function liberada(ui,li){
-  if(li===0)return true;
+  if(li===0)return ui===0||!TRANCAR_ETAPAS||revisaoFeita(ui-1);
   return !!S.feitas[UNITS[ui].lessons[li-1].id];
 }
 function mundoCompleto(u){return u.lessons.every(l=>S.feitas[l.id]);}
+/* [etapa, fase] da próxima fase; [etapa, 5] quando as 5 fases estão feitas e falta a revisão que destranca a etapa seguinte */
 function proxima(){
-  for(let i=0;i<UNITS.length;i++)for(let j=0;j<UNITS[i].lessons.length;j++)
-    if(!S.feitas[UNITS[i].lessons[j].id])return [i,j];
+  for(let i=0;i<UNITS.length;i++){
+    for(let j=0;j<UNITS[i].lessons.length;j++)if(!S.feitas[UNITS[i].lessons[j].id]){
+      if(j===0&&!liberada(i,0))return [i-1,5];
+      return [i,j];
+    }
+    if(TRANCAR_ETAPAS&&!revisaoFeita(i)&&i<UNITS.length-1)return [i,5];
+  }
   return null;
 }
+const tituloDaProxima=p=>p?(p[1]===5?'Revisão da etapa '+UNITS[p[0]].n:UNITS[p[0]].lessons[p[1]].title):'';
 function passosDe(l){
   if(typeof AULAS!=='undefined'&&AULAS[l.id])return AULAS[l.id];
   const t=l.teach;

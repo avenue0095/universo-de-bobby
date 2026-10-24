@@ -585,6 +585,13 @@ function pintarFim(){
   }
   completouMundo=!!LIC.completouMundo;
   const nErr=(S.errados[MATERIA+LIC.u.n]||[]).length;
+  /* fase vencida: o fim acontece NO MAPA, ao lado do objeto que acendeu (mesa 03 mudança 9); revisão e "vamos descansar" ficam aqui */
+  if(passou&&!LIC.rev&&typeof fimNoMapa==='function'&&!LIC.fimNoMapa){
+    LIC.fimNoMapa=true;
+    fimNoMapa({ui:LIC.ui,li:LIC.li,est:est,perfeita:LIC.erros===0,acertos:LIC.acertos,base:LIC.base,ganho:LIC.ganhoFase||0,completouMundo:completouMundo,bloco:bloco,
+      fala:falaDe(LIC.erros===0?'fasePerfeita':'faseCompleta'),extraHTML:(typeof blocoFimHTML==='function'?blocoFimHTML(bloco):'')});
+    pintarTopo();return;
+  }
   $('#palco').innerHTML='<div class="fim surge">'+
     MASC(passou?'comemora':'incentiva')+
     '<div class="estrelao acende">'+estrelasSVG(est)+'</div>'+

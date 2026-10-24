@@ -1506,8 +1506,8 @@ body[data-materia="ing"]{--atmosfera:url("./assets/planetas/planeta-ing.webp")}
 .premio-ic.adesivo{box-sizing:border-box;padding:var(--esp-4);border-radius:var(--raio-pilula);background:var(--cor-papel);border:3px solid var(--cor-papel);box-shadow:0 0 0 1px var(--cor-linha-forte),var(--sombra-1);transform:rotate(-8deg)}
 /* cena: enquanto a imagem não chega, o céu e o chão da matéria já aparecem (nunca um cartão vazio), e a arte entra com um fade */
 .cena{background:linear-gradient(to bottom,var(--materia-ceu-topo),var(--materia-ceu-horizonte) 62%,var(--materia-chao) 62%)}
-.cena>img.arte{animation:so-opacidade var(--mov-padrao) var(--curva-entra) both}
-@media (prefers-reduced-motion:reduce){.cena>img.arte{animation:none}}
+.cena>img.arte:not(.peca-luz){animation:so-opacidade var(--mov-padrao) var(--curva-entra) both}
+@media (prefers-reduced-motion:reduce){.cena>img.arte:not(.peca-luz){animation:none}}
 /* nome do jogador numa linha só, com reticências; o lápis nunca encolhe */
 .planeta .oi-nome{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .planeta .lapis{flex:none}
@@ -1734,3 +1734,55 @@ html.hitstop *{animation-play-state:paused!important;transition:none!important}
 .obj.nova{outline:3px solid var(--cor-ouro);outline-offset:2px;border-radius:var(--raio-16)}
 .obj.tirada{opacity:.35}
 .obj.tirada svg{filter:grayscale(1)}
+
+/* ---------- o mundo reage (1C): nós como objetos, personagem que anda, fim de fase no mapa ---------- */
+.trilha.objetos .passo-trilha{display:none}
+.no.obj-no{width:auto;transform:translate(-50%,-100%);align-items:center}
+.no.obj-no .bt{width:max(64px,calc(var(--w) * 1cqw));height:max(64px,calc(var(--h) * 1cqh));border-radius:var(--raio-16);background:none;border:0;box-shadow:none;color:transparent;transform:none;margin:0}
+.no.obj-no .bt::after{inset:0}
+.no.obj-no.disp .bt{box-shadow:0 0 0 2px color-mix(in srgb,var(--materia-luz) 70%,transparent),0 0 24px 6px color-mix(in srgb,var(--materia-luz) 45%,transparent);animation:brilho-obj 2.4s var(--curva-move) infinite}
+.no.obj-no.trava .bt{cursor:not-allowed}
+.no.obj-no.feito .bt{box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--cor-ouro) 60%,transparent)}
+.no.obj-no .selo-feito{position:absolute;right:-4px;top:-4px;width:28px;height:28px;border-radius:var(--raio-pilula);background:var(--cor-ouro);color:var(--cor-ouro-sobre);display:grid;place-items:center;box-shadow:var(--sombra-1)}
+.no.obj-no .selo-feito svg{width:16px;height:16px}
+.no.obj-no .estrelas{position:absolute;left:50%;top:-14px;transform:translateX(-50%)}
+.no.obj-no .rot{position:absolute;left:50%;top:calc(100% + var(--esp-4));transform:translateX(-50%);display:none;max-width:160px;white-space:normal;-webkit-line-clamp:2;line-clamp:2;overflow:visible;text-overflow:clip;padding:var(--esp-4) var(--esp-8);border-radius:var(--raio-16);box-shadow:var(--sombra-2)}
+.no.obj-no.atual .rot,.no.obj-no.mostra .rot{display:block}
+.no.obj-no.trava .rot{display:none}
+.no.obj-no.atual .bt::before{display:none}
+@keyframes brilho-obj{0%,100%{box-shadow:0 0 0 2px color-mix(in srgb,var(--materia-luz) 70%,transparent),0 0 18px 4px color-mix(in srgb,var(--materia-luz) 35%,transparent)}50%{box-shadow:0 0 0 2px color-mix(in srgb,var(--materia-luz) 90%,transparent),0 0 30px 10px color-mix(in srgb,var(--materia-luz) 55%,transparent)}}
+/* a peça do cenário completo aparece pelo recorte (a lona sai em 480 ms) */
+.cena.por-peca{--rev:70%}
+.peca-luz{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block;opacity:0;transition:opacity 480ms var(--curva-entra),filter 480ms var(--curva-entra);filter:brightness(1.6)}
+.peca-luz.on{opacity:1;filter:brightness(1)}
+/* o personagem anda (600 a 900 ms) e chega com a pose Oi; respira trocando de pose com fusão de 300 ms */
+.voce{transition:left var(--anda-ms,var(--mov-lento)) var(--curva-move),top var(--anda-ms,var(--mov-lento)) var(--curva-move)}
+.voce.pula{transition:none;animation:so-opacidade 320ms var(--curva-entra) both}
+.voce .voce-pe2{display:block;opacity:0;transition:opacity 300ms var(--curva-entra)}
+.voce.pose2:not(.anda) .voce-pe2{opacity:1}
+.voce.pose2:not(.anda) .voce-pe{opacity:0;transition:opacity 300ms var(--curva-entra)}
+.voce .voce-pe{transition:opacity 300ms var(--curva-entra)}
+.voce.anda .voce-pe2{display:none}
+/* fim de fase no mapa: cartão na base da cena, sem modal */
+.fim-cena{position:absolute;left:var(--esp-8);right:var(--esp-8);bottom:var(--esp-8);background:var(--cor-superficie);border:2px solid var(--cor-linha-forte);border-radius:var(--raio-16);box-shadow:var(--sombra-3);padding:var(--esp-8) var(--esp-16);display:grid;gap:var(--esp-4);justify-items:center;text-align:center;pointer-events:auto;z-index:3;animation:painel-sobe var(--mov-padrao) var(--curva-entra) both}
+.fim-cena .fim-atores{display:flex;align-items:flex-end;gap:var(--esp-8);margin-top:calc(-1 * var(--esp-48))}
+.fim-cena .fim-atores .mascote{width:auto;height:64px;margin:0}
+.fim-cena .fim-guia{width:auto;height:56px}
+.fim-cena .fim-estrelas{display:flex;gap:var(--esp-4)}
+.fim-cena .fim-estrelas svg{width:28px;height:28px;color:var(--cor-superficie-2);transition:color 200ms,transform 200ms var(--curva-sai)}
+.fim-cena .fim-estrelas svg.on{color:var(--cor-ouro-borda);transform:scale(1.08)}
+.fim-cena .fala-p{margin:0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
+.fim-cena .linha-fim{margin:0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
+.fim-cena .fim-bts{display:flex;gap:var(--esp-8);align-items:center;flex-wrap:wrap;justify-content:center;width:100%}
+.fim-cena .fim-bts .btn-acao{min-height:var(--toque-min);padding:var(--esp-8) var(--esp-24)}
+.fim-cena .fim-bts .fantasma{min-height:var(--toque-min);padding:var(--esp-4) var(--esp-8);font-size:var(--t-legenda)}
+.fim-cena .fim-bau{display:flex;gap:var(--esp-8);align-items:center;flex-wrap:wrap;justify-content:center}
+.fim-cena .fim-of{margin:0;font-size:var(--t-legenda)}
+.cena{container-type:size}
+.no.revela .bt{animation:brilho-obj 1.2s var(--curva-move) 2}
+@media (prefers-reduced-motion:reduce){.no.obj-no.disp .bt,.no.revela .bt{animation:none}.peca-luz{transition:none}.voce .voce-pe,.voce .voce-pe2{transition:none}}
+.trilha.objetos{container-type:size}
+/* rótulo do objeto nunca sai da cena: nas pontas ele alinha pela borda do objeto */
+.no.obj-no.lado-d .rot{left:auto;right:0;transform:none}
+.no.obj-no.lado-e .rot{left:0;transform:none}
+.no.obj-no .rot{max-width:140px}

@@ -311,7 +311,7 @@ function textoDoResumo(){
   const p=proxima();
   return 'Resumo da semana de '+(perfilAtual().nome||'seu jogador')+' no Universo de Bobby: '+r.dias+' de 7 dias com atividade, '+r.min+
     ' minutos, '+r.perguntas+' perguntas'+(r.pct!==null?', '+r.pct+'% de acerto':'')+'. '+r.revisoes+' revisões feitas.'+
-    (p?' Próxima fase: '+UNITS[p[0]].lessons[p[1]].title+'.':'');
+    (p?' Próxima fase: '+tituloDaProxima(p)+'.':'');
 }
 function ligarSemana(){
   const b=$('#copia-resumo');if(!b)return;

@@ -34,6 +34,14 @@ function noAtualDaEtapa(u){
 }
 function cenaHTML(u,k,agora){
   const cena=cenaDaEtapa(MATERIA,u.n),pl=PLANETAS[MATERIA];
+  const hs=hotspotsDe(MATERIA,u.n);
+  if(cena&&hs){
+    /* por peça: a lona de cada objeto sai quando a fase dele é feita (recorte retangular do cenário completo); a casa acende com a revisão */
+    let h='<div class="cena por-peca" data-k="'+k+'" style="--rev:70%">'+imgArte(cena.apagado,{cls:'cena-base',eager:!!agora});
+    hs.forEach((r,li)=>{const feita=li<5?!!S.feitas[u.lessons[li].id]:!!S.feitas['rev'+MATERIA+u.n];
+      h+=imgArte(cena.completo,{cls:'peca-luz'+(feita&&!(MAPA.fim&&MAPA.fim.ui===UNITS.indexOf(u)&&MAPA.fim.li===li)?' on':''),style:pecaStyle(r),eager:!!agora}).replace('<img','<img data-li="'+li+'"');});
+    return h;
+  }
   if(cena){
     const ant=REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n];
     return '<div class="cena" data-k="'+k+'" style="--rev:'+revPct(ant)+'">'+
@@ -52,13 +60,13 @@ function vocePecas(){
   const pa=persAtivo();
   if(pa.tipo==='comp'){
     const c=pa.id;
-    return imgArte(c+'-p01',{cls:'voce-pe',eager:true})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a1',eager:true})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a2',eager:true});
+    return imgArte(c+'-p01',{cls:'voce-pe',eager:true})+imgArte(ativo(c+'-p04')?c+'-p04':c+'-p01',{cls:'voce-pe2'})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a1',eager:true})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a2',eager:true});
   }
   const uso=lookEmUso(S.look||{});
   let parado=imgArte('bobby-p01',{cls:'voce-pe',eager:true});
   if(uso&&uso.peca.modo!=='sobrepor')parado=imgArte(uso.peca.arte,{cls:'voce-pe',eager:true});
   else if(uso){const an=FRONTAIS['bobby-p01'],a1=ativo('bobby-p01');parado+=imgArte(uso.peca.arte,{cls:'item-chapeu voce-pe',eager:true,style:'left:'+(an[0]*100).toFixed(1)+'%;top:'+(.34*an[1]*a1[1]/a1[2]*100).toFixed(1)+'%;width:'+(an[1]*.66*100).toFixed(1)+'%'});}
-  return parado+imgArte('bobby-p05a',{cls:'voce-a1',eager:true})+imgArte('bobby-p05b',{cls:'voce-a2',eager:true});
+  return parado+imgArte('bobby-p09',{cls:'voce-pe2'})+imgArte('bobby-p05a',{cls:'voce-a1',eager:true})+imgArte('bobby-p05b',{cls:'voce-a2',eager:true});
 }
 function etapaHTML(u,ui,prox){
   const feitasN=u.lessons.filter(l=>S.feitas[l.id]).length;
@@ -73,32 +81,40 @@ function etapaHTML(u,ui,prox){
      '<h3 id="etapa-t-'+(ui+1)+'">'+tituloEmDuasLinhas(u.title)+'</h3><p>'+escapa(u.sub)+'</p></div>'+
      '<span class="etapa-prog'+(completo?' ok':'')+'">'+(completo?IC.certo+' Completa':feitasN+' de '+u.lessons.length+' fases')+'</span></header>';
   h+=cenaHTML(u,feitasN,ehAtual);
-  h+='<div class="trilha">'+trilhaPontos();
+  const hs=hotspotsDe(MATERIA,u.n),fimAqui=MAPA.fim&&MAPA.fim.ui===ui;
+  h+='<div class="trilha'+(hs?' objetos':'')+'">'+(hs?'':trilhaPontos());
+  /* nó = objeto do cenário (recorte retangular, área de toque de pelo menos 64 x 64) ou, sem recorte, um marco genérico com brilho */
+  const noHTML=(li,cls,atrs,rotulo,aria,miolo,est)=>{
+    const p=posNo(u,li),r=hs&&hs[li];
+    const estilo=r?'left:'+p[0].toFixed(2)+'%;top:'+p[1].toFixed(2)+'%;--w:'+(r[2]-r[0]).toFixed(2)+';--h:'+(r[3]-r[1]).toFixed(2)
+                  :'left:'+p[0]+'%;top:'+p[1]+'%;--nx:'+Math.min(p[0],100-p[0]);
+    return '<div class="'+cls.join(' ')+(r?' obj-no':'')+'" data-li="'+li+'" style="'+estilo+'">'+
+      '<button class="bt" '+atrs+' aria-label="'+aria+'">'+miolo+'</button>'+
+      '<span class="estrelas" aria-hidden="true">'+(est?estrelasSVG(est):'')+'</span>'+
+      '<span class="rot">'+rotulo+'</span></div>';
+  };
   u.lessons.forEach((l,li)=>{
     const ok=S.feitas[l.id],abr=liberada(ui,li),atual=ehAtual&&atualNo===li;
-    const cls=['no'];if(NOS[li][0]<=16)cls.push('lado-e');else if(NOS[li][0]>=84)cls.push('lado-d');if(!abr)cls.push('trava');if(ok)cls.push('feito');if(atual)cls.push('atual');
-    /* só o PRÓXIMO nó da etapa atual mostra o cadeado grande; os outros trancados viram pontos (menos cadeado cobrindo o cenário) */
+    const p=posNo(u,li);
+    const cls=['no'];if(p[0]<=16)cls.push('lado-e');else if(p[0]>=84)cls.push('lado-d');if(!abr)cls.push('trava');if(ok)cls.push('feito');if(atual)cls.push('atual');
+    if(abr&&!ok)cls.push('disp');
     const proxTrava=ehAtual&&!abr&&li===atualNo+1;
     if(!abr)cls.push(proxTrava?'trava-prox':'trava-longe');
     const est=ok?estrelasDaFase(l.id):0;
-    h+='<div class="'+cls.join(' ')+'" style="left:'+NOS[li][0]+'%;top:'+NOS[li][1]+'%;--nx:'+Math.min(NOS[li][0],100-NOS[li][0])+'">'+
-       '<button class="bt" data-u="'+ui+'" data-l="'+li+'"'+(abr?'':' aria-disabled="true"')+
-       ' aria-label="Fase '+(li+1)+': '+escapa(l.title)+(ok?'. Concluída com '+est+(est===1?' estrela':' estrelas'):(atual?'. Sua próxima fase':''))+'">'+
-       (abr?'<b>'+(li+1)+'</b>':(proxTrava?IC.cadeado:''))+'</button>'+
-       '<span class="estrelas" aria-hidden="true">'+(ok?estrelasSVG(est):'')+'</span>'+
-       '<span class="rot">'+escapa(nomeCurto(l.title))+'</span></div>';
+    h+=noHTML(li,cls,'data-u="'+ui+'" data-l="'+li+'"'+(abr?'':' aria-disabled="true"'),escapa(nomeCurto(l.title)),
+      'Fase '+(li+1)+': '+escapa(l.title)+(ok?'. Concluída com '+est+(est===1?' estrela':' estrelas'):(atual?'. Sua próxima fase':(abr?'':'. Ainda fechada'))),
+      hs?(ok?'<span class="selo-feito">'+IC.estrela+'</span>':''):(abr?'<b>'+(li+1)+'</b>':(proxTrava?IC.cadeado:'')),est);
   });
-  const cr=['no','revisao-no'];if(NOS[5][0]<=16)cr.push('lado-e');if(!completo)cr.push('trava','trava-longe');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
-  h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%;--nx:'+Math.min(NOS[5][0],100-NOS[5][0])+'">'+
-     '<button class="bt" data-rev="'+ui+'"'+(completo?'':' aria-disabled="true"')+
-     ' aria-label="Revisão da etapa '+u.n+(completo?'':'. Termine as 5 fases para abrir')+'">'+(completo?IC.medalha:'')+'</button>'+
-     '<span class="estrelas" aria-hidden="true">'+(estRev?estrelasSVG(estRev):'')+'</span>'+
-     '<span class="rot">Revisão'+(completo&&nErr?' · '+nErr+' para refazer':'')+'</span></div>';
-  if(ehAtual){
-    const ant=NO_ANTES[chave]==null?atualNo:NO_ANTES[chave];
-    const p=NOS[ant],lado=NOS[atualNo][0]<=16?'d':'e';
-    h+='<div class="voce '+lado+'" data-no="'+atualNo+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-hidden="true">'+vocePecas()+'</div>';
+  const cr=['no','revisao-no'];const p5=posNo(u,5);if(p5[0]<=16)cr.push('lado-e');if(!completo)cr.push('trava','trava-longe');if(estRev)cr.push('feito');if(completo&&!estRev)cr.push('disp');if(ehAtual&&atualNo===5)cr.push('atual');
+  h+=noHTML(5,cr,'data-rev="'+ui+'"'+(completo?'':' aria-disabled="true"'),'Revisão'+(completo&&nErr?' · '+nErr+' para refazer':''),
+    'Revisão da etapa '+u.n+(completo?'':'. Termine as 5 fases para abrir'),hs?(estRev?'<span class="selo-feito">'+IC.medalha+'</span>':''):(completo?IC.medalha:''),estRev);
+  if(ehAtual||fimAqui){
+    const noVoce=fimAqui?MAPA.fim.li:atualNo;
+    const ant=fimAqui?noVoce:(NO_ANTES[chave]==null?noVoce:NO_ANTES[chave]);
+    const p=posNo(u,ant),lado=posNo(u,noVoce)[0]<=16?'d':'e';
+    h+='<div class="voce '+lado+'" data-no="'+noVoce+'" style="left:'+p[0].toFixed(2)+'%;top:'+p[1].toFixed(2)+'%" aria-hidden="true">'+vocePecas()+'</div>';
   }
+  if(fimAqui)h+=fimCenaHTML(MAPA.fim);
   h+='</div></div></section>';
   return h;
 }
@@ -115,16 +131,12 @@ function animarMapa(prox){
     }else el.style.setProperty('--rev',revPct(k));
   });
   const v=document.querySelectorAll('.voce')[0];
-  if(v&&prox&&isFinite(+v.dataset.no)){
+  if(v&&prox&&isFinite(+v.dataset.no)&&!MAPA.fim){
     const chave=MATERIA+UNITS[prox[0]].n,no=+v.dataset.no,antes=NO_ANTES[chave];
-    NO_ANTES[chave]=no;
-    if(antes!=null&&antes!==no){
-      const alvo=NOS[no];
-      const vai=()=>{if(typeof sfx==='function')sfx('passo',{mat:'madeira',pt:'grama',en:'areia'}[MATERIA]||'grama');v.classList.add('anda');v.style.left=alvo[0]+'%';v.style.top=alvo[1]+'%';
-        if(reduz)v.classList.remove('anda');else setTimeout(()=>v.classList.remove('anda'),520);};
-      if(reduz)vai();else requestAnimationFrame(()=>requestAnimationFrame(vai));
-    }
+    if(antes!=null&&antes!==no){v.dataset.no=antes;andarAte(prox[0],no);}
+    else NO_ANTES[chave]=no;
   }
+  idleMapa();
 }
 
 /* aviso curto, no mesmo lugar do aviso de voz (acima da barra), que some sozinho */
@@ -166,9 +178,9 @@ function renderTrilha(){
   const nome=escapa(S.nome?S.nome:'explorador');
   const pl=PLANETAS[MATERIA];
   const frase=feitas()===0?'Bem-vindo ao meu universo! Cada planeta é uma matéria e cada etapa tem 5 fases. Escolha por onde começar.'
-    :(p?'Sua próxima fase é “'+escapa(UNITS[p[0]].lessons[p[1]].title)+'”. Bora?'
+    :(p?'Sua próxima fase é “'+escapa(tituloDaProxima(p))+'”. Bora?'
        :'Você terminou este planeta inteiro! Pode refazer as fases ou visitar outro planeta lá em cima.');
-  const curta=feitas()===0?'Escolha por onde começar.':(p?'Próxima fase: “'+escapa(nomeCurto(UNITS[p[0]].lessons[p[1]].title))+'”.':'Você terminou este planeta inteiro!');
+  const curta=feitas()===0?'Escolha por onde começar.':(p?'Próxima fase: “'+escapa(nomeCurto(tituloDaProxima(p)))+'”.':'Você terminou este planeta inteiro!');
   let h='<section class="planeta" aria-label="Planeta '+pl.n+'">'+
     '<div class="planeta-img">'+imgArte(pl.img,{eager:true})+'</div>'+
     '<div class="planeta-txt"><span class="planeta-nome">Planeta '+pl.n+' · '+MATERIAS[MATERIA].n+'</span>'+
@@ -191,9 +203,13 @@ function renderTrilha(){
   /* nó trancado: continua no caminho do teclado (aria-disabled, não disabled) e explica o que falta em vez de ficar mudo */
   $('#tela').querySelectorAll('.bt').forEach(b=>
     b.addEventListener('click',()=>{
-      if(b.getAttribute('aria-disabled')==='true'){avisoNo(b.dataset.rev!==undefined?'Termine as 5 fases da etapa para abrir a revisão.':'Termine a fase anterior para abrir esta.');return;}
-      if(b.dataset.rev!==undefined)abrirRevisaoMundo(+b.dataset.rev);
-      else abrirLicao(+b.dataset.u,+b.dataset.l);
+      const noEl=b.closest('.no');if(noEl)noEl.classList.add('mostra');
+      if(b.getAttribute('aria-disabled')==='true'){avisoNo(b.dataset.rev!==undefined?'Termine as 5 fases da etapa para abrir a revisão.':(TRANCAR_ETAPAS&&b.dataset.l==='0'?'Termine a revisão da etapa anterior para abrir esta.':'Termine a fase anterior para abrir esta.'));return;}
+      const abre=()=>{if(b.dataset.rev!==undefined)abrirRevisaoMundo(+b.dataset.rev);else abrirLicao(+b.dataset.u,+b.dataset.l);};
+      /* o personagem anda até o objeto antes de abrir (quando está nesta etapa); a fase só abre quando ele chega */
+      const ui=+(b.dataset.rev!==undefined?b.dataset.rev:b.dataset.u),li=b.dataset.rev!==undefined?5:+b.dataset.l;
+      const sec=$('#etapa-'+(ui+1)),v=sec&&sec.querySelector('.voce');
+      if(v&&+v.dataset.no!==li)andarAte(ui,li,abre);else abre();
     }));
   pintarPontoGaleria();
   animarMapa(p);
@@ -206,5 +222,6 @@ function renderTrilha(){
       if(sit){avisoNo(falaDe(sit));sfx('motivo','bobby');}
     },1400);
   }
+  if(MAPA.fim){ligarFimCena(MAPA.fim);}
   if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelector('.no.atual')||document.querySelector('.voce');if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}
 }

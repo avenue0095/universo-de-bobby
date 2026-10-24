@@ -1,11 +1,13 @@
 /* ---------- confete ---------- */
-function confete(){
+function confete(origem){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const cv=document.createElement('canvas');cv.className='confete';document.body.appendChild(cv);
   const cx=cv.getContext('2d'),W=cv.width=innerWidth,H=cv.height=innerHeight;
   const css=typeof getComputedStyle==='function'?getComputedStyle(document.body):null;
   const cores=['--cor-acao','--mat-base','--ing-base','--cor-ainda','--por-base','--cor-ouro'].map(n=>(css&&css.getPropertyValue(n).trim())||'orange');
-  const ps=Array.from({length:120},()=>({x:W/2+(Math.random()-.5)*W*.5,y:H*.4,
+  /* com origem (fim de fase perfeita no mapa) os papéis saem do objeto; sem origem, do meio da tela */
+  const ox=origem&&isFinite(origem.x)?origem.x:W/2,oy=origem&&isFinite(origem.y)?origem.y:H*.4,esp=origem?40:W*.5;
+  const ps=Array.from({length:origem?70:120},()=>({x:ox+(Math.random()-.5)*esp,y:oy,
     vx:(Math.random()-.5)*11,vy:-Math.random()*13-4,s:6+Math.random()*7,
     a:Math.random()*6.3,va:(Math.random()-.5)*.3,c:cores[Math.floor(Math.random()*cores.length)]}));
   let t=0;

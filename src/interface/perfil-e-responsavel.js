@@ -121,7 +121,7 @@ function telaResponsavel(){
     h+='</div>';}
   h+='<h2 class="sec">O que fazer hoje</h2><ol class="passos plano">';
   if(lista.length)h+='<li>Refaça junto a fase <b>'+lista[0].t+'</b> e peça para explicar em voz alta o que está fazendo.</li>';
-  if(p)h+='<li>A próxima fase nova é <b>'+UNITS[p[0]].lessons[p[1]].title+'</b> (Mundo '+UNITS[p[0]].n+').</li>';
+  if(p)h+='<li>A próxima fase nova é <b>'+tituloDaProxima(p)+'</b> (Mundo '+UNITS[p[0]].n+').</li>';
   h+='<li>Use a <b>Revisão do mundo</b> (medalha dourada no fim do mapa): ela devolve exatamente as perguntas erradas. A <b>Revisão do dia</b> do mapa traz de volta, aos poucos, o que já foi errado.</li>';
   h+='<li>Imprima o desenho da fase e peça para contar a história enquanto pinta: repetir com as mãos fixa mais que repetir com os olhos.</li></ol>';
   h+='<h2 class="sec">Como o app ensina</h2><p class="galeria-intro">Cada fase segue o caminho <b>concreto → desenho → número</b>: '+

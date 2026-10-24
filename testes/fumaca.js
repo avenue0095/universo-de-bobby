@@ -213,7 +213,7 @@ async function main() {
         }
         const r = await js('({etapa:LIC.etapa,acertos:LIC.acertos,base:LIC.base,vidas:LIC.vidas,erros:LIC.erros})');
         if (r.etapa !== 'fim' || r.acertos !== r.base || r.erros !== 0) problemas.push(rot + ' ' + mat + ': fase nao fechou perfeita ' + JSON.stringify(r));
-        const placar = await js("document.querySelector('#palco').innerText.replace(/\\s+/g,' ').slice(0,160)");
+        const placar = await js("(document.querySelector('.fim')||document.querySelector('#palco')).innerText.replace(/\\s+/g,' ').slice(0,160)");
         feito.push(rot + ' / ' + mat + ': ' + r.acertos + ' de ' + r.base + ' (' + r.vidas + ' coracoes) | tela final: "' + placar + '"');
         if (FOTO) {
           fs.mkdirSync(path.join(__dirname, 'saida'), { recursive: true });
@@ -582,10 +582,14 @@ async function main() {
       {
         await js("usarMateria('mat');fecharFolha();document.querySelector('#modal').classList.remove('on');S.cer=[];S.feitas={};S.moedas=0;UNITS[0].lessons.slice(0,4).forEach(l=>S.feitas[l.id]=3);salvar();0");
         // fluxo real: jogar a ultima fase da etapa 1 e esperar a cerimonia
-        await js("abrirLicao(0,4);LIC.etapa='questao';pintarLicao();while(LIC.etapa==='questao'){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0"); await dorme(2200);
+        await js("abrirLicao(0,4);LIC.etapa='questao';pintarLicao();while(LIC.etapa==='questao'){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0"); await dorme(900);
         const fim = await js("(()=>{const f=document.querySelector('#palco .fim');return {linha:(document.querySelector('.linha-fim')||{}).innerText||'',placar:!!document.querySelector('#palco .placar'),cer:!!document.querySelector('#folha .cer')}})()");
         if (!/\d+ de \d+ perguntas, \d+ moedas/.test(fim.linha) || fim.placar) problemas.push(rot + ' fim de fase: esperada uma linha unica ("8 de 8 perguntas, 90 moedas") e nenhum cartao ' + JSON.stringify(fim));
-        if (!fim.cer) problemas.push(rot + ' cerimonia da etapa nao apareceu depois da ultima fase');
+        /* 1C: o fim de fase acontece no mapa; a cerimonia da etapa vem depois de Continuar */
+        if (fim.cer) problemas.push(rot + ' a cerimonia nao deveria cobrir o fim de fase no mapa');
+        await js("(()=>{const b=document.querySelector('#fim-continuar');if(b)b.click();})()"); await dorme(1400);
+        fim.cer = await js("!!document.querySelector('#folha .cer')");
+        if (!fim.cer) problemas.push(rot + ' cerimonia da etapa nao apareceu depois de Continuar no fim da ultima fase');
         const c1 = await js(`(()=>{const f=document.querySelector('#folha .cer');if(!f)return null;return {titulo:(f.querySelector('h2')||{}).innerText,frase:(f.querySelector('p.fala-p')||{}).innerText||'',luz:!!f.querySelector('.cena-luz'),desenho:!!f.querySelector('.premio'),antes:f.classList.contains('tudo')}})()`);
         if (c1) {
           if (!/Etapa 1 completa/.test(c1.titulo)) problemas.push(rot + ' cerimonia da etapa: titulo ' + c1.titulo);
@@ -701,6 +705,61 @@ async function main() {
         await js("fecharLicao();0");
         if (medidas.mobile) await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
         feito.push(rot + ': verbos na cena (tocar objetos em <100 ms, arrastar com ima e tocar-tocar, letra, ordenar), pressionado no quadro, hit-stop ' + hs.ms + ' ms, painel ' + painel.pct.toFixed(0) + '% da altura');
+      }
+
+      /* 2d8) O MUNDO REAGE (1C): nos como objetos do cenario (area >= 64 x 64, rotulo so ao tocar ou chegar, nunca truncado), o personagem anda
+         ate o objeto antes de abrir (nenhuma fase abre antes de chegar) e a camera vai junto, a peca "feita" muda em ate 2 s (diferenca de pixels),
+         fim de fase no mapa sem modal com botao em ate 3 s, e a etapa N trancada ate a revisao da N-1 (decisao do Filipe). */
+      {
+        await js("fecharLicao();fecharFolha();usarMateria('mat');fecharFolha();document.querySelector('#modal').classList.remove('on');S.feitas={};salvar();renderTrilha.jaMostrou=false;renderTrilha();window.scrollTo(0,0);0"); await dorme(700);
+        const circ = await js("document.querySelectorAll('.no-circulo').length+document.querySelectorAll('#etapa-1 .passo-trilha').length");
+        if (circ) problemas.push(rot + ' mapa: ainda ha circulos ou pontinhos na etapa com objetos (' + circ + ')');
+        const areas = await js("[...document.querySelectorAll('#etapa-1 .no .bt')].map(b=>{const r=b.getBoundingClientRect();return [Math.round(r.width),Math.round(r.height)]})");
+        if (areas.length !== 6 || areas.some((a) => a[0] < 64 || a[1] < 64)) problemas.push(rot + ' mapa: area de toque menor que 64 x 64: ' + JSON.stringify(areas));
+        // rotulos: so o atual aparece; ao tocar num objeto trancado o rotulo aparece; nenhum truncado (largura nem altura) em nenhuma etapa
+        const rots = await js("(()=>{document.querySelectorAll('#tela .no').forEach(n=>n.classList.add('mostra'));const r=[];document.querySelectorAll('#tela .no .rot').forEach(e=>{if(getComputedStyle(e).display==='none')return;if(e.scrollWidth>e.clientWidth+1||e.scrollHeight>e.clientHeight+2)r.push(e.textContent+' '+e.scrollWidth+'/'+e.clientWidth+' '+e.scrollHeight+'/'+e.clientHeight);});document.querySelectorAll('#tela .no').forEach(n=>n.classList.remove('mostra'));return r})()");
+        if (rots.length) problemas.push(rot + ' mapa: rotulo truncado: ' + rots.slice(0, 4).join(' | '));
+        const vis = await js("[...document.querySelectorAll('#etapa-1 .no .rot')].filter(e=>getComputedStyle(e).display!=='none').length");
+        if (vis !== 1) problemas.push(rot + ' mapa: so o rotulo do objeto atual deveria aparecer (' + vis + ')');
+        // trancar: a etapa 2 so abre depois da revisao da etapa 1
+        const tr = await js("(()=>{UNITS[0].lessons.forEach(l=>S.feitas[l.id]=3);delete S.feitas['revmat1'];const a=liberada(1,0),p1=proxima();S.feitas['revmat1']=3;const b=liberada(1,0),p2=proxima();S.feitas={};return {a,p1,b,p2}})()");
+        if (tr.a || !(tr.p1 && tr.p1[0] === 0 && tr.p1[1] === 5) || !tr.b || !(tr.p2 && tr.p2[0] === 1 && tr.p2[1] === 0)) problemas.push(rot + ' trancar etapas: ' + JSON.stringify(tr));
+        // joga a fase 1: o fim acontece no mapa (sem modal), a peca acende em ate 2 s e o botao aparece em ate 3 s
+        await js("renderTrilha();abrirLicao(0,0);LIC.etapa='questao';pintarLicao();while(LIC.etapa==='questao'){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0");
+        const tFim = Date.now(); let pecaMs = -1, btnMs = -1;
+        for (let k = 0; k < 30; k++) { await dorme(100); const st = await js("({p:!!document.querySelector('.peca-luz[data-li=\"0\"].on'),b:!!document.querySelector('#fim-continuar')})"); if (st.p && pecaMs < 0) pecaMs = Date.now() - tFim; if (st.b && btnMs < 0) btnMs = Date.now() - tFim; if (st.p && st.b) break; }
+        const fim = await js("({licao:document.querySelector('#licao').classList.contains('on'),modal:document.querySelectorAll('.modal.on, #modal.on').length,card:!!document.querySelector('.fim.fim-cena'),texto:(document.querySelector('.fim-cena')||{innerText:''}).innerText.replace(/\\s+/g,' ').slice(0,80)})");
+        if (fim.licao || fim.modal || !fim.card) problemas.push(rot + ' fim de fase no mapa: ' + JSON.stringify(fim));
+        if (pecaMs < 0 || pecaMs > 2000) problemas.push(rot + ' peca feita nao acendeu em ate 2 s (' + pecaMs + ' ms)');
+        if (btnMs < 0 || btnMs > 3000) problemas.push(rot + ' botao do fim de fase nao apareceu em ate 3 s (' + btnMs + ' ms)');
+        // diferenca de pixels na regiao da peca entre o cenario apagado e o completo (acima de 2%)
+        const dif = await js(`(async()=>{const sec=document.querySelector('#etapa-1');const base=sec.querySelector('.cena-base'),luz=sec.querySelector('.peca-luz[data-li="0"]');const r=hotspotsDe('mat',1)[0];
+          const carrega=src=>new Promise(res=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>res(null);i.src=src;});const a=await carrega(base.src),b=await carrega(luz.src);if(!a||!b)return -1;
+          const W=160,H=256,cv=document.createElement('canvas');cv.width=W;cv.height=H;const cx=cv.getContext('2d');
+          const corta=(im)=>{cx.clearRect(0,0,W,H);const esc=H/im.naturalHeight,sw=W/esc,sx=(im.naturalWidth-sw)/2;cx.drawImage(im,sx,0,sw,im.naturalHeight,0,0,W,H);return cx.getImageData(Math.round(r[0]/100*W),Math.round(r[1]/100*H),Math.max(1,Math.round((r[2]-r[0])/100*W)),Math.max(1,Math.round((r[3]-r[1])/100*H))).data;};
+          const d1=corta(a),d2=corta(b);let n=0,t=d1.length/4;for(let i=0;i<d1.length;i+=4){if(Math.abs(d1[i]-d2[i])+Math.abs(d1[i+1]-d2[i+1])+Math.abs(d1[i+2]-d2[i+2])>60)n++;}return n/t*100})()`);
+        if (dif < 2) problemas.push(rot + ' peca feita: diferenca de pixels na regiao ' + dif.toFixed(1) + '% (minimo 2)');
+        if (medidas.width >= 1280) { const cz = await js("(()=>{const f=document.querySelector('.fim-cena').getBoundingClientRect(),b=document.querySelector('.barra-baixo').getBoundingClientRect();return {fb:Math.round(f.bottom),bt:Math.round(b.top)}})()"); if (cz.fb > cz.bt) problemas.push(rot + ' fim de fase no computador cruza o rodape ' + JSON.stringify(cz)); }
+        await shot0('mundo-fim-' + nomeTela);
+        // Continuar: o personagem ANDA do objeto 1 ao objeto 2 (deslocamento medido) e a camera o mantem na tela
+        const v0 = await js("(()=>{const b=document.querySelector('.voce').getBoundingClientRect();return [Math.round(b.left),Math.round(b.top)]})()");
+        await js("document.querySelector('#fim-continuar').click();0"); await dorme(350);
+        const andando = await js("document.querySelector('.voce').classList.contains('anda')");
+        await dorme(1100);
+        const v1 = await js("(()=>{const v=document.querySelector('.voce'),b=v.getBoundingClientRect(),bar=document.querySelector('.barra-baixo').getBoundingClientRect();return {no:v.dataset.no,x:Math.round(b.left),y:Math.round(b.top),dentro:b.top>=0&&b.bottom<=bar.top+1,anda:v.classList.contains('anda')}})()");
+        if (!andando) problemas.push(rot + ' o personagem nao andou (classe anda) depois do fim da fase');
+        if (v1.no !== '1' || (Math.abs(v1.x - v0[0]) + Math.abs(v1.y - v0[1])) < 20) problemas.push(rot + ' deslocamento do personagem: ' + JSON.stringify({ v0, v1 }));
+        if (!v1.dentro) problemas.push(rot + ' camera: o personagem ficou fora da tela depois de andar ' + JSON.stringify(v1));
+        await shot0('mundo-andou-' + nomeTela);
+        // tocar num objeto a frente: o personagem anda ate la e a fase so abre quando ele chega
+        await js("(()=>{S.feitas={};UNITS[0].lessons.slice(0,3).forEach(l=>S.feitas[l.id]=3);salvar();renderTrilha();0})()"); await dorme(400);
+        await js("document.querySelector('#etapa-1 .no[data-li=\"0\"] .bt').click();0"); await dorme(120);
+        const abriuCedo = await js("document.querySelector('#licao').classList.contains('on')");
+        await dorme(1100);
+        const abriu = await js("document.querySelector('#licao').classList.contains('on')&&LIC.li===0");
+        if (abriuCedo || !abriu) problemas.push(rot + ' tocar num objeto: a fase ' + (abriuCedo ? 'abriu antes de o personagem chegar' : 'nao abriu depois da caminhada'));
+        await js("fecharLicao();S.feitas={};salvar();renderTrilha();0");
+        feito.push(rot + ': mundo reage (objetos com area ' + areas[0].join('x') + ', peca acesa em ' + pecaMs + ' ms, botao em ' + btnMs + ' ms, diferenca ' + dif.toFixed(0) + '%, andou ' + (Math.abs(v1.x - v0[0]) + Math.abs(v1.y - v0[1])) + ' px)');
       }
 
       /* 2e) PONTARIA E TOQUE REAL. Regressao de 24/10/2026: um z-index no corpo da fase cobriu o painel fixo e nenhum botao respondia,
