@@ -3,7 +3,8 @@ function confete(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const cv=document.createElement('canvas');cv.className='confete';document.body.appendChild(cv);
   const cx=cv.getContext('2d'),W=cv.width=innerWidth,H=cv.height=innerHeight;
-  const cores=['#FF8A2B','#12A06E','#1B93C8','#F0455F','#7B5BE0','#FFC53D'];
+  const css=getComputedStyle(document.body);
+  const cores=['--cor-acao','--mat-base','--ing-base','--cor-ainda','--por-base','--cor-ouro'].map(n=>css.getPropertyValue(n).trim()||'orange');
   const ps=Array.from({length:120},()=>({x:W/2+(Math.random()-.5)*W*.5,y:H*.4,
     vx:(Math.random()-.5)*11,vy:-Math.random()*13-4,s:6+Math.random()*7,
     a:Math.random()*6.3,va:(Math.random()-.5)*.3,c:cores[Math.floor(Math.random()*cores.length)]}));

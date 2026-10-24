@@ -6,7 +6,7 @@ function escapa(t){return String(t==null?'':t)
   .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
   .replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function estrelasSVG(n,total){let h='';for(let i=0;i<(total||3);i++)h+=IC.estrela.replace('<svg',i<n?'<svg class="on"':'<svg');return h;}
-function corUnidade(u){return 'var('+TONS[u.tone]+')';}
+function corUnidade(u){return 'var(--materia-base)';}
 function normaliza(t){
   return String(t).toLowerCase().replace(/r\$/g,'').replace(/\s|&nbsp;/g,'')
     .replace(/cm²|cm2|cm³|cm3|cm|graus|°|reais|km|kg|ml|litros?|m\b/g,'').replace(',','.').trim();

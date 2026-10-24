@@ -11,7 +11,7 @@ const CACHE_AUDIO='bobby-audio-v1';
 /* Arte (WebP em assets/): cache próprio, também protegido na ativação ('bobby-arte-'). A camada 'inicial' do assets/manifesto.json
    entra na instalação; o resto entra sozinho, na primeira vez que a criança vê a imagem. */
 const CACHE_ARTE='bobby-arte-v1';
-const ARQUIVOS=['./','./index.html','./manifest.webmanifest','./icone-192.png','./icone-512.png','./icone-maskable.png'];
+const ARQUIVOS=['./','./index.html','./manifest.webmanifest','./assets/fontes/Fredoka-variavel-latin.woff2','./assets/fontes/Nunito-variavel-latin.woff2','./icone-192.png','./icone-512.png','./icone-maskable.png'];
 
 /* nunca derruba a instalação: se a arte não chegar agora, ela entra sob demanda depois */
 function preCarregarArte(){

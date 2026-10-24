@@ -66,6 +66,7 @@ function mapaMundo(u,ui,prox){
 
 /* ---------- tela inicial ---------- */
 function pintarTopo(){
+  document.body.dataset.materia=MATCOD[MATERIA]||'mat';
   document.documentElement.style.setProperty('--m1',perfilAtual().cor||CORES[0]);
   const o=S.ofensiva,fogo=$('#st-fogo');
   fogo.innerHTML=IC.fogo+'<em>'+o.atual+'</em>'+(o.congeladores>0?'<span class="gelo-n" aria-hidden="true">'+IC.gelo+o.congeladores+'</span>':'');

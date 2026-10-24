@@ -48,6 +48,8 @@ function usarMateria(m){
   if(typeof audioPrepararMateria==='function')audioPrepararMateria(m);
   if(typeof mostrarEntradaDoDia==='function')mostrarEntradaDoDia();
 }
+/* código de matéria do app (mat, pt, en) para o código de cor do DESIGN.md (mat, por, ing) */
+const MATCOD={mat:'mat',pt:'por',en:'ing'};
 let CAP_ATUAL=null,MISS_ATUAL=null;
 function telaMaterias(){
   let h='<div class="perfis-in"><h1>Escolha a sua galáxia</h1>'+
@@ -55,7 +57,7 @@ function telaMaterias(){
   Object.keys(MATERIAS).forEach(k=>{
     const m=MATERIAS[k];
     const feitasM=Object.keys(S.feitas||{}).filter(x=>x.indexOf('rev')!==0&&(k==='pt'?x.charAt(0)==='p':(k==='en'?x.charAt(0)==='e':/^[0-9]/.test(x)))).length;
-    h+='<button class="cartao-bt materia" data-m="'+k+'" style="--ub:'+m.cor+'">'+
+    h+='<button class="cartao-bt materia" data-m="'+k+'" data-materia="'+MATCOD[k]+'">'+
        '<span class="mat-ic">'+m.ic+'</span><b>'+m.n+'</b><span class="pg">'+m.sub+'</span>'+
        '<span class="pg forte">'+feitasM+' de '+m.total()+' fases</span></button>';
   });

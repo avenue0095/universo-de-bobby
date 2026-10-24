@@ -26,7 +26,7 @@ function telaPerfil(){
   Object.keys(MATERIAS).forEach(k=>{
     const m=MATERIAS[k],n=feitasDaMateria(k),tot=m.total();
     const pc=Math.round(n/tot*100);
-    h+='<button class="linha-mundo galaxia'+(k===MATERIA?' atual':'')+'" data-gal="'+k+'" style="--ub:'+m.cor+'">'+
+    h+='<button class="linha-mundo galaxia'+(k===MATERIA?' atual':'')+'" data-gal="'+k+'" data-materia="'+MATCOD[k]+'">'+
        '<span class="gic">'+m.ic+'</span>'+
        '<div class="mtx"><b>'+m.n+(k===MATERIA?' <i class="agora">você está aqui</i>':'')+'</b>'+
        '<div class="mbar"><i style="width:'+pc+'%"></i></div></div>'+

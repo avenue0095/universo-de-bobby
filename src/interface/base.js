@@ -1,6 +1,5 @@
 /* ===== O Universo de Bobby — aplicativo ===== */
 const $=s=>document.querySelector(s);
-const TONS={verde:'--u-verde',agua:'--u-agua',ambar:'--u-ambar',coral:'--u-coral',roxo:'--u-roxo'};
 const CHAVE='trilha-matematica-v1';
 const IC={
  certo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.6 9.4 17.5 19.5 7"/></svg>',
