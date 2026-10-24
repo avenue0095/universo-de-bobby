@@ -41,6 +41,7 @@ Precisa de Node 22+ e Python 3. Nada para instalar. `npm test` roda tudo menos o
 | `node testes/ciclo.js` | meta em perguntas, baú sem sorteio, missões, bilhete, ponto de parada, congelador no fluxo real, tom dos textos |
 | `node testes/revisao.js` | caixas 1, 3, 7, 14, 30, teto de 10 por dia, aquecimento, freios |
 | `node testes/medicao.js` | eventos sem dado pessoal, D1/D7/D30, teto de 4.000 eventos |
+| `node testes/sw.js` | a ativação do service worker só apaga caches `bobby-v*` antigos e preserva `bobby-audio-*` |
 | `node testes/tokens.js` | hex solto e token inexistente no CSS novo |
 | `node testes/fumaca.js [--foto]` | Chrome de verdade (sem pacote, via DevTools): joga uma fase de cada matéria, o ciclo do dia inteiro (bilhete, rotina, Meu personagem, baú, parada) e a migração de um estado v3, em desktop e celular. Falha se houver erro de console |
 | `python3 build/build.py --check` | falha se `index.html` não for o que `src/` gera |

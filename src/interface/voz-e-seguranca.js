@@ -34,7 +34,7 @@ function telaVoz(){
   };
 
   let h='<div class="perfil-in">';
-  h+='<p class="galeria-intro">A voz que lê as aulas vem do próprio aparelho — cada celular tem as suas. '+
+  h+='<p class="galeria-intro">A voz que lê as aulas vem do próprio aparelho. Cada celular tem as suas. '+
      'Toque numa opção para ouvir e ela já fica escolhida.</p>';
 
   h+='<h2 class="sec">Voz do português</h2>'+lista(pt,S.vozPt,'pt');

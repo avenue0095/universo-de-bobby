@@ -1114,7 +1114,7 @@ ol.plano li{padding-left:38px}
 .folha-bts.par{grid-template-columns:1fr 1fr}
 @media (max-width:430px){.folha-bts.par{grid-template-columns:1fr}}
 .link-resp{background:none;color:var(--cor-texto-suave);text-decoration:underline;min-height:var(--toque-min);font-size:var(--t-pequeno)}
-.bau-fig{width:96px;height:96px;margin:0 auto var(--esp-8);color:var(--cor-ouro-borda);background:var(--cor-ouro);border-radius:var(--raio-24);display:grid;place-items:center;border:2px solid var(--cor-ouro-borda)}
+.bau-fig{width:96px;height:96px;margin:0 auto var(--esp-8);color:var(--cor-ouro-sobre);background:var(--cor-ouro);border-radius:var(--raio-24);display:grid;place-items:center;border:2px solid var(--cor-ouro-borda)}
 .bau-fig svg{width:56px;height:56px}
 .bilhete-texto{font-family:var(--fonte-titulo);font-size:var(--t-destaque)!important;line-height:var(--lh-destaque)!important}
 .folha-in .perfis-sub{color:var(--cor-texto-suave)}

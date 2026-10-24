@@ -15,7 +15,7 @@ Nada foi publicado, nenhum áudio ou imagem foi gerado, nenhum crédito foi gast
 
 ## Desvios da especificação (conscientes)
 
-- **Medidor dentro do app.** O pedido manda o painel D1/D7/D30 na área do responsável; a especificação (7.4) dizia só em página separada (`medir.html`). Está na área do responsável, em seção própria "Medidor do produto". Revisar se o Filipe preferir tirar de lá.
+- **Medidor dentro do app.** O pedido manda o painel D1/D7/D30 na área do responsável; a especificação (7.4) dizia só em página separada (`medir.html`). Está na área do responsável, em seção própria "Medidor do produto". **Decisão pendente do Filipe:** o painel D1/D7/D30 dentro do app é desvio da especificação 7.4 (lá, só em `medir.html`, fora do app). Fica até ele decidir; para tirar, basta remover `medidorHTML()` da tela do responsável.
 - `vozPt`, `vozEn` e `velocidade` ficam no topo do perfil (a tela de escolha de voz de reserva ainda existe); a especificação os movia para `legado`. Saem quando o áudio gravado entrar.
 - `errados` continua vivo ao lado de `revisao` (a "Revisão do mundo" ainda usa), e uma cópia vai para `legado.errados`.
 - `pid` de medição é um campo à parte do `id` do perfil (o `id` vai no backup, o `pid` nunca).
@@ -39,3 +39,5 @@ Nada foi publicado, nenhum áudio ou imagem foi gerado, nenhum crédito foi gast
 - **Baú por meta cheia** e o botão "continuar por 50 moedas" seguem pendentes de advogado (ECA Digital), como diz a especificação 5.2 e 5.7.
 - `color-scheme: light dark` entrou junto com os tokens do DESIGN.md e muda a cor de controles nativos no escuro.
 - A tela de aviso de migração aparece uma vez; se o responsável fechar a aba antes de tocar, ela volta na próxima abertura.
+
+- Service worker: a ativação agora só apaga caches `bobby-*` antigos e nunca `bobby-audio-*` (reservado ao áudio gravado). `CACHE` continua `bobby-v3`.

@@ -293,7 +293,7 @@ function dicaDaPergunta(q){
   if(q.type==='fracao')return 'Toque em <b>'+q.answer+'</b> partes da barra, contando em voz alta: 1, 2, 3...';
   if(q.type==='grupinhos')return 'Coloque <b>'+q.alvoG+'</b> em “grupos” e <b>'+q.alvoP+'</b> em “em cada”. O total aparece sozinho.';
   if(q.type==='dinheiro')return 'Comece pelas notas maiores e vá completando com as moedas até o visor chegar no valor pedido.';
-  if(q.type==='silabas')return 'Fale a palavra devagar batendo palma. Cada palma é uma sílaba — toque nelas na ordem.';
+  if(q.type==='silabas')return 'Fale a palavra devagar batendo palma. Cada palma é uma sílaba. Toque nelas na ordem.';
   const ps=passosDe(LIC.l);
   return (ps[1]&&ps[1].c)||(ps[0]&&ps[0].c)||'Leia a pergunta de novo devagar.';
 }
@@ -344,7 +344,7 @@ function ajudaForte(){
     msg='A resposta começa com <b>'+a.slice(0,1)+'</b> e tem <b>'+a.length+'</b> '+(a.length>1?'caracteres':'caractere')+'.';
   }else if(q.type==='silabas'){
     msg='A primeira sílaba é <b>'+String(q.answer).slice(0,2)+'</b>.';
-  }else msg='Leia devagar e tente de novo — você consegue.';
+  }else msg='Leia devagar e tente de novo. Você consegue.';
   const alvo=cx.querySelector('div:last-child');
   cx.innerHTML='<div class="mini-tuco">'+MASC('feliz')+'</div><div><span class="tit">Ajuda extra</span>'+msg+'</div>';
   falar(msg);
@@ -470,7 +470,7 @@ function pintarFim(){
       :'Acabaram os corações')+'</h2>'+
     (passou&&LIC.miss&&LIC.miss.fim?'<p class="fecho">'+LIC.miss.fim+'</p>':'')+
     '<p class="sub">'+(passou?'Você acertou '+LIC.acertos+' de '+LIC.base+' perguntas.'+
-        (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros — volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
+        (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros. Volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
       :'Tudo bem! Vamos rever a aula e tentar de novo. Errar faz parte de aprender.')+'</p>'+
     (completouMundo?'<div class="mundo-ok">'+IC.bandeira+' Mundo '+LIC.u.n+' completo!</div>':'')+
     (passou&&!LIC.rev?'<div class="premio"><div class="mini-desenho">'+DESENHO(LIC.ui,LIC.li).svg+'</div>'+

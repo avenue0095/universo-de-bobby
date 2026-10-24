@@ -27,7 +27,7 @@ function abrirRevisaoMundo(ui){
   }
   const falso={id:'rev'+MATERIA+u.n,glyph:'★',title:'Revisão do Mundo '+u.n,teach:{
     ideia:'Esta é a revisão do Mundo '+u.n+'. Aqui voltam justamente as perguntas que você errou nas fases, para ver se agora ficou claro.',
-    exemplo:'Se travar em alguma, volte na fase daquele assunto e leia a aula de novo — ela continua lá, sempre aberta.',
+    exemplo:'Se travar em alguma, volte na fase daquele assunto e leia a aula de novo. Ela continua lá, sempre aberta.',
     dica:'Cada pergunta que você acertar aqui sai do seu caderno de erros. Acertando todas, o caderno fica limpo!'}};
   garantirDia();
   if(limiteDeBlocosAtingido()){mostrarParada(true);return;}

@@ -99,7 +99,7 @@ function telaResponsavel(){
   const pc=totalAcertos+totalErros?Math.round(totalAcertos/(totalAcertos+totalErros)*100):0;
 
   let h='<div class="perfil-in"><p class="galeria-intro">Resumo de <b>'+escapa(perfilAtual().nome||'')+'</b> para você acompanhar. '+
-    'Nada aqui é enviado para lugar nenhum — fica só neste aparelho.</p>';
+    'Nada aqui é enviado para lugar nenhum: fica só neste aparelho.</p>';
   h+='<div class="stats">'+
     stat(IC.bandeira,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
     stat(IC.fogo,fmtTempo(st.tempo),'tempo total')+
@@ -122,7 +122,7 @@ function telaResponsavel(){
   if(lista.length)h+='<li>Refaça junto a fase <b>'+lista[0].t+'</b> e peça para explicar em voz alta o que está fazendo.</li>';
   if(p)h+='<li>A próxima fase nova é <b>'+UNITS[p[0]].lessons[p[1]].title+'</b> (Mundo '+UNITS[p[0]].n+').</li>';
   h+='<li>Use a <b>Revisão do mundo</b> (medalha dourada no fim do mapa): ela devolve exatamente as perguntas erradas. A <b>Revisão do dia</b> do mapa traz de volta, aos poucos, o que já foi errado.</li>';
-  h+='<li>Imprima o desenho da fase e peça para contar a história enquanto pinta — repetir com as mãos fixa mais que repetir com os olhos.</li></ol>';
+  h+='<li>Imprima o desenho da fase e peça para contar a história enquanto pinta: repetir com as mãos fixa mais que repetir com os olhos.</li></ol>';
   h+='<h2 class="sec">Como o app ensina</h2><p class="galeria-intro">Cada fase segue o caminho <b>concreto → desenho → número</b>: '+
      'primeiro a peça na tela (barrinhas, fatias, moedas), depois a figura, só então a conta escrita. '+
      'É o método usado com material dourado na escola. Se travar num assunto, volte um degrau em vez de repetir a conta.</p>';
@@ -132,7 +132,7 @@ function telaResponsavel(){
   h+='<h2 class="sec">Levar o progresso para outro aparelho</h2>';
   h+='<ol class="passos plano">'+
      '<li>Neste aparelho, toque em <b>Salvar cópia deste perfil</b> aqui embaixo. Sai um arquivo <b>.json</b>.</li>'+
-     '<li>Mande esse arquivo para o outro aparelho (WhatsApp para você mesma, e-mail, Drive — tanto faz).</li>'+
+     '<li>Mande esse arquivo para o outro aparelho (WhatsApp para você mesma, e-mail, Drive: tanto faz).</li>'+
      '<li>No outro aparelho, abra o app, vá em <b>Perfil → Para o responsável</b> e toque em <b>Restaurar de uma cópia</b>.</li>'+
      '<li>Escolha o arquivo. O perfil aparece na tela “Quem vai jogar?” com todo o progresso.</li>'+
      '</ol>';
@@ -143,7 +143,7 @@ function telaResponsavel(){
   h+='<p class="galeria-intro">Todo o progresso fica guardado <b>só neste aparelho</b>, no navegador. '+
      'Nada é enviado para a internet e não existe cadastro nem e-mail. '+
      'Cada jogador tem a própria caixinha de dados: moedas, fases, erros e desenhos de um não aparecem no outro. '+
-     'Se você limpar os dados do navegador, o progresso vai junto — por isso vale guardar uma cópia.</p>';
+     'Se você limpar os dados do navegador, o progresso vai junto: por isso vale guardar uma cópia.</p>';
   h+=controlesHTML();
   h+=medidorHTML();
   h+='<div id="resp-aviso"></div>';
@@ -162,7 +162,7 @@ function telaResponsavel(){
   $('#rs-perfil').addEventListener('click',restaurarPerfil);
   $('#sn-perfil').addEventListener('click',()=>pedirSenha(
     temSenha()?'Nova senha':'Criar senha',
-    'Escolha de 4 a 6 números. Ela protege os relatórios e a troca de perfis — anote em algum lugar, não dá para recuperar.',
+    'Escolha de 4 a 6 números. Ela protege os relatórios e a troca de perfis. Anote em algum lugar, não dá para recuperar.',
     ()=>telaResponsavel(),true));
 }
 
@@ -179,7 +179,7 @@ function instrucaoInstalar(){
   if(android)return 'No Android: abra este endereço no <b>Chrome</b>, toque nos <b>três pontinhos</b> '+
     'do canto e escolha <b>“Adicionar à tela inicial”</b> ou <b>“Instalar app”</b>.';
   return 'No celular, abra este endereço no navegador e procure a opção '+
-    '<b>“Adicionar à tela inicial”</b> — no iPhone fica no botão de compartilhar do Safari, '+
+    '<b>“Adicionar à tela inicial”</b>: no iPhone fica no botão de compartilhar do Safari, '+
     'no Android fica nos três pontinhos do Chrome.';
 }
 

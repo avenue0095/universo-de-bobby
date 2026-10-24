@@ -1125,7 +1125,7 @@ ol.plano li{padding-left:38px}
 .folha-bts.par{grid-template-columns:1fr 1fr}
 @media (max-width:430px){.folha-bts.par{grid-template-columns:1fr}}
 .link-resp{background:none;color:var(--cor-texto-suave);text-decoration:underline;min-height:var(--toque-min);font-size:var(--t-pequeno)}
-.bau-fig{width:96px;height:96px;margin:0 auto var(--esp-8);color:var(--cor-ouro-borda);background:var(--cor-ouro);border-radius:var(--raio-24);display:grid;place-items:center;border:2px solid var(--cor-ouro-borda)}
+.bau-fig{width:96px;height:96px;margin:0 auto var(--esp-8);color:var(--cor-ouro-sobre);background:var(--cor-ouro);border-radius:var(--raio-24);display:grid;place-items:center;border:2px solid var(--cor-ouro-borda)}
 .bau-fig svg{width:56px;height:56px}
 .bilhete-texto{font-family:var(--fonte-titulo);font-size:var(--t-destaque)!important;line-height:var(--lh-destaque)!important}
 .folha-in .perfis-sub{color:var(--cor-texto-suave)}
@@ -6340,7 +6340,7 @@ function dicaDaPergunta(q){
   if(q.type==='fracao')return 'Toque em <b>'+q.answer+'</b> partes da barra, contando em voz alta: 1, 2, 3...';
   if(q.type==='grupinhos')return 'Coloque <b>'+q.alvoG+'</b> em “grupos” e <b>'+q.alvoP+'</b> em “em cada”. O total aparece sozinho.';
   if(q.type==='dinheiro')return 'Comece pelas notas maiores e vá completando com as moedas até o visor chegar no valor pedido.';
-  if(q.type==='silabas')return 'Fale a palavra devagar batendo palma. Cada palma é uma sílaba — toque nelas na ordem.';
+  if(q.type==='silabas')return 'Fale a palavra devagar batendo palma. Cada palma é uma sílaba. Toque nelas na ordem.';
   const ps=passosDe(LIC.l);
   return (ps[1]&&ps[1].c)||(ps[0]&&ps[0].c)||'Leia a pergunta de novo devagar.';
 }
@@ -6391,7 +6391,7 @@ function ajudaForte(){
     msg='A resposta começa com <b>'+a.slice(0,1)+'</b> e tem <b>'+a.length+'</b> '+(a.length>1?'caracteres':'caractere')+'.';
   }else if(q.type==='silabas'){
     msg='A primeira sílaba é <b>'+String(q.answer).slice(0,2)+'</b>.';
-  }else msg='Leia devagar e tente de novo — você consegue.';
+  }else msg='Leia devagar e tente de novo. Você consegue.';
   const alvo=cx.querySelector('div:last-child');
   cx.innerHTML='<div class="mini-tuco">'+MASC('feliz')+'</div><div><span class="tit">Ajuda extra</span>'+msg+'</div>';
   falar(msg);
@@ -6517,7 +6517,7 @@ function pintarFim(){
       :'Acabaram os corações')+'</h2>'+
     (passou&&LIC.miss&&LIC.miss.fim?'<p class="fecho">'+LIC.miss.fim+'</p>':'')+
     '<p class="sub">'+(passou?'Você acertou '+LIC.acertos+' de '+LIC.base+' perguntas.'+
-        (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros — volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
+        (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros. Volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
       :'Tudo bem! Vamos rever a aula e tentar de novo. Errar faz parte de aprender.')+'</p>'+
     (completouMundo?'<div class="mundo-ok">'+IC.bandeira+' Mundo '+LIC.u.n+' completo!</div>':'')+
     (passou&&!LIC.rev?'<div class="premio"><div class="mini-desenho">'+DESENHO(LIC.ui,LIC.li).svg+'</div>'+
@@ -6570,7 +6570,7 @@ function abrirRevisaoMundo(ui){
   }
   const falso={id:'rev'+MATERIA+u.n,glyph:'★',title:'Revisão do Mundo '+u.n,teach:{
     ideia:'Esta é a revisão do Mundo '+u.n+'. Aqui voltam justamente as perguntas que você errou nas fases, para ver se agora ficou claro.',
-    exemplo:'Se travar em alguma, volte na fase daquele assunto e leia a aula de novo — ela continua lá, sempre aberta.',
+    exemplo:'Se travar em alguma, volte na fase daquele assunto e leia a aula de novo. Ela continua lá, sempre aberta.',
     dica:'Cada pergunta que você acertar aqui sai do seu caderno de erros. Acertando todas, o caderno fica limpo!'}};
   garantirDia();
   if(limiteDeBlocosAtingido()){mostrarParada(true);return;}
@@ -7552,7 +7552,7 @@ function telaResponsavel(){
   const pc=totalAcertos+totalErros?Math.round(totalAcertos/(totalAcertos+totalErros)*100):0;
 
   let h='<div class="perfil-in"><p class="galeria-intro">Resumo de <b>'+escapa(perfilAtual().nome||'')+'</b> para você acompanhar. '+
-    'Nada aqui é enviado para lugar nenhum — fica só neste aparelho.</p>';
+    'Nada aqui é enviado para lugar nenhum: fica só neste aparelho.</p>';
   h+='<div class="stats">'+
     stat(IC.bandeira,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
     stat(IC.fogo,fmtTempo(st.tempo),'tempo total')+
@@ -7575,7 +7575,7 @@ function telaResponsavel(){
   if(lista.length)h+='<li>Refaça junto a fase <b>'+lista[0].t+'</b> e peça para explicar em voz alta o que está fazendo.</li>';
   if(p)h+='<li>A próxima fase nova é <b>'+UNITS[p[0]].lessons[p[1]].title+'</b> (Mundo '+UNITS[p[0]].n+').</li>';
   h+='<li>Use a <b>Revisão do mundo</b> (medalha dourada no fim do mapa): ela devolve exatamente as perguntas erradas. A <b>Revisão do dia</b> do mapa traz de volta, aos poucos, o que já foi errado.</li>';
-  h+='<li>Imprima o desenho da fase e peça para contar a história enquanto pinta — repetir com as mãos fixa mais que repetir com os olhos.</li></ol>';
+  h+='<li>Imprima o desenho da fase e peça para contar a história enquanto pinta: repetir com as mãos fixa mais que repetir com os olhos.</li></ol>';
   h+='<h2 class="sec">Como o app ensina</h2><p class="galeria-intro">Cada fase segue o caminho <b>concreto → desenho → número</b>: '+
      'primeiro a peça na tela (barrinhas, fatias, moedas), depois a figura, só então a conta escrita. '+
      'É o método usado com material dourado na escola. Se travar num assunto, volte um degrau em vez de repetir a conta.</p>';
@@ -7585,7 +7585,7 @@ function telaResponsavel(){
   h+='<h2 class="sec">Levar o progresso para outro aparelho</h2>';
   h+='<ol class="passos plano">'+
      '<li>Neste aparelho, toque em <b>Salvar cópia deste perfil</b> aqui embaixo. Sai um arquivo <b>.json</b>.</li>'+
-     '<li>Mande esse arquivo para o outro aparelho (WhatsApp para você mesma, e-mail, Drive — tanto faz).</li>'+
+     '<li>Mande esse arquivo para o outro aparelho (WhatsApp para você mesma, e-mail, Drive: tanto faz).</li>'+
      '<li>No outro aparelho, abra o app, vá em <b>Perfil → Para o responsável</b> e toque em <b>Restaurar de uma cópia</b>.</li>'+
      '<li>Escolha o arquivo. O perfil aparece na tela “Quem vai jogar?” com todo o progresso.</li>'+
      '</ol>';
@@ -7596,7 +7596,7 @@ function telaResponsavel(){
   h+='<p class="galeria-intro">Todo o progresso fica guardado <b>só neste aparelho</b>, no navegador. '+
      'Nada é enviado para a internet e não existe cadastro nem e-mail. '+
      'Cada jogador tem a própria caixinha de dados: moedas, fases, erros e desenhos de um não aparecem no outro. '+
-     'Se você limpar os dados do navegador, o progresso vai junto — por isso vale guardar uma cópia.</p>';
+     'Se você limpar os dados do navegador, o progresso vai junto: por isso vale guardar uma cópia.</p>';
   h+=controlesHTML();
   h+=medidorHTML();
   h+='<div id="resp-aviso"></div>';
@@ -7615,7 +7615,7 @@ function telaResponsavel(){
   $('#rs-perfil').addEventListener('click',restaurarPerfil);
   $('#sn-perfil').addEventListener('click',()=>pedirSenha(
     temSenha()?'Nova senha':'Criar senha',
-    'Escolha de 4 a 6 números. Ela protege os relatórios e a troca de perfis — anote em algum lugar, não dá para recuperar.',
+    'Escolha de 4 a 6 números. Ela protege os relatórios e a troca de perfis. Anote em algum lugar, não dá para recuperar.',
     ()=>telaResponsavel(),true));
 }
 
@@ -7632,7 +7632,7 @@ function instrucaoInstalar(){
   if(android)return 'No Android: abra este endereço no <b>Chrome</b>, toque nos <b>três pontinhos</b> '+
     'do canto e escolha <b>“Adicionar à tela inicial”</b> ou <b>“Instalar app”</b>.';
   return 'No celular, abra este endereço no navegador e procure a opção '+
-    '<b>“Adicionar à tela inicial”</b> — no iPhone fica no botão de compartilhar do Safari, '+
+    '<b>“Adicionar à tela inicial”</b>: no iPhone fica no botão de compartilhar do Safari, '+
     'no Android fica nos três pontinhos do Chrome.';
 }
 
@@ -7673,7 +7673,7 @@ function telaVoz(){
   };
 
   let h='<div class="perfil-in">';
-  h+='<p class="galeria-intro">A voz que lê as aulas vem do próprio aparelho — cada celular tem as suas. '+
+  h+='<p class="galeria-intro">A voz que lê as aulas vem do próprio aparelho. Cada celular tem as suas. '+
      'Toque numa opção para ouvir e ela já fica escolhida.</p>';
 
   h+='<h2 class="sec">Voz do português</h2>'+lista(pt,S.vozPt,'pt');

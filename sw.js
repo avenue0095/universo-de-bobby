@@ -13,7 +13,8 @@ self.addEventListener('install',e=>{
 
 self.addEventListener('activate',e=>{
   e.waitUntil(caches.keys().then(ks=>Promise.all(
-    ks.filter(k=>k!==CACHE).map(k=>caches.delete(k))
+    /* só apaga caches antigos DESTA app (bobby-v*); 'bobby-audio-*' (áudio gravado) e caches de outros nunca são apagados */
+    ks.filter(k=>k.startsWith('bobby-')&&!k.startsWith('bobby-audio-')&&k!==CACHE).map(k=>caches.delete(k))
   )).then(()=>self.clients.claim()));
 });
 
