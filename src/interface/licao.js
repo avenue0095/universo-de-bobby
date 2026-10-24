@@ -136,21 +136,26 @@ function pintarLicao(){
     const fora=q.options.filter(o=>o!==q.answer);
     q.options=shufA([q.answer,fora[0],fora[1]]);q.__reduzido=true;
   }
-  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q">'+MASC('pensa','avatar')+'<div class="et">'+
+  /* A pergunta acontece dentro da cena: o guia da matéria (Teo, Rufa ou Otto) fala o enunciado num balão, com o cenário da etapa ao fundo.
+     Com companheiro escolhido ele acompanha como amigo (retrato ao lado do número da pergunta) e o guia da matéria continua ensinando. */
+  const guia=PLANETAS[MATERIA].guia,pa=persAtivo(),amigo=pa.tipo==='comp'&&pa.id===guia?'':MASC('pensa','avatar');
+  let h='<div class="surge">'+barraMissao()+'<div class="cena-q" data-guia="'+guia+'">'+
+    '<div class="guia-q">'+imgArte(guia+'-p04',{cls:'guia-img',eager:true,alt:PLANETAS[MATERIA].guiaNome+', o guia'})+'</div>'+
+    '<div class="balao-q"><div class="balao-topo">'+amigo+'<div class="et">'+
     (LIC.rev?'Revisão · ':'')+'Pergunta '+(LIC.i+1)+
     (q.__irma?' · <b>parecida</b>':(q.__rep?' · <b>de novo</b>':''))+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+
-    (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>';
-  /* nas duas primeiras perguntas a regra da aula fica na tela: nunca cobrar antes de ensinar */
+    (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>'+
+    '<h2 class="pergunta">'+htmlSeguro(q.prompt,500)+'</h2></div></div>';
+  /* o lembrete da aula começa FECHADO (abre com um toque; abre sozinho depois de dois erros seguidos) */
   if(!LIC.rev&&LIC.i<2){
     const lem=lembreteDaAula(LIC.l);
-    /* telas baixas (celular): o lembrete começa fechado para a alternativa 3 não ir parar embaixo do painel */
-    if(lem)h+='<details class="lembrete"'+(innerHeight>=820?' open':'')+'><summary class="tit">'+IC.lampada+' Lembre da aula</summary>'+lem+'</details>';
+    if(lem)h+='<details class="lembrete"><summary class="tit">'+IC.lampada+' Lembre da aula</summary>'+lem+'</details>';
   }
-  h+='<h2 class="pergunta">'+htmlSeguro(q.prompt,500)+'</h2>';
   if(q.figure)h+='<div class="figura">'+q.figure+'</div>';
   if(q.type==='mc'){
-    h+='<div class="alts">';
+    const curtas=q.options.length>=4&&q.options.every(o=>String(o).length<=9&&!/<|figure/.test(String(o)));
+    h+='<div class="alts'+(curtas?' curtas':'')+'">';
     q.options.forEach((o,k)=>{h+='<button class="alt" data-v="'+k+'"><span class="k">'+(k+1)+'</span><span>'+htmlSeguro(o,120)+'</span></button>';});
     h+='</div>';
   }else if(q.type==='blocos'){
@@ -171,6 +176,9 @@ function pintarLicao(){
   h+='<div class="caixa-dica" id="caixa-dica" hidden></div>';
   h+='</div>';
   $('#palco').innerHTML=h;
+  /* cenário da etapa atrás da pergunta (escurecido e desfocado por CSS); sem a arte da etapa fica o planeta de sempre */
+  const cn=cenaDaEtapa(MATERIA,LIC.u.n);
+  if(cn&&ativo(cn.completo))$('#licao').style.setProperty('--cena','url("'+ARTE_BASE+ativo(cn.completo)[0]+'")');else $('#licao').style.removeProperty('--cena');
   $('.lc-corpo').scrollTo(0,0);
   ligarOuvir($('#palco'));
   LIC.resp=null;LIC.digitado='';LIC.conferido=false;LIC.dica=false;LIC.tQ=Date.now();
@@ -401,6 +409,11 @@ function irmaDe(q){
   c.__rep=true;c.__irma=true;c.reforco=true;
   return c;
 }
+/* troca a pose do guia na hora (mesma tarefa do toque): p02 comemora no acerto, p04 pensa na pergunta e no erro (nunca triste) */
+function guiaPose(pose){
+  const i=$('#palco .guia-img'),id=PLANETAS[MATERIA].guia+'-'+pose;
+  if(i&&ativo(id))i.src=ARTE_BASE+ativo(id)[0];
+}
 function conferir(){
   const q=LIC.qs[LIC.i];LIC.conferido=true;
   /* escolha: compara o texto exato da opcao (Lívia e lívia são opções diferentes de propósito);
@@ -420,7 +433,7 @@ function conferir(){
     });
   }
   if(ok){
-    LIC.acertos++;LIC.combo++;regStat(LIC.l.id,'acertos');
+    LIC.acertos++;LIC.combo++;LIC.errosSeguidos=0;guiaPose('p02');regStat(LIC.l.id,'acertos');
     LIC.melhorCombo=Math.max(LIC.melhorCombo,LIC.combo);
     let ganho=ECON.ganhoAcerto,extra='';
     if(LIC.combo>=ECON.sequenciaDe&&LIC.combo%ECON.sequenciaDe===0&&bonusDeComboAtivo()){
@@ -439,7 +452,8 @@ function conferir(){
     if(LIC.rev)tirarErrado(q);
     if(primeira&&q.__item)revisaoResultado(q.__item,true,LIC.dica||0);
   }else{
-    LIC.erros++;LIC.combo=0;LIC.vidas--;regStat(LIC.l.id,'erros');pe.classList.add('errado');
+    LIC.erros++;LIC.combo=0;LIC.vidas--;LIC.errosSeguidos=(LIC.errosSeguidos||0)+1;guiaPose('p04');regStat(LIC.l.id,'erros');pe.classList.add('errado');
+    if(LIC.errosSeguidos>=2){const lm=$('#palco .lembrete');if(lm)lm.open=true;}
     guardarErrado(q);
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
     $('#selo').innerHTML=MASC('pensa','avatar');

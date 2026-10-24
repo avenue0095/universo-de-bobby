@@ -414,7 +414,7 @@ async function main() {
           await js("abrirLicao(0,0);LIC.etapa='aula';LIC.passo=0;pintarLicao();0"); await dorme(350);
           tem(await html('.aula'), 'aula'); await shot0('personagem-aula-' + rotulo + '-' + nomeTela);
           await js("LIC.etapa='questao';LIC.i=0;pintarLicao();0"); await dorme(350);
-          tem(await html('.cabecalho-q'), 'pergunta'); await shot0('personagem-pergunta-' + rotulo + '-' + nomeTela);
+          tem(await html('.cena-q'), 'pergunta'); await shot0('personagem-pergunta-' + rotulo + '-' + nomeTela);
           await js("LIC.resp='__errada__';conferir();0"); await dorme(250);
           tem(await html('#selo'), 'reacao de erro'); await shot0('personagem-erro-' + rotulo + '-' + nomeTela);
           await js("avancar();LIC.resp=LIC.qs[LIC.i].answer;conferir();0"); await dorme(250);
@@ -436,6 +436,39 @@ async function main() {
         if (!trocou) problemas.push(rot + ' personagem: trocar de companheiro em Meu personagem nao mudou o topo e a barra na hora');
         await js("fecharTelasDaBarra();S.look={};salvar();pintarTopo();0"); await dorme(200);
         feito.push(rot + ': personagem escolhido (Rufa, coroa e chapeu de explorador) usado no topo, barra, mapa, aula, pergunta, acerto, erro, fim e bau');
+      }
+
+      /* 2d4) A PERGUNTA DENTRO DA CENA: enunciado no balao do guia da materia (Teo, Rufa, Otto), cenario da etapa ao fundo, lembrete da aula FECHADO,
+         pose do guia trocada no mesmo toque (< 100 ms) e as 4 alternativas inteiras acima do painel, mesmo em 360 x 640. */
+      {
+        const guias = { mat: 'teo', pt: 'rufa', en: 'otto' };
+        for (const mat of ['mat', 'pt', 'en']) {
+          await js("usarMateria('" + mat + "');fecharFolha();document.querySelector('#modal').classList.remove('on');S.faixa='f910';S.look={};abrirLicao(0,0);LIC.etapa='questao';LIC.i=0;pintarLicao();0"); await dorme(250);
+          const cena = await js("(()=>{const g=document.querySelector('.cena-q .guia-img');return {balao:!!document.querySelector('.cena-q .balao-q h2.pergunta'),guia:g?g.src:'',fundo:document.querySelector('#licao').style.getPropertyValue('--cena'),lembrete:(document.querySelector('.lembrete')||{}).open}})()");
+          if (!cena.balao) problemas.push(rot + ' ' + mat + ' pergunta: o enunciado nao esta no balao do guia');
+          if (cena.guia.indexOf(guias[mat] + '-p04') < 0) problemas.push(rot + ' ' + mat + ' pergunta: o guia da materia (' + guias[mat] + ') nao aparece: ' + cena.guia.slice(-30));
+          if (!/cenarios\/cen-/.test(cena.fundo)) problemas.push(rot + ' ' + mat + ' pergunta: sem o cenario da etapa ao fundo (' + cena.fundo + ')');
+          if (cena.lembrete) problemas.push(rot + ' ' + mat + ' pergunta: o lembrete da aula deveria comecar fechado');
+          // alternativas: curtas e longas, as 4 acima do painel fixo
+          for (const [nome, opts] of [['curtas', ['10', '11', '12', '13']], ['longas', ['Setenta e cinco bolinhas', 'Setenta e seis bolinhas', 'Setenta e sete bolinhas', 'Setenta e oito bolinhas']]]) {
+            const r = await js(`(()=>{const o=${JSON.stringify(opts)};LIC.qs=[{type:'mc',prompt:'Qual e a resposta certa para esta pergunta de teste?',answer:o[2],options:o}];LIC.i=0;LIC.qs[0].__reduzido=true;pintarLicao();
+              const alts=Array.from(document.querySelectorAll('.alt')),pe=document.querySelector('.pe').getBoundingClientRect(),u=alts[alts.length-1],b=u.getBoundingClientRect();
+              const t=document.elementFromPoint(b.left+b.width/2,b.top+b.height/2);return {n:alts.length,bottom:Math.round(b.bottom),peTop:Math.round(pe.top),livre:!!t&&(t===u||u.contains(t))}})()`);
+            if (r.n !== 4 || r.bottom > r.peTop + 1 || !r.livre) problemas.push(rot + ' ' + mat + ' pergunta (' + nome + '): a 4a alternativa fica cortada atras do botao (' + JSON.stringify(r) + ')');
+          }
+          if (mat === 'mat') await shot0('cena-pergunta-' + nomeTela);
+        }
+        // pose do guia na hora do toque: 20 respostas, certa e errada, medidas no mesmo instante
+        const tempos = await js(`(()=>{const o=['1','2','3','4'],r=[];for(let k=0;k<20;k++){LIC.qs=[{type:'mc',prompt:'Pergunta '+k+'?',answer:'2',options:o}];LIC.i=0;LIC.vidas=5;LIC.qs[0].__reduzido=true;pintarLicao();
+          const g=document.querySelector('.guia-img');document.querySelectorAll('.alt')[k%2===0?1:0].click();const t0=performance.now();document.querySelector('#acao').click();const dt=performance.now()-t0;
+          r.push({dt:dt,pose:/-p0([24])/.exec(g.src)[1],esperado:k%2===0?'2':'4'});}return r})()`);
+        const lento = tempos.filter((t) => t.dt > 100), errada = tempos.filter((t) => t.pose !== t.esperado);
+        if (lento.length || errada.length) problemas.push(rot + ' pose do guia: ' + lento.length + ' toques acima de 100 ms, ' + errada.length + ' poses erradas (acerto = p02, erro = p04)');
+        // lembrete abre sozinho depois de dois erros seguidos
+        const abre = await js(`(()=>{abrirLicao(0,0);LIC.etapa='questao';LIC.i=0;LIC.vidas=5;pintarLicao();const lm=document.querySelector('.lembrete');if(!lm)return 'sem lembrete';const ini=lm.open;
+          LIC.resp='__x__';conferir();const a1=lm.open;avancar();LIC.resp='__x__';conferir();return [ini,a1,document.querySelector('.lembrete').open].join()})()`);
+        if (!/^false,false,true$/.test(abre) && abre !== 'sem lembrete') problemas.push(rot + ' lembrete da aula: esperado fechado, fechado, aberto depois do 2o erro seguido; veio ' + abre);
+        await js("fecharLicao();0");
       }
 
       /* 2e) PONTARIA E TOQUE REAL. Regressao de 24/10/2026: um z-index no corpo da fase cobriu o painel fixo e nenhum botao respondia,

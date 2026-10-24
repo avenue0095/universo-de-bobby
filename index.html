@@ -1592,6 +1592,37 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
 @media (max-width:340px){.topo-in{gap:0;padding:var(--esp-8) var(--esp-4)}.stat{padding:var(--esp-4)}.marca{min-width:72px;flex:1 1 72px}.marca span{display:none}}
 /* nó aberto mas que não é o próximo (a 1ª fase de toda etapa abre desde o início): sem o azul vivo, só o contorno da matéria */
 .no:not(.feito):not(.atual):not(.trava) .bt{background:var(--materia-suave);color:var(--materia-tinta);border-color:var(--materia-base);box-shadow:none}
+
+/* ---------- a pergunta dentro da cena: guia da matéria, balão, cenário da etapa ao fundo ---------- */
+.licao::after{content:"";position:absolute;inset:0;background:var(--cena,none) center/cover no-repeat;filter:blur(6px) brightness(.34) saturate(.9);opacity:1;pointer-events:none;z-index:0}
+.licao[style*="--cena"]::before{display:none}
+.cena-q{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;gap:var(--esp-8);margin-bottom:var(--esp-8)}
+.guia-q{width:72px;align-self:end}
+.guia-img{display:block;width:100%;height:auto;filter:drop-shadow(0 6px 8px var(--cor-sombra))}
+.balao-q{position:relative;background:var(--cor-superficie);border:2px solid var(--materia-base);border-radius:var(--raio-16);padding:var(--esp-8) var(--esp-16) var(--esp-8);box-shadow:var(--sombra-2)}
+.balao-q::before{content:"";position:absolute;left:-10px;bottom:var(--esp-16);width:16px;height:16px;background:var(--cor-superficie);border-left:2px solid var(--materia-base);border-bottom:2px solid var(--materia-base);transform:rotate(45deg)}
+.balao-topo{display:flex;align-items:center;gap:var(--esp-8);margin-bottom:var(--esp-4)}
+.balao-topo .et{margin:0;flex:1}
+.balao-topo .mascote.avatar{width:32px;height:32px;flex:none}
+.balao-topo .icobtn{flex:none}
+.balao-q .pergunta{margin:0}
+.cena-q + .figura,.cena-q ~ .figura{margin-top:var(--esp-8)}
+.lembrete{margin-bottom:var(--esp-8)}
+/* alternativas curtas em duas colunas: as quatro cabem sem rolar em 360 x 640 */
+.alts.curtas{grid-template-columns:repeat(2,minmax(0,1fr))}
+.alts.curtas .alt{flex-direction:column;justify-content:center;gap:var(--esp-4);text-align:center;min-height:var(--toque-conforto);padding:var(--esp-8)}
+@media (min-width:640px){.guia-q{width:96px}.balao-topo .mascote.avatar{width:40px;height:40px}}
+@media (max-height:700px){.missao{display:none}}
+@media (max-height:820px){
+  /* tela baixa (celular pequeno e notebook): alternativas mais justas, as quatro cabem sem rolar */
+  .alts{gap:var(--esp-4)}
+  .alt{padding:var(--esp-8) var(--esp-16);min-height:var(--toque-min)}
+  .lembrete summary{min-height:var(--toque-min);padding-top:0;padding-bottom:0}
+  .lembrete{margin-bottom:var(--esp-4)}
+  .balao-q{padding-top:var(--esp-4);padding-bottom:var(--esp-8)}
+  .pe{padding-top:var(--esp-8);padding-bottom:calc(var(--esp-8) + var(--area-segura-baixo))}
+  .lc-corpo{padding-top:var(--esp-8)}
+}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -6707,21 +6738,26 @@ function pintarLicao(){
     const fora=q.options.filter(o=>o!==q.answer);
     q.options=shufA([q.answer,fora[0],fora[1]]);q.__reduzido=true;
   }
-  let h='<div class="surge">'+barraMissao()+'<div class="cabecalho-q">'+MASC('pensa','avatar')+'<div class="et">'+
+  /* A pergunta acontece dentro da cena: o guia da matéria (Teo, Rufa ou Otto) fala o enunciado num balão, com o cenário da etapa ao fundo.
+     Com companheiro escolhido ele acompanha como amigo (retrato ao lado do número da pergunta) e o guia da matéria continua ensinando. */
+  const guia=PLANETAS[MATERIA].guia,pa=persAtivo(),amigo=pa.tipo==='comp'&&pa.id===guia?'':MASC('pensa','avatar');
+  let h='<div class="surge">'+barraMissao()+'<div class="cena-q" data-guia="'+guia+'">'+
+    '<div class="guia-q">'+imgArte(guia+'-p04',{cls:'guia-img',eager:true,alt:PLANETAS[MATERIA].guiaNome+', o guia'})+'</div>'+
+    '<div class="balao-q"><div class="balao-topo">'+amigo+'<div class="et">'+
     (LIC.rev?'Revisão · ':'')+'Pergunta '+(LIC.i+1)+
     (q.__irma?' · <b>parecida</b>':(q.__rep?' · <b>de novo</b>':''))+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+
-    (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>';
-  /* nas duas primeiras perguntas a regra da aula fica na tela: nunca cobrar antes de ensinar */
+    (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>'+
+    '<h2 class="pergunta">'+htmlSeguro(q.prompt,500)+'</h2></div></div>';
+  /* o lembrete da aula começa FECHADO (abre com um toque; abre sozinho depois de dois erros seguidos) */
   if(!LIC.rev&&LIC.i<2){
     const lem=lembreteDaAula(LIC.l);
-    /* telas baixas (celular): o lembrete começa fechado para a alternativa 3 não ir parar embaixo do painel */
-    if(lem)h+='<details class="lembrete"'+(innerHeight>=820?' open':'')+'><summary class="tit">'+IC.lampada+' Lembre da aula</summary>'+lem+'</details>';
+    if(lem)h+='<details class="lembrete"><summary class="tit">'+IC.lampada+' Lembre da aula</summary>'+lem+'</details>';
   }
-  h+='<h2 class="pergunta">'+htmlSeguro(q.prompt,500)+'</h2>';
   if(q.figure)h+='<div class="figura">'+q.figure+'</div>';
   if(q.type==='mc'){
-    h+='<div class="alts">';
+    const curtas=q.options.length>=4&&q.options.every(o=>String(o).length<=9&&!/<|figure/.test(String(o)));
+    h+='<div class="alts'+(curtas?' curtas':'')+'">';
     q.options.forEach((o,k)=>{h+='<button class="alt" data-v="'+k+'"><span class="k">'+(k+1)+'</span><span>'+htmlSeguro(o,120)+'</span></button>';});
     h+='</div>';
   }else if(q.type==='blocos'){
@@ -6742,6 +6778,9 @@ function pintarLicao(){
   h+='<div class="caixa-dica" id="caixa-dica" hidden></div>';
   h+='</div>';
   $('#palco').innerHTML=h;
+  /* cenário da etapa atrás da pergunta (escurecido e desfocado por CSS); sem a arte da etapa fica o planeta de sempre */
+  const cn=cenaDaEtapa(MATERIA,LIC.u.n);
+  if(cn&&ativo(cn.completo))$('#licao').style.setProperty('--cena','url("'+ARTE_BASE+ativo(cn.completo)[0]+'")');else $('#licao').style.removeProperty('--cena');
   $('.lc-corpo').scrollTo(0,0);
   ligarOuvir($('#palco'));
   LIC.resp=null;LIC.digitado='';LIC.conferido=false;LIC.dica=false;LIC.tQ=Date.now();
@@ -6972,6 +7011,11 @@ function irmaDe(q){
   c.__rep=true;c.__irma=true;c.reforco=true;
   return c;
 }
+/* troca a pose do guia na hora (mesma tarefa do toque): p02 comemora no acerto, p04 pensa na pergunta e no erro (nunca triste) */
+function guiaPose(pose){
+  const i=$('#palco .guia-img'),id=PLANETAS[MATERIA].guia+'-'+pose;
+  if(i&&ativo(id))i.src=ARTE_BASE+ativo(id)[0];
+}
 function conferir(){
   const q=LIC.qs[LIC.i];LIC.conferido=true;
   /* escolha: compara o texto exato da opcao (Lívia e lívia são opções diferentes de propósito);
@@ -6991,7 +7035,7 @@ function conferir(){
     });
   }
   if(ok){
-    LIC.acertos++;LIC.combo++;regStat(LIC.l.id,'acertos');
+    LIC.acertos++;LIC.combo++;LIC.errosSeguidos=0;guiaPose('p02');regStat(LIC.l.id,'acertos');
     LIC.melhorCombo=Math.max(LIC.melhorCombo,LIC.combo);
     let ganho=ECON.ganhoAcerto,extra='';
     if(LIC.combo>=ECON.sequenciaDe&&LIC.combo%ECON.sequenciaDe===0&&bonusDeComboAtivo()){
@@ -7010,7 +7054,8 @@ function conferir(){
     if(LIC.rev)tirarErrado(q);
     if(primeira&&q.__item)revisaoResultado(q.__item,true,LIC.dica||0);
   }else{
-    LIC.erros++;LIC.combo=0;LIC.vidas--;regStat(LIC.l.id,'erros');pe.classList.add('errado');
+    LIC.erros++;LIC.combo=0;LIC.vidas--;LIC.errosSeguidos=(LIC.errosSeguidos||0)+1;guiaPose('p04');regStat(LIC.l.id,'erros');pe.classList.add('errado');
+    if(LIC.errosSeguidos>=2){const lm=$('#palco .lembrete');if(lm)lm.open=true;}
     guardarErrado(q);
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
     $('#selo').innerHTML=MASC('pensa','avatar');
