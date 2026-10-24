@@ -828,9 +828,6 @@ ol.plano li{padding-left:40px}
   #st-fogo{display:flex}
   #som{display:grid}
 }
-@media (max-width:359px){
-  .marca b{display:none}
-}
 
 /* ---- figuras das aulas de português e inglês ---- */
 .tira{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
@@ -1574,3 +1571,17 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
 .aviso.confirma span{color:var(--cor-texto);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
 .confirma-bts{display:flex;gap:var(--esp-8);flex-wrap:wrap;justify-content:center}
 .item.bloqueado .item-img{opacity:.78}
+
+/* rótulos dos nós das pontas: alinhados a 8 px da borda da cena e com mais largura (30% da cena), para não cortar o nome */
+.no.lado-e .rot{align-self:flex-start;margin-left:calc(64px - var(--nx,16) * 1cqw);max-width:min(120px,30cqw)}
+.no.lado-d .rot{align-self:flex-end;margin-right:calc(64px - var(--nx,16) * 1cqw);max-width:min(120px,30cqw)}
+.no .rot{padding:0 var(--esp-4)}
+.no.atual{scroll-margin-bottom:calc(var(--barra-h) + var(--esp-16))}
+/* Quem vai jogar: a lixeira fica numa faixa própria no alto do cartão, sem cobrir o avatar */
+.cartao{position:relative}
+.cartao .cartao-bt[data-i]{padding-top:calc(var(--esp-48) + var(--esp-8))}
+.lixo{top:var(--esp-4);right:var(--esp-4)}
+/* topo em 320: o nome da matéria continua à vista (ofensiva e moedas ficam compactos) */
+@media (max-width:340px){.topo-in{gap:2px;padding:var(--esp-8) var(--esp-4)}.stat{padding:var(--esp-4)}.marca{min-width:72px;flex:1 1 72px}.marca span{display:none}}
+/* nó aberto mas que não é o próximo (a 1ª fase de toda etapa abre desde o início): sem o azul vivo, só o contorno da matéria */
+.no:not(.feito):not(.atual):not(.trava) .bt{background:var(--materia-suave);color:var(--materia-tinta);border-color:var(--materia-base);box-shadow:none}

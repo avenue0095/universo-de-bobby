@@ -14,12 +14,12 @@ function telaPerfil(){
      '<h1>'+escapa(p.nome||'Jogador')+'</h1>'+
      '<span class="titulo">Explorador nível '+niv+' · '+ROTULO_FAIXA[S.faixa]+'</span></div>';
   h+='<div class="stats">'+
-    stat(IC.bandeira,feitasGeral+'/'+totalGeral,'fases')+
-    stat(IC.estrela,estrelasTotal(),'estrelas')+
+    stat(IC.medalha,feitasGeral+'/'+totalGeral,'fases')+
+    stat(IC.estrelaDia,estrelasTotal(),'estrelas')+
     stat(IC.moeda,S.moedas,'moedas')+
     stat(IC.fogo,S.ofensiva.atual,S.ofensiva.atual===1?'dia seguido':'dias seguidos')+
     stat(IC.trofeu,S.ofensiva.melhor,S.ofensiva.melhor===1?'dia de recorde':'dias de recorde')+
-    stat(IC.quadro,desenhos+'/'+desenhosCatalogo().length,'desenhos')+'</div>';
+    stat(IC.pergaminho||IC.quadro,desenhos+'/'+desenhosCatalogo().length,'desenhos')+'</div>';
 
   /* progresso das três galáxias, sempre visível */
   h+='<h2 class="sec">Suas galáxias</h2><div class="mundos-lista">';
@@ -102,7 +102,7 @@ function telaResponsavel(){
   let h='<div class="perfil-in"><p class="galeria-intro">Resumo de <b>'+escapa(perfilAtual().nome||'')+'</b> para você acompanhar. '+
     'Nada aqui é enviado para lugar nenhum: fica só neste aparelho.</p>';
   h+='<div class="stats">'+
-    stat(IC.bandeira,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
+    stat(IC.medalha,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
     stat(IC.relogio,fmtTempo(st.tempo),'tempo total')+
     stat(IC.alvo,pc+'%','acerto geral')+'</div>';
   h+=semanaHTML();

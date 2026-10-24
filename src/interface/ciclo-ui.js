@@ -27,7 +27,7 @@ function textoOfensiva(){
 
 /* ---------- Rotina de hoje (cartão do mapa) ---------- */
 /* ícone de cada missão (um por tipo, em arte 3D) */
-const ICONE_MISSAO={revisao:'medalha',fase:'trofeu',combo:'estrela',['en-audio']:'bilhete',galaxias:'presente'};
+const ICONE_MISSAO={revisao:'medalha',fase:'trofeu',combo:'estrelaDia',['en-audio']:'bilhete',galaxias:'presente'};
 function icoMissao(m){const d=missaoPorId(m.id),k=ICONE_MISSAO[d&&d.g]||'pergaminho';return IC[k]||IC.pergaminho;}
 function rotinaHTML(){
   garantirDia();

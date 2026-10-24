@@ -3,7 +3,7 @@
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
     navigator.serviceWorker.register('./sw.js').then(function(reg){
-      reg.update();
+      reg.update().catch(function(){});   /* sem internet o update falha: isso não é erro */
       setInterval(function(){reg.update();},60*60*1000);
       reg.addEventListener('updatefound',function(){
         var novo=reg.installing;

@@ -162,6 +162,19 @@ async function main() {
         // rotulos dos nos: pelo menos 8 px da borda da cena e sem sobrepor o vizinho
         const rot8 = await js("(()=>{const ruins=[];document.querySelectorAll('.etapa').forEach((et,k)=>{if(k>2)return;const c=et.querySelector('.cena').getBoundingClientRect();const rs=Array.from(et.querySelectorAll('.no')).filter(n=>getComputedStyle(n.querySelector('.rot')).display!=='none').map(n=>({n:n,b:n.querySelector('.rot').getBoundingClientRect(),t:n.querySelector('.rot').textContent}));rs.forEach(a=>{if(a.b.left<c.left+7.5||a.b.right>c.right-7.5)ruins.push('borda '+a.t+' '+Math.round(a.b.left-c.left)+'/'+Math.round(c.right-a.b.right));rs.forEach(z=>{if(a!==z&&a.b.left<z.b.right&&z.b.left<a.b.right&&a.b.top<z.b.bottom&&z.b.top<a.b.bottom)ruins.push('encosta '+a.t+' em '+z.t)})})});return ruins})()");
         if (rot8.length) problemas.push(rot + ' rotulos dos nos: ' + [...new Set(rot8)].slice(0, 5).join(' | '));
+        // nenhum rotulo de no cortado (3 linhas, sem reticencias) nas 3 materias com todas as fases abertas, e o no atual (rotulo incluido) acima da barra
+        if (medidas.width >= 360) {
+          const cort = await js("(()=>{const r=[];['mat','pt','en'].forEach(m=>{usarMateria(m);fecharFolha();S.feitas={};UNITS.forEach(u=>u.lessons.forEach(l=>S.feitas[l.id]=3));renderTrilha();document.querySelectorAll('.etapa').forEach(et=>{const c=et.querySelector('.cena').getBoundingClientRect();et.querySelectorAll('.no .rot').forEach(e=>{if(getComputedStyle(e).display==='none')return;const b=e.getBoundingClientRect();if(e.scrollHeight>e.clientHeight+1)r.push(m+': '+e.textContent);if(b.left<c.left+7||b.right>c.right-7)r.push('borda '+e.textContent);});});});S.feitas={};usarMateria('mat');fecharFolha();document.querySelector('#modal').classList.remove('on');window.scrollTo(0,0);return r;})()");
+          if (cort.length) problemas.push(rot + ' rotulos de no cortados ou fora da cena: ' + cort.slice(0, 5).join(' | '));
+        }
+        await js("renderTrilha.jaMostrou=false;renderTrilha();0"); await dorme(450);
+        const atual = await js("(()=>{const n=document.querySelector('.no.atual').getBoundingClientRect(),b=document.querySelector('.barra-baixo').getBoundingClientRect();return {nb:Math.round(n.bottom),bt:Math.round(b.top)}})()");
+        if (atual.nb > atual.bt + 1) problemas.push(rot + ' o no atual com o rotulo (termina em y=' + atual.nb + ') fica atras da barra (y=' + atual.bt + ')');
+        // em 320x568 o nome da materia continua a vista (abreviado se precisar)
+        await cdp('Emulation.setDeviceMetricsOverride', Object.assign({}, medidas, { width: 320, height: 568 })); await dorme(300);
+        const t320 = await js("(()=>{const e=document.querySelector('#nome-materia'),m=document.querySelector('.marca').getBoundingClientRect();return {w:Math.round(e.clientWidth),m:Math.round(m.width),vis:getComputedStyle(e).visibility}})()");
+        if (t320.w < 56) problemas.push(rot + ' topo em 320: o nome da materia sumiu (' + JSON.stringify(t320) + ')');
+        await cdp('Emulation.setDeviceMetricsOverride', medidas); await dorme(200);
         // nome da materia inteiro no topo
         const nm = await js("(()=>{const e=document.querySelector('#nome-materia');return {sw:e.scrollWidth,cw:e.clientWidth}})()");
         if (nm.sw > nm.cw + 1) problemas.push(rot + ' topo: o nome da materia esta cortado (' + nm.sw + ' > ' + nm.cw + ')');
@@ -597,6 +610,8 @@ if(r<(grande?3:4.5)){const k=el.tagName+'.'+el.className+' '+r.toFixed(2);if(!vi
       /* 3 perfis: a tela "Quem vai jogar?" vem primeiro; escolhe a Lua (primeiro perfil) */
       const tela0 = await js("document.querySelector('#perfis').classList.contains('on')");
       if (!tela0) problemas.push(rot + ': com 3 perfis a tela Quem vai jogar deveria abrir');
+      const sobre = await js("(()=>{const r=[];document.querySelectorAll('#perfis .cartao').forEach(c=>{const l=c.querySelector('.lixo'),f=c.querySelector('.rosto');if(!l||!f)return;const a=l.getBoundingClientRect(),b=f.getBoundingClientRect();if(a.left<b.right&&b.left<a.right&&a.top<b.bottom&&b.top<a.bottom)r.push(c.innerText.slice(0,12))});return r})()");
+      if (sobre.length) problemas.push(rot + ' Quem vai jogar: a lixeira cobre o avatar em ' + sobre.join(', '));
       await js("document.querySelector('.cartao-bt[data-i=\"0\"]').click();0"); await dorme(400);
       /* quem ja jogou volta direto para o mapa (sem escolher planeta de novo) */
       const semSeletor = await js("!document.querySelector('#materias').classList.contains('on')");

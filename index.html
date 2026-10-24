@@ -840,9 +840,6 @@ ol.plano li{padding-left:40px}
   #st-fogo{display:flex}
   #som{display:grid}
 }
-@media (max-width:359px){
-  .marca b{display:none}
-}
 
 /* ---- figuras das aulas de português e inglês ---- */
 .tira{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
@@ -1586,6 +1583,20 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
 .aviso.confirma span{color:var(--cor-texto);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
 .confirma-bts{display:flex;gap:var(--esp-8);flex-wrap:wrap;justify-content:center}
 .item.bloqueado .item-img{opacity:.78}
+
+/* rótulos dos nós das pontas: alinhados a 8 px da borda da cena e com mais largura (30% da cena), para não cortar o nome */
+.no.lado-e .rot{align-self:flex-start;margin-left:calc(64px - var(--nx,16) * 1cqw);max-width:min(120px,30cqw)}
+.no.lado-d .rot{align-self:flex-end;margin-right:calc(64px - var(--nx,16) * 1cqw);max-width:min(120px,30cqw)}
+.no .rot{padding:0 var(--esp-4)}
+.no.atual{scroll-margin-bottom:calc(var(--barra-h) + var(--esp-16))}
+/* Quem vai jogar: a lixeira fica numa faixa própria no alto do cartão, sem cobrir o avatar */
+.cartao{position:relative}
+.cartao .cartao-bt[data-i]{padding-top:calc(var(--esp-48) + var(--esp-8))}
+.lixo{top:var(--esp-4);right:var(--esp-4)}
+/* topo em 320: o nome da matéria continua à vista (ofensiva e moedas ficam compactos) */
+@media (max-width:340px){.topo-in{gap:2px;padding:var(--esp-8) var(--esp-4)}.stat{padding:var(--esp-4)}.marca{min-width:72px;flex:1 1 72px}.marca span{display:none}}
+/* nó aberto mas que não é o próximo (a 1ª fase de toda etapa abre desde o início): sem o azul vivo, só o contorno da matéria */
+.no:not(.feito):not(.atual):not(.trava) .bt{background:var(--materia-suave);color:var(--materia-tinta);border-color:var(--materia-base);box-shadow:none}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -6389,7 +6400,9 @@ function trilhaPontos(){
   return h;
 }
 /* o nó mostra só o nome principal (em inglês, o que vem antes do parêntese); a tradução fica na aula e no rótulo de acessibilidade */
-const nomeCurto=t=>String(t).replace(/\s*\([^)]*\)\s*$/,'')||String(t);
+/* títulos que não cabem em 3 linhas na largura de um celular pequeno ganham um nome curto no nó (o título inteiro continua na aula e na leitura de tela) */
+const NOME_NO_CURTO={'Dobro, metade, triplo e terça parte':'Dobro, metade e triplo','Juntar sílabas e formar palavras':'Juntar sílabas','Maiúscula no começo, ponto no fim':'Maiúscula e ponto'};
+const nomeCurto=t=>NOME_NO_CURTO[t]||String(t).replace(/\s*\([^)]*\)\s*$/,'')||String(t);
 /* 'Animals · Animais' vira duas linhas (nome e tradução), sem ponto solto no começo de uma linha */
 function tituloEmDuasLinhas(t){
   const p=String(t).split(' · ');
@@ -6443,7 +6456,7 @@ function etapaHTML(u,ui,prox){
   h+='<div class="trilha">'+trilhaPontos();
   u.lessons.forEach((l,li)=>{
     const ok=S.feitas[l.id],abr=liberada(ui,li),atual=ehAtual&&atualNo===li;
-    const cls=['no'];if(!abr)cls.push('trava');if(ok)cls.push('feito');if(atual)cls.push('atual');
+    const cls=['no'];if(NOS[li][0]<=16)cls.push('lado-e');else if(NOS[li][0]>=84)cls.push('lado-d');if(!abr)cls.push('trava');if(ok)cls.push('feito');if(atual)cls.push('atual');
     /* só o PRÓXIMO nó da etapa atual mostra o cadeado grande; os outros trancados viram pontos (menos cadeado cobrindo o cenário) */
     const proxTrava=ehAtual&&!abr&&li===atualNo+1;
     if(!abr)cls.push(proxTrava?'trava-prox':'trava-longe');
@@ -6455,7 +6468,7 @@ function etapaHTML(u,ui,prox){
        '<span class="estrelas" aria-hidden="true">'+(ok?estrelasSVG(est):'')+'</span>'+
        '<span class="rot">'+escapa(nomeCurto(l.title))+'</span></div>';
   });
-  const cr=['no','revisao-no'];if(!completo)cr.push('trava','trava-longe');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
+  const cr=['no','revisao-no'];if(NOS[5][0]<=16)cr.push('lado-e');if(!completo)cr.push('trava','trava-longe');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
   h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%;--nx:'+Math.min(NOS[5][0],100-NOS[5][0])+'">'+
      '<button class="bt" data-rev="'+ui+'"'+(completo?'':' aria-disabled="true"')+
      ' aria-label="Revisão da etapa '+u.n+(completo?'':'. Termine as 5 fases para abrir')+'">'+(completo?IC.medalha:'')+'</button>'+
@@ -6559,7 +6572,7 @@ function renderTrilha(){
     }));
   pintarPontoGaleria();
   animarMapa(p);
-  if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelectorAll('.voce')[0];if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}
+  if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelector('.no.atual')||document.querySelector('.voce');if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}
 }
 /* ---------- lição ---------- */
 let LIC={};
@@ -7962,12 +7975,12 @@ function telaPerfil(){
      '<h1>'+escapa(p.nome||'Jogador')+'</h1>'+
      '<span class="titulo">Explorador nível '+niv+' · '+ROTULO_FAIXA[S.faixa]+'</span></div>';
   h+='<div class="stats">'+
-    stat(IC.bandeira,feitasGeral+'/'+totalGeral,'fases')+
-    stat(IC.estrela,estrelasTotal(),'estrelas')+
+    stat(IC.medalha,feitasGeral+'/'+totalGeral,'fases')+
+    stat(IC.estrelaDia,estrelasTotal(),'estrelas')+
     stat(IC.moeda,S.moedas,'moedas')+
     stat(IC.fogo,S.ofensiva.atual,S.ofensiva.atual===1?'dia seguido':'dias seguidos')+
     stat(IC.trofeu,S.ofensiva.melhor,S.ofensiva.melhor===1?'dia de recorde':'dias de recorde')+
-    stat(IC.quadro,desenhos+'/'+desenhosCatalogo().length,'desenhos')+'</div>';
+    stat(IC.pergaminho||IC.quadro,desenhos+'/'+desenhosCatalogo().length,'desenhos')+'</div>';
 
   /* progresso das três galáxias, sempre visível */
   h+='<h2 class="sec">Suas galáxias</h2><div class="mundos-lista">';
@@ -8050,7 +8063,7 @@ function telaResponsavel(){
   let h='<div class="perfil-in"><p class="galeria-intro">Resumo de <b>'+escapa(perfilAtual().nome||'')+'</b> para você acompanhar. '+
     'Nada aqui é enviado para lugar nenhum: fica só neste aparelho.</p>';
   h+='<div class="stats">'+
-    stat(IC.bandeira,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
+    stat(IC.medalha,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
     stat(IC.relogio,fmtTempo(st.tempo),'tempo total')+
     stat(IC.alvo,pc+'%','acerto geral')+'</div>';
   h+=semanaHTML();
@@ -8206,6 +8219,15 @@ async function arteGuardarTudo(progresso){
   await Promise.all([trabalha(),trabalha(),trabalha(),trabalha()]);
   return {ok:falhas===0,falhas:falhas,total:lista.length};
 }
+/* linhas dos pacotes de voz (repintadas depois de baixar, para a tela dizer a verdade) */
+function pacotesVozHTML(){
+  const g=audioGuardado();
+  return ['core','mat','pt','en'].map(p=>{
+    const ok=g.pacotes&&g.pacotes[p]&&g.formato===audioFormato();
+    return '<div class="linha-mundo"><div class="mtx"><b>'+NOME_PACOTE[p].replace(/^./,c=>c.toUpperCase())+'</b>'+
+       '<span class="sub-l">'+(audioIndiceCheio()?audioMB(audioTamanhoPacote(p)):'tamanho indisponível')+' · '+(ok?'guardado neste aparelho':'ainda não guardado')+'</span></div></div>';
+  }).join('');
+}
 function telaVoz(){
   let h='<div class="perfil-in">';
   h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
@@ -8225,14 +8247,7 @@ function telaVoz(){
      '<button class="btn fantasma" id="vel-teste">Ouvir uma frase</button></div>';
   h+='<h2 class="sec">Jogar sem internet</h2>';
   h+='<p class="galeria-intro">As vozes ficam guardadas neste aparelho. Cada matéria baixa uma vez, quando você entra nela. Pelo celular, o tamanho aparece antes.</p>';
-  const g=audioGuardado();
-  h+='<div class="mundos-lista" id="pacotes-voz">';
-  ['core','mat','pt','en'].forEach(p=>{
-    const ok=g.pacotes&&g.pacotes[p]&&g.formato===audioFormato();
-    h+='<div class="linha-mundo"><div class="mtx"><b>'+NOME_PACOTE[p].replace(/^./,c=>c.toUpperCase())+'</b>'+
-       '<span class="sub-l">'+(audioIndiceCheio()?audioMB(audioTamanhoPacote(p)):'tamanho indisponível')+' · '+(ok?'guardado neste aparelho':'ainda não guardado')+'</span></div></div>';
-  });
-  h+='</div>';
+  h+='<div class="mundos-lista" id="pacotes-voz">'+pacotesVozHTML()+'</div>';
   h+='<p class="galeria-intro" id="arte-estado" role="status">Conferindo as imagens guardadas...</p>';
   h+='<div class="perfil-bts"><button class="btn laranja" id="baixar-vozes">'+IC.baixar+' Guardar tudo para jogar sem internet</button></div><div id="voz-aviso" role="status" aria-live="polite"></div>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-voz">Voltar ao perfil</button></div></div>';
@@ -8267,7 +8282,9 @@ function telaVoz(){
     for(const p of ['core','mat','pt','en']){
       const r2=await audioBaixarPacote(p,(a2,b2)=>diz('Guardando as vozes de '+NOME_PACOTE[p]+': '+a2+' de '+b2),false);
       if(r2&&!r2.ok)falhas++;
+      else if(r2&&r2.ok&&typeof audioMarcarGuardado==='function')audioMarcarGuardado(p,audioFormato());
     }
+    const lp=$('#pacotes-voz');if(lp)lp.innerHTML=pacotesVozHTML();
     diz(falhas?'Alguns arquivos não baixaram. Tente de novo com internet.':'Pronto! Imagens e vozes estão guardadas neste aparelho.');
     arteContarGuardadas().then(n=>{const e=$('#arte-estado');if(e)e.textContent='Imagens guardadas neste aparelho: '+n+' de '+total+(n<total?'. Toque no botão abaixo para guardar o resto.':'. Tudo pronto para jogar sem internet.');});
     registrarEvento('config_mudou',{chave:'vozes_offline'});
@@ -8886,7 +8903,7 @@ function textoOfensiva(){
 
 /* ---------- Rotina de hoje (cartão do mapa) ---------- */
 /* ícone de cada missão (um por tipo, em arte 3D) */
-const ICONE_MISSAO={revisao:'medalha',fase:'trofeu',combo:'estrela',['en-audio']:'bilhete',galaxias:'presente'};
+const ICONE_MISSAO={revisao:'medalha',fase:'trofeu',combo:'estrelaDia',['en-audio']:'bilhete',galaxias:'presente'};
 function icoMissao(m){const d=missaoPorId(m.id),k=ICONE_MISSAO[d&&d.g]||'pergaminho';return IC[k]||IC.pergaminho;}
 function rotinaHTML(){
   garantirDia();
@@ -9334,7 +9351,7 @@ audioIniciar();
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
     navigator.serviceWorker.register('./sw.js').then(function(reg){
-      reg.update();
+      reg.update().catch(function(){});   /* sem internet o update falha: isso não é erro */
       setInterval(function(){reg.update();},60*60*1000);
       reg.addEventListener('updatefound',function(){
         var novo=reg.installing;

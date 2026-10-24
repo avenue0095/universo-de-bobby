@@ -30,6 +30,15 @@ async function arteGuardarTudo(progresso){
   await Promise.all([trabalha(),trabalha(),trabalha(),trabalha()]);
   return {ok:falhas===0,falhas:falhas,total:lista.length};
 }
+/* linhas dos pacotes de voz (repintadas depois de baixar, para a tela dizer a verdade) */
+function pacotesVozHTML(){
+  const g=audioGuardado();
+  return ['core','mat','pt','en'].map(p=>{
+    const ok=g.pacotes&&g.pacotes[p]&&g.formato===audioFormato();
+    return '<div class="linha-mundo"><div class="mtx"><b>'+NOME_PACOTE[p].replace(/^./,c=>c.toUpperCase())+'</b>'+
+       '<span class="sub-l">'+(audioIndiceCheio()?audioMB(audioTamanhoPacote(p)):'tamanho indisponível')+' · '+(ok?'guardado neste aparelho':'ainda não guardado')+'</span></div></div>';
+  }).join('');
+}
 function telaVoz(){
   let h='<div class="perfil-in">';
   h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
@@ -49,14 +58,7 @@ function telaVoz(){
      '<button class="btn fantasma" id="vel-teste">Ouvir uma frase</button></div>';
   h+='<h2 class="sec">Jogar sem internet</h2>';
   h+='<p class="galeria-intro">As vozes ficam guardadas neste aparelho. Cada matéria baixa uma vez, quando você entra nela. Pelo celular, o tamanho aparece antes.</p>';
-  const g=audioGuardado();
-  h+='<div class="mundos-lista" id="pacotes-voz">';
-  ['core','mat','pt','en'].forEach(p=>{
-    const ok=g.pacotes&&g.pacotes[p]&&g.formato===audioFormato();
-    h+='<div class="linha-mundo"><div class="mtx"><b>'+NOME_PACOTE[p].replace(/^./,c=>c.toUpperCase())+'</b>'+
-       '<span class="sub-l">'+(audioIndiceCheio()?audioMB(audioTamanhoPacote(p)):'tamanho indisponível')+' · '+(ok?'guardado neste aparelho':'ainda não guardado')+'</span></div></div>';
-  });
-  h+='</div>';
+  h+='<div class="mundos-lista" id="pacotes-voz">'+pacotesVozHTML()+'</div>';
   h+='<p class="galeria-intro" id="arte-estado" role="status">Conferindo as imagens guardadas...</p>';
   h+='<div class="perfil-bts"><button class="btn laranja" id="baixar-vozes">'+IC.baixar+' Guardar tudo para jogar sem internet</button></div><div id="voz-aviso" role="status" aria-live="polite"></div>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-voz">Voltar ao perfil</button></div></div>';
@@ -91,7 +93,9 @@ function telaVoz(){
     for(const p of ['core','mat','pt','en']){
       const r2=await audioBaixarPacote(p,(a2,b2)=>diz('Guardando as vozes de '+NOME_PACOTE[p]+': '+a2+' de '+b2),false);
       if(r2&&!r2.ok)falhas++;
+      else if(r2&&r2.ok&&typeof audioMarcarGuardado==='function')audioMarcarGuardado(p,audioFormato());
     }
+    const lp=$('#pacotes-voz');if(lp)lp.innerHTML=pacotesVozHTML();
     diz(falhas?'Alguns arquivos não baixaram. Tente de novo com internet.':'Pronto! Imagens e vozes estão guardadas neste aparelho.');
     arteContarGuardadas().then(n=>{const e=$('#arte-estado');if(e)e.textContent='Imagens guardadas neste aparelho: '+n+' de '+total+(n<total?'. Toque no botão abaixo para guardar o resto.':'. Tudo pronto para jogar sem internet.');});
     registrarEvento('config_mudou',{chave:'vozes_offline'});

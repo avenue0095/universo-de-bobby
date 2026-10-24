@@ -20,7 +20,9 @@ function trilhaPontos(){
   return h;
 }
 /* o nó mostra só o nome principal (em inglês, o que vem antes do parêntese); a tradução fica na aula e no rótulo de acessibilidade */
-const nomeCurto=t=>String(t).replace(/\s*\([^)]*\)\s*$/,'')||String(t);
+/* títulos que não cabem em 3 linhas na largura de um celular pequeno ganham um nome curto no nó (o título inteiro continua na aula e na leitura de tela) */
+const NOME_NO_CURTO={'Dobro, metade, triplo e terça parte':'Dobro, metade e triplo','Juntar sílabas e formar palavras':'Juntar sílabas','Maiúscula no começo, ponto no fim':'Maiúscula e ponto'};
+const nomeCurto=t=>NOME_NO_CURTO[t]||String(t).replace(/\s*\([^)]*\)\s*$/,'')||String(t);
 /* 'Animals · Animais' vira duas linhas (nome e tradução), sem ponto solto no começo de uma linha */
 function tituloEmDuasLinhas(t){
   const p=String(t).split(' · ');
@@ -74,7 +76,7 @@ function etapaHTML(u,ui,prox){
   h+='<div class="trilha">'+trilhaPontos();
   u.lessons.forEach((l,li)=>{
     const ok=S.feitas[l.id],abr=liberada(ui,li),atual=ehAtual&&atualNo===li;
-    const cls=['no'];if(!abr)cls.push('trava');if(ok)cls.push('feito');if(atual)cls.push('atual');
+    const cls=['no'];if(NOS[li][0]<=16)cls.push('lado-e');else if(NOS[li][0]>=84)cls.push('lado-d');if(!abr)cls.push('trava');if(ok)cls.push('feito');if(atual)cls.push('atual');
     /* só o PRÓXIMO nó da etapa atual mostra o cadeado grande; os outros trancados viram pontos (menos cadeado cobrindo o cenário) */
     const proxTrava=ehAtual&&!abr&&li===atualNo+1;
     if(!abr)cls.push(proxTrava?'trava-prox':'trava-longe');
@@ -86,7 +88,7 @@ function etapaHTML(u,ui,prox){
        '<span class="estrelas" aria-hidden="true">'+(ok?estrelasSVG(est):'')+'</span>'+
        '<span class="rot">'+escapa(nomeCurto(l.title))+'</span></div>';
   });
-  const cr=['no','revisao-no'];if(!completo)cr.push('trava','trava-longe');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
+  const cr=['no','revisao-no'];if(NOS[5][0]<=16)cr.push('lado-e');if(!completo)cr.push('trava','trava-longe');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
   h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%;--nx:'+Math.min(NOS[5][0],100-NOS[5][0])+'">'+
      '<button class="bt" data-rev="'+ui+'"'+(completo?'':' aria-disabled="true"')+
      ' aria-label="Revisão da etapa '+u.n+(completo?'':'. Termine as 5 fases para abrir')+'">'+(completo?IC.medalha:'')+'</button>'+
@@ -190,5 +192,5 @@ function renderTrilha(){
     }));
   pintarPontoGaleria();
   animarMapa(p);
-  if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelectorAll('.voce')[0];if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}
+  if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelector('.no.atual')||document.querySelector('.voce');if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}
 }
