@@ -265,7 +265,7 @@ const chaveDe = (a, classe, lang, texto) => a.avaliar('audioChaveDe(' + JSON.str
     a.avaliar('telaVoz()');
     A.strictEqual(a.reg.sintese, 0);
     const fonte = fs.readFileSync(path.join(RAIZ, 'src', 'interface', 'voz-e-seguranca.js'), 'utf8');
-    ['data-som', 'data-voz', 'id="vel"', 'Guardar todas as vozes'].forEach((t) => A.ok(fonte.includes(t), 'falta ' + t));
+    ['data-som', 'data-voz', 'id="vel"', 'Guardar tudo para jogar sem internet'].forEach((t) => A.ok(fonte.includes(t), 'falta ' + t));
     A.ok(!/Voz do português|Voz padrão do aparelho/.test(fonte));
   });
 

@@ -40,6 +40,10 @@ MAX_BAU = 512
 INICIAIS = {
     'rec-moeda', 'rec-estrela', 'rec-medalha', 'rec-congelador', 'rec-pergaminho', 'rec-bilhete', 'rec-presente', 'rec-trofeu', 'bau-fechado',
     'bobby-p01', 'bobby-p05a', 'bobby-p05b', 'bobby-e01', 'bobby-e02', 'bobby-e06',
+    # camada maior (teto de 3 MB no total): todas as expressões e poses do Bobby, que aparecem em toda pergunta e em Meu personagem
+    'bobby-e03', 'bobby-e04', 'bobby-e05', 'bobby-e07', 'bobby-e08',
+    'bobby-p02', 'bobby-p03', 'bobby-p04', 'bobby-p06', 'bobby-p07', 'bobby-p08', 'bobby-p09', 'bobby-p10', 'bobby-p11',
+    'bobby-sheet', 'bobby-sheet-frente', 'item-base',
     'planeta-mat', 'planeta-por', 'planeta-ing',
     'cen-mat01-apagado', 'cen-mat01-completo', 'cen-por01-apagado', 'cen-por01-completo', 'cen-ing01-apagado', 'cen-ing01-completo',
 }

@@ -47,7 +47,7 @@
    "fonte": "BOBBY-E03.png",
    "g": "expressao",
    "h": 735,
-   "inicial": false,
+   "inicial": true,
    "w": 725
   },
   "bobby-e04": {
@@ -57,7 +57,7 @@
    "fonte": "BOBBY-E04.png",
    "g": "expressao",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 740
   },
   "bobby-e05": {
@@ -67,7 +67,7 @@
    "fonte": "BOBBY-E05.png",
    "g": "expressao",
    "h": 766,
-   "inicial": false,
+   "inicial": true,
    "w": 768
   },
   "bobby-e06": {
@@ -87,7 +87,7 @@
    "fonte": "BOBBY-E07.png",
    "g": "expressao",
    "h": 741,
-   "inicial": false,
+   "inicial": true,
    "w": 768
   },
   "bobby-e08": {
@@ -97,7 +97,7 @@
    "fonte": "BOBBY-E08.png",
    "g": "expressao",
    "h": 744,
-   "inicial": false,
+   "inicial": true,
    "w": 768
   },
   "bobby-item-chapeu": {
@@ -127,7 +127,7 @@
    "fonte": "BOBBY-P02.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 612
   },
   "bobby-p03": {
@@ -137,7 +137,7 @@
    "fonte": "BOBBY-P03.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 383
   },
   "bobby-p04": {
@@ -147,7 +147,7 @@
    "fonte": "BOBBY-P04.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 556
   },
   "bobby-p05a": {
@@ -177,7 +177,7 @@
    "fonte": "BOBBY-P06.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 422
   },
   "bobby-p07": {
@@ -187,7 +187,7 @@
    "fonte": "BOBBY-P07.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 459
   },
   "bobby-p08": {
@@ -197,7 +197,7 @@
    "fonte": "BOBBY-P08.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 449
   },
   "bobby-p09": {
@@ -207,7 +207,7 @@
    "fonte": "BOBBY-P09.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 483
   },
   "bobby-p10": {
@@ -217,7 +217,7 @@
    "fonte": "BOBBY-P10.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 378
   },
   "bobby-p11": {
@@ -227,7 +227,7 @@
    "fonte": "BOBBY-P11.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 507
   },
   "bobby-p12": {
@@ -247,7 +247,7 @@
    "fonte": "BOBBY-SHEET.png",
    "g": "personagem",
    "h": 337,
-   "inicial": false,
+   "inicial": true,
    "w": 768
   },
   "bobby-sheet-frente": {
@@ -257,7 +257,7 @@
    "fonte": "BOBBY-SHEET-FRENTE.png",
    "g": "personagem",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 685
   },
   "brisa-p01": {
@@ -1317,7 +1317,7 @@
    "fonte": "ITEM-BASE.png",
    "g": "look",
    "h": 768,
-   "inicial": false,
+   "inicial": true,
    "w": 415
   },
   "item-bone": {
@@ -1643,8 +1643,8 @@
  },
  "manifesto_arte_lido": true,
  "totais": {
-  "demanda_bytes": 9512322,
-  "inicial_bytes": 1235040,
+  "demanda_bytes": 8459544,
+  "inicial_bytes": 2287818,
   "itens": 164,
   "total_bytes": 10747362
  },

@@ -4,7 +4,7 @@
    - a página do app: primeiro tenta a internet (para pegar a versão nova),
      e só usa o cache se estiver sem sinal;
    - ícones e manifesto: primeiro o cache, porque quase nunca mudam.  */
-const CACHE='bobby-v5';
+const CACHE='bobby-v6';
 /* Áudio gravado: cache próprio. O prefixo 'bobby-audio-' NUNCA é apagado na ativação (o app só guarda áudio aqui, por pacote:
    core, mat, pt, en). Troca de versão do app não faz a criança baixar 40 MB de novo. */
 const CACHE_AUDIO='bobby-audio-v1';
@@ -36,7 +36,8 @@ const ORIGEM=(self.location&&self.location.origin)||'';
 const MESMA=url=>!ORIGEM||url.origin===ORIGEM;
 const INICIO=(()=>{try{return new URL('./',self.location.href).pathname;}catch(e){return '/';}})();
 const ehAudio=url=>MESMA(url)&&/\/audio\/.+\.(m4a|opus)$/.test(url.pathname);
-const ehArte=url=>/\/assets\/(personagens|expressoes|itens|companheiros|planetas|cenarios|desenhos|recompensas)\/.+\.webp$/.test(url.pathname);
+/* qualquer WebP de assets/ (personagens, expressoes, itens, looks, companheiros, planetas, cenarios, desenhos, recompensas e o que vier), menos as fontes */
+const ehArte=url=>MESMA(url)&&/\/assets\/(?!fontes\/)[^/]+\/.+\.webp$/.test(url.pathname);
 const ehManifestoAudio=url=>MESMA(url)&&/\/audio\/manifesto-min\.json$/.test(url.pathname);
 
 const ehPagina=req=>req.mode==='navigate'||

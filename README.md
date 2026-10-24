@@ -63,7 +63,7 @@ Quem já instalou o app depende destes endereços. `node testes/trava-url.js` fa
 - `manifest.webmanifest`: `"start_url": "./index.html"` e `"scope": "./"`;
 - `sw.js` guarda `./` e `./index.html`; HTML vai sempre à rede primeiro (versão nova chega sozinha).
 
-Se mexer em `sw.js`, suba o número de `CACHE` (hoje `bobby-v5`). O áudio gravado vive em `bobby-audio-v1` e a arte em `bobby-arte-v1`; a ativação nunca apaga nenhum dos dois.
+Se mexer em `sw.js`, suba o número de `CACHE` (hoje `bobby-v6`). O áudio gravado vive em `bobby-audio-v1` e a arte em `bobby-arte-v1`; a ativação nunca apaga nenhum dos dois.
 
 ## Pastas que não são do app
 

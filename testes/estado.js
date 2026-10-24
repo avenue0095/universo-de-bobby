@@ -202,7 +202,7 @@ const J = (x) => JSON.parse(JSON.stringify(x));
 
   await teste('19. app instalado com service worker velho: HTML segue network-first e o index nao depende de cache', () => {
     const sw = fs.readFileSync(path.join(__dirname, '..', 'sw.js'), 'utf8');
-    A.ok(/fetch\(req\)\.then/.test(sw) && /bobby-v5/.test(sw));
+    A.ok(/fetch\(req\)\.then/.test(sw) && /bobby-v6/.test(sw));
   });
 
   await teste('20. estadoDe tolera lixo: valores absurdos viram valores validos', () => {

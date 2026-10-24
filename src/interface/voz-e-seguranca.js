@@ -1,4 +1,35 @@
 /* ---------- voz e som (voz gravada: só liga/desliga, velocidade e pacotes para jogar sem internet) ---------- */
+/* ---------- jogar sem internet: arte e vozes ---------- */
+const ARTE_CACHE='bobby-arte-v1';
+const arteLista=()=>Object.keys(typeof ATIVOS==='object'?ATIVOS:{}).map(k=>ARTE_BASE+ATIVOS[k][0]);
+/* quantas imagens já estão guardadas neste aparelho (para dizer a verdade na tela) */
+async function arteContarGuardadas(){
+  try{
+    if(typeof caches==='undefined')return 0;
+    const c=await caches.open(ARTE_CACHE),lista=arteLista();let n=0;
+    for(const u of lista){if(await c.match(u))n++;}
+    return n;
+  }catch(e){return 0;}
+}
+/* guarda TODA a arte no cache da arte, 4 por vez, com progresso. As que já estão guardadas não baixam de novo. */
+async function arteGuardarTudo(progresso){
+  const lista=arteLista();
+  if(typeof caches==='undefined'||typeof fetch!=='function')return {ok:false,falhas:0,total:lista.length,semCache:true};
+  const cache=await caches.open(ARTE_CACHE);
+  let i=0,feitos=0,falhas=0;
+  const trabalha=async()=>{
+    while(i<lista.length){
+      const u=lista[i++];
+      try{
+        if(!(await cache.match(u))){const r=await fetch(u);if(!r.ok)throw new Error('HTTP '+r.status);await cache.put(u,r);}
+      }catch(e){falhas++;}
+      feitos++;
+      if(progresso)try{progresso(feitos,lista.length);}catch(e){}
+    }
+  };
+  await Promise.all([trabalha(),trabalha(),trabalha(),trabalha()]);
+  return {ok:falhas===0,falhas:falhas,total:lista.length};
+}
 function telaVoz(){
   let h='<div class="perfil-in">';
   h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
@@ -26,7 +57,8 @@ function telaVoz(){
        '<span class="sub-l">'+(audioIndiceCheio()?audioMB(audioTamanhoPacote(p)):'tamanho indisponível')+' · '+(ok?'guardado neste aparelho':'ainda não guardado')+'</span></div></div>';
   });
   h+='</div>';
-  h+='<div class="perfil-bts"><button class="btn laranja" id="baixar-vozes">'+IC.baixar+' Guardar todas as vozes</button></div><div id="voz-aviso"></div>';
+  h+='<p class="galeria-intro" id="arte-estado" role="status">Conferindo as imagens guardadas...</p>';
+  h+='<div class="perfil-bts"><button class="btn laranja" id="baixar-vozes">'+IC.baixar+' Guardar tudo para jogar sem internet</button></div><div id="voz-aviso" role="status" aria-live="polite"></div>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-voz">Voltar ao perfil</button></div></div>';
 
   $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-voz2" aria-label="Voltar">'+
@@ -45,17 +77,23 @@ function telaVoz(){
   }
   const t=$('#vel-teste');
   if(t)t.addEventListener('click',()=>falarPedido('Isso aí!'));
+  const total=arteLista().length;
+  arteContarGuardadas().then(n=>{const e=$('#arte-estado');if(e)e.textContent='Imagens guardadas neste aparelho: '+n+' de '+total+(n<total?'. Toque no botão abaixo para guardar o resto.':'. Tudo pronto para jogar sem internet.');});
   const bx=$('#baixar-vozes');
   if(bx)bx.addEventListener('click',async()=>{
     bx.disabled=true;
     const av=$('#voz-aviso');
-    await audioIniciar();
+    const diz=t=>{av.innerHTML='<div class="aviso-ok">'+t+'</div>';};
     let falhas=0;
+    const ra=await arteGuardarTudo((a2,b2)=>diz('Guardando as imagens: '+a2+' de '+b2));
+    if(!ra.ok)falhas+=ra.falhas||1;
+    await audioIniciar();
     for(const p of ['core','mat','pt','en']){
-      const r2=await audioBaixarPacote(p,(a,b)=>{av.innerHTML='<div class="aviso-ok">Guardando '+NOME_PACOTE[p]+': '+a+' de '+b+'</div>';},false);
+      const r2=await audioBaixarPacote(p,(a2,b2)=>diz('Guardando as vozes de '+NOME_PACOTE[p]+': '+a2+' de '+b2),false);
       if(r2&&!r2.ok)falhas++;
     }
-    av.innerHTML='<div class="aviso-ok">'+(falhas?'Alguns arquivos não baixaram. Tente de novo com internet.':'Pronto! As vozes estão guardadas neste aparelho.')+'</div>';
+    diz(falhas?'Alguns arquivos não baixaram. Tente de novo com internet.':'Pronto! Imagens e vozes estão guardadas neste aparelho.');
+    arteContarGuardadas().then(n=>{const e=$('#arte-estado');if(e)e.textContent='Imagens guardadas neste aparelho: '+n+' de '+total+(n<total?'. Toque no botão abaixo para guardar o resto.':'. Tudo pronto para jogar sem internet.');});
     registrarEvento('config_mudou',{chave:'vozes_offline'});
     bx.disabled=false;
   });
