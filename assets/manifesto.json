@@ -1,5 +1,25 @@
 {
  "itens": {
+  "bau-aberto": {
+   "a": "recompensas/bau-aberto.webp",
+   "alfa": true,
+   "b": 46466,
+   "fonte": "BAU-ABERTO.png",
+   "g": "recompensa",
+   "h": 509,
+   "inicial": false,
+   "w": 512
+  },
+  "bau-fechado": {
+   "a": "recompensas/bau-fechado.webp",
+   "alfa": true,
+   "b": 40330,
+   "fonte": "BAU-FECHADO.png",
+   "g": "recompensa",
+   "h": 443,
+   "inicial": true,
+   "w": 512
+  },
   "bobby-e01": {
    "a": "expressoes/bobby-e01.webp",
    "alfa": true,
@@ -293,47 +313,47 @@
   "capi-p01": {
    "a": "companheiros/capi-p01.webp",
    "alfa": true,
-   "b": 61040,
+   "b": 62784,
    "fonte": "CAPI-P01.png",
    "g": "companheiro",
    "h": 768,
    "inicial": false,
-   "w": 518
+   "w": 513
   },
   "capi-p02": {
    "a": "companheiros/capi-p02.webp",
    "alfa": true,
-   "b": 71400,
+   "b": 71030,
    "fonte": "CAPI-P02.png",
    "g": "companheiro",
    "h": 768,
    "inicial": false,
-   "w": 520
+   "w": 519
   },
   "capi-p03": {
    "a": "companheiros/capi-p03.webp",
    "alfa": true,
-   "b": 71358,
+   "b": 72562,
    "fonte": "CAPI-P03.png",
    "g": "companheiro",
    "h": 768,
    "inicial": false,
-   "w": 512
+   "w": 509
   },
   "capi-p04": {
    "a": "companheiros/capi-p04.webp",
    "alfa": true,
-   "b": 61240,
+   "b": 63754,
    "fonte": "CAPI-P04.png",
    "g": "companheiro",
    "h": 768,
    "inicial": false,
-   "w": 548
+   "w": 550
   },
   "capi-sheet": {
    "a": "companheiros/capi-sheet.webp",
    "alfa": true,
-   "b": 57484,
+   "b": 55484,
    "fonte": "CAPI-SHEET.png",
    "g": "companheiro",
    "h": 326,
@@ -643,7 +663,7 @@
   "cen-mat06-apagado": {
    "a": "cenarios/cen-mat06-apagado.webp",
    "alfa": false,
-   "b": 56666,
+   "b": 46434,
    "fonte": "CEN-MAT06-APAGADO.jpg",
    "g": "cenario",
    "h": 1024,
@@ -663,7 +683,7 @@
   "cen-mat07-apagado": {
    "a": "cenarios/cen-mat07-apagado.webp",
    "alfa": false,
-   "b": 47170,
+   "b": 41078,
    "fonte": "CEN-MAT07-APAGADO.jpg",
    "g": "cenario",
    "h": 1024,
@@ -903,7 +923,7 @@
   "cen-por09-apagado": {
    "a": "cenarios/cen-por09-apagado.webp",
    "alfa": false,
-   "b": 76684,
+   "b": 44254,
    "fonte": "CEN-POR09-APAGADO.jpg",
    "g": "cenario",
    "h": 1024,
@@ -1290,6 +1310,76 @@
    "inicial": false,
    "w": 768
   },
+  "item-base": {
+   "a": "looks/item-base.webp",
+   "alfa": true,
+   "b": 45894,
+   "fonte": "ITEM-BASE.png",
+   "g": "look",
+   "h": 768,
+   "inicial": false,
+   "w": 415
+  },
+  "item-bone": {
+   "a": "looks/item-bone.webp",
+   "alfa": true,
+   "b": 51494,
+   "fonte": "ITEM-BONE.png",
+   "g": "look",
+   "h": 768,
+   "inicial": false,
+   "w": 431
+  },
+  "item-capa": {
+   "a": "looks/item-capa.webp",
+   "alfa": true,
+   "b": 50074,
+   "fonte": "ITEM-CAPA.png",
+   "g": "look",
+   "h": 768,
+   "inicial": false,
+   "w": 462
+  },
+  "item-capacete": {
+   "a": "looks/item-capacete.webp",
+   "alfa": true,
+   "b": 46498,
+   "fonte": "ITEM-CAPACETE.png",
+   "g": "look",
+   "h": 768,
+   "inicial": false,
+   "w": 432
+  },
+  "item-coroa": {
+   "a": "looks/item-coroa.webp",
+   "alfa": true,
+   "b": 53822,
+   "fonte": "ITEM-COROA.png",
+   "g": "look",
+   "h": 768,
+   "inicial": false,
+   "w": 450
+  },
+  "item-lenco": {
+   "a": "looks/item-lenco.webp",
+   "alfa": true,
+   "b": 53362,
+   "fonte": "ITEM-LENCO.png",
+   "g": "look",
+   "h": 768,
+   "inicial": false,
+   "w": 458
+  },
+  "item-oculos": {
+   "a": "looks/item-oculos.webp",
+   "alfa": true,
+   "b": 49010,
+   "fonte": "ITEM-OCULOS.png",
+   "g": "look",
+   "h": 768,
+   "inicial": false,
+   "w": 439
+  },
   "otto-p01": {
    "a": "companheiros/otto-p01.webp",
    "alfa": true,
@@ -1370,6 +1460,86 @@
    "inicial": true,
    "w": 766
   },
+  "rec-bilhete": {
+   "a": "recompensas/rec-bilhete.webp",
+   "alfa": true,
+   "b": 6958,
+   "fonte": "REC-BILHETE.png",
+   "g": "recompensa",
+   "h": 160,
+   "inicial": true,
+   "w": 192
+  },
+  "rec-congelador": {
+   "a": "recompensas/rec-congelador.webp",
+   "alfa": true,
+   "b": 5960,
+   "fonte": "REC-CONGELADOR.png",
+   "g": "recompensa",
+   "h": 192,
+   "inicial": true,
+   "w": 133
+  },
+  "rec-estrela": {
+   "a": "recompensas/rec-estrela.webp",
+   "alfa": true,
+   "b": 8200,
+   "fonte": "REC-ESTRELA.png",
+   "g": "recompensa",
+   "h": 185,
+   "inicial": true,
+   "w": 192
+  },
+  "rec-medalha": {
+   "a": "recompensas/rec-medalha.webp",
+   "alfa": true,
+   "b": 7082,
+   "fonte": "REC-MEDALHA.png",
+   "g": "recompensa",
+   "h": 192,
+   "inicial": true,
+   "w": 110
+  },
+  "rec-moeda": {
+   "a": "recompensas/rec-moeda.webp",
+   "alfa": true,
+   "b": 8730,
+   "fonte": "REC-MOEDA.png",
+   "g": "recompensa",
+   "h": 192,
+   "inicial": true,
+   "w": 176
+  },
+  "rec-pergaminho": {
+   "a": "recompensas/rec-pergaminho.webp",
+   "alfa": true,
+   "b": 6404,
+   "fonte": "REC-PERGAMINHO.png",
+   "g": "recompensa",
+   "h": 192,
+   "inicial": true,
+   "w": 157
+  },
+  "rec-presente": {
+   "a": "recompensas/rec-presente.webp",
+   "alfa": true,
+   "b": 6976,
+   "fonte": "REC-PRESENTE.png",
+   "g": "recompensa",
+   "h": 192,
+   "inicial": true,
+   "w": 178
+  },
+  "rec-trofeu": {
+   "a": "recompensas/rec-trofeu.webp",
+   "alfa": true,
+   "b": 10328,
+   "fonte": "REC-TROFEU.png",
+   "g": "recompensa",
+   "h": 192,
+   "inicial": true,
+   "w": 189
+  },
   "rufa-p01": {
    "a": "companheiros/rufa-p01.webp",
    "alfa": true,
@@ -1423,60 +1593,60 @@
   "teo-p01": {
    "a": "companheiros/teo-p01.webp",
    "alfa": true,
-   "b": 34412,
+   "b": 30312,
    "fonte": "TEO-P01.png",
    "g": "companheiro",
    "h": 768,
    "inicial": false,
-   "w": 403
+   "w": 401
   },
   "teo-p02": {
    "a": "companheiros/teo-p02.webp",
    "alfa": true,
-   "b": 35876,
+   "b": 35076,
    "fonte": "TEO-P02.png",
    "g": "companheiro",
    "h": 768,
    "inicial": false,
-   "w": 542
+   "w": 541
   },
   "teo-p03": {
    "a": "companheiros/teo-p03.webp",
    "alfa": true,
-   "b": 33182,
+   "b": 22888,
    "fonte": "TEO-P03.png",
    "g": "companheiro",
-   "h": 768,
+   "h": 712,
    "inicial": false,
-   "w": 373
+   "w": 515
   },
   "teo-p04": {
    "a": "companheiros/teo-p04.webp",
    "alfa": true,
-   "b": 35130,
+   "b": 33704,
    "fonte": "TEO-P04.png",
    "g": "companheiro",
    "h": 768,
    "inicial": false,
-   "w": 398
+   "w": 397
   },
   "teo-sheet": {
    "a": "companheiros/teo-sheet.webp",
    "alfa": true,
-   "b": 33894,
+   "b": 33164,
    "fonte": "TEO-SHEET.png",
    "g": "companheiro",
-   "h": 362,
+   "h": 361,
    "inicial": false,
    "w": 768
   }
  },
  "manifesto_arte_lido": true,
  "totais": {
-  "demanda_bytes": 9178714,
-  "inicial_bytes": 1134072,
-  "itens": 147,
-  "total_bytes": 10312786
+  "demanda_bytes": 9512322,
+  "inicial_bytes": 1235040,
+  "itens": 164,
+  "total_bytes": 10747362
  },
  "versao": 1
 }

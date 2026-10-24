@@ -1334,11 +1334,37 @@ body:has(#licao.on) .aviso-voz{display:none}
   .pe.mostra #acao{flex:1 1 100%;margin:0}
 }
 
-/* cenas com o apagado fora de enquadramento: a luz entra por opacidade (cross-fade) */
-.cena.fade .cena-luz{-webkit-mask-image:none;mask-image:none;opacity:var(--op,0);transition:opacity var(--mov-lento) var(--curva-move)}
-@media (prefers-reduced-motion:reduce){.cena.fade .cena-luz{transition:none}}
-.marcar{display:flex;align-items:flex-start;gap:var(--esp-8);text-align:left;margin:var(--esp-8) 0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto-suave)}
-.marcar input{width:24px;height:24px;flex:none;accent-color:var(--materia-base)}
+/* ---------- looks do Bobby (urso inteiro com o item), ícones de recompensa e baú em arte ---------- */
+.look-retrato{display:block;aspect-ratio:1/1;overflow:hidden;background:none}
+.look-retrato img{display:block;width:100%;height:auto;max-width:none}
+.look-retrato.avatar{border-radius:var(--raio-pilula);border:2px solid var(--materia-base);background:var(--materia-suave)}
+.look-retrato.avatar img{width:100%;margin-top:0}
+.look-corpo{display:block;height:auto;max-width:100%}
+.palco-bobby .look-corpo{height:min(78vw,340px);width:auto;margin-top:var(--esp-24)}
+.mascote.entra,.look-corpo.entra{animation:so-opacidade var(--mov-padrao) var(--curva-entra) both}
+@keyframes so-opacidade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.mascote.entra,.look-corpo.entra{animation:none}}
+.item-look{height:128px}
+.item-look .look-retrato{height:100%;aspect-ratio:1/1;border-radius:var(--raio-16);background:var(--materia-suave)}
+.perfil-bobby .look-corpo,.folha-bobby .look-corpo{width:auto;height:100%}
+.fim .look-corpo{height:200px;margin:0 auto var(--esp-8)}
+.ic-arte{display:block;width:24px;height:24px;object-fit:contain;flex:none}
+.stat .ic-arte{width:24px;height:24px}
+.stat-card .ic-arte{width:32px;height:32px;margin:0 auto var(--esp-4)}
+.gelo-chip .ic-arte,.gelo-n .ic-arte{width:20px;height:20px}
+.rotina-estrela .ic-arte,.fim-of .ic-arte{width:32px;height:32px}
+.mundo-ok .ic-arte{width:32px;height:32px}
+.revisao-no .bt .ic-arte{width:44px;height:44px}
+.medalha .ic-arte{width:44px;height:44px;margin:0 auto var(--esp-4)}
+.medalha:not(.on) .ic-arte{filter:grayscale(1);opacity:.6}
+.saldo .ic-arte{width:28px;height:28px}
+.btn-acao .ic-arte{width:28px;height:28px}
+.missoes li>.ic-arte{width:32px;height:32px}
+.folha-lista.icones li{display:flex;align-items:center;gap:var(--esp-8)}
+.folha-lista.icones .ic-arte{width:32px;height:32px}
+.bau-cena .bau-img{width:100%;height:auto;max-height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px var(--cor-sombra))}
+.bau-cena .bau-fig{width:128px;height:112px;margin:0 0 0 calc(-1 * var(--esp-24))}
+.bau-cena.aberto .bau-img{filter:drop-shadow(0 0 16px var(--cor-ouro))}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -1431,7 +1457,7 @@ body:has(#licao.on) .aviso-voz{display:none}
 
 <div class="modal folha" id="folha" role="dialog" aria-modal="true"></div>
 
-<script>const ATIVOS={"bobby-e01":["expressoes/bobby-e01.webp",768,750],"bobby-e02":["expressoes/bobby-e02.webp",710,722],"bobby-e03":["expressoes/bobby-e03.webp",725,735],"bobby-e04":["expressoes/bobby-e04.webp",740,768],"bobby-e05":["expressoes/bobby-e05.webp",768,766],"bobby-e06":["expressoes/bobby-e06.webp",768,757],"bobby-e07":["expressoes/bobby-e07.webp",768,741],"bobby-e08":["expressoes/bobby-e08.webp",768,744],"bobby-item-chapeu":["itens/bobby-item-chapeu.webp",512,292],"bobby-p01":["personagens/bobby-p01.webp",521,768],"bobby-p02":["personagens/bobby-p02.webp",612,768],"bobby-p03":["personagens/bobby-p03.webp",383,768],"bobby-p04":["personagens/bobby-p04.webp",556,768],"bobby-p05a":["personagens/bobby-p05a.webp",506,768],"bobby-p05b":["personagens/bobby-p05b.webp",486,768],"bobby-p06":["personagens/bobby-p06.webp",422,768],"bobby-p07":["personagens/bobby-p07.webp",459,768],"bobby-p08":["personagens/bobby-p08.webp",449,768],"bobby-p09":["personagens/bobby-p09.webp",483,768],"bobby-p10":["personagens/bobby-p10.webp",378,768],"bobby-p11":["personagens/bobby-p11.webp",507,768],"bobby-p12":["personagens/bobby-p12.webp",671,768],"bobby-sheet":["personagens/bobby-sheet.webp",768,337],"bobby-sheet-frente":["personagens/bobby-sheet-frente.webp",685,768],"brisa-p01":["companheiros/brisa-p01.webp",574,768],"brisa-p02":["companheiros/brisa-p02.webp",557,768],"brisa-p03":["companheiros/brisa-p03.webp",444,768],"brisa-p04":["companheiros/brisa-p04.webp",473,768],"brisa-sheet":["companheiros/brisa-sheet.webp",768,338],"capi-p01":["companheiros/capi-p01.webp",518,768],"capi-p02":["companheiros/capi-p02.webp",520,768],"capi-p03":["companheiros/capi-p03.webp",512,768],"capi-p04":["companheiros/capi-p04.webp",548,768],"capi-sheet":["companheiros/capi-sheet.webp",768,326],"cen-ing01-apagado":["cenarios/cen-ing01-apagado.webp",765,1024],"cen-ing01-completo":["cenarios/cen-ing01-completo.webp",765,1024],"cen-ing02-apagado":["cenarios/cen-ing02-apagado.webp",765,1024],"cen-ing02-completo":["cenarios/cen-ing02-completo.webp",765,1024],"cen-ing03-apagado":["cenarios/cen-ing03-apagado.webp",765,1024],"cen-ing03-completo":["cenarios/cen-ing03-completo.webp",765,1024],"cen-ing04-apagado":["cenarios/cen-ing04-apagado.webp",765,1024],"cen-ing04-completo":["cenarios/cen-ing04-completo.webp",765,1024],"cen-ing05-apagado":["cenarios/cen-ing05-apagado.webp",765,1024],"cen-ing05-completo":["cenarios/cen-ing05-completo.webp",765,1024],"cen-ing06-apagado":["cenarios/cen-ing06-apagado.webp",765,1024],"cen-ing06-completo":["cenarios/cen-ing06-completo.webp",765,1024],"cen-ing07-apagado":["cenarios/cen-ing07-apagado.webp",765,1024],"cen-ing07-completo":["cenarios/cen-ing07-completo.webp",765,1024],"cen-ing08-apagado":["cenarios/cen-ing08-apagado.webp",765,1024],"cen-ing08-completo":["cenarios/cen-ing08-completo.webp",765,1024],"cen-ing09-apagado":["cenarios/cen-ing09-apagado.webp",765,1024],"cen-ing09-completo":["cenarios/cen-ing09-completo.webp",765,1024],"cen-ing10-apagado":["cenarios/cen-ing10-apagado.webp",765,1024],"cen-ing10-completo":["cenarios/cen-ing10-completo.webp",765,1024],"cen-mat01-apagado":["cenarios/cen-mat01-apagado.webp",765,1024],"cen-mat01-completo":["cenarios/cen-mat01-completo.webp",765,1024],"cen-mat02-apagado":["cenarios/cen-mat02-apagado.webp",765,1024],"cen-mat02-completo":["cenarios/cen-mat02-completo.webp",765,1024],"cen-mat03-apagado":["cenarios/cen-mat03-apagado.webp",765,1024],"cen-mat03-completo":["cenarios/cen-mat03-completo.webp",765,1024],"cen-mat04-apagado":["cenarios/cen-mat04-apagado.webp",765,1024],"cen-mat04-completo":["cenarios/cen-mat04-completo.webp",765,1024],"cen-mat05-apagado":["cenarios/cen-mat05-apagado.webp",765,1024],"cen-mat05-completo":["cenarios/cen-mat05-completo.webp",765,1024],"cen-mat06-apagado":["cenarios/cen-mat06-apagado.webp",765,1024],"cen-mat06-completo":["cenarios/cen-mat06-completo.webp",765,1024],"cen-mat07-apagado":["cenarios/cen-mat07-apagado.webp",765,1024],"cen-mat07-completo":["cenarios/cen-mat07-completo.webp",765,1024],"cen-mat08-apagado":["cenarios/cen-mat08-apagado.webp",765,1024],"cen-mat08-completo":["cenarios/cen-mat08-completo.webp",765,1024],"cen-mat09-apagado":["cenarios/cen-mat09-apagado.webp",765,1024],"cen-mat09-completo":["cenarios/cen-mat09-completo.webp",765,1024],"cen-mat10-apagado":["cenarios/cen-mat10-apagado.webp",765,1024],"cen-mat10-completo":["cenarios/cen-mat10-completo.webp",765,1024],"cen-por01-apagado":["cenarios/cen-por01-apagado.webp",765,1024],"cen-por01-completo":["cenarios/cen-por01-completo.webp",765,1024],"cen-por02-apagado":["cenarios/cen-por02-apagado.webp",765,1024],"cen-por02-completo":["cenarios/cen-por02-completo.webp",765,1024],"cen-por03-apagado":["cenarios/cen-por03-apagado.webp",765,1024],"cen-por03-completo":["cenarios/cen-por03-completo.webp",765,1024],"cen-por04-apagado":["cenarios/cen-por04-apagado.webp",765,1024],"cen-por04-completo":["cenarios/cen-por04-completo.webp",765,1024],"cen-por05-apagado":["cenarios/cen-por05-apagado.webp",765,1024],"cen-por05-completo":["cenarios/cen-por05-completo.webp",765,1024],"cen-por06-apagado":["cenarios/cen-por06-apagado.webp",765,1024],"cen-por06-completo":["cenarios/cen-por06-completo.webp",765,1024],"cen-por07-apagado":["cenarios/cen-por07-apagado.webp",765,1024],"cen-por07-completo":["cenarios/cen-por07-completo.webp",765,1024],"cen-por08-apagado":["cenarios/cen-por08-apagado.webp",765,1024],"cen-por08-completo":["cenarios/cen-por08-completo.webp",765,1024],"cen-por09-apagado":["cenarios/cen-por09-apagado.webp",765,1024],"cen-por09-completo":["cenarios/cen-por09-completo.webp",765,1024],"cen-por10-apagado":["cenarios/cen-por10-apagado.webp",765,1024],"cen-por10-completo":["cenarios/cen-por10-completo.webp",765,1024],"des-ing01":["desenhos/des-ing01.webp",765,1024],"des-ing02":["desenhos/des-ing02.webp",765,1024],"des-ing03":["desenhos/des-ing03.webp",765,1024],"des-ing04":["desenhos/des-ing04.webp",765,1024],"des-ing05":["desenhos/des-ing05.webp",765,1024],"des-ing06":["desenhos/des-ing06.webp",765,1024],"des-ing07":["desenhos/des-ing07.webp",765,1024],"des-ing08":["desenhos/des-ing08.webp",765,1024],"des-ing09":["desenhos/des-ing09.webp",765,1024],"des-ing10":["desenhos/des-ing10.webp",765,1024],"des-mat01":["desenhos/des-mat01.webp",765,1024],"des-mat02":["desenhos/des-mat02.webp",765,1024],"des-mat03":["desenhos/des-mat03.webp",765,1024],"des-mat04":["desenhos/des-mat04.webp",765,1024],"des-mat05":["desenhos/des-mat05.webp",765,1024],"des-mat06":["desenhos/des-mat06.webp",765,1024],"des-mat07":["desenhos/des-mat07.webp",765,1024],"des-mat08":["desenhos/des-mat08.webp",765,1024],"des-mat09":["desenhos/des-mat09.webp",765,1024],"des-mat10":["desenhos/des-mat10.webp",765,1024],"des-por01":["desenhos/des-por01.webp",765,1024],"des-por02":["desenhos/des-por02.webp",765,1024],"des-por03":["desenhos/des-por03.webp",765,1024],"des-por04":["desenhos/des-por04.webp",765,1024],"des-por05":["desenhos/des-por05.webp",765,1024],"des-por06":["desenhos/des-por06.webp",765,1024],"des-por07":["desenhos/des-por07.webp",765,1024],"des-por08":["desenhos/des-por08.webp",765,1024],"des-por09":["desenhos/des-por09.webp",765,1024],"des-por10":["desenhos/des-por10.webp",765,1024],"fagulha-p01":["companheiros/fagulha-p01.webp",600,765],"fagulha-p02":["companheiros/fagulha-p02.webp",643,754],"fagulha-p03":["companheiros/fagulha-p03.webp",547,688],"fagulha-p04":["companheiros/fagulha-p04.webp",605,768],"fagulha-sheet":["companheiros/fagulha-sheet.webp",768,282],"otto-p01":["companheiros/otto-p01.webp",427,768],"otto-p02":["companheiros/otto-p02.webp",499,768],"otto-p03":["companheiros/otto-p03.webp",497,768],"otto-p04":["companheiros/otto-p04.webp",429,768],"otto-sheet":["companheiros/otto-sheet.webp",768,366],"planeta-ing":["planetas/planeta-ing.webp",730,725],"planeta-mat":["planetas/planeta-mat.webp",848,748],"planeta-por":["planetas/planeta-por.webp",766,910],"rufa-p01":["companheiros/rufa-p01.webp",491,768],"rufa-p02":["companheiros/rufa-p02.webp",506,768],"rufa-p03":["companheiros/rufa-p03.webp",526,768],"rufa-p04":["companheiros/rufa-p04.webp",382,768],"rufa-sheet":["companheiros/rufa-sheet.webp",768,357],"teo-p01":["companheiros/teo-p01.webp",403,768],"teo-p02":["companheiros/teo-p02.webp",542,768],"teo-p03":["companheiros/teo-p03.webp",373,768],"teo-p04":["companheiros/teo-p04.webp",398,768],"teo-sheet":["companheiros/teo-sheet.webp",768,362]};</script>
+<script>const ATIVOS={"bau-aberto":["recompensas/bau-aberto.webp",512,509],"bau-fechado":["recompensas/bau-fechado.webp",512,443],"bobby-e01":["expressoes/bobby-e01.webp",768,750],"bobby-e02":["expressoes/bobby-e02.webp",710,722],"bobby-e03":["expressoes/bobby-e03.webp",725,735],"bobby-e04":["expressoes/bobby-e04.webp",740,768],"bobby-e05":["expressoes/bobby-e05.webp",768,766],"bobby-e06":["expressoes/bobby-e06.webp",768,757],"bobby-e07":["expressoes/bobby-e07.webp",768,741],"bobby-e08":["expressoes/bobby-e08.webp",768,744],"bobby-item-chapeu":["itens/bobby-item-chapeu.webp",512,292],"bobby-p01":["personagens/bobby-p01.webp",521,768],"bobby-p02":["personagens/bobby-p02.webp",612,768],"bobby-p03":["personagens/bobby-p03.webp",383,768],"bobby-p04":["personagens/bobby-p04.webp",556,768],"bobby-p05a":["personagens/bobby-p05a.webp",506,768],"bobby-p05b":["personagens/bobby-p05b.webp",486,768],"bobby-p06":["personagens/bobby-p06.webp",422,768],"bobby-p07":["personagens/bobby-p07.webp",459,768],"bobby-p08":["personagens/bobby-p08.webp",449,768],"bobby-p09":["personagens/bobby-p09.webp",483,768],"bobby-p10":["personagens/bobby-p10.webp",378,768],"bobby-p11":["personagens/bobby-p11.webp",507,768],"bobby-p12":["personagens/bobby-p12.webp",671,768],"bobby-sheet":["personagens/bobby-sheet.webp",768,337],"bobby-sheet-frente":["personagens/bobby-sheet-frente.webp",685,768],"brisa-p01":["companheiros/brisa-p01.webp",574,768],"brisa-p02":["companheiros/brisa-p02.webp",557,768],"brisa-p03":["companheiros/brisa-p03.webp",444,768],"brisa-p04":["companheiros/brisa-p04.webp",473,768],"brisa-sheet":["companheiros/brisa-sheet.webp",768,338],"capi-p01":["companheiros/capi-p01.webp",513,768],"capi-p02":["companheiros/capi-p02.webp",519,768],"capi-p03":["companheiros/capi-p03.webp",509,768],"capi-p04":["companheiros/capi-p04.webp",550,768],"capi-sheet":["companheiros/capi-sheet.webp",768,326],"cen-ing01-apagado":["cenarios/cen-ing01-apagado.webp",765,1024],"cen-ing01-completo":["cenarios/cen-ing01-completo.webp",765,1024],"cen-ing02-apagado":["cenarios/cen-ing02-apagado.webp",765,1024],"cen-ing02-completo":["cenarios/cen-ing02-completo.webp",765,1024],"cen-ing03-apagado":["cenarios/cen-ing03-apagado.webp",765,1024],"cen-ing03-completo":["cenarios/cen-ing03-completo.webp",765,1024],"cen-ing04-apagado":["cenarios/cen-ing04-apagado.webp",765,1024],"cen-ing04-completo":["cenarios/cen-ing04-completo.webp",765,1024],"cen-ing05-apagado":["cenarios/cen-ing05-apagado.webp",765,1024],"cen-ing05-completo":["cenarios/cen-ing05-completo.webp",765,1024],"cen-ing06-apagado":["cenarios/cen-ing06-apagado.webp",765,1024],"cen-ing06-completo":["cenarios/cen-ing06-completo.webp",765,1024],"cen-ing07-apagado":["cenarios/cen-ing07-apagado.webp",765,1024],"cen-ing07-completo":["cenarios/cen-ing07-completo.webp",765,1024],"cen-ing08-apagado":["cenarios/cen-ing08-apagado.webp",765,1024],"cen-ing08-completo":["cenarios/cen-ing08-completo.webp",765,1024],"cen-ing09-apagado":["cenarios/cen-ing09-apagado.webp",765,1024],"cen-ing09-completo":["cenarios/cen-ing09-completo.webp",765,1024],"cen-ing10-apagado":["cenarios/cen-ing10-apagado.webp",765,1024],"cen-ing10-completo":["cenarios/cen-ing10-completo.webp",765,1024],"cen-mat01-apagado":["cenarios/cen-mat01-apagado.webp",765,1024],"cen-mat01-completo":["cenarios/cen-mat01-completo.webp",765,1024],"cen-mat02-apagado":["cenarios/cen-mat02-apagado.webp",765,1024],"cen-mat02-completo":["cenarios/cen-mat02-completo.webp",765,1024],"cen-mat03-apagado":["cenarios/cen-mat03-apagado.webp",765,1024],"cen-mat03-completo":["cenarios/cen-mat03-completo.webp",765,1024],"cen-mat04-apagado":["cenarios/cen-mat04-apagado.webp",765,1024],"cen-mat04-completo":["cenarios/cen-mat04-completo.webp",765,1024],"cen-mat05-apagado":["cenarios/cen-mat05-apagado.webp",765,1024],"cen-mat05-completo":["cenarios/cen-mat05-completo.webp",765,1024],"cen-mat06-apagado":["cenarios/cen-mat06-apagado.webp",765,1024],"cen-mat06-completo":["cenarios/cen-mat06-completo.webp",765,1024],"cen-mat07-apagado":["cenarios/cen-mat07-apagado.webp",765,1024],"cen-mat07-completo":["cenarios/cen-mat07-completo.webp",765,1024],"cen-mat08-apagado":["cenarios/cen-mat08-apagado.webp",765,1024],"cen-mat08-completo":["cenarios/cen-mat08-completo.webp",765,1024],"cen-mat09-apagado":["cenarios/cen-mat09-apagado.webp",765,1024],"cen-mat09-completo":["cenarios/cen-mat09-completo.webp",765,1024],"cen-mat10-apagado":["cenarios/cen-mat10-apagado.webp",765,1024],"cen-mat10-completo":["cenarios/cen-mat10-completo.webp",765,1024],"cen-por01-apagado":["cenarios/cen-por01-apagado.webp",765,1024],"cen-por01-completo":["cenarios/cen-por01-completo.webp",765,1024],"cen-por02-apagado":["cenarios/cen-por02-apagado.webp",765,1024],"cen-por02-completo":["cenarios/cen-por02-completo.webp",765,1024],"cen-por03-apagado":["cenarios/cen-por03-apagado.webp",765,1024],"cen-por03-completo":["cenarios/cen-por03-completo.webp",765,1024],"cen-por04-apagado":["cenarios/cen-por04-apagado.webp",765,1024],"cen-por04-completo":["cenarios/cen-por04-completo.webp",765,1024],"cen-por05-apagado":["cenarios/cen-por05-apagado.webp",765,1024],"cen-por05-completo":["cenarios/cen-por05-completo.webp",765,1024],"cen-por06-apagado":["cenarios/cen-por06-apagado.webp",765,1024],"cen-por06-completo":["cenarios/cen-por06-completo.webp",765,1024],"cen-por07-apagado":["cenarios/cen-por07-apagado.webp",765,1024],"cen-por07-completo":["cenarios/cen-por07-completo.webp",765,1024],"cen-por08-apagado":["cenarios/cen-por08-apagado.webp",765,1024],"cen-por08-completo":["cenarios/cen-por08-completo.webp",765,1024],"cen-por09-apagado":["cenarios/cen-por09-apagado.webp",765,1024],"cen-por09-completo":["cenarios/cen-por09-completo.webp",765,1024],"cen-por10-apagado":["cenarios/cen-por10-apagado.webp",765,1024],"cen-por10-completo":["cenarios/cen-por10-completo.webp",765,1024],"des-ing01":["desenhos/des-ing01.webp",765,1024],"des-ing02":["desenhos/des-ing02.webp",765,1024],"des-ing03":["desenhos/des-ing03.webp",765,1024],"des-ing04":["desenhos/des-ing04.webp",765,1024],"des-ing05":["desenhos/des-ing05.webp",765,1024],"des-ing06":["desenhos/des-ing06.webp",765,1024],"des-ing07":["desenhos/des-ing07.webp",765,1024],"des-ing08":["desenhos/des-ing08.webp",765,1024],"des-ing09":["desenhos/des-ing09.webp",765,1024],"des-ing10":["desenhos/des-ing10.webp",765,1024],"des-mat01":["desenhos/des-mat01.webp",765,1024],"des-mat02":["desenhos/des-mat02.webp",765,1024],"des-mat03":["desenhos/des-mat03.webp",765,1024],"des-mat04":["desenhos/des-mat04.webp",765,1024],"des-mat05":["desenhos/des-mat05.webp",765,1024],"des-mat06":["desenhos/des-mat06.webp",765,1024],"des-mat07":["desenhos/des-mat07.webp",765,1024],"des-mat08":["desenhos/des-mat08.webp",765,1024],"des-mat09":["desenhos/des-mat09.webp",765,1024],"des-mat10":["desenhos/des-mat10.webp",765,1024],"des-por01":["desenhos/des-por01.webp",765,1024],"des-por02":["desenhos/des-por02.webp",765,1024],"des-por03":["desenhos/des-por03.webp",765,1024],"des-por04":["desenhos/des-por04.webp",765,1024],"des-por05":["desenhos/des-por05.webp",765,1024],"des-por06":["desenhos/des-por06.webp",765,1024],"des-por07":["desenhos/des-por07.webp",765,1024],"des-por08":["desenhos/des-por08.webp",765,1024],"des-por09":["desenhos/des-por09.webp",765,1024],"des-por10":["desenhos/des-por10.webp",765,1024],"fagulha-p01":["companheiros/fagulha-p01.webp",600,765],"fagulha-p02":["companheiros/fagulha-p02.webp",643,754],"fagulha-p03":["companheiros/fagulha-p03.webp",547,688],"fagulha-p04":["companheiros/fagulha-p04.webp",605,768],"fagulha-sheet":["companheiros/fagulha-sheet.webp",768,282],"item-base":["looks/item-base.webp",415,768],"item-bone":["looks/item-bone.webp",431,768],"item-capa":["looks/item-capa.webp",462,768],"item-capacete":["looks/item-capacete.webp",432,768],"item-coroa":["looks/item-coroa.webp",450,768],"item-lenco":["looks/item-lenco.webp",458,768],"item-oculos":["looks/item-oculos.webp",439,768],"otto-p01":["companheiros/otto-p01.webp",427,768],"otto-p02":["companheiros/otto-p02.webp",499,768],"otto-p03":["companheiros/otto-p03.webp",497,768],"otto-p04":["companheiros/otto-p04.webp",429,768],"otto-sheet":["companheiros/otto-sheet.webp",768,366],"planeta-ing":["planetas/planeta-ing.webp",730,725],"planeta-mat":["planetas/planeta-mat.webp",848,748],"planeta-por":["planetas/planeta-por.webp",766,910],"rec-bilhete":["recompensas/rec-bilhete.webp",192,160],"rec-congelador":["recompensas/rec-congelador.webp",133,192],"rec-estrela":["recompensas/rec-estrela.webp",192,185],"rec-medalha":["recompensas/rec-medalha.webp",110,192],"rec-moeda":["recompensas/rec-moeda.webp",176,192],"rec-pergaminho":["recompensas/rec-pergaminho.webp",157,192],"rec-presente":["recompensas/rec-presente.webp",178,192],"rec-trofeu":["recompensas/rec-trofeu.webp",189,192],"rufa-p01":["companheiros/rufa-p01.webp",491,768],"rufa-p02":["companheiros/rufa-p02.webp",506,768],"rufa-p03":["companheiros/rufa-p03.webp",526,768],"rufa-p04":["companheiros/rufa-p04.webp",382,768],"rufa-sheet":["companheiros/rufa-sheet.webp",768,357],"teo-p01":["companheiros/teo-p01.webp",401,768],"teo-p02":["companheiros/teo-p02.webp",541,768],"teo-p03":["companheiros/teo-p03.webp",515,712],"teo-p04":["companheiros/teo-p04.webp",397,768],"teo-sheet":["companheiros/teo-sheet.webp",768,361]};</script>
 <script>
 /* ===== Motor de conteúdo — Trilha da Matemática ===== */
 const R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
@@ -4935,52 +4961,73 @@ const FRONTAIS={
   'bobby-e01':[.5,.94],'bobby-e02':[.5,.92],'bobby-e03':[.5,.94],'bobby-e04':[.5,.92],'bobby-e05':[.5,.92],'bobby-e06':[.5,.92],'bobby-e07':[.5,.87],'bobby-e08':[.5,.92]
 };
 /* catálogo do guarda-roupa. 'arte' = existe imagem nova (o item aparece de verdade). Sem 'arte' = item da versão antiga:
-   quem já tinha comprado continua com o direito e vê o item guardado ("volta com a arte nova"); ninguém compra o que não tem arte. */
+   quem já tinha comprado continua com o direito e vê o item guardado ("volta com a arte nova"); ninguém compra o que não tem arte.
+   Dois jeitos de aparecer: modo 'sobrepor' (o chapéu de explorador, por cima das imagens de frente) e 'look' (o urso inteiro usando o item:
+   as poses não coincidem pixel a pixel com a base, então a imagem do Bobby é TROCADA pelo look escolhido, com transição de opacidade).
+   Só um look por vez. Dono de item antigo é dono do look que o substitui (DONOS). */
 const PECAS={
   chapeu:{
-    explorador:{n:'Chapéu de explorador',p:100,arte:'bobby-item-chapeu'},
-    bone:{n:'Boné azul',p:120},festa:{n:'Chapéu de festa',p:180},chef:{n:'Chapéu de chef',p:240},
-    espacial:{n:'Capacete espacial',p:400},pirata:{n:'Chapéu de pirata',p:320},coroa:{n:'Coroa do rei',p:600}
+    explorador:{n:'Chapéu de explorador',p:100,arte:'bobby-item-chapeu',modo:'sobrepor'},
+    bone:{n:'Boné',p:120,arte:'item-bone'},capacete:{n:'Capacete aberto',p:400,arte:'item-capacete'},coroa:{n:'Coroa de papel',p:600,arte:'item-coroa'},
+    festa:{n:'Chapéu de festa',p:180},chef:{n:'Chapéu de chef',p:240},espacial:{n:'Capacete espacial',p:400},pirata:{n:'Chapéu de pirata',p:320}
   },
-  rosto:{oculos:{n:'Óculos redondos',p:150},sol:{n:'Óculos de sol',p:220},heroi:{n:'Máscara de herói',p:280},tapaolho:{n:'Tapa-olho',p:200}},
-  pescoco:{cachecol:{n:'Cachecol',p:180},gravata:{n:'Gravata-borboleta',p:140},medalha:{n:'Medalha de ouro',p:350},capa:{n:'Capa de herói',p:450}},
+  rosto:{oculos:{n:'Óculos de astronauta',p:150,arte:'item-oculos'},sol:{n:'Óculos de sol',p:220},heroi:{n:'Máscara de herói',p:280},tapaolho:{n:'Tapa-olho',p:200}},
+  pescoco:{lenco:{n:'Lenço',p:180,arte:'item-lenco'},capa:{n:'Capa azul',p:450,arte:'item-capa'},cachecol:{n:'Cachecol',p:180},gravata:{n:'Gravata-borboleta',p:140},medalha:{n:'Medalha de ouro',p:350}},
   pelo:{mel:{n:'Pelo mel',p:100},cinza:{n:'Pelo cinza',p:150},panda:{n:'Pelo panda',p:260},polar:{n:'Pelo polar',p:300},rosa:{n:'Pelo rosa',p:220},choco:{n:'Chocolate',p:180}},
   pers:{nina:{n:'Nina, a coelhinha',p:180},pim:{n:'Pim, o gatinho',p:220},zeca:{n:'Zeca, o macaquinho',p:260},lulu:{n:'Lulu, a corujinha',p:320}}
 };
-/* itens que o agente de arte entrega depois: o app só passa a mostrar quando o arquivo existe em ATIVOS (python3 build/ativos.py).
-   Nomes esperados: bobby-item-<nome>. Ancoragem de rosto e pescoço ainda por conferir quando a arte chegar. */
-const ARTE_ESPERADA={chapeu:{bone:'bobby-item-bone',espacial:'bobby-item-capacete',coroa:'bobby-item-coroa'},rosto:{oculos:'bobby-item-oculos'},pescoco:{capa:'bobby-item-capa',cachecol:'bobby-item-lenco'}};
-Object.keys(ARTE_ESPERADA).forEach(sl=>Object.keys(ARTE_ESPERADA[sl]).forEach(id=>{if(ativo(ARTE_ESPERADA[sl][id])&&PECAS[sl][id])PECAS[sl][id].arte=ARTE_ESPERADA[sl][id];}));
-const ABAS_LOJA=[['comp','Companheiro'],['chapeu','Chapéus'],['rosto','Rosto'],['pescoco','Pescoço']];
+const DONOS={capacete:['espacial'],lenco:['cachecol'],oculos:['sol']};
+const LOOKS_ORDEM=[['chapeu','explorador'],['chapeu','bone'],['rosto','oculos'],['pescoco','lenco'],['pescoco','capa'],['chapeu','capacete'],['chapeu','coroa']];
+const SLOTS_LOOK=['chapeu','rosto','pescoco'];
+const ABAS_LOJA=[['comp','Companheiro'],['look','Looks']];
+const EXPRESSAO_IDS=['feliz','radiante','curioso','pensa','surpreso','ops','concentrado','tranquilo'];
 
-/* O Bobby numa tela. exp: nome de BOBBY (oi, feliz, ops...). Devolve <img>, com o chapéu por cima se estiver equipado e a imagem for de frente.
-   alt vazio = decorativo (o texto ao lado já diz tudo). */
+/* o look em uso: {slot,id,peca} ou null (sem item ou sem arte) */
+function lookEmUso(L){
+  L=L||{};
+  for(const sl of SLOTS_LOOK){const id=L[sl];const p=id&&PECAS[sl][id];if(p&&p.arte&&ativo(p.arte))return {slot:sl,id:id,peca:p};}
+  return null;
+}
+/* O Bobby numa tela. exp: nome de BOBBY (oi, feliz, ops...). Devolve a imagem (ou o recorte da cabeça, ou a imagem com o chapéu por cima).
+   alt vazio = decorativo (o texto ao lado já diz tudo). Look de urso inteiro só existe numa pose (a frontal, 'oi') e vira retrato recortado
+   nas expressões; outras poses ficam com a base. */
 function MASC(exp,cls,look,alt){
   const id=BOBBY[exp]||(ativo(exp)?exp:BOBBY.oi);
   const L=look||(typeof S!=='undefined'&&S.look)||{};
+  const uso=lookEmUso(L),avatar=/avatar/.test(cls||'');
+  if(uso&&uso.peca.modo!=='sobrepor'){
+    const retrato=EXPRESSAO_IDS.indexOf(exp)>=0||/^bobby-e0/.test(id);
+    if(retrato)return '<span class="mascote look-retrato'+(cls?' '+cls:'')+'">'+imgArte(uso.peca.arte,{alt:alt||''})+'</span>';
+    if(exp==='oi'||id==='bobby-p01')return imgArte(uso.peca.arte,{cls:'mascote look-corpo'+(cls?' '+cls:''),alt:alt||''});
+  }
   const img=imgArte(id,{cls:'mascote'+(cls?' '+cls:''),alt:alt||''});
-  const peca=L.chapeu&&PECAS.chapeu[L.chapeu],anc=FRONTAIS[id],a=ativo(id);
-  if(!peca||!peca.arte||!anc||!a||!ativo(peca.arte)||/avatar/.test(cls||''))return img;   /* avatar redondo: sem chapéu */
+  const peca=uso&&uso.peca.modo==='sobrepor'?uso.peca:null,anc=FRONTAIS[id],a=ativo(id);
+  if(!peca||!anc||!a||avatar)return img;   /* avatar redondo: sem chapéu */
   const larg=anc[1]*.66,topo=.34*anc[1]*a[1]/a[2];
   return '<span class="bobby-com-item">'+img+imgArte(peca.arte,{cls:'item-chapeu',style:'left:'+(anc[0]*100).toFixed(1)+'%;top:'+(topo*100).toFixed(1)+'%;width:'+(larg*100).toFixed(1)+'%'})+'</span>';
 }
-/* retrato redondo do jogador (barra, topo, perfis): sempre a expressão alegre, sem chapéu (cabe num círculo) */
+/* retrato redondo do jogador (barra, topo, perfis): sempre a expressão alegre, sem item (cabe num círculo) */
 const retratoBobby=cls=>imgArte('bobby-e01',{cls:'retrato'+(cls?' '+cls:''),eager:true});
 
 /* ---------- Meu personagem ---------- */
-let abaLoja='comp',lojaOrigem='perfil',palcoModo='rosto',palcoId='bobby-e01';
-const temItem=id=>(S.comprado||[]).indexOf(id)>=0;
+let abaLoja='comp',lojaOrigem='perfil',palcoModo='rosto',palcoId='bobby-e01',lookAnterior='';
+const temItem=id=>(S.comprado||[]).indexOf(id)>=0||(DONOS[id]||[]).some(o=>(S.comprado||[]).indexOf(o)>=0);
+const antigoSubstituido=id=>Object.keys(DONOS).some(k=>DONOS[k].indexOf(id)>=0);
+function vestir(slot,id){            /* só um look por vez: vestir um tira o outro */
+  S.look=Object.assign({},S.look);
+  SLOTS_LOOK.forEach(sl=>{S.look[sl]='';});
+  if(id)S.look[slot]=id;
+}
 function comprar(slot,id){
   const it=PECAS[slot][id];
   if(!it||!it.arte)return;
   if(S.moedas<it.p){lojaAviso('Faltam '+(it.p-S.moedas)+' moedas para “'+it.n+'”. Cada resposta certa vale 10 moedas.');return;}
   S.moedas-=it.p;S.comprado=(S.comprado||[]).concat([id]);
-  S.look=Object.assign({},S.look);S.look[slot]=id;
+  vestir(slot,id);
   salvar();somMoeda();somFim();telaLoja();
 }
 function equipar(slot,id){
-  S.look=Object.assign({},S.look);
-  S.look[slot]=(S.look[slot]===id?'':id);
+  vestir(slot,(S.look||{})[slot]===id?'':id);
   salvar();somPasso();telaLoja();
 }
 function escolherCompanheiro(id){
@@ -4989,30 +5036,44 @@ function escolherCompanheiro(id){
 }
 function lojaAviso(t){const a=$('#loja-aviso');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
 /* itens que o jogador já comprou na versão antiga e ainda não têm arte nova: ficam guardados */
-function guardadosDa(slot){
+function guardadosDa(aba){
   const r=[];
-  Object.keys(PECAS[slot]||{}).forEach(id=>{const it=PECAS[slot][id];if(!it.arte&&temItem(id))r.push(it.n);});
-  if(slot==='comp')['pers','pelo'].forEach(sl=>Object.keys(PECAS[sl]).forEach(id=>{if(temItem(id))r.push(PECAS[sl][id].n);}));
+  if(aba==='look')SLOTS_LOOK.forEach(sl=>Object.keys(PECAS[sl]).forEach(id=>{const it=PECAS[sl][id];if(!it.arte&&!antigoSubstituido(id)&&temItem(id))r.push(it.n);}));
+  if(aba==='comp')['pers','pelo'].forEach(sl=>Object.keys(PECAS[sl]).forEach(id=>{if(temItem(id))r.push(PECAS[sl][id].n);}));
   return r;
 }
 function palcoHTML(){
   const L=S.look||{};
+  const uso=lookEmUso(L),cheio=!!(uso&&uso.peca.modo!=='sobrepor');
   const ex=EXPRESSOES.concat(POSES);
-  const nomeAtual=(ex.filter(x=>x[0]===palcoId)[0]||['','Alegre'])[1];
+  const nomeAtual=cheio?uso.peca.n:(ex.filter(x=>x[0]===palcoId)[0]||['','Alegre'])[1];
   const comp=COMPANHEIROS.filter(c=>c.id===L.companheiro)[0]||null;
-  const chapeuEq=L.chapeu&&PECAS.chapeu[L.chapeu]&&PECAS.chapeu[L.chapeu].arte;
+  const chapeuEq=uso&&uso.peca.modo==='sobrepor';
   const semChapeu=chapeuEq&&!FRONTAIS[palcoId];
-  const grande=MASC(palcoId,'bobby-grande',L,'Bobby, o ursinho explorador, '+nomeAtual.toLowerCase()+(chapeuEq&&FRONTAIS[palcoId]?', de chapéu':''));
+  const mudou=(uso?uso.id:'')!==lookAnterior;lookAnterior=uso?uso.id:'';
+  const grande=cheio
+    ?imgArte(uso.peca.arte,{cls:'mascote look-corpo bobby-grande'+(mudou?' entra':''),alt:'Bobby, o ursinho explorador, com '+uso.peca.n.toLowerCase()})
+    :MASC(palcoId,'bobby-grande'+(mudou?' entra':''),L,'Bobby, o ursinho explorador, '+nomeAtual.toLowerCase()+(chapeuEq&&FRONTAIS[palcoId]?', de chapéu':''));
   let h='<section class="palco" aria-label="Seu personagem">'+
-    '<button class="palco-bobby '+(palcoModo==='corpo'?'corpo':'rosto')+'" id="palco-bobby" aria-label="Bobby, '+nomeAtual.toLowerCase()+'. Toque para mudar a expressão">'+grande+'</button>';
+    '<button class="palco-bobby '+(cheio||palcoModo==='corpo'?'corpo':'rosto')+'" id="palco-bobby" aria-label="Bobby, '+nomeAtual.toLowerCase()+(cheio?'':'. Toque para mudar a expressão')+'">'+grande+'</button>';
   if(comp)h+='<div class="palco-comp">'+imgArte(comp.id+'-p01',{alt:comp.n+', '+comp.quem})+'</div>';
-  h+='<p class="palco-nome" aria-live="polite"><b>Bobby</b> · '+nomeAtual+(semChapeu?'<small>O chapéu aparece nas imagens de frente.</small>':'')+'</p></section>';
+  h+='<p class="palco-nome" aria-live="polite"><b>Bobby</b> · '+escapa(nomeAtual)+(semChapeu?'<small>O chapéu aparece nas imagens de frente.</small>':'')+
+     (cheio?'<small>Com um item de look o Bobby fica nesta pose. Tire o item para trocar a expressão.</small>':'')+'</p></section>';
+  if(cheio)return h;
   h+='<div class="palco-modos" role="group" aria-label="O que mostrar"><button class="aba'+(palcoModo==='rosto'?' on':'')+'" data-modo="rosto">Rosto</button>'+
      '<button class="aba'+(palcoModo==='corpo'?' on':'')+'" data-modo="corpo">Corpo inteiro</button></div>';
   const lista=palcoModo==='rosto'?EXPRESSOES:POSES;
   h+='<div class="palco-escolha" role="group" aria-label="'+(palcoModo==='rosto'?'Expressões':'Poses')+'">'+lista.map(x=>
     '<button class="mini-pose'+(x[0]===palcoId?' on':'')+'" data-pose="'+x[0]+'" aria-label="'+x[1]+'" aria-pressed="'+(x[0]===palcoId)+'">'+imgArte(x[0],{})+'<span>'+(x[2]||x[1])+'</span></button>').join('')+'</div>';
   return h;
+}
+function cartaoLook(slot,id){
+  const it=PECAS[slot][id],L=S.look||{},tem=temItem(id),eq=L[slot]===id;
+  const bt=tem?'<button class="btn-sec" data-eq="'+slot+'|'+id+'">'+(eq?'Tirar':'Usar')+'</button>'
+              :'<button class="'+(S.moedas<it.p?'btn-sec':'btn-acao')+'" data-buy="'+slot+'|'+id+'">'+IC.moeda+' '+it.p+'</button>';
+  const figura=it.modo==='sobrepor'?'<div class="item-img item-peca">'+imgArte(it.arte,{})+'</div>'
+    :'<div class="item-img item-look"><span class="look-retrato">'+imgArte(it.arte,{})+'</span></div>';
+  return '<div class="item'+(eq?' equipado':'')+'">'+(eq?'<span class="selo">'+IC.certo+' em uso</span>':'')+figura+'<b>'+it.n+'</b>'+bt+'</div>';
 }
 function telaLoja(){
   const L=S.look||{};
@@ -5029,20 +5090,14 @@ function telaLoja(){
         '<button class="btn-sec" data-comp="'+c.id+'"'+(eq?' aria-pressed="true"':'')+'>'+(eq?'Tirar':'Chamar')+'</button></div>';
     });
   }else{
-    Object.keys(PECAS[abaLoja]).forEach(id=>{
-      const it=PECAS[abaLoja][id];
-      if(!it.arte)return;
-      const tem=temItem(id),eq=L[abaLoja]===id;
-      const bt=tem?'<button class="btn-sec" data-eq="'+abaLoja+'|'+id+'">'+(eq?'Tirar':'Usar')+'</button>'
-                  :'<button class="'+(S.moedas<it.p?'btn-sec':'btn-acao')+'" data-buy="'+abaLoja+'|'+id+'">'+IC.moeda+' '+it.p+'</button>';
-      h+='<div class="item'+(eq?' equipado':'')+'">'+(eq?'<span class="selo">'+IC.certo+' em uso</span>':'')+
-        '<div class="item-img item-peca">'+imgArte(it.arte,{})+'</div><b>'+it.n+'</b>'+bt+'</div>';
-    });
-    if(!Object.keys(PECAS[abaLoja]).some(id=>PECAS[abaLoja][id].arte))
-      h+='<div class="item vazio"><b>Chega em breve</b><span class="tipo">Esta parte do guarda-roupa ainda está sendo desenhada.</span></div>';
+    const nenhum=!lookEmUso(L);
+    h+='<div class="item'+(nenhum?' equipado':'')+'">'+(nenhum?'<span class="selo">'+IC.certo+' em uso</span>':'')+
+      '<div class="item-img item-look"><span class="look-retrato">'+imgArte('item-base',{})+'</span></div><b>Sem item</b><span class="tipo">o Bobby de sempre</span>'+
+      '<button class="btn-sec" data-semlook="1"'+(nenhum?' disabled':'')+'>'+(nenhum?'Em uso':'Usar')+'</button></div>';
+    LOOKS_ORDEM.forEach(par=>{if(PECAS[par[0]][par[1]]&&PECAS[par[0]][par[1]].arte&&ativo(PECAS[par[0]][par[1]].arte))h+=cartaoLook(par[0],par[1]);});
   }
   h+='</div>';
-  h+='<p class="dica-loja">'+(abaLoja==='comp'?'O companheiro aparece no mapa e na sua tela.':'Cada resposta certa vale 10 moedas. Mais peças chegam em breve, e o baú do dia também traz roupas.')+'</p>';
+  h+='<p class="dica-loja">'+(abaLoja==='comp'?'O companheiro aparece no mapa e na sua tela.':'Cada resposta certa vale 10 moedas. Um look por vez; mais itens chegam em breve, e o baú do dia também traz roupas.')+'</p>';
   const guard=guardadosDa(abaLoja);
   if(guard.length)h+='<p class="guardados"><b>Guardados para a arte nova:</b> '+guard.map(escapa).join(', ')+'. Eles continuam seus e voltam quando ficarem prontos.</p>';
   h+='</div>';
@@ -5058,6 +5113,7 @@ function telaLoja(){
   P.querySelectorAll('[data-pose]').forEach(b=>b.addEventListener('click',()=>{palcoId=b.dataset.pose;trocarPalco();}));
   const pb=$('#palco-bobby');
   if(pb)pb.addEventListener('click',()=>{
+    if(lookEmUso(S.look)&&lookEmUso(S.look).peca.modo!=='sobrepor')return;
     /* tocar no Bobby troca a expressão (ou a pose): vai para a próxima da lista */
     const lista=(palcoModo==='rosto'?EXPRESSOES:POSES).map(x=>x[0]);
     palcoId=lista[(lista.indexOf(palcoId)+1)%lista.length];trocarPalco();
@@ -5065,6 +5121,7 @@ function telaLoja(){
   P.querySelectorAll('[data-comp]').forEach(b=>b.addEventListener('click',()=>escolherCompanheiro(S.look&&S.look.companheiro===b.dataset.comp?'':b.dataset.comp)));
   P.querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.buy.split('|');comprar(q[0],q[1]);}));
   P.querySelectorAll('[data-eq]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.eq.split('|');equipar(q[0],q[1]);}));
+  P.querySelectorAll('[data-semlook]').forEach(b=>b.addEventListener('click',()=>{vestir('',''); salvar();somPasso();telaLoja();}));
   if(typeof pintarBarra==='function')pintarBarra();
 }
 /* troca só o palco (sem refazer a tela inteira) para a expressão mudar na hora, sem pulo na rolagem */
@@ -5987,8 +6044,6 @@ function passosDe(l){
 const NOS=[[16,78],[50,74],[84,78],[84,52],[50,48],[16,52]];   /* x e y em %; o 6º é a revisão */
 const REV_TOPO=70,REV_VAO=78;                                    /* faixa da revelação: de 70% (nada aceso) a -8% (tudo aceso) */
 const revPct=k=>(REV_TOPO-REV_VAO*Math.max(0,Math.min(5,k))/5).toFixed(1)+'%';
-/* cenas cujo "apagado" saiu fora de enquadramento (arte a realinhar): acendem por cross-fade, não por máscara */
-const CENA_FADE=['mat06','mat07','por09'];
 const NO_ANTES={},REV_ANTES={};                                  /* onde o Bobby e a luz estavam no desenho anterior (só nesta sessão) */
 
 function trilhaPontos(){
@@ -6011,8 +6066,7 @@ function cenaHTML(u,k){
   const cena=cenaDaEtapa(MATERIA,u.n),pl=PLANETAS[MATERIA];
   if(cena){
     const ant=REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n];
-    const fade=CENA_FADE.indexOf(PLANETAS[MATERIA].cena+('0'+u.n).slice(-2))>=0;
-    return '<div class="cena'+(fade?' fade':'')+'" data-k="'+k+'" style="--rev:'+revPct(ant)+';--op:'+(ant/5).toFixed(2)+'">'+
+    return '<div class="cena" data-k="'+k+'" style="--rev:'+revPct(ant)+'">'+
       imgArte(cena.apagado,{cls:'cena-base'})+imgArte(cena.completo,{cls:'cena-luz'});
   }
   /* sem arte da etapa: o planeta no céu da matéria; apagado por filtro, aceso pela mesma revelação */
@@ -6069,10 +6123,10 @@ function animarMapa(prox){
     const sec=el.closest('.etapa'),ui=+sec.id.replace('etapa-','')-1,chave=MATERIA+UNITS[ui].n,k=+el.dataset.k;
     const antes=REV_ANTES[chave];REV_ANTES[chave]=k;
     if(antes!=null&&antes!==k){
-      const acende=()=>{el.style.setProperty('--rev',revPct(k));el.style.setProperty('--op',(k/5).toFixed(2));};
+      const acende=()=>{el.style.setProperty('--rev',revPct(k));};
       if(reduz)acende();
       else requestAnimationFrame(()=>requestAnimationFrame(acende));
-    }else{el.style.setProperty('--rev',revPct(k));el.style.setProperty('--op',(k/5).toFixed(2));}
+    }else el.style.setProperty('--rev',revPct(k));
   });
   const v=document.querySelectorAll('.voce')[0];
   if(v&&prox&&isFinite(+v.dataset.no)){
@@ -6638,7 +6692,7 @@ function pintarFim(){
     '<p class="sub">'+(passou?'Você acertou '+LIC.acertos+' de '+LIC.base+' perguntas.'+
         (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros. Volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
       :'Tudo bem! Vamos rever a aula e tentar de novo. Errar faz parte de aprender.')+'</p>'+
-    (completouMundo?'<div class="mundo-ok">'+IC.bandeira+' Etapa '+LIC.u.n+' completa!</div>':'')+
+    (completouMundo?'<div class="mundo-ok">'+IC.trofeu+' Etapa '+LIC.u.n+' completa!</div>':'')+
     (passou&&!LIC.rev?premioDesenhoHTML(completouMundo):'')+
     '<div class="placar">'+
       '<div><span>Acertos</span><b>'+LIC.acertos+'</b></div>'+
@@ -7153,7 +7207,7 @@ function pecaParaBau(tam){
   const todas=[];
   /* só peça com arte nova entra no baú: dar o que a criança não consegue ver seria promessa vazia */
   ['chapeu','rosto','pescoco'].forEach(sl=>Object.keys(PECAS[sl]||{}).forEach(id=>{if(PECAS[sl][id].arte)todas.push({id:id,n:PECAS[sl][id].n,p:PECAS[sl][id].p});}));
-  const livres=todas.filter(x=>S.comprado.indexOf(x.id)<0).sort((a,b)=>a.p-b.p||(a.id<b.id?-1:1));
+  const livres=todas.filter(x=>!temItem(x.id)).sort((a,b)=>a.p-b.p||(a.id<b.id?-1:1));
   if(!livres.length)return null;
   if(tam==='roupa-p')return livres.find(x=>x.p<=220)||null;
   if(tam==='roupa-g')return livres.find(x=>x.p>=250&&x.p<=450)||null;
@@ -8334,7 +8388,7 @@ function confirmarRestauracao(lido){
    Cores: só tokens do DESIGN.md (var(--cor-*)); nada de hex aqui. */
 Object.assign(IC,{
  gelo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5"/></svg>',
- bau:'<svg viewBox="0 0 64 56"><defs><linearGradient id="bg-tampa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-ouro)"/><stop offset="1" stop-color="var(--cor-acao)"/></linearGradient><linearGradient id="bg-corpo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-acao)"/><stop offset="1" stop-color="var(--cor-acao-borda)"/></linearGradient><radialGradient id="bg-luz" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--cor-ouro)" stop-opacity=".9"/><stop offset="1" stop-color="var(--cor-ouro)" stop-opacity="0"/></radialGradient></defs><ellipse cx="32" cy="52" rx="24" ry="4" fill="var(--cor-sombra)"/><circle cx="32" cy="22" r="26" fill="url(#bg-luz)"/><path d="M8 28V19a13 13 0 0 1 13-13h22a13 13 0 0 1 13 13v9Z" fill="url(#bg-tampa)" stroke="var(--cor-ouro-borda)" stroke-width="2" stroke-linejoin="round"/><path d="M14 16a8 8 0 0 1 8-6h12" fill="none" stroke="var(--cor-superficie)" stroke-width="2.4" stroke-linecap="round" opacity=".7"/><rect x="8" y="28" width="48" height="21" rx="4" fill="url(#bg-corpo)" stroke="var(--cor-acao-borda)" stroke-width="2"/><path d="M15 33h34M15 40h34" stroke="var(--cor-acao-borda)" stroke-width="1.4" opacity=".55"/><rect x="25" y="6" width="14" height="43" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="8" y="25" width="48" height="5" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="27.5" y="28" width="9" height="11" rx="2.5" fill="var(--cor-ouro-sobre)" stroke="var(--cor-ouro-borda)" stroke-width="1.5"/><circle cx="32" cy="33" r="1.8" fill="var(--cor-ouro)"/><path d="M55 4l1.4 3.4 3.4 1.4-3.4 1.4L55 13.6l-1.4-3.4-3.4-1.4 3.4-1.4ZM8 2l1 2.4 2.4 1-2.4 1L8 8.8l-1-2.4L4.6 5.4l2.4-1Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="1"/></svg>',
+ bauSvg:'<svg viewBox="0 0 64 56"><defs><linearGradient id="bg-tampa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-ouro)"/><stop offset="1" stop-color="var(--cor-acao)"/></linearGradient><linearGradient id="bg-corpo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-acao)"/><stop offset="1" stop-color="var(--cor-acao-borda)"/></linearGradient><radialGradient id="bg-luz" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--cor-ouro)" stop-opacity=".9"/><stop offset="1" stop-color="var(--cor-ouro)" stop-opacity="0"/></radialGradient></defs><ellipse cx="32" cy="52" rx="24" ry="4" fill="var(--cor-sombra)"/><circle cx="32" cy="22" r="26" fill="url(#bg-luz)"/><path d="M8 28V19a13 13 0 0 1 13-13h22a13 13 0 0 1 13 13v9Z" fill="url(#bg-tampa)" stroke="var(--cor-ouro-borda)" stroke-width="2" stroke-linejoin="round"/><path d="M14 16a8 8 0 0 1 8-6h12" fill="none" stroke="var(--cor-superficie)" stroke-width="2.4" stroke-linecap="round" opacity=".7"/><rect x="8" y="28" width="48" height="21" rx="4" fill="url(#bg-corpo)" stroke="var(--cor-acao-borda)" stroke-width="2"/><path d="M15 33h34M15 40h34" stroke="var(--cor-acao-borda)" stroke-width="1.4" opacity=".55"/><rect x="25" y="6" width="14" height="43" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="8" y="25" width="48" height="5" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="27.5" y="28" width="9" height="11" rx="2.5" fill="var(--cor-ouro-sobre)" stroke="var(--cor-ouro-borda)" stroke-width="1.5"/><circle cx="32" cy="33" r="1.8" fill="var(--cor-ouro)"/><path d="M55 4l1.4 3.4 3.4 1.4-3.4 1.4L55 13.6l-1.4-3.4-3.4-1.4 3.4-1.4ZM8 2l1 2.4 2.4 1-2.4 1L8 8.8l-1-2.4L4.6 5.4l2.4-1Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="1"/></svg>',
  casa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>',
  pessoa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg>',
  bobby:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><rect x="3.5" y="5.5" width="17" height="15" rx="7.5"/><circle cx="9" cy="12.5" r="1.4" fill="var(--cor-superficie)"/><circle cx="15" cy="12.5" r="1.4" fill="var(--cor-superficie)"/></svg>'
@@ -8371,10 +8425,10 @@ function rotinaHTML(){
   if(S.config.missoesLigadas&&d.missoes.length){
     h+='<ul class="missoes">';
     d.missoes.forEach(m=>{
-      h+='<li class="'+(m.ok?'ok':'')+'"><span class="mk">'+(m.ok?IC.certo:'')+'</span><span class="mt">'+textoDaMissao(m)+'</span><small>'+m.prog+' de '+m.alvo+'</small></li>';
+      h+='<li class="'+(m.ok?'ok':'')+'">'+IC.pergaminho+'<span class="mt">'+textoDaMissao(m)+'</span><small>'+m.prog+' de '+m.alvo+'</small>'+(m.ok?'<span class="mk">'+IC.certo+'</span>':'')+'</li>';
     });
     h+='</ul>';
-    if(d.estrela)h+='<p class="rotina-estrela">'+IC.estrela+' Estrela do dia conquistada!</p>';
+    if(d.estrela)h+='<p class="rotina-estrela">'+IC.estrelaDia+' Estrela do dia conquistada!</p>';
   }
   h+='<div class="rotina-acoes">';
   if(bauPronto())h+='<button class="btn-acao" id="rt-bau">'+IC.bau+' Abrir o baú do dia</button>';
@@ -8417,7 +8471,7 @@ function mostrarBilhete(){
   if(!b)return;
   abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('presente')+'</div><h2>Um bilhete do Bobby</h2>'+
     '<p class="bilhete-texto">'+b.texto+'</p>'+
-    '<ul class="folha-lista"><li>No baú de amanhã: '+escapa(b.presente)+'</li><li>'+b.pronto+'</li></ul>'+
+    '<ul class="folha-lista icones"><li>'+IC.presente+'<span>No baú de amanhã: '+escapa(b.presente)+'</span></li><li>'+IC.bilhete+'<span>'+b.pronto+'</span></li></ul>'+
     '<div class="folha-bts"><button class="btn-sec" id="fl-ouvir" aria-label="Ouvir o bilhete">'+IC.falar+' Ouvir</button>'+
     '<button class="btn-acao" id="fl-ok">Vamos jogar</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{marcarBilheteVisto();fecharFolha();});
@@ -8427,9 +8481,11 @@ function mostrarBilhete(){
 function falarDepois2(ms,t){audioAgendar(()=>{if($('#folha').classList.contains('on'))falar(t);},ms);}
 
 /* ---------- baú do dia (sem sorteio) ---------- */
-/* Bobby comemorando ao lado do baú (o baú em arte 3D ainda não chegou: enquanto isso, SVG com volume e luz) */
+/* Bobby comemorando ao lado do baú 3D (fechado ou aberto); sem a imagem, cai no baú em SVG */
 function bauCena(aberto){
-  return '<div class="bau-cena'+(aberto?' aberto':'')+'" aria-hidden="true">'+MASC('comemora')+'<div class="bau-fig">'+IC.bau+'</div></div>';
+  const grande=ativo(aberto?'bau-aberto':'bau-fechado');
+  return '<div class="bau-cena'+(aberto?' aberto':'')+'" aria-hidden="true">'+MASC('comemora')+'<div class="bau-fig">'+
+    (grande?imgArte(aberto?'bau-aberto':'bau-fechado',{cls:'bau-img',eager:true}):IC.bauSvg)+'</div></div>';
 }
 function mostrarBau(){
   garantirDia();
@@ -8502,7 +8558,7 @@ function blocoFimHTML(bloco){
     }
     if(bauPronto())h+='<div class="fim-bau"><b>O baú do dia está pronto!</b><button class="btn-acao" id="fim-abrir-bau">'+IC.bau+' Abrir o baú</button></div>';
     else if(S.diario.metaOk&&!S.diario.bau.aberto)h+='';
-    if(S.diario.estrela&&!S.diario._estrelaDita){S.diario._estrelaDita=true;h+='<p class="fim-of">'+IC.estrela+' Estrela do dia conquistada!</p>';}
+    if(S.diario.estrela&&!S.diario._estrelaDita){S.diario._estrelaDita=true;h+='<p class="fim-of">'+IC.estrelaDia+' Estrela do dia conquistada!</p>';}
   }
   return h;
 }
@@ -8660,6 +8716,16 @@ function ligarMedidor(){
   const b=$('#exp-metricas');if(!b)return;
   b.addEventListener('click',()=>entregar('bobby-metricas.json',JSON.stringify(pacoteDeMetricas(perfilAtual().pid),null,1)));
 }
+
+/* ---------- ícones de recompensa em arte (REC-*, BAU-*): onde a imagem existe ela entra no lugar do SVG ----------
+   Definidos aqui, depois do Object.assign(IC,...) acima, porque são acessores. Sem a imagem (ou sem ATIVOS), cai no SVG. */
+(function ligarIconesDeArte(){
+  const svgs={moeda:IC.moeda,medalha:IC.medalha,gelo:IC.gelo,bau:IC.bauSvg,estrelaDia:IC.estrela};
+  const def=(nome,id,fallback)=>Object.defineProperty(IC,nome,{configurable:true,enumerable:true,get(){return ativo(id)?imgArte(id,{cls:'ic-arte',eager:true}):fallback;}});
+  def('moeda','rec-moeda',svgs.moeda);def('medalha','rec-medalha',svgs.medalha);def('gelo','rec-congelador',svgs.gelo);
+  def('bau','bau-fechado',svgs.bau);def('estrelaDia','rec-estrela',svgs.estrelaDia);
+  def('pergaminho','rec-pergaminho','');def('bilhete','rec-bilhete','');def('presente','rec-presente','');def('trofeu','rec-trofeu',IC.bandeira);
+})();
 /* ---------- confete ---------- */
 function confete(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;

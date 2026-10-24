@@ -63,7 +63,7 @@ function pecaParaBau(tam){
   const todas=[];
   /* só peça com arte nova entra no baú: dar o que a criança não consegue ver seria promessa vazia */
   ['chapeu','rosto','pescoco'].forEach(sl=>Object.keys(PECAS[sl]||{}).forEach(id=>{if(PECAS[sl][id].arte)todas.push({id:id,n:PECAS[sl][id].n,p:PECAS[sl][id].p});}));
-  const livres=todas.filter(x=>S.comprado.indexOf(x.id)<0).sort((a,b)=>a.p-b.p||(a.id<b.id?-1:1));
+  const livres=todas.filter(x=>!temItem(x.id)).sort((a,b)=>a.p-b.p||(a.id<b.id?-1:1));
   if(!livres.length)return null;
   if(tam==='roupa-p')return livres.find(x=>x.p<=220)||null;
   if(tam==='roupa-g')return livres.find(x=>x.p>=250&&x.p<=450)||null;

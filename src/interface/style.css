@@ -1322,8 +1322,34 @@ body:has(#licao.on) .aviso-voz{display:none}
   .pe.mostra #acao{flex:1 1 100%;margin:0}
 }
 
-/* cenas com o apagado fora de enquadramento: a luz entra por opacidade (cross-fade) */
-.cena.fade .cena-luz{-webkit-mask-image:none;mask-image:none;opacity:var(--op,0);transition:opacity var(--mov-lento) var(--curva-move)}
-@media (prefers-reduced-motion:reduce){.cena.fade .cena-luz{transition:none}}
-.marcar{display:flex;align-items:flex-start;gap:var(--esp-8);text-align:left;margin:var(--esp-8) 0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto-suave)}
-.marcar input{width:24px;height:24px;flex:none;accent-color:var(--materia-base)}
+/* ---------- looks do Bobby (urso inteiro com o item), ícones de recompensa e baú em arte ---------- */
+.look-retrato{display:block;aspect-ratio:1/1;overflow:hidden;background:none}
+.look-retrato img{display:block;width:100%;height:auto;max-width:none}
+.look-retrato.avatar{border-radius:var(--raio-pilula);border:2px solid var(--materia-base);background:var(--materia-suave)}
+.look-retrato.avatar img{width:100%;margin-top:0}
+.look-corpo{display:block;height:auto;max-width:100%}
+.palco-bobby .look-corpo{height:min(78vw,340px);width:auto;margin-top:var(--esp-24)}
+.mascote.entra,.look-corpo.entra{animation:so-opacidade var(--mov-padrao) var(--curva-entra) both}
+@keyframes so-opacidade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.mascote.entra,.look-corpo.entra{animation:none}}
+.item-look{height:128px}
+.item-look .look-retrato{height:100%;aspect-ratio:1/1;border-radius:var(--raio-16);background:var(--materia-suave)}
+.perfil-bobby .look-corpo,.folha-bobby .look-corpo{width:auto;height:100%}
+.fim .look-corpo{height:200px;margin:0 auto var(--esp-8)}
+.ic-arte{display:block;width:24px;height:24px;object-fit:contain;flex:none}
+.stat .ic-arte{width:24px;height:24px}
+.stat-card .ic-arte{width:32px;height:32px;margin:0 auto var(--esp-4)}
+.gelo-chip .ic-arte,.gelo-n .ic-arte{width:20px;height:20px}
+.rotina-estrela .ic-arte,.fim-of .ic-arte{width:32px;height:32px}
+.mundo-ok .ic-arte{width:32px;height:32px}
+.revisao-no .bt .ic-arte{width:44px;height:44px}
+.medalha .ic-arte{width:44px;height:44px;margin:0 auto var(--esp-4)}
+.medalha:not(.on) .ic-arte{filter:grayscale(1);opacity:.6}
+.saldo .ic-arte{width:28px;height:28px}
+.btn-acao .ic-arte{width:28px;height:28px}
+.missoes li>.ic-arte{width:32px;height:32px}
+.folha-lista.icones li{display:flex;align-items:center;gap:var(--esp-8)}
+.folha-lista.icones .ic-arte{width:32px;height:32px}
+.bau-cena .bau-img{width:100%;height:auto;max-height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px var(--cor-sombra))}
+.bau-cena .bau-fig{width:128px;height:112px;margin:0 0 0 calc(-1 * var(--esp-24))}
+.bau-cena.aberto .bau-img{filter:drop-shadow(0 0 16px var(--cor-ouro))}

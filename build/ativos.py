@@ -33,9 +33,12 @@ QUALIDADE = 82
 MAX_POSE = 768
 MAX_ITEM = 512
 MAX_CENA = 1024
+MAX_ICONE = 192      # icone de recompensa: aparece de 16 a 96 px
+MAX_BAU = 512
 
 # o que entra no pre-cache da arte (camada inicial). O resto e sob demanda.
 INICIAIS = {
+    'rec-moeda', 'rec-estrela', 'rec-medalha', 'rec-congelador', 'rec-pergaminho', 'rec-bilhete', 'rec-presente', 'rec-trofeu', 'bau-fechado',
     'bobby-p01', 'bobby-p05a', 'bobby-p05b', 'bobby-e01', 'bobby-e02', 'bobby-e06',
     'planeta-mat', 'planeta-por', 'planeta-ing',
     'cen-mat01-apagado', 'cen-mat01-completo', 'cen-por01-apagado', 'cen-por01-completo', 'cen-ing01-apagado', 'cen-ing01-completo',
@@ -118,6 +121,12 @@ def plano():
             grupo, mx = 'expressao', MAX_POSE
         elif nome == 'BOBBY-ITEM-CHAPEU':
             grupo, mx = 'item', MAX_ITEM
+        elif nome.startswith('REC-'):
+            grupo, mx = 'recompensa', MAX_ICONE
+        elif nome.startswith('BAU-'):
+            grupo, mx = 'recompensa', MAX_BAU
+        elif nome.startswith('ITEM-'):
+            grupo, mx = 'look', MAX_POSE
         elif nome.startswith('BOBBY-'):
             grupo, mx = 'personagem', MAX_POSE
         else:
@@ -129,12 +138,12 @@ def plano():
         if nome in tem_recorte or nome.startswith('BOBBY-'):
             continue
         itens.append((slug(nome), f, 'companheiro', (lambda p=f: recorta_fundo_liso(p)), MAX_POSE, True, False))
-    # itens do guarda-roupa sobre a pose frontal (BOBBY-ITEM-*) e icones de recompensa (ICONE-*), quando chegarem sem recorte pronto
-    for f in sorted(list(apr.glob('BOBBY-ITEM-*.jpg'))+list(apr.glob('ICONE-*.jpg'))):
+    # itens do guarda-roupa (BOBBY-ITEM-*), looks (ITEM-*) e icones (REC-*, BAU-*) que cheguem sem recorte pronto
+    for f in sorted(list(apr.glob('BOBBY-ITEM-*.jpg'))+list(apr.glob('ITEM-*.jpg'))+list(apr.glob('REC-*.jpg'))+list(apr.glob('BAU-*.jpg'))):
         if f.stem in tem_recorte:
             continue
-        grupo = 'item' if f.stem.startswith('BOBBY-ITEM') else 'recompensa'
-        itens.append((slug(f.stem), f, grupo, (lambda p=f: recorta_fundo_liso(p)), MAX_ITEM, True, False))
+        grupo = 'item' if f.stem.startswith('BOBBY-ITEM') else ('look' if f.stem.startswith('ITEM-') else 'recompensa')
+        itens.append((slug(f.stem), f, grupo, (lambda p=f: recorta_fundo_liso(p)), MAX_ITEM if grupo != 'look' else MAX_POSE, True, False))
     for f in sorted(apr.glob('PLANETA-*.jpg')):
         itens.append((slug(f.stem), f, 'planeta', (lambda p=f: planeta_com_alfa(p)), MAX_CENA, True, False))
     for f in sorted(apr.glob('CEN-*.jpg')):
@@ -145,7 +154,7 @@ def plano():
 
 
 PASTA = {'personagem': 'personagens', 'expressao': 'expressoes', 'item': 'itens', 'companheiro': 'companheiros',
-         'planeta': 'planetas', 'cenario': 'cenarios', 'desenho': 'desenhos', 'recompensa': 'recompensas'}
+         'planeta': 'planetas', 'cenario': 'cenarios', 'desenho': 'desenhos', 'recompensa': 'recompensas', 'look': 'looks'}
 
 
 def main(argv):

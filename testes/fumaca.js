@@ -235,7 +235,7 @@ async function main() {
         // Meu personagem: expressao, chapeu e companheiro
         await js("S.moedas=500;document.querySelector('#bb-pers').click();0"); await dorme(500);
         await js("document.querySelector('[data-pose=\"bobby-e03\"]').click();0"); await dorme(200);
-        await js("document.querySelector('[data-aba=\"chapeu\"]').click();0"); await dorme(200);
+        await js("document.querySelector('[data-aba=\"look\"]').click();0"); await dorme(200);
         await js("document.querySelector('[data-buy]').click();0"); await dorme(300);
         const roupa = await js("({chapeu:!!document.querySelector('.palco .item-chapeu'),look:S.look.chapeu,moedas:S.moedas})");
         if (!roupa.chapeu || roupa.look !== 'explorador') problemas.push(rot + ' personagem: chapeu nao apareceu ' + JSON.stringify(roupa));

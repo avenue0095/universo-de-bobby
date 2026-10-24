@@ -4,7 +4,7 @@
    Cores: só tokens do DESIGN.md (var(--cor-*)); nada de hex aqui. */
 Object.assign(IC,{
  gelo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5"/></svg>',
- bau:'<svg viewBox="0 0 64 56"><defs><linearGradient id="bg-tampa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-ouro)"/><stop offset="1" stop-color="var(--cor-acao)"/></linearGradient><linearGradient id="bg-corpo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-acao)"/><stop offset="1" stop-color="var(--cor-acao-borda)"/></linearGradient><radialGradient id="bg-luz" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--cor-ouro)" stop-opacity=".9"/><stop offset="1" stop-color="var(--cor-ouro)" stop-opacity="0"/></radialGradient></defs><ellipse cx="32" cy="52" rx="24" ry="4" fill="var(--cor-sombra)"/><circle cx="32" cy="22" r="26" fill="url(#bg-luz)"/><path d="M8 28V19a13 13 0 0 1 13-13h22a13 13 0 0 1 13 13v9Z" fill="url(#bg-tampa)" stroke="var(--cor-ouro-borda)" stroke-width="2" stroke-linejoin="round"/><path d="M14 16a8 8 0 0 1 8-6h12" fill="none" stroke="var(--cor-superficie)" stroke-width="2.4" stroke-linecap="round" opacity=".7"/><rect x="8" y="28" width="48" height="21" rx="4" fill="url(#bg-corpo)" stroke="var(--cor-acao-borda)" stroke-width="2"/><path d="M15 33h34M15 40h34" stroke="var(--cor-acao-borda)" stroke-width="1.4" opacity=".55"/><rect x="25" y="6" width="14" height="43" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="8" y="25" width="48" height="5" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="27.5" y="28" width="9" height="11" rx="2.5" fill="var(--cor-ouro-sobre)" stroke="var(--cor-ouro-borda)" stroke-width="1.5"/><circle cx="32" cy="33" r="1.8" fill="var(--cor-ouro)"/><path d="M55 4l1.4 3.4 3.4 1.4-3.4 1.4L55 13.6l-1.4-3.4-3.4-1.4 3.4-1.4ZM8 2l1 2.4 2.4 1-2.4 1L8 8.8l-1-2.4L4.6 5.4l2.4-1Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="1"/></svg>',
+ bauSvg:'<svg viewBox="0 0 64 56"><defs><linearGradient id="bg-tampa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-ouro)"/><stop offset="1" stop-color="var(--cor-acao)"/></linearGradient><linearGradient id="bg-corpo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--cor-acao)"/><stop offset="1" stop-color="var(--cor-acao-borda)"/></linearGradient><radialGradient id="bg-luz" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="var(--cor-ouro)" stop-opacity=".9"/><stop offset="1" stop-color="var(--cor-ouro)" stop-opacity="0"/></radialGradient></defs><ellipse cx="32" cy="52" rx="24" ry="4" fill="var(--cor-sombra)"/><circle cx="32" cy="22" r="26" fill="url(#bg-luz)"/><path d="M8 28V19a13 13 0 0 1 13-13h22a13 13 0 0 1 13 13v9Z" fill="url(#bg-tampa)" stroke="var(--cor-ouro-borda)" stroke-width="2" stroke-linejoin="round"/><path d="M14 16a8 8 0 0 1 8-6h12" fill="none" stroke="var(--cor-superficie)" stroke-width="2.4" stroke-linecap="round" opacity=".7"/><rect x="8" y="28" width="48" height="21" rx="4" fill="url(#bg-corpo)" stroke="var(--cor-acao-borda)" stroke-width="2"/><path d="M15 33h34M15 40h34" stroke="var(--cor-acao-borda)" stroke-width="1.4" opacity=".55"/><rect x="25" y="6" width="14" height="43" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="8" y="25" width="48" height="5" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="2"/><rect x="27.5" y="28" width="9" height="11" rx="2.5" fill="var(--cor-ouro-sobre)" stroke="var(--cor-ouro-borda)" stroke-width="1.5"/><circle cx="32" cy="33" r="1.8" fill="var(--cor-ouro)"/><path d="M55 4l1.4 3.4 3.4 1.4-3.4 1.4L55 13.6l-1.4-3.4-3.4-1.4 3.4-1.4ZM8 2l1 2.4 2.4 1-2.4 1L8 8.8l-1-2.4L4.6 5.4l2.4-1Z" fill="var(--cor-ouro)" stroke="var(--cor-ouro-borda)" stroke-width="1"/></svg>',
  casa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>',
  pessoa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg>',
  bobby:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><rect x="3.5" y="5.5" width="17" height="15" rx="7.5"/><circle cx="9" cy="12.5" r="1.4" fill="var(--cor-superficie)"/><circle cx="15" cy="12.5" r="1.4" fill="var(--cor-superficie)"/></svg>'
@@ -41,10 +41,10 @@ function rotinaHTML(){
   if(S.config.missoesLigadas&&d.missoes.length){
     h+='<ul class="missoes">';
     d.missoes.forEach(m=>{
-      h+='<li class="'+(m.ok?'ok':'')+'"><span class="mk">'+(m.ok?IC.certo:'')+'</span><span class="mt">'+textoDaMissao(m)+'</span><small>'+m.prog+' de '+m.alvo+'</small></li>';
+      h+='<li class="'+(m.ok?'ok':'')+'">'+IC.pergaminho+'<span class="mt">'+textoDaMissao(m)+'</span><small>'+m.prog+' de '+m.alvo+'</small>'+(m.ok?'<span class="mk">'+IC.certo+'</span>':'')+'</li>';
     });
     h+='</ul>';
-    if(d.estrela)h+='<p class="rotina-estrela">'+IC.estrela+' Estrela do dia conquistada!</p>';
+    if(d.estrela)h+='<p class="rotina-estrela">'+IC.estrelaDia+' Estrela do dia conquistada!</p>';
   }
   h+='<div class="rotina-acoes">';
   if(bauPronto())h+='<button class="btn-acao" id="rt-bau">'+IC.bau+' Abrir o baú do dia</button>';
@@ -87,7 +87,7 @@ function mostrarBilhete(){
   if(!b)return;
   abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('presente')+'</div><h2>Um bilhete do Bobby</h2>'+
     '<p class="bilhete-texto">'+b.texto+'</p>'+
-    '<ul class="folha-lista"><li>No baú de amanhã: '+escapa(b.presente)+'</li><li>'+b.pronto+'</li></ul>'+
+    '<ul class="folha-lista icones"><li>'+IC.presente+'<span>No baú de amanhã: '+escapa(b.presente)+'</span></li><li>'+IC.bilhete+'<span>'+b.pronto+'</span></li></ul>'+
     '<div class="folha-bts"><button class="btn-sec" id="fl-ouvir" aria-label="Ouvir o bilhete">'+IC.falar+' Ouvir</button>'+
     '<button class="btn-acao" id="fl-ok">Vamos jogar</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{marcarBilheteVisto();fecharFolha();});
@@ -97,9 +97,11 @@ function mostrarBilhete(){
 function falarDepois2(ms,t){audioAgendar(()=>{if($('#folha').classList.contains('on'))falar(t);},ms);}
 
 /* ---------- baú do dia (sem sorteio) ---------- */
-/* Bobby comemorando ao lado do baú (o baú em arte 3D ainda não chegou: enquanto isso, SVG com volume e luz) */
+/* Bobby comemorando ao lado do baú 3D (fechado ou aberto); sem a imagem, cai no baú em SVG */
 function bauCena(aberto){
-  return '<div class="bau-cena'+(aberto?' aberto':'')+'" aria-hidden="true">'+MASC('comemora')+'<div class="bau-fig">'+IC.bau+'</div></div>';
+  const grande=ativo(aberto?'bau-aberto':'bau-fechado');
+  return '<div class="bau-cena'+(aberto?' aberto':'')+'" aria-hidden="true">'+MASC('comemora')+'<div class="bau-fig">'+
+    (grande?imgArte(aberto?'bau-aberto':'bau-fechado',{cls:'bau-img',eager:true}):IC.bauSvg)+'</div></div>';
 }
 function mostrarBau(){
   garantirDia();
@@ -172,7 +174,7 @@ function blocoFimHTML(bloco){
     }
     if(bauPronto())h+='<div class="fim-bau"><b>O baú do dia está pronto!</b><button class="btn-acao" id="fim-abrir-bau">'+IC.bau+' Abrir o baú</button></div>';
     else if(S.diario.metaOk&&!S.diario.bau.aberto)h+='';
-    if(S.diario.estrela&&!S.diario._estrelaDita){S.diario._estrelaDita=true;h+='<p class="fim-of">'+IC.estrela+' Estrela do dia conquistada!</p>';}
+    if(S.diario.estrela&&!S.diario._estrelaDita){S.diario._estrelaDita=true;h+='<p class="fim-of">'+IC.estrelaDia+' Estrela do dia conquistada!</p>';}
   }
   return h;
 }
@@ -330,3 +332,13 @@ function ligarMedidor(){
   const b=$('#exp-metricas');if(!b)return;
   b.addEventListener('click',()=>entregar('bobby-metricas.json',JSON.stringify(pacoteDeMetricas(perfilAtual().pid),null,1)));
 }
+
+/* ---------- ícones de recompensa em arte (REC-*, BAU-*): onde a imagem existe ela entra no lugar do SVG ----------
+   Definidos aqui, depois do Object.assign(IC,...) acima, porque são acessores. Sem a imagem (ou sem ATIVOS), cai no SVG. */
+(function ligarIconesDeArte(){
+  const svgs={moeda:IC.moeda,medalha:IC.medalha,gelo:IC.gelo,bau:IC.bauSvg,estrelaDia:IC.estrela};
+  const def=(nome,id,fallback)=>Object.defineProperty(IC,nome,{configurable:true,enumerable:true,get(){return ativo(id)?imgArte(id,{cls:'ic-arte',eager:true}):fallback;}});
+  def('moeda','rec-moeda',svgs.moeda);def('medalha','rec-medalha',svgs.medalha);def('gelo','rec-congelador',svgs.gelo);
+  def('bau','bau-fechado',svgs.bau);def('estrelaDia','rec-estrela',svgs.estrelaDia);
+  def('pergaminho','rec-pergaminho','');def('bilhete','rec-bilhete','');def('presente','rec-presente','');def('trofeu','rec-trofeu',IC.bandeira);
+})();

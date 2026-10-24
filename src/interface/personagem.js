@@ -18,52 +18,73 @@ const FRONTAIS={
   'bobby-e01':[.5,.94],'bobby-e02':[.5,.92],'bobby-e03':[.5,.94],'bobby-e04':[.5,.92],'bobby-e05':[.5,.92],'bobby-e06':[.5,.92],'bobby-e07':[.5,.87],'bobby-e08':[.5,.92]
 };
 /* catálogo do guarda-roupa. 'arte' = existe imagem nova (o item aparece de verdade). Sem 'arte' = item da versão antiga:
-   quem já tinha comprado continua com o direito e vê o item guardado ("volta com a arte nova"); ninguém compra o que não tem arte. */
+   quem já tinha comprado continua com o direito e vê o item guardado ("volta com a arte nova"); ninguém compra o que não tem arte.
+   Dois jeitos de aparecer: modo 'sobrepor' (o chapéu de explorador, por cima das imagens de frente) e 'look' (o urso inteiro usando o item:
+   as poses não coincidem pixel a pixel com a base, então a imagem do Bobby é TROCADA pelo look escolhido, com transição de opacidade).
+   Só um look por vez. Dono de item antigo é dono do look que o substitui (DONOS). */
 const PECAS={
   chapeu:{
-    explorador:{n:'Chapéu de explorador',p:100,arte:'bobby-item-chapeu'},
-    bone:{n:'Boné azul',p:120},festa:{n:'Chapéu de festa',p:180},chef:{n:'Chapéu de chef',p:240},
-    espacial:{n:'Capacete espacial',p:400},pirata:{n:'Chapéu de pirata',p:320},coroa:{n:'Coroa do rei',p:600}
+    explorador:{n:'Chapéu de explorador',p:100,arte:'bobby-item-chapeu',modo:'sobrepor'},
+    bone:{n:'Boné',p:120,arte:'item-bone'},capacete:{n:'Capacete aberto',p:400,arte:'item-capacete'},coroa:{n:'Coroa de papel',p:600,arte:'item-coroa'},
+    festa:{n:'Chapéu de festa',p:180},chef:{n:'Chapéu de chef',p:240},espacial:{n:'Capacete espacial',p:400},pirata:{n:'Chapéu de pirata',p:320}
   },
-  rosto:{oculos:{n:'Óculos redondos',p:150},sol:{n:'Óculos de sol',p:220},heroi:{n:'Máscara de herói',p:280},tapaolho:{n:'Tapa-olho',p:200}},
-  pescoco:{cachecol:{n:'Cachecol',p:180},gravata:{n:'Gravata-borboleta',p:140},medalha:{n:'Medalha de ouro',p:350},capa:{n:'Capa de herói',p:450}},
+  rosto:{oculos:{n:'Óculos de astronauta',p:150,arte:'item-oculos'},sol:{n:'Óculos de sol',p:220},heroi:{n:'Máscara de herói',p:280},tapaolho:{n:'Tapa-olho',p:200}},
+  pescoco:{lenco:{n:'Lenço',p:180,arte:'item-lenco'},capa:{n:'Capa azul',p:450,arte:'item-capa'},cachecol:{n:'Cachecol',p:180},gravata:{n:'Gravata-borboleta',p:140},medalha:{n:'Medalha de ouro',p:350}},
   pelo:{mel:{n:'Pelo mel',p:100},cinza:{n:'Pelo cinza',p:150},panda:{n:'Pelo panda',p:260},polar:{n:'Pelo polar',p:300},rosa:{n:'Pelo rosa',p:220},choco:{n:'Chocolate',p:180}},
   pers:{nina:{n:'Nina, a coelhinha',p:180},pim:{n:'Pim, o gatinho',p:220},zeca:{n:'Zeca, o macaquinho',p:260},lulu:{n:'Lulu, a corujinha',p:320}}
 };
-/* itens que o agente de arte entrega depois: o app só passa a mostrar quando o arquivo existe em ATIVOS (python3 build/ativos.py).
-   Nomes esperados: bobby-item-<nome>. Ancoragem de rosto e pescoço ainda por conferir quando a arte chegar. */
-const ARTE_ESPERADA={chapeu:{bone:'bobby-item-bone',espacial:'bobby-item-capacete',coroa:'bobby-item-coroa'},rosto:{oculos:'bobby-item-oculos'},pescoco:{capa:'bobby-item-capa',cachecol:'bobby-item-lenco'}};
-Object.keys(ARTE_ESPERADA).forEach(sl=>Object.keys(ARTE_ESPERADA[sl]).forEach(id=>{if(ativo(ARTE_ESPERADA[sl][id])&&PECAS[sl][id])PECAS[sl][id].arte=ARTE_ESPERADA[sl][id];}));
-const ABAS_LOJA=[['comp','Companheiro'],['chapeu','Chapéus'],['rosto','Rosto'],['pescoco','Pescoço']];
+const DONOS={capacete:['espacial'],lenco:['cachecol'],oculos:['sol']};
+const LOOKS_ORDEM=[['chapeu','explorador'],['chapeu','bone'],['rosto','oculos'],['pescoco','lenco'],['pescoco','capa'],['chapeu','capacete'],['chapeu','coroa']];
+const SLOTS_LOOK=['chapeu','rosto','pescoco'];
+const ABAS_LOJA=[['comp','Companheiro'],['look','Looks']];
+const EXPRESSAO_IDS=['feliz','radiante','curioso','pensa','surpreso','ops','concentrado','tranquilo'];
 
-/* O Bobby numa tela. exp: nome de BOBBY (oi, feliz, ops...). Devolve <img>, com o chapéu por cima se estiver equipado e a imagem for de frente.
-   alt vazio = decorativo (o texto ao lado já diz tudo). */
+/* o look em uso: {slot,id,peca} ou null (sem item ou sem arte) */
+function lookEmUso(L){
+  L=L||{};
+  for(const sl of SLOTS_LOOK){const id=L[sl];const p=id&&PECAS[sl][id];if(p&&p.arte&&ativo(p.arte))return {slot:sl,id:id,peca:p};}
+  return null;
+}
+/* O Bobby numa tela. exp: nome de BOBBY (oi, feliz, ops...). Devolve a imagem (ou o recorte da cabeça, ou a imagem com o chapéu por cima).
+   alt vazio = decorativo (o texto ao lado já diz tudo). Look de urso inteiro só existe numa pose (a frontal, 'oi') e vira retrato recortado
+   nas expressões; outras poses ficam com a base. */
 function MASC(exp,cls,look,alt){
   const id=BOBBY[exp]||(ativo(exp)?exp:BOBBY.oi);
   const L=look||(typeof S!=='undefined'&&S.look)||{};
+  const uso=lookEmUso(L),avatar=/avatar/.test(cls||'');
+  if(uso&&uso.peca.modo!=='sobrepor'){
+    const retrato=EXPRESSAO_IDS.indexOf(exp)>=0||/^bobby-e0/.test(id);
+    if(retrato)return '<span class="mascote look-retrato'+(cls?' '+cls:'')+'">'+imgArte(uso.peca.arte,{alt:alt||''})+'</span>';
+    if(exp==='oi'||id==='bobby-p01')return imgArte(uso.peca.arte,{cls:'mascote look-corpo'+(cls?' '+cls:''),alt:alt||''});
+  }
   const img=imgArte(id,{cls:'mascote'+(cls?' '+cls:''),alt:alt||''});
-  const peca=L.chapeu&&PECAS.chapeu[L.chapeu],anc=FRONTAIS[id],a=ativo(id);
-  if(!peca||!peca.arte||!anc||!a||!ativo(peca.arte)||/avatar/.test(cls||''))return img;   /* avatar redondo: sem chapéu */
+  const peca=uso&&uso.peca.modo==='sobrepor'?uso.peca:null,anc=FRONTAIS[id],a=ativo(id);
+  if(!peca||!anc||!a||avatar)return img;   /* avatar redondo: sem chapéu */
   const larg=anc[1]*.66,topo=.34*anc[1]*a[1]/a[2];
   return '<span class="bobby-com-item">'+img+imgArte(peca.arte,{cls:'item-chapeu',style:'left:'+(anc[0]*100).toFixed(1)+'%;top:'+(topo*100).toFixed(1)+'%;width:'+(larg*100).toFixed(1)+'%'})+'</span>';
 }
-/* retrato redondo do jogador (barra, topo, perfis): sempre a expressão alegre, sem chapéu (cabe num círculo) */
+/* retrato redondo do jogador (barra, topo, perfis): sempre a expressão alegre, sem item (cabe num círculo) */
 const retratoBobby=cls=>imgArte('bobby-e01',{cls:'retrato'+(cls?' '+cls:''),eager:true});
 
 /* ---------- Meu personagem ---------- */
-let abaLoja='comp',lojaOrigem='perfil',palcoModo='rosto',palcoId='bobby-e01';
-const temItem=id=>(S.comprado||[]).indexOf(id)>=0;
+let abaLoja='comp',lojaOrigem='perfil',palcoModo='rosto',palcoId='bobby-e01',lookAnterior='';
+const temItem=id=>(S.comprado||[]).indexOf(id)>=0||(DONOS[id]||[]).some(o=>(S.comprado||[]).indexOf(o)>=0);
+const antigoSubstituido=id=>Object.keys(DONOS).some(k=>DONOS[k].indexOf(id)>=0);
+function vestir(slot,id){            /* só um look por vez: vestir um tira o outro */
+  S.look=Object.assign({},S.look);
+  SLOTS_LOOK.forEach(sl=>{S.look[sl]='';});
+  if(id)S.look[slot]=id;
+}
 function comprar(slot,id){
   const it=PECAS[slot][id];
   if(!it||!it.arte)return;
   if(S.moedas<it.p){lojaAviso('Faltam '+(it.p-S.moedas)+' moedas para “'+it.n+'”. Cada resposta certa vale 10 moedas.');return;}
   S.moedas-=it.p;S.comprado=(S.comprado||[]).concat([id]);
-  S.look=Object.assign({},S.look);S.look[slot]=id;
+  vestir(slot,id);
   salvar();somMoeda();somFim();telaLoja();
 }
 function equipar(slot,id){
-  S.look=Object.assign({},S.look);
-  S.look[slot]=(S.look[slot]===id?'':id);
+  vestir(slot,(S.look||{})[slot]===id?'':id);
   salvar();somPasso();telaLoja();
 }
 function escolherCompanheiro(id){
@@ -72,30 +93,44 @@ function escolherCompanheiro(id){
 }
 function lojaAviso(t){const a=$('#loja-aviso');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
 /* itens que o jogador já comprou na versão antiga e ainda não têm arte nova: ficam guardados */
-function guardadosDa(slot){
+function guardadosDa(aba){
   const r=[];
-  Object.keys(PECAS[slot]||{}).forEach(id=>{const it=PECAS[slot][id];if(!it.arte&&temItem(id))r.push(it.n);});
-  if(slot==='comp')['pers','pelo'].forEach(sl=>Object.keys(PECAS[sl]).forEach(id=>{if(temItem(id))r.push(PECAS[sl][id].n);}));
+  if(aba==='look')SLOTS_LOOK.forEach(sl=>Object.keys(PECAS[sl]).forEach(id=>{const it=PECAS[sl][id];if(!it.arte&&!antigoSubstituido(id)&&temItem(id))r.push(it.n);}));
+  if(aba==='comp')['pers','pelo'].forEach(sl=>Object.keys(PECAS[sl]).forEach(id=>{if(temItem(id))r.push(PECAS[sl][id].n);}));
   return r;
 }
 function palcoHTML(){
   const L=S.look||{};
+  const uso=lookEmUso(L),cheio=!!(uso&&uso.peca.modo!=='sobrepor');
   const ex=EXPRESSOES.concat(POSES);
-  const nomeAtual=(ex.filter(x=>x[0]===palcoId)[0]||['','Alegre'])[1];
+  const nomeAtual=cheio?uso.peca.n:(ex.filter(x=>x[0]===palcoId)[0]||['','Alegre'])[1];
   const comp=COMPANHEIROS.filter(c=>c.id===L.companheiro)[0]||null;
-  const chapeuEq=L.chapeu&&PECAS.chapeu[L.chapeu]&&PECAS.chapeu[L.chapeu].arte;
+  const chapeuEq=uso&&uso.peca.modo==='sobrepor';
   const semChapeu=chapeuEq&&!FRONTAIS[palcoId];
-  const grande=MASC(palcoId,'bobby-grande',L,'Bobby, o ursinho explorador, '+nomeAtual.toLowerCase()+(chapeuEq&&FRONTAIS[palcoId]?', de chapéu':''));
+  const mudou=(uso?uso.id:'')!==lookAnterior;lookAnterior=uso?uso.id:'';
+  const grande=cheio
+    ?imgArte(uso.peca.arte,{cls:'mascote look-corpo bobby-grande'+(mudou?' entra':''),alt:'Bobby, o ursinho explorador, com '+uso.peca.n.toLowerCase()})
+    :MASC(palcoId,'bobby-grande'+(mudou?' entra':''),L,'Bobby, o ursinho explorador, '+nomeAtual.toLowerCase()+(chapeuEq&&FRONTAIS[palcoId]?', de chapéu':''));
   let h='<section class="palco" aria-label="Seu personagem">'+
-    '<button class="palco-bobby '+(palcoModo==='corpo'?'corpo':'rosto')+'" id="palco-bobby" aria-label="Bobby, '+nomeAtual.toLowerCase()+'. Toque para mudar a expressão">'+grande+'</button>';
+    '<button class="palco-bobby '+(cheio||palcoModo==='corpo'?'corpo':'rosto')+'" id="palco-bobby" aria-label="Bobby, '+nomeAtual.toLowerCase()+(cheio?'':'. Toque para mudar a expressão')+'">'+grande+'</button>';
   if(comp)h+='<div class="palco-comp">'+imgArte(comp.id+'-p01',{alt:comp.n+', '+comp.quem})+'</div>';
-  h+='<p class="palco-nome" aria-live="polite"><b>Bobby</b> · '+nomeAtual+(semChapeu?'<small>O chapéu aparece nas imagens de frente.</small>':'')+'</p></section>';
+  h+='<p class="palco-nome" aria-live="polite"><b>Bobby</b> · '+escapa(nomeAtual)+(semChapeu?'<small>O chapéu aparece nas imagens de frente.</small>':'')+
+     (cheio?'<small>Com um item de look o Bobby fica nesta pose. Tire o item para trocar a expressão.</small>':'')+'</p></section>';
+  if(cheio)return h;
   h+='<div class="palco-modos" role="group" aria-label="O que mostrar"><button class="aba'+(palcoModo==='rosto'?' on':'')+'" data-modo="rosto">Rosto</button>'+
      '<button class="aba'+(palcoModo==='corpo'?' on':'')+'" data-modo="corpo">Corpo inteiro</button></div>';
   const lista=palcoModo==='rosto'?EXPRESSOES:POSES;
   h+='<div class="palco-escolha" role="group" aria-label="'+(palcoModo==='rosto'?'Expressões':'Poses')+'">'+lista.map(x=>
     '<button class="mini-pose'+(x[0]===palcoId?' on':'')+'" data-pose="'+x[0]+'" aria-label="'+x[1]+'" aria-pressed="'+(x[0]===palcoId)+'">'+imgArte(x[0],{})+'<span>'+(x[2]||x[1])+'</span></button>').join('')+'</div>';
   return h;
+}
+function cartaoLook(slot,id){
+  const it=PECAS[slot][id],L=S.look||{},tem=temItem(id),eq=L[slot]===id;
+  const bt=tem?'<button class="btn-sec" data-eq="'+slot+'|'+id+'">'+(eq?'Tirar':'Usar')+'</button>'
+              :'<button class="'+(S.moedas<it.p?'btn-sec':'btn-acao')+'" data-buy="'+slot+'|'+id+'">'+IC.moeda+' '+it.p+'</button>';
+  const figura=it.modo==='sobrepor'?'<div class="item-img item-peca">'+imgArte(it.arte,{})+'</div>'
+    :'<div class="item-img item-look"><span class="look-retrato">'+imgArte(it.arte,{})+'</span></div>';
+  return '<div class="item'+(eq?' equipado':'')+'">'+(eq?'<span class="selo">'+IC.certo+' em uso</span>':'')+figura+'<b>'+it.n+'</b>'+bt+'</div>';
 }
 function telaLoja(){
   const L=S.look||{};
@@ -112,20 +147,14 @@ function telaLoja(){
         '<button class="btn-sec" data-comp="'+c.id+'"'+(eq?' aria-pressed="true"':'')+'>'+(eq?'Tirar':'Chamar')+'</button></div>';
     });
   }else{
-    Object.keys(PECAS[abaLoja]).forEach(id=>{
-      const it=PECAS[abaLoja][id];
-      if(!it.arte)return;
-      const tem=temItem(id),eq=L[abaLoja]===id;
-      const bt=tem?'<button class="btn-sec" data-eq="'+abaLoja+'|'+id+'">'+(eq?'Tirar':'Usar')+'</button>'
-                  :'<button class="'+(S.moedas<it.p?'btn-sec':'btn-acao')+'" data-buy="'+abaLoja+'|'+id+'">'+IC.moeda+' '+it.p+'</button>';
-      h+='<div class="item'+(eq?' equipado':'')+'">'+(eq?'<span class="selo">'+IC.certo+' em uso</span>':'')+
-        '<div class="item-img item-peca">'+imgArte(it.arte,{})+'</div><b>'+it.n+'</b>'+bt+'</div>';
-    });
-    if(!Object.keys(PECAS[abaLoja]).some(id=>PECAS[abaLoja][id].arte))
-      h+='<div class="item vazio"><b>Chega em breve</b><span class="tipo">Esta parte do guarda-roupa ainda está sendo desenhada.</span></div>';
+    const nenhum=!lookEmUso(L);
+    h+='<div class="item'+(nenhum?' equipado':'')+'">'+(nenhum?'<span class="selo">'+IC.certo+' em uso</span>':'')+
+      '<div class="item-img item-look"><span class="look-retrato">'+imgArte('item-base',{})+'</span></div><b>Sem item</b><span class="tipo">o Bobby de sempre</span>'+
+      '<button class="btn-sec" data-semlook="1"'+(nenhum?' disabled':'')+'>'+(nenhum?'Em uso':'Usar')+'</button></div>';
+    LOOKS_ORDEM.forEach(par=>{if(PECAS[par[0]][par[1]]&&PECAS[par[0]][par[1]].arte&&ativo(PECAS[par[0]][par[1]].arte))h+=cartaoLook(par[0],par[1]);});
   }
   h+='</div>';
-  h+='<p class="dica-loja">'+(abaLoja==='comp'?'O companheiro aparece no mapa e na sua tela.':'Cada resposta certa vale 10 moedas. Mais peças chegam em breve, e o baú do dia também traz roupas.')+'</p>';
+  h+='<p class="dica-loja">'+(abaLoja==='comp'?'O companheiro aparece no mapa e na sua tela.':'Cada resposta certa vale 10 moedas. Um look por vez; mais itens chegam em breve, e o baú do dia também traz roupas.')+'</p>';
   const guard=guardadosDa(abaLoja);
   if(guard.length)h+='<p class="guardados"><b>Guardados para a arte nova:</b> '+guard.map(escapa).join(', ')+'. Eles continuam seus e voltam quando ficarem prontos.</p>';
   h+='</div>';
@@ -141,6 +170,7 @@ function telaLoja(){
   P.querySelectorAll('[data-pose]').forEach(b=>b.addEventListener('click',()=>{palcoId=b.dataset.pose;trocarPalco();}));
   const pb=$('#palco-bobby');
   if(pb)pb.addEventListener('click',()=>{
+    if(lookEmUso(S.look)&&lookEmUso(S.look).peca.modo!=='sobrepor')return;
     /* tocar no Bobby troca a expressão (ou a pose): vai para a próxima da lista */
     const lista=(palcoModo==='rosto'?EXPRESSOES:POSES).map(x=>x[0]);
     palcoId=lista[(lista.indexOf(palcoId)+1)%lista.length];trocarPalco();
@@ -148,6 +178,7 @@ function telaLoja(){
   P.querySelectorAll('[data-comp]').forEach(b=>b.addEventListener('click',()=>escolherCompanheiro(S.look&&S.look.companheiro===b.dataset.comp?'':b.dataset.comp)));
   P.querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.buy.split('|');comprar(q[0],q[1]);}));
   P.querySelectorAll('[data-eq]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.eq.split('|');equipar(q[0],q[1]);}));
+  P.querySelectorAll('[data-semlook]').forEach(b=>b.addEventListener('click',()=>{vestir('',''); salvar();somPasso();telaLoja();}));
   if(typeof pintarBarra==='function')pintarBarra();
 }
 /* troca só o palco (sem refazer a tela inteira) para a expressão mudar na hora, sem pulo na rolagem */
