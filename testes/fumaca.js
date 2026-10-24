@@ -464,6 +464,14 @@ async function main() {
           r.push({dt:dt,pose:/-p0([24])/.exec(g.src)[1],esperado:k%2===0?'2':'4'});}return r})()`);
         const lento = tempos.filter((t) => t.dt > 100), errada = tempos.filter((t) => t.pose !== t.esperado);
         if (lento.length || errada.length) problemas.push(rot + ' pose do guia: ' + lento.length + ' toques acima de 100 ms, ' + errada.length + ' poses erradas (acerto = p02, erro = p04)');
+        // falas do banco no acerto e no erro (nunca 'Quase!'), e o painel nao esconde o botao
+        for (const [rotulo, resp] of [['acerto', 'LIC.qs[LIC.i].answer'], ['erro', "'__errada__'"]]) {
+          const f = await js(`(()=>{LIC.vidas=5;LIC.qs=[{type:'mc',prompt:'Quanto e 1 + 1?',answer:'2',options:['1','2','3','4']}];LIC.i=0;LIC.qs[0].__reduzido=true;pintarLicao();LIC.resp=${resp.replace('LIC.qs[LIC.i].answer', "'2'")};conferir();
+            const t=document.querySelector('#fb-t').innerText.trim();const ac=document.querySelector('#acao'),b=ac.getBoundingClientRect(),e=document.elementFromPoint(b.left+b.width/2,b.top+b.height/2);
+            return {t:t,banco:falasTodas().some(x=>t.indexOf(x.texto)>=0),botao:!!e&&(e===ac||ac.contains(e))}})()`);
+          if (!f.banco || /Quase!/.test(f.t) || !f.botao) problemas.push(rot + ' fala do ' + rotulo + ': ' + JSON.stringify(f));
+          await shot0('fala-' + rotulo + '-' + nomeTela);
+        }
         // lembrete abre sozinho depois de dois erros seguidos
         const abre = await js(`(()=>{abrirLicao(0,0);LIC.etapa='questao';LIC.i=0;LIC.vidas=5;pintarLicao();const lm=document.querySelector('.lembrete');if(!lm)return 'sem lembrete';const ini=lm.open;
           LIC.resp='__x__';conferir();const a1=lm.open;avancar();LIC.resp='__x__';conferir();return [ini,a1,document.querySelector('.lembrete').open].join()})()`);

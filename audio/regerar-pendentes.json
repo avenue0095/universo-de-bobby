@@ -1,0 +1,776 @@
+{
+ "gerado": "2026-10-24",
+ "total": 70,
+ "itens": [
+  {
+   "texto": "Bom dia, explorador! Hoje o céu está limpo e a mochila está cheia.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (chegada.manha)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Bom dia, explorador! Hoje o céu está limpo e a mochila está cheia."
+   ]
+  },
+  {
+   "texto": "Boa tarde! Trouxe lanche, lupa e muita curiosidade. E você?",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (chegada.tarde)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Boa tarde! Trouxe lanche, lupa e muita curiosidade. E você?"
+   ]
+  },
+  {
+   "texto": "Boa noite! Uma missão pequena e depois a gente descansa.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (chegada.noite)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Boa noite! Uma missão pequena e depois a gente descansa."
+   ]
+  },
+  {
+   "texto": "Que bom ver você de novo! Vamos ver o que mudou no planeta?",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (chegada.volta)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Que bom ver você de novo! Vamos ver o que mudou no planeta?"
+   ]
+  },
+  {
+   "texto": "Cadê meu mapa? Ah, está na mochila. Sempre está.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (chegada.mapa)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Cadê meu mapa? Ah, está na mochila. Sempre está."
+   ]
+  },
+  {
+   "texto": "Escolha um planeta. Cada um tem um amigo esperando, com uma história para contar.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (chegada.planetas)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Escolha um planeta. Cada um tem um amigo esperando, com uma história para contar."
+   ]
+  },
+  {
+   "texto": "Hoje a missão é curta. Eu vou junto.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (chegada.curta)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Hoje a missão é curta. Eu vou junto."
+   ]
+  },
+  {
+   "texto": "O Embaralho passou por aqui de novo. Vamos arrumar a bagunça!",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (chegada.embaralho)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "O Embaralho passou por aqui de novo. Vamos arrumar a bagunça!"
+   ]
+  },
+  {
+   "texto": "Uau!",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.geral)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Uau!"
+   ]
+  },
+  {
+   "texto": "Boa! Mandou bem.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.geral)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Boa! Mandou bem."
+   ]
+  },
+  {
+   "texto": "Certinho! Pode me chamar de ajudante de ouro.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.geral)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Certinho! Pode me chamar de ajudante de ouro."
+   ]
+  },
+  {
+   "texto": "Perfeito! Até a mochila ficou orgulhosa.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.geral)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Perfeito! Até a mochila ficou orgulhosa."
+   ]
+  },
+  {
+   "texto": "Oba!",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.geral)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Oba!"
+   ]
+  },
+  {
+   "texto": "Aí sim.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.geral)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Aí sim."
+   ]
+  },
+  {
+   "texto": "Calculei, conferi e confirmei: você acertou.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.teo)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Calculei, conferi e confirmei: você acertou."
+   ]
+  },
+  {
+   "texto": "Padrão encontrado! Eu adoro quando os números combinam.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.teo)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Padrão encontrado! Eu adoro quando os números combinam."
+   ]
+  },
+  {
+   "texto": "Número bonito! Três e quatro, sete. Ótima conta.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.teo)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Número bonito! Três e quatro, sete. Ótima conta."
+   ]
+  },
+  {
+   "texto": "Era uma vez uma resposta certa, e ela era sua.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.rufa)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Era uma vez uma resposta certa, e ela era sua."
+   ]
+  },
+  {
+   "texto": "Que final feliz! Merece até um ponto final.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.rufa)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Que final feliz! Merece até um ponto final."
+   ]
+  },
+  {
+   "texto": "Essa palavra ficou linda no papel. Quer ler de novo?",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.rufa)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Essa palavra ficou linda no papel. Quer ler de novo?"
+   ]
+  },
+  {
+   "texto": "Great! Great job! Isso mesmo.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.otto)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Great! Great job! Isso mesmo."
+   ]
+  },
+  {
+   "texto": "Say it with me: hello, hello! Agora você.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.otto)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Say it with me: hello, hello! Agora você."
+   ]
+  },
+  {
+   "texto": "Duvido que você consiga. Ah, conseguiu!",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.rara)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Duvido que você consiga. Ah, conseguiu!"
+   ]
+  },
+  {
+   "texto": "Mais uma rodada? Eu não perco com graça, perco com estilo.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (acerto.rara)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Mais uma rodada? Eu não perco com graça, perco com estilo."
+   ]
+  },
+  {
+   "texto": "Três seguidas! A mochila está chacoalhando de alegria.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (sequencia3)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Três seguidas! A mochila está chacoalhando de alegria."
+   ]
+  },
+  {
+   "texto": "Cinco seguidas! Você está voando mais que a Brisa.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (sequencia5)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Cinco seguidas! Você está voando mais que a Brisa."
+   ]
+  },
+  {
+   "texto": "Acertou de primeira. Eu nem tinha terminado de torcer.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (primeira)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Acertou de primeira. Eu nem tinha terminado de torcer."
+   ]
+  },
+  {
+   "texto": "Agora sim! Tentar de novo funciona.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (recuperou)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Agora sim! Tentar de novo funciona."
+   ]
+  },
+  {
+   "texto": "Esse foi difícil e você resolveu. Caprichou!",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (dificil)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Esse foi difícil e você resolveu. Caprichou!"
+   ]
+  },
+  {
+   "texto": "Eita, você é rápido! Eu pisquei e a resposta já estava lá.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (rapida)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Eita, você é rápido! Eu pisquei e a resposta já estava lá."
+   ]
+  },
+  {
+   "texto": "Errar faz parte da exploração. Todo mapa tem uma curva.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.bobby)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Errar faz parte da exploração. Todo mapa tem uma curva."
+   ]
+  },
+  {
+   "texto": "Essa era das difíceis mesmo. Vamos olhar juntos.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.bobby)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Essa era das difíceis mesmo. Vamos olhar juntos."
+   ]
+  },
+  {
+   "texto": "Quase todo explorador erra esse. Olha só a dica.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.bobby)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Quase todo explorador erra esse. Olha só a dica."
+   ]
+  },
+  {
+   "texto": "Epa, esse cálculo travou. Vamos reiniciar o raciocínio juntos.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.teo)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Epa, esse cálculo travou. Vamos reiniciar o raciocínio juntos."
+   ]
+  },
+  {
+   "texto": "Eu errei de propósito só para testar você. Quase funcionou.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.teo)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Eu errei de propósito só para testar você. Quase funcionou."
+   ]
+  },
+  {
+   "texto": "Errar faz parte da exploração. Todo mapa tem uma curva.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.rufa)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Errar faz parte da exploração. Todo mapa tem uma curva."
+   ]
+  },
+  {
+   "texto": "Essa era das difíceis mesmo. Vamos olhar juntos.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.rufa)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Essa era das difíceis mesmo. Vamos olhar juntos."
+   ]
+  },
+  {
+   "texto": "Nice try! Vamos ouvir de novo, bem devagar.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.otto)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Nice try! Vamos ouvir de novo, bem devagar."
+   ]
+  },
+  {
+   "texto": "Repita comigo, devagar. Quanto mais devagar, melhor o som.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.otto)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Repita comigo, devagar. Quanto mais devagar, melhor o som."
+   ]
+  },
+  {
+   "texto": "Respira fundo. A gente tenta de novo, sem pressa.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.capi)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Respira fundo. A gente tenta de novo, sem pressa."
+   ]
+  },
+  {
+   "texto": "Uma resposta errada ajuda o cérebro a crescer. Pode ficar tranquilo.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erro.capi)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Uma resposta errada ajuda o cérebro a crescer. Pode ficar tranquilo."
+   ]
+  },
+  {
+   "texto": "Ainda não. A resposta certa é essa, e a pergunta volta mais tarde.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (erroIgual)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Ainda não. A resposta certa é essa, e a pergunta volta mais tarde."
+   ]
+  },
+  {
+   "texto": "Quer uma dica? Dica não gasta nada.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (dica)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Quer uma dica? Dica não gasta nada."
+   ]
+  },
+  {
+   "texto": "Pedir ajuda é coisa de explorador esperto.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (dica)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Pedir ajuda é coisa de explorador esperto."
+   ]
+  },
+  {
+   "texto": "Uma pergunta por vez. A gente chega lá.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (dica)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Uma pergunta por vez. A gente chega lá."
+   ]
+  },
+  {
+   "texto": "Pronto. Agora vamos conferir o que a gente aprendeu nessa trilha.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (meio)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Pronto. Agora vamos conferir o que a gente aprendeu nessa trilha."
+   ]
+  },
+  {
+   "texto": "Ufa, que subida! Mas a vista lá de cima vale cada passo.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (meio)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Ufa, que subida! Mas a vista lá de cima vale cada passo."
+   ]
+  },
+  {
+   "texto": "Falta pouco. Só mais uma, e depois a gente confere a mochila inteira.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (ultima)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Falta pouco. Só mais uma, e depois a gente confere a mochila inteira."
+   ]
+  },
+  {
+   "texto": "Fase completa! Minha mochila quer dançar.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (faseCompleta)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Fase completa! Minha mochila quer dançar."
+   ]
+  },
+  {
+   "texto": "Fase perfeita! Isso merece abraço de urso.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (fasePerfeita)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Fase perfeita! Isso merece abraço de urso."
+   ]
+  },
+  {
+   "texto": "Etapa completa! Olha o lugar acendendo.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (etapaCompleta)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Etapa completa! Olha o lugar acendendo."
+   ]
+  },
+  {
+   "texto": "Uma estrela voltou para o céu. Falta pouco para a constelação.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (estrela)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Uma estrela voltou para o céu. Falta pouco para a constelação."
+   ]
+  },
+  {
+   "texto": "Seu baú do dia está pronto. Quer abrir?",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (bauPronto)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Seu baú do dia está pronto. Quer abrir?"
+   ]
+  },
+  {
+   "texto": "Que baú bonito! Tem uma coisa nova lá dentro.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (bauAberto)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Que baú bonito! Tem uma coisa nova lá dentro."
+   ]
+  },
+  {
+   "texto": "Por hoje chega. Você fez um ótimo trabalho, e amanhã tem mais.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (parada)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Por hoje chega. Você fez um ótimo trabalho, e amanhã tem mais."
+   ]
+  },
+  {
+   "texto": "Descansar também faz parte da aventura.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (parada)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Descansar também faz parte da aventura."
+   ]
+  },
+  {
+   "texto": "Hoje foi bastante.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (parada)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Hoje foi bastante."
+   ]
+  },
+  {
+   "texto": "Um congelador cuidou da sua sequência. Ela continua firme.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (congelador)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Um congelador cuidou da sua sequência. Ela continua firme."
+   ]
+  },
+  {
+   "texto": "Sua sequência estava descansando. Hoje ela volta com tudo.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (descansando)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Sua sequência estava descansando. Hoje ela volta com tudo."
+   ]
+  },
+  {
+   "texto": "Psiu! Tem um bilhete para você.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (bilhete)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Psiu! Tem um bilhete para você."
+   ]
+  },
+  {
+   "texto": "Entreguei! Era para você mesmo.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (bilhete)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Entreguei! Era para você mesmo."
+   ]
+  },
+  {
+   "texto": "Ei, esse chapéu combinou com você.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (chapeu)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Ei, esse chapéu combinou com você."
+   ]
+  },
+  {
+   "texto": "Cócegas na orelha! Hahaha. Para, para, para.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (toque)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Cócegas na orelha! Hahaha. Para, para, para."
+   ]
+  },
+  {
+   "texto": "Pode me chamar do que quiser. Eu respondo a qualquer apelido que venha com lanche.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (toque)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Pode me chamar do que quiser. Eu respondo a qualquer apelido que venha com lanche."
+   ]
+  },
+  {
+   "texto": "Olha, um passarinho! Sumiu. Mas eu juro que ele estava ali.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (toque)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Olha, um passarinho! Sumiu. Mas eu juro que ele estava ali."
+   ]
+  },
+  {
+   "texto": "Hmm. Interessante. Muito interessante. Nenhuma ideia, mas interessante.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (toque)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Hmm. Interessante. Muito interessante. Nenhuma ideia, mas interessante."
+   ]
+  },
+  {
+   "texto": "Ops.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (toque)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Ops."
+   ]
+  },
+  {
+   "texto": "Hihi, troquei tudo de lugar! Ops. Desculpa.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (embaralho)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Hihi, troquei tudo de lugar! Ops. Desculpa."
+   ]
+  },
+  {
+   "texto": "Você me achou! Eu não sei perder esconde-esconde.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (embaralho)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Você me achou! Eu não sei perder esconde-esconde."
+   ]
+  },
+  {
+   "texto": "Sem pressa. Pensar também é jogar.",
+   "idioma": "pt-BR",
+   "materia": "sistema",
+   "categoria": "fala do personagem (ocioso)",
+   "classe": "feedback",
+   "motivo": "fala nova (banco de falas, docs/PLANO-DE-IDENTIDADE.md secao 7); gerar com a voz local, uma voz por personagem (Bobby, Teo, Rufa, Otto, Capi, Fagulha, Brisa, Embaralho), sem custo",
+   "trechos_sem_clipe": [
+    "Sem pressa. Pensar também é jogar."
+   ]
+  }
+ ]
+}

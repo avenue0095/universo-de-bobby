@@ -1611,3 +1611,8 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
   .pe{padding-top:var(--esp-8);padding-bottom:calc(var(--esp-8) + var(--area-segura-baixo))}
   .lc-corpo{padding-top:var(--esp-8)}
 }
+
+/* falas dos personagens */
+.fala-p{font-weight:700;color:var(--cor-texto);margin:0 0 var(--esp-8)}
+.fala-mini{display:block;margin-top:var(--esp-4);font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:700;color:var(--cor-texto-suave)}
+.fala-mini[hidden]{display:none}

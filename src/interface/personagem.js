@@ -247,7 +247,9 @@ function telaLoja(){
     if(lookEmUso(S.look)&&lookEmUso(S.look).peca.modo!=='sobrepor')return;
     /* tocar no Bobby troca a expressão (ou a pose): vai para a próxima da lista */
     const lista=(palcoModo==='rosto'?EXPRESSOES:POSES).map(x=>x[0]);
-    palcoId=lista[(lista.indexOf(palcoId)+1)%lista.length];trocarPalco();
+    palcoId=lista[(lista.indexOf(palcoId)+1)%lista.length];
+    const fala=lookEmUso(S.look)&&Math.random()<.4?falaDe('chapeu'):falaDe('toque');
+    trocarPalco();lojaAviso(escapa(fala));setTimeout(()=>lojaAviso(''),4500);
   });
   P.querySelectorAll('[data-buycomp]').forEach(b=>b.addEventListener('click',()=>pedirCompraCompanheiro(b.dataset.buycomp)));
   P.querySelectorAll('[data-comp]').forEach(b=>b.addEventListener('click',()=>escolherCompanheiro(S.look&&S.look.companheiro===b.dataset.comp?'':b.dataset.comp)));

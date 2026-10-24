@@ -5,7 +5,7 @@
   "scripts": {
     "build": "python3 build/build.py",
     "build:check": "python3 build/build.py --check",
-    "test": "python3 build/build.py --check && node testes/trava-url.js && node testes/verifica.js --estrito && node testes/regressao.js && node testes/audio.js && node testes/ofensiva.js && node testes/estado.js && node testes/ciclo.js && node testes/revisao.js && node testes/irmas.js && node testes/economia.js && node testes/medicao.js && node testes/tokens.js && node testes/sw.js && node testes/ativos.js && node testes/desenhos.js && node testes/seguranca.js && node testes/site.js && node testes/senha-e-apagar.js && node testes/personagem.js && node testes/cobertura-audio.js",
+    "test": "python3 build/build.py --check && node testes/trava-url.js && node testes/verifica.js --estrito && node testes/regressao.js && node testes/audio.js && node testes/ofensiva.js && node testes/estado.js && node testes/ciclo.js && node testes/revisao.js && node testes/irmas.js && node testes/economia.js && node testes/falas.js && node testes/medicao.js && node testes/tokens.js && node testes/sw.js && node testes/ativos.js && node testes/desenhos.js && node testes/seguranca.js && node testes/site.js && node testes/senha-e-apagar.js && node testes/personagem.js && node testes/cobertura-audio.js",
     "fumaca": "node testes/fumaca.js",
     "test:tudo": "npm test && npm run fumaca"
   }

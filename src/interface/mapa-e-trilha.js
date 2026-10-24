@@ -192,5 +192,14 @@ function renderTrilha(){
     }));
   pintarPontoGaleria();
   animarMapa(p);
+  /* chegada: uma frase do Bobby pela hora do dia (uma vez por abertura, só se nada estiver por cima) */
+  if(!renderTrilha.chegou&&p){
+    renderTrilha.chegou=true;
+    setTimeout(()=>{
+      if(['#folha','#modal','#licao','#perfis','#materias','#perfil','#galeria'].some(q=>{const e=$(q);return e&&e.classList&&e.classList.contains('on');}))return;
+      const h=new Date().getHours(),sit=feitas()===0?'chegada.curta':(S.diario&&S.diario.blocos>0?null:(h<12?'chegada.manha':(h<18?'chegada.tarde':'chegada.noite')));
+      if(sit)avisoNo(falaDe(sit));
+    },1400);
+  }
   if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelector('.no.atual')||document.querySelector('.voce');if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}
 }

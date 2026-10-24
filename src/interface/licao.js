@@ -146,7 +146,10 @@ function pintarLicao(){
     (q.__irma?' · <b>parecida</b>':(q.__rep?' · <b>de novo</b>':''))+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+
     (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>'+
-    '<h2 class="pergunta">'+htmlSeguro(q.prompt,500)+'</h2></div></div>';
+    '<h2 class="pergunta">'+htmlSeguro(q.prompt,500)+'</h2>'+
+    (()=>{const ult=LIC.i>=LIC.qs.length-1&&LIC.qs.length>2,meio=LIC.i===Math.floor(LIC.base/2)&&LIC.base>=6;
+      return !LIC.rev&&(ult||meio)&&!(q.__rep)?'<small class="fala-mini">'+falaDe(ult?'ultima':'meio')+'</small>':'';})()+
+    '<small class="fala-mini" id="fala-ocioso" hidden></small></div></div>';
   /* o lembrete da aula começa FECHADO (abre com um toque; abre sozinho depois de dois erros seguidos) */
   if(!LIC.rev&&LIC.i<2){
     const lem=lembreteDaAula(LIC.l);
@@ -230,6 +233,13 @@ function pintarLicao(){
     pintarCampo();
     $('#palco').querySelectorAll('.tecla').forEach(b=>b.addEventListener('click',()=>digitar(b.dataset.k)));
   }
+  /* ocioso: depois de 20 s sem resposta, uma única frase tranquila (no máximo uma a cada 5 minutos), nunca cobra */
+  clearTimeout(LIC.tOcioso);
+  LIC.tOcioso=setTimeout(()=>{
+    const el=$('#fala-ocioso');
+    if(!el||LIC.conferido||LIC.etapa!=='questao'||Date.now()-(falaDe.ultimoOcioso||0)<300000)return;
+    falaDe.ultimoOcioso=Date.now();el.textContent=falaDe('ocioso');el.hidden=false;
+  },20000);
   if(ehF78()||q.ouvir)falarDepois(420,q.ouvir||q.prompt,q.lang);
   /* já deixa pronto o áudio da próxima pergunta (baixa e decodifica enquanto a criança responde) */
   const prox=LIC.qs[LIC.i+1];
@@ -409,6 +419,23 @@ function irmaDe(q){
   c.__rep=true;c.__irma=true;c.reforco=true;
   return c;
 }
+/* quem fala: o guia da matéria (Teo, Rufa, Otto); Capi entra depois de dois erros seguidos (calma, sem pressa) */
+const guiaDaMateria=()=>(PLANETAS[MATERIA]||PLANETAS.mat).guia;
+/* fala do acerto, em ordem de peso: sequência de 5 ou de 3, volta depois de erro (irmã), uma rara a cada 8 acertos, rápida, de primeira, o guia */
+function falaDoAcerto(q,ms){
+  const n=S.acertosTotal||0;
+  if(LIC.combo>=5&&LIC.combo%5===0)return falaDe('sequencia5');
+  if(LIC.combo===3)return falaDe('sequencia3');
+  if(q.__irma)return falaDe('recuperou');
+  if(n>0&&n%8===0)return falaDe('acerto.rara');
+  if(ms&&ms<2500&&!q.__rep&&LIC.combo>1)return falaDe('rapida');
+  if(!q.__rep&&!LIC.dica&&LIC.acertos===1)return falaDe('primeira');
+  return falaDe('acerto',guiaDaMateria());
+}
+function falaDoErro(q){
+  if(q&&(q.__rep&&!q.__irma))return falaDe('erroIgual');
+  return falaDe('erro',(LIC.errosSeguidos||0)>=2?'capi':guiaDaMateria());
+}
 /* troca a pose do guia na hora (mesma tarefa do toque): p02 comemora no acerto, p04 pensa na pergunta e no erro (nunca triste) */
 function guiaPose(pose){
   const i=$('#palco .guia-img'),id=PLANETAS[MATERIA].guia+'-'+pose;
@@ -444,7 +471,7 @@ function conferir(){
     S.xp+=ganho;S.moedas+=ganho;LIC.ganhoFase=(LIC.ganhoFase||0)+ganho;S.acertosTotal=(S.acertosTotal||0)+1;
     S.melhorCombo=Math.max(S.melhorCombo||0,LIC.combo);pe.classList.add('certo');
     $('#selo').innerHTML=MASC(LIC.combo>=3?'radiante':'feliz','avatar');
-    const elogio=pick2(['Isso aí!','Boa!','Perfeito!','Mandou bem!','Certinho!','Show!']);
+    const elogio=falaDoAcerto(q,ms);
     $('#fb-t').innerHTML=IC.certo+'<span>'+elogio+'</span>';
     if(ehF78())falar(elogio);
     $('#fb-s').innerHTML='+'+ganho+' moedas'+extra;
@@ -457,8 +484,9 @@ function conferir(){
     guardarErrado(q);
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
     $('#selo').innerHTML=MASC('pensa','avatar');
-    $('#fb-t').innerHTML=IC.refazer+'<span>Quase!</span>';
-    if(ehF78())falar('Quase!');
+    const calma=falaDoErro(q);
+    $('#fb-t').innerHTML=IC.refazer+'<span>'+escapa(calma)+'</span>';
+    if(ehF78())falar(calma);
     /* o erro NÃO repete a mesma pergunta (isso mede memória da resposta): volta uma IRMÃ, do mesmo gerador, com outros números ou palavras,
        2 perguntas depois. O item errado em si já foi para o caderno (guardarErrado) e volta amanhã na revisão espaçada. */
     let voltaIrma=false,voltaIgual=false;
@@ -550,11 +578,12 @@ function pintarFim(){
     '<div class="estrelao">'+estrelasSVG(est)+'</div>'+
     '<h2>'+(passou?(LIC.rev?'Revisão concluída!':(LIC.erros===0?'Fase perfeita!':'Fase concluída!'))
       :'Vamos descansar e revisar')+'</h2>'+
+    (passou&&!LIC.rev?'<p class="fala-p">'+falaDe(LIC.erros===0?'fasePerfeita':'faseCompleta')+'</p>':'')+
     (passou&&LIC.miss&&LIC.miss.fim?'<p class="fecho">'+LIC.miss.fim+'</p>':'')+
     '<p class="sub">'+(passou?'Você acertou '+LIC.acertos+' de '+LIC.base+' perguntas.'+
         (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros. Volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
       :'Os erros foram para o seu caderno e voltam amanhã na revisão. Seu progresso está guardado. Errar faz parte de aprender.')+'</p>'+
-    (completouMundo?'<div class="mundo-ok">'+IC.trofeu+' Etapa '+LIC.u.n+' completa!</div>':'')+
+    (completouMundo?'<div class="mundo-ok">'+IC.trofeu+' Etapa '+LIC.u.n+' completa!</div><p class="fala-p">'+falaDe('etapaCompleta')+'</p>':'')+
     (passou&&!LIC.rev?premioDesenhoHTML(completouMundo):'')+
     '<div class="placar">'+
       '<div><span>Acertos</span><b>'+LIC.acertos+'</b></div>'+

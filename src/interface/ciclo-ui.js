@@ -92,7 +92,7 @@ function mostrarBilhete(){
   const b=bilheteDeHoje();
   if(!b)return;
   abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('presente')+'</div><h2>Um bilhete do Bobby</h2>'+
-    '<p class="bilhete-texto">'+b.texto+'</p>'+
+    '<p class="fala-p">'+falaDe('bilhete')+'</p><p class="bilhete-texto">'+b.texto+'</p>'+
     '<ul class="folha-lista icones"><li>'+IC.presente+'<span>No baú de amanhã: '+escapa(b.presente)+'</span></li><li>'+IC.bilhete+'<span>'+b.pronto+'</span></li></ul>'+
     '<div class="folha-bts"><button class="btn-sec" id="fl-ouvir" aria-label="Ouvir o bilhete">'+IC.falar+' Ouvir</button>'+
     '<button class="btn-acao" id="fl-ok">Vamos jogar</button></div></div>');
@@ -121,14 +121,14 @@ function mostrarBau(){
   if(!bauPronto())return;
   const dia=Math.max(1,S.ofensiva.atual);
   abrirFolha('<div class="folha-in">'+bauCena(false)+'<h2>Seu baú de hoje</h2>'+
-    '<p>Você completou a meta de hoje. Dentro do baú tem '+categoriaDoBau(dia)+'.</p>'+
+    '<p class="fala-p">'+falaDe('bauPronto')+'</p><p>Você completou a meta de hoje. Dentro do baú tem '+categoriaDoBau(dia)+'.</p>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-abrir">Abrir o baú</button></div></div>');
   $('#fl-abrir').addEventListener('click',()=>{abrirBau();salvar();mostrarBauAberto();});
 }
 function mostrarBauAberto(){
   const b=S.diario.bau;
   abrirFolha('<div class="folha-in">'+bauCena(true)+'<h2>Você ganhou</h2>'+
-    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+iconeDoPremio(i.k)+'<span>'+(ROTULO_PREMIO[i.k]?'<small>'+ROTULO_PREMIO[i.k]+'</small>':'')+'<b>'+escapa(i.n)+'</b></span></li>').join('')+'</ul>'+
+    '<p class="fala-p">'+falaDe('bauAberto')+'</p><ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+iconeDoPremio(i.k)+'<span>'+(ROTULO_PREMIO[i.k]?'<small>'+ROTULO_PREMIO[i.k]+'</small>':'')+'<b>'+escapa(i.n)+'</b></span></li>').join('')+'</ul>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Continuar</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{
     fecharFolha();pintarTopo();
@@ -141,7 +141,7 @@ function mostrarParada(limite){
   garantirDia();
   if(limite){
     abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('tchau')+'</div><h2>Por hoje chega!</h2>'+
-      '<p>Você fez um ótimo trabalho. Amanhã tem mais.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
+      '<p class="fala-p">'+falaDe('parada')+'</p><p>Amanhã tem mais.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
       '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Até amanhã</button>'+
       '<button class="link-resp" id="fl-resp">Sou o responsável</button></div></div>');
     $('#fl-ok').addEventListener('click',()=>{fecharFolha();renderTrilha();});
@@ -152,7 +152,7 @@ function mostrarParada(limite){
     return;
   }
   abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('tchau')+'</div><h2>Por hoje chega!</h2>'+
-    '<p>Você fez um ótimo trabalho.</p><p>Amanhã tem mais. O baú de amanhã já está guardado.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
+    '<p class="fala-p">'+falaDe('parada')+'</p><p>Amanhã tem mais. O baú de amanhã já está guardado.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
     '<div class="folha-bts par"><button class="btn-acao" id="fl-fim">Terminar por hoje</button>'+
     '<button class="btn-sec" id="fl-segue">Continuar explorando</button></div></div>');
   if(ehF78())falarDepois2(400,'Por hoje chega! Você fez um ótimo trabalho.');
