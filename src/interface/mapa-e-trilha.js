@@ -67,8 +67,14 @@ function mapaMundo(u,ui,prox){
 /* ---------- tela inicial ---------- */
 function pintarTopo(){
   document.documentElement.style.setProperty('--m1',perfilAtual().cor||CORES[0]);
-  $('#st-fogo').innerHTML=IC.fogo+'<em>'+S.ofensiva+'</em>';
-  $('#st-moedas').innerHTML=IC.moeda+'<em>'+S.xp+'</em>';
+  const o=S.ofensiva,fogo=$('#st-fogo');
+  fogo.innerHTML=IC.fogo+'<em>'+o.atual+'</em>'+(o.congeladores>0?'<span class="gelo-n" aria-hidden="true">'+IC.gelo+o.congeladores+'</span>':'');
+  fogo.style.display=S.config.ofensivaLigada?'':'none';
+  fogo.classList.toggle('descansa',!!o.descansando);
+  fogo.setAttribute('title',textoOfensiva()+(o.congeladores?' · Congeladores: '+o.congeladores:''));
+  fogo.setAttribute('aria-label',textoOfensiva()+'. Congeladores: '+o.congeladores);
+  $('#st-moedas').innerHTML=IC.moeda+'<em>'+S.moedas+'</em>';
+  $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
   $('#som').innerHTML=S.som?IC.falar:IC.somOff;
   $('#som').setAttribute('aria-label',S.som?'Desligar sons':'Ligar sons');
   $('#logo').innerHTML=MASC('oi');
@@ -76,6 +82,7 @@ function pintarTopo(){
 function renderTrilha(){
   pintarTopo();calar();
   const p=proxima();
+  garantirDia();
   const pct=Math.round(feitas()/TOTAL_LESSONS*100);
   const nome=escapa(S.nome?S.nome:'explorador');
   const frase=feitas()===0?'Bem-vindo ao meu universo! Cada galáxia é uma matéria e cada mundo tem 5 fases. Escolha por onde começar.'
@@ -83,7 +90,7 @@ function renderTrilha(){
        :'Você zerou esta galáxia inteira! Pode refazer as fases ou trocar de matéria lá em cima.');
   let h='<div class="ola"><div class="mini">'+MASC('feliz')+'</div>'+
     '<div class="txt"><h1>Oi, '+nome+' <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1><p>'+frase+'</p></div>'+
-    '<div class="anel" style="--p:'+pct+'"><i>'+feitas()+'/'+TOTAL_LESSONS+'</i></div></div>';
+    '<div class="anel" style="--p:'+pct+'"><i>'+feitas()+'/'+TOTAL_LESSONS+'</i></div></div>'+rotinaHTML();
 
   UNITS.forEach((u,ui)=>{
     const completo=mundoCompleto(u);
@@ -96,6 +103,7 @@ function renderTrilha(){
   });
   $('#tela').innerHTML=h;
   const en=$('#editar-nome');if(en)en.addEventListener('click',telaPerfil);
+  ligarRotina();
   $('#tela').querySelectorAll('.bt:not([disabled])').forEach(b=>
     b.addEventListener('click',()=>{
       if(b.dataset.rev!==undefined)abrirRevisaoMundo(+b.dataset.rev);

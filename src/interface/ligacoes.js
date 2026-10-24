@@ -18,7 +18,7 @@ function confete(){
 }
 
 /* ---------- nome e cor ---------- */
-let corEscolhida=CORES[0],criando=false,nivelEscolhido='facil';
+let corEscolhida=CORES[0],criando=false,faixaEscolhida='f78';
 function pintarCores(){
   $('#cores').innerHTML=CORES.map(c=>'<button class="cor'+(c===corEscolhida?' on':'')+
     '" data-c="'+c+'" style="background:'+c+'" aria-label="Cor"></button>').join('');
@@ -34,17 +34,17 @@ function pedirNome(nova){
   $('#masc-modal').style.setProperty('--m1',corEscolhida);
   $('#tt-nome').textContent=nova?'Novo jogador':'Trocar o nome';
   $('#txt-nome').textContent=nova?'Escolha um nome e a cor do seu Bobby.':'Você pode mudar seu nome e sua cor.';
-  pintarCores();nivelEscolhido=nova?'facil':(S.nivel||'facil');pintarNiveis();
+  pintarCores();faixaEscolhida=nova?'f78':(S.faixa||'f78');pintarNiveis();
   $('#modal').classList.add('on');
   const c=$('#campo-nome');c.value=criando?'':(perfilAtual().nome||'');
   setTimeout(()=>c.focus(),80);
 }
 function pintarNiveis(){
-  const ns=[['facil','6 a 8 anos','tudo lido em voz alta e menos opções'],
-            ['medio','9 a 10 anos','ritmo normal'],
-            ['forte','11 anos ou mais','sem ajudas extras']];
-  $('#niveis').innerHTML=ns.map(n=>'<button class="nv'+(n[0]===nivelEscolhido?' on':'')+'" data-n="'+n[0]+'"><b>'+n[1]+'</b><span>'+n[2]+'</span></button>').join('');
-  $('#niveis').querySelectorAll('.nv').forEach(b=>b.addEventListener('click',()=>{nivelEscolhido=b.dataset.n;pintarNiveis();}));
+  const ns=[['f78','7 a 8 anos','tudo lido em voz alta e menos opções'],
+            ['f910','9 a 10 anos','ritmo normal'],
+            ['f1112','11 a 12 anos','sem ajudas extras']];
+  $('#niveis').innerHTML=ns.map(n=>'<button class="nv'+(n[0]===faixaEscolhida?' on':'')+'" data-n="'+n[0]+'"><b>'+n[1]+'</b><span>'+n[2]+'</span></button>').join('');
+  $('#niveis').querySelectorAll('.nv').forEach(b=>b.addEventListener('click',()=>{faixaEscolhida=b.dataset.n;pintarNiveis();}));
 }
 function salvarNome(){
   const n=($('#campo-nome').value.trim()||'Jogador '+(STORE.perfis.length+1)).slice(0,18);
@@ -52,7 +52,9 @@ function salvarNome(){
   if(criando){novoPerfil(n,corEscolhida);return;}
   STORE.perfis[STORE.atual].nome=n;
   STORE.perfis[STORE.atual].cor=corEscolhida;
-  S.nome=n;S.nivel=nivelEscolhido;salvar();renderTrilha();
+  const mudouFaixa=S.faixa!==faixaEscolhida;
+  S.nome=n;S.faixa=faixaEscolhida;salvar();renderTrilha();
+  if(mudouFaixa)registrarEvento('config_mudou',{chave:'faixa'});
 }
 
 /* ---------- ligações ---------- */
@@ -80,8 +82,6 @@ $('#som').addEventListener('click',()=>{S.som=!S.som;salvar();pintarTopo();if(S.
 $('#salvar-nome').addEventListener('click',salvarNome);
 $('#pular-nome').addEventListener('click',()=>{$('#modal').classList.remove('on');if(criando&&STORE.atual<0)telaPerfis();});
 $('#campo-nome').addEventListener('keydown',e=>{if(e.key==='Enter')salvarNome();});
-$('#trocar-nome').addEventListener('click',telaPerfil);
-$('#galeria-bt').addEventListener('click',()=>abrirGaleria(false));
 $('#troca-materia').addEventListener('click',telaMaterias);
 $('#fechar-gal').addEventListener('click',fecharGaleria);
 document.addEventListener('keydown',e=>{
@@ -104,7 +104,8 @@ lerStore();
 CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();
 if(STORE.perfis.length===0){telaPerfis();setTimeout(()=>pedirNome(true),300);}
 else if(STORE.perfis.length===1&&STORE.atual>=0){usarPerfil(STORE.atual);}
-else{telaPerfis();if(STORE.atual>=0){S=estadoDe(STORE.perfis[STORE.atual].dados);}
+else{telaPerfis();if(STORE.atual>=0){S=estadoDe(STORE.perfis[STORE.atual].dados);S.nome=STORE.perfis[STORE.atual].nome;garantirDia();}
   CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();renderTrilha();}
+iniciarCiclo();
 
 

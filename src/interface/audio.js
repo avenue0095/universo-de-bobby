@@ -74,7 +74,7 @@ function audioParar(){
   try{if(typeof speechSynthesis!=='undefined')speechSynthesis.cancel();}catch(e){}
 }
 function audioFalhou(chave,motivo){
-  try{if(typeof registrarEvento==='function')registrarEvento('audio_falha',{clip:String(chave).slice(0,80),motivo:String(motivo).slice(0,40)});}catch(e){}
+  try{if(typeof registrarEvento==='function')registrarEvento('audio_falha',{clip:String(chave).slice(0,80),motivo:String(motivo).toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,40)});}catch(e){}
 }
 /* RESERVA: voz do aparelho. Nunca chama speak() logo depois de cancel(): em vários Androids o cancel
    engole a fala seguinte. Se havia fala em andamento, cancela e espera um instante. */

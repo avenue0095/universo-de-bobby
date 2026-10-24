@@ -31,8 +31,6 @@
     <div class="stat fogo" id="st-fogo" title="Dias seguidos jogando"></div>
     <div class="stat moedas" id="st-moedas" title="Moedas"></div>
     <button class="icobtn" id="troca-materia" aria-label="Trocar de matéria" title="Trocar de galáxia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3.4"/><ellipse cx="12" cy="12" rx="10" ry="4.6" transform="rotate(-30 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.6" transform="rotate(30 12 12)"/></svg></button>
-    <button class="icobtn" id="galeria-bt" aria-label="Meus desenhos" title="Meus desenhos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m5.5 17 4-5 3 3.5L16 10.5l2.6 6.5"/><circle cx="8.6" cy="9" r="1.6" fill="currentColor" stroke="none"/></svg></button>
-    <button class="icobtn" id="trocar-nome" aria-label="Trocar de jogador" title="Trocar de jogador"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg></button>
     <button class="icobtn" id="som" aria-label="Sons"></button>
   </div>
 </header>
@@ -42,6 +40,13 @@
 <section class="galeria-tela" id="perfil"></section>
 
 <main class="tela" id="tela"></main>
+
+<nav class="barra-baixo" id="barra" aria-label="Navegação principal">
+  <button id="bb-mapa" aria-label="Mapa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg><span>Mapa</span></button>
+  <button id="bb-pers" aria-label="Meu personagem"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><rect x="3.5" y="5.5" width="17" height="15" rx="7.5"/></svg><span>Meu personagem</span></button>
+  <button id="bb-gal" aria-label="Meus desenhos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m5.5 17 4-5 3 3.5L16 10.5l2.6 6.5"/></svg><span>Desenhos</span></button>
+  <button id="bb-perfil" aria-label="Perfil"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg><span>Perfil</span></button>
+</nav>
 
 <section class="licao" id="licao" aria-live="polite">
   <div class="lc-topo">
@@ -91,6 +96,8 @@
   </div>
 </div>
 
+<div class="modal folha" id="folha" role="dialog" aria-modal="true"></div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <!--@script conteudo/matematica-motor.js conteudo/matematica-curriculo.js-->
 <!--@script conteudo/aulas-matematica.js-->
@@ -104,6 +111,9 @@
 <!--@script conteudo/lexico-ingles.js-->
 <!--@script conteudo/historias-ingles.js-->
 <!--@script
+  interface/nucleo.js
+  interface/ofensiva.js
+  interface/migracao.js
   interface/base.js
   interface/personagem.js
   interface/cenario-e-materias.js
@@ -114,10 +124,15 @@
   interface/mapa-e-trilha.js
   interface/licao.js
   interface/caderno-e-revisao.js
+  interface/revisao-espacada.js
+  interface/medicao.js
+  interface/ciclo.js
   interface/loja-e-conquistas.js
   interface/perfil-e-responsavel.js
   interface/voz-e-seguranca.js
   interface/telas-auxiliares.js
+  interface/backup.js
+  interface/ciclo-ui.js
   interface/ligacoes.js
   interface/enfeite-ceu.js
 -->

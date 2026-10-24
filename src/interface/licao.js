@@ -2,14 +2,23 @@
 let LIC={};
 function abrirLicao(ui,li){
   calar();if(LIC&&LIC.tDica){clearTimeout(LIC.tDica);}
+  garantirDia();
+  /* limite de blocos do dia, definido pelo responsável: só "até amanhã" (o responsável libera com a senha) */
+  if(limiteDeBlocosAtingido()){mostrarParada(true);return;}
   const u=UNITS[ui],l=u.lessons[li];
   /* base = quantas perguntas a fase REALMENTE tem. Fixo em 8 fazia a fase de 6 perguntas
      dizer "você acertou 6 de 8" numa jogada perfeita e travar a barra de missão em 75%. */
   const _qs=genQuestions(l,8);
+  const faseNova=!S.feitas[l.id];
+  const aquecimento=(typeof aquecimentoDaFase==='function'&&faseNova)?aquecimentoDaFase():[];
+  /* aquecimento: 2 ou 3 itens do caderno entram logo depois da primeira pergunta (recuperar antes de aprender) */
+  if(aquecimento.length&&_qs.length>1)_qs.splice(1,0,...aquecimento);
   LIC={ui:ui,li:li,u:u,l:l,qs:_qs,base:_qs.length,i:0,passo:0,vidas:5,erros:0,acertos:0,
        combo:0,melhorCombo:0,etapa:'historia',resp:null,digitado:'',conferido:false,dica:false,
        md:{c:0,d:0,u:0},miss:(MISS_ATUAL?MISS_ATUAL[l.id]:null),
-       cap:(CAP_ATUAL?CAP_ATUAL[u.n]:null),t0:Date.now()};
+       cap:(CAP_ATUAL?CAP_ATUAL[u.n]:null),t0:Date.now(),
+       tipoBloco:'fase',faseNova:faseNova,respondidas:0,ganhoFase:0,hist:[],tQ:0};
+  registrarEvento('bloco_inicio',{tipo:'fase',lic:String(l.id).replace(/[^a-z0-9._]/gi,''),materia:MATERIA});
   $('#licao').classList.add('on');
   $('#revisao').classList.remove('on');
   $('#licao').style.setProperty('--ub',corUnidade(u));
@@ -19,7 +28,14 @@ function abrirLicao(ui,li){
 function fecharLicao(){
   calar();
   if(LIC.tDica){clearTimeout(LIC.tDica);LIC.tDica=null;}
+  /* saiu no meio do bloco: fica registrado como "abandonou" (não conta como dia ativo) */
+  if(LIC.etapa==='questao'&&!LIC.encerrado&&(LIC.respondidas||0)>0){
+    LIC.encerrado=true;
+    registrarEvento('bloco_fim',{tipo:LIC.tipoBloco||'fase',lic:String((LIC.l&&LIC.l.id)||'').replace(/[^a-z0-9._]/gi,''),materia:MATERIA,
+      perguntas:LIC.respondidas||0,acertos:LIC.acertos||0,abandonou:1,contou:0,seg:Math.round((Date.now()-(LIC.t0||Date.now()))/1000)});
+  }
   $('#licao').classList.remove('on');document.body.style.overflow='';renderTrilha();
+  if(typeof depoisDeFecharLicao==='function')depoisDeFecharLicao();
 }
 function pintarVidas(){
   let h='';for(let i=0;i<5;i++)h+=IC.coracao.replace('<svg',i<LIC.vidas?'<svg':'<svg class="off"');
@@ -84,7 +100,7 @@ function pintarLicao(){
     $('#palco').innerHTML=h;ligarOuvir($('#palco'));
     $('#acao').textContent='Vamos ajudar!';$('#acao').disabled=false;
     $('.lc-corpo').scrollTo(0,0);
-    if(S.nivel==='facil')falarDepois(350,(cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''));
+    if(ehF78())falarDepois(350,(cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''));
     return;
   }
   if(LIC.etapa==='aula'){
@@ -106,7 +122,7 @@ function pintarLicao(){
   }
   if(LIC.etapa==='fim'){pintarFim();return;}
   const q=LIC.qs[LIC.i];
-  if(S.nivel==='facil'&&q.type==='mc'&&q.options.length>3&&!q.__reduzido){
+  if(ehF78()&&q.type==='mc'&&q.options.length>3&&!q.__reduzido){
     const fora=q.options.filter(o=>o!==q.answer);
     q.options=shufA([q.answer,fora[0],fora[1]]);q.__reduzido=true;
   }
@@ -146,7 +162,7 @@ function pintarLicao(){
   $('#palco').innerHTML=h;
   $('.lc-corpo').scrollTo(0,0);
   ligarOuvir($('#palco'));
-  LIC.resp=null;LIC.digitado='';LIC.conferido=false;LIC.dica=false;
+  LIC.resp=null;LIC.digitado='';LIC.conferido=false;LIC.dica=false;LIC.tQ=Date.now();
   $('#acao').textContent='Verificar';$('#acao').disabled=true;
   $('#dica').style.display='grid';
   if(q.type==='mc'){
@@ -195,7 +211,7 @@ function pintarLicao(){
     pintarCampo();
     $('#palco').querySelectorAll('.tecla').forEach(b=>b.addEventListener('click',()=>digitar(b.dataset.k)));
   }
-  if(S.nivel==='facil'||q.ouvir)falarDepois(420,q.ouvir||q.prompt,q.lang);
+  if(ehF78()||q.ouvir)falarDepois(420,q.ouvir||q.prompt,q.lang);
 }
 const shufA=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 function barraMissao(){
@@ -338,6 +354,10 @@ function conferir(){
   /* escolha: compara o texto exato da opcao (Lívia e lívia são opções diferentes de propósito);
      o resto passa por acertou(), que aceita 1,5 e 1.5 e ignora acento e maiúscula na digitação */
   const ok=q.type==='mc'?String(LIC.resp)===String(q.answer):acertou(LIC.resp,q.answer);
+  const primeira=!q.__rep;
+  const ms=LIC.tQ?Date.now()-LIC.tQ:0;
+  LIC.respondidas=(LIC.respondidas||0)+1;
+  if(primeira)LIC.hist.push({q:q,ok:ok,ms:ms,dica:LIC.dica||0});
   const pe=$('#pe');pe.classList.add('mostra');
   $('#dica').style.display='none';
   if(q.type==='mc'){
@@ -351,36 +371,41 @@ function conferir(){
     LIC.acertos++;LIC.combo++;regStat(LIC.l.id,'acertos');
     LIC.melhorCombo=Math.max(LIC.melhorCombo,LIC.combo);
     let ganho=10,extra='';
-    if(LIC.combo>=3&&LIC.combo%3===0){
+    if(LIC.combo>=3&&LIC.combo%3===0&&bonusDeComboAtivo()){
       ganho+=5;extra=' · <b>'+LIC.combo+' seguidas!</b> +5 de bônus';
       if(LIC.vidas<5){LIC.vidas++;extra+=' e +1 coração';somVida();pintarVidas();}
     }
-    S.xp+=ganho;S.ganhoTotal=(S.ganhoTotal||0)+ganho;S.acertos=(S.acertos||0)+1;
-    S.combo=Math.max(S.combo||0,LIC.combo);pe.classList.add('certo');
+    /* XP nunca diminui; moedas são o saldo que a loja gasta */
+    S.xp+=ganho;S.moedas+=ganho;LIC.ganhoFase=(LIC.ganhoFase||0)+ganho;S.acertosTotal=(S.acertosTotal||0)+1;
+    S.melhorCombo=Math.max(S.melhorCombo||0,LIC.combo);pe.classList.add('certo');
     $('#selo').innerHTML=MASC('feliz');
     $('#fb-t').textContent=pick2(['Isso aí!','Boa!','Perfeito!','Mandou bem!','Certinho!','Show!']);
     $('#fb-s').innerHTML='+'+ganho+' moedas'+extra;
     somCerto();somMoeda();
     if(LIC.rev)tirarErrado(q);
+    if(primeira&&q.__item)revisaoResultado(q.__item,true,LIC.dica||0);
   }else{
     LIC.erros++;LIC.combo=0;LIC.vidas--;regStat(LIC.l.id,'erros');pe.classList.add('errado');
     guardarErrado(q);
+    if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
     $('#selo').innerHTML=MASC('ops');
     $('#fb-t').textContent='Quase!';
     $('#fb-s').innerHTML='A resposta certa é <b>'+q.answer+'</b>.'+
       (LIC.vidas>0?' Esta pergunta volta no fim para você tentar de novo.':'');
     if(!q.__rep&&LIC.vidas>0){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);}
     somErro();pintarVidas();
-    if(S.nivel==='facil'&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
+    if(ehF78()&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
     const p=$('#palco').firstElementChild;if(p){p.classList.add('tremer');setTimeout(()=>p.classList.remove('tremer'),460);}
   }
+  cicloPergunta(q,{ok:ok,ms:ms,dica:LIC.dica||0});
+  if(primeira&&(LIC.diaria||q.__aquec)){const st=diaDeStats();st.rev=(st.rev||0)+1;if(ok)st.revAc=(st.revAc||0)+1;}
   pintarTopo();salvar();
   $('#acao').textContent=(LIC.vidas<=0)?'Ver resultado':(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');
-  if(LIC.vidas<=0&&S.xp>=PRECO_CORACAO&&!LIC.comprou){
+  if(LIC.vidas<=0&&S.moedas>=PRECO_CORACAO&&!LIC.comprou){
     $('#fb-s').innerHTML+=' <button class="comprar-vida" id="comprar-vida">'+IC.coracao+' continuar por '+PRECO_CORACAO+' moedas</button>';
     const cv=$('#comprar-vida');
     if(cv)cv.addEventListener('click',()=>{
-      S.xp-=PRECO_CORACAO;LIC.vidas=2;LIC.comprou=true;salvar();pintarVidas();pintarTopo();
+      S.moedas-=PRECO_CORACAO;LIC.vidas=2;LIC.comprou=true;salvar();pintarVidas();pintarTopo();
       $('#acao').textContent=(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');cv.remove();somVida();
     });
   }
@@ -403,8 +428,8 @@ function regFim(){
   S.stats=S.stats||{porLicao:{},dias:{},tempo:0};
   const seg=Math.min(3600,Math.round((Date.now()-(LIC.t0||Date.now()))/1000));
   S.stats.tempo=(S.stats.tempo||0)+seg;
-  const d=hoje(),dia=S.stats.dias[d]||{fases:0,seg:0};
-  dia.fases++;dia.seg+=seg;S.stats.dias[d]=dia;
+  const dia=diaDeStats();
+  dia.fases=(dia.fases||0)+1;dia.seg=(dia.seg||0)+seg;
 }
 function pintarFim(){
   const passou=LIC.vidas>0;
@@ -413,14 +438,30 @@ function pintarFim(){
   $('#rever').style.display='none';
   $('#dica').style.display='none';
   $('#prog').style.width='100%';
-  let completouMundo=false;
-  if(passou){
-    const bonus=LIC.erros===0?20:0;S.xp+=bonus;
-    const antes=S.feitas[LIC.l.id]||0;
-    if(est>antes)S.feitas[LIC.l.id]=est;
-    marcarDia();regFim();salvar();confete();somFim();
+  let completouMundo=false,bloco={contou:false};
+  if(passou&&!LIC.fimPago){
+    LIC.fimPago=true;
+    /* bônus de fase perfeita (+20) e de revisão (+5): soma em XP e em moedas, e entra no placar */
+    const bonus=(LIC.erros===0?20:0)+(LIC.diaria?5:0);
+    S.xp+=bonus;S.moedas+=bonus;LIC.ganhoFase=(LIC.ganhoFase||0)+bonus;
+    if(!LIC.rev){const antes=S.feitas[LIC.l.id]||0;if(est>antes)S.feitas[LIC.l.id]=est;}
+    regFim();
     completouMundo=!LIC.rev&&mundoCompleto(LIC.u);
+    LIC.completouMundo=completouMundo;
   }
+  if(!LIC.encerrado){
+    LIC.encerrado=true;
+    const seg=Math.min(3600,Math.round((Date.now()-(LIC.t0||Date.now()))/1000));
+    bloco=concluirBloco({tipo:LIC.tipoBloco||'fase',lic:LIC.l.id,materia:MATERIA,perguntas:LIC.respondidas||0,acertos:LIC.acertos,
+      estrelas:est,seg:seg,faseNova:!!LIC.faseNova&&passou,erros:LIC.erros,completouMundo:LIC.completouMundo});
+    LIC.bloco=bloco;
+    if(LIC.revAgg&&LIC.revAgg.n)registrarEvento('revisao_item',{n:LIC.revAgg.n,ok:LIC.revAgg.ok,
+      caixa_antes:LIC.revAgg.antes/LIC.revAgg.n,caixa_depois:LIC.revAgg.depois/LIC.revAgg.n});
+    if(passou&&typeof revisaoPosFase==='function')revisaoPosFase(LIC);
+    if(passou){confete();somFim();}
+    salvar();
+  }
+  completouMundo=!!LIC.completouMundo;
   const nErr=(S.errados[MATERIA+LIC.u.n]||[]).length;
   $('#palco').innerHTML='<div class="fim surge">'+
     MASC(passou?'feliz':'ops',passou?'pula':'')+
@@ -437,12 +478,14 @@ function pintarFim(){
       '<button class="btn fantasma" id="ver-galeria">Ver meus desenhos</button></div></div>':'')+
     '<div class="placar">'+
       '<div><span>Acertos</span><b>'+LIC.acertos+'</b></div>'+
-      '<div><span>Moedas</span><b>'+(LIC.acertos*10+(passou&&LIC.erros===0?20:0))+'</b></div>'+
+      '<div><span>Moedas</span><b>'+(LIC.ganhoFase||0)+'</b></div>'+
       '<div><span>Melhor combo</span><b>'+LIC.melhorCombo+'</b></div>'+
     '</div>'+
+    (typeof blocoFimHTML==='function'?blocoFimHTML(bloco):'')+
     '<button class="btn fantasma" id="rever-fim">Rever a aula desta fase</button></div>';
   $('.lc-corpo').scrollTo(0,0);
   $('#rever-fim').addEventListener('click',abrirRevisao);
+  if(typeof ligarBlocoFim==='function')ligarBlocoFim(bloco);
   const vg=$('#ver-galeria');if(vg)vg.addEventListener('click',()=>abrirGaleria(true));
   $('#pe').className='pe';
   $('#acao').textContent=passou?'Voltar para o mapa':'Tentar de novo';

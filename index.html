@@ -796,6 +796,357 @@ ol.plano li{padding-left:38px}
   font-size:12px;font-weight:700;color:var(--tinta2)}
 .vel-tx b{font-family:Fredoka,Nunito,sans-serif;font-size:17px;color:var(--tinta)}
 
+
+
+/* ======================================================================
+   Tokens do DESIGN.md (Fase 3). Copiados do bloco 2.1 do docs/DESIGN.md.
+   Os componentes NOVOS usam so estes (var(--cor-*), var(--esp-*)...). Os componentes antigos
+   seguem nos tokens acima (--papel, --surf...) ate a migracao visual. ====================================================================== */
+/* ===== TOKENS: O Universo de Bobby (única fonte de hex) ===== */
+:root {
+  color-scheme: light dark;
+
+  /* ---------- claro: "Dia" ---------- */
+  --cor-fundo: #F3F5FD;
+  --cor-superficie: #FFFFFF;
+  --cor-superficie-2: #E9EDFA;
+  --cor-texto: #16213A;
+  --cor-texto-suave: #4A5877;
+  --cor-linha: rgba(22,33,58,.14);
+  --cor-linha-forte: #6C7AA0;
+  --cor-foco: #1B5FC4;
+  --cor-sombra: rgba(22,33,58,.30);
+  --cor-vidro: rgba(255,255,255,.80);
+  --cor-acerto: #0B7A4B;
+  --cor-acerto-suave: #D8F3E5;
+  --cor-ainda: #A33C08;
+  --cor-ainda-suave: #FDE6D6;
+  --cor-ouro: #F2B134;
+  --cor-ouro-sobre: #16213A;
+  --cor-ouro-borda: #8A5A00;
+  --cor-acao: #FF8A2B;
+  --cor-acao-sobre: #16213A;
+  --cor-acao-borda: #B4510A;
+  --cor-gelo: #CDEEFF;
+  --cor-gelo-sobre: #16213A;
+  --cor-gelo-borda: #1F6F99;
+  --mat-base: #1B5FC4;
+  --mat-sobre: #FFFFFF;
+  --mat-tinta: #1B5FC4;
+  --mat-suave: #DCE8FB;
+  --mat-luz: #6FA8FF;
+  --mat-ceu-topo: #BFD7FF;
+  --mat-ceu-horizonte: #EAF2FF;
+  --mat-chao: #7FB0F5;
+  --por-base: #6340D0;
+  --por-sobre: #FFFFFF;
+  --por-tinta: #6340D0;
+  --por-suave: #E6DFFA;
+  --por-luz: #A68CFF;
+  --por-ceu-topo: #D9CCFF;
+  --por-ceu-horizonte: #F4EFFF;
+  --por-chao: #B49CF2;
+  --ing-base: #066B62;
+  --ing-sobre: #FFFFFF;
+  --ing-tinta: #066B62;
+  --ing-suave: #D5F1EC;
+  --ing-luz: #3FD1BF;
+  --ing-ceu-topo: #BDEFE8;
+  --ing-ceu-horizonte: #E8FAF7;
+  --ing-chao: #6CCFC2;
+
+  /* ---------- personagens: REFERÊNCIA DE ARTE, nunca usar como cor de texto ---------- */
+  --pers-bobby-pelo: #9A6338;
+  --pers-bobby-pelo-sombra: #6E4524;
+  --pers-bobby-focinho: #EBCDA6;
+  --pers-bobby-olho: #2A1810;
+  --pers-teo-corpo: #E6EAF2;
+  --pers-teo-visor: #FFB02E;
+  --pers-teo-junta: #5B6B8C;
+  --pers-rufa-pelo: #D9622B;
+  --pers-rufa-creme: #F7E4CC;
+  --pers-rufa-meia: #3B2A26;
+  --pers-otto-pelo: #7A5436;
+  --pers-otto-barriga: #D8B48A;
+  --pers-otto-cachecol: #F26B5B;
+  --pers-brisa-escama: #2FB8C9;
+  --pers-brisa-asa: #B9A6FF;
+  --pers-brisa-barriga: #F2E6B8;
+  --pers-capi-pelo: #B58A5A;
+  --pers-capi-focinho: #8A6540;
+  --pers-capi-folha: #7FA37A;
+  --pers-fagulha-corpo: #2A2F4A;
+  --pers-fagulha-lanterna: #FFE9A8;
+  --pers-fagulha-asa: #AEB8D6;
+
+  /* ---------- tipografia ---------- */
+  --fonte-titulo: "Fredoka", "Nunito", system-ui, sans-serif;
+  --fonte-corpo: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --peso-titulo: 600;
+  --peso-corpo: 600;
+  --peso-forte: 800;
+
+  --t-legenda: 14px;  --lh-legenda: 20px;
+  --t-pequeno: 16px;  --lh-pequeno: 24px;
+  --t-corpo: 18px;    --lh-corpo: 28px;
+  --t-destaque: 20px; --lh-destaque: 28px;
+  --t-h3: 24px;       --lh-h3: 32px;
+  --t-h2: 28px;       --lh-h2: 36px;
+  --t-h1: 36px;       --lh-h1: 44px;
+  --t-display: 48px;  --lh-display: 56px;
+  --t-numero: 64px;   --lh-numero: 72px;
+
+  /* ---------- grade de 8 px (4 só como meio passo) ---------- */
+  --esp-4: 4px;
+  --esp-8: 8px;
+  --esp-16: 16px;
+  --esp-24: 24px;
+  --esp-32: 32px;
+  --esp-40: 40px;
+  --esp-48: 48px;
+  --esp-64: 64px;
+  --esp-96: 96px;
+
+  /* ---------- raios ---------- */
+  --raio-8: 8px;
+  --raio-16: 16px;
+  --raio-24: 24px;
+  --raio-32: 32px;
+  --raio-pilula: 999px;
+
+  /* ---------- sombras (derivadas de --cor-sombra e --cor-linha) ---------- */
+  --sombra-1: 0 1px 0 var(--cor-linha), 0 4px 8px -4px var(--cor-sombra);
+  --sombra-2: 0 1px 0 var(--cor-linha), 0 8px 16px -8px var(--cor-sombra);
+  --sombra-3: 0 1px 0 var(--cor-linha), 0 16px 32px -16px var(--cor-sombra);
+  --sombra-contato: radial-gradient(closest-side, var(--cor-sombra), transparent);
+
+  /* ---------- movimento ---------- */
+  --mov-rapido: 120ms;
+  --mov-padrao: 240ms;
+  --mov-lento: 480ms;
+  --mov-celebra: 800ms;
+  --curva-entra: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --curva-sai: cubic-bezier(0.4, 0, 1, 1);
+  --curva-move: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---------- toque e layout ---------- */
+  --toque-min: 48px;
+  --toque-conforto: 56px;
+  --toque-folga: 8px;
+  --barra-h: 72px;
+  --topo-h: 56px;
+  --larg-conteudo: 640px;
+  --area-segura-baixo: env(safe-area-inset-bottom, 0px);
+
+  /* ---------- camadas ---------- */
+  --z-mapa: 0;
+  --z-cartao: 10;
+  --z-barra: 20;
+  --z-folha: 30;
+  --z-modal: 40;
+  --z-celebra: 50;
+}
+
+/* ---------- escuro: "Espaço" (segue o sistema, a menos que o usuário tenha escolhido claro) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cor-fundo: #0B1020;
+    --cor-superficie: #151C33;
+    --cor-superficie-2: #1E2742;
+    --cor-texto: #EEF2FF;
+    --cor-texto-suave: #A9B5D6;
+    --cor-linha: rgba(169,181,214,.20);
+    --cor-linha-forte: #7F8DB5;
+    --cor-foco: #8DBBFF;
+    --cor-sombra: rgba(0,0,0,.55);
+    --cor-vidro: rgba(21,28,51,.78);
+    --cor-acerto: #4BDB9A;
+    --cor-acerto-suave: #123B2A;
+    --cor-ainda: #FFA463;
+    --cor-ainda-suave: #43261A;
+    --cor-ouro: #F2B134;
+    --cor-ouro-sobre: #0B1020;
+    --cor-ouro-borda: #F2B134;
+    --cor-acao: #FF9A45;
+    --cor-acao-sobre: #0B1020;
+    --cor-acao-borda: #FF9A45;
+    --cor-gelo: #1E4A66;
+    --cor-gelo-sobre: #EEF2FF;
+    --cor-gelo-borda: #7CC8F2;
+    --mat-base: #6FA8FF;
+    --mat-sobre: #0B1020;
+    --mat-tinta: #8DBBFF;
+    --mat-suave: #1B2B52;
+    --mat-luz: #6FA8FF;
+    --mat-ceu-topo: #0E1A3D;
+    --mat-ceu-horizonte: #1B2F66;
+    --mat-chao: #14264F;
+    --por-base: #A68CFF;
+    --por-sobre: #0B1020;
+    --por-tinta: #B9A6FF;
+    --por-suave: #2A2257;
+    --por-luz: #A68CFF;
+    --por-ceu-topo: #1A1442;
+    --por-ceu-horizonte: #34286E;
+    --por-chao: #231A55;
+    --ing-base: #3FD1BF;
+    --ing-sobre: #0B1020;
+    --ing-tinta: #5FE0CF;
+    --ing-suave: #123B3A;
+    --ing-luz: #3FD1BF;
+    --ing-ceu-topo: #072B2A;
+    --ing-ceu-horizonte: #0F4B48;
+    --ing-chao: #0B3A38;
+  }
+}
+:root[data-theme="dark"] {
+  --cor-fundo: #0B1020;
+  --cor-superficie: #151C33;
+  --cor-superficie-2: #1E2742;
+  --cor-texto: #EEF2FF;
+  --cor-texto-suave: #A9B5D6;
+  --cor-linha: rgba(169,181,214,.20);
+  --cor-linha-forte: #7F8DB5;
+  --cor-foco: #8DBBFF;
+  --cor-sombra: rgba(0,0,0,.55);
+  --cor-vidro: rgba(21,28,51,.78);
+  --cor-acerto: #4BDB9A;
+  --cor-acerto-suave: #123B2A;
+  --cor-ainda: #FFA463;
+  --cor-ainda-suave: #43261A;
+  --cor-ouro: #F2B134;
+  --cor-ouro-sobre: #0B1020;
+  --cor-ouro-borda: #F2B134;
+  --cor-acao: #FF9A45;
+  --cor-acao-sobre: #0B1020;
+  --cor-acao-borda: #FF9A45;
+  --cor-gelo: #1E4A66;
+  --cor-gelo-sobre: #EEF2FF;
+  --cor-gelo-borda: #7CC8F2;
+  --mat-base: #6FA8FF;
+  --mat-sobre: #0B1020;
+  --mat-tinta: #8DBBFF;
+  --mat-suave: #1B2B52;
+  --mat-luz: #6FA8FF;
+  --mat-ceu-topo: #0E1A3D;
+  --mat-ceu-horizonte: #1B2F66;
+  --mat-chao: #14264F;
+  --por-base: #A68CFF;
+  --por-sobre: #0B1020;
+  --por-tinta: #B9A6FF;
+  --por-suave: #2A2257;
+  --por-luz: #A68CFF;
+  --por-ceu-topo: #1A1442;
+  --por-ceu-horizonte: #34286E;
+  --por-chao: #231A55;
+  --ing-base: #3FD1BF;
+  --ing-sobre: #0B1020;
+  --ing-tinta: #5FE0CF;
+  --ing-suave: #123B3A;
+  --ing-luz: #3FD1BF;
+  --ing-ceu-topo: #072B2A;
+  --ing-ceu-horizonte: #0F4B48;
+  --ing-chao: #0B3A38;
+}
+
+/* ---------- aliases por matéria: o componente usa --materia-*, nunca --mat-*, --por-* ou --ing-* ---------- */
+[data-materia="mat"] { --materia-base: var(--mat-base); --materia-sobre: var(--mat-sobre); --materia-tinta: var(--mat-tinta); --materia-suave: var(--mat-suave); --materia-luz: var(--mat-luz); --materia-ceu-topo: var(--mat-ceu-topo); --materia-ceu-horizonte: var(--mat-ceu-horizonte); --materia-chao: var(--mat-chao); }
+[data-materia="por"] { --materia-base: var(--por-base); --materia-sobre: var(--por-sobre); --materia-tinta: var(--por-tinta); --materia-suave: var(--por-suave); --materia-luz: var(--por-luz); --materia-ceu-topo: var(--por-ceu-topo); --materia-ceu-horizonte: var(--por-ceu-horizonte); --materia-chao: var(--por-chao); }
+[data-materia="ing"] { --materia-base: var(--ing-base); --materia-sobre: var(--ing-sobre); --materia-tinta: var(--ing-tinta); --materia-suave: var(--ing-suave); --materia-luz: var(--ing-luz); --materia-ceu-topo: var(--ing-ceu-topo); --materia-ceu-horizonte: var(--ing-ceu-horizonte); --materia-chao: var(--ing-chao); }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --mov-rapido: 0ms; --mov-padrao: 0ms; --mov-lento: 0ms; --mov-celebra: 0ms; }
+}
+
+/* ======================================================================
+   Componentes do ciclo diário (Fase 2, lógica). Só tokens do DESIGN.md. Acabamento visual vem com a arte.
+   ====================================================================== */
+.tela{padding-bottom:calc(var(--barra-h) + var(--esp-32) + var(--area-segura-baixo))}
+.barra-baixo{position:fixed;left:0;right:0;bottom:0;z-index:var(--z-barra);display:flex;justify-content:center;gap:var(--esp-4);
+  padding:var(--esp-8) max(var(--esp-8),calc((100% - var(--larg-conteudo)) / 2)) calc(var(--esp-8) + var(--area-segura-baixo));
+  background:var(--cor-superficie);border-top:1px solid var(--cor-linha)}
+.barra-baixo button{flex:1 1 0;min-height:var(--toque-min);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:var(--esp-4);padding:var(--esp-4) var(--esp-4);border-radius:var(--raio-16);color:var(--cor-texto-suave);
+  font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte)}
+.barra-baixo button svg{width:24px;height:24px}
+.barra-baixo button:hover{background:var(--cor-superficie-2);color:var(--cor-texto)}
+.barra-baixo button:focus-visible{outline:3px solid var(--cor-foco);outline-offset:2px}
+.barra-baixo #bb-pers{color:var(--cor-acao-sobre);background:var(--cor-acao);border:2px solid var(--cor-acao-borda)}
+@media (max-width:430px){.barra-baixo button span{font-size:12px;line-height:16px}}
+
+.rotina{background:var(--cor-superficie);color:var(--cor-texto);border:2px solid var(--cor-linha);border-radius:var(--raio-24);
+  padding:var(--esp-16);margin:0 0 var(--esp-24);box-shadow:var(--sombra-1)}
+.rotina h2{font-size:var(--t-destaque);line-height:var(--lh-destaque)}
+.rotina-topo{display:flex;align-items:center;justify-content:space-between;gap:var(--esp-8);flex-wrap:wrap;margin-bottom:var(--esp-8)}
+.rotina-of{display:inline-flex;align-items:center;gap:var(--esp-4);font-weight:var(--peso-forte);font-size:var(--t-legenda);line-height:var(--lh-legenda);
+  color:var(--cor-texto);background:var(--cor-superficie-2);border-radius:var(--raio-pilula);padding:var(--esp-4) var(--esp-8)}
+.rotina-of svg{width:16px;height:16px;color:var(--cor-acao-borda)}
+.rotina-of.descansa{background:var(--cor-gelo);color:var(--cor-gelo-sobre)}
+.meta-linha{display:flex;align-items:center;gap:var(--esp-8);font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave);font-weight:var(--peso-forte)}
+.meta-barra{flex:1;height:var(--esp-16);border-radius:var(--raio-pilula);background:var(--cor-superficie-2);border:1px solid var(--cor-linha-forte);overflow:hidden}
+.meta-barra i{display:block;height:100%;background:var(--cor-acerto);border-radius:var(--raio-pilula);transition:width var(--mov-padrao) var(--curva-move)}
+.rotina-vivo{margin:var(--esp-8) 0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto-suave)}
+.missoes{list-style:none;margin:0 0 var(--esp-8);padding:0;display:grid;gap:var(--esp-8)}
+.missoes li{display:flex;align-items:center;gap:var(--esp-8);padding:var(--esp-8) var(--esp-16);border-radius:var(--raio-16);background:var(--cor-superficie-2);
+  font-size:var(--t-pequeno);line-height:var(--lh-pequeno);min-height:var(--toque-min)}
+.missoes li.ok{background:var(--cor-acerto-suave);color:var(--cor-texto)}
+.missoes .mk{width:24px;height:24px;flex:none;border-radius:var(--raio-pilula);border:2px solid var(--cor-linha-forte);display:grid;place-items:center;color:var(--cor-acerto)}
+.missoes li.ok .mk{border-color:var(--cor-acerto)}
+.missoes .mk svg{width:16px;height:16px}
+.missoes .mt{flex:1}
+.missoes small{font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:var(--peso-forte)}
+.rotina-estrela{display:flex;align-items:center;gap:var(--esp-8);margin:0 0 var(--esp-8);font-weight:var(--peso-forte);color:var(--cor-texto)}
+.rotina-estrela svg{width:24px;height:24px;color:var(--cor-ouro-borda)}
+.rotina-acoes{display:grid;gap:var(--esp-8);margin:var(--esp-8) 0}
+.rotina-rodape{display:flex;gap:var(--esp-8) var(--esp-16);flex-wrap:wrap;margin:0;font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave);font-weight:var(--peso-forte)}
+.gelo-chip{display:inline-flex;align-items:center;gap:var(--esp-4);background:var(--cor-gelo);color:var(--cor-gelo-sobre);border:1px solid var(--cor-gelo-borda);border-radius:var(--raio-pilula);padding:0 var(--esp-8)}
+.gelo-chip svg{width:16px;height:16px}
+.gelo-n{display:inline-flex;align-items:center;gap:2px;margin-left:var(--esp-4);font-size:var(--t-legenda);color:var(--cor-gelo-sobre);background:var(--cor-gelo);border-radius:var(--raio-pilula);padding:0 var(--esp-4)}
+.gelo-n svg{width:16px!important;height:16px!important}
+.stat.fogo.descansa{opacity:.9;border-color:var(--cor-gelo-borda)}
+
+.btn-acao,.btn-sec{display:inline-flex;align-items:center;justify-content:center;gap:var(--esp-8);min-height:var(--toque-conforto);padding:var(--esp-8) var(--esp-24);
+  border-radius:var(--raio-16);font-family:var(--fonte-titulo);font-weight:var(--peso-titulo);font-size:var(--t-corpo);line-height:var(--lh-corpo);width:100%}
+.btn-acao{background:var(--cor-acao);color:var(--cor-acao-sobre);border:2px solid var(--cor-acao-borda)}
+.btn-acao svg,.btn-sec svg{width:24px;height:24px}
+.btn-sec{background:var(--cor-superficie);color:var(--cor-texto);border:2px solid var(--cor-linha-forte)}
+.btn-acao:focus-visible,.btn-sec:focus-visible,.chip-ctl:focus-visible{outline:3px solid var(--cor-foco);outline-offset:2px}
+
+.folha{place-items:center;background:var(--cor-sombra)}
+.folha-in{background:var(--cor-superficie);color:var(--cor-texto);border-radius:var(--raio-32);padding:var(--esp-24);width:100%;max-width:420px;max-height:90vh;overflow:auto;
+  box-shadow:var(--sombra-3);text-align:center}
+.folha-in h2{font-size:var(--t-h3);line-height:var(--lh-h3);margin-bottom:var(--esp-8)}
+.folha-in p{margin:0 0 var(--esp-8);font-size:var(--t-corpo);line-height:var(--lh-corpo);color:var(--cor-texto)}
+.folha-bobby{width:96px;height:96px;margin:0 auto var(--esp-8)}
+.folha-lista{list-style:none;margin:var(--esp-8) 0 var(--esp-16);padding:0;display:grid;gap:var(--esp-8);text-align:left}
+.folha-lista li{background:var(--cor-superficie-2);border-radius:var(--raio-16);padding:var(--esp-8) var(--esp-16);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
+.folha-lista.premios li{background:var(--cor-ouro);color:var(--cor-ouro-sobre);font-weight:var(--peso-forte);border:2px solid var(--cor-ouro-borda)}
+.folha-bts{display:grid;gap:var(--esp-8);margin-top:var(--esp-16)}
+.folha-bts.par{grid-template-columns:1fr 1fr}
+@media (max-width:430px){.folha-bts.par{grid-template-columns:1fr}}
+.link-resp{background:none;color:var(--cor-texto-suave);text-decoration:underline;min-height:var(--toque-min);font-size:var(--t-pequeno)}
+.bau-fig{width:96px;height:96px;margin:0 auto var(--esp-8);color:var(--cor-ouro-borda);background:var(--cor-ouro);border-radius:var(--raio-24);display:grid;place-items:center;border:2px solid var(--cor-ouro-borda)}
+.bau-fig svg{width:56px;height:56px}
+.bilhete-texto{font-family:var(--fonte-titulo);font-size:var(--t-destaque)!important;line-height:var(--lh-destaque)!important}
+.folha-in .perfis-sub{color:var(--cor-texto-suave)}
+.folha-in .campo.pin{width:100%;padding:var(--esp-16);border:2px solid var(--cor-linha-forte);border-radius:var(--raio-16);background:var(--cor-superficie-2);color:var(--cor-texto);margin:var(--esp-8) 0}
+.folha-in .modal-bts{display:flex;gap:var(--esp-8);justify-content:center;margin-top:var(--esp-16)}
+.folha-in .link{background:none;text-decoration:underline;color:var(--cor-texto-suave);min-height:var(--toque-min);padding:0 var(--esp-16)}
+.folha-in .erro-pin{color:var(--cor-ainda)}
+
+.fim-of{display:flex;align-items:center;justify-content:center;gap:var(--esp-8);margin:var(--esp-8) 0;font-weight:var(--peso-forte);color:var(--cor-texto)}
+.fim-of svg{width:24px;height:24px;color:var(--cor-acao-borda);flex:none}
+.fim-bau{margin:var(--esp-16) 0;padding:var(--esp-16);border-radius:var(--raio-24);background:var(--cor-superficie);border:2px solid var(--cor-ouro-borda);display:grid;gap:var(--esp-8)}
+.fim-bau b{font-family:var(--fonte-titulo);font-size:var(--t-destaque);line-height:var(--lh-destaque);color:var(--cor-texto)}
+
+.ctl{display:grid;gap:var(--esp-16)}
+.ctl-linha{background:var(--cor-superficie);border:2px solid var(--cor-linha);border-radius:var(--raio-16);padding:var(--esp-16);display:grid;gap:var(--esp-8)}
+.ctl-linha b{font-size:var(--t-corpo);line-height:var(--lh-corpo)}
+.ctl-linha div{display:flex;flex-wrap:wrap;gap:var(--esp-8)}
+.ctl-linha small{color:var(--cor-texto-suave);font-size:var(--t-legenda);line-height:var(--lh-legenda)}
+.chip-ctl{min-height:var(--toque-min);padding:0 var(--esp-16);border-radius:var(--raio-pilula);background:var(--cor-superficie-2);color:var(--cor-texto);border:2px solid var(--cor-linha-forte);font-weight:var(--peso-forte);font-size:var(--t-pequeno)}
+.chip-ctl.on{background:var(--cor-acao);color:var(--cor-acao-sobre);border-color:var(--cor-acao-borda)}
+.medidor .sub-l{display:block}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -819,8 +1170,6 @@ ol.plano li{padding-left:38px}
     <div class="stat fogo" id="st-fogo" title="Dias seguidos jogando"></div>
     <div class="stat moedas" id="st-moedas" title="Moedas"></div>
     <button class="icobtn" id="troca-materia" aria-label="Trocar de matéria" title="Trocar de galáxia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3.4"/><ellipse cx="12" cy="12" rx="10" ry="4.6" transform="rotate(-30 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.6" transform="rotate(30 12 12)"/></svg></button>
-    <button class="icobtn" id="galeria-bt" aria-label="Meus desenhos" title="Meus desenhos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m5.5 17 4-5 3 3.5L16 10.5l2.6 6.5"/><circle cx="8.6" cy="9" r="1.6" fill="currentColor" stroke="none"/></svg></button>
-    <button class="icobtn" id="trocar-nome" aria-label="Trocar de jogador" title="Trocar de jogador"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg></button>
     <button class="icobtn" id="som" aria-label="Sons"></button>
   </div>
 </header>
@@ -830,6 +1179,13 @@ ol.plano li{padding-left:38px}
 <section class="galeria-tela" id="perfil"></section>
 
 <main class="tela" id="tela"></main>
+
+<nav class="barra-baixo" id="barra" aria-label="Navegação principal">
+  <button id="bb-mapa" aria-label="Mapa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg><span>Mapa</span></button>
+  <button id="bb-pers" aria-label="Meu personagem"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><rect x="3.5" y="5.5" width="17" height="15" rx="7.5"/></svg><span>Meu personagem</span></button>
+  <button id="bb-gal" aria-label="Meus desenhos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m5.5 17 4-5 3 3.5L16 10.5l2.6 6.5"/></svg><span>Desenhos</span></button>
+  <button id="bb-perfil" aria-label="Perfil"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg><span>Perfil</span></button>
+</nav>
 
 <section class="licao" id="licao" aria-live="polite">
   <div class="lc-topo">
@@ -878,6 +1234,8 @@ ol.plano li{padding-left:38px}
     </div>
   </div>
 </div>
+
+<div class="modal folha" id="folha" role="dialog" aria-modal="true"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
@@ -4551,6 +4909,242 @@ const MISSOES_EN={};
 
 </script>
 <script>
+/* ---------- núcleo: dia local, hash e sorteio com semente ----------
+   Sem DOM e sem estado: estas funções rodam igual no navegador e nos testes em Node.
+   Regra do dia: SEMPRE o calendário local do aparelho. new Date().toISOString() é UTC e, no Brasil (UTC-3),
+   depois das 21h já devolve o dia seguinte (padrão do cofre: padrao-toisostring-e-utc-a-data-de-hoje-e-local). */
+const _p2=n=>String(n).padStart(2,'0');
+function diaLocal(agora){
+  const d=agora instanceof Date?agora:(agora!==undefined&&agora!==null?new Date(agora):new Date());
+  return d.getFullYear()+'-'+_p2(d.getMonth()+1)+'-'+_p2(d.getDate());
+}
+const hoje=()=>diaLocal();
+/* número do dia (inteiro) a partir de 'AAAA-MM-DD', sem fuso: diferenças de dias nunca erram por horário de verão */
+function idxDia(s){
+  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s));
+  if(!m)return NaN;
+  return Math.round(Date.UTC(+m[1],+m[2]-1,+m[3])/864e5);
+}
+const difDias=(a,b)=>idxDia(b)-idxDia(a);
+function somaDias(s,n){
+  const d=new Date(idxDia(s)*864e5+n*864e5);
+  return d.getUTCFullYear()+'-'+_p2(d.getUTCMonth()+1)+'-'+_p2(d.getUTCDate());
+}
+/* 0 = domingo ... 6 = sábado */
+const diaSemana=s=>new Date(idxDia(s)*864e5).getUTCDay();
+const ehDia=s=>/^\d{4}-\d{2}-\d{2}$/.test(String(s))&&!isNaN(idxDia(s));
+/* semana ISO 'AAAA-Snn' */
+function semanaIso(s){
+  const q=new Date(idxDia(s)*864e5);
+  q.setUTCDate(q.getUTCDate()+4-(q.getUTCDay()||7));
+  const y=q.getUTCFullYear(),w=Math.ceil(((q-Date.UTC(y,0,1))/864e5+1)/7);
+  return y+'-S'+_p2(w);
+}
+/* hash FNV-1a de 32 bits, síncrono e idêntico ao do script de build do áudio */
+function fnv1a(str){
+  let h=0x811c9dc5;str=String(str);
+  for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,0x01000193);}
+  return h>>>0;
+}
+const fnv8=s=>fnv1a(s).toString(16).padStart(8,'0');
+function mulberry32(a){
+  return function(){
+    a=(a+0x6D2B79F5)>>>0;let t=a;
+    t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);
+    return((t^(t>>>14))>>>0)/4294967296;
+  };
+}
+const escolheCom=(rnd,lista)=>lista[Math.floor(rnd()*lista.length)];
+/* sorteio local de identificador (não é segredo, não sai do aparelho) */
+function sorteioId(n){
+  const a='abcdefghjkmnpqrstuvwxyz23456789';let t='';
+  for(let i=0;i<(n||12);i++)t+=a.charAt(Math.floor(Math.random()*a.length));
+  return t;
+}
+/* ---------- ofensiva com congelador ganho, descanso e recuperação ----------
+   Porte de docs/anexos/referencia-ofensiva.js (docs/FASE-2-especificacao.md, seção 5.3). Sem DOM, sem localStorage.
+   Datas são 'AAAA-MM-DD' do calendário LOCAL (nucleo.js). A diferença para a referência: o contador se chama
+   'atual' (a referência usava 'ofensiva') porque aqui o objeto inteiro é S.ofensiva.
+   Tom: a ofensiva nunca "morre". Sem congelador ela DESCANSA e volta pela metade; o texto nunca culpa. */
+const OF_P={diasParaCongelador:7,maxCongeladores:2,maxLacunaRecuperavel:3,carenciaRecuperacao:14,tetoRetorno:10};
+const OF_MARCOS=[3,7,14,30,60,100];
+
+function ofensivaNova(){
+  return {atual:0,melhor:0,ultimo:'',descansando:false,valorAntes:0,lacuna:0,congeladores:0,prog:0,
+    recuperouEm:'',recuperavel:null,diasLivres:[],pausaAte:'',cobertos:[],marcos:[]};
+}
+
+/* Chamar ao abrir o app e na virada do dia. Não gasta nada se não houver lacuna. */
+function ofensivaAbrir(s,hoje){
+  if(!s.ultimo||s.descansando)return s;
+  const lacuna=[];
+  for(let d=somaDias(s.ultimo,1);difDias(d,hoje)>0;d=somaDias(d,1)){
+    /* dia livre (ex.: domingo) e pausa do responsável não contam como falta */
+    if((s.diasLivres||[]).includes(diaSemana(d))||(s.pausaAte&&d<=s.pausaAte))continue;
+    lacuna.push(d);
+  }
+  if(!lacuna.length){
+    if(difDias(s.ultimo,hoje)>1)s.ultimo=somaDias(hoje,-1);   /* a ofensiva segue "viva" até hoje */
+    return s;
+  }
+  /* só gasta se os congeladores cobrem TODOS os dias perdidos; nunca gasta parte */
+  if(s.congeladores>=lacuna.length){
+    s.congeladores-=lacuna.length;
+    s.cobertos=(s.cobertos||[]).concat(lacuna).slice(-60);
+    s.ultimo=somaDias(hoje,-1);
+    return s;
+  }
+  s.descansando=true;s.valorAntes=s.atual;s.lacuna=lacuna.length;
+  return s;
+}
+
+/* Chamar ao concluir um bloco (6 perguntas ou mais). O 2º bloco do mesmo dia vale como "bloco extra". */
+function ofensivaBloco(s,hoje){
+  /* relógio do aparelho voltou no tempo: não penaliza e não conta o dia duas vezes */
+  if(s.ultimo&&difDias(hoje,s.ultimo)>0){s.relogioEstranho=true;hoje=s.ultimo;}
+  ofensivaAbrir(s,hoje);
+  if(s.ultimo===hoje){                       /* dia já vivo: só avalia a recuperação */
+    if(s.recuperavel&&!s.recuperavel.feita){
+      s.recuperavel.extras++;
+      if(s.recuperavel.extras>=1){
+        s.atual=s.recuperavel.V+1;s.recuperavel.feita=true;s.recuperouEm=hoje;
+        s.melhor=Math.max(s.melhor,s.atual);
+        ofensivaMarcos(s);
+      }
+    }
+    return s;
+  }
+  if(s.descansando){
+    const V=s.valorAntes;
+    const podeRecuperar=s.lacuna<=OF_P.maxLacunaRecuperavel&&(!s.recuperouEm||difDias(s.recuperouEm,hoje)>=OF_P.carenciaRecuperacao);
+    s.atual=Math.max(1,Math.min(Math.ceil(V/2),OF_P.tetoRetorno));   /* retorno "pela metade", nunca zero */
+    s.recuperavel=podeRecuperar?{V:V,extras:0,feita:false}:null;
+    s.descansando=false;
+  }else s.atual=s.atual+1;
+  s.ultimo=hoje;s.melhor=Math.max(s.melhor,s.atual);
+  s.prog++;
+  if(s.prog>=OF_P.diasParaCongelador){
+    if(s.congeladores<OF_P.maxCongeladores){s.congeladores++;s.prog=0;}
+    else s.prog=OF_P.diasParaCongelador-1;               /* com 2 guardados o contador fica em 6 de 7 */
+  }
+  ofensivaMarcos(s);
+  return s;
+}
+/* medalha permanente: marco atingido não se perde */
+function ofensivaMarcos(s){
+  s.marcos=s.marcos||[];
+  OF_MARCOS.forEach(m=>{if(s.atual>=m&&s.marcos.indexOf(m)<0)s.marcos.push(m);});
+}
+/* ---------- migração do estado v3 ('mundo-numeros-v2') para o v4 ('universo-bobby-v4') ----------
+   docs/FASE-2-especificacao.md, seção 8.3. Funções PURAS: recebem o objeto antigo e devolvem o novo.
+   A chave antiga NUNCA é alterada nem apagada: ela é a cópia de segurança (rollback). */
+const VERSAO_DADOS=4;
+const CHAVE4='universo-bobby-v4';
+const CHAVE_V3='mundo-numeros-v2';
+const CHAVE_V3_BAK='mundo-numeros-v2.bak-v3';
+const CHAVE_V4_RUIM='universo-bobby-v4.corrompido';
+const FAIXA_DO_NIVEL={facil:'f78',medio:'f910',forte:'f1112'};
+const NIVEL_DA_FAIXA={f78:'facil',f910:'medio',f1112:'forte'};
+const FAIXAS=['f78','f910','f1112'];
+
+/* estrelas de uma fase, aceitando o formato estranho de backups antigos (número, {estrelas}, ou só "verdadeiro") */
+function estrelasDe(v){
+  if(typeof v==='number'&&isFinite(v))return Math.max(1,Math.min(3,Math.round(v)));
+  if(v&&typeof v==='object'&&typeof v.estrelas==='number')return Math.max(1,Math.min(3,Math.round(v.estrelas)));
+  return v?1:0;
+}
+/* o objeto parece dados do v3? (v4 sempre tem 'faixa') */
+function ehDadosV3(d){
+  if(!d||typeof d!=='object')return false;
+  if(d.faixa!==undefined)return false;
+  return d.nivel!==undefined||typeof d.ofensiva==='number'||d.ultimoDia!==undefined||
+    d.ganhoTotal!==undefined||(d.xp!==undefined&&d.moedas===undefined);
+}
+/* converte os dados de UM perfil v3 em dados v4 (ainda sem a normalização de estadoDe) */
+function migrarDadosV3(d,dia){
+  d=(d&&typeof d==='object')?d:{};
+  const obj=v=>(v&&typeof v==='object'&&!Array.isArray(v))?v:{};
+  const n=(v,def)=>{v=+v;return isFinite(v)?v:(def||0);};
+  const saldo=Math.max(0,n(d.xp));
+  const ganho=Math.max(0,n(d.ganhoTotal));
+  const o=ofensivaNova();
+  o.atual=Math.max(0,Math.round(n(d.ofensiva)));
+  o.melhor=Math.max(o.atual,Math.round(n(d.melhorOfensiva)));
+  o.ultimo=ehDia(d.ultimoDia)?d.ultimoDia:'';
+  o.congeladores=1;          /* congelador de cortesia: absorve o dia de diferença do fuso UTC para local */
+  o.prog=0;
+  ofensivaMarcos(o);
+  const stats=obj(d.stats);
+  const dias={};
+  const diasV3=obj(stats.dias);
+  Object.keys(diasV3).forEach(k=>{
+    const x=obj(diasV3[k]);
+    if(!ehDia(k))return;
+    dias[k]={fases:Math.max(0,n(x.fases)),seg:Math.max(0,n(x.seg)),b:Math.max(0,n(x.fases)),q:0};
+  });
+  const feitas={};
+  const f3=obj(d.feitas);
+  Object.keys(f3).forEach(k=>{const e=estrelasDe(f3[k]);if(e>0)feitas[k]=e;});
+  const errados={};
+  const e3=obj(d.errados);
+  Object.keys(e3).forEach(k=>{if(Array.isArray(e3[k]))errados[k]=e3[k].filter(q=>q&&typeof q==='object'&&q.prompt!==undefined).slice(-30);});
+  return {
+    faixa:FAIXA_DO_NIVEL[d.nivel]||'f78',
+    materia:['mat','pt','en'].indexOf(d.materia)>=0?d.materia:'mat',
+    xp:Math.max(ganho,saldo),
+    moedas:saldo,
+    acertosTotal:Math.max(0,Math.round(n(d.acertos))),
+    melhorCombo:Math.max(0,Math.round(n(d.combo))),
+    feitas:feitas,
+    look:Object.assign({},obj(d.look)),
+    comprado:Array.isArray(d.comprado)?d.comprado.filter(x=>typeof x==='string').slice(0,400):[],
+    ofensiva:o,
+    errados:errados,
+    stats:{porLicao:Object.assign({},obj(stats.porLicao)),dias:dias,tempo:Math.max(0,n(stats.tempo)),amostras:[]},
+    som:d.som!==false,voz:d.voz!==false,
+    velocidade:Math.min(1.3,Math.max(.6,n(d.velocidade,1)||1)),
+    vozPt:String(d.vozPt||'').slice(0,80),vozEn:String(d.vozEn||'').slice(0,80),
+    nome:String(d.nome||'').slice(0,18),
+    legado:{nivel:['facil','medio','forte'].indexOf(d.nivel)>=0?d.nivel:'facil',errados:JSON.parse(JSON.stringify(errados)),
+            vozPt:String(d.vozPt||'').slice(0,80),vozEn:String(d.vozEn||'').slice(0,80),migradoEm:dia||''}
+  };
+}
+/* Valida o resultado contra o original. Devolve null se estiver tudo certo, ou o motivo da falha.
+   (passo 4 da migração: falhou, o v4 NÃO é gravado) */
+function validarMigracao(antigo,novo){
+  antigo=(antigo&&typeof antigo==='object')?antigo:{};
+  const f3=(antigo.feitas&&typeof antigo.feitas==='object')?antigo.feitas:{};
+  const antes=Object.keys(f3).filter(k=>estrelasDe(f3[k])>0).length;
+  const depois=Object.keys(novo.feitas||{}).length;
+  if(antes!==depois)return 'fases: '+antes+' antes, '+depois+' depois';
+  const xp0=Math.max(0,+antigo.xp||0);
+  if(!((novo.xp||0)+(novo.moedas||0)>=xp0))return 'xp+moedas menor que o xp antigo';
+  if(!(novo.moedas===xp0))return 'moedas diferentes do saldo antigo';
+  if(!(novo.ofensiva&&novo.ofensiva.atual>=0))return 'ofensiva negativa';
+  return null;
+}
+/* Erros do caderno v3 viram itens da revisão espaçada: caixa 1, datas escalonadas hoje + floor(i/5) dias.
+   Só entram os tipos que sabem se redesenhar a partir do que o v3 guardava (escolha e digitação). */
+const TIPOS_DO_CADERNO_V3=['mc','input','texto'];
+function migrarErrosParaRevisao(errados,dia){
+  const itens={},congelados={};
+  let i=0;
+  Object.keys(errados||{}).forEach(chave=>{
+    const m=/^(mat|pt|en)(\d+)$/.exec(chave);
+    (errados[chave]||[]).forEach(q=>{
+      if(!q||TIPOS_DO_CADERNO_V3.indexOf(q.type)<0)return;
+      const k='er:'+fnv8(q.prompt+'||'+q.answer);
+      if(itens[k])return;
+      const snap={};
+      ['type','prompt','answer','options','figure','teclado','ouvir','lang'].forEach(c=>{if(q[c]!==undefined)snap[c]=q[c];});
+      snap.m=m?m[1]:'mat';snap.w=m?+m[2]:0;snap.sk='';
+      congelados[k]=snap;
+      itens[k]=[1,somaDias(dia,Math.floor(i/5)),1,0,1,'',0,0];
+      i++;
+    });
+  });
+  return {itens:itens,congelados:congelados};
+}
 /* ===== O Universo de Bobby — aplicativo ===== */
 const $=s=>document.querySelector(s);
 const TONS={verde:'--u-verde',agua:'--u-agua',ambar:'--u-ambar',coral:'--u-coral',roxo:'--u-roxo'};
@@ -4735,6 +5329,7 @@ function usarMateria(m){
   S.materia=m;salvar();
   $('#nome-materia').textContent=MATERIAS[m].n;
   fecharMaterias();renderTrilha();
+  if(typeof mostrarEntradaDoDia==='function')mostrarEntradaDoDia();
 }
 let CAP_ATUAL=null,MISS_ATUAL=null;
 function telaMaterias(){
@@ -4754,56 +5349,174 @@ function telaMaterias(){
 }
 function fecharMaterias(){$('#materias').classList.remove('on');document.body.style.overflow='';}
 
-/* ---------- estado: vários jogadores ---------- */
-const CHAVE2='mundo-numeros-v2';
+/* ---------- estado v4: vários jogadores, chave 'universo-bobby-v4' ----------
+   A chave antiga 'mundo-numeros-v2' (v3) só é LIDA e nunca mais escrita: ela é a cópia de segurança.
+   Esquema e regras: docs/FASE-2-especificacao.md, seção 8. Migração: migracao.js. */
 const CORES=['#A9713F','#12A06E','#1B93C8','#7B5BE0','#F0455F','#E8A317'];
-const VERSAO_DADOS=3;
+const CHAVE2=CHAVE_V3;       /* nome antigo, ainda usado por quem lê a chave do v3 */
+const APP_VERSAO='2026.10.24-logica';
+
+const objDe=v=>(v&&typeof v==='object'&&!Array.isArray(v))?v:{};
+const numDe=(v,min,max,def)=>{v=+v;if(!isFinite(v))return def;return Math.min(max,Math.max(min,v));};
+const intDe=(v,min,max,def)=>Math.round(numDe(v,min,max,def));
+const diaOuVazio=v=>ehDia(v)?String(v):'';
+const listaDe=(v,max)=>Array.isArray(v)?v.slice(0,max):[];
+const textosDe=(v,max,tam)=>listaDe(v,max).filter(x=>typeof x==='string').map(x=>x.slice(0,tam||120));
+
 /* IMPORTANTE: cada perfil precisa do SEU proprio objeto.
-   Um objeto "vazio" compartilhado faria o progresso de um jogador vazar para o outro,
-   porque {feitas:{}} seria a MESMA caixinha para todo mundo. Por isso e uma funcao. */
+   Um objeto "vazio" compartilhado faria o progresso de um jogador vazar para o outro. Por isso e uma funcao. */
+function configPadrao(){
+  return {metaMin:5,revisaoPorDia:8,limiteBlocosDia:null,diasLivres:[],pausaAte:'',
+    ofensivaLigada:true,missoesLigadas:true,
+    lembrete:{ics:false,hora:'17:00',dias:[1,2,3,4,5],comApelido:false},ligaFamilia:false};
+}
+function contadoresVazios(){
+  return {fase:0,faseNova:0,revisao:0,fatos:0,historia:0,combo:0,enAudio:0,ditado:0,aulaRevista:0,
+    lapso:0,mat:0,itensNovos:0,porque:0,materiasBloco:[]};
+}
+function diarioVazio(dia){
+  return {dia:dia||'',blocos:0,perguntas:0,acertos:0,metaOk:false,estrela:false,liberados:0,kit:0,
+    bau:{aberto:false,dia:0,itens:[]},missoes:[],paradaVista:false,paradaAcao:'',c:contadoresVazios()};
+}
+function revisaoVazia(){return {itens:{},congelados:{},ultimoAquecimento:''};}
+function colecaoVazia(){return {adesivos:[],ornamentos:[],medalhas:[],poses:[],molduras:[],trilhas:[],constelacao:[]};}
 function estadoVazio(){
-  return {nome:'',xp:0,ganhoTotal:0,ofensiva:0,melhorOfensiva:0,ultimoDia:'',
+  return {nome:'',faixa:'f78',materia:'mat',
+    xp:0,moedas:0,acertosTotal:0,melhorCombo:0,
     feitas:{},errados:{},comprado:[],look:{},
-    stats:{porLicao:{},dias:{},tempo:0},
-    acertos:0,combo:0,som:true,voz:true,nivel:'facil',materia:'mat',
-    vozPt:'',vozEn:'',velocidade:1};
+    ofensiva:ofensivaNova(),diario:diarioVazio(''),espera:null,
+    config:configPadrao(),revisao:revisaoVazia(),colecao:colecaoVazia(),
+    semana:{chave:'',estrelas:0,aulaRevista:0,constelacao:false},
+    stats:{porLicao:{},dias:{},tempo:0,amostras:[]},missHist:[],
+    som:true,voz:true,velocidade:1,vozPt:'',vozEn:'',
+    legado:{nivel:'',errados:{},vozPt:'',vozEn:'',migradoEm:''}};
 }
 function clonar(o){
   try{return JSON.parse(JSON.stringify(o));}catch(e){return null;}
 }
-/* monta um estado valido a partir do que estava guardado, sem nunca reaproveitar objetos */
-function estadoDe(dados){
-  const s=estadoVazio();
-  const d=(dados&&typeof dados==='object')?clonar(dados):null;
-  if(d)Object.keys(s).forEach(k=>{if(d[k]!==undefined&&d[k]!==null)s[k]=d[k];});
-  const obj=v=>(v&&typeof v==='object'&&!Array.isArray(v))?v:{};
-  s.feitas=obj(s.feitas);s.errados=obj(s.errados);s.look=obj(s.look);
-  s.stats=obj(s.stats);
-  s.stats.porLicao=obj(s.stats.porLicao);
-  s.stats.dias=obj(s.stats.dias);
-  s.stats.tempo=+s.stats.tempo||0;
-  s.comprado=Array.isArray(s.comprado)?s.comprado.slice():[];
-  ['xp','ganhoTotal','ofensiva','melhorOfensiva','acertos','combo'].forEach(k=>{s[k]=+s[k]||0;});
-  s.som=s.som!==false;s.voz=s.voz!==false;
-  s.vozPt=String(s.vozPt||'').slice(0,80);
-  s.vozEn=String(s.vozEn||'').slice(0,80);
-  s.velocidade=Math.min(1.3,Math.max(.6,+s.velocidade||1));
-  if(['facil','medio','forte'].indexOf(s.nivel)<0)s.nivel='facil';
-  if(['mat','pt','en'].indexOf(s.materia)<0)s.materia='mat';
-  s.nome=String(s.nome||'').slice(0,18);
+function normalizaOfensiva(x){
+  x=objDe(x);const o=ofensivaNova();
+  o.atual=intDe(x.atual,0,100000,0);o.melhor=Math.max(o.atual,intDe(x.melhor,0,100000,0));
+  o.ultimo=diaOuVazio(x.ultimo);o.descansando=!!x.descansando;o.valorAntes=intDe(x.valorAntes,0,100000,0);
+  o.lacuna=intDe(x.lacuna,0,100000,0);o.congeladores=intDe(x.congeladores,0,OF_P.maxCongeladores,0);
+  o.prog=intDe(x.prog,0,OF_P.diasParaCongelador-1,0);o.recuperouEm=diaOuVazio(x.recuperouEm);
+  const r=objDe(x.recuperavel);
+  o.recuperavel=(x.recuperavel&&typeof x.recuperavel==='object')?{V:intDe(r.V,0,100000,0),extras:intDe(r.extras,0,99,0),feita:!!r.feita}:null;
+  o.diasLivres=listaDe(x.diasLivres,7).map(Number).filter(n=>n>=0&&n<=6);
+  o.pausaAte=diaOuVazio(x.pausaAte);
+  o.cobertos=listaDe(x.cobertos,60).filter(ehDia);
+  o.marcos=listaDe(x.marcos,20).map(Number).filter(n=>OF_MARCOS.indexOf(n)>=0);
+  if(x.relogioEstranho)o.relogioEstranho=true;
+  return o;
+}
+function normalizaConfig(x){
+  x=objDe(x);const c=configPadrao(),l=objDe(x.lembrete);
+  c.metaMin=[5,10,15].indexOf(+x.metaMin)>=0?+x.metaMin:5;
+  c.revisaoPorDia=[5,8,12].indexOf(+x.revisaoPorDia)>=0?+x.revisaoPorDia:8;
+  c.limiteBlocosDia=(+x.limiteBlocosDia>=1)?intDe(x.limiteBlocosDia,1,30,1):null;
+  c.diasLivres=listaDe(x.diasLivres,7).map(Number).filter(n=>n>=0&&n<=6);
+  c.pausaAte=diaOuVazio(x.pausaAte);
+  c.ofensivaLigada=x.ofensivaLigada!==false;c.missoesLigadas=x.missoesLigadas!==false;
+  c.lembrete={ics:!!l.ics,hora:/^\d{2}:\d{2}$/.test(l.hora)?l.hora:'17:00',
+    dias:listaDe(l.dias,7).map(Number).filter(n=>n>=0&&n<=6),comApelido:!!l.comApelido};
+  c.ligaFamilia=false;       /* só existe na Fase 4 */
+  return c;
+}
+function normalizaDiario(x){
+  x=objDe(x);const d=diarioVazio(diaOuVazio(x.dia)),b=objDe(x.bau),c=objDe(x.c);
+  d.blocos=intDe(x.blocos,0,9999,0);d.perguntas=intDe(x.perguntas,0,99999,0);d.acertos=intDe(x.acertos,0,99999,0);
+  d.metaOk=!!x.metaOk;d.estrela=!!x.estrela;d.liberados=intDe(x.liberados,0,99,0);d.kit=intDe(x.kit,0,2,0);
+  d.bau={aberto:!!b.aberto,dia:intDe(b.dia,0,100000,0),itens:listaDe(b.itens,10).filter(i=>i&&typeof i==='object').map(i=>({k:String(i.k||'').slice(0,20),n:String(i.n||'').slice(0,60),v:intDe(i.v,0,100000,0)}))};
+  d.missoes=listaDe(x.missoes,3).filter(m=>m&&typeof m==='object'&&typeof m.id==='string').map(m=>({id:m.id.slice(0,8),alvo:intDe(m.alvo,1,999,1),prog:intDe(m.prog,0,9999,0),ok:!!m.ok}));
+  d.paradaVista=!!x.paradaVista;d.paradaAcao=['terminar','continuar'].indexOf(x.paradaAcao)>=0?x.paradaAcao:'';
+  Object.keys(d.c).forEach(k=>{if(k!=='materiasBloco')d.c[k]=intDe(c[k],0,99999,0);});
+  d.c.materiasBloco=textosDe(c.materiasBloco,3,4).filter(m=>['mat','pt','en'].indexOf(m)>=0);
+  return d;
+}
+function normalizaRevisao(x){
+  x=objDe(x);const r=revisaoVazia(),it=objDe(x.itens),cg=objDe(x.congelados);
+  Object.keys(cg).slice(0,1500).forEach(k=>{const q=objDe(cg[k]);if(typeof q.prompt==='string'&&q.answer!==undefined)r.congelados[k]=q;});
+  Object.keys(it).slice(0,2500).forEach(k=>{
+    const a=it[k];if(!Array.isArray(a)||a.length<5||!ehDia(a[1]))return;
+    if(k.indexOf('er:')===0&&!r.congelados[k])return;          /* erro sem a pergunta guardada não dá para refazer */
+    r.itens[k]=[intDe(a[0],1,5,1),String(a[1]),intDe(a[2],0,99999,0),intDe(a[3],0,99999,0),intDe(a[4],0,99999,0),diaOuVazio(a[5]),a[6]?1:0,a[7]?1:0];
+  });
+  r.ultimoAquecimento=diaOuVazio(x.ultimoAquecimento);
+  r.ajustadoEm=diaOuVazio(x.ajustadoEm);r.aliviadoEm=diaOuVazio(x.aliviadoEm);
+  return r;
+}
+function normalizaStats(x){
+  x=objDe(x);const s={porLicao:{},dias:{},tempo:Math.max(0,+x.tempo||0),amostras:[]};
+  const pl=objDe(x.porLicao);
+  Object.keys(pl).slice(0,400).forEach(k=>{const p=objDe(pl[k]);s.porLicao[k]={acertos:intDe(p.acertos,0,999999,0),erros:intDe(p.erros,0,999999,0)};});
+  const dias=objDe(x.dias);
+  Object.keys(dias).filter(ehDia).sort().slice(-400).forEach(k=>{
+    const d=objDe(dias[k]);
+    const bm=objDe(d.bm);
+    s.dias[k]={fases:intDe(d.fases,0,9999,0),seg:intDe(d.seg,0,99999,0),b:intDe(d.b,0,9999,0),q:intDe(d.q,0,99999,0),ac:intDe(d.ac,0,99999,0),rev:intDe(d.rev,0,99999,0),revAc:intDe(d.revAc,0,99999,0),
+      bm:{mat:intDe(bm.mat,0,999,0),pt:intDe(bm.pt,0,999,0),en:intDe(bm.en,0,999,0)}};
+  });
+  s.amostras=listaDe(x.amostras,120).map(Number).filter(n=>n>0&&n<=120);
   return s;
 }
-let STORE={v:VERSAO_DADOS,perfis:[],atual:-1,senha:null};
+function normalizaColecao(x){
+  x=objDe(x);const c=colecaoVazia();
+  Object.keys(c).forEach(k=>{c[k]=textosDe(x[k],400,80);});
+  return c;
+}
+/* monta um estado valido a partir do que estava guardado (v4, ou v3 que e convertido), sem reaproveitar objetos */
+function estadoDe(dados){
+  let d=(dados&&typeof dados==='object')?clonar(dados):null;
+  if(d&&ehDadosV3(d))d=migrarDadosV3(d,hoje());
+  const s=estadoVazio();
+  d=d||{};
+  s.nome=String(d.nome||'').slice(0,18);
+  s.faixa=FAIXAS.indexOf(d.faixa)>=0?d.faixa:'f78';
+  s.materia=['mat','pt','en'].indexOf(d.materia)>=0?d.materia:'mat';
+  s.xp=intDe(d.xp,0,1e9,0);s.moedas=intDe(d.moedas,0,1e9,0);
+  s.acertosTotal=intDe(d.acertosTotal,0,1e9,0);s.melhorCombo=intDe(d.melhorCombo,0,1e6,0);
+  const f=objDe(d.feitas);Object.keys(f).forEach(k=>{const e=estrelasDe(f[k]);if(e>0)s.feitas[k]=e;});
+  const er=objDe(d.errados);Object.keys(er).forEach(k=>{if(Array.isArray(er[k]))s.errados[k]=er[k].filter(q=>q&&typeof q==='object'&&q.prompt!==undefined).slice(-30);});
+  s.comprado=textosDe(d.comprado,400,40);
+  s.look=objDe(d.look);
+  s.ofensiva=normalizaOfensiva(d.ofensiva);
+  s.diario=normalizaDiario(d.diario);
+  const e=objDe(d.espera);
+  s.espera=d.espera&&typeof d.espera==='object'?{bilhete:String(e.bilhete||'').slice(0,20),presente:String(e.presente||'').slice(0,40),desde:diaOuVazio(e.desde),vistoEm:diaOuVazio(e.vistoEm),mundoNovo:!!e.mundoNovo,erroDificil:!!e.erroDificil,usouCongelador:diaOuVazio(e.usouCongelador)}:null;
+  s.config=normalizaConfig(d.config);
+  s.revisao=normalizaRevisao(d.revisao);
+  s.colecao=normalizaColecao(d.colecao);
+  const w=objDe(d.semana);s.semana={chave:String(w.chave||'').slice(0,10),estrelas:intDe(w.estrelas,0,99,0),aulaRevista:intDe(w.aulaRevista,0,99,0),constelacao:!!w.constelacao};
+  s.stats=normalizaStats(d.stats);
+  s.missHist=listaDe(d.missHist,5).filter(h=>h&&typeof h==='object'&&ehDia(h.dia)).map(h=>({dia:h.dia,ids:textosDe(h.ids,3,4),ok:intDe(h.ok,0,3,0)}));
+  s.som=d.som!==false;s.voz=d.voz!==false;
+  s.velocidade=numDe(d.velocidade,.6,1.3,1);
+  s.vozPt=String(d.vozPt||'').slice(0,80);s.vozEn=String(d.vozEn||'').slice(0,80);
+  const l=objDe(d.legado);
+  s.legado={nivel:['','facil','medio','forte'].indexOf(l.nivel)>=0?l.nivel:'',errados:objDe(l.errados),vozPt:String(l.vozPt||'').slice(0,80),vozEn:String(l.vozEn||'').slice(0,80),migradoEm:diaOuVazio(l.migradoEm)};
+  return s;
+}
+
+let STORE={v:VERSAO_DADOS,migradoDe:null,criadoEm:'',perfis:[],atual:-1,senha:null,avisoVisto:true};
 let S=estadoVazio();
-/* deixa o armazenamento sempre num formato valido, mesmo se vier corrompido */
+const ehF78=()=>S.faixa==='f78';
+const ROTULO_FAIXA={f78:'7 a 8 anos',f910:'9 a 10 anos',f1112:'11 a 12 anos'};
+/* nível do explorador: n quando xp >= 60 * (n-1)^2, teto 30. O xp nunca diminui, então o nível nunca cai. */
+const nivelDoExplorador=()=>Math.min(30,Math.floor(Math.sqrt(Math.max(0,S.xp)/60))+1);
+
+/* deixa o armazenamento sempre num formato valido, mesmo se vier corrompido. Aceita o store v3 (atual = indice) e o v4 (atual = id). */
 function arrumarStore(x){
-  const st={v:VERSAO_DADOS,perfis:[],atual:-1,senha:null};
+  const st={v:VERSAO_DADOS,migradoDe:null,criadoEm:hoje(),perfis:[],atual:-1,senha:null,avisoVisto:true};
   if(!x||typeof x!=='object')return st;
+  st.migradoDe=x.migradoDe?String(x.migradoDe).slice(0,40):null;
+  st.criadoEm=diaOuVazio(x.criadoEm)||hoje();
+  st.avisoVisto=x.avisoVisto!==false;
   const lista=Array.isArray(x.perfis)?x.perfis:[];
   lista.forEach((p,i)=>{
     if(!p||typeof p!=='object')return;
     st.perfis.push({
       id:String(p.id||('p'+Date.now().toString(36)+i.toString(36))),
+      pid:String(p.pid||sorteioId(12)).slice(0,24),
       nome:String(p.nome||('Jogador '+(i+1))).slice(0,18),
       cor:CORES.indexOf(p.cor)>=0?p.cor:CORES[i%CORES.length],
       criado:+p.criado||Date.now(),
@@ -4812,35 +5525,82 @@ function arrumarStore(x){
   });
   if(x.senha&&typeof x.senha==='object'&&x.senha.h&&x.senha.s)
     st.senha={s:String(x.senha.s),h:String(x.senha.h)};
-  const a=+x.atual;
-  st.atual=(a>=0&&a<st.perfis.length)?a:-1;
+  if(typeof x.atual==='string'){st.atual=st.perfis.findIndex(p=>p.id===x.atual);}
+  else{const a=+x.atual;st.atual=(a>=0&&a<st.perfis.length)?a:-1;}
   return st;
 }
+function storeParaDisco(){
+  const p=STORE.perfis[STORE.atual];
+  return {v:VERSAO_DADOS,migradoDe:STORE.migradoDe||null,criadoEm:STORE.criadoEm||hoje(),
+    atual:p?p.id:null,avisoVisto:STORE.avisoVisto!==false,senha:STORE.senha,perfis:STORE.perfis};
+}
+/* Migra de 'mundo-numeros-v2' (v3) e, se faltar, do fluxo ainda mais antigo 'trilha-matematica-v1'.
+   Devolve {store, migrou, aviso}. NUNCA escreve nem apaga a chave antiga. */
+function migrarDoLegado(){
+  let bruto=null,v3=null,origem=null;
+  try{bruto=localStorage.getItem(CHAVE_V3);}catch(e){}
+  if(bruto){try{v3=JSON.parse(bruto);origem='mundo-numeros-v2@3';}catch(e){v3=null;}}
+  if(!v3||typeof v3!=='object'||!Array.isArray(v3.perfis)){
+    v3=null;
+    try{
+      const antigo=localStorage.getItem(CHAVE);
+      if(antigo){
+        const d=JSON.parse(antigo);
+        v3={perfis:[{nome:(d&&d.nome)||'Jogador 1',cor:CORES[0],dados:d}],atual:0};
+        origem='trilha-matematica-v1@1';bruto=null;
+      }
+    }catch(e){v3=null;}
+  }
+  const vazio=arrumarStore(null);
+  if(!v3)return {store:vazio,migrou:false,aviso:''};
+  let aviso='';
+  /* passo 2: cópia bruta; falta de espaço não impede a migração, mas avisa */
+  if(bruto){try{localStorage.setItem(CHAVE_V3_BAK,bruto);}catch(e){aviso='cota';}}
+  const dia=hoje();
+  const perfis=[];
+  let falha=null;
+  v3.perfis.forEach((p,i)=>{
+    if(!p||typeof p!=='object')return;
+    const antigo=(p.dados&&typeof p.dados==='object')?p.dados:{};
+    const dados=ehDadosV3(antigo)||antigo.faixa===undefined?migrarDadosV3(antigo,dia):antigo;
+    const motivo=validarMigracao(antigo,dados);
+    if(motivo&&!falha)falha='perfil '+(i+1)+': '+motivo;
+    const rv=migrarErrosParaRevisao(dados.errados,dia);
+    dados.revisao={itens:rv.itens,congelados:rv.congelados,ultimoAquecimento:''};
+    perfis.push({id:p.id,pid:sorteioId(12),nome:p.nome,cor:p.cor,criado:p.criado,dados:dados});
+  });
+  const st=arrumarStore({perfis:perfis,atual:v3.atual,senha:v3.senha,criadoEm:dia});
+  st.migradoDe=origem;st.avisoVisto=false;
+  if(falha){st.semGravar=true;aviso='falhou: '+falha;}
+  return {store:st,migrou:true,aviso:aviso};
+}
 function lerStore(){
-  try{
-    const raw=localStorage.getItem(CHAVE2);
-    if(raw){STORE=arrumarStore(JSON.parse(raw));return;}
-  }catch(e){}
-  try{
-    const antigo=localStorage.getItem(CHAVE);
-    if(antigo){
-      const d=estadoDe(JSON.parse(antigo));
-      STORE=arrumarStore({perfis:[{nome:d.nome||'Jogador 1',cor:CORES[0],dados:d}],atual:0});
-      salvarStore();return;
-    }
-  }catch(e){}
-  STORE={v:VERSAO_DADOS,perfis:[],atual:-1,senha:null};
+  let bruto=null;
+  try{bruto=localStorage.getItem(CHAVE4);}catch(e){}
+  if(bruto){
+    try{STORE=arrumarStore(JSON.parse(bruto));return;}
+    catch(e){try{localStorage.setItem(CHAVE_V4_RUIM,bruto);}catch(e2){}}   /* ilegível: guarda a cópia e tenta recomeçar do v3 */
+  }
+  const r=migrarDoLegado();
+  STORE=r.store;
+  if(r.migrou&&!STORE.semGravar){
+    salvarStore();
+    if(typeof registrarEvento==='function')registrarEvento('migracao_ok',{perfis:STORE.perfis.length});
+  }
+  if(r.aviso==='cota')avisoArmazenamento('Não consegui guardar a cópia de segurança do progresso antigo. Vale baixar um backup em Para o responsável.');
+  else if(r.aviso)avisoArmazenamento('A atualização não conseguiu converter o progresso. Nada foi apagado: o progresso antigo continua guardado.');
 }
 function salvarStore(){
-  try{STORE.v=VERSAO_DADOS;localStorage.setItem(CHAVE2,JSON.stringify(STORE));}
+  if(STORE.semGravar)return;
+  try{STORE.v=VERSAO_DADOS;localStorage.setItem(CHAVE4,JSON.stringify(storeParaDisco()));}
   catch(e){avisoArmazenamento();}
 }
 let avisouArmazenamento=false;
-function avisoArmazenamento(){
+function avisoArmazenamento(texto){
   if(avisouArmazenamento)return;avisouArmazenamento=true;
   const d=document.createElement('div');d.className='aviso-voz';
-  d.innerHTML='<b>Não consegui salvar o progresso</b><span>A memória do navegador está cheia ou bloqueada. '+
-    'O jogo continua funcionando, mas o progresso desta sessão pode se perder.</span>';
+  d.innerHTML='<b>Não consegui salvar o progresso</b><span>'+(texto||'A memória do navegador está cheia ou bloqueada. '+
+    'O jogo continua funcionando, mas o progresso desta sessão pode se perder.')+'</span>';
   document.body.appendChild(d);
   setTimeout(()=>{d.classList.add('sai');setTimeout(()=>d.remove(),400);},7000);
 }
@@ -4857,6 +5617,7 @@ function usarPerfil(i){
   STORE.atual=i;
   S=estadoDe(STORE.perfis[i].dados);
   S.nome=STORE.perfis[i].nome;
+  if(typeof garantirDia==='function')garantirDia();
   salvar();fecharPerfis();
   MATERIA=S.materia||'mat';
   UNITS=MATERIAS[MATERIA].units();TOTAL_LESSONS=MATERIAS[MATERIA].total();
@@ -4866,29 +5627,22 @@ function usarPerfil(i){
 }
 function novoPerfil(nome,cor){
   const novo=estadoVazio();
-  novo.nome=nome;novo.nivel=nivelEscolhido;
-  STORE.perfis.push({id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+  novo.nome=nome;novo.faixa=faixaEscolhida;
+  STORE.perfis.push({id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),pid:sorteioId(12),
     nome:nome,cor:cor,criado:Date.now(),dados:novo});
   salvarStore();usarPerfil(STORE.perfis.length-1);
+  if(typeof registrarEvento==='function')registrarEvento('perfil_criado',{faixa:novo.faixa});
 }
 function apagarPerfil(i){
+  const pid=STORE.perfis[i]&&STORE.perfis[i].pid;
   STORE.perfis.splice(i,1);
   if(STORE.atual===i)STORE.atual=-1;
   else if(STORE.atual>i)STORE.atual--;
   salvarStore();
+  if(pid&&typeof apagarEventosDe==='function')apagarEventosDe(pid);
   if(STORE.atual<0){S=estadoVazio();}
   telaPerfis();
 }
-const hoje=()=>new Date().toISOString().slice(0,10);
-function marcarDia(){
-  const d=hoje();if(S.ultimoDia===d)return;
-  const ontem=new Date(Date.now()-864e5).toISOString().slice(0,10);
-  S.ofensiva=(S.ultimoDia===ontem)?S.ofensiva+1:1;S.ultimoDia=d;
-  S.melhorOfensiva=Math.max(S.melhorOfensiva||0,S.ofensiva);
-  const b=Math.min(50,S.ofensiva*5);S.xp+=b;S.ganhoTotal=(S.ganhoTotal||0)+b;
-  LIC.bonusDia=b;
-}
-
 /* ---------- áudio: camada única de som falado ----------
    API para o resto do app:
      audioTocar(chaveOuTexto, idioma)   toca um clipe gravado (se o manifesto tiver) ou, só como RESERVA,
@@ -4965,7 +5719,7 @@ function audioParar(){
   try{if(typeof speechSynthesis!=='undefined')speechSynthesis.cancel();}catch(e){}
 }
 function audioFalhou(chave,motivo){
-  try{if(typeof registrarEvento==='function')registrarEvento('audio_falha',{clip:String(chave).slice(0,80),motivo:String(motivo).slice(0,40)});}catch(e){}
+  try{if(typeof registrarEvento==='function')registrarEvento('audio_falha',{clip:String(chave).slice(0,80),motivo:String(motivo).toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,40)});}catch(e){}
 }
 /* RESERVA: voz do aparelho. Nunca chama speak() logo depois de cancel(): em vários Androids o cancel
    engole a fala seguinte. Se havia fala em andamento, cancela e espera um instante. */
@@ -5160,7 +5914,8 @@ function acertou(dado,gab){
   if(!isNaN(na)&&!isNaN(nb))return Math.abs(na-nb)<1e-9;
   return semAcento(dado)===semAcento(gab);
 }
-const feitas=()=>Object.keys(S.feitas).length;
+/* fases concluídas DA MATÉRIA ATUAL (o anel do mapa somava as três galáxias e as revisões: dava 1/50 com 3 matérias jogadas) */
+const feitas=()=>fases();
 function liberada(ui,li){
   if(li===0)return true;
   return !!S.feitas[UNITS[ui].lessons[li-1].id];
@@ -5246,8 +6001,14 @@ function mapaMundo(u,ui,prox){
 /* ---------- tela inicial ---------- */
 function pintarTopo(){
   document.documentElement.style.setProperty('--m1',perfilAtual().cor||CORES[0]);
-  $('#st-fogo').innerHTML=IC.fogo+'<em>'+S.ofensiva+'</em>';
-  $('#st-moedas').innerHTML=IC.moeda+'<em>'+S.xp+'</em>';
+  const o=S.ofensiva,fogo=$('#st-fogo');
+  fogo.innerHTML=IC.fogo+'<em>'+o.atual+'</em>'+(o.congeladores>0?'<span class="gelo-n" aria-hidden="true">'+IC.gelo+o.congeladores+'</span>':'');
+  fogo.style.display=S.config.ofensivaLigada?'':'none';
+  fogo.classList.toggle('descansa',!!o.descansando);
+  fogo.setAttribute('title',textoOfensiva()+(o.congeladores?' · Congeladores: '+o.congeladores:''));
+  fogo.setAttribute('aria-label',textoOfensiva()+'. Congeladores: '+o.congeladores);
+  $('#st-moedas').innerHTML=IC.moeda+'<em>'+S.moedas+'</em>';
+  $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
   $('#som').innerHTML=S.som?IC.falar:IC.somOff;
   $('#som').setAttribute('aria-label',S.som?'Desligar sons':'Ligar sons');
   $('#logo').innerHTML=MASC('oi');
@@ -5255,6 +6016,7 @@ function pintarTopo(){
 function renderTrilha(){
   pintarTopo();calar();
   const p=proxima();
+  garantirDia();
   const pct=Math.round(feitas()/TOTAL_LESSONS*100);
   const nome=escapa(S.nome?S.nome:'explorador');
   const frase=feitas()===0?'Bem-vindo ao meu universo! Cada galáxia é uma matéria e cada mundo tem 5 fases. Escolha por onde começar.'
@@ -5262,7 +6024,7 @@ function renderTrilha(){
        :'Você zerou esta galáxia inteira! Pode refazer as fases ou trocar de matéria lá em cima.');
   let h='<div class="ola"><div class="mini">'+MASC('feliz')+'</div>'+
     '<div class="txt"><h1>Oi, '+nome+' <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1><p>'+frase+'</p></div>'+
-    '<div class="anel" style="--p:'+pct+'"><i>'+feitas()+'/'+TOTAL_LESSONS+'</i></div></div>';
+    '<div class="anel" style="--p:'+pct+'"><i>'+feitas()+'/'+TOTAL_LESSONS+'</i></div></div>'+rotinaHTML();
 
   UNITS.forEach((u,ui)=>{
     const completo=mundoCompleto(u);
@@ -5275,6 +6037,7 @@ function renderTrilha(){
   });
   $('#tela').innerHTML=h;
   const en=$('#editar-nome');if(en)en.addEventListener('click',telaPerfil);
+  ligarRotina();
   $('#tela').querySelectorAll('.bt:not([disabled])').forEach(b=>
     b.addEventListener('click',()=>{
       if(b.dataset.rev!==undefined)abrirRevisaoMundo(+b.dataset.rev);
@@ -5286,14 +6049,23 @@ function renderTrilha(){
 let LIC={};
 function abrirLicao(ui,li){
   calar();if(LIC&&LIC.tDica){clearTimeout(LIC.tDica);}
+  garantirDia();
+  /* limite de blocos do dia, definido pelo responsável: só "até amanhã" (o responsável libera com a senha) */
+  if(limiteDeBlocosAtingido()){mostrarParada(true);return;}
   const u=UNITS[ui],l=u.lessons[li];
   /* base = quantas perguntas a fase REALMENTE tem. Fixo em 8 fazia a fase de 6 perguntas
      dizer "você acertou 6 de 8" numa jogada perfeita e travar a barra de missão em 75%. */
   const _qs=genQuestions(l,8);
+  const faseNova=!S.feitas[l.id];
+  const aquecimento=(typeof aquecimentoDaFase==='function'&&faseNova)?aquecimentoDaFase():[];
+  /* aquecimento: 2 ou 3 itens do caderno entram logo depois da primeira pergunta (recuperar antes de aprender) */
+  if(aquecimento.length&&_qs.length>1)_qs.splice(1,0,...aquecimento);
   LIC={ui:ui,li:li,u:u,l:l,qs:_qs,base:_qs.length,i:0,passo:0,vidas:5,erros:0,acertos:0,
        combo:0,melhorCombo:0,etapa:'historia',resp:null,digitado:'',conferido:false,dica:false,
        md:{c:0,d:0,u:0},miss:(MISS_ATUAL?MISS_ATUAL[l.id]:null),
-       cap:(CAP_ATUAL?CAP_ATUAL[u.n]:null),t0:Date.now()};
+       cap:(CAP_ATUAL?CAP_ATUAL[u.n]:null),t0:Date.now(),
+       tipoBloco:'fase',faseNova:faseNova,respondidas:0,ganhoFase:0,hist:[],tQ:0};
+  registrarEvento('bloco_inicio',{tipo:'fase',lic:String(l.id).replace(/[^a-z0-9._]/gi,''),materia:MATERIA});
   $('#licao').classList.add('on');
   $('#revisao').classList.remove('on');
   $('#licao').style.setProperty('--ub',corUnidade(u));
@@ -5303,7 +6075,14 @@ function abrirLicao(ui,li){
 function fecharLicao(){
   calar();
   if(LIC.tDica){clearTimeout(LIC.tDica);LIC.tDica=null;}
+  /* saiu no meio do bloco: fica registrado como "abandonou" (não conta como dia ativo) */
+  if(LIC.etapa==='questao'&&!LIC.encerrado&&(LIC.respondidas||0)>0){
+    LIC.encerrado=true;
+    registrarEvento('bloco_fim',{tipo:LIC.tipoBloco||'fase',lic:String((LIC.l&&LIC.l.id)||'').replace(/[^a-z0-9._]/gi,''),materia:MATERIA,
+      perguntas:LIC.respondidas||0,acertos:LIC.acertos||0,abandonou:1,contou:0,seg:Math.round((Date.now()-(LIC.t0||Date.now()))/1000)});
+  }
   $('#licao').classList.remove('on');document.body.style.overflow='';renderTrilha();
+  if(typeof depoisDeFecharLicao==='function')depoisDeFecharLicao();
 }
 function pintarVidas(){
   let h='';for(let i=0;i<5;i++)h+=IC.coracao.replace('<svg',i<LIC.vidas?'<svg':'<svg class="off"');
@@ -5368,7 +6147,7 @@ function pintarLicao(){
     $('#palco').innerHTML=h;ligarOuvir($('#palco'));
     $('#acao').textContent='Vamos ajudar!';$('#acao').disabled=false;
     $('.lc-corpo').scrollTo(0,0);
-    if(S.nivel==='facil')falarDepois(350,(cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''));
+    if(ehF78())falarDepois(350,(cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''));
     return;
   }
   if(LIC.etapa==='aula'){
@@ -5390,7 +6169,7 @@ function pintarLicao(){
   }
   if(LIC.etapa==='fim'){pintarFim();return;}
   const q=LIC.qs[LIC.i];
-  if(S.nivel==='facil'&&q.type==='mc'&&q.options.length>3&&!q.__reduzido){
+  if(ehF78()&&q.type==='mc'&&q.options.length>3&&!q.__reduzido){
     const fora=q.options.filter(o=>o!==q.answer);
     q.options=shufA([q.answer,fora[0],fora[1]]);q.__reduzido=true;
   }
@@ -5430,7 +6209,7 @@ function pintarLicao(){
   $('#palco').innerHTML=h;
   $('.lc-corpo').scrollTo(0,0);
   ligarOuvir($('#palco'));
-  LIC.resp=null;LIC.digitado='';LIC.conferido=false;LIC.dica=false;
+  LIC.resp=null;LIC.digitado='';LIC.conferido=false;LIC.dica=false;LIC.tQ=Date.now();
   $('#acao').textContent='Verificar';$('#acao').disabled=true;
   $('#dica').style.display='grid';
   if(q.type==='mc'){
@@ -5479,7 +6258,7 @@ function pintarLicao(){
     pintarCampo();
     $('#palco').querySelectorAll('.tecla').forEach(b=>b.addEventListener('click',()=>digitar(b.dataset.k)));
   }
-  if(S.nivel==='facil'||q.ouvir)falarDepois(420,q.ouvir||q.prompt,q.lang);
+  if(ehF78()||q.ouvir)falarDepois(420,q.ouvir||q.prompt,q.lang);
 }
 const shufA=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 function barraMissao(){
@@ -5622,6 +6401,10 @@ function conferir(){
   /* escolha: compara o texto exato da opcao (Lívia e lívia são opções diferentes de propósito);
      o resto passa por acertou(), que aceita 1,5 e 1.5 e ignora acento e maiúscula na digitação */
   const ok=q.type==='mc'?String(LIC.resp)===String(q.answer):acertou(LIC.resp,q.answer);
+  const primeira=!q.__rep;
+  const ms=LIC.tQ?Date.now()-LIC.tQ:0;
+  LIC.respondidas=(LIC.respondidas||0)+1;
+  if(primeira)LIC.hist.push({q:q,ok:ok,ms:ms,dica:LIC.dica||0});
   const pe=$('#pe');pe.classList.add('mostra');
   $('#dica').style.display='none';
   if(q.type==='mc'){
@@ -5635,36 +6418,41 @@ function conferir(){
     LIC.acertos++;LIC.combo++;regStat(LIC.l.id,'acertos');
     LIC.melhorCombo=Math.max(LIC.melhorCombo,LIC.combo);
     let ganho=10,extra='';
-    if(LIC.combo>=3&&LIC.combo%3===0){
+    if(LIC.combo>=3&&LIC.combo%3===0&&bonusDeComboAtivo()){
       ganho+=5;extra=' · <b>'+LIC.combo+' seguidas!</b> +5 de bônus';
       if(LIC.vidas<5){LIC.vidas++;extra+=' e +1 coração';somVida();pintarVidas();}
     }
-    S.xp+=ganho;S.ganhoTotal=(S.ganhoTotal||0)+ganho;S.acertos=(S.acertos||0)+1;
-    S.combo=Math.max(S.combo||0,LIC.combo);pe.classList.add('certo');
+    /* XP nunca diminui; moedas são o saldo que a loja gasta */
+    S.xp+=ganho;S.moedas+=ganho;LIC.ganhoFase=(LIC.ganhoFase||0)+ganho;S.acertosTotal=(S.acertosTotal||0)+1;
+    S.melhorCombo=Math.max(S.melhorCombo||0,LIC.combo);pe.classList.add('certo');
     $('#selo').innerHTML=MASC('feliz');
     $('#fb-t').textContent=pick2(['Isso aí!','Boa!','Perfeito!','Mandou bem!','Certinho!','Show!']);
     $('#fb-s').innerHTML='+'+ganho+' moedas'+extra;
     somCerto();somMoeda();
     if(LIC.rev)tirarErrado(q);
+    if(primeira&&q.__item)revisaoResultado(q.__item,true,LIC.dica||0);
   }else{
     LIC.erros++;LIC.combo=0;LIC.vidas--;regStat(LIC.l.id,'erros');pe.classList.add('errado');
     guardarErrado(q);
+    if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
     $('#selo').innerHTML=MASC('ops');
     $('#fb-t').textContent='Quase!';
     $('#fb-s').innerHTML='A resposta certa é <b>'+q.answer+'</b>.'+
       (LIC.vidas>0?' Esta pergunta volta no fim para você tentar de novo.':'');
     if(!q.__rep&&LIC.vidas>0){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);}
     somErro();pintarVidas();
-    if(S.nivel==='facil'&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
+    if(ehF78()&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
     const p=$('#palco').firstElementChild;if(p){p.classList.add('tremer');setTimeout(()=>p.classList.remove('tremer'),460);}
   }
+  cicloPergunta(q,{ok:ok,ms:ms,dica:LIC.dica||0});
+  if(primeira&&(LIC.diaria||q.__aquec)){const st=diaDeStats();st.rev=(st.rev||0)+1;if(ok)st.revAc=(st.revAc||0)+1;}
   pintarTopo();salvar();
   $('#acao').textContent=(LIC.vidas<=0)?'Ver resultado':(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');
-  if(LIC.vidas<=0&&S.xp>=PRECO_CORACAO&&!LIC.comprou){
+  if(LIC.vidas<=0&&S.moedas>=PRECO_CORACAO&&!LIC.comprou){
     $('#fb-s').innerHTML+=' <button class="comprar-vida" id="comprar-vida">'+IC.coracao+' continuar por '+PRECO_CORACAO+' moedas</button>';
     const cv=$('#comprar-vida');
     if(cv)cv.addEventListener('click',()=>{
-      S.xp-=PRECO_CORACAO;LIC.vidas=2;LIC.comprou=true;salvar();pintarVidas();pintarTopo();
+      S.moedas-=PRECO_CORACAO;LIC.vidas=2;LIC.comprou=true;salvar();pintarVidas();pintarTopo();
       $('#acao').textContent=(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');cv.remove();somVida();
     });
   }
@@ -5687,8 +6475,8 @@ function regFim(){
   S.stats=S.stats||{porLicao:{},dias:{},tempo:0};
   const seg=Math.min(3600,Math.round((Date.now()-(LIC.t0||Date.now()))/1000));
   S.stats.tempo=(S.stats.tempo||0)+seg;
-  const d=hoje(),dia=S.stats.dias[d]||{fases:0,seg:0};
-  dia.fases++;dia.seg+=seg;S.stats.dias[d]=dia;
+  const dia=diaDeStats();
+  dia.fases=(dia.fases||0)+1;dia.seg=(dia.seg||0)+seg;
 }
 function pintarFim(){
   const passou=LIC.vidas>0;
@@ -5697,14 +6485,30 @@ function pintarFim(){
   $('#rever').style.display='none';
   $('#dica').style.display='none';
   $('#prog').style.width='100%';
-  let completouMundo=false;
-  if(passou){
-    const bonus=LIC.erros===0?20:0;S.xp+=bonus;
-    const antes=S.feitas[LIC.l.id]||0;
-    if(est>antes)S.feitas[LIC.l.id]=est;
-    marcarDia();regFim();salvar();confete();somFim();
+  let completouMundo=false,bloco={contou:false};
+  if(passou&&!LIC.fimPago){
+    LIC.fimPago=true;
+    /* bônus de fase perfeita (+20) e de revisão (+5): soma em XP e em moedas, e entra no placar */
+    const bonus=(LIC.erros===0?20:0)+(LIC.diaria?5:0);
+    S.xp+=bonus;S.moedas+=bonus;LIC.ganhoFase=(LIC.ganhoFase||0)+bonus;
+    if(!LIC.rev){const antes=S.feitas[LIC.l.id]||0;if(est>antes)S.feitas[LIC.l.id]=est;}
+    regFim();
     completouMundo=!LIC.rev&&mundoCompleto(LIC.u);
+    LIC.completouMundo=completouMundo;
   }
+  if(!LIC.encerrado){
+    LIC.encerrado=true;
+    const seg=Math.min(3600,Math.round((Date.now()-(LIC.t0||Date.now()))/1000));
+    bloco=concluirBloco({tipo:LIC.tipoBloco||'fase',lic:LIC.l.id,materia:MATERIA,perguntas:LIC.respondidas||0,acertos:LIC.acertos,
+      estrelas:est,seg:seg,faseNova:!!LIC.faseNova&&passou,erros:LIC.erros,completouMundo:LIC.completouMundo});
+    LIC.bloco=bloco;
+    if(LIC.revAgg&&LIC.revAgg.n)registrarEvento('revisao_item',{n:LIC.revAgg.n,ok:LIC.revAgg.ok,
+      caixa_antes:LIC.revAgg.antes/LIC.revAgg.n,caixa_depois:LIC.revAgg.depois/LIC.revAgg.n});
+    if(passou&&typeof revisaoPosFase==='function')revisaoPosFase(LIC);
+    if(passou){confete();somFim();}
+    salvar();
+  }
+  completouMundo=!!LIC.completouMundo;
   const nErr=(S.errados[MATERIA+LIC.u.n]||[]).length;
   $('#palco').innerHTML='<div class="fim surge">'+
     MASC(passou?'feliz':'ops',passou?'pula':'')+
@@ -5721,12 +6525,14 @@ function pintarFim(){
       '<button class="btn fantasma" id="ver-galeria">Ver meus desenhos</button></div></div>':'')+
     '<div class="placar">'+
       '<div><span>Acertos</span><b>'+LIC.acertos+'</b></div>'+
-      '<div><span>Moedas</span><b>'+(LIC.acertos*10+(passou&&LIC.erros===0?20:0))+'</b></div>'+
+      '<div><span>Moedas</span><b>'+(LIC.ganhoFase||0)+'</b></div>'+
       '<div><span>Melhor combo</span><b>'+LIC.melhorCombo+'</b></div>'+
     '</div>'+
+    (typeof blocoFimHTML==='function'?blocoFimHTML(bloco):'')+
     '<button class="btn fantasma" id="rever-fim">Rever a aula desta fase</button></div>';
   $('.lc-corpo').scrollTo(0,0);
   $('#rever-fim').addEventListener('click',abrirRevisao);
+  if(typeof ligarBlocoFim==='function')ligarBlocoFim(bloco);
   const vg=$('#ver-galeria');if(vg)vg.addEventListener('click',()=>abrirGaleria(true));
   $('#pe').className='pe';
   $('#acao').textContent=passou?'Voltar para o mapa':'Tentar de novo';
@@ -5741,10 +6547,10 @@ function guardarErrado(q){
   const n=MATERIA+LIC.u.n;const lista=S.errados[n]||[];
   const k=chaveQ(q);
   if(!lista.some(x=>chaveQ(x)===k)){
-    const c={type:q.type,prompt:q.prompt,answer:q.answer};
-    if(q.options)c.options=q.options.slice();
-    if(q.figure)c.figure=q.figure;
-    lista.push(c);
+    /* guarda a pergunta inteira (fração precisa de 'partes', sílabas de 'pecas'...) e não só o texto */
+    const c={};
+    Object.keys(q).forEach(c2=>{if(c2.indexOf('__')!==0&&typeof q[c2]!=='function')c[c2]=q[c2];});
+    lista.push(JSON.parse(JSON.stringify(c)));
   }
   S.errados[n]=lista.slice(-30);salvar();
 }
@@ -5766,10 +6572,14 @@ function abrirRevisaoMundo(ui){
     ideia:'Esta é a revisão do Mundo '+u.n+'. Aqui voltam justamente as perguntas que você errou nas fases, para ver se agora ficou claro.',
     exemplo:'Se travar em alguma, volte na fase daquele assunto e leia a aula de novo — ela continua lá, sempre aberta.',
     dica:'Cada pergunta que você acertar aqui sai do seu caderno de erros. Acertando todas, o caderno fica limpo!'}};
+  garantirDia();
+  if(limiteDeBlocosAtingido()){mostrarParada(true);return;}
   LIC={ui:ui,li:-1,u:u,l:falso,qs:qs,base:qs.length,i:0,passo:0,vidas:5,erros:0,acertos:0,
        combo:0,melhorCombo:0,etapa:'aula',resp:null,digitado:'',conferido:false,dica:false,rev:true,
        md:{c:0,d:0,u:0},miss:{t:'Revisão do Mundo '+u.n,abre:'',fim:'Revisão concluída!'},
-       cap:(CAP_ATUAL?CAP_ATUAL[u.n]:null)};
+       cap:(CAP_ATUAL?CAP_ATUAL[u.n]:null),t0:Date.now(),
+       tipoBloco:'revmundo',respondidas:0,ganhoFase:0,hist:[],tQ:0};
+  registrarEvento('bloco_inicio',{tipo:'revmundo',lic:'rev'+MATERIA+u.n,materia:MATERIA});
   $('#licao').classList.add('on');
   $('#revisao').classList.remove('on');
   $('#licao').style.setProperty('--ub',corUnidade(u));
@@ -5779,6 +6589,7 @@ function abrirRevisaoMundo(ui){
 
 /* ---------- rever a aula ---------- */
 function abrirRevisao(){
+  if(typeof cicloAulaRevista==='function')cicloAulaRevista();
   const ps=passosDe(LIC.l);
   let h='';ps.forEach((_,k)=>{h+=blocoPasso(ps,k,false);});
   $('#rev-corpo').innerHTML='<div class="lc-in">'+h+'</div>';
@@ -5786,21 +6597,752 @@ function abrirRevisao(){
   $('#revisao').classList.add('on');
 }
 
+
+/* ---------- Revisão do dia (caixas espaçadas) ---------- */
+/* fases que a criança já concluiu na matéria atual, para completar uma revisão curta com perguntas novas */
+function fasesFeitasDaMateria(){
+  const ls=[];
+  UNITS.forEach(u=>u.lessons.forEach(l=>{if(S.feitas[l.id])ls.push(l);}));
+  return ls;
+}
+function revisaoDoDiaPronta(){
+  garantirDia();
+  const n=Math.min(S.config.revisaoPorDia,revisaoSelecionar(S.config.revisaoPorDia).length);
+  return n;
+}
+function abrirRevisaoDia(){
+  garantirDia();
+  if(limiteDeBlocosAtingido()){mostrarParada(true);return;}
+  const chaves=revisaoSelecionar(S.config.revisaoPorDia);
+  if(!chaves.length)return;
+  const qs=chaves.map(perguntaDoItem).filter(Boolean);
+  /* menos de 6 itens vencidos: completa com perguntas novas das fases que já passou (bloco precisa de 6) */
+  const feitas=fasesFeitasDaMateria();
+  for(let t=0;qs.length<CICLO.minBloco&&feitas.length&&t<40;t++){
+    const l=feitas[Math.floor(Math.random()*feitas.length)];
+    const nova=genQuestions(l,1)[0];
+    if(nova&&!qs.some(x=>x.prompt===nova.prompt))qs.push(nova);
+  }
+  if(!qs.length)return;
+  const u=UNITS[0];
+  const falso={id:'revdia',glyph:'★',title:'Revisão do dia',teach:{
+    ideia:'Estas são perguntas que o Bobby guardou para você rever hoje. Rever depois de alguns dias faz o cérebro guardar de verdade.',
+    exemplo:'Errou alguma? Sem problema: ela volta mais uma vez, e logo você acerta.',
+    dica:'Vá com calma. Cada acerto aqui deixa a lembrança mais forte.'}};
+  LIC={ui:0,li:-1,u:u,l:falso,qs:qs,base:qs.length,i:0,passo:0,vidas:5,erros:0,acertos:0,
+       combo:0,melhorCombo:0,etapa:'aula',resp:null,digitado:'',conferido:false,dica:false,rev:true,diaria:true,
+       md:{c:0,d:0,u:0},miss:{t:'Revisão do dia',abre:'',fim:'Revisão do dia concluída!'},
+       cap:null,t0:Date.now(),tipoBloco:'revisao',respondidas:0,ganhoFase:0,hist:[],tQ:0,revAgg:{n:0,ok:0,antes:0,depois:0}};
+  registrarEvento('bloco_inicio',{tipo:'revisao',lic:'revdia',materia:MATERIA});
+  $('#licao').classList.add('on');
+  $('#revisao').classList.remove('on');
+  $('#licao').style.setProperty('--ub','var(--cor-acao)');
+  document.body.style.overflow='hidden';
+  pintarLicao();
+}
+/* soma as respostas da sessão de revisão para o evento agregado 'revisao_item' */
+function cicloRevisaoItem(antes,depois,ok){
+  if(typeof LIC!=='object'||!LIC||!LIC.revAgg)return;
+  const a=LIC.revAgg;a.n++;if(ok)a.ok++;a.antes+=antes;a.depois+=depois;
+}
+/* 2 ou 3 itens vencidos entram depois da primeira pergunta de uma fase NOVA (no máximo uma vez por dia, dentro do teto de 10) */
+function aquecimentoDaFase(){
+  garantirDia();
+  if(S.revisao.ultimoAquecimento===hoje())return [];
+  const n=Math.min(LEITNER.aquecimento,revisaoRestanteDoDia());
+  if(n<=0)return [];
+  const qs=revisaoSelecionar(n).map(perguntaDoItem).filter(Boolean);
+  if(!qs.length)return [];
+  S.revisao.ultimoAquecimento=hoje();
+  qs.forEach(q=>{q.__aquec=true;});
+  return qs;
+}
+/* ao concluir uma fase: até 3 itens-chave entram na caixa 1 (os erros já entraram na hora; completa com os que demoraram mais) */
+function revisaoPosFase(lic){
+  if(lic.rev)return;
+  const ctx={m:MATERIA,f:String(lic.l.id),w:lic.u.n};
+  const erros=lic.hist.filter(h=>!h.ok).length;
+  let vagas=Math.max(0,LEITNER.chavesPorFase-erros);
+  const certos=lic.hist.filter(h=>h.ok&&!h.q.__item&&!h.q.__aquec&&!h.q.reforco&&!h.dica).sort((a,b)=>b.ms-a.ms);
+  let novos=0;
+  for(const h of certos){
+    if(vagas<=0)break;
+    if(revisaoIntroduzir(h.q,ctx)){vagas--;novos++;}
+  }
+  novos+=lic.hist.filter(h=>!h.ok&&!h.q.__item&&S.revisao.itens[chaveItem(h.q)]&&S.revisao.itens[chaveItem(h.q)][IT.N]<=1).length;
+  if(novos&&S.diario)S.diario.c.itensNovos+=novos;
+  if(typeof atualizarMissoes==='function')atualizarMissoes();
+}
+function cicloAulaRevista(){
+  garantirDia();
+  S.diario.c.aulaRevista++;
+  S.semana.aulaRevista=(S.semana.aulaRevista||0)+1;
+  atualizarMissoes();
+}
+/* ---------- caderno de erros espaçado (caixas tipo Leitner) ----------
+   docs/FASE-2-especificacao.md, seção 2. Cinco caixas com intervalos de 1, 3, 7, 14 e 30 dias (hipótese a calibrar).
+   Entram na fila: todo ERRO e até 3 itens-chave por fase. A criança nunca vê "87 pendentes".
+   Cada item em S.revisao.itens[chave] é um array compacto:
+     [caixa, vence, n, acertos, lapsos, ultimo, dificil, dom]       (dom: 0, 1 = 1 acerto na caixa 5, 2 = dominado)
+   e a pergunta congelada fica em S.revisao.congelados[chave]. */
+const LEITNER={intervalos:[1,3,7,14,30],maxPorDia:10,chavesPorFase:3,aquecimento:3,
+  atrasoMax:2,voltaDominado:60,amostraDominado:20,maxCongelados:600,filaMax:3};
+const IT={CAIXA:0,VENCE:1,N:2,AC:3,LAPSOS:4,ULTIMO:5,DIFICIL:6,DOM:7};
+const intervaloDe=caixa=>LEITNER.intervalos[Math.max(1,Math.min(5,caixa))-1];
+
+const chaveItem=q=>'er:'+fnv8(q.prompt+'||'+q.answer);
+/* guarda a pergunta inteira (menos o que é só da tela), para refazer igualzinha: fração precisa de 'partes',
+   sílabas de 'pecas' etc. O caderno antigo só guardava tipo, enunciado, resposta e opções. */
+function congelarPergunta(q,ctx){
+  const c={};
+  Object.keys(q).forEach(k=>{
+    if(k.indexOf('__')===0||typeof q[k]==='function')return;
+    c[k]=q[k];
+  });
+  c.m=(ctx&&ctx.m)||'mat';c.f=(ctx&&ctx.f)||'';c.w=(ctx&&ctx.w)||0;c.sk='';
+  return JSON.parse(JSON.stringify(c));
+}
+function perguntaDoItem(chave){
+  const c=S.revisao.congelados[chave];
+  if(!c)return null;
+  const q=JSON.parse(JSON.stringify(c));
+  delete q.m;delete q.f;delete q.w;delete q.sk;
+  q.__item=chave;
+  const it=S.revisao.itens[chave];
+  if(it&&it[IT.LAPSOS]>0)q.__lapso=true;
+  return q;
+}
+function ctxDaFase(){
+  const id=(typeof LIC==='object'&&LIC&&LIC.l&&LIC.l.id)||'';
+  const u=(typeof LIC==='object'&&LIC&&LIC.u)||null;
+  return {m:MATERIA,f:String(id),w:u?u.n:0};
+}
+function aparaCongelados(){
+  const ks=Object.keys(S.revisao.congelados);
+  if(ks.length<=LEITNER.maxCongelados)return;
+  /* sobra: tira primeiro os dominados, depois os mais antigos */
+  const nota=k=>{const it=S.revisao.itens[k];return it?(it[IT.DOM]===2?0:1)*1e6+(idxDia(it[IT.ULTIMO]||it[IT.VENCE])||0):-1;};
+  ks.sort((a,b)=>nota(a)-nota(b)).slice(0,ks.length-LEITNER.maxCongelados).forEach(k=>{
+    delete S.revisao.congelados[k];delete S.revisao.itens[k];});
+}
+/* aplica o resultado de uma resposta a um item que já existe. dica: 0 (nenhuma), 1 ou 2 */
+function aplicarResultado(it,ok,dica,dia){
+  it[IT.N]++;
+  if(ok){
+    it[IT.AC]++;
+    if(!dica){
+      const eraCinco=it[IT.CAIXA]===5;
+      if(eraCinco&&it[IT.ULTIMO]!==dia){
+        it[IT.DOM]=Math.min(2,(it[IT.DOM]||0)+1);
+        if(it[IT.DOM]>=2){it[IT.VENCE]=somaDias(dia,LEITNER.voltaDominado);it[IT.ULTIMO]=dia;return it;}   /* dominado */
+      }
+      it[IT.CAIXA]=Math.min(5,it[IT.CAIXA]+1);
+    }
+    it[IT.VENCE]=somaDias(dia,intervaloDe(it[IT.CAIXA]));
+  }else{
+    it[IT.CAIXA]=Math.max(1,it[IT.CAIXA]-2);
+    it[IT.VENCE]=somaDias(dia,1);
+    it[IT.LAPSOS]++;it[IT.DOM]=0;
+    if(it[IT.LAPSOS]>=3&&it[IT.CAIXA]<=2)it[IT.DIFICIL]=1;
+  }
+  it[IT.ULTIMO]=dia;
+  return it;
+}
+/* Resposta a uma pergunta que JÁ está no caderno (sessão de revisão do dia). */
+function revisaoResultado(chave,ok,dica){
+  const it=S.revisao.itens[chave];if(!it)return null;
+  const antes=it[IT.CAIXA];
+  aplicarResultado(it,ok,dica||0,hoje());
+  if(typeof cicloRevisaoItem==='function')cicloRevisaoItem(antes,it[IT.CAIXA],ok);
+  return it;
+}
+/* Erro numa fase normal: o item entra na caixa 1 (vence amanhã) ou, se já estava lá, cai 2 caixas. */
+function revisaoErro(q,ctx){
+  const k=chaveItem(q),dia=hoje();
+  if(S.revisao.itens[k]){aplicarResultado(S.revisao.itens[k],false,0,dia);return k;}
+  S.revisao.congelados[k]=congelarPergunta(q,ctx||ctxDaFase());
+  S.revisao.itens[k]=[1,somaDias(dia,1),1,0,1,dia,0,0];
+  aparaCongelados();
+  return k;
+}
+/* Item-chave da fase concluída: entra na caixa 1, vence amanhã, qualquer que tenha sido o resultado.
+   Respeita o freio: com a fila cheia, item novo espera. Devolve true se entrou. */
+function revisaoIntroduzir(q,ctx){
+  const k=chaveItem(q),dia=hoje();
+  if(S.revisao.itens[k])return false;
+  if(revisaoVencidos(dia).length>=S.config.revisaoPorDia*2)return false;
+  S.revisao.congelados[k]=congelarPergunta(q,ctx||ctxDaFase());
+  S.revisao.itens[k]=[1,somaDias(dia,1),1,1,0,dia,0,0];
+  aparaCongelados();
+  return true;
+}
+/* esquecimento provável: atrasou mais de 2x o intervalo -> cai 1 caixa e vence hoje (uma vez por dia) */
+function revisaoAjustaAtrasos(dia){
+  if(S.revisao.ajustadoEm===dia)return;
+  Object.keys(S.revisao.itens).forEach(k=>{
+    const it=S.revisao.itens[k];
+    if(it[IT.DOM]===2)return;
+    const atraso=difDias(it[IT.VENCE],dia);
+    if(atraso>LEITNER.atrasoMax*intervaloDe(it[IT.CAIXA])){it[IT.CAIXA]=Math.max(1,it[IT.CAIXA]-1);it[IT.VENCE]=dia;}
+  });
+  S.revisao.ajustadoEm=dia;
+}
+/* a fila nunca vira culpa: se há mais de 3x o limite vencido, os itens de caixa 3 ou mais esperam mais um pouco */
+function revisaoAliviaFila(dia,vencidos){
+  const limite=S.config.revisaoPorDia;
+  if(vencidos.length<=LEITNER.filaMax*limite||S.revisao.aliviadoEm===dia)return vencidos;
+  vencidos.forEach(k=>{
+    const it=S.revisao.itens[k];
+    if(it[IT.CAIXA]>=3)it[IT.VENCE]=somaDias(dia,Math.ceil(intervaloDe(it[IT.CAIXA])/2));
+  });
+  S.revisao.aliviadoEm=dia;
+  return Object.keys(S.revisao.itens).filter(k=>S.revisao.itens[k][IT.VENCE]<=dia);
+}
+/* itens que vencem hoje (dominados só voltam numa amostra de 5%, e só de 60 em 60 dias) */
+function revisaoVencidos(dia){
+  dia=dia||hoje();
+  const todos=Object.keys(S.revisao.itens).filter(k=>{
+    const it=S.revisao.itens[k];
+    if(it[IT.VENCE]>dia)return false;
+    if(it[IT.DOM]===2)return fnv1a(k+'|'+dia)%LEITNER.amostraDominado===0;
+    return true;
+  });
+  return todos;
+}
+function revisoesHoje(){return ((S.stats.dias[hoje()]||{}).rev)||0;}
+function revisaoRestanteDoDia(){return Math.max(0,LEITNER.maxPorDia-revisoesHoje());}
+/* Escolhe até 'n' itens: mais atrasados em proporção ao intervalo, caixas baixas primeiro, pelo menos 1 de cada
+   matéria que tenha vencido, e nunca 3 seguidos da mesma matéria/fase. */
+function revisaoSelecionar(n,dia){
+  dia=dia||hoje();
+  revisaoAjustaAtrasos(dia);
+  let venc=revisaoVencidos(dia);
+  venc=revisaoAliviaFila(dia,venc).filter(k=>S.revisao.itens[k][IT.VENCE]<=dia&&S.revisao.congelados[k]);
+  const atraso=k=>{const it=S.revisao.itens[k];return (difDias(it[IT.VENCE],dia)+1)/intervaloDe(it[IT.CAIXA]);};
+  venc.sort((a,b)=>atraso(b)-atraso(a)||S.revisao.itens[a][IT.CAIXA]-S.revisao.itens[b][IT.CAIXA]||(a<b?-1:1));
+  const lim=Math.max(0,Math.min(n,revisaoRestanteDoDia()));
+  const escolha=[];
+  ['mat','pt','en'].forEach(m=>{
+    const k=venc.find(x=>S.revisao.congelados[x].m===m&&escolha.indexOf(x)<0);
+    if(k&&escolha.length<lim)escolha.push(k);
+  });
+  venc.forEach(k=>{if(escolha.length<lim&&escolha.indexOf(k)<0)escolha.push(k);});
+  /* intercalação: reordena para não repetir a mesma matéria/fase 3 vezes seguidas */
+  const tag=k=>S.revisao.congelados[k].m+'/'+S.revisao.congelados[k].f;
+  const fila=escolha.slice(),saida=[];
+  while(fila.length){
+    let i=0;
+    for(;i<fila.length;i++){
+      const n2=saida.length;
+      if(!(n2>=2&&tag(saida[n2-1])===tag(fila[i])&&tag(saida[n2-2])===tag(fila[i])))break;
+    }
+    saida.push(fila.splice(i<fila.length?i:0,1)[0]);
+  }
+  return saida;
+}
+function revisaoContagens(){
+  const venc=revisaoVencidos(hoje());
+  return {vencidos:venc.length,total:Object.keys(S.revisao.itens).length};
+}
+/* ---------- medição local: eventos sem dado pessoal e retenção D1/D7/D30 ----------
+   docs/FASE-2-especificacao.md, seção 7. Nada sai do aparelho: exportar é ato do responsável.
+   Regras: nada de apelido, texto livre ou identificador do aparelho; 'pid' é um sorteio local separado do apelido,
+   trocado por outro sorteio na exportação; hora só em horas cheias; no máximo 4.000 eventos ou 120 dias. */
+const CHAVE_EVENTOS='universo-bobby-eventos-v1';
+const EV={max:4000,dias:120,abertura:sorteioId(8)};
+const EVENTOS_NOMES=['app_aberto','perfil_criado','diag_fim','bloco_inicio','bloco_fim','meta_cheia','bau_aberto','missao_ok',
+  'parada_vista','congelador_ganho','congelador_usado','ofensiva_descansa','ofensiva_recuperada','ofensiva_retorno',
+  'revisao_item','audio_falha','relatorio_visto','lembrete_ics','config_mudou','sessao_fim','migracao_ok','migracao_falhou','relogio_estranho'];
+/* só aceita número, verdadeiro/falso ou um código curto (letras, números, _ . : / -). Frase digitada nunca passa. */
+const EV_CODIGO=/^[a-z0-9_.:\/\-]{0,80}$/i;
+const EV_PROIBIDOS=/nome|apelido|email|e-mail|texto|senha|telefone|cpf/i;
+let EVENTOS=null;
+
+function eventosLer(){
+  if(EVENTOS)return EVENTOS;
+  EVENTOS=[];
+  try{
+    const j=JSON.parse(localStorage.getItem(CHAVE_EVENTOS)||'null');
+    if(j&&Array.isArray(j.itens))EVENTOS=j.itens.filter(x=>x&&typeof x==='object'&&EVENTOS_NOMES.indexOf(x.e)>=0&&ehDia(x.d));
+  }catch(e){EVENTOS=[];}
+  return EVENTOS;
+}
+function eventosGravar(){
+  try{localStorage.setItem(CHAVE_EVENTOS,JSON.stringify({v:1,itens:EVENTOS}));}catch(e){}
+}
+function eventosAparar(dia){
+  const lim=somaDias(dia,-EV.dias);
+  EVENTOS=EVENTOS.filter(x=>x.d>=lim);
+  if(EVENTOS.length>EV.max)EVENTOS=EVENTOS.slice(EVENTOS.length-EV.max);
+}
+function eventoLimpo(campos){
+  const out={};
+  Object.keys(campos||{}).forEach(k=>{
+    if(EV_PROIBIDOS.test(k)||!/^[a-z0-9_]{1,20}$/i.test(k))return;
+    const v=campos[k];
+    if(typeof v==='number'&&isFinite(v))out[k]=Math.round(v*100)/100;
+    else if(typeof v==='boolean')out[k]=v?1:0;
+    else if(typeof v==='string'&&EV_CODIGO.test(v))out[k]=v;
+  });
+  return out;
+}
+function registrarEvento(nome,campos){
+  try{
+    if(EVENTOS_NOMES.indexOf(nome)<0)return false;
+    const p=perfilAtual(),pid=p&&p.pid;
+    if(!pid)return false;
+    eventosLer();
+    const agora=new Date(),dia=diaLocal(agora);
+    const reg=Object.assign({e:nome,d:dia,h:agora.getHours(),s:EV.abertura,v:APP_VERSAO,pid:pid},eventoLimpo(campos));
+    EVENTOS.push(reg);
+    eventosAparar(dia);
+    eventosGravar();
+    return true;
+  }catch(e){return false;}
+}
+function apagarEventosDe(pid){
+  eventosLer();
+  EVENTOS=EVENTOS.filter(x=>x.pid!==pid);
+  eventosGravar();
+}
+function eventosDoPerfil(pid){return eventosLer().filter(x=>x.pid===pid);}
+
+/* ---- retenção (porte de docs/anexos/referencia-retencao.js) ----
+   Dia ativo = data local com pelo menos 1 'bloco_fim'. Abrir o app sem terminar bloco não conta. */
+function diasAtivosDe(ev){
+  const m={};
+  ev.filter(x=>x.e==='bloco_fim'&&(x.contou===undefined||x.contou)).forEach(x=>{(m[x.pid]=m[x.pid]||new Set()).add(x.d);});
+  return m;
+}
+function retencao(ev,hojeStr){
+  const A=diasAtivosDe(ev),out={D1:[0,0],D7:[0,0],D30:[0,0],D1j:[0,0],D7j:[0,0],D30j:[0,0],curr:[0,0]};
+  for(const pid in A){
+    const dias=[...A[pid]].map(idxDia).sort((a,b)=>a-b),p=dias[0],set=new Set(dias),h=idxDia(hojeStr);
+    [[1,'D1',1],[7,'D7',1],[30,'D30',2]].forEach(([n,k,folga])=>{
+      if(p+n>h)return;                                   /* ainda não deu tempo: fora do denominador */
+      out[k][1]++;if(set.has(p+n))out[k][0]++;            /* estrita: exatamente no dia N */
+      out[k+'j'][1]++;
+      for(let j=Math.max(1,n-folga);j<=n+folga;j++)if(set.has(p+j)){out[k+'j'][0]++;break;}   /* janela */
+    });
+    /* retorno no dia seguinte (parecido com o CURR): dia ativo com outro dia ativo nos 7 dias anteriores */
+    dias.forEach(d=>{
+      if(d+1>h)return;
+      let recente=false;for(let j=1;j<=7;j++)if(set.has(d-j))recente=true;
+      if(recente){out.curr[1]++;if(set.has(d+1))out.curr[0]++;}
+    });
+  }
+  const r=k=>out[k][1]?+(out[k][0]/out[k][1]).toFixed(2):null;
+  return {D1:r('D1'),D7:r('D7'),D30:r('D30'),D1_janela:r('D1j'),D7_janela:r('D7j'),D30_janela:r('D30j'),
+    retornoDiaSeguinte:r('curr'),n:{D1:out.D1[1],D7:out.D7[1],D30:out.D30[1],curr:out.curr[1]}};
+}
+function coortes(ev){
+  const A=diasAtivosDe(ev),c={};
+  for(const pid in A){
+    const p=[...A[pid]].sort()[0],k=semanaIso(p);
+    (c[k]=c[k]||[]).push(pid);
+  }
+  return c;
+}
+/* meta cheia por dia ativo: separa "dia vivo" de "meta" */
+function metaPorDiaAtivo(ev){
+  const dias=new Set(),metas=new Set();
+  ev.forEach(x=>{
+    if(x.e==='bloco_fim')dias.add(x.pid+'|'+x.d);
+    if(x.e==='meta_cheia')metas.add(x.pid+'|'+x.d);
+  });
+  return dias.size?+(metas.size/dias.size).toFixed(2):null;
+}
+/* resumo curto da semana (7 dias até hojeStr) para o responsável, tirado das estatísticas do perfil */
+function resumoSemana(stats,hojeStr){
+  const r={dias:0,min:0,perguntas:0,acertos:0,revisoes:0,blocos:0};
+  for(let i=0;i<7;i++){
+    const d=stats.dias[somaDias(hojeStr,-i)];
+    if(!d)continue;
+    if((d.b||d.fases||0)>0||(d.q||0)>0)r.dias++;
+    r.min+=Math.round((d.seg||0)/60);r.perguntas+=d.q||0;r.acertos+=d.ac||0;r.revisoes+=d.rev||0;r.blocos+=d.b||d.fases||0;
+  }
+  r.pct=r.perguntas?Math.round(r.acertos/r.perguntas*100):null;
+  return r;
+}
+/* pacote anônimo: só contadores. O pid sai trocado por outro sorteio e o apelido nunca entra. */
+function pacoteDeMetricas(pid){
+  const troca=sorteioId(12);
+  const itens=eventosDoPerfil(pid).map(x=>Object.assign({},x,{pid:troca,s:undefined}));
+  itens.forEach(x=>{delete x.s;});
+  return {app:'universo-de-bobby',tipo:'metricas-anonimas',versao:1,quando:new Date().toISOString(),eventos:itens};
+}
+/* ---------- ciclo diário: dia vivo, meta, baú, missões, bilhete e ponto de parada ----------
+   docs/FASE-2-especificacao.md, seção 5. Lógica sem desenho (as telas ficam em ciclo-ui.js).
+   Princípios que valem para cada texto e cada regra daqui:
+   - o Bobby incentiva e NUNCA culpa, cobra ou fica triste; nada de contagem regressiva nem "você vai perder";
+   - a meta é contada em PERGUNTAS (ações), não em minutos de tela; o relógio só calibra;
+   - o baú não tem sorteio: o que vem em cada dia é conhecido antes de abrir; nada disto é vendido. */
+const CICLO={segPorPergunta:15,minBloco:6,minAmostras:50,segMin:8,segMax:40,maxAmostras:120};
+
+/* ---------- meta em perguntas ---------- */
+function segPorPergunta(){
+  const a=(S.stats.amostras||[]);
+  if(a.length<CICLO.minAmostras)return CICLO.segPorPergunta;
+  const o=a.slice().sort((x,y)=>x-y),med=o[Math.floor(o.length/2)];
+  return Math.min(CICLO.segMax,Math.max(CICLO.segMin,med));
+}
+const perguntasMeta=()=>Math.max(1,Math.round(S.config.metaMin*60/segPorPergunta()));
+
+/* ---------- recompensas do baú (tabela dos dias 1 a 30, só cosméticos) ----------
+   k: adesivo | moedas | ornamento | roupa-p | roupa-g | roupa-ex | medalha | pose | moldura | trilha */
+const ADESIVOS=['Primeira visita','Estrela cadente','Cometa curioso','Lua sorridente','Foguetinho','Planeta de anéis','Aurora',
+  'Nave exploradora','Satélite amigo','Galáxia espiral','Urso astronauta','Meteoro veloz','Sol dourado','Nebulosa rosa',
+  'Constelação do Urso','Estrela do mapa','Lanterna espacial','Astronauta mirim','Cristal azul','Planeta verde',
+  'Cometa de gelo','Anel prateado','Lua cheia','Foguete listrado','Estrela do norte','Mapa do tesouro','Bússola',
+  'Estrela do mar','Vaga-lume','Constelação do mês'];
+const ORNAMENTOS=['Carimbo de estrela','Carimbo de lua','Carimbo de foguete','Carimbo de planeta','Carimbo de cometa',
+  'Moldura de estrelas','Borda de nuvens','Faixa de constelação','Carimbo de nave','Carimbo de sol'];
+const BAU_TABELA={
+  1:[['adesivo','Primeira visita']],2:[['moedas',10]],3:[['adesivo'],['medalha','3 dias']],4:[['ornamento']],5:[['roupa-p']],
+  6:[['moedas',10]],7:[['medalha','1 semana'],['pose','Pose de comemoração'],['moldura','Moldura de perfil: semana']],
+  8:[['adesivo']],9:[['ornamento']],10:[['roupa-p']],11:[['moedas',15]],12:[['adesivo']],13:[['ornamento']],
+  14:[['medalha','2 semanas'],['roupa-g'],['adesivo','Adesivo raro: cometa dourado']],
+  15:[['moedas',15]],16:[['adesivo']],17:[['ornamento']],18:[['moedas',15]],19:[['roupa-p']],20:[['adesivo']],
+  21:[['medalha','3 semanas'],['trilha','Trilha de brilho no mapa']],22:[['moedas',20]],23:[['ornamento']],24:[['adesivo']],
+  25:[['roupa-p']],26:[['moedas',20]],27:[['ornamento']],28:[['medalha','4 semanas'],['pose','Pose de explorador']],29:[['adesivo']],
+  30:[['medalha','do mês'],['roupa-ex'],['moldura','Moldura dourada'],['adesivo','Constelação']]
+};
+/* recompensa do dia n (valor da ofensiva). Depois do dia 30: a cada 10 dias um adesivo da Constelação;
+   nos outros dias repete o ciclo da tabela, e o que a criança já tem vira +20 moedas. */
+function recompensaDoDia(n){
+  n=Math.max(1,Math.floor(n||1));
+  if(n>30&&n%10===0)return [['adesivo','Constelação do mês '+Math.ceil(n/30)+', dia '+n]];
+  const base=BAU_TABELA[n>30?((n-1)%30)+1:n];
+  return base.map(x=>x.slice());
+}
+const ROTULO_BAU={adesivo:'um adesivo',moedas:'moedas',ornamento:'um ornamento de colorir',
+  'roupa-p':'uma peça para o Bobby','roupa-g':'uma peça para o Bobby','roupa-ex':'uma peça exclusiva',
+  medalha:'uma medalha',pose:'uma pose nova',moldura:'uma moldura',trilha:'uma trilha de brilho'};
+/* o que aparece FECHADO no baú de amanhã: só a categoria principal */
+function categoriaDoBau(n){
+  const it=recompensaDoDia(n);
+  const principal=it.find(x=>x[0]==='medalha')||it[0];
+  return ROTULO_BAU[principal[0]]||'uma surpresa boa';
+}
+function nomeDe(kind,n){
+  const dia=Math.max(1,n);
+  if(kind==='adesivo')return ADESIVOS[(dia-1)%ADESIVOS.length];
+  if(kind==='ornamento')return ORNAMENTOS[(dia-1)%ORNAMENTOS.length];
+  return kind;
+}
+const COLECAO_DE={adesivo:'adesivos',ornamento:'ornamentos',medalha:'medalhas',pose:'poses',moldura:'molduras',trilha:'trilhas'};
+/* peças do guarda-roupa por faixa de preço: pequena, maior e exclusiva (a mais cara que a criança ainda não tem) */
+function pecaParaBau(tam){
+  const todas=[];
+  ['chapeu','rosto','pescoco'].forEach(sl=>Object.keys(PECAS[sl]||{}).forEach(id=>todas.push({id:id,n:PECAS[sl][id].n,p:PECAS[sl][id].p})));
+  const livres=todas.filter(x=>S.comprado.indexOf(x.id)<0).sort((a,b)=>a.p-b.p||(a.id<b.id?-1:1));
+  if(!livres.length)return null;
+  if(tam==='roupa-p')return livres.find(x=>x.p<=220)||null;
+  if(tam==='roupa-g')return livres.find(x=>x.p>=250&&x.p<=450)||null;
+  return livres[livres.length-1];
+}
+/* entrega de verdade o que o baú prometeu. Item que a criança já tem vira +20 moedas (nada se perde, nada se repete). */
+function entregarRecompensa(lista,dia){
+  const itens=[];
+  lista.forEach(r=>{
+    const k=r[0];let v=r[1];
+    if(k==='moedas'){S.moedas+=v;itens.push({k:k,n:'+'+v+' moedas',v:v});return;}
+    if(k.indexOf('roupa')===0){
+      const p=pecaParaBau(k);
+      if(p){S.comprado.push(p.id);itens.push({k:k,n:p.n,v:0});}
+      else{S.moedas+=20;itens.push({k:'moedas',n:'+20 moedas (você já tem todas as peças dessa faixa)',v:20});}
+      return;
+    }
+    const lista2=S.colecao[COLECAO_DE[k]];
+    const nome=(typeof v==='string'&&v)?(k==='medalha'?'Medalha '+v:v):nomeDe(k,dia);
+    if(lista2.indexOf(nome)>=0){S.moedas+=20;itens.push({k:'moedas',n:'+20 moedas ('+nome+' você já tem)',v:20});}
+    else{lista2.push(nome);itens.push({k:k,n:nome,v:0});}
+  });
+  return itens;
+}
+
+/* ---------- missões ---------- */
+/* alvo por faixa: [f78, f910, f1112] */
+const MISSOES_CAT=[
+ {id:'M01',g:'revisao',alvo:[1,1,1],t:n=>'Faça a Revisão do dia',conta:c=>c.revisao,ok:()=>true},
+ {id:'M02',g:'fase',alvo:[1,1,1],t:n=>'Complete uma fase',conta:c=>c.fase,ok:()=>true},
+ {id:'M03',g:'combo',alvo:[4,5,6],t:n=>'Acerte '+n+' seguidas',conta:c=>c.combo,ok:()=>true},
+ {id:'M04',g:'en-audio',alvo:[4,5,6],t:n=>'Ouça e acerte '+n+' palavras em inglês',conta:c=>c.enAudio,ok:()=>true},
+ {id:'M05',g:'fatos',alvo:[1,1,1],t:n=>'Faça uma rodada de fatos',conta:c=>c.fatos,ok:()=>false},          /* rodada de fatos ainda não existe */
+ {id:'M06',g:'historia',alvo:[1,1,1],t:n=>'Leia um texto com o Bobby',conta:c=>c.historia,ok:()=>false},     /* histórias e leituras ainda não existem */
+ {id:'M07',g:'ditado',alvo:[3,4,5],t:n=>'Escreva '+n+' palavras que você ouviu',conta:c=>c.ditado,ok:()=>false},  /* ditado ainda não existe */
+ {id:'M08',g:'galaxias',alvo:[2,2,2],t:n=>'Jogue em outra galáxia',conta:c=>c.materiasBloco.length,ok:()=>true},
+ {id:'M09',g:'aula',alvo:[1,1,1],t:n=>'Releia uma aula',conta:c=>c.aulaRevista,ok:()=>(S.semana.aulaRevista||0)<1},   /* no máximo 1 vez por semana */
+ {id:'M10',g:'lapso',alvo:[2,3,4],t:n=>'Acerte '+n+' perguntas que já errou antes',conta:c=>c.lapso,ok:()=>Object.keys(S.revisao.itens).some(k=>S.revisao.itens[k][IT.LAPSOS]>0)},
+ {id:'M11',g:'mat',alvo:[8,10,12],t:n=>'Responda '+n+' perguntas de matemática',conta:c=>c.mat,ok:()=>true},
+ {id:'M12',g:'porque',alvo:[1,1,1],t:n=>'Responda um "por quê?"',conta:c=>c.porque,ok:()=>false},              /* só depois do tipo "por quê" */
+ {id:'M13',g:'novos',alvo:[3,4,5],t:n=>'Aprenda '+n+' coisas novas',conta:c=>c.itensNovos,ok:()=>true},
+ {id:'M14',g:'fase',alvo:[1,1,1],t:n=>'Avance um passo no mundo',conta:c=>c.faseNova,ok:()=>true}
+];
+const missaoPorId=id=>MISSOES_CAT.filter(m=>m.id===id)[0];
+const FAIXA_COLUNA={f78:0,f910:1,f1112:2};
+/* degrau do alvo: cai 1 se em 3 dos últimos 5 dias fez menos de 2 das 3; sobe 1 se fez as 3 em 5 dias seguidos (teto f1112) */
+function deltaDeAlvo(){
+  const h=(S.missHist||[]).slice(-5);
+  if(h.length>=3&&h.filter(x=>x.ok<2).length>=3)return -1;
+  if(h.length>=5&&h.every(x=>x.ok>=3))return 1;
+  return 0;
+}
+function alvoDaMissao(m){
+  const col=Math.max(0,Math.min(2,(FAIXA_COLUNA[S.faixa]||0)+deltaDeAlvo()));
+  return m.alvo[col];
+}
+/* matéria menos jogada nos últimos 3 dias (blocos por matéria) */
+function materiaMenosJogada(dia){
+  const n={mat:0,pt:0,en:0};
+  for(let i=0;i<3;i++){const d=S.stats.dias[somaDias(dia,-i)];if(d&&d.bm)Object.keys(n).forEach(m=>{n[m]+=d.bm[m]||0;});}
+  return ['mat','pt','en'].sort((a,b)=>n[a]-n[b])[0];
+}
+/* 3 missões do dia, determinísticas: mesma semente (perfil + dia) = mesmas missões o dia inteiro */
+function gerarMissoes(dia){
+  const rnd=mulberry32(fnv1a((perfilAtual().pid||'')+'|'+dia));
+  const venc=(typeof revisaoVencidos==='function')?revisaoVencidos(dia).length:0;
+  const ids=[];
+  const ok=m=>m.ok();
+  const usadas3=new Set();
+  (S.missHist||[]).slice(-3).forEach(h=>(h.ids||[]).forEach(i=>usadas3.add(i)));
+  const grupos=()=>ids.map(i=>missaoPorId(i).g);
+  const livre=lista=>lista.map(missaoPorId).filter(m=>ok(m)&&ids.indexOf(m.id)<0&&grupos().indexOf(m.g)<0);
+  const sorteia=lista=>lista.length?escolheCom(rnd,lista).id:null;
+  /* A: base de aprendizado */
+  let a=venc>=4?'M01':sorteia(livre(['M13','M02']));
+  if(a)ids.push(a);
+  /* B: progresso */
+  const menos=materiaMenosJogada(dia);
+  const poolB=['M02','M14','M13'].concat(menos==='mat'?['M11']:[]);
+  const b=sorteia(livre(poolB));
+  if(b)ids.push(b);
+  /* C: desafio (evita o que já saiu nos últimos 3 dias; se ficar sem opção, aceita repetir) */
+  const poolC=['M03','M04','M07','M10','M12','M08','M06','M05'];
+  let cands=livre(poolC).filter(m=>!usadas3.has(m.id));
+  if(!cands.length)cands=livre(poolC);
+  const c=cands.length?escolheCom(rnd,cands).id:null;
+  if(c)ids.push(c);
+  /* se algum pool secou, completa com o que sobrar para sempre haver 3 */
+  ['M02','M13','M03','M11','M08','M14'].forEach(i=>{
+    const m=missaoPorId(i);
+    if(ids.length<3&&ok(m)&&ids.indexOf(i)<0&&grupos().indexOf(m.g)<0)ids.push(i);
+  });
+  return ids.slice(0,3).map(id=>({id:id,alvo:alvoDaMissao(missaoPorId(id)),prog:0,ok:false}));
+}
+function atualizarMissoes(){
+  const d=S.diario;
+  d.missoes.forEach(m=>{
+    const cat=missaoPorId(m.id);if(!cat)return;
+    m.prog=Math.min(m.alvo,cat.conta(d.c,d));
+    if(!m.ok&&m.prog>=m.alvo){
+      m.ok=true;
+      registrarEvento('missao_ok',{id:m.id});
+    }
+  });
+  if(d.missoes.length===3&&d.missoes.every(m=>m.ok)&&!d.estrela){
+    d.estrela=true;
+    S.semana.estrelas++;
+    if(S.semana.estrelas>=5&&!S.semana.constelacao){
+      S.semana.constelacao=true;
+      S.colecao.constelacao.push('Peça da Constelação da semana '+S.semana.chave);
+    }
+  }
+}
+const textoDaMissao=m=>missaoPorId(m.id).t(m.alvo);
+
+/* ---------- virada do dia ---------- */
+/* Chamar ao abrir o app, ao trocar de perfil e antes de qualquer ação. Barato quando o dia não mudou. */
+function garantirDia(){
+  const d=hoje();
+  const o=S.ofensiva;
+  o.diasLivres=S.config.diasLivres.slice();o.pausaAte=S.config.pausaAte;
+  const antes={cong:o.congeladores,desc:o.descansando,ultimo:o.ultimo};
+  ofensivaAbrir(o,d);
+  if(o.congeladores<antes.cong){registrarEvento('congelador_usado',{saldo:o.congeladores});S.espera=S.espera||{};S.espera.usouCongelador=d;}
+  if(!antes.desc&&o.descansando)registrarEvento('ofensiva_descansa',{valor:o.valorAntes,lacuna:o.lacuna});
+  if(o.relogioEstranho){registrarEvento('relogio_estranho',{});o.relogioEstranho=false;}
+  if(S.semana.chave!==semanaIso(d))S.semana={chave:semanaIso(d),estrelas:0,aulaRevista:0,constelacao:false};
+  if(S.diario.dia!==d){
+    const ontem=S.diario;
+    /* guarda o resultado do dia que passou: alimenta o ajuste silencioso do alvo das missões */
+    if(ontem.dia&&ontem.missoes.length){
+      S.missHist=(S.missHist||[]).concat([{dia:ontem.dia,ids:ontem.missoes.map(m=>m.id),ok:ontem.missoes.filter(m=>m.ok).length}]).slice(-5);
+    }
+    S.diario=diarioVazio(d);
+    S.diario.missoes=S.config.missoesLigadas?gerarMissoes(d):[];
+    /* Kit de volta: quem volta depois de 4 dias ou mais ganha um presente de boas-vindas (fora da tabela do baú) */
+    if(antes.ultimo&&difDias(antes.ultimo,d)>=4)S.diario.kit=1;
+  }
+  return S;
+}
+
+/* ---------- registro de cada pergunta e de cada bloco ---------- */
+function diaDeStats(){
+  const d=hoje();
+  const x=S.stats.dias[d]||{fases:0,seg:0,b:0,q:0,ac:0,rev:0};
+  if(!x.bm)x.bm={mat:0,pt:0,en:0};
+  S.stats.dias[d]=x;
+  return x;
+}
+/* chamada por conferir(). info: {ok, ms, dica, rev, lapso} */
+function cicloPergunta(q,info){
+  garantirDia();
+  const d=S.diario,st=diaDeStats();
+  d.perguntas++;st.q=(st.q||0)+1;
+  if(info.ok){d.acertos++;st.ac=(st.ac||0)+1;}
+  if(info.ms>0){S.stats.amostras.push(Math.max(1,Math.min(60,Math.round(info.ms/1000))));if(S.stats.amostras.length>CICLO.maxAmostras)S.stats.amostras.shift();}
+  if(MATERIA==='mat')d.c.mat++;
+  if(info.ok&&MATERIA==='en'&&q.ouvir)d.c.enAudio++;
+  if(info.ok&&q.type==='texto'&&q.ouvir)d.c.ditado++;
+  if(info.ok&&q.__lapso)d.c.lapso++;
+  if(info.ok&&typeof LIC==='object')d.c.combo=Math.max(d.c.combo,LIC.combo||0);
+  if(!d.metaOk&&d.perguntas>=perguntasMeta()){
+    d.metaOk=true;
+    registrarEvento('meta_cheia',{perguntas:d.perguntas,min:S.config.metaMin});
+  }
+  atualizarMissoes();
+}
+/* chamada ao fim de um bloco. info: {tipo:'fase'|'revisao', lic, materia, perguntas, acertos, estrelas, seg, faseNova}
+   Devolve {contou, ofensiva:{...mudou}}. Só vira bloco quem respondeu 6 perguntas ou mais. */
+function concluirBloco(info){
+  garantirDia();
+  registrarEvento('bloco_fim',{tipo:info.tipo,lic:String(info.lic||'').replace(/[^a-z0-9._]/gi,''),materia:info.materia||MATERIA,
+    perguntas:info.perguntas,acertos:info.acertos,estrelas:info.estrelas||0,seg:info.seg||0,abandonou:info.abandonou?1:0,contou:info.perguntas>=CICLO.minBloco?1:0});
+  if(info.perguntas<CICLO.minBloco)return {contou:false};
+  const o=S.ofensiva,d=S.diario,st=diaDeStats(),hj=hoje();
+  o.diasLivres=S.config.diasLivres.slice();o.pausaAte=S.config.pausaAte;
+  const a={atual:o.atual,cong:o.congeladores,desc:o.descansando,rec:!!(o.recuperavel&&o.recuperavel.feita),dia:o.ultimo===hj};
+  ofensivaBloco(o,hj);
+  const mudou={subiu:o.atual>a.atual,voltouPelaMetade:a.desc&&o.atual<a.atual,recuperou:!a.rec&&!!(o.recuperavel&&o.recuperavel.feita),
+    ganhouCongelador:o.congeladores>a.cong,primeiroDoDia:!a.dia};
+  if(mudou.voltouPelaMetade)registrarEvento('ofensiva_retorno',{valor_antes:a.atual,valor_depois:o.atual});
+  if(mudou.recuperou)registrarEvento('ofensiva_recuperada',{valor:o.atual});
+  if(mudou.ganhouCongelador)registrarEvento('congelador_ganho',{saldo:o.congeladores});
+  d.blocos++;st.b=(st.b||0)+1;
+  const mat=info.materia||MATERIA;
+  st.bm[mat]=(st.bm[mat]||0)+1;
+  if(d.c.materiasBloco.indexOf(mat)<0)d.c.materiasBloco.push(mat);
+  if(info.tipo==='fase'){d.c.fase++;if(info.faseNova)d.c.faseNova++;}
+  if(info.tipo==='revisao')d.c.revisao++;
+  atualizarMissoes();
+  gravarEspera(info);
+  return {contou:true,mudou:mudou};
+}
+
+/* ---------- baú, parada, kit ---------- */
+const bauPronto=()=>S.diario.metaOk&&S.diario.blocos>=1&&!S.diario.bau.aberto;
+function abrirBau(){
+  garantirDia();
+  if(!bauPronto())return null;
+  const dia=Math.max(1,S.ofensiva.atual);
+  const itens=entregarRecompensa(recompensaDoDia(dia),dia);
+  S.diario.bau={aberto:true,dia:dia,itens:itens};
+  registrarEvento('bau_aberto',{dia:dia});
+  gravarEspera();
+  return S.diario.bau;
+}
+const paradaPendente=()=>S.diario.metaOk&&S.diario.bau.aberto&&!S.diario.paradaVista;
+function limiteDeBlocosAtingido(){
+  const l=S.config.limiteBlocosDia;
+  return !!l&&S.diario.blocos>=l+(S.diario.liberados||0);
+}
+function registrarParada(acao){
+  S.diario.paradaVista=true;S.diario.paradaAcao=acao==='terminar'?'terminar':'continuar';
+  registrarEvento('parada_vista',{acao:S.diario.paradaAcao});
+  gravarEspera();salvar();
+}
+/* depois da parada ("continuar explorando") não há novo baú, nova missão nem bônus de combo do dia */
+const bonusDeComboAtivo=()=>!(S.diario.paradaVista&&S.diario.paradaAcao==='continuar');
+function pegarKit(){
+  if(S.diario.kit!==1)return null;
+  S.diario.kit=2;
+  S.moedas+=15;
+  const nome='Kit de volta';
+  let itens=[{k:'moedas',n:'+15 moedas',v:15}];
+  if(S.colecao.adesivos.indexOf(nome)<0){S.colecao.adesivos.push(nome);itens.push({k:'adesivo',n:nome,v:0});}
+  salvar();
+  return itens;
+}
+
+/* ---------- o que fica esperando (bilhete do Bobby) ---------- */
+const BILHETES={
+  primeiro:'Oi! Eu sou o Bobby. Deixei uma missão pequena para a gente começar.',
+  diaSeguinte:'Que bom ver você de novo! Hoje a missão é rápida.',
+  doisATres:'Oi de novo! Guardei um adesivo para você. Vamos?',
+  quatroOuMais:'Seja bem-vindo de volta! Seu Kit de volta está aberto. Quer começar devagar?',
+  revisao:'Preparei uma revisão curta com palavras que você já conhece.',
+  mundo:'Você terminou um mundo inteiro! Hoje tem um mundo novo para explorar.',
+  marco:'Hoje é um dia especial na sua sequência. Vem ver!',
+  fimDeSemana:'Fim de semana de aventura! Uma missão e depois é só brincar.',
+  sabado:'Sábado de aventura! Uma missão e depois é só brincar.',
+  congelador:'O Bobby cuidou da sua sequência. Ela continua firme!',
+  descansando:'Sua sequência estava descansando. Hoje ela volta com tudo!',
+  erroDificil:'Aquela pergunta era difícil mesmo. Hoje a gente tenta de outro jeito.',
+  neutro:'Que bom ver você! Vamos jogar um pouquinho?'
+};
+/* guarda o que a próxima abertura vai mostrar. Chamado ao fim de cada bloco, do baú e da parada. */
+function gravarEspera(info){
+  const e=S.espera||{};
+  const dia=hoje();
+  S.espera={bilhete:e.bilhete||'',presente:categoriaDoBau(Math.max(1,S.ofensiva.atual)+1),desde:dia,vistoEm:e.vistoEm||'',
+    mundoNovo:!!(e.mundoNovo||(info&&info.completouMundo)),erroDificil:!!(e.erroDificil||(info&&info.erros>=3)),
+    usouCongelador:e.usouCongelador};
+  return S.espera;
+}
+/* Qual bilhete mostrar agora. A escolha depende do que aconteceu, nunca de "quanto tempo ficou fora" como cobrança. */
+function escolherBilhete(){
+  const dia=hoje(),o=S.ofensiva,e=S.espera||{};
+  const ultimo=o.ultimo,fora=ultimo?difDias(ultimo,dia):0;
+  const nunca=!ultimo&&Object.keys(S.stats.dias).length===0&&Object.keys(S.feitas).length===0;
+  if(nunca)return 'primeiro';
+  if(e.usouCongelador===dia)return 'congelador';
+  if(o.descansando)return 'descansando';
+  if(OF_MARCOS.indexOf(o.atual+1)>=0&&fora<=1)return 'marco';
+  if(e.mundoNovo)return 'mundo';
+  if(e.erroDificil)return 'erroDificil';
+  if(fora>=4)return 'quatroOuMais';
+  if(fora>=2)return 'doisATres';
+  const venc=(typeof revisaoVencidos==='function')?revisaoVencidos(dia).length:0;
+  if(venc>=1)return 'revisao';
+  const dow=diaSemana(dia);
+  if(dow===6)return 'sabado';
+  if(dow===0)return 'fimDeSemana';
+  if(fora===1)return 'diaSeguinte';
+  return 'neutro';
+}
+/* {chave, texto, presente, pronto} ou null se já foi mostrado hoje */
+function bilheteDeHoje(){
+  garantirDia();
+  const dia=hoje(),e=S.espera||{};
+  if(e.vistoEm===dia)return null;
+  const chave=escolherBilhete();
+  const venc=(typeof revisaoVencidos==='function')?Math.min(S.config.revisaoPorDia,revisaoVencidos(dia).length):0;
+  let pronto='Sua missão de hoje está pronta.';
+  if(chave==='mundo')pronto='Um mundo novo foi liberado.';
+  else if(venc>=1)pronto='Sua Revisão do dia está pronta ('+venc+' pergunta'+(venc>1?'s':'')+').';
+  return {chave:chave,texto:BILHETES[chave],presente:e.presente||categoriaDoBau(Math.max(1,S.ofensiva.atual)+1),pronto:pronto};
+}
+function marcarBilheteVisto(){
+  const e=S.espera||{};
+  S.espera=Object.assign({},e,{vistoEm:hoje(),mundoNovo:false,erroDificil:false,usouCongelador:''});
+  salvar();
+}
 /* ---------- guarda-roupa do Bobby ---------- */
 const PRECO_CORACAO=50;
-let abaLoja='chapeu';
+let abaLoja='chapeu',lojaOrigem='perfil';
 const temItem=id=>(S.comprado||[]).indexOf(id)>=0;
 function comprar(slot,id){
   const it=PECAS[slot][id];
-  if(S.xp<it.p){lojaAviso('Faltam '+(it.p-S.xp)+' moedas para “'+it.n+'”. Cada acerto vale 10 moedas!');return;}
-  S.xp-=it.p;S.comprado=(S.comprado||[]).concat([id]);
+  if(S.moedas<it.p){lojaAviso('Faltam '+(it.p-S.moedas)+' moedas para “'+it.n+'”. Cada acerto vale 10 moedas!');return;}
+  S.moedas-=it.p;S.comprado=(S.comprado||[]).concat([id]);
   S.look=Object.assign({},S.look);S.look[slot]=id;
   salvar();somMoeda();somFim();telaLoja();
 }
 function comprarPers(id){
   const it=PERS[id];
-  if(S.xp<it.p){lojaAviso('Faltam '+(it.p-S.xp)+' moedas para trazer '+it.n+' para a turma.');return;}
-  S.xp-=it.p;S.comprado=(S.comprado||[]).concat([id]);
+  if(S.moedas<it.p){lojaAviso('Faltam '+(it.p-S.moedas)+' moedas para trazer '+it.n+' para a turma.');return;}
+  S.moedas-=it.p;S.comprado=(S.comprado||[]).concat([id]);
   S.look=Object.assign({},S.look);S.look.pers=id;S.look.pelo='';
   salvar();somMoeda();somFim();telaLoja();
 }
@@ -5829,7 +7371,7 @@ function telaLoja(){
      '<div class="previa-tx"><span class="rot">seu personagem agora</span>'+
      '<b>'+nomePers+'</b>'+
      '<span class="usando">'+(usando.length?'usando: '+usando.join(', '):'sem acessórios ainda')+'</span>'+
-     '<div class="saldo">'+IC.moeda+'<b>'+S.xp+'</b> moedas</div></div></div>';
+     '<div class="saldo">'+IC.moeda+'<b>'+S.moedas+'</b> moedas</div></div></div>';
 
   /* 2) abas: o que você quer trocar */
   h+='<span class="rot-abas">O que você quer trocar?</span>';
@@ -5847,7 +7389,7 @@ function telaLoja(){
       const it=PERS[id],tem=it.p===0||temItem(id),eq=(L.pers||'bobby')===id;
       const look=Object.assign({},L);look.pers=id;look.pelo='';
       const bt=tem?'<button class="btn '+(eq?'fantasma':'')+'" data-eq="pers|'+id+'"'+(eq?' disabled':'')+'>'+(eq?'em uso':'usar')+'</button>'
-                  :'<button class="btn'+(S.xp<it.p?' pobre':'')+'" data-buy="pers|'+id+'">'+IC.moeda+' '+it.p+'</button>';
+                  :'<button class="btn'+(S.moedas<it.p?' pobre':'')+'" data-buy="pers|'+id+'">'+IC.moeda+' '+it.p+'</button>';
       h+=cartao(look,it.n,it.tipo,bt,eq);
     });
     h+='</div><p class="dica-loja">Todo personagem usa as mesmas roupas e acessórios que você já comprou.</p></div>';
@@ -5861,16 +7403,16 @@ function telaLoja(){
       const it=PECAS[abaLoja][id],tem=temItem(id),eq=L[abaLoja]===id;
       const look=Object.assign({},L);look[abaLoja]=id;
       const bt=tem?'<button class="btn '+(eq?'fantasma':'')+'" data-eq="'+abaLoja+'|'+id+'">'+(eq?'tirar':'usar')+'</button>'
-                  :'<button class="btn'+(S.xp<it.p?' pobre':'')+'" data-buy="'+abaLoja+'|'+id+'">'+IC.moeda+' '+it.p+'</button>';
+                  :'<button class="btn'+(S.moedas<it.p?' pobre':'')+'" data-buy="'+abaLoja+'|'+id+'">'+IC.moeda+' '+it.p+'</button>';
       h+=cartao(look,it.n,'',bt,eq);
     });
-    h+='</div><p class="dica-loja">Cada resposta certa vale 10 moedas. Combo de 3 dá bônus, e cada dia seguido rende moedas extras.</p></div>';
+    h+='</div><p class="dica-loja">Cada resposta certa vale 10 moedas. Combo de 3 dá bônus, e o baú do dia traz moedas e peças novas.</p></div>';
   }
 
   $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-perfil" aria-label="Voltar">'+IC.volta+
     '</button><h2>Guarda-roupa</h2></div><div class="rev-corpo">'+h+'</div>';
   $('#perfil').classList.add('on');document.body.style.overflow='hidden';
-  $('#volta-perfil').addEventListener('click',telaPerfil);
+  $('#volta-perfil').addEventListener('click',()=>{if(lojaOrigem==='barra'){lojaOrigem='perfil';fecharPerfil2();}else telaPerfil();});
   $('#perfil').querySelectorAll('[data-aba]').forEach(b=>b.addEventListener('click',()=>{abaLoja=b.dataset.aba;telaLoja();}));
   $('#perfil').querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',()=>{
     const q=b.dataset.buy.split('|');
@@ -5891,10 +7433,10 @@ const CONQUISTAS=[
  {id:'c5',n:'Primeiro castelo',d:'Completar 1 mundo',ok:()=>mundosOk()>=1},
  {id:'c6',n:'Meia jornada',d:'Completar 5 mundos',ok:()=>mundosOk()>=5},
  {id:'c7',n:'Rei dos mundos',d:'Completar os 10 mundos',ok:()=>mundosOk()>=10},
- {id:'c8',n:'Três dias',d:'Ofensiva de 3 dias',ok:()=>(S.melhorOfensiva||0)>=3},
- {id:'c9',n:'Uma semana',d:'Ofensiva de 7 dias',ok:()=>(S.melhorOfensiva||0)>=7},
- {id:'c10',n:'Sem errar',d:'8 acertos seguidos',ok:()=>(S.combo||0)>=8},
- {id:'c11',n:'Cofre cheio',d:'Ganhar 500 moedas',ok:()=>(S.ganhoTotal||0)>=500},
+ {id:'c8',n:'Três dias',d:'Ofensiva de 3 dias',ok:()=>S.ofensiva.melhor>=3},
+ {id:'c9',n:'Uma semana',d:'Ofensiva de 7 dias',ok:()=>S.ofensiva.melhor>=7},
+ {id:'c10',n:'Sem errar',d:'8 acertos seguidos',ok:()=>(S.melhorCombo||0)>=8},
+ {id:'c11',n:'Cofre cheio',d:'Ganhar 500 moedas',ok:()=>(S.xp||0)>=500},
  {id:'c12',n:'Perfeccionista',d:'3 estrelas em 10 fases',ok:()=>Object.keys(S.feitas).filter(k=>estrelasDaFase(k)===3).length>=10}
 ];
 const daMateria=k=>MATERIA==='pt'?k.charAt(0)==='p':(MATERIA==='en'?k.charAt(0)==='e':/^[0-9]/.test(k));
@@ -5919,17 +7461,17 @@ function telaPerfil(){
   const desenhos=fases();
   const totalGeral=Object.keys(MATERIAS).reduce((a,k)=>a+MATERIAS[k].total(),0);
   const feitasGeral=Object.keys(MATERIAS).reduce((a,k)=>a+feitasDaMateria(k),0);
-  const niv=Math.min(20,Math.floor(feitasGeral/5)+1);
+  const niv=nivelDoExplorador();
   let h='<div class="perfil-in">';
   h+='<div class="perfil-cabeca"><div class="perfil-bobby">'+MASC('feliz')+'</div>'+
      '<h1>'+escapa(p.nome||'Jogador')+'</h1>'+
-     '<span class="titulo">Explorador nível '+niv+' · '+(S.nivel==='facil'?'6 a 8 anos':S.nivel==='medio'?'9 a 10 anos':'11+ anos')+'</span></div>';
+     '<span class="titulo">Explorador nível '+niv+' · '+ROTULO_FAIXA[S.faixa]+'</span></div>';
   h+='<div class="stats">'+
     stat(IC.bandeira,feitasGeral+'/'+totalGeral,'fases')+
     stat(IC.estrela,estrelasTotal(),'estrelas')+
-    stat(IC.moeda,S.xp,'moedas')+
-    stat(IC.fogo,S.ofensiva,'dias seguidos')+
-    stat(IC.coracao,(S.melhorOfensiva||0),'recorde de dias')+
+    stat(IC.moeda,S.moedas,'moedas')+
+    stat(IC.fogo,S.ofensiva.atual,'dias seguidos')+
+    stat(IC.coracao,S.ofensiva.melhor,'recorde de dias')+
     stat(IC.quadro,desenhos,'desenhos')+'</div>';
 
   /* progresso das três galáxias, sempre visível */
@@ -5972,7 +7514,7 @@ function telaPerfil(){
   $('#fechar-perfil').addEventListener('click',fecharPerfil2);
   $('#perfil').querySelectorAll('[data-gal]').forEach(b=>b.addEventListener('click',()=>{
     usarMateria(b.dataset.gal);telaPerfil();}));
-  $('#ir-loja').addEventListener('click',telaLoja);
+  $('#ir-loja').addEventListener('click',()=>{lojaOrigem='perfil';telaLoja();});
   $('#ir-voz').addEventListener('click',telaVoz);
   $('#ir-galeria').addEventListener('click',()=>{fecharPerfil2();abrirGaleria(false);});
   $('#ir-resp').addEventListener('click',()=>comSenha(telaResponsavel));
@@ -6000,7 +7542,7 @@ function telaResponsavel(){
   lista.sort((x,y)=>y.taxa-x.taxa||y.e-x.e);
   const dias=[];
   for(let i=6;i>=0;i--){
-    const d=new Date(Date.now()-i*864e5).toISOString().slice(0,10);
+    const d=somaDias(hoje(),-i);
     dias.push({d:d,n:(st.dias[d]||{}).fases||0,s:(st.dias[d]||{}).seg||0});
   }
   const maxD=Math.max(1,...dias.map(x=>x.n));
@@ -6015,27 +7557,28 @@ function telaResponsavel(){
     stat(IC.bandeira,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
     stat(IC.fogo,fmtTempo(st.tempo),'tempo total')+
     stat(IC.estrela,pc+'%','acerto geral')+'</div>';
+  h+=semanaHTML();
   h+='<h2 class="sec">Últimos 7 dias</h2><div class="semana">';
   dias.forEach(x=>{const dt=new Date(x.d+'T12:00:00');
     h+='<div class="dia"><span class="col" style="height:'+Math.max(6,Math.round(x.n/maxD*70))+'px"></span>'+
        '<b>'+x.n+'</b><em>'+['dom','seg','ter','qua','qui','sex','sáb'][dt.getDay()]+'</em></div>';});
   h+='</div>';
-  h+='<h2 class="sec">Onde ela mais erra</h2>';
-  if(!lista.length)h+='<p class="galeria-intro">Ainda não há erros registrados. Assim que ela jogar, os assuntos difíceis aparecem aqui.</p>';
+  h+='<h2 class="sec">Onde mais erra</h2>';
+  if(!lista.length)h+='<p class="galeria-intro">Ainda não há erros registrados. Assim que o jogo rolar, os assuntos difíceis aparecem aqui.</p>';
   else{h+='<div class="mundos-lista">';
     lista.slice(0,5).forEach(x=>{
       h+='<div class="linha-mundo" style="--ub:var(--coral)"><span class="mn">'+Math.round(x.taxa*100)+'%</span>'+
          '<div class="mtx"><b>'+x.t+'</b><span class="sub-l">Mundo '+x.m+' · '+x.e+' erro'+(x.e>1?'s':'')+' e '+x.a+' acerto'+(x.a===1?'':'s')+'</span></div></div>';
     });
     h+='</div>';}
-  h+='<h2 class="sec">O que fazer com ela hoje</h2><ol class="passos plano">';
-  if(lista.length)h+='<li>Refaça junto a fase <b>'+lista[0].t+'</b> e peça para ela explicar em voz alta o que está fazendo.</li>';
+  h+='<h2 class="sec">O que fazer hoje</h2><ol class="passos plano">';
+  if(lista.length)h+='<li>Refaça junto a fase <b>'+lista[0].t+'</b> e peça para explicar em voz alta o que está fazendo.</li>';
   if(p)h+='<li>A próxima fase nova é <b>'+UNITS[p[0]].lessons[p[1]].title+'</b> (Mundo '+UNITS[p[0]].n+').</li>';
-  h+='<li>Use a <b>Revisão do mundo</b> (medalha dourada no fim do mapa): ela devolve exatamente as perguntas erradas.</li>';
-  h+='<li>Imprima o desenho da fase e peça para ela contar a história enquanto pinta — repetir com as mãos fixa mais que repetir com os olhos.</li></ol>';
+  h+='<li>Use a <b>Revisão do mundo</b> (medalha dourada no fim do mapa): ela devolve exatamente as perguntas erradas. A <b>Revisão do dia</b> do mapa traz de volta, aos poucos, o que já foi errado.</li>';
+  h+='<li>Imprima o desenho da fase e peça para contar a história enquanto pinta — repetir com as mãos fixa mais que repetir com os olhos.</li></ol>';
   h+='<h2 class="sec">Como o app ensina</h2><p class="galeria-intro">Cada fase segue o caminho <b>concreto → desenho → número</b>: '+
      'primeiro a peça na tela (barrinhas, fatias, moedas), depois a figura, só então a conta escrita. '+
-     'É o método usado com material dourado na escola. Se ela travar num assunto, volte um degrau em vez de repetir a conta.</p>';
+     'É o método usado com material dourado na escola. Se travar num assunto, volte um degrau em vez de repetir a conta.</p>';
   h+='<h2 class="sec">Instalar na tela inicial</h2>';
   h+='<p class="galeria-intro">Dá para deixar o Bobby como um ícone no celular, que abre em tela cheia, '+
      'sem a barra do navegador. '+instrucaoInstalar()+'</p>';
@@ -6047,13 +7590,15 @@ function telaResponsavel(){
      '<li>Escolha o arquivo. O perfil aparece na tela “Quem vai jogar?” com todo o progresso.</li>'+
      '</ol>';
   h+='<p class="galeria-intro">Vale lembrar: o progresso <b>não sincroniza sozinho</b> entre aparelhos. '+
-     'Cada um guarda o seu. Se ela jogar nos dois, faça a cópia de novo para atualizar — '+
-     'a restauração cria um perfil novo, então apague o antigo depois para não ficarem dois iguais.</p>';
+     'Cada um guarda o seu. Se jogar nos dois, faça a cópia de novo para atualizar. '+
+     'Ao restaurar, o app pergunta se você quer substituir o perfil que já existe ou salvar como outro perfil.</p>';
   h+='<h2 class="sec">Dados e privacidade</h2>';
   h+='<p class="galeria-intro">Todo o progresso fica guardado <b>só neste aparelho</b>, no navegador. '+
      'Nada é enviado para a internet e não existe cadastro nem e-mail. '+
      'Cada jogador tem a própria caixinha de dados: moedas, fases, erros e desenhos de um não aparecem no outro. '+
      'Se você limpar os dados do navegador, o progresso vai junto — por isso vale guardar uma cópia.</p>';
+  h+=controlesHTML();
+  h+=medidorHTML();
   h+='<div id="resp-aviso"></div>';
   h+='<div class="perfil-bts">'+
      '<button class="btn laranja" id="bx-perfil">'+IC.baixar+' Salvar cópia deste perfil</button>'+
@@ -6065,6 +7610,7 @@ function telaResponsavel(){
   $('#perfil').classList.add('on');document.body.style.overflow='hidden';
   $('#volta-resp').addEventListener('click',telaPerfil);
   $('#volta-resp2').addEventListener('click',telaPerfil);
+  ligarControles(telaResponsavel);ligarSemana();ligarMedidor();
   $('#bx-perfil').addEventListener('click',baixarPerfil);
   $('#rs-perfil').addEventListener('click',restaurarPerfil);
   $('#sn-perfil').addEventListener('click',()=>pedirSenha(
@@ -6195,67 +7741,34 @@ const respLiberado=()=>!temSenha()||Date.now()<liberadoAte;
 function pedirSenha(titulo,texto,aoAcertar,criando){
   let erro='';
   const pinta=()=>{
-    $('#modal').innerHTML='<div class="modal-in senha-in">'+
+    $('#folha').innerHTML='<div class="folha-in senha-in">'+
       '<h2>'+titulo+'</h2><p class="perfis-sub">'+texto+'</p>'+
       '<input id="campo-pin" class="campo pin" type="password" inputmode="numeric" '+
       'autocomplete="off" maxlength="6" placeholder="••••" aria-label="Senha de 4 números">'+
       (erro?'<p class="erro-pin">'+erro+'</p>':'')+
       '<div class="modal-bts"><button class="link" id="pin-cancela">Cancelar</button>'+
       '<button class="btn" id="pin-ok">'+(criando?'Criar senha':'Entrar')+'</button></div></div>';
-    $('#modal').classList.add('on');
+    $('#folha').classList.add('on');
     const campo=$('#campo-pin');campo.focus();
     const tenta=()=>{
       const v=(campo.value||'').trim();
       if(criando){
         if(!/^[0-9]{4,6}$/.test(v)){erro='Use de 4 a 6 números.';pinta();return;}
         definirSenha(v);liberadoAte=Date.now()+15*60000;
-        $('#modal').classList.remove('on');aoAcertar();return;
+        $('#folha').classList.remove('on');aoAcertar();return;
       }
-      if(conferirSenha(v)){liberadoAte=Date.now()+15*60000;$('#modal').classList.remove('on');aoAcertar();}
+      if(conferirSenha(v)){liberadoAte=Date.now()+15*60000;$('#folha').classList.remove('on');aoAcertar();}
       else{erro='Senha errada. Tente de novo.';pinta();}
     };
     $('#pin-ok').addEventListener('click',tenta);
     campo.addEventListener('keydown',e=>{if(e.key==='Enter')tenta();});
-    $('#pin-cancela').addEventListener('click',()=>{$('#modal').classList.remove('on');});
+    $('#pin-cancela').addEventListener('click',()=>{$('#folha').classList.remove('on');});
   };
   pinta();
 }
 function comSenha(fn){
   if(respLiberado()){fn();return;}
   pedirSenha('Área do responsável','Digite a senha para ver os relatórios e mexer nos perfis.',fn,false);
-}
-/* backup: leva o perfil inteiro para outro aparelho */
-function baixarPerfil(){
-  const p=STORE.perfis[STORE.atual];
-  if(!p)return;
-  const pacote={app:'universo-de-bobby',versao:VERSAO_DADOS,quando:new Date().toISOString(),
-    perfil:{nome:p.nome,cor:p.cor,dados:estadoDe(p.dados)}};
-  const nome='bobby-'+String(p.nome||'perfil').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'.json';
-  entregar(nome,JSON.stringify(pacote,null,1));
-}
-function restaurarPerfil(){
-  const ent=document.createElement('input');
-  ent.type='file';ent.accept='application/json,.json';
-  ent.addEventListener('change',()=>{
-    const f=ent.files&&ent.files[0];if(!f)return;
-    const fr=new FileReader();
-    fr.onload=()=>{
-      let pac=null;
-      try{pac=JSON.parse(fr.result);}catch(e){}
-      if(!pac||pac.app!=='universo-de-bobby'||!pac.perfil){
-        alertaResp('Esse arquivo não é um backup do Universo de Bobby.');return;
-      }
-      const d=estadoDe(pac.perfil.dados);
-      const nome=String(pac.perfil.nome||'Jogador').slice(0,18);
-      STORE.perfis.push({id:'p'+Date.now().toString(36),nome:nome,
-        cor:CORES.indexOf(pac.perfil.cor)>=0?pac.perfil.cor:CORES[STORE.perfis.length%CORES.length],
-        criado:Date.now(),dados:d});
-      salvarStore();
-      alertaResp('Perfil <b>'+nome+'</b> restaurado. Ele aparece na tela "Quem vai jogar?".');
-    };
-    fr.readAsText(f);
-  });
-  ent.click();
 }
 function alertaResp(msg){
   const cx=$('#resp-aviso');
@@ -6478,11 +7991,407 @@ async function entregar(nome,dados){
       return;
     }
   }
-  const url=URL.createObjectURL(typeof dados==='string'?new Blob([dados],{type:'image/svg+xml'}):dados);
+  const tipo=/\.json$/i.test(nome)?'application/json':(/\.ics$/i.test(nome)?'text/calendar':'image/svg+xml');
+  const url=URL.createObjectURL(typeof dados==='string'?new Blob([dados],{type:tipo}):dados);
   const a=document.createElement('a');a.href=url;a.download=nome;document.body.appendChild(a);a.click();
   setTimeout(()=>{a.remove();URL.revokeObjectURL(url);},2000);
 }
 
+/* ---------- backup: exportar e importar um perfil ----------
+   docs/FASE-2-especificacao.md, seção 8.4. Formato v4:
+   { app, versao:4, quando, perfil:{id,nome,cor,dados}, soma:'fnv1a-8hex' }
+   A 'soma' detecta arquivo cortado ou editado à mão. O backup NÃO leva eventos de medição nem o 'pid'. */
+function somaDoPerfil(perfil){return fnv8(JSON.stringify(perfil));}
+function montarPacote(p){
+  const perfil={id:p.id,nome:p.nome,cor:p.cor,dados:estadoDe(p.dados)};
+  return {app:'universo-de-bobby',versao:VERSAO_DADOS,quando:new Date().toISOString(),perfil:perfil,soma:somaDoPerfil(perfil)};
+}
+/* Lê o texto de um arquivo de backup. Devolve {ok:false,erro} ou
+   {ok:true,versao,id,nome,cor,dados,somaConfere}. Aceita as versões 3 e 4 (a 3 passa pela migração). */
+function lerPacote(texto){
+  let pac=null;
+  try{pac=JSON.parse(texto);}catch(e){}
+  if(!pac||pac.app!=='universo-de-bobby'||!pac.perfil||typeof pac.perfil!=='object')
+    return {ok:false,erro:'Esse arquivo não é um backup do Universo de Bobby.'};
+  const v=+pac.versao;
+  if(v!==3&&v!==4)return {ok:false,erro:v>4?'Esse backup vem de uma versão mais nova do app. Atualize o app e tente de novo.':'Não reconheci a versão desse backup.'};
+  const pf=pac.perfil;
+  const somaConfere=v===4?(String(pac.soma||'')===somaDoPerfil(pf)):true;
+  const nome=String(pf.nome||'Jogador').slice(0,18);
+  return {ok:true,versao:v,id:v===4&&pf.id?String(pf.id).slice(0,40):'',nome:nome,
+    cor:CORES.indexOf(pf.cor)>=0?pf.cor:null,dados:estadoDe(pf.dados),somaConfere:somaConfere};
+}
+/* coloca o perfil lido no armazenamento. modo: 'substituir' (troca o de mesmo id) ou 'novo' (cria outro) */
+function aplicarPacote(lido,modo){
+  const idx=lido.id?STORE.perfis.findIndex(p=>p.id===lido.id):-1;
+  const cor=lido.cor||CORES[STORE.perfis.length%CORES.length];
+  if(modo==='substituir'&&idx>=0){
+    STORE.perfis[idx].nome=lido.nome;STORE.perfis[idx].cor=cor;STORE.perfis[idx].dados=lido.dados;
+    if(STORE.atual===idx){S=estadoDe(lido.dados);S.nome=lido.nome;}
+    salvarStore();return idx;
+  }
+  STORE.perfis.push({id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),pid:sorteioId(12),
+    nome:lido.nome,cor:cor,criado:Date.now(),dados:lido.dados});
+  salvarStore();return STORE.perfis.length-1;
+}
+function baixarPerfil(){
+  const p=STORE.perfis[STORE.atual];
+  if(!p)return;
+  salvar();
+  const pacote=montarPacote(p);
+  const nome='bobby-'+String(p.nome||'perfil').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'.json';
+  entregar(nome,JSON.stringify(pacote,null,1));
+}
+function restaurarPerfil(){
+  const ent=document.createElement('input');
+  ent.type='file';ent.accept='application/json,.json';
+  ent.addEventListener('change',()=>{
+    const f=ent.files&&ent.files[0];if(!f)return;
+    const fr=new FileReader();
+    fr.onload=()=>{
+      const lido=lerPacote(String(fr.result));
+      if(!lido.ok){alertaResp(escapa(lido.erro));return;}
+      confirmarRestauracao(lido);
+    };
+    fr.readAsText(f);
+  });
+  ent.click();
+}
+/* Nunca silencioso: soma errada pede confirmação; id já existente pergunta se substitui ou salva como outro perfil. */
+function confirmarRestauracao(lido){
+  const existe=lido.id&&STORE.perfis.some(p=>p.id===lido.id);
+  const fim=(modo)=>{
+    fecharFolha();
+    aplicarPacote(lido,modo);
+    alertaResp('Perfil <b>'+escapa(lido.nome)+'</b> '+(modo==='substituir'?'substituído':'restaurado')+'. Ele aparece na tela "Quem vai jogar?".');
+  };
+  const passoExiste=()=>{
+    if(!existe){fim('novo');return;}
+    abrirFolha('<div class="folha-in"><h2>Esse perfil já existe aqui</h2>'+
+      '<p>Já há um jogador com o mesmo código de <b>'+escapa(lido.nome)+'</b>. O que você prefere?</p>'+
+      '<div class="folha-bts"><button class="btn" id="rs-sub">Substituir o perfil existente</button>'+
+      '<button class="btn fantasma" id="rs-novo">Salvar como outro perfil</button>'+
+      '<button class="btn fantasma" id="rs-cancela">Cancelar</button></div></div>');
+    $('#rs-sub').addEventListener('click',()=>fim('substituir'));
+    $('#rs-novo').addEventListener('click',()=>fim('novo'));
+    $('#rs-cancela').addEventListener('click',fecharFolha);
+  };
+  if(!lido.somaConfere){
+    abrirFolha('<div class="folha-in"><h2>Esse arquivo parece diferente do original</h2>'+
+      '<p>A conferência do backup não bateu. Ele pode ter sido cortado ou editado. Quer importar mesmo assim?</p>'+
+      '<div class="folha-bts"><button class="btn fantasma" id="rs-mesmo">Importar mesmo assim</button>'+
+      '<button class="btn" id="rs-cancela">Cancelar</button></div></div>');
+    $('#rs-mesmo').addEventListener('click',passoExiste);
+    $('#rs-cancela').addEventListener('click',fecharFolha);
+    return;
+  }
+  passoExiste();
+}
+/* ---------- telas do ciclo diário (versão funcional e sóbria; o acabamento visual vem com a arte) ----------
+   Rotina de hoje, bilhete do Bobby, baú, "Por hoje chega", congeladores, barra de baixo e controles do responsável.
+   Texto: português do Brasil, "você", frases curtas, sem travessão. O Bobby só incentiva: nunca culpa, cobra ou fica triste.
+   Cores: só tokens do DESIGN.md (var(--cor-*)); nada de hex aqui. */
+Object.assign(IC,{
+ gelo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5"/></svg>',
+ bau:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v2H3v-2Zm0 3h7v1.5h4V13h7v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Z"/></svg>',
+ casa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>',
+ pessoa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.6-9 5.6V22h18v-2.4c0-3-4-5.6-9-5.6Z"/></svg>',
+ bobby:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><rect x="3.5" y="5.5" width="17" height="15" rx="7.5"/><circle cx="9" cy="12.5" r="1.4" fill="var(--cor-superficie)"/><circle cx="15" cy="12.5" r="1.4" fill="var(--cor-superficie)"/></svg>'
+});
+
+/* ---------- folha (diálogo) ---------- */
+function abrirFolha(html){
+  const f=$('#folha');
+  f.innerHTML=html;f.classList.add('on');
+  const b=f.querySelector('button');if(b&&b.focus)try{b.focus();}catch(e){}
+}
+function fecharFolha(){$('#folha').classList.remove('on');$('#folha').innerHTML='';}
+
+/* ---------- topo: ofensiva e moedas ---------- */
+function textoOfensiva(){
+  const o=S.ofensiva;
+  if(o.descansando)return 'Ofensiva descansando';
+  return 'Ofensiva: '+o.atual+(o.atual===1?' dia':' dias');
+}
+
+/* ---------- Rotina de hoje (cartão do mapa) ---------- */
+function rotinaHTML(){
+  garantirDia();
+  const d=S.diario,meta=perguntasMeta();
+  const pct=Math.min(100,Math.round(d.perguntas/meta*100));
+  let h='<section class="rotina" aria-label="Rotina de hoje"><div class="rotina-topo"><h2>Rotina de hoje</h2>';
+  if(S.config.ofensivaLigada){
+    h+='<span class="rotina-of'+(S.ofensiva.descansando?' descansa':'')+'">'+IC.fogo+textoOfensiva()+'</span>';
+  }
+  h+='</div>';
+  h+='<div class="meta-linha"><div class="meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="'+meta+'" aria-valuenow="'+Math.min(meta,d.perguntas)+
+     '" aria-label="Meta do dia"><i style="width:'+pct+'%"></i></div><span>'+Math.min(d.perguntas,meta)+' de '+meta+' perguntas</span></div>';
+  h+='<p class="rotina-vivo">'+(d.blocos>0?'Seu dia está vivo. Você já jogou hoje.':'Jogue uma fase e o dia fica vivo.')+'</p>';
+  if(S.config.missoesLigadas&&d.missoes.length){
+    h+='<ul class="missoes">';
+    d.missoes.forEach(m=>{
+      h+='<li class="'+(m.ok?'ok':'')+'"><span class="mk">'+(m.ok?IC.certo:'')+'</span><span class="mt">'+textoDaMissao(m)+'</span><small>'+m.prog+' de '+m.alvo+'</small></li>';
+    });
+    h+='</ul>';
+    if(d.estrela)h+='<p class="rotina-estrela">'+IC.estrela+' Estrela do dia conquistada!</p>';
+  }
+  h+='<div class="rotina-acoes">';
+  if(bauPronto())h+='<button class="btn-acao" id="rt-bau">'+IC.bau+' Abrir o baú do dia</button>';
+  if(d.kit===1)h+='<button class="btn-acao" id="rt-kit">Pegar o Kit de volta</button>';
+  const rev=revisaoDoDiaPronta();
+  if(rev>0&&revisaoRestanteDoDia()>0)h+='<button class="btn-sec" id="rt-rev">Revisão do dia · '+rev+' pergunta'+(rev>1?'s':'')+'</button>';
+  h+='</div>';
+  h+='<p class="rotina-rodape">';
+  if(S.config.ofensivaLigada)h+='<span class="gelo-chip" title="Congeladores guardam sua sequência">'+IC.gelo+'Congeladores: '+S.ofensiva.congeladores+'</span> ';
+  h+=d.bau.aberto?'<span>Amanhã no baú: '+categoriaDoBau(Math.max(1,S.ofensiva.atual)+1)+'</span></p></section>'
+    :'<span>No baú de hoje: '+categoriaDoBau(Math.max(1,S.ofensiva.atual))+'</span></p></section>';
+  return h;
+}
+function ligarRotina(){
+  const bau=$('#rt-bau');if(bau)bau.addEventListener('click',mostrarBau);
+  const kit=$('#rt-kit');if(kit)kit.addEventListener('click',()=>{
+    const itens=pegarKit();renderTrilha();
+    if(itens)abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('feliz')+'</div><h2>Seu Kit de volta</h2><ul class="folha-lista">'+
+      itens.map(i=>'<li>'+escapa(i.n)+'</li>').join('')+'</ul><div class="folha-bts"><button class="btn-acao" id="fl-ok">Continuar</button></div></div>');
+    const ok=$('#fl-ok');if(ok)ok.addEventListener('click',fecharFolha);
+  });
+  const rev=$('#rt-rev');if(rev)rev.addEventListener('click',abrirRevisaoDia);
+}
+
+/* ---------- bilhete do Bobby (uma vez por dia) ---------- */
+function mostrarEntradaDoDia(){
+  if(STORE.atual<0)return;
+  if(!STORE.avisoVisto){mostrarAvisoMigracao(mostrarBilhete);return;}
+  mostrarBilhete();
+}
+function mostrarAvisoMigracao(depois){
+  STORE.avisoVisto=true;salvarStore();
+  abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('oi')+'</div><h2>O Bobby ganhou novidades</h2>'+
+    '<p>Seu progresso está todo aqui. Você também ganhou um congelador para guardar sua sequência.</p>'+
+    '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Vamos lá</button></div></div>');
+  $('#fl-ok').addEventListener('click',()=>{fecharFolha();if(depois)depois();});
+}
+function mostrarBilhete(){
+  const b=bilheteDeHoje();
+  if(!b)return;
+  abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('oi')+'</div><h2>Um bilhete do Bobby</h2>'+
+    '<p class="bilhete-texto">'+b.texto+'</p>'+
+    '<ul class="folha-lista"><li>No baú de amanhã: '+b.presente+'</li><li>'+b.pronto+'</li></ul>'+
+    '<div class="folha-bts"><button class="btn-sec" id="fl-ouvir" aria-label="Ouvir o bilhete">'+IC.falar+' Ouvir</button>'+
+    '<button class="btn-acao" id="fl-ok">Vamos jogar</button></div></div>');
+  $('#fl-ok').addEventListener('click',()=>{marcarBilheteVisto();fecharFolha();});
+  $('#fl-ouvir').addEventListener('click',()=>falarPedido(b.texto));
+  if(ehF78())falarDepois2(500,b.texto);
+}
+function falarDepois2(ms,t){audioAgendar(()=>{if($('#folha').classList.contains('on'))falar(t);},ms);}
+
+/* ---------- baú do dia (sem sorteio) ---------- */
+function mostrarBau(){
+  garantirDia();
+  if(S.diario.bau.aberto){mostrarBauAberto();return;}
+  if(!bauPronto())return;
+  const dia=Math.max(1,S.ofensiva.atual);
+  abrirFolha('<div class="folha-in"><div class="bau-fig" aria-hidden="true">'+IC.bau+'</div><h2>Baú do dia</h2>'+
+    '<p>Você completou a meta de hoje. Dentro do baú tem '+categoriaDoBau(dia)+'.</p>'+
+    '<div class="folha-bts"><button class="btn-acao" id="fl-abrir">Abrir o baú</button></div></div>');
+  $('#fl-abrir').addEventListener('click',()=>{abrirBau();salvar();mostrarBauAberto();});
+}
+function mostrarBauAberto(){
+  const b=S.diario.bau;
+  abrirFolha('<div class="folha-in"><div class="bau-fig aberto" aria-hidden="true">'+IC.bau+'</div><h2>Você ganhou</h2>'+
+    '<ul class="folha-lista premios">'+b.itens.map(i=>'<li>'+escapa(i.n)+'</li>').join('')+'</ul>'+
+    '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Continuar</button></div></div>');
+  $('#fl-ok').addEventListener('click',()=>{
+    fecharFolha();pintarTopo();
+    if(paradaPendente())mostrarParada(false);else renderTrilha();
+  });
+}
+
+/* ---------- "Por hoje chega!" ---------- */
+function mostrarParada(limite){
+  garantirDia();
+  if(limite){
+    abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('feliz')+'</div><h2>Por hoje chega!</h2>'+
+      '<p>Você fez um ótimo trabalho. Amanhã tem mais.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
+      '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Até amanhã</button>'+
+      '<button class="link-resp" id="fl-resp">Sou o responsável</button></div></div>');
+    $('#fl-ok').addEventListener('click',()=>{fecharFolha();renderTrilha();});
+    $('#fl-resp').addEventListener('click',()=>{
+      fecharFolha();
+      comSenha(()=>{S.diario.liberados=(S.diario.liberados||0)+1;salvar();renderTrilha();});
+    });
+    return;
+  }
+  abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('feliz','pula')+'</div><h2>Por hoje chega!</h2>'+
+    '<p>Você fez um ótimo trabalho.</p><p>Amanhã tem mais. O baú de amanhã já está guardado.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
+    '<div class="folha-bts par"><button class="btn-acao" id="fl-fim">Terminar por hoje</button>'+
+    '<button class="btn-acao" id="fl-segue">Continuar explorando</button></div></div>');
+  if(ehF78())falarDepois2(400,'Por hoje chega! Você fez um ótimo trabalho.');
+  $('#fl-fim').addEventListener('click',()=>{
+    registrarParada('terminar');
+    abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('feliz')+'</div><h2>Até amanhã!</h2>'+
+      '<p>Pode fechar o app. O Bobby guarda tudo para você.</p>'+
+      '<div class="folha-bts"><button class="btn-sec" id="fl-mapa">Ver o mapa</button></div></div>');
+    $('#fl-mapa').addEventListener('click',()=>{fecharFolha();renderTrilha();});
+  });
+  $('#fl-segue').addEventListener('click',()=>{registrarParada('continuar');fecharFolha();renderTrilha();});
+}
+/* chamado quando a lição fecha: a parada aparece uma vez por dia, depois que o baú foi aberto */
+function depoisDeFecharLicao(){
+  garantirDia();
+  if(paradaPendente())mostrarParada(false);
+}
+
+/* ---------- fim de fase: ofensiva, congelador e baú ---------- */
+function blocoFimHTML(bloco){
+  let h='';
+  if(bloco&&bloco.contou){
+    const m=bloco.mudou||{};
+    if(S.config.ofensivaLigada){
+      let t='';
+      if(m.recuperou)t='Sua sequência foi recuperada: '+S.ofensiva.atual+' dias.';
+      else if(m.voltouPelaMetade)t='Sua sequência voltou com tudo: '+S.ofensiva.atual+(S.ofensiva.atual===1?' dia':' dias')+'. O seu recorde continua guardado.';
+      else if(m.primeiroDoDia)t=textoOfensiva()+'.';
+      if(m.ganhouCongelador)t+=' Você ganhou um congelador!';
+      if(t)h+='<p class="fim-of">'+IC.fogo+' '+t.trim()+'</p>';
+    }
+    if(bauPronto())h+='<div class="fim-bau"><b>O baú do dia está pronto!</b><button class="btn-acao" id="fim-abrir-bau">'+IC.bau+' Abrir o baú</button></div>';
+    else if(S.diario.metaOk&&!S.diario.bau.aberto)h+='';
+    if(S.diario.estrela&&!S.diario._estrelaDita){S.diario._estrelaDita=true;h+='<p class="fim-of">'+IC.estrela+' Estrela do dia conquistada!</p>';}
+  }
+  return h;
+}
+function ligarBlocoFim(){
+  const b=$('#fim-abrir-bau');if(b)b.addEventListener('click',mostrarBau);
+}
+
+/* ---------- barra de baixo ---------- */
+function ligarBarra(){
+  const mapa=$('#bb-mapa'),pers=$('#bb-pers'),gal=$('#bb-gal'),perfil=$('#bb-perfil');
+  if(mapa)mapa.addEventListener('click',()=>{
+    if($('#perfil').classList.contains('on'))fecharPerfil2();
+    if($('#galeria').classList.contains('on'))fecharGaleria();
+    window.scrollTo&&window.scrollTo(0,0);
+  });
+  /* Meu personagem: 1 toque até o guarda-roupa */
+  if(pers)pers.addEventListener('click',()=>{lojaOrigem='barra';telaLoja();});
+  if(gal)gal.addEventListener('click',()=>abrirGaleria(false));
+  if(perfil)perfil.addEventListener('click',telaPerfil);
+}
+
+/* ---------- abertura e fechamento da sessão ---------- */
+let SESSAO={ini:Date.now(),blocos0:0};
+function iniciarCiclo(){
+  ligarBarra();
+  let standalone=0;
+  try{standalone=((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)?1:0;}catch(e){}
+  registrarEvento('app_aberto',{instalado:standalone});
+  SESSAO.blocos0=(S&&S.diario)?S.diario.blocos:0;
+  const sai=()=>{
+    try{
+      if(STORE.atual<0)return;
+      gravarEspera();salvar();
+      registrarEvento('sessao_fim',{seg:Math.round((Date.now()-SESSAO.ini)/1000),blocos:Math.max(0,S.diario.blocos-SESSAO.blocos0)});
+    }catch(e){}
+  };
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)sai();
+    else{SESSAO.ini=Date.now();SESSAO.blocos0=S.diario.blocos;if(STORE.atual>=0){garantirDia();salvar();}}
+  });
+  window.addEventListener('pagehide',sai);
+}
+
+/* ---------- controles do responsável (ficam atrás da senha, na tela do responsável) ---------- */
+function controlesHTML(){
+  const c=S.config,hj=hoje();
+  const opt=(vals,atual,campo,rot)=>vals.map(v=>'<button class="chip-ctl'+(String(v)===String(atual)?' on':'')+'" data-cfg="'+campo+'" data-v="'+v+'">'+(rot?rot(v):v)+'</button>').join('');
+  const pausada=c.pausaAte&&c.pausaAte>=hj;
+  const dsem=['dom','seg','ter','qua','qui','sex','sáb'];
+  let h='<h2 class="sec">Controles do dia a dia</h2><div class="ctl">';
+  h+='<div class="ctl-linha"><b>Meta do dia</b><div>'+opt([5,10,15],c.metaMin,'metaMin',v=>v+' min')+'</div><small>Contada em perguntas: cerca de '+perguntasMeta()+' hoje.</small></div>';
+  h+='<div class="ctl-linha"><b>Revisão por dia</b><div>'+opt([5,8,12],c.revisaoPorDia,'revisaoPorDia',v=>v+' perguntas')+'</div><small>No máximo 10 revisões por dia.</small></div>';
+  h+='<div class="ctl-linha"><b>Limite de blocos por dia</b><div>'+opt(['','2','3','4','6','8'],c.limiteBlocosDia||'','limiteBlocosDia',v=>v?v:'Sem limite')+'</div><small>Ao chegar no limite, só o responsável libera mais um bloco.</small></div>';
+  h+='<div class="ctl-linha"><b>Dias livres da ofensiva</b><div>'+dsem.map((n,i)=>'<button class="chip-ctl'+(c.diasLivres.indexOf(i)>=0?' on':'')+'" data-dia="'+i+'">'+n+'</button>').join('')+'</div><small>Nesses dias a ofensiva não perde nada.</small></div>';
+  h+='<div class="ctl-linha"><b>Pausar a ofensiva</b><div>'+
+     '<button class="chip-ctl'+(!pausada?' on':'')+'" data-pausa="0">Sem pausa</button>'+
+     '<button class="chip-ctl" data-pausa="3">3 dias</button><button class="chip-ctl" data-pausa="7">7 dias</button></div>'+
+     '<small>'+(pausada?'Pausada até '+c.pausaAte.split('-').reverse().join('/')+'.':'Máximo de 7 dias.')+'</small></div>';
+  h+='<div class="ctl-linha"><b>Ofensiva</b><div>'+opt([1,0],c.ofensivaLigada?1:0,'ofensivaLigada',v=>v?'Ligada':'Desligada')+'</div></div>';
+  h+='<div class="ctl-linha"><b>Missões do dia</b><div>'+opt([1,0],c.missoesLigadas?1:0,'missoesLigadas',v=>v?'Ligadas':'Desligadas')+'</div></div>';
+  return h+'</div>';
+}
+function ligarControles(refaz){
+  const c=S.config;
+  const muda=(chave)=>{salvar();registrarEvento('config_mudou',{chave:chave});refaz();};
+  $('#perfil').querySelectorAll('[data-cfg]').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.cfg,v=b.dataset.v;
+    if(k==='metaMin'||k==='revisaoPorDia')c[k]=+v;
+    else if(k==='limiteBlocosDia')c[k]=v?+v:null;
+    else c[k]=v==='1';
+    if(k==='missoesLigadas'){S.diario.missoes=c.missoesLigadas?gerarMissoes(hoje()):[];}
+    muda(k);
+  }));
+  $('#perfil').querySelectorAll('[data-dia]').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.dia,p=c.diasLivres.indexOf(i);
+    if(p>=0)c.diasLivres.splice(p,1);else c.diasLivres.push(i);
+    muda('diasLivres');
+  }));
+  $('#perfil').querySelectorAll('[data-pausa]').forEach(b=>b.addEventListener('click',()=>{
+    const n=+b.dataset.pausa;c.pausaAte=n?somaDias(hoje(),n):'';muda('pausaAte');
+  }));
+}
+
+/* ---------- cartão da semana e medidor ---------- */
+function semanaHTML(){
+  const r=resumoSemana(S.stats,hoje());
+  let h='<h2 class="sec">Esta semana</h2><div class="stats">'+
+    stat(IC.fogo,r.dias+' de 7','dias com atividade')+
+    stat(IC.estrela,r.min+' min','de atividade')+
+    stat(IC.bandeira,r.perguntas,'perguntas feitas')+'</div>';
+  h+='<p class="galeria-intro">'+r.revisoes+' revisão'+(r.revisoes===1?'':'ões')+' feita'+(r.revisoes===1?'':'s')+
+     (r.pct!==null?' e '+r.pct+'% de acerto nas perguntas da semana.':'.')+'</p>';
+  h+='<div class="perfil-bts"><button class="btn fantasma" id="copia-resumo">Copiar o resumo da semana</button></div><div id="resumo-aviso"></div>';
+  return h;
+}
+function textoDoResumo(){
+  const r=resumoSemana(S.stats,hoje());
+  const p=proxima();
+  return 'Resumo da semana de '+(perfilAtual().nome||'seu jogador')+' no Universo de Bobby: '+r.dias+' de 7 dias com atividade, '+r.min+
+    ' minutos, '+r.perguntas+' perguntas'+(r.pct!==null?', '+r.pct+'% de acerto':'')+'. '+r.revisoes+' revisões feitas.'+
+    (p?' Próxima fase: '+UNITS[p[0]].lessons[p[1]].title+'.':'');
+}
+function ligarSemana(){
+  const b=$('#copia-resumo');if(!b)return;
+  b.addEventListener('click',()=>{
+    const t=textoDoResumo();
+    registrarEvento('relatorio_visto',{semana:semanaIso(hoje())});
+    const fim=ok=>{$('#resumo-aviso').innerHTML='<div class="aviso-ok">'+(ok?'Resumo copiado. Cole onde quiser.':'Não consegui copiar. Selecione o texto: '+escapa(t))+'</div>';};
+    try{
+      if(navigator.share){navigator.share({text:t}).catch(()=>{});return;}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>fim(true),()=>fim(false));return;}
+    }catch(e){}
+    fim(false);
+  });
+}
+function medidorHTML(){
+  const pid=perfilAtual().pid,ev=eventosDoPerfil(pid),r=retencao(ev,hoje());
+  const f=v=>v===null?'sem dados':Math.round(v*100)+'%';
+  const meta=metaPorDiaAtivo(ev);
+  let h='<h2 class="sec">Medidor do produto</h2><p class="galeria-intro">Para quem cuida do app. Números só deste jogador, calculados no aparelho. '+
+    'Com poucos dias de uso eles ainda não dizem nada: servem para comparar depois, com várias famílias.</p>';
+  h+='<div class="mundos-lista medidor">'+
+    '<div class="linha-mundo"><div class="mtx"><b>Voltou no dia 1</b><span class="sub-l">exato: '+f(r.D1)+' · janela: '+f(r.D1_janela)+' · base '+r.n.D1+'</span></div></div>'+
+    '<div class="linha-mundo"><div class="mtx"><b>Voltou no dia 7</b><span class="sub-l">exato: '+f(r.D7)+' · janela: '+f(r.D7_janela)+' · base '+r.n.D7+'</span></div></div>'+
+    '<div class="linha-mundo"><div class="mtx"><b>Voltou no dia 30</b><span class="sub-l">exato: '+f(r.D30)+' · janela: '+f(r.D30_janela)+' · base '+r.n.D30+'</span></div></div>'+
+    '<div class="linha-mundo"><div class="mtx"><b>Volta no dia seguinte</b><span class="sub-l">'+f(r.retornoDiaSeguinte)+' · base '+r.n.curr+'</span></div></div>'+
+    '<div class="linha-mundo"><div class="mtx"><b>Meta cheia por dia ativo</b><span class="sub-l">'+f(meta)+'</span></div></div></div>';
+  h+='<div class="perfil-bts"><button class="btn fantasma" id="exp-metricas">Exportar métricas anônimas</button></div>';
+  return h;
+}
+function ligarMedidor(){
+  const b=$('#exp-metricas');if(!b)return;
+  b.addEventListener('click',()=>entregar('bobby-metricas.json',JSON.stringify(pacoteDeMetricas(perfilAtual().pid),null,1)));
+}
 /* ---------- confete ---------- */
 function confete(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -6503,7 +8412,7 @@ function confete(){
 }
 
 /* ---------- nome e cor ---------- */
-let corEscolhida=CORES[0],criando=false,nivelEscolhido='facil';
+let corEscolhida=CORES[0],criando=false,faixaEscolhida='f78';
 function pintarCores(){
   $('#cores').innerHTML=CORES.map(c=>'<button class="cor'+(c===corEscolhida?' on':'')+
     '" data-c="'+c+'" style="background:'+c+'" aria-label="Cor"></button>').join('');
@@ -6519,17 +8428,17 @@ function pedirNome(nova){
   $('#masc-modal').style.setProperty('--m1',corEscolhida);
   $('#tt-nome').textContent=nova?'Novo jogador':'Trocar o nome';
   $('#txt-nome').textContent=nova?'Escolha um nome e a cor do seu Bobby.':'Você pode mudar seu nome e sua cor.';
-  pintarCores();nivelEscolhido=nova?'facil':(S.nivel||'facil');pintarNiveis();
+  pintarCores();faixaEscolhida=nova?'f78':(S.faixa||'f78');pintarNiveis();
   $('#modal').classList.add('on');
   const c=$('#campo-nome');c.value=criando?'':(perfilAtual().nome||'');
   setTimeout(()=>c.focus(),80);
 }
 function pintarNiveis(){
-  const ns=[['facil','6 a 8 anos','tudo lido em voz alta e menos opções'],
-            ['medio','9 a 10 anos','ritmo normal'],
-            ['forte','11 anos ou mais','sem ajudas extras']];
-  $('#niveis').innerHTML=ns.map(n=>'<button class="nv'+(n[0]===nivelEscolhido?' on':'')+'" data-n="'+n[0]+'"><b>'+n[1]+'</b><span>'+n[2]+'</span></button>').join('');
-  $('#niveis').querySelectorAll('.nv').forEach(b=>b.addEventListener('click',()=>{nivelEscolhido=b.dataset.n;pintarNiveis();}));
+  const ns=[['f78','7 a 8 anos','tudo lido em voz alta e menos opções'],
+            ['f910','9 a 10 anos','ritmo normal'],
+            ['f1112','11 a 12 anos','sem ajudas extras']];
+  $('#niveis').innerHTML=ns.map(n=>'<button class="nv'+(n[0]===faixaEscolhida?' on':'')+'" data-n="'+n[0]+'"><b>'+n[1]+'</b><span>'+n[2]+'</span></button>').join('');
+  $('#niveis').querySelectorAll('.nv').forEach(b=>b.addEventListener('click',()=>{faixaEscolhida=b.dataset.n;pintarNiveis();}));
 }
 function salvarNome(){
   const n=($('#campo-nome').value.trim()||'Jogador '+(STORE.perfis.length+1)).slice(0,18);
@@ -6537,7 +8446,9 @@ function salvarNome(){
   if(criando){novoPerfil(n,corEscolhida);return;}
   STORE.perfis[STORE.atual].nome=n;
   STORE.perfis[STORE.atual].cor=corEscolhida;
-  S.nome=n;S.nivel=nivelEscolhido;salvar();renderTrilha();
+  const mudouFaixa=S.faixa!==faixaEscolhida;
+  S.nome=n;S.faixa=faixaEscolhida;salvar();renderTrilha();
+  if(mudouFaixa)registrarEvento('config_mudou',{chave:'faixa'});
 }
 
 /* ---------- ligações ---------- */
@@ -6565,8 +8476,6 @@ $('#som').addEventListener('click',()=>{S.som=!S.som;salvar();pintarTopo();if(S.
 $('#salvar-nome').addEventListener('click',salvarNome);
 $('#pular-nome').addEventListener('click',()=>{$('#modal').classList.remove('on');if(criando&&STORE.atual<0)telaPerfis();});
 $('#campo-nome').addEventListener('keydown',e=>{if(e.key==='Enter')salvarNome();});
-$('#trocar-nome').addEventListener('click',telaPerfil);
-$('#galeria-bt').addEventListener('click',()=>abrirGaleria(false));
 $('#troca-materia').addEventListener('click',telaMaterias);
 $('#fechar-gal').addEventListener('click',fecharGaleria);
 document.addEventListener('keydown',e=>{
@@ -6589,8 +8498,9 @@ lerStore();
 CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();
 if(STORE.perfis.length===0){telaPerfis();setTimeout(()=>pedirNome(true),300);}
 else if(STORE.perfis.length===1&&STORE.atual>=0){usarPerfil(STORE.atual);}
-else{telaPerfis();if(STORE.atual>=0){S=estadoDe(STORE.perfis[STORE.atual].dados);}
+else{telaPerfis();if(STORE.atual>=0){S=estadoDe(STORE.perfis[STORE.atual].dados);S.nome=STORE.perfis[STORE.atual].nome;garantirDia();}
   CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();renderTrilha();}
+iniciarCiclo();
 
 
 /* ---------- céu de galáxia: enfeites grandes (as estrelas são CSS) ---------- */

@@ -102,7 +102,8 @@ async function main() {
       await cdp('Page.navigate', { url: base + '/index.html' });
       await dorme(1200);
       /* limpa o armazenamento do app para sempre comecar com jogador novo */
-      await js("localStorage.clear();location.reload();0");
+      /* STORE.atual=-1: o app grava o estado ao sair da pagina (pagehide); sem isso ele regravaria o jogador antigo logo apos o clear */
+      await js("STORE.atual=-1;localStorage.clear();location.reload();0");
       await dorme(1500);
       const rot = nomeTela;
       /* 1) cria o jogador pelo modal, como a crianca faria */
@@ -155,12 +156,87 @@ async function main() {
         }
         await js("fecharLicao();0"); await dorme(200);
       }
+      /* 2b) ciclo diario no Chrome de verdade: rotina, barra "Meu personagem", baue, parada e bilhete */
+      await js("fecharLicao();usarMateria('mat');0"); await dorme(300);
+      const shot = async (nome) => { if (!FOTO) return; fs.mkdirSync(path.join(__dirname, 'saida'), { recursive: true }); const f = await cdp('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(path.join(__dirname, 'saida', nomeTela + '-' + nome + '.png'), Buffer.from(f.data, 'base64')); };
+      // o bilhete do Bobby e a primeira coisa do dia
+      const bilhete = await js("document.querySelector('#folha').classList.contains('on')&&document.querySelector('#folha').innerText.replace(/\\s+/g,' ')");
+      if (!bilhete || !/bilhete/i.test(bilhete)) problemas.push(rot + ': o bilhete do Bobby nao apareceu na primeira abertura do dia');
+      await shot('ciclo-1-bilhete');
+      await js("document.querySelector('#fl-ok').click();0"); await dorme(150);
+      const rotina = await js("(()=>{const r=document.querySelector('.rotina');if(!r)return null;const b=r.getBoundingClientRect();return {w:b.width,txt:r.innerText.replace(/\\s+/g,' ').slice(0,200)}})()");
+      if (!rotina) problemas.push(rot + ': cartao Rotina de hoje nao apareceu'); else feito.push(rot + ': rotina "' + rotina.txt.slice(0, 90) + '"');
+      await shot('ciclo-2-mapa');
+      // barra de baixo: "Meu personagem" abre o guarda-roupa em 1 toque
+      const barra = await js("(()=>{const b=document.querySelector('#barra').getBoundingClientRect();const p=document.querySelector('#bb-pers').getBoundingClientRect();return {bottom:b.bottom,ih:innerHeight,w:p.width,h:p.height,fixa:getComputedStyle(document.querySelector('#barra')).position}})()");
+      if (barra.fixa !== 'fixed' || Math.abs(barra.bottom - barra.ih) > 2) problemas.push(rot + ': barra de baixo nao esta fixa no rodape');
+      if (barra.h < 44) problemas.push(rot + ': botao Meu personagem menor que 44 px de altura (' + barra.h + ')');
+      await js("document.querySelector('#bb-pers').click();0"); await dorme(250);
+      const loja = await js("document.querySelector('#perfil').classList.contains('on')&&/Guarda-roupa/.test(document.querySelector('#perfil').innerText)");
+      if (!loja) problemas.push(rot + ': Meu personagem nao abriu o guarda-roupa em 1 toque');
+      await shot('ciclo-3-guarda-roupa');
+      await js("document.querySelector('#volta-perfil').click();0"); await dorme(200);
+      const fechou = await js("!document.querySelector('#perfil').classList.contains('on')");
+      if (!fechou) problemas.push(rot + ': voltar do guarda-roupa aberto pela barra deveria fechar a tela');
+      // joga ate a meta cheia (20 perguntas) e abre o bau
+      for (let f = 0; f < 4; f++) {
+        await js("abrirLicao(0," + (f % 5) + ");LIC.etapa='questao';pintarLicao();while(LIC.etapa==='questao'){LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();}0"); await dorme(150);
+      }
+      const temBau = await js("!!document.querySelector('#fim-abrir-bau')");
+      if (!temBau) problemas.push(rot + ': botao Abrir o bau nao apareceu no fim da fase com a meta cheia');
+      await shot('ciclo-4-fim-com-bau');
+      await js("document.querySelector('#fim-abrir-bau').click();0"); await dorme(200);
+      await shot('ciclo-5-bau-fechado');
+      await js("document.querySelector('#fl-abrir').click();0"); await dorme(200);
+      await shot('ciclo-6-bau-aberto');
+      await js("document.querySelector('#fl-ok').click();0"); await dorme(200);
+      const parada = await js("document.querySelector('#folha').classList.contains('on')&&document.querySelector('#folha').innerText.replace(/\\s+/g,' ')");
+      if (!parada || !/Por hoje chega/.test(parada) || !/Terminar por hoje/.test(parada) || !/Continuar explorando/.test(parada)) problemas.push(rot + ': tela Por hoje chega incompleta: ' + parada);
+      await shot('ciclo-7-parada');
+      await js("document.querySelector('#fl-segue').click();0"); await dorme(150);
+      await js("document.querySelector('#fechar').click();0"); await dorme(200);
+      const sem = await js("!document.querySelector('#folha').classList.contains('on')");
+      if (!sem) problemas.push(rot + ': a parada reapareceu no mesmo dia');
+      const estado = await js("JSON.stringify({baus:S.diario.bau.aberto,meta:S.diario.metaOk,of:S.ofensiva.atual,xp:S.xp,moedas:S.moedas})");
+      feito.push(rot + ': ciclo completo ' + estado);
+      await js("window.scrollTo(0,0);0"); await dorme(100); await shot('ciclo-8-mapa-final');
+      coleta(rot + ' ciclo');
+
       /* 3) sem rolagem lateral no celular */
       const largura = await js('({sw:document.documentElement.scrollWidth,iw:innerWidth})');
       if (largura.sw > largura.iw + 1) problemas.push(rot + ': rolagem horizontal (' + largura.sw + ' > ' + largura.iw + ')');
       const sw = await js("navigator.serviceWorker?navigator.serviceWorker.getRegistrations().then(r=>r.length):-1");
       feito.push(rot + ': service worker registrado=' + sw + ', largura ' + largura.sw + '/' + largura.iw);
       await dorme(300); coleta(rot);
+    }
+    /* 4) migracao de um estado v3 de exemplo, no Chrome de verdade (testes/fixtures/estado-v3-exemplo.json) */
+    {
+      const rot = 'migracao';
+      await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+      const fixture = fs.readFileSync(path.join(__dirname, 'fixtures', 'estado-v3-exemplo.json'), 'utf8');
+      await cdp('Page.navigate', { url: base + '/manifest.webmanifest' }); await dorme(600);
+      await js("(()=>{localStorage.clear();localStorage.setItem('mundo-numeros-v2'," + JSON.stringify(fixture) + ");return 1})()");
+      await cdp('Page.navigate', { url: base + '/index.html' }); await dorme(1500);
+      /* 3 perfis: a tela "Quem vai jogar?" vem primeiro; escolhe a Lua (primeiro perfil) */
+      const tela0 = await js("document.querySelector('#perfis').classList.contains('on')");
+      if (!tela0) problemas.push(rot + ': com 3 perfis a tela Quem vai jogar deveria abrir');
+      await js("document.querySelector('.cartao-bt[data-i=\"0\"]').click();0"); await dorme(400);
+      await js("document.querySelector('[data-m=\"mat\"]').click();0"); await dorme(400);
+      const aviso = await js("document.querySelector('#folha').classList.contains('on')&&document.querySelector('#folha').innerText.replace(/\\s+/g,' ')");
+      if (!aviso || !/ganhou novidades/.test(aviso) || !/progresso está todo aqui/.test(aviso)) problemas.push(rot + ': aviso unico da migracao nao apareceu: ' + aviso);
+      if (FOTO) { const f = await cdp('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(path.join(__dirname, 'saida', 'celular-migracao-aviso.png'), Buffer.from(f.data, 'base64')); }
+      await js("document.querySelector('#fl-ok').click();0"); await dorme(300);
+      const bil = await js("document.querySelector('#folha').classList.contains('on')&&document.querySelector('#folha').innerText.replace(/\\s+/g,' ')");
+      if (!bil || !/bilhete/i.test(bil)) problemas.push(rot + ': depois do aviso deveria vir o bilhete: ' + bil);
+      await js("document.querySelector('#fl-ok').click();0"); await dorme(200);
+      const r = await js("JSON.stringify({v3igual:localStorage.getItem('mundo-numeros-v2')===" + JSON.stringify(fixture) + ",bak:!!localStorage.getItem('mundo-numeros-v2.bak-v3'),v4:!!localStorage.getItem('universo-bobby-v4'),perfis:STORE.perfis.length,nome:S.nome,moedas:S.moedas,xp:S.xp,fases:Object.keys(S.feitas).length,of:S.ofensiva.atual,cong:S.ofensiva.congeladores,faixa:S.faixa})");
+      const m = JSON.parse(r);
+      if (!m.v3igual) problemas.push(rot + ': a chave antiga do v3 foi alterada');
+      if (!m.bak || !m.v4 || m.perfis !== 3 || m.nome !== 'Lua' || m.moedas !== 1520 || m.xp !== 2480 || m.fases !== 51 || m.faixa !== 'f78') problemas.push(rot + ': dados migrados fora do esperado ' + r);
+      feito.push(rot + ': ' + r);
+      const rotina = await js("document.querySelector('.rotina')&&document.querySelector('.rotina').innerText.replace(/\\s+/g,' ').slice(0,120)");
+      feito.push(rot + ': rotina depois de migrar "' + rotina + '"');
+      await dorme(200); coleta(rot);
     }
     ws.close();
     console.log('fumaca.js (Chrome headless via CDP, ' + base + ')');
