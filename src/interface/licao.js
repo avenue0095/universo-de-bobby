@@ -178,7 +178,7 @@ function pintarLicao(){
   $('#palco').innerHTML=h;
   /* cenário da etapa atrás da pergunta (escurecido e desfocado por CSS); sem a arte da etapa fica o planeta de sempre */
   const cn=cenaDaEtapa(MATERIA,LIC.u.n);
-  if(cn&&ativo(cn.completo))$('#licao').style.setProperty('--cena','url("'+ARTE_BASE+ativo(cn.completo)[0]+'")');else $('#licao').style.removeProperty('--cena');
+  if(cn&&ativo(cn.completo))$('#licao').style.setProperty('--cena','url("'+ARTE_BASE+ativo(cn.completo)[0]+'")');else $('#licao').style.setProperty('--cena','none');
   $('.lc-corpo').scrollTo(0,0);
   ligarOuvir($('#palco'));
   LIC.resp=null;LIC.digitado='';LIC.conferido=false;LIC.dica=false;LIC.tQ=Date.now();

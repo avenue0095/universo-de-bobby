@@ -1583,7 +1583,7 @@ svg.md{border:0;padding:0;background:none;border-radius:0}
 
 /* ---------- a pergunta dentro da cena: guia da matéria, balão, cenário da etapa ao fundo ---------- */
 .licao::after{content:"";position:absolute;inset:0;background:var(--cena,none) center/cover no-repeat;filter:blur(6px) brightness(.34) saturate(.9);opacity:1;pointer-events:none;z-index:0}
-.licao[style*="--cena"]::before{display:none}
+.licao[style*="--cena: url"]::before,.licao[style*="--cena:url"]::before{display:none}
 .cena-q{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;gap:var(--esp-8);margin-bottom:var(--esp-8)}
 .guia-q{width:72px;align-self:end}
 .guia-img{display:block;width:100%;height:auto;filter:drop-shadow(0 6px 8px var(--cor-sombra))}
