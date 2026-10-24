@@ -299,7 +299,7 @@ img{max-width:100%}
 .so-leitor{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- imagens de arte: carregando e erro ficam num bloco neutro, o jogo segue ---------- */
-.arte{display:block;background:transparent}
+.arte{display:block;background:transparent;height:auto}
 .arte.falhou{visibility:hidden}
 
 /* ---------- topo (DESIGN 10.11): avatar, matéria, ofensiva, moedas, som. Sempre os três indicadores ---------- */
@@ -327,66 +327,100 @@ img{max-width:100%}
 .icobtn.ouvir{color:var(--materia-tinta);background:var(--cor-superficie);border:2px solid var(--cor-linha)}
 
 /* ---------- tela do mapa ---------- */
-.tela{max-width:640px;margin:0 auto;padding:16px 16px 96px}
-.ola{display:flex;gap:16px;align-items:center;background:var(--cor-superficie);border:2px solid var(--cor-linha);
-  border-radius:var(--raio-24);padding:16px;box-shadow:var(--sombra-1);margin-bottom:24px}
-.ola .mini{width:74px;height:74px;flex:none}
-.ola .txt{flex:1;min-width:0}
-.ola h1{font-size:var(--t-destaque);letter-spacing:-.01em}
-.ola p{margin:4px 0 0;font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:700}
-.ola .anel{width:54px;height:54px;flex:none;border-radius:var(--raio-pilula);display:grid;place-items:center;
-  background:conic-gradient(var(--materia-base) calc(var(--p,0)*1%),var(--cor-superficie-2) 0)}
-.ola .anel i{width:42px;height:42px;border-radius:var(--raio-pilula);background:var(--cor-superficie);display:grid;place-items:center;
-  font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600;font-style:normal;color:var(--cor-texto)}
+@property --rev{syntax:"<percentage>";inherits:true;initial-value:70%}
+.tela{max-width:var(--larg-conteudo);margin:0 auto;padding:var(--esp-16) var(--esp-16) calc(var(--barra-h) + var(--esp-32) + var(--area-segura-baixo))}
 
-.mundo{margin-bottom:8px}
-.faixa{position:relative;border-radius:var(--raio-24);padding:16px 16px;color:var(--materia-sobre);overflow:hidden;z-index:2;
-  background:var(--ub);box-shadow:var(--sombra-1);}
-.faixa::after{content:"";position:absolute;inset:0;opacity:.18;pointer-events:none;
-  }
-.faixa .nun{font-size:var(--t-legenda);font-weight:800;letter-spacing:.09em;text-transform:uppercase;opacity:.88;
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.faixa .zerado{display:inline-flex;align-items:center;gap:4px;background:var(--cor-vidro);
-  border-radius:var(--raio-pilula);padding:4px 8px 4px 8px;letter-spacing:.04em}
-.faixa .zerado svg{width:13px;height:13px}
-.faixa h2{font-size:var(--t-destaque);letter-spacing:-.015em;margin:4px 0 4px;color:var(--materia-sobre)}
-.faixa p{margin:0;font-size:var(--t-legenda);opacity:.92;line-height:1.45;max-width:44ch;font-weight:700}
+/* planeta da matéria: cabeçalho do mapa (DESIGN 2.3). Texto sempre sobre o cartão, nunca direto sobre a imagem */
+.planeta{position:relative;display:grid;grid-template-columns:1fr minmax(0,40%);align-items:center;gap:var(--esp-8);
+  background:var(--cor-superficie);border:1px solid var(--cor-linha);border-radius:var(--raio-32);padding:var(--esp-16) var(--esp-16) var(--esp-16) var(--esp-24);
+  box-shadow:var(--sombra-2);margin:0 0 var(--esp-24);overflow:hidden}
+.planeta::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 90% at 100% 40%,color-mix(in srgb,var(--materia-luz) 32%,transparent),transparent 70%)}
+.planeta-txt{position:relative;min-width:0;display:grid;gap:var(--esp-8);grid-column:1;grid-row:1}
+.planeta-nome{font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);color:var(--materia-tinta);text-transform:uppercase;letter-spacing:.06em}
+.planeta h1{font-size:var(--t-h2);line-height:var(--lh-h2)}
+.planeta p{margin:0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto-suave)}
+.planeta-img{position:relative;grid-column:2;grid-row:1;align-self:center;justify-self:center;width:100%;aspect-ratio:1/1}
+.planeta-img img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 12px 16px var(--cor-sombra))}
+.planeta-guia{position:absolute;right:var(--esp-8);bottom:var(--esp-8);width:56px;pointer-events:none}
+.planeta-guia img{width:100%;height:auto;display:block;filter:drop-shadow(0 4px 6px var(--cor-sombra))}
+.planeta .lapis{display:inline-grid;place-items:center;width:var(--toque-min);height:var(--toque-min);border-radius:var(--raio-pilula);
+  background:var(--cor-superficie-2);color:var(--cor-texto-suave);vertical-align:middle;margin:calc(-1 * var(--esp-8)) 0}
+.planeta .lapis svg{width:20px;height:20px}
+.lapis{display:inline-grid;place-items:center;border-radius:var(--raio-16);background:var(--cor-superficie-2);color:var(--cor-texto-suave);vertical-align:middle}
+.lapis svg{width:16px;height:16px}
+@media (max-width:430px){
+  .planeta{grid-template-columns:1fr;padding:var(--esp-16)}
+  .planeta-img{grid-column:1;grid-row:1;width:144px;justify-self:end;margin:calc(-1 * var(--esp-8)) calc(-1 * var(--esp-8)) calc(-1 * var(--esp-48)) 0}
+  .planeta-txt{grid-row:2}
+  .planeta-guia{display:none}
+}
 
-.mapa{position:relative;margin-top:-16px;padding-top:16px;border-radius:0 0 28px 28px;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--ub) 15%,var(--cor-fundo)) 0%,
-             color-mix(in srgb,var(--ub) 5%,var(--cor-fundo)) 55%,var(--cor-fundo) 100%);
-  overflow:hidden}
-.cenario{position:absolute;transform:translate(-50%,-50%) scale(var(--e,1));width:62px;height:62px;
-  opacity:.92;pointer-events:none}
-.cenario.nuvem{width:78px;height:78px;opacity:.75}
-svg.cen{width:100%;height:100%;display:block}
-.passo-trilha{position:absolute;width:11px;height:11px;border-radius:var(--raio-pilula);background:var(--cor-linha);
-  transform:translate(-50%,-50%);box-shadow:0 0 0 3px color-mix(in srgb,var(--cor-fundo) 70%,transparent)}
+/* etapa: o lugar que acende fase por fase (DESIGN 10.4) */
+.etapa{margin:0 auto var(--esp-32);max-width:480px;background:var(--cor-superficie);border:1px solid var(--cor-linha);border-radius:var(--raio-32);
+  box-shadow:var(--sombra-2);overflow:hidden}
+.etapa-cab{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--esp-8);background:var(--materia-suave);padding:var(--esp-16) var(--esp-24)}
+.etapa-tx{min-width:0}
+.etapa-n{display:block;font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);color:var(--materia-tinta);text-transform:uppercase;letter-spacing:.06em}
+.etapa h3{font-size:var(--t-h3);line-height:var(--lh-h3)}
+.etapa-cab p{margin:0;font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave)}
+.etapa-prog{flex:none;display:inline-flex;align-items:center;gap:var(--esp-4);background:var(--cor-superficie);color:var(--cor-texto);border:1px solid var(--cor-linha-forte);
+  border-radius:var(--raio-pilula);padding:var(--esp-4) var(--esp-8);font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);white-space:nowrap}
+.etapa-prog svg{width:16px;height:16px;color:var(--cor-acerto)}
+.etapa-prog.ok{background:var(--cor-acerto-suave);border-color:var(--cor-acerto)}
 
-.fase{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;
-  align-items:center;gap:4px;width:130px}
-.fase .bt{width:70px;height:70px;border-radius:var(--raio-pilula);display:grid;place-items:center;position:relative;
-  background:var(--ub);color:var(--materia-sobre);font-family:"Fredoka",sans-serif;font-size:var(--t-h2);font-weight:600;
-  border:4px solid var(--cor-fundo);
-  box-shadow:var(--sombra-1);transition:transform .12s,box-shadow .12s}
-.fase .bt:hover{transform:translateY(-3px);box-shadow:var(--sombra-1);}
-.fase .bt:active{transform:translateY(4px);box-shadow:var(--sombra-1);}
-.fase .bt svg{width:34px;height:34px}
-.fase.castelo .bt{width:88px;height:88px;border-radius:var(--raio-24);background:color-mix(in srgb,var(--ub) 22%,var(--cor-superficie));
-  box-shadow:var(--sombra-1);}
-.fase.castelo .bt svg.cast-svg{width:64px;height:64px}
-.fase.revisao-fase .bt{background:var(--cor-ouro);box-shadow:var(--sombra-1);}
-.fase.trava .bt{background:var(--cor-superficie-2);color:var(--cor-texto-suave);box-shadow:none;cursor:not-allowed}
-.fase.trava .bt:hover{transform:none;box-shadow:none;}
-.fase.feito .bt::after{content:"";position:absolute;inset:-9px;border-radius:inherit;
-  border:2px dashed currentColor;opacity:.4}
-.fase .rot{font-size:var(--t-legenda);color:var(--cor-texto-suave);text-align:center;line-height:1.2;font-weight:700;
-  background:color-mix(in srgb,var(--cor-fundo) 80%,transparent);border-radius:var(--raio-8);padding:4px 8px}
-.fase .rot i{font-style:normal;font-size:var(--t-legenda);color:var(--cor-ouro-borda);font-weight:800}
-.fase.atual .rot{color:var(--cor-texto);font-weight:800}
-.fase .estrelas{display:flex;gap:4px;height:14px}
-.fase .estrelas svg{width:14px;height:14px;color:var(--cor-acao-borda)}
-.voce{position:absolute;top:-58px;width:56px;height:56px;}
+.cena{position:relative;aspect-ratio:5/7.6;background:var(--materia-chao);overflow:hidden;--rev:70%}
+.cena-base,.cena-luz{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block}
+.cena-luz{-webkit-mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));
+  mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));transition:--rev var(--mov-lento) var(--curva-move)}
+.cena.sem-arte .cena-ceu{position:absolute;inset:0;background:linear-gradient(to bottom,var(--materia-ceu-topo),var(--materia-ceu-horizonte) 62%,var(--materia-chao) 62%)}
+.cena-planeta{position:absolute;left:12%;right:12%;top:4%;height:44%}
+.cena-planeta img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.cena-planeta.cena-base{filter:grayscale(.85) brightness(.6);opacity:.9}
+.cena-planeta.cena-luz{-webkit-mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));
+  transition:--rev var(--mov-lento) var(--curva-move)}
+.cena-breve{position:absolute;left:var(--esp-16);top:var(--esp-16);background:var(--cor-vidro);color:var(--cor-texto);border-radius:var(--raio-pilula);padding:var(--esp-4) var(--esp-8);
+  font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte)}
+.etapa.acesa .cena{box-shadow:inset 0 0 0 4px var(--cor-ouro)}
+
+.trilha{position:absolute;inset:0}
+.passo-trilha{position:absolute;width:8px;height:8px;border-radius:var(--raio-pilula);background:var(--cor-superficie);opacity:.9;transform:translate(-50%,-50%);
+  box-shadow:0 0 0 2px var(--cor-sombra)}
+.no{position:absolute;transform:translate(-50%,-32px);display:flex;flex-direction:column;align-items:center;gap:var(--esp-4);width:112px}
+.no .bt{width:64px;height:64px;border-radius:var(--raio-pilula);display:grid;place-items:center;position:relative;
+  background:var(--materia-base);color:var(--materia-sobre);font-family:var(--fonte-titulo);font-size:var(--t-h3);line-height:var(--lh-h3);font-weight:var(--peso-titulo);
+  border:3px solid var(--cor-superficie);box-shadow:var(--sombra-2)}
+.no .bt::after{content:"";position:absolute;inset:calc(-1 * var(--esp-8));border-radius:var(--raio-pilula)}   /* área de toque de 80 px */
+.no .bt svg{width:32px;height:32px}
+.no .bt:hover{background:color-mix(in srgb,var(--materia-base) 88%,var(--cor-superficie))}
+.no.atual .bt{width:72px;height:72px;margin:-4px 0}
+.no.atual .bt::before{content:"";position:absolute;inset:-6px;border-radius:var(--raio-pilula);border:3px solid var(--materia-luz);animation:halo 2s var(--curva-move) 2}
+.no.feito .bt{box-shadow:var(--sombra-2),0 0 0 3px var(--materia-luz)}
+.no.trava .bt{background:var(--cor-superficie-2);color:var(--cor-texto-suave);border-color:var(--cor-linha-forte);box-shadow:none;cursor:not-allowed}
+.revisao-no .bt{background:var(--cor-ouro);color:var(--cor-ouro-sobre);border-color:var(--cor-ouro-borda)}
+.revisao-no.trava .bt{background:var(--cor-superficie-2);color:var(--cor-texto-suave);border-color:var(--cor-linha-forte)}
+.no .rot{max-width:112px;background:var(--cor-superficie);color:var(--cor-texto);border:1px solid var(--cor-linha);border-radius:var(--raio-pilula);
+  padding:0 var(--esp-8);font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.no.atual .rot{border-color:var(--materia-base);background:var(--materia-suave)}
+.no .rot i{font-style:normal}
+.no .estrelas{display:flex;gap:0;height:16px}
+.no .estrelas svg{width:16px;height:16px;color:var(--cor-ouro-borda)}
+.no .estrelas svg:not(.on){color:var(--cor-linha-forte);opacity:.55}
+@keyframes halo{from{transform:scale(1);opacity:.9}to{transform:scale(1.4);opacity:0}}
+
+/* o Bobby no mapa: fica em pé ao lado do nó atual e anda até o próximo (DESIGN 10.5) */
+.voce{position:absolute;z-index:var(--z-cartao);width:68px;height:100px;pointer-events:none;transform:translate(-100%,-76%);
+  transition:left var(--mov-lento) var(--curva-move),top var(--mov-lento) var(--curva-move)}
+.voce.d{transform:translate(8%,-76%)}
+.voce::before{content:"";position:absolute;left:8%;right:8%;bottom:-2px;height:10px;border-radius:50%;background:var(--sombra-contato)}
+.voce img{position:absolute;left:0;bottom:0;width:100%;height:auto;max-height:100%;object-fit:contain;display:block}
+.voce .voce-a1,.voce .voce-a2{display:none}
+.voce.anda .voce-pe{display:none}
+.voce.anda .voce-a1{display:block;animation:passo var(--mov-lento) steps(1) infinite}
+.voce.anda .voce-a2{display:block;animation:passo var(--mov-lento) steps(1) infinite reverse}
+@keyframes passo{0%{opacity:1}50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.no.atual .bt::before{animation:none}.voce.anda .voce-a1,.voce.anda .voce-a2{animation:none}.voce.anda .voce-a2{display:none}}
 
 /* ---------- lição ---------- */
 .licao{position:fixed;inset:0;z-index:50;display:none;flex-direction:column}
@@ -827,10 +861,7 @@ ol.plano li{padding-left:40px}
 .textinho{background:var(--cor-superficie);border:2px solid var(--cor-linha);border-radius:var(--raio-16);padding:16px 16px;font-size:var(--t-pequeno);
   line-height:1.7;text-align:left;max-width:100%}
 .textinho b{display:block;font-family:"Fredoka",sans-serif;font-size:var(--t-corpo);margin-bottom:8px;color:var(--materia-tinta)}
-.cartao-bt.materia{gap:8px;padding:24px 16px}
-.mat-ic{width:70px;height:70px;color:var(--materia-tinta);display:block}
-.mat-ic svg{width:100%;height:100%}
-.pg.forte{color:var(--materia-tinta);font-weight:800}
+
 .item .tipo{font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:700;margin-top:-4px}
 @media (max-width:430px){
   /* celular: ofensiva e som continuam à vista, só ficam compactos (antes eram escondidos) */
@@ -1063,3 +1094,15 @@ ol.plano li{padding-left:40px}
 .chip-ctl{min-height:var(--toque-min);padding:0 var(--esp-16);border-radius:var(--raio-pilula);background:var(--cor-superficie-2);color:var(--cor-texto);border:2px solid var(--cor-linha-forte);font-weight:var(--peso-forte);font-size:var(--t-pequeno)}
 .chip-ctl.on{background:var(--cor-acao);color:var(--cor-acao-sobre);border-color:var(--cor-acao-borda)}
 .medidor .sub-l{display:block}
+
+/* ---------- escolha do planeta ---------- */
+.cartoes.planetas{grid-template-columns:1fr;gap:var(--esp-16)}
+.cartao-bt.materia{display:grid;grid-template-columns:96px 1fr;grid-template-rows:auto auto auto auto;column-gap:var(--esp-16);align-items:center;text-align:left;
+  padding:var(--esp-16);border-radius:var(--raio-24);min-height:112px;border:2px solid var(--cor-linha-forte)}
+.cartao-bt.materia.atual{border-color:var(--materia-base);background:var(--materia-suave)}
+.mat-planeta{grid-row:1/5;width:96px;height:96px}
+.mat-planeta img{width:100%;height:100%;object-fit:contain}
+.mat-nome{font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);color:var(--materia-tinta);text-transform:uppercase;letter-spacing:.06em}
+.cartao-bt.materia b{font-size:var(--t-h3);line-height:var(--lh-h3);margin:0}
+.cartao-bt.materia .pg{font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave)}
+.cartao-bt.materia .pg.forte{color:var(--materia-tinta);font-weight:var(--peso-forte)}

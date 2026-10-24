@@ -310,7 +310,7 @@ img{max-width:100%}
 .so-leitor{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- imagens de arte: carregando e erro ficam num bloco neutro, o jogo segue ---------- */
-.arte{display:block;background:transparent}
+.arte{display:block;background:transparent;height:auto}
 .arte.falhou{visibility:hidden}
 
 /* ---------- topo (DESIGN 10.11): avatar, matéria, ofensiva, moedas, som. Sempre os três indicadores ---------- */
@@ -338,66 +338,100 @@ img{max-width:100%}
 .icobtn.ouvir{color:var(--materia-tinta);background:var(--cor-superficie);border:2px solid var(--cor-linha)}
 
 /* ---------- tela do mapa ---------- */
-.tela{max-width:640px;margin:0 auto;padding:16px 16px 96px}
-.ola{display:flex;gap:16px;align-items:center;background:var(--cor-superficie);border:2px solid var(--cor-linha);
-  border-radius:var(--raio-24);padding:16px;box-shadow:var(--sombra-1);margin-bottom:24px}
-.ola .mini{width:74px;height:74px;flex:none}
-.ola .txt{flex:1;min-width:0}
-.ola h1{font-size:var(--t-destaque);letter-spacing:-.01em}
-.ola p{margin:4px 0 0;font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:700}
-.ola .anel{width:54px;height:54px;flex:none;border-radius:var(--raio-pilula);display:grid;place-items:center;
-  background:conic-gradient(var(--materia-base) calc(var(--p,0)*1%),var(--cor-superficie-2) 0)}
-.ola .anel i{width:42px;height:42px;border-radius:var(--raio-pilula);background:var(--cor-superficie);display:grid;place-items:center;
-  font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600;font-style:normal;color:var(--cor-texto)}
+@property --rev{syntax:"<percentage>";inherits:true;initial-value:70%}
+.tela{max-width:var(--larg-conteudo);margin:0 auto;padding:var(--esp-16) var(--esp-16) calc(var(--barra-h) + var(--esp-32) + var(--area-segura-baixo))}
 
-.mundo{margin-bottom:8px}
-.faixa{position:relative;border-radius:var(--raio-24);padding:16px 16px;color:var(--materia-sobre);overflow:hidden;z-index:2;
-  background:var(--ub);box-shadow:var(--sombra-1);}
-.faixa::after{content:"";position:absolute;inset:0;opacity:.18;pointer-events:none;
-  }
-.faixa .nun{font-size:var(--t-legenda);font-weight:800;letter-spacing:.09em;text-transform:uppercase;opacity:.88;
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.faixa .zerado{display:inline-flex;align-items:center;gap:4px;background:var(--cor-vidro);
-  border-radius:var(--raio-pilula);padding:4px 8px 4px 8px;letter-spacing:.04em}
-.faixa .zerado svg{width:13px;height:13px}
-.faixa h2{font-size:var(--t-destaque);letter-spacing:-.015em;margin:4px 0 4px;color:var(--materia-sobre)}
-.faixa p{margin:0;font-size:var(--t-legenda);opacity:.92;line-height:1.45;max-width:44ch;font-weight:700}
+/* planeta da matéria: cabeçalho do mapa (DESIGN 2.3). Texto sempre sobre o cartão, nunca direto sobre a imagem */
+.planeta{position:relative;display:grid;grid-template-columns:1fr minmax(0,40%);align-items:center;gap:var(--esp-8);
+  background:var(--cor-superficie);border:1px solid var(--cor-linha);border-radius:var(--raio-32);padding:var(--esp-16) var(--esp-16) var(--esp-16) var(--esp-24);
+  box-shadow:var(--sombra-2);margin:0 0 var(--esp-24);overflow:hidden}
+.planeta::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 90% at 100% 40%,color-mix(in srgb,var(--materia-luz) 32%,transparent),transparent 70%)}
+.planeta-txt{position:relative;min-width:0;display:grid;gap:var(--esp-8);grid-column:1;grid-row:1}
+.planeta-nome{font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);color:var(--materia-tinta);text-transform:uppercase;letter-spacing:.06em}
+.planeta h1{font-size:var(--t-h2);line-height:var(--lh-h2)}
+.planeta p{margin:0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);color:var(--cor-texto-suave)}
+.planeta-img{position:relative;grid-column:2;grid-row:1;align-self:center;justify-self:center;width:100%;aspect-ratio:1/1}
+.planeta-img img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 12px 16px var(--cor-sombra))}
+.planeta-guia{position:absolute;right:var(--esp-8);bottom:var(--esp-8);width:56px;pointer-events:none}
+.planeta-guia img{width:100%;height:auto;display:block;filter:drop-shadow(0 4px 6px var(--cor-sombra))}
+.planeta .lapis{display:inline-grid;place-items:center;width:var(--toque-min);height:var(--toque-min);border-radius:var(--raio-pilula);
+  background:var(--cor-superficie-2);color:var(--cor-texto-suave);vertical-align:middle;margin:calc(-1 * var(--esp-8)) 0}
+.planeta .lapis svg{width:20px;height:20px}
+.lapis{display:inline-grid;place-items:center;border-radius:var(--raio-16);background:var(--cor-superficie-2);color:var(--cor-texto-suave);vertical-align:middle}
+.lapis svg{width:16px;height:16px}
+@media (max-width:430px){
+  .planeta{grid-template-columns:1fr;padding:var(--esp-16)}
+  .planeta-img{grid-column:1;grid-row:1;width:144px;justify-self:end;margin:calc(-1 * var(--esp-8)) calc(-1 * var(--esp-8)) calc(-1 * var(--esp-48)) 0}
+  .planeta-txt{grid-row:2}
+  .planeta-guia{display:none}
+}
 
-.mapa{position:relative;margin-top:-16px;padding-top:16px;border-radius:0 0 28px 28px;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--ub) 15%,var(--cor-fundo)) 0%,
-             color-mix(in srgb,var(--ub) 5%,var(--cor-fundo)) 55%,var(--cor-fundo) 100%);
-  overflow:hidden}
-.cenario{position:absolute;transform:translate(-50%,-50%) scale(var(--e,1));width:62px;height:62px;
-  opacity:.92;pointer-events:none}
-.cenario.nuvem{width:78px;height:78px;opacity:.75}
-svg.cen{width:100%;height:100%;display:block}
-.passo-trilha{position:absolute;width:11px;height:11px;border-radius:var(--raio-pilula);background:var(--cor-linha);
-  transform:translate(-50%,-50%);box-shadow:0 0 0 3px color-mix(in srgb,var(--cor-fundo) 70%,transparent)}
+/* etapa: o lugar que acende fase por fase (DESIGN 10.4) */
+.etapa{margin:0 auto var(--esp-32);max-width:480px;background:var(--cor-superficie);border:1px solid var(--cor-linha);border-radius:var(--raio-32);
+  box-shadow:var(--sombra-2);overflow:hidden}
+.etapa-cab{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--esp-8);background:var(--materia-suave);padding:var(--esp-16) var(--esp-24)}
+.etapa-tx{min-width:0}
+.etapa-n{display:block;font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);color:var(--materia-tinta);text-transform:uppercase;letter-spacing:.06em}
+.etapa h3{font-size:var(--t-h3);line-height:var(--lh-h3)}
+.etapa-cab p{margin:0;font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave)}
+.etapa-prog{flex:none;display:inline-flex;align-items:center;gap:var(--esp-4);background:var(--cor-superficie);color:var(--cor-texto);border:1px solid var(--cor-linha-forte);
+  border-radius:var(--raio-pilula);padding:var(--esp-4) var(--esp-8);font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);white-space:nowrap}
+.etapa-prog svg{width:16px;height:16px;color:var(--cor-acerto)}
+.etapa-prog.ok{background:var(--cor-acerto-suave);border-color:var(--cor-acerto)}
 
-.fase{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;
-  align-items:center;gap:4px;width:130px}
-.fase .bt{width:70px;height:70px;border-radius:var(--raio-pilula);display:grid;place-items:center;position:relative;
-  background:var(--ub);color:var(--materia-sobre);font-family:"Fredoka",sans-serif;font-size:var(--t-h2);font-weight:600;
-  border:4px solid var(--cor-fundo);
-  box-shadow:var(--sombra-1);transition:transform .12s,box-shadow .12s}
-.fase .bt:hover{transform:translateY(-3px);box-shadow:var(--sombra-1);}
-.fase .bt:active{transform:translateY(4px);box-shadow:var(--sombra-1);}
-.fase .bt svg{width:34px;height:34px}
-.fase.castelo .bt{width:88px;height:88px;border-radius:var(--raio-24);background:color-mix(in srgb,var(--ub) 22%,var(--cor-superficie));
-  box-shadow:var(--sombra-1);}
-.fase.castelo .bt svg.cast-svg{width:64px;height:64px}
-.fase.revisao-fase .bt{background:var(--cor-ouro);box-shadow:var(--sombra-1);}
-.fase.trava .bt{background:var(--cor-superficie-2);color:var(--cor-texto-suave);box-shadow:none;cursor:not-allowed}
-.fase.trava .bt:hover{transform:none;box-shadow:none;}
-.fase.feito .bt::after{content:"";position:absolute;inset:-9px;border-radius:inherit;
-  border:2px dashed currentColor;opacity:.4}
-.fase .rot{font-size:var(--t-legenda);color:var(--cor-texto-suave);text-align:center;line-height:1.2;font-weight:700;
-  background:color-mix(in srgb,var(--cor-fundo) 80%,transparent);border-radius:var(--raio-8);padding:4px 8px}
-.fase .rot i{font-style:normal;font-size:var(--t-legenda);color:var(--cor-ouro-borda);font-weight:800}
-.fase.atual .rot{color:var(--cor-texto);font-weight:800}
-.fase .estrelas{display:flex;gap:4px;height:14px}
-.fase .estrelas svg{width:14px;height:14px;color:var(--cor-acao-borda)}
-.voce{position:absolute;top:-58px;width:56px;height:56px;}
+.cena{position:relative;aspect-ratio:5/7.6;background:var(--materia-chao);overflow:hidden;--rev:70%}
+.cena-base,.cena-luz{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block}
+.cena-luz{-webkit-mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));
+  mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));transition:--rev var(--mov-lento) var(--curva-move)}
+.cena.sem-arte .cena-ceu{position:absolute;inset:0;background:linear-gradient(to bottom,var(--materia-ceu-topo),var(--materia-ceu-horizonte) 62%,var(--materia-chao) 62%)}
+.cena-planeta{position:absolute;left:12%;right:12%;top:4%;height:44%}
+.cena-planeta img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.cena-planeta.cena-base{filter:grayscale(.85) brightness(.6);opacity:.9}
+.cena-planeta.cena-luz{-webkit-mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));
+  transition:--rev var(--mov-lento) var(--curva-move)}
+.cena-breve{position:absolute;left:var(--esp-16);top:var(--esp-16);background:var(--cor-vidro);color:var(--cor-texto);border-radius:var(--raio-pilula);padding:var(--esp-4) var(--esp-8);
+  font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte)}
+.etapa.acesa .cena{box-shadow:inset 0 0 0 4px var(--cor-ouro)}
+
+.trilha{position:absolute;inset:0}
+.passo-trilha{position:absolute;width:8px;height:8px;border-radius:var(--raio-pilula);background:var(--cor-superficie);opacity:.9;transform:translate(-50%,-50%);
+  box-shadow:0 0 0 2px var(--cor-sombra)}
+.no{position:absolute;transform:translate(-50%,-32px);display:flex;flex-direction:column;align-items:center;gap:var(--esp-4);width:112px}
+.no .bt{width:64px;height:64px;border-radius:var(--raio-pilula);display:grid;place-items:center;position:relative;
+  background:var(--materia-base);color:var(--materia-sobre);font-family:var(--fonte-titulo);font-size:var(--t-h3);line-height:var(--lh-h3);font-weight:var(--peso-titulo);
+  border:3px solid var(--cor-superficie);box-shadow:var(--sombra-2)}
+.no .bt::after{content:"";position:absolute;inset:calc(-1 * var(--esp-8));border-radius:var(--raio-pilula)}   /* área de toque de 80 px */
+.no .bt svg{width:32px;height:32px}
+.no .bt:hover{background:color-mix(in srgb,var(--materia-base) 88%,var(--cor-superficie))}
+.no.atual .bt{width:72px;height:72px;margin:-4px 0}
+.no.atual .bt::before{content:"";position:absolute;inset:-6px;border-radius:var(--raio-pilula);border:3px solid var(--materia-luz);animation:halo 2s var(--curva-move) 2}
+.no.feito .bt{box-shadow:var(--sombra-2),0 0 0 3px var(--materia-luz)}
+.no.trava .bt{background:var(--cor-superficie-2);color:var(--cor-texto-suave);border-color:var(--cor-linha-forte);box-shadow:none;cursor:not-allowed}
+.revisao-no .bt{background:var(--cor-ouro);color:var(--cor-ouro-sobre);border-color:var(--cor-ouro-borda)}
+.revisao-no.trava .bt{background:var(--cor-superficie-2);color:var(--cor-texto-suave);border-color:var(--cor-linha-forte)}
+.no .rot{max-width:112px;background:var(--cor-superficie);color:var(--cor-texto);border:1px solid var(--cor-linha);border-radius:var(--raio-pilula);
+  padding:0 var(--esp-8);font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.no.atual .rot{border-color:var(--materia-base);background:var(--materia-suave)}
+.no .rot i{font-style:normal}
+.no .estrelas{display:flex;gap:0;height:16px}
+.no .estrelas svg{width:16px;height:16px;color:var(--cor-ouro-borda)}
+.no .estrelas svg:not(.on){color:var(--cor-linha-forte);opacity:.55}
+@keyframes halo{from{transform:scale(1);opacity:.9}to{transform:scale(1.4);opacity:0}}
+
+/* o Bobby no mapa: fica em pé ao lado do nó atual e anda até o próximo (DESIGN 10.5) */
+.voce{position:absolute;z-index:var(--z-cartao);width:68px;height:100px;pointer-events:none;transform:translate(-100%,-76%);
+  transition:left var(--mov-lento) var(--curva-move),top var(--mov-lento) var(--curva-move)}
+.voce.d{transform:translate(8%,-76%)}
+.voce::before{content:"";position:absolute;left:8%;right:8%;bottom:-2px;height:10px;border-radius:50%;background:var(--sombra-contato)}
+.voce img{position:absolute;left:0;bottom:0;width:100%;height:auto;max-height:100%;object-fit:contain;display:block}
+.voce .voce-a1,.voce .voce-a2{display:none}
+.voce.anda .voce-pe{display:none}
+.voce.anda .voce-a1{display:block;animation:passo var(--mov-lento) steps(1) infinite}
+.voce.anda .voce-a2{display:block;animation:passo var(--mov-lento) steps(1) infinite reverse}
+@keyframes passo{0%{opacity:1}50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.no.atual .bt::before{animation:none}.voce.anda .voce-a1,.voce.anda .voce-a2{animation:none}.voce.anda .voce-a2{display:none}}
 
 /* ---------- lição ---------- */
 .licao{position:fixed;inset:0;z-index:50;display:none;flex-direction:column}
@@ -838,10 +872,7 @@ ol.plano li{padding-left:40px}
 .textinho{background:var(--cor-superficie);border:2px solid var(--cor-linha);border-radius:var(--raio-16);padding:16px 16px;font-size:var(--t-pequeno);
   line-height:1.7;text-align:left;max-width:100%}
 .textinho b{display:block;font-family:"Fredoka",sans-serif;font-size:var(--t-corpo);margin-bottom:8px;color:var(--materia-tinta)}
-.cartao-bt.materia{gap:8px;padding:24px 16px}
-.mat-ic{width:70px;height:70px;color:var(--materia-tinta);display:block}
-.mat-ic svg{width:100%;height:100%}
-.pg.forte{color:var(--materia-tinta);font-weight:800}
+
 .item .tipo{font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:700;margin-top:-4px}
 @media (max-width:430px){
   /* celular: ofensiva e som continuam à vista, só ficam compactos (antes eram escondidos) */
@@ -1074,6 +1105,18 @@ ol.plano li{padding-left:40px}
 .chip-ctl{min-height:var(--toque-min);padding:0 var(--esp-16);border-radius:var(--raio-pilula);background:var(--cor-superficie-2);color:var(--cor-texto);border:2px solid var(--cor-linha-forte);font-weight:var(--peso-forte);font-size:var(--t-pequeno)}
 .chip-ctl.on{background:var(--cor-acao);color:var(--cor-acao-sobre);border-color:var(--cor-acao-borda)}
 .medidor .sub-l{display:block}
+
+/* ---------- escolha do planeta ---------- */
+.cartoes.planetas{grid-template-columns:1fr;gap:var(--esp-16)}
+.cartao-bt.materia{display:grid;grid-template-columns:96px 1fr;grid-template-rows:auto auto auto auto;column-gap:var(--esp-16);align-items:center;text-align:left;
+  padding:var(--esp-16);border-radius:var(--raio-24);min-height:112px;border:2px solid var(--cor-linha-forte)}
+.cartao-bt.materia.atual{border-color:var(--materia-base);background:var(--materia-suave)}
+.mat-planeta{grid-row:1/5;width:96px;height:96px}
+.mat-planeta img{width:100%;height:100%;object-fit:contain}
+.mat-nome{font-size:var(--t-legenda);line-height:var(--lh-legenda);font-weight:var(--peso-forte);color:var(--materia-tinta);text-transform:uppercase;letter-spacing:.06em}
+.cartao-bt.materia b{font-size:var(--t-h3);line-height:var(--lh-h3);margin:0}
+.cartao-bt.materia .pg{font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-texto-suave)}
+.cartao-bt.materia .pg.forte{color:var(--materia-tinta);font-weight:var(--peso-forte)}
 </style>
 
 <div class="ceu" id="ceu" aria-hidden="true"></div>
@@ -5096,6 +5139,38 @@ const IC={
  medalha:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 2 6 8h4l1.2-6Zm7 0L18 8h-4l-1.2-6Z" opacity=".65"/><circle cx="12" cy="15" r="7.2"/><path d="m12 10.6 1.5 3 3.3.5-2.4 2.3.6 3.3-3-1.6-3 1.6.6-3.3-2.4-2.3 3.3-.5Z" fill="rgba(0,0,0,.3)"/></svg>'
 };
 
+/* ---------- arte: imagens WebP de assets/ (índice ATIVOS embutido pelo build) ----------
+   Regras do DESIGN.md: toda imagem tem width e height (sem pulo de layout), carrega preguiçosa e decodifica fora da thread principal.
+   Imagem decorativa tem alt vazio; imagem que informa recebe texto. Se a imagem falhar, o bloco fica neutro e o jogo segue. */
+const ARTE_BASE='./assets/';
+function ativo(id){return (typeof ATIVOS!=='undefined'&&ATIVOS[id])||null;}
+function imgArte(id,o){
+  o=o||{};const a=ativo(id);if(!a)return '';
+  return '<img class="arte'+(o.cls?' '+o.cls:'')+'" src="'+ARTE_BASE+a[0]+'" width="'+a[1]+'" height="'+a[2]+'" alt="'+escapa(o.alt||'')+
+    '" decoding="async" loading="'+(o.eager?'eager':'lazy')+'"'+(o.style?' style="'+o.style+'"':'')+
+    ' onerror="this.classList.add(\'falhou\')">';
+}
+
+/* planeta e guia de cada matéria (código do app: mat, pt, en) */
+const PLANETAS={
+  mat:{n:'Numeral',img:'planeta-mat',guia:'teo',guiaNome:'Teo',cena:'mat'},
+  pt:{n:'Fábula',img:'planeta-por',guia:'rufa',guiaNome:'Rufa',cena:'por'},
+  en:{n:'Horizonte',img:'planeta-ing',guia:'otto',guiaNome:'Otto',cena:'ing'}
+};
+const COMPANHEIROS=[
+  {id:'teo',n:'Teo',quem:'o robô explorador',fala:'Guia de Matemática'},
+  {id:'rufa',n:'Rufa',quem:'a raposa ruiva',fala:'Guia de Português'},
+  {id:'otto',n:'Otto',quem:'a lontra viajante',fala:'Guia de Inglês'},
+  {id:'brisa',n:'Brisa',quem:'a dragoa do ar',fala:'Gosta de desafios'},
+  {id:'capi',n:'Capi',quem:'a capivara',fala:'Cuida de quem precisa de calma'},
+  {id:'fagulha',n:'Fagulha',quem:'a vaga-lume',fala:'Leva os bilhetes'}
+];
+/* cenário da etapa n (1 a 10) da matéria: o par apagado/completo, se a arte já existe */
+function cenaDaEtapa(mat,n){
+  const cod=(PLANETAS[mat]||PLANETAS.mat).cena,k=('0'+n).slice(-2);
+  const ap='cen-'+cod+k+'-apagado',co='cen-'+cod+k+'-completo';
+  return (ativo(ap)&&ativo(co))?{apagado:ap,completo:co}:null;
+}
 /* ---------- o personagem: Bobby, o ursinho ---------- */
 const PECAS={
  chapeu:{
@@ -5209,43 +5284,16 @@ function MASC(exp,cls,look){
     '</svg>';
 }
 
-/* ---------- cenário do mapa ---------- */
-const sv=(c)=>'<svg viewBox="0 0 60 60" class="cen">'+c+'</svg>';
-const CEN={
- arvore:sv('<rect x="26" y="34" width="8" height="20" rx="3" fill="var(--tronco)"/><circle cx="30" cy="26" r="17" fill="var(--folha)"/><circle cx="19" cy="32" r="11" fill="var(--folha2)"/><circle cx="41" cy="32" r="11" fill="var(--folha2)"/>'),
- arbusto:sv('<circle cx="20" cy="42" r="12" fill="var(--folha2)"/><circle cx="34" cy="38" r="15" fill="var(--folha)"/><circle cx="44" cy="45" r="10" fill="var(--folha2)"/>'),
- flor:sv('<rect x="28" y="34" width="4" height="20" rx="2" fill="var(--folha)"/><circle cx="30" cy="26" r="7" fill="var(--flor1)"/><circle cx="20" cy="26" r="7" fill="var(--flor2)"/><circle cx="40" cy="26" r="7" fill="var(--flor2)"/><circle cx="30" cy="16" r="7" fill="var(--flor2)"/><circle cx="30" cy="26" r="5" fill="#FFD84D"/>'),
- pinheiro:sv('<rect x="27" y="42" width="6" height="12" rx="2" fill="var(--tronco)"/><path d="M30 6 44 28H16Z" fill="var(--folha)"/><path d="M30 20 47 44H13Z" fill="var(--folha2)"/>'),
- palmeira:sv('<path d="M28 54V26h5v28Z" fill="var(--tronco)"/><ellipse cx="16" cy="22" rx="14" ry="6" fill="var(--folha)" transform="rotate(-18 16 22)"/><ellipse cx="45" cy="22" rx="14" ry="6" fill="var(--folha)" transform="rotate(18 45 22)"/><ellipse cx="30" cy="14" rx="13" ry="6" fill="var(--folha2)"/>'),
- cacto:sv('<rect x="25" y="16" width="11" height="38" rx="5" fill="var(--folha)"/><rect x="11" y="26" width="9" height="18" rx="4" fill="var(--folha)"/><rect x="11" y="36" width="16" height="8" rx="4" fill="var(--folha)"/><rect x="41" y="20" width="9" height="16" rx="4" fill="var(--folha2)"/><rect x="33" y="28" width="16" height="8" rx="4" fill="var(--folha2)"/>'),
- cogumelo:sv('<rect x="24" y="32" width="12" height="22" rx="5" fill="#FFF0DA"/><path d="M6 34a24 18 0 0 1 48 0Z" fill="var(--flor1)"/><circle cx="20" cy="24" r="4.5" fill="#fff"/><circle cx="38" cy="21" r="5.5" fill="#fff"/>'),
- montanha:sv('<path d="M4 54 24 16l14 22 6-8 12 24Z" fill="var(--pedra)"/><path d="M24 16 33 30h-18Z" fill="#fff" opacity=".85"/>'),
- pedra:sv('<path d="M10 50c-4-10 6-20 16-20s22 8 20 20Z" fill="var(--pedra)"/><path d="M20 38c2-4 8-5 11-2" stroke="rgba(255,255,255,.5)" stroke-width="3" fill="none" stroke-linecap="round"/>'),
- predio:sv('<rect x="10" y="14" width="18" height="40" rx="3" fill="var(--pedra)"/><rect x="32" y="26" width="18" height="28" rx="3" fill="var(--folha2)"/><g fill="#FFD84D"><rect x="14" y="20" width="5" height="5"/><rect x="21" y="20" width="5" height="5"/><rect x="14" y="30" width="5" height="5"/><rect x="21" y="30" width="5" height="5"/><rect x="36" y="32" width="5" height="5"/><rect x="43" y="32" width="5" height="5"/></g>'),
- estrela:sv('<path d="m30 8 6 13 14 2-10 10 3 14-13-7-13 7 3-14-10-10 14-2Z" fill="#FFD84D"/>'),
- planeta:sv('<circle cx="30" cy="30" r="15" fill="var(--flor2)"/><ellipse cx="30" cy="32" rx="27" ry="7" fill="none" stroke="#FFD84D" stroke-width="4" transform="rotate(-18 30 32)"/>'),
- nuvem:sv('<g fill="var(--nuvem)"><circle cx="20" cy="34" r="12"/><circle cx="34" cy="30" r="16"/><circle cx="46" cy="36" r="11"/><rect x="18" y="34" width="30" height="13" rx="6"/></g>')
-};
-const CASTELO='<svg viewBox="0 0 100 100" class="cast-svg">'+
- '<rect x="14" y="40" width="72" height="48" rx="6" fill="var(--ub)"/>'+
- '<rect x="4" y="30" width="20" height="58" rx="5" fill="var(--ub)"/>'+
- '<rect x="76" y="30" width="20" height="58" rx="5" fill="var(--ub)"/>'+
- '<path d="M4 30h20l-4-10h-12Z" fill="rgba(0,0,0,.18)"/><path d="M76 30h20l-4-10h-12Z" fill="rgba(0,0,0,.18)"/>'+
- '<path d="M14 40h72l-6-12H20Z" fill="rgba(0,0,0,.18)"/>'+
- '<rect x="40" y="58" width="20" height="30" rx="10" fill="#4A2E12"/>'+
- '<circle cx="50" cy="47" r="6" fill="#FFD84D"/>'+
- '<rect x="48" y="4" width="4" height="20" fill="#7A5A3A"/><path d="M52 6h20l-6 6 6 6H52Z" fill="#FF4D5E"/></svg>';
-
 /* ---------- matérias ---------- */
 var UNITS=UNITS_MAT,TOTAL_LESSONS=TOTAL_MAT,MATERIA='mat';
 const MATERIAS={
- mat:{n:'Matemática',sub:'Galáxia dos números: do contar às equações',cor:'#12A06E',
+ mat:{n:'Matemática',sub:'Os números, do contar às equações',
       units:()=>UNITS_MAT,total:()=>TOTAL_MAT,caps:()=>CAPITULOS,miss:()=>MISSOES,
       ic:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h7v7H4Zm9 0h7v7h-7ZM4 14h7v7H4Zm9 0h7v7h-7Z" opacity=".25"/><path d="M6.2 5.2h2.6v1.4H6.2Zm0 2.2h2.6v1.4H6.2Z"/><path d="M14.6 5.6h4v1.5h-4Zm1.2 9.6h1.6v1.6h1.6v1.6h-1.6v1.6h-1.6v-1.6h-1.6v-1.6h1.6Z"/><path d="M5.4 16.2h4.2v1.6H5.4Z"/></svg>'},
- pt:{n:'Português',sub:'Galáxia das palavras: das letras à leitura',cor:'#7B5BE0',
+ pt:{n:'Português',sub:'As palavras, das letras à leitura',
       units:()=>UNITS_PT,total:()=>TOTAL_PT,caps:()=>CAPITULOS_PT,miss:()=>MISSOES_PT,
       ic:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7a3 3 0 0 1 3 3v13a3 3 0 0 0-3-2H4Zm16 0h-7a3 3 0 0 0-3 3v13a3 3 0 0 1 3-2h7Z"/></svg>'},
- en:{n:'Inglês',sub:'Galáxia do inglês: do zero à conversa do dia a dia',cor:'#1B93C8',
+ en:{n:'Inglês',sub:'O inglês, do zero à conversa do dia a dia',
       units:()=>UNITS_EN,total:()=>TOTAL_EN,caps:()=>CAPITULOS_EN,miss:()=>MISSOES_EN,
       ic:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9.5" opacity=".22"/><path d="M12 2.5a9.5 9.5 0 0 1 0 19 9.5 9.5 0 0 1 0-19Zm0 0c-3 3-3 16 0 19M2.8 9h18.4M2.8 15h18.4" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>'}
 };
@@ -5263,13 +5311,14 @@ function usarMateria(m){
 const MATCOD={mat:'mat',pt:'por',en:'ing'};
 let CAP_ATUAL=null,MISS_ATUAL=null;
 function telaMaterias(){
-  let h='<div class="perfis-in"><h1>Escolha a sua galáxia</h1>'+
-    '<p class="perfis-sub">Cada galáxia é uma matéria, cheia de mundos para desbravar. O progresso de cada uma é guardado separado.</p><div class="cartoes">';
+  let h='<div class="perfis-in"><h1>Escolha o seu planeta</h1>'+
+    '<p class="perfis-sub">Cada planeta é uma matéria, cheia de etapas para explorar. O progresso de cada um é guardado separado.</p><div class="cartoes planetas">';
   Object.keys(MATERIAS).forEach(k=>{
-    const m=MATERIAS[k];
+    const m=MATERIAS[k],pl=PLANETAS[k];
     const feitasM=Object.keys(S.feitas||{}).filter(x=>x.indexOf('rev')!==0&&(k==='pt'?x.charAt(0)==='p':(k==='en'?x.charAt(0)==='e':/^[0-9]/.test(x)))).length;
-    h+='<button class="cartao-bt materia" data-m="'+k+'" data-materia="'+MATCOD[k]+'">'+
-       '<span class="mat-ic">'+m.ic+'</span><b>'+m.n+'</b><span class="pg">'+m.sub+'</span>'+
+    h+='<button class="cartao-bt materia'+(k===MATERIA?' atual':'')+'" data-m="'+k+'" data-materia="'+MATCOD[k]+'">'+
+       '<span class="mat-planeta">'+imgArte(pl.img,{eager:true})+'</span>'+
+       '<span class="mat-nome">Planeta '+pl.n+'</span><b>'+m.n+'</b><span class="pg">'+m.sub+'</span>'+
        '<span class="pg forte">'+feitasM+' de '+m.total()+' fases</span></button>';
   });
   h+='</div></div>';
@@ -6073,76 +6122,111 @@ function passosDe(l){
   return [{t:'O que é isso?',c:t.ideia},{t:'Um exemplo',c:t.exemplo},{t:'Pra não esquecer',c:t.dica}];
 }
 
-/* ---------- mapa dos mundos ---------- */
-const TRACADO=[
-  [[20,124],[56,226],[27,334],[64,440],[43,546],[76,636]],
-  [[76,124],[40,226],[71,334],[32,440],[57,546],[24,636]]
-];
-const CENAS=[[76,176,1],[9,286,.85],[85,392,.9],[12,498,1],[66,598,.8]];
-const TEMAS=[
- ['arvore','arbusto','flor','arvore','arbusto'],
- ['palmeira','pedra','arbusto','palmeira','flor'],
- ['cacto','pedra','cacto','arbusto','pedra'],
- ['pinheiro','cogumelo','pinheiro','arbusto','cogumelo'],
- ['montanha','pedra','pinheiro','montanha','arbusto'],
- ['predio','arbusto','predio','flor','predio'],
- ['pedra','montanha','pedra','cacto','pedra'],
- ['arvore','flor','arbusto','arvore','flor'],
- ['estrela','planeta','estrela','planeta','estrela'],
- ['montanha','estrela','pinheiro','planeta','estrela']
-];
-const ALT_MAPA=726;
-function trilhaPontos(pos){
+/* ---------- mapa: planeta no topo, etapas que acendem e o Bobby andando ----------
+   Cada etapa (um "mundo" do código: 5 fases e a revisão) é um lugar que começa apagado e acende de baixo para cima,
+   uma parte por fase concluída. Os 6 nós ficam no chão calmo da cena, em serpentina (3 embaixo, 3 em cima; o chão calmo ocupa os 40% de baixo da cena).
+   Se a arte da etapa ainda não existe, o planeta da matéria faz o papel de cenário (apagado e aceso do mesmo jeito). */
+const NOS=[[20,84],[50,80],[80,84],[80,60],[50,56],[20,60]];   /* x e y em %; o 6º é a revisão */
+const REV_TOPO=70,REV_VAO=78;                                    /* faixa da revelação: de 70% (nada aceso) a -8% (tudo aceso) */
+const revPct=k=>(REV_TOPO-REV_VAO*Math.max(0,Math.min(5,k))/5).toFixed(1)+'%';
+const NO_ANTES={},REV_ANTES={};                                  /* onde o Bobby e a luz estavam no desenho anterior (só nesta sessão) */
+
+function trilhaPontos(){
   let h='';
-  for(let i=0;i<pos.length-1;i++){
-    const a=pos[i],b=pos[i+1];
-    for(let k=1;k<=5;k++){
-      const t=k/6;
-      const x=a[0]+(b[0]-a[0])*t+Math.sin(Math.PI*t)*3.5*(i%2?-1:1);
-      const y=a[1]+(b[1]-a[1])*t;
-      h+='<span class="passo-trilha" style="left:'+x.toFixed(1)+'%;top:'+y.toFixed(0)+'px"></span>';
+  for(let i=0;i<NOS.length-1;i++){
+    const a=NOS[i],b=NOS[i+1];
+    for(let k=1;k<=4;k++){
+      const t=k/5;
+      const x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t;
+      h+='<span class="passo-trilha" style="left:'+x.toFixed(1)+'%;top:'+y.toFixed(1)+'%"></span>';
     }
   }
   return h;
 }
-function mapaMundo(u,ui,prox){
-  const pos=TRACADO[ui%2],tema=TEMAS[ui%TEMAS.length];
-  let h='<div class="mapa" style="height:'+ALT_MAPA+'px">';
-  h+='<span class="cenario nuvem" style="left:'+(ui%2?18:62)+'%;top:44px">'+CEN.nuvem+'</span>';
-  h+='<span class="cenario nuvem lenta" style="left:'+(ui%2?70:22)+'%;top:276px">'+CEN.nuvem+'</span>';
-  tema.forEach((t,k)=>{const c=CENAS[k];
-    h+='<span class="cenario" style="left:'+c[0]+'%;top:'+c[1]+'px;--e:'+c[2]+'">'+(CEN[t]||CEN.arbusto)+'</span>';});
-  h+=trilhaPontos(pos);
-  u.lessons.forEach((l,li)=>{
-    const ok=S.feitas[l.id],abr=liberada(ui,li),ehCastelo=li===u.lessons.length-1;
-    const atual=prox&&prox[0]===ui&&prox[1]===li;
-    const cls=['fase'];if(!abr)cls.push('trava');if(ok)cls.push('feito');if(atual)cls.push('atual');
-    if(ehCastelo)cls.push('castelo');
-    h+='<div class="'+cls.join(' ')+'" style="left:'+pos[li][0]+'%;top:'+pos[li][1]+'px">';
-    if(atual)h+='<span class="voce">'+MASC('feliz','pula')+'</span>';
-    h+='<button class="bt" data-u="'+ui+'" data-l="'+li+'"'+(abr?'':' disabled aria-disabled="true"')+
-       ' aria-label="Fase '+(li+1)+': '+l.title+'">'+
-       (ehCastelo?(abr?CASTELO:IC.cadeado):(abr?'<b>'+(li+1)+'</b>':IC.cadeado))+'</button>';
-    h+='<span class="estrelas">'+(ok?estrelasSVG(ok):'')+'</span>';
-    h+='<span class="rot">'+l.title+'</span></div>';
-  });
+function noAtualDaEtapa(u){
+  for(let li=0;li<u.lessons.length;li++)if(!S.feitas[u.lessons[li].id])return li;
+  return 5;   /* tudo feito: ele espera na revisão */
+}
+function cenaHTML(u,k){
+  const cena=cenaDaEtapa(MATERIA,u.n),pl=PLANETAS[MATERIA];
+  if(cena){
+    return '<div class="cena" data-k="'+k+'" style="--rev:'+revPct(REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n])+'">'+
+      imgArte(cena.apagado,{cls:'cena-base'})+imgArte(cena.completo,{cls:'cena-luz'});
+  }
+  /* sem arte da etapa: o planeta no céu da matéria; apagado por filtro, aceso pela mesma revelação */
+  return '<div class="cena sem-arte" data-k="'+k+'" style="--rev:'+revPct(REV_ANTES[MATERIA+u.n]==null?k:REV_ANTES[MATERIA+u.n])+'">'+
+    '<div class="cena-ceu"></div>'+
+    '<div class="cena-planeta cena-base">'+imgArte(pl.img,{})+'</div>'+
+    '<div class="cena-planeta cena-luz">'+imgArte(pl.img,{})+'</div>'+
+    '<span class="cena-breve">Lugar novo em breve</span>';
+}
+function etapaHTML(u,ui,prox){
+  const feitasN=u.lessons.filter(l=>S.feitas[l.id]).length;
   const completo=mundoCompleto(u);
-  const nErr=(S.errados[MATERIA+u.n]||[]).length;
   const estRev=S.feitas['rev'+MATERIA+u.n]||0;
-  const cr=['fase','revisao-fase'];if(!completo)cr.push('trava');if(estRev)cr.push('feito');
-  h+='<div class="'+cr.join(' ')+'" style="left:'+pos[5][0]+'%;top:'+pos[5][1]+'px">';
-  h+='<button class="bt" data-rev="'+ui+'"'+(completo?'':' disabled aria-disabled="true"')+
-     ' aria-label="Revisao do Mundo '+u.n+'">'+(completo?IC.medalha:IC.cadeado)+'</button>';
-  h+='<span class="estrelas">'+(estRev?estrelasSVG(estRev):'')+'</span>';
-  h+='<span class="rot">Revisão do mundo'+(completo&&nErr?'<br><i>'+nErr+' para refazer</i>':'')+'</span></div>';
-  h+='</div>';
+  const nErr=(S.errados[MATERIA+u.n]||[]).length;
+  const ehAtual=!!prox&&prox[0]===ui;
+  const chave=MATERIA+u.n;
+  const atualNo=ehAtual?noAtualDaEtapa(u):-1;
+  let h='<section class="etapa'+(completo?' completa':'')+(estRev?' acesa':'')+'" id="etapa-'+(ui+1)+'" aria-labelledby="etapa-t-'+(ui+1)+'">';
+  h+='<header class="etapa-cab"><div class="etapa-tx"><span class="etapa-n">Etapa '+u.n+'</span>'+
+     '<h3 id="etapa-t-'+(ui+1)+'">'+escapa(u.title)+'</h3><p>'+escapa(u.sub)+'</p></div>'+
+     '<span class="etapa-prog'+(completo?' ok':'')+'">'+(completo?IC.certo+' Completa':feitasN+' de '+u.lessons.length+' fases')+'</span></header>';
+  h+=cenaHTML(u,feitasN);
+  h+='<div class="trilha">'+trilhaPontos();
+  u.lessons.forEach((l,li)=>{
+    const ok=S.feitas[l.id],abr=liberada(ui,li),atual=ehAtual&&atualNo===li;
+    const cls=['no'];if(!abr)cls.push('trava');if(ok)cls.push('feito');if(atual)cls.push('atual');
+    const est=ok?estrelasDaFase(l.id):0;
+    h+='<div class="'+cls.join(' ')+'" style="left:'+NOS[li][0]+'%;top:'+NOS[li][1]+'%">'+
+       '<button class="bt" data-u="'+ui+'" data-l="'+li+'"'+(abr?'':' disabled aria-disabled="true"')+
+       ' aria-label="Fase '+(li+1)+': '+escapa(l.title)+(ok?'. Concluída com '+est+(est===1?' estrela':' estrelas'):(atual?'. Sua próxima fase':''))+'">'+
+       (abr?'<b>'+(li+1)+'</b>':IC.cadeado)+'</button>'+
+       '<span class="estrelas" aria-hidden="true">'+(ok?estrelasSVG(est):'')+'</span>'+
+       '<span class="rot">'+escapa(l.title)+'</span></div>';
+  });
+  const cr=['no','revisao-no'];if(!completo)cr.push('trava');if(estRev)cr.push('feito');if(ehAtual&&atualNo===5)cr.push('atual');
+  h+='<div class="'+cr.join(' ')+'" style="left:'+NOS[5][0]+'%;top:'+NOS[5][1]+'%">'+
+     '<button class="bt" data-rev="'+ui+'"'+(completo?'':' disabled aria-disabled="true"')+
+     ' aria-label="Revisão da etapa '+u.n+(completo?'':'. Termine as 5 fases para abrir')+'">'+(completo?IC.medalha:IC.cadeado)+'</button>'+
+     '<span class="estrelas" aria-hidden="true">'+(estRev?estrelasSVG(estRev):'')+'</span>'+
+     '<span class="rot">Revisão'+(completo&&nErr?' · '+nErr+' para refazer':'')+'</span></div>';
+  if(ehAtual){
+    const ant=NO_ANTES[chave]==null?atualNo:NO_ANTES[chave];
+    const p=NOS[ant],lado=NOS[atualNo][0]<=20?'d':'e';
+    h+='<div class="voce '+lado+'" data-no="'+atualNo+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-hidden="true">'+
+       imgArte('bobby-p01',{cls:'voce-pe',eager:true})+imgArte('bobby-p05a',{cls:'voce-a1',eager:true})+imgArte('bobby-p05b',{cls:'voce-a2',eager:true})+'</div>';
+  }
+  h+='</div></div></section>';
   return h;
+}
+/* depois de pintar: acende a luz que ganhou e leva o Bobby ao nó novo (sem animação quando o movimento está reduzido) */
+function animarMapa(prox){
+  const reduz=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.cena[data-k]').forEach(el=>{
+    const sec=el.closest('.etapa'),ui=+sec.id.replace('etapa-','')-1,chave=MATERIA+UNITS[ui].n,k=+el.dataset.k;
+    const antes=REV_ANTES[chave];REV_ANTES[chave]=k;
+    if(antes!=null&&antes!==k){
+      if(reduz)el.style.setProperty('--rev',revPct(k));
+      else requestAnimationFrame(()=>requestAnimationFrame(()=>el.style.setProperty('--rev',revPct(k))));
+    }else el.style.setProperty('--rev',revPct(k));
+  });
+  const v=document.querySelectorAll('.voce')[0];
+  if(v&&prox&&isFinite(+v.dataset.no)){
+    const chave=MATERIA+UNITS[prox[0]].n,no=+v.dataset.no,antes=NO_ANTES[chave];
+    NO_ANTES[chave]=no;
+    if(antes!=null&&antes!==no){
+      const alvo=NOS[no];
+      const vai=()=>{v.classList.add('anda');v.style.left=alvo[0]+'%';v.style.top=alvo[1]+'%';
+        if(reduz)v.classList.remove('anda');else setTimeout(()=>v.classList.remove('anda'),520);};
+      if(reduz)vai();else requestAnimationFrame(()=>requestAnimationFrame(vai));
+    }
+  }
 }
 
 /* ---------- tela inicial ---------- */
 function pintarTopo(){
   document.body.dataset.materia=MATCOD[MATERIA]||'mat';
-  document.documentElement.style.setProperty('--m1',perfilAtual().cor||CORES[0]);
   const o=S.ofensiva,fogo=$('#st-fogo');
   fogo.innerHTML=IC.fogo+'<em>'+o.atual+'</em>'+(o.congeladores>0?'<span class="gelo-n" aria-hidden="true">'+IC.gelo+o.congeladores+'</span>':'');
   fogo.style.display=S.config.ofensivaLigada?'':'none';
@@ -6153,7 +6237,7 @@ function pintarTopo(){
   $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
   $('#som').innerHTML=S.som?IC.falar:IC.somOff;
   $('#som').setAttribute('aria-label',S.som?'Desligar sons':'Ligar sons');
-  $('#logo').innerHTML=MASC('oi');
+  $('#logo').innerHTML=imgArte('bobby-e01',{eager:true});
 }
 function renderTrilha(){
   pintarTopo();calar();
@@ -6161,22 +6245,20 @@ function renderTrilha(){
   garantirDia();
   const pct=Math.round(feitas()/TOTAL_LESSONS*100);
   const nome=escapa(S.nome?S.nome:'explorador');
-  const frase=feitas()===0?'Bem-vindo ao meu universo! Cada galáxia é uma matéria e cada mundo tem 5 fases. Escolha por onde começar.'
-    :(p?'Sua próxima fase é “'+UNITS[p[0]].lessons[p[1]].title+'”. Bora?'
-       :'Você zerou esta galáxia inteira! Pode refazer as fases ou trocar de matéria lá em cima.');
-  let h='<div class="ola"><div class="mini">'+MASC('feliz')+'</div>'+
-    '<div class="txt"><h1>Oi, '+nome+' <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1><p>'+frase+'</p></div>'+
-    '<div class="anel" style="--p:'+pct+'"><i>'+feitas()+'/'+TOTAL_LESSONS+'</i></div></div>'+rotinaHTML();
-
-  UNITS.forEach((u,ui)=>{
-    const completo=mundoCompleto(u);
-    h+='<section class="mundo" style="--ub:'+corUnidade(u)+'">';
-    h+='<div class="faixa"><div class="nun">Mundo '+u.n+' · '+u.lessons.length+' fases'+
-       (completo?' <span class="zerado">'+IC.bandeira+' completo</span>':'')+'</div>'+
-       '<h2>'+u.title+'</h2><p>'+u.sub+'</p></div>';
-    h+=mapaMundo(u,ui,p);
-    h+='</section>';
-  });
+  const pl=PLANETAS[MATERIA];
+  const frase=feitas()===0?'Bem-vindo ao meu universo! Cada planeta é uma matéria e cada etapa tem 5 fases. Escolha por onde começar.'
+    :(p?'Sua próxima fase é “'+escapa(UNITS[p[0]].lessons[p[1]].title)+'”. Bora?'
+       :'Você terminou este planeta inteiro! Pode refazer as fases ou visitar outro planeta lá em cima.');
+  const guia=(S.look&&S.look.companheiro)||pl.guia;
+  let h='<section class="planeta" aria-label="Planeta '+pl.n+'">'+
+    '<div class="planeta-img">'+imgArte(pl.img,{eager:true})+'</div>'+
+    '<div class="planeta-txt"><span class="planeta-nome">Planeta '+pl.n+' · '+MATERIAS[MATERIA].n+'</span>'+
+    '<h1>Oi, '+nome+' <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1>'+
+    '<p>'+frase+'</p>'+
+    '<div class="meta-linha"><div class="meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="'+TOTAL_LESSONS+'" aria-valuenow="'+feitas()+
+    '" aria-label="Fases deste planeta"><i style="width:'+pct+'%"></i></div><span>'+feitas()+' de '+TOTAL_LESSONS+' fases</span></div></div>'+
+    '<div class="planeta-guia">'+imgArte(guia+'-p01',{})+'</div></section>'+rotinaHTML();
+  UNITS.forEach((u,ui)=>{h+=etapaHTML(u,ui,p);});
   $('#tela').innerHTML=h;
   const en=$('#editar-nome');if(en)en.addEventListener('click',telaPerfil);
   ligarRotina();
@@ -6185,8 +6267,8 @@ function renderTrilha(){
       if(b.dataset.rev!==undefined)abrirRevisaoMundo(+b.dataset.rev);
       else abrirLicao(+b.dataset.u,+b.dataset.l);
     }));
+  animarMapa(p);
 }
-
 /* ---------- lição ---------- */
 let LIC={};
 function abrirLicao(ui,li){
