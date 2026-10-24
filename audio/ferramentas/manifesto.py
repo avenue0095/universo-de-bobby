@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import json, os, csv, hashlib, datetime, collections, re
-ROOT = os.environ.get('BOBBY_TRABALHO', os.path.expanduser('~/bobby-audio-trabalho'))   # items.json, wav/, medidas.json (nao fica no repositorio)
+ROOT = os.environ.get('BOBBY_TRABALHO', os.path.expanduser('~/bobby-audio-trabalho'))
 OUT = os.environ.get('BOBBY_AUDIO', os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')))
 items = json.load(open(f'{ROOT}/items.json'))
 med = {m['id']: m for m in json.load(open(f'{ROOT}/medidas.json'))}
@@ -27,7 +27,7 @@ for it in items:
 tot = lambda k: sum(c[k] for c in clipes.values())
 man = dict(v=1, gerado_em=datetime.datetime.now().astimezone().isoformat(timespec='seconds'),
            vozes=VOZ, formatos=dict(opus=dict(codec='Opus', bitrate='24k', canais=1, ext='.opus', bytes=tot('bytes_opus')),
-                                    m4a=dict(codec='AAC-LC', bitrate='28k', canais=1, ext='.m4a', bytes=tot('bytes_m4a'))),
+                                    m4a=dict(codec='AAC-LC', bitrate='24k', canais=1, ext='.m4a', bytes=tot('bytes_m4a'))),
            normalizacao=dict(alvo_lufs=-16, teto_pico_dbfs=-1.5, metodo='ebur128 + ganho + alimiter'),
            preenchimento_ms=dict(frase=[150, 250], encaixe=[30, 60], palavra_en=[150, 300]),
            total_clipes=len(clipes), duracao_total_ms=tot('ms'),

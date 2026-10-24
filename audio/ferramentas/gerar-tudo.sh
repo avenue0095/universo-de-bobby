@@ -17,6 +17,6 @@ python3 prep.py
 OMP_NUM_THREADS=4 "$PY" synth.py 0 2 & REV=1 "$PY" synth.py 1 2 & wait
 "$PY" synth.py 0 1   # fecha o que sobrou
 # 4) corte de silencio, normalizacao, Opus 24k e AAC 28k
-NPROC=6 AAC_K=28k python3 post.py
+NPROC=6 AAC_K=24k python3 post.py
 # 5) medicao e manifestos
 NPROC=6 python3 verifica.py && python3 manifesto.py

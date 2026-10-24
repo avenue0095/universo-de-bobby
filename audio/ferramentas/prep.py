@@ -4,7 +4,7 @@ Cada item: id, classe, idioma, texto, tipo, segs=[[lang, fala]], pad.
 """
 import csv, re, json, os, sys, collections, unicodedata
 
-D = os.environ.get('BOBBY_TRABALHO', os.path.expanduser('~/bobby-audio-trabalho'))   # onde ficam inventario-audio.tsv (r1) e r2..r5
+D = os.environ.get('BOBBY_TRABALHO', os.path.expanduser('~/bobby-audio-trabalho'))
 rows = {}
 for sub in ['', 'r2', 'r3', 'r4', 'r5']:
     p = os.path.join(D, sub, 'inventario-audio.tsv')
@@ -14,6 +14,26 @@ for sub in ['', 'r2', 'r3', 'r4', 'r5']:
             r['rodada'] = sub or 'r1'
             rows[k] = r
         # o inventario "oficial" desta execucao e a r1; o resto so soma quadros sorteados
+
+# ---- lote 2: falas que o app pede e nao tinham clipe (gerado por lacunas.js -> novos.json) ----
+def _slug(t): return re.sub(r'^-|-$', '', re.sub(r'[^a-z0-9]+', '-', unicodedata.normalize('NFD', t.lower()).encode('ascii', 'ignore').decode()))[:32]
+def _fnv(t):
+    h = 0x811c9dc5
+    for b in t.encode('utf8'): h = ((h ^ b) * 0x01000193) & 0xffffffff
+    return '%08x' % h
+_DIR = {'quadro-enunciado': 'quadro', 'feedback': 'sistema', 'pt-glosa': 'glosa', 'pt-letra': 'letra', 'en-alvo': 'en'}
+if os.path.exists(os.path.join(D, 'novos.json')):
+    for n in json.load(open(os.path.join(D, 'novos.json'))):
+        cl, tx = n['classe'], n['texto']
+        if cl == '?mask': cl = 'pt-glosa'
+        if cl == '?letra': cl = 'pt-letra'
+        if cl.startswith('?'): continue
+        lg = 'en-us' if n['idioma'] == 'en-US' else 'pt-br'
+        k = f"{lg}/{_DIR[cl]}/{_slug(tx)}-{_fnv(cl + tx)}.m4a"
+        if k in rows: continue
+        rows[k] = dict(arquivo=k, classe=cl, idioma=n['idioma'], materia=n['materia'] if cl != 'pt-glosa' else 'en', tipo_contagem='novo-lote2',
+                       chars=str(len(tx)), origem='lote 2: ' + n['origem'], texto=tx, rodada='lote2')
+
 base_n = len(list(csv.DictReader(open(os.path.join(D, 'inventario-audio.tsv'), encoding='utf8'), delimiter='\t', quoting=csv.QUOTE_NONE)))
 
 # ---------------- numeros por extenso (pt-BR) ----------------
@@ -117,7 +137,7 @@ def seg_mixed(texto):
     return out
 
 # ---------------- limpeza para fala ----------------
-LETRA = {'a':'á','b':'bê','c':'cê','d':'dê','e':'e','f':'efe','g':'gê','h':'agá','i':'i','j':'jota','k':'cá','l':'ele','m':'eme','n':'ene','o':'ó','p':'pê','q':'quê','r':'érre','s':'esse','t':'tê','u':'u','v':'vê','w':'dáblio','x':'xis','y':'ípsilon','z':'zê'}
+LETRA = {'a':'á','b':'bê','c':'cê','d':'dê','e':'e','f':'efe','g':'gê','h':'agá','i':'i','j':'jota','k':'cá','l':'ele','m':'eme','n':'ene','o':'ó','p':'pê','q':'quê','r':'érre','s':'esse','t':'tê','u':'u','v':'vê','w':'dáblio','x':'xis','y':'ípsilon','z':'zê','ç':'cê cedilha'}
 
 LETRA_S = dict(LETRA, e='é')
 
@@ -222,7 +242,7 @@ for k, r in rows.items():
     # arquivo sem extensao
     aid = re.sub(r'\.m4a$', '', k)
     items.append(dict(id=aid, classe=classe, idioma=idi, materia=r['materia'], tipo=r['tipo_contagem'], origem=r['origem'],
-                      texto=texto, segs=segs, pad=fp(classe), inventario=True, rodada=r['rodada']))
+                      texto=texto, segs=segs, pad=fp(classe), inventario=(r['rodada'] != 'lote2'), rodada=r['rodada']))
 
 # ---------------- extras de nucleo (nao estao no TSV; necessarios para o audio composto) ----------------
 def slug(t): return re.sub(r'^-|-$', '', re.sub(r'[^a-z0-9]+', '-', unicodedata.normalize('NFD', t.lower()).encode('ascii', 'ignore').decode()))[:32]
