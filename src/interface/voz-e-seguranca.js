@@ -1,55 +1,31 @@
-/* ---------- voz e som ---------- */
+/* ---------- voz e som (voz gravada: só liga/desliga, velocidade e pacotes para jogar sem internet) ---------- */
 function telaVoz(){
-  const pt=vozesDe('pt-BR'),en=vozesDe('en-US');
-  const REGIAO={'pt-br':'português do Brasil','pt-pt':'português de Portugal',
-    'en-us':'inglês americano','en-gb':'inglês britânico','en-au':'inglês australiano',
-    'en-ie':'inglês irlandês','en-za':'inglês sul-africano','en-in':'inglês indiano'};
-  const nomeCurto=v=>{
-    /* nomes vêm como "Eddy (Português (Brasil))" — corta tudo do primeiro parêntese */
-    const i=String(v.name||'').indexOf('(');
-    return (i>0?String(v.name).slice(0,i):String(v.name||'')).trim()||'Voz sem nome';
-  };
-  const detalhe=v=>{
-    const e=[];
-    const reg=REGIAO[idioma(v)];
-    if(reg)e.push(reg);
-    if(/premium|enhanced|neural|natural/i.test(v.name))e.push('melhor qualidade');
-    if(!v.localService)e.push('precisa de internet');
-    return e.join(' · ')||idioma(v);
-  };
-  const lista=(vs,atual,campo)=>{
-    if(!vs.length)return '<p class="galeria-intro">Este aparelho não tem nenhuma voz instalada para este idioma.</p>';
-    let h='<div class="vozes">';
-    h+='<button class="voz-op'+(!atual?' on':'')+'" data-voz="'+campo+'|">'+
-       '<b>Voz padrão do aparelho</b><span>a mesma de sempre</span></button>';
-    /* quando dois nomes iguais aparecem, o detalhe do lado desempata */
-    const vistos={};vs.forEach(v=>{const n=nomeCurto(v);vistos[n]=(vistos[n]||0)+1;});
-    vs.forEach(v=>{
-      const sel=atual===v.name,n=nomeCurto(v);
-      h+='<button class="voz-op'+(sel?' on':'')+'" data-voz="'+campo+'|'+
-         String(v.name).replace(/"/g,'&quot;')+'"><b>'+n+'</b>'+
-         '<span>'+detalhe(v)+'</span></button>';
-    });
-    return h+'</div>';
-  };
-
   let h='<div class="perfil-in">';
-  h+='<p class="galeria-intro">A voz que lê as aulas vem do próprio aparelho. Cada celular tem as suas. '+
-     'Toque numa opção para ouvir e ela já fica escolhida.</p>';
-
-  h+='<h2 class="sec">Voz do português</h2>'+lista(pt,S.vozPt,'pt');
-  h+='<h2 class="sec">Voz do inglês</h2>';
-  if(!en.length)h+='<p class="galeria-intro">Nenhuma voz em inglês instalada. '+
-     'No iPhone: <b>Ajustes → Acessibilidade → Conteúdo Falado → Vozes → Inglês</b>. '+
-     'No Android: <b>Config. → Idiomas → Conversão de texto em voz</b>.</p>';
-  h+=lista(en,S.vozEn,'en');
-
-  const v=Math.round((+S.velocidade||1)*100);
+  h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
+  h+='<h2 class="sec">Sons</h2><div class="ctl">';
+  h+='<div class="ctl-linha"><b>Efeitos e voz</b><div>'+
+     '<button class="chip-ctl'+(S.som?' on':'')+'" data-som="1">Ligados</button>'+
+     '<button class="chip-ctl'+(!S.som?' on':'')+'" data-som="0">Desligados</button></div>'+
+     '<small>Com os sons desligados, o Bobby também fica em silêncio.</small></div>';
+  h+='<div class="ctl-linha"><b>Narração do Bobby</b><div>'+
+     '<button class="chip-ctl'+(S.voz?' on':'')+'" data-voz="1">Ligada</button>'+
+     '<button class="chip-ctl'+(!S.voz?' on':'')+'" data-voz="0">Desligada</button></div></div></div>';
+  const v=Math.round(audioVelocidade()*100);
   h+='<h2 class="sec">Velocidade da fala</h2>';
-  h+='<div class="velocidade"><input type="range" id="vel" min="60" max="130" step="5" value="'+v+'">'+
+  h+='<div class="velocidade"><input type="range" id="vel" min="80" max="120" step="5" value="'+v+'" aria-label="Velocidade da fala">'+
      '<div class="vel-tx"><span>mais devagar</span><b id="vel-n">'+v+'%</b><span>mais rápido</span></div>'+
      '<button class="btn fantasma" id="vel-teste">Ouvir uma frase</button></div>';
-
+  h+='<h2 class="sec">Jogar sem internet</h2>';
+  h+='<p class="galeria-intro">As vozes ficam guardadas neste aparelho. Cada matéria baixa uma vez, quando você entra nela. Pelo celular, o tamanho aparece antes.</p>';
+  const g=audioGuardado();
+  h+='<div class="mundos-lista" id="pacotes-voz">';
+  ['core','mat','pt','en'].forEach(p=>{
+    const ok=g.pacotes&&g.pacotes[p]&&g.formato===audioFormato();
+    h+='<div class="linha-mundo"><div class="mtx"><b>'+NOME_PACOTE[p].replace(/^./,c=>c.toUpperCase())+'</b>'+
+       '<span class="sub-l">'+(audioIndiceCheio()?audioMB(audioTamanhoPacote(p)):'tamanho indisponível')+' · '+(ok?'guardado neste aparelho':'ainda não guardado')+'</span></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="perfil-bts"><button class="btn laranja" id="baixar-vozes">'+IC.baixar+' Guardar todas as vozes</button></div><div id="voz-aviso"></div>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-voz">Voltar ao perfil</button></div></div>';
 
   $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-voz2" aria-label="Voltar">'+
@@ -57,22 +33,31 @@ function telaVoz(){
   $('#perfil').classList.add('on');document.body.style.overflow='hidden';
   $('#volta-voz').addEventListener('click',telaPerfil);
   $('#volta-voz2').addEventListener('click',telaPerfil);
-
+  $('#perfil').querySelectorAll('[data-som]').forEach(b=>b.addEventListener('click',()=>{
+    S.som=b.dataset.som==='1';salvar();pintarTopo();if(!S.som)calar();telaVoz();}));
   $('#perfil').querySelectorAll('[data-voz]').forEach(b=>b.addEventListener('click',()=>{
-    const i=b.dataset.voz.indexOf('|');
-    const campo=b.dataset.voz.slice(0,i),nome=b.dataset.voz.slice(i+1);
-    if(campo==='pt'){S.vozPt=nome;salvar();falarPedido('Oi! Eu sou o Bobby. Vamos aprender juntos?');}
-    else{S.vozEn=nome;salvar();falarPedido('Hello! My name is Bobby. Nice to meet you!','en-US');}
-    telaVoz();
-  }));
+    S.voz=b.dataset.voz==='1';salvar();if(!S.voz)calar();telaVoz();}));
   const r=$('#vel');
   if(r){
     r.addEventListener('input',()=>{$('#vel-n').textContent=r.value+'%';});
-    r.addEventListener('change',()=>{S.velocidade=(+r.value)/100;salvar();
-      falarPedido('Assim está bom para você acompanhar?');});
+    r.addEventListener('change',()=>{S.velocidade=(+r.value)/100;salvar();falarPedido('Boa!');});
   }
   const t=$('#vel-teste');
-  if(t)t.addEventListener('click',()=>falarPedido('Contar é apontar para cada coisa e falar um número em voz alta.'));
+  if(t)t.addEventListener('click',()=>falarPedido('Isso aí!'));
+  const bx=$('#baixar-vozes');
+  if(bx)bx.addEventListener('click',async()=>{
+    bx.disabled=true;
+    const av=$('#voz-aviso');
+    await audioIniciar();
+    let falhas=0;
+    for(const p of ['core','mat','pt','en']){
+      const r2=await audioBaixarPacote(p,(a,b)=>{av.innerHTML='<div class="aviso-ok">Guardando '+NOME_PACOTE[p]+': '+a+' de '+b+'</div>';},false);
+      if(r2&&!r2.ok)falhas++;
+    }
+    av.innerHTML='<div class="aviso-ok">'+(falhas?'Alguns arquivos não baixaram. Tente de novo com internet.':'Pronto! As vozes estão guardadas neste aparelho.')+'</div>';
+    registrarEvento('config_mudou',{chave:'vozes_offline'});
+    bx.disabled=false;
+  });
 }
 
 /* ---------- segurança e dados do perfil ---------- */

@@ -4199,12 +4199,13 @@ function banco(m,i){
    preenchido pelo ingles-lex.js e usado quando o aparelho não tem voz em inglês */
 var FALA_EN={},SIG_EN={};
 function podeOuvirEN(){
-  try{return typeof temVoz==='function'?temVoz('en-US'):false;}catch(e){return false;}
+  /* voz gravada: a pergunta de ouvir existe sempre que o áudio está disponível (audioPodeOuvir, em interface/audio.js) */
+  try{return typeof audioPodeOuvir==='function'?audioPodeOuvir():true;}catch(e){return true;}
 }
 function ouvirEN(prompt,certa,erradas){
   const fala=FALA_EN[String(certa).toLowerCase()];
   const sig=SIG_EN[String(certa).toLowerCase()];
-  /* sem voz em inglês no aparelho a pergunta de ouvir ficaria impossível:
+  /* sem áudio (primeira visita sem internet) a pergunta de ouvir ficaria impossível:
      vira uma pergunta equivalente que dá para responder lendo */
   if(!podeOuvirEN()){
     if(fala)return Object.assign({type:'mc',prompt:'Qual destas palavras se fala assim: <b>“'+fala+'”</b>?',
@@ -5102,8 +5103,7 @@ function migrarDadosV3(d,dia){
     errados:errados,
     stats:{porLicao:Object.assign({},obj(stats.porLicao)),dias:dias,tempo:Math.max(0,n(stats.tempo)),amostras:[]},
     som:d.som!==false,voz:d.voz!==false,
-    velocidade:Math.min(1.3,Math.max(.6,n(d.velocidade,1)||1)),
-    vozPt:String(d.vozPt||'').slice(0,80),vozEn:String(d.vozEn||'').slice(0,80),
+    velocidade:Math.min(1.2,Math.max(.8,n(d.velocidade,1)||1)),    /* a voz gravada toca de 80% a 120% */
     nome:String(d.nome||'').slice(0,18),
     legado:{nivel:['facil','medio','forte'].indexOf(d.nivel)>=0?d.nivel:'facil',errados:JSON.parse(JSON.stringify(errados)),
             vozPt:String(d.vozPt||'').slice(0,80),vozEn:String(d.vozEn||'').slice(0,80),migradoEm:dia||''}
@@ -5329,6 +5329,7 @@ function usarMateria(m){
   S.materia=m;salvar();
   $('#nome-materia').textContent=MATERIAS[m].n;
   fecharMaterias();renderTrilha();
+  if(typeof audioPrepararMateria==='function')audioPrepararMateria(m);
   if(typeof mostrarEntradaDoDia==='function')mostrarEntradaDoDia();
 }
 let CAP_ATUAL=null,MISS_ATUAL=null;
@@ -5388,7 +5389,7 @@ function estadoVazio(){
     config:configPadrao(),revisao:revisaoVazia(),colecao:colecaoVazia(),
     semana:{chave:'',estrelas:0,aulaRevista:0,constelacao:false},
     stats:{porLicao:{},dias:{},tempo:0,amostras:[]},missHist:[],
-    som:true,voz:true,velocidade:1,vozPt:'',vozEn:'',
+    som:true,voz:true,velocidade:1,
     legado:{nivel:'',errados:{},vozPt:'',vozEn:'',migradoEm:''}};
 }
 function clonar(o){
@@ -5490,10 +5491,10 @@ function estadoDe(dados){
   s.stats=normalizaStats(d.stats);
   s.missHist=listaDe(d.missHist,5).filter(h=>h&&typeof h==='object'&&ehDia(h.dia)).map(h=>({dia:h.dia,ids:textosDe(h.ids,3,4),ok:intDe(h.ok,0,3,0)}));
   s.som=d.som!==false;s.voz=d.voz!==false;
-  s.velocidade=numDe(d.velocidade,.6,1.3,1);
-  s.vozPt=String(d.vozPt||'').slice(0,80);s.vozEn=String(d.vozEn||'').slice(0,80);
+  s.velocidade=numDe(d.velocidade,.8,1.2,1);   /* a voz gravada toca de 80% a 120% */
+  const vozAntiga={pt:String(d.vozPt||'').slice(0,80),en:String(d.vozEn||'').slice(0,80)};
   const l=objDe(d.legado);
-  s.legado={nivel:['','facil','medio','forte'].indexOf(l.nivel)>=0?l.nivel:'',errados:objDe(l.errados),vozPt:String(l.vozPt||'').slice(0,80),vozEn:String(l.vozEn||'').slice(0,80),migradoEm:diaOuVazio(l.migradoEm)};
+  s.legado={nivel:['','facil','medio','forte'].indexOf(l.nivel)>=0?l.nivel:'',errados:objDe(l.errados),vozPt:String(l.vozPt||vozAntiga.pt).slice(0,80),vozEn:String(l.vozEn||vozAntiga.en).slice(0,80),migradoEm:diaOuVazio(l.migradoEm)};
   return s;
 }
 
@@ -5643,21 +5644,197 @@ function apagarPerfil(i){
   if(STORE.atual<0){S=estadoVazio();}
   telaPerfis();
 }
-/* ---------- áudio: camada única de som falado ----------
+/* ---------- áudio gravado: do texto falado ao clipe ----------
+   Sem DOM e sem rede. Resolve "o que o app quer falar" em nomes de clipe do manifesto (audio/manifesto-min.json),
+   do mesmo jeito que o gerador (audio/ferramentas/extrair-audio.js e prep.py):
+   - nome do clipe = <idioma>/<pasta da classe>/<slug de 32 letras>-<FNV-1a 32 bits de classe + texto, em UTF-8>
+   - texto = emTexto(html) (português) ou limpaEN(html) (inglês), com espaços simples
+   - enunciado com número, nome, palavra ou sílaba sorteados = composição: QUADROS (trechos fixos, minúsculas e sem
+     pontuação) + ENCAIXES (números, nomes, palavras, sílabas, letras), tocados em fila (docs/FASE-2-especificacao.md, 9.2).
+   Texto sem clipe NÃO cai para voz do aparelho: fica sem voz e entra na lista de faltas. */
+const AUDIO_DIR={'aula-passo':'aula','capitulo-abre':'historia','missao':'missao','missao-fim':'missao','en-alvo':'en','pt-glosa':'glosa',
+  'pt-palavra':'palavra','pt-silaba':'silaba','pt-letra':'letra','pt-leitura':'leitura','quadro-enunciado':'quadro',
+  'numero':'numero','nome':'nome','feedback':'sistema'};
+const AUDIO_CLASSES={'pt-BR':['aula-passo','capitulo-abre','missao','missao-fim','pt-glosa','pt-palavra','pt-silaba','pt-letra','pt-leitura','quadro-enunciado','numero','nome','feedback'],
+  'en-US':['en-alvo']};
+/* manifesto carregado: chave (caminho sem extensão) -> {pacote, ms, b:[opus, m4a]} */
+const AUDIO_INDICE={chaves:new Map(),pacotes:{}};
+
+function audioFnv8(str){
+  const b=unescape(encodeURIComponent(String(str)));   /* UTF-8 em "bytes", como o gerador */
+  let h=0x811c9dc5;
+  for(let i=0;i<b.length;i++){h^=b.charCodeAt(i);h=Math.imul(h,0x01000193);}
+  return (h>>>0).toString(16).padStart(8,'0');
+}
+function audioSlug(t){
+  return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,32);
+}
+function audioChaveDe(classe,idioma,texto){
+  return (idioma==='en-US'?'en-us':'pt-br')+'/'+AUDIO_DIR[classe]+'/'+audioSlug(texto)+'-'+audioFnv8(classe+texto);
+}
+function audioIndexar(min){
+  AUDIO_INDICE.chaves=new Map();AUDIO_INDICE.pacotes={};
+  if(!min||!min.pacotes)return 0;
+  Object.keys(min.pacotes).forEach(p=>{
+    AUDIO_INDICE.pacotes[p]=Object.keys(min.pacotes[p]);
+    Object.keys(min.pacotes[p]).forEach(k=>{const v=min.pacotes[p][k];AUDIO_INDICE.chaves.set(k,{pacote:p,ms:v[0],b:[v[1],v[2]]});});
+  });
+  return AUDIO_INDICE.chaves.size;
+}
+const audioTem=k=>AUDIO_INDICE.chaves.has(k);
+function audioResolveTexto(texto,idioma,classes){
+  const t=String(texto==null?'':texto).replace(/\s+/g,' ').trim();
+  if(!t)return null;
+  const lista=classes||AUDIO_CLASSES[idioma==='en-US'?'en-US':'pt-BR'];
+  const lang=idioma==='en-US'?'en-US':'pt-BR';
+  for(const c of lista){const k=audioChaveDe(c,lang,t);if(audioTem(k))return k;}
+  /* o gerador junta "Excuse me" e "excuse me" num clipe só (a conta ignora maiúscula): tenta também em minúscula */
+  const b=t.toLowerCase();
+  if(b!==t)for(const c of lista){const k=audioChaveDe(c,lang,b);if(audioTem(k))return k;}
+  return null;
+}
+
+/* ---------- números por extenso, em palavras que existem como clipe ('numero') ---------- */
+const AU_U20=['zero','um','dois','três','quatro','cinco','seis','sete','oito','nove','dez','onze','doze','treze','catorze','quinze','dezesseis','dezessete','dezoito','dezenove'];
+const AU_DZ=['','','vinte','trinta','quarenta','cinquenta','sessenta','setenta','oitenta','noventa'];
+const AU_CT=['','cento','duzentos','trezentos','quatrocentos','quinhentos','seiscentos','setecentos','oitocentos','novecentos'];
+function audioExtenso(n){
+  if(n<20)return AU_U20[n];
+  if(n<100){const d=Math.floor(n/10),u=n%10;return AU_DZ[d]+(u?' e '+AU_U20[u]:'');}
+  if(n===100)return 'cem';
+  if(n<1000){const c=Math.floor(n/100),r=n%100;return AU_CT[c]+(r?' e '+audioExtenso(r):'');}
+  if(n<1000000){
+    const m=Math.floor(n/1000),r=n%1000,pre=m===1?'mil':audioExtenso(m)+' mil';
+    if(r===0)return pre;
+    return pre+((r<100||r%100===0)?' e ':' ')+audioExtenso(r);
+  }
+  return String(n).split('').map(d=>AU_U20[+d]).join(' ');
+}
+/* '23' -> 'vinte e três'; '3,5' -> 'três vírgula cinco'; '3,05' -> 'três vírgula zero cinco' (mesma regra do prep.py) */
+function audioNumeroPalavras(s){
+  s=String(s);
+  if(s.indexOf(',')>=0){
+    const p=s.split(','),b=p[1];
+    const zeros=b.length-b.replace(/^0+/,'').length;
+    return audioExtenso(+p[0])+' vírgula '+(+b?('zero '.repeat(zeros)+audioExtenso(+b)):'zero');
+  }
+  return audioExtenso(+s);
+}
+function audioNumeroClipes(s){
+  const ch=[],falta=[];
+  audioNumeroPalavras(s).split(' ').forEach(w=>{
+    const k=audioChaveDe('numero','pt-BR',w);
+    if(audioTem(k))ch.push(k);else falta.push('numero:'+w);
+  });
+  return {chaves:ch,faltas:falta};
+}
+
+/* ---------- composição de enunciado (espelha quadrosDe do extrair-audio.js) ---------- */
+let AU_CACHE=null;
+function audioDadosDeConteudo(){
+  if(AU_CACHE)return AU_CACHE;
+  const mask=new Set();
+  try{
+    [LEX,VOC].forEach(o=>Object.values(o).forEach(a=>a.forEach(w=>w.forEach(x=>x&&mask.add(String(x))))));
+    FRASES.forEach(f=>f.forEach(x=>mask.add(x)));
+    COGN.forEach(f=>f.slice(0,2).forEach(x=>mask.add(x)));
+  }catch(e){}
+  const sil=new Set();
+  PAL.forEach(w=>w.s.forEach(s=>sil.add(s)));
+  AU_CACHE={
+    mask:[...mask].filter(x=>x.length>1).sort((a,b)=>b.length-a.length),
+    palavras:PAL.map(w=>w.p),silabas:[...sil],
+    nomes:NOMES.slice()
+  };
+  AU_CACHE.reNome=AU_CACHE.nomes.map(n=>new RegExp('\\b'+n+'\\b','g'));
+  AU_CACHE.rePal=AU_CACHE.palavras.map(w=>new RegExp('\\b'+w+'\\b','gi'));
+  AU_CACHE.reSil=AU_CACHE.silabas.map(w=>new RegExp('(?<![\\p{L}\\u0001\\uE000-\\uF8FF])'+w+'(?![\\p{L}])','giu'));
+  return AU_CACHE;
+}
+const AU_MARCA=i=>String.fromCharCode(0xE000+i);
+/* corta o texto em [{t:'quadro',v}, {t:'num'|'nome'|'mask'|'caps'|'pal'|'sil', v}] na ordem em que se fala */
+function audioPartes(p,mat){
+  const D=audioDadosDeConteudo(),enc=[];
+  const marca=(v,tipo)=>{enc.push([v,tipo]);return AU_MARCA(enc.length-1);};
+  let s=p;
+  if(mat==='en')D.mask.forEach(m=>{if(s.indexOf(m)>=0)s=s.split(m).join(marca(m,'mask'));});
+  s=s.replace(/\d+(,\d+)?/g,m=>marca(m,'num'));
+  D.reNome.forEach(re=>{s=s.replace(re,m=>marca(m,'nome'));});
+  if(mat==='pt'){
+    s=s.replace(/\b[A-ZÇ]{1,3}\b/g,m=>marca(m,'caps'));
+    D.rePal.forEach(re=>{s=s.replace(re,m=>marca(m,'pal'));});
+    D.reSil.forEach(re=>{s=s.replace(re,m=>marca(m,'sil'));});
+  }
+  const partes=[];
+  let atual='';
+  const fecha=()=>{
+    const q=atual.replace(/[?!.,:;()"“”‘’→–—\-=]+/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
+    if(q.length>1)partes.push({t:'quadro',v:q});
+    atual='';
+  };
+  for(const ch of s){
+    const c=ch.charCodeAt(0);
+    if(c>=0xE000&&c<=0xF8FF){fecha();const e=enc[c-0xE000];if(e)partes.push({t:e[1],v:e[0]});}
+    else atual+=ch;
+  }
+  fecha();
+  return partes;
+}
+/* clipes de um encaixe; devolve {chaves, faltas} */
+function audioEncaixe(parte){
+  const v=parte.v;
+  if(parte.t==='num')return audioNumeroClipes(v);
+  const um=k=>k?{chaves:[k],faltas:[]}:{chaves:[],faltas:[parte.t+':'+v]};
+  if(parte.t==='nome')return um(audioResolveTexto(v,'pt-BR',['nome']));
+  if(parte.t==='mask')return um(audioResolveTexto(v,'en-US',['en-alvo'])||audioResolveTexto(v,'pt-BR',['pt-glosa']));
+  if(parte.t==='pal')return um(audioResolveTexto(v.toLowerCase(),'pt-BR',['pt-palavra']));
+  if(parte.t==='sil'||parte.t==='caps'){
+    const baixo=v.toLowerCase();
+    const k=audioResolveTexto(baixo,'pt-BR',['pt-silaba','pt-palavra','pt-letra']);
+    if(k)return {chaves:[k],faltas:[]};
+    /* sigla ou dígrafo (RR, CH, LH): fala o nome das letras, uma a uma */
+    const ch=[],falta=[];
+    baixo.split('').forEach(l=>{const kl=audioResolveTexto(l,'pt-BR',['pt-letra']);if(kl)ch.push(kl);else falta.push('letra:'+l);});
+    return {chaves:ch,faltas:falta};
+  }
+  return {chaves:[],faltas:[parte.t+':'+v]};
+}
+/* O texto inteiro pode ter clipe próprio (aula, palavra, frase em inglês). Se não tiver, compõe por quadros e encaixes.
+   html: o que o app mandaria falar. idioma: 'pt-BR'|'en-US'. mat: matéria do enunciado ('mat'|'pt'|'en'). */
+function audioSequencia(html,idioma,mat){
+  const ing=idioma==='en-US';
+  const t=ing?limpaEN(html):emTexto(html);
+  const inteiro=audioResolveTexto(t,idioma);
+  if(inteiro)return {texto:t,chaves:[inteiro],faltas:[],composto:false};
+  if(ing)return {texto:t,chaves:[],faltas:[t],composto:false};
+  const chaves=[],faltas=[];
+  const partes=audioPartes(t,mat||'mat');
+  partes.forEach(p=>{
+    if(p.t==='quadro'){
+      const k=audioResolveTexto(p.v,'pt-BR',['quadro-enunciado']);
+      if(k)chaves.push(k);else faltas.push('quadro:'+p.v);
+    }else{const r=audioEncaixe(p);r.chaves.forEach(k=>chaves.push(k));r.faltas.forEach(f=>faltas.push(f));}
+  });
+  return {texto:t,chaves:chaves,faltas:faltas,composto:true};
+}
+/* ---------- áudio: player da voz GRAVADA ----------
+   Decisão do Filipe: a voz é toda gravada (audio/, manifesto-min.json). NÃO existe voz do aparelho (speechSynthesis):
+   texto sem clipe fica sem voz e vira aviso no teste de cobertura (testes/cobertura-audio.js) e evento 'audio_falha'.
    API para o resto do app:
-     audioTocar(chaveOuTexto, idioma)   toca um clipe gravado (se o manifesto tiver) ou, só como RESERVA,
-                                        lê o texto com a voz do aparelho. Devolve uma Promise que diz como saiu:
-                                        'gravado' | 'reserva' | 'mudo' | 'cancelado' | 'sem-voz'
-     audioPrecarregar([chaves])         baixa e decodifica clipes antes de precisar
-     audioParar()                       para tudo: clipe em andamento, fala da voz do aparelho e
-                                        TODA fala agendada com audioAgendar() (nada sai depois de fechar a fase)
-     audioAgendar(fn, ms)               setTimeout que o audioParar() cancela
-     audioDefinirManifesto(m, base)     liga o áudio gravado. Hoje ninguém chama: o manifesto vem do módulo
-                                        de áudio (pasta audio/) e será integrado depois.
-   Regras: S.som=false ou S.voz=false silenciam TUDO (efeitos e voz). Idioma: 'pt-BR' ou 'en-US'.
-   Formato do manifesto (docs/FASE-2-especificacao.md, 9.4):
-     { v:1, clipes:{ 'pt-br/numero/vinte-1a2b3c4d.m4a':{ms,b} }, textos:{ 'pt-br|texto normalizado':'chave' } } */
-const AUDIO={manifesto:null,base:'',token:0,timers:[],fonte:null,cache:new Map(),max:48,ultimo:''};
+     audioTocar(alvo, idioma)   alvo = texto (html), chave de clipe ou lista deles. Resolve texto -> clipe(s) (audio-clipes.js),
+                                compõe quadros e encaixes quando preciso, toca em fila sem intervalo (Web Audio).
+                                Devolve Promise: 'gravado' | 'sem-clipe' | 'mudo' | 'cancelado' | 'indisponivel'
+     audioPrecarregarTexto(t)   baixa e decodifica os clipes do próximo texto
+     audioParar()               para clipe, fila e TODA fala agendada (nada sai depois de fechar a fase)
+     audioAgendar(fn, ms)       setTimeout que o audioParar() cancela
+     audioIniciar()             carrega o manifesto, escolhe .m4a (AAC) ou .opus, baixa o pacote core na primeira visita
+     audioBaixarPacote(nome)    guarda um pacote (core, mat, pt, en) no cache 'bobby-audio-v1' para jogar sem internet
+   Regras: S.som=false ou S.voz=false silenciam TUDO. Formato: .m4a por padrão; .opus só se o aparelho não toca AAC
+   e confirma Opus em canPlayType (docs/FASE-2-especificacao.md, 9.5). */
+const AUDIO_CACHE='bobby-audio-v1';
+const AUDIO_CHAVE_LS='universo-bobby-audio';
+const AUDIO={base:'audio/',token:0,timers:[],fontes:[],buffers:new Map(),max:80,pronto:null,semAudio:false,
+  formato:null,log:[],avisados:new Set(),baixando:{},fins:[]};
 
 function audioAtivo(){return !!S&&S.som!==false&&S.voz!==false;}
 function ctxAudio(){
@@ -5667,43 +5844,84 @@ function ctxAudio(){
     return AC;
   }catch(e){return null;}
 }
-function audioDefinirManifesto(m,base){
-  AUDIO.manifesto=(m&&typeof m==='object'&&m.clipes)?m:null;
-  AUDIO.base=String(base||'');
-  AUDIO.cache.clear();
+/* o app só oferece "ouça e escolha" quando há áudio; sem manifesto (primeira visita sem internet) a pergunta vira de ler */
+const audioPodeOuvir=()=>!AUDIO.semAudio;
+function audioLog(chave,estado){
+  AUDIO.log.push({chave:chave,estado:estado,t:Date.now()});
+  if(AUDIO.log.length>200)AUDIO.log.shift();
 }
-/* normaliza o texto como o script de build normaliza: minúsculas, sem tags, espaços simples */
-function audioNormaliza(t){
-  return String(t==null?'':t).replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
+function audioFormato(){
+  if(AUDIO.formato)return AUDIO.formato;
+  let f='.m4a';
+  try{
+    const a=document.createElement('audio');
+    const aac=a.canPlayType&&a.canPlayType('audio/mp4; codecs="mp4a.40.2"');
+    const opus=a.canPlayType&&a.canPlayType('audio/ogg; codecs="opus"');
+    if(!aac&&opus)f='.opus';
+  }catch(e){}
+  AUDIO.formato=f;
+  return f;
 }
-function audioChave(alvo,idioma){
-  const m=AUDIO.manifesto;
-  if(!m)return null;
-  const a=String(alvo==null?'':alvo);
-  if(m.clipes&&Object.prototype.hasOwnProperty.call(m.clipes,a))return a;
-  const lang=(idioma==='en-US')?'en-us':'pt-br';
-  const k=m.textos&&m.textos[lang+'|'+audioNormaliza(a)];
-  return (k&&m.clipes&&m.clipes[k])?k:null;
+const audioUrl=chave=>AUDIO.base+chave+audioFormato();
+
+/* ---------- manifesto ---------- */
+function audioIniciar(){
+  if(AUDIO.pronto)return AUDIO.pronto;
+  AUDIO.pronto=(async()=>{
+    let min=null;
+    try{
+      const r=await fetch(AUDIO.base+'manifesto-min.json');
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      min=await r.json();
+    }catch(e){
+      try{const c=await caches.open(AUDIO_CACHE);const r=await c.match(AUDIO.base+'manifesto-min.json');if(r)min=await r.json();}catch(e2){}
+    }
+    /* sem manifesto (primeira visita sem internet): perguntas de ouvir viram de ler, e a próxima chamada tenta de novo */
+    if(!min||!audioIndexar(min)){AUDIO.semAudio=true;AUDIO.pronto=null;return false;}
+    AUDIO.semAudio=false;
+    /* primeira visita: o pacote core (letras, sílabas, números, nomes, feedback) vem junto */
+    audioBaixarPacote('core').catch(()=>{});
+    return true;
+  })();
+  return AUDIO.pronto;
 }
+
+/* ---------- carregar e decodificar ---------- */
 function audioCarregar(chave){
-  if(AUDIO.cache.has(chave)){const v=AUDIO.cache.get(chave);AUDIO.cache.delete(chave);AUDIO.cache.set(chave,v);return v;}
+  if(AUDIO.buffers.has(chave)){const v=AUDIO.buffers.get(chave);AUDIO.buffers.delete(chave);AUDIO.buffers.set(chave,v);return v;}
   const ctx=ctxAudio();
   if(!ctx||typeof fetch!=='function')return Promise.reject(new Error('sem Web Audio'));
-  const p=fetch(AUDIO.base+chave).then(r=>{
+  const p=fetch(audioUrl(chave)).then(r=>{
     if(!r.ok)throw new Error('HTTP '+r.status);
     return r.arrayBuffer();
-  }).then(b=>new Promise((ok,no)=>{ctx.decodeAudioData(b,ok,no);}));
-  AUDIO.cache.set(chave,p);
-  /* clipe que falhou não fica no cache: a próxima tentativa baixa de novo */
-  p.catch(()=>{AUDIO.cache.delete(chave);});
-  while(AUDIO.cache.size>AUDIO.max)AUDIO.cache.delete(AUDIO.cache.keys().next().value);
+  }).then(b=>new Promise((ok,no)=>{
+    const r=ctx.decodeAudioData(b,ok,no);
+    if(r&&r.then)r.then(ok,no);
+  }));
+  AUDIO.buffers.set(chave,p);
+  p.catch(()=>{AUDIO.buffers.delete(chave);});      /* clipe que falhou não fica no cache: a próxima tentativa baixa de novo */
+  while(AUDIO.buffers.size>AUDIO.max)AUDIO.buffers.delete(AUDIO.buffers.keys().next().value);
   return p;
 }
-function audioPrecarregar(chaves){
-  if(!AUDIO.manifesto)return Promise.resolve(0);
-  const lista=(chaves||[]).filter(c=>AUDIO.manifesto.clipes&&AUDIO.manifesto.clipes[c]);
-  return Promise.all(lista.map(c=>audioCarregar(c).then(()=>1,()=>0))).then(r=>r.reduce((a,b)=>a+b,0));
+/* lista de clipes de um alvo: texto, chave ou lista deles */
+function audioClipesDe(alvo,idioma,mat){
+  const itens=Array.isArray(alvo)?alvo:[alvo];
+  const chaves=[],faltas=[];
+  itens.forEach(it=>{
+    if(typeof it==='string'&&audioTem(it)){chaves.push(it);return;}
+    const s=audioSequencia(it,idioma,mat);
+    s.chaves.forEach(k=>chaves.push(k));
+    s.faltas.forEach(f=>faltas.push(f));
+  });
+  return {chaves:chaves,faltas:faltas};
 }
+function audioPrecarregarTexto(alvo,idioma,mat){
+  if(!audioAtivo()||AUDIO.semAudio||!audioIndiceCheio())return Promise.resolve(0);
+  const c=audioClipesDe(alvo,idioma||'pt-BR',mat||MATERIA);
+  return Promise.all(c.chaves.map(k=>audioCarregar(k).then(()=>1,()=>0))).then(r=>r.reduce((a,b)=>a+b,0));
+}
+const audioIndiceCheio=()=>AUDIO_INDICE.chaves.size>0;
+
 function audioAgendar(fn,ms){
   const id=setTimeout(()=>{
     const i=AUDIO.timers.indexOf(id);if(i>=0)AUDIO.timers.splice(i,1);
@@ -5715,59 +5933,124 @@ function audioAgendar(fn,ms){
 function audioParar(){
   AUDIO.token++;
   AUDIO.timers.splice(0).forEach(clearTimeout);
-  if(AUDIO.fonte){try{AUDIO.fonte.onended=null;AUDIO.fonte.stop();}catch(e){}AUDIO.fonte=null;}
-  try{if(typeof speechSynthesis!=='undefined')speechSynthesis.cancel();}catch(e){}
+  AUDIO.fontes.splice(0).forEach(f=>{try{f.onended=null;f.stop();}catch(e){}});
+  AUDIO.fins.splice(0).forEach(f=>f('cancelado'));      /* quem esperava a fala terminar recebe 'cancelado' */
 }
 function audioFalhou(chave,motivo){
+  /* só código curto: texto livre nunca vai para os eventos */
   try{if(typeof registrarEvento==='function')registrarEvento('audio_falha',{clip:String(chave).slice(0,80),motivo:String(motivo).toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,40)});}catch(e){}
 }
-/* RESERVA: voz do aparelho. Nunca chama speak() logo depois de cancel(): em vários Androids o cancel
-   engole a fala seguinte. Se havia fala em andamento, cancela e espera um instante. */
-function audioReserva(texto,idioma,tok){
-  if(typeof speechSynthesis==='undefined'||typeof SpeechSynthesisUtterance==='undefined')return Promise.resolve('sem-voz');
-  const ing=idioma==='en-US';
-  const t=String(texto||'').trim();
-  if(!t)return Promise.resolve('mudo');
-  return new Promise(ok=>{
-    const dizer=()=>{
-      if(tok!==AUDIO.token){ok('cancelado');return;}
-      try{
-        const v=vozDe(ing?'en-US':'pt-BR');
-        if(ing&&!v){if(VOZES.length)avisoVoz();ok('sem-voz');return;}
-        const u=new SpeechSynthesisUtterance(t);
-        u.lang=ing?'en-US':'pt-BR';
-        if(v){u.voice=v;if(v.lang)u.lang=v.lang;}
-        u.rate=(ing?.82:.92)*(+S.velocidade||1);u.pitch=1.05;
-        u.onend=()=>ok('reserva');u.onerror=()=>ok('reserva');
-        speechSynthesis.speak(u);
-        AUDIO.ultimo=t;
-      }catch(e){ok('sem-voz');}
-    };
-    try{
-      if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();audioAgendar(dizer,90);}
-      else dizer();
-    }catch(e){ok('sem-voz');}
-  });
-}
-function audioTocar(alvo,idioma){
-  if(!audioAtivo())return Promise.resolve('mudo');
+const audioVelocidade=()=>Math.min(1.2,Math.max(.8,+S.velocidade||1));
+
+/* ---------- tocar ---------- */
+async function audioTocar(alvo,idioma,mat){
+  if(!audioAtivo())return 'mudo';
   audioParar();
   const tok=AUDIO.token;
-  const lang=(idioma==='en-US')?'en-US':'pt-BR';
-  const chave=audioChave(alvo,lang);
-  if(!chave)return audioReserva(alvo,lang,tok);
-  return audioCarregar(chave).then(buf=>{
-    if(tok!==AUDIO.token)return 'cancelado';
-    const ctx=ctxAudio();
-    const fonte=ctx.createBufferSource();
-    fonte.buffer=buf;fonte.connect(ctx.destination);
-    AUDIO.fonte=fonte;
-    return new Promise(ok=>{fonte.onended=()=>{if(AUDIO.fonte===fonte)AUDIO.fonte=null;ok('gravado');};fonte.start(0);});
-  }).catch(e=>{
-    audioFalhou(chave,e&&e.message||'erro');
-    if(tok!==AUDIO.token)return 'cancelado';
-    return audioReserva(alvo,lang,tok);
+  const lang=idioma==='en-US'?'en-US':'pt-BR';
+  try{await audioIniciar();}catch(e){}
+  if(tok!==AUDIO.token)return 'cancelado';
+  if(AUDIO.semAudio)return 'indisponivel';
+  const c=audioClipesDe(alvo,lang,mat||MATERIA);
+  c.faltas.forEach(f=>{
+    /* aviso uma vez por sessão e por falta; o conteúdo da falta (texto do app, não da criança) vira só um código curto */
+    const cod='sem-'+audioFnv8(f);
+    if(!AUDIO.avisados.has(cod)){AUDIO.avisados.add(cod);audioFalhou(cod,'sem-clipe');}
   });
+  if(!c.chaves.length)return 'sem-clipe';
+  const ctx=ctxAudio();
+  if(!ctx)return 'indisponivel';
+  /* baixa e decodifica todos os clipes da fila antes de começar: assim a fila toca sem intervalo audível */
+  const bufs=await Promise.all(c.chaves.map(k=>audioCarregar(k).then(b=>({k:k,b:b}),e=>{audioLog(k,'erro');audioFalhou(k,e&&e.message||'erro');return null;})));
+  if(tok!==AUDIO.token)return 'cancelado';
+  const ok=bufs.filter(Boolean);
+  if(!ok.length)return 'sem-clipe';
+  const vel=audioVelocidade();
+  return new Promise(fim0=>{
+    const fim=r=>{const i=AUDIO.fins.indexOf(fim0);if(i>=0)AUDIO.fins.splice(i,1);fim0(r);};
+    AUDIO.fins.push(fim0);
+    let t=ctx.currentTime+0.04;
+    ok.forEach((x,i)=>{
+      const fonte=ctx.createBufferSource();
+      fonte.buffer=x.b;
+      try{fonte.playbackRate.value=vel;}catch(e){}
+      fonte.connect(ctx.destination);
+      AUDIO.fontes.push(fonte);
+      const ultimo=i===ok.length-1;
+      fonte.onended=()=>{
+        const j=AUDIO.fontes.indexOf(fonte);if(j>=0)AUDIO.fontes.splice(j,1);
+        audioLog(x.k,'terminou');
+        if(ultimo)fim('gravado');
+      };
+      audioLog(x.k,'iniciou');
+      fonte.start(t);
+      t+=(x.b.duration||0)/vel;
+    });
+  });
+}
+
+/* ---------- pacotes no cache (jogar sem internet) ---------- */
+function audioGuardado(){
+  try{return JSON.parse(localStorage.getItem(AUDIO_CHAVE_LS)||'{}')||{};}catch(e){return {};}
+}
+function audioMarcarGuardado(pacote,formato){
+  try{const g=audioGuardado();g.formato=formato;g.pacotes=g.pacotes||{};g.pacotes[pacote]=diaLocal();localStorage.setItem(AUDIO_CHAVE_LS,JSON.stringify(g));}catch(e){}
+}
+function audioTamanhoPacote(nome){
+  const i=audioFormato()==='.opus'?0:1;
+  return (AUDIO_INDICE.pacotes[nome]||[]).reduce((a,k)=>a+AUDIO_INDICE.chaves.get(k).b[i],0);
+}
+const audioMB=b=>(b/1048576).toFixed(1).replace('.',',')+' MB';
+/* Guarda os clipes de um pacote no cache 'bobby-audio-v1'. Nada de download escondido grande: o app avisa o tamanho
+   antes (ver avisoBaixando) e respeita "economia de dados" do aparelho nos pacotes de matéria. */
+async function audioBaixarPacote(nome,progresso,forcar){
+  if(AUDIO.baixando[nome])return AUDIO.baixando[nome];
+  const g=audioGuardado();
+  if(!forcar&&g.pacotes&&g.pacotes[nome]&&g.formato===audioFormato())return {ok:true,ja:true,falhas:0};
+  if(typeof caches==='undefined'||typeof fetch!=='function')return {ok:false,falhas:0,semCache:true};
+  AUDIO.baixando[nome]=(async()=>{
+    await audioIniciar();
+    const chaves=(AUDIO_INDICE.pacotes[nome]||[]).slice();
+    const cache=await caches.open(AUDIO_CACHE);
+    let feitos=0,falhas=0,i=0;
+    const trabalha=async()=>{
+      while(i<chaves.length){
+        const k=chaves[i++],url=audioUrl(k);
+        try{
+          if(!(await cache.match(url))){const r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);await cache.put(url,r);}
+        }catch(e){falhas++;}
+        feitos++;
+        if(progresso)try{progresso(feitos,chaves.length);}catch(e){}
+      }
+    };
+    await Promise.all([trabalha(),trabalha(),trabalha(),trabalha()]);
+    if(!falhas)audioMarcarGuardado(nome,audioFormato());
+    delete AUDIO.baixando[nome];
+    return {ok:falhas===0,falhas:falhas,total:chaves.length};
+  })();
+  AUDIO.baixando[nome].catch(()=>{delete AUDIO.baixando[nome];});
+  return AUDIO.baixando[nome];
+}
+const NOME_PACOTE={core:'vozes básicas',mat:'Matemática',pt:'Português',en:'Inglês'};
+/* ao abrir uma galáxia: avisa o tamanho e guarda o pacote da matéria (uma vez) */
+async function audioPrepararMateria(m){
+  try{
+    await audioIniciar();
+    if(AUDIO.semAudio)return;
+    const g=audioGuardado();
+    if(g.pacotes&&g.pacotes[m]&&g.formato===audioFormato())return;
+    if(navigator.connection&&navigator.connection.saveData)return;     /* economia de dados ligada: não baixa sozinho */
+    avisoBaixando('Baixando as vozes de '+NOME_PACOTE[m]+' ('+audioMB(audioTamanhoPacote(m))+') para jogar sem internet.');
+    audioBaixarPacote(m).then(r=>{if(r&&r.ok&&!r.ja)avisoBaixando('Vozes de '+NOME_PACOTE[m]+' prontas para jogar sem internet.');});
+  }catch(e){}
+}
+function avisoBaixando(texto){
+  try{
+    const d=document.createElement('div');d.className='aviso-voz';
+    d.innerHTML='<span>'+escapa(texto)+'</span>';
+    document.body.appendChild(d);
+    setTimeout(()=>{d.classList.add('sai');setTimeout(()=>d.remove(),400);},4500);
+  }catch(e){}
 }
 /* ---------- som e voz ---------- */
 let AC=null;
@@ -5800,72 +6083,10 @@ function emTexto(html){
      .replace(/R\$/g,' reais ').replace(/___/g,' quanto ').replace(/\s+/g,' ').trim();
   return t;
 }
-/* --- vozes do aparelho: SÓ COMO RESERVA enquanto o áudio gravado não chega (ver audio.js) --- */
-let VOZES=[];
-function carregarVozes(){
-  try{VOZES=speechSynthesis.getVoices()||[];}catch(e){VOZES=[];}
-}
-if(typeof speechSynthesis!=='undefined'){
-  carregarVozes();
-  try{speechSynthesis.addEventListener('voiceschanged',carregarVozes);}catch(e){speechSynthesis.onvoiceschanged=carregarVozes;}
-  setTimeout(carregarVozes,300);setTimeout(carregarVozes,1200);
-}
-const idioma=v=>String((v&&v.lang)||'').toLowerCase().replace(/_/g,'-');
-/* nome sem o parêntese: "Eddy (Português (Brasil))" -> "eddy" */
-const nomeBase=v=>String((v&&v.name)||'').split('(')[0].replace(/^(microsoft|google|apple)\s+/i,'').trim().toLowerCase();
-/* Vozes de brincadeira do macOS/iOS (existem em vários idiomas, inclusive pt-BR e en-US).
-   Nunca servem para ler uma aula e NÃO aparecem na lista nem são escolhidas sozinhas. */
-const VOZ_PIADA=new Set(['albert','bad news','bahh','bells','boing','bubbles','cellos','deranged','eddy','flo','fred',
-  'good news','grandma','grandpa','hysterical','jester','junior','kathy','organ','pipe organ','princess','ralph','reed',
-  'rocko','sandy','shelley','superstar','trinoids','whisper','wobble','zarvox']);
-const ehVozPiada=v=>{
-  const n=nomeBase(v);
-  return VOZ_PIADA.has(n)||/\b(novelty|bad news|good news|pipe organ)\b/.test(n)||VOZ_PIADA.has(n.split(' ')[0]);
-};
-/* vozes que costumam soar bem em cada idioma (Android, iOS, macOS, Windows/Edge) */
-const VOZ_BOA={
-  'pt':/luciana|felipe|francisca|thalita|antonio|maria|google portugu[eê]s do brasil|google portuguese|pt-br-x-/,
-  'en':/samantha|ava|allison|nicky|zoe|evan|alex|aria|jenny|guy|google us english|en-us-x-/
-};
-function notaVoz(v,alvo){
-  const n=String((v&&v.name)||'').toLowerCase(),b=nomeBase(v);
-  let p=0;
-  if(idioma(v)===alvo)p+=10;                              /* sotaque certo: pt-BR não perde para pt-PT */
-  if(v.localService)p+=4;                                 /* funciona sem internet */
-  if(/premium|enhanced|neural|natural|aprimorad/.test(n))p+=8;
-  if(VOZ_BOA[alvo.slice(0,2)]&&VOZ_BOA[alvo.slice(0,2)].test(b+' '+n))p+=5;
-  if(/compact|espeak|robot/.test(n))p-=6;
-  if(v.default)p+=1;
-  return p;
-}
-/* lista de vozes de um idioma, da melhor para a pior, sem vozes de piada */
-function vozesDe(lang){
-  if(!VOZES.length)carregarVozes();
-  const alvo=(lang||'pt-BR').toLowerCase().replace(/_/g,'-'),raiz=alvo.slice(0,2);
-  const limpas=VOZES.filter(v=>!ehVozPiada(v));
-  let c=limpas.filter(v=>idioma(v)===alvo);
-  /* sem a variante exata (pt-BR), aceita o mesmo idioma de outra região (pt-PT) em vez de nada */
-  if(!c.length)c=limpas.filter(v=>idioma(v).slice(0,2)===raiz);
-  return c.slice().sort((a,b)=>notaVoz(b,alvo)-notaVoz(a,alvo));
-}
-function vozDe(lang){
-  const lista=vozesDe(lang);
-  if(!lista.length)return null;
-  /* respeita a voz escolhida nas configurações, se ela existir neste aparelho e não for de piada */
-  const escolhida=(lang==='en-US')?S.vozEn:S.vozPt;
-  if(escolhida){
-    const achou=lista.filter(v=>v.name===escolhida)[0];
-    if(achou)return achou;
-  }
-  return lista[0];
-}
-function temVoz(lang){return !!vozDe(lang);}
-/* falar(html, 'pt-BR'|'en-US'): tira as tags, troca símbolos por extenso e entrega ao audio.js.
-   Respeita S.som e S.voz: com o som desligado a voz também fica calada. */
-function falar(html,lang){
-  const ing=lang==='en-US';
-  return audioTocar(ing?limpaEN(html):emTexto(html),ing?'en-US':'pt-BR');
-}
+/* falar(html, 'pt-BR'|'en-US'): entrega ao audio.js, que acha o clipe gravado (ou compõe quadros e encaixes).
+   Respeita S.som e S.voz: com o som desligado a voz também fica calada. Sem clipe, fica sem voz (nada de voz do aparelho).
+   html pode ser um texto ou uma lista de textos (tocam em fila). */
+function falar(html,lang){return audioTocar(html,lang);}
 /* fala pedida pela criança (botão de ouvir): se o som estiver desligado, avisa em vez de ficar mudo sem explicar */
 function falarPedido(html,lang){
   if(!audioAtivo()){avisoSomDesligado();return Promise.resolve('mudo');}
@@ -5882,15 +6103,6 @@ function avisoSomDesligado(){
 function limpaEN(html){
   return String(html).replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ')
     .replace(/&amp;/g,'and').replace(/[“”"]/g,'').replace(/\s+/g,' ').trim();
-}
-let avisouVoz=false;
-function avisoVoz(){
-  if(avisouVoz)return;avisouVoz=true;
-  const d=document.createElement('div');
-  d.className='aviso-voz';
-  d.innerHTML='<b>Som em inglês indisponível</b><span>Este aparelho não tem uma voz em inglês instalada, então preferimos não ler com sotaque errado. Nas configurações do aparelho, adicione o idioma inglês (EUA) na leitura em voz alta.</span>';
-  document.body.appendChild(d);
-  setTimeout(()=>{d.classList.add('sai');setTimeout(()=>d.remove(),400);},6500);
 }
 const calar=()=>audioParar();
 /* ---------- utilidades ---------- */
@@ -6099,7 +6311,10 @@ function blocoPasso(ps,k,comFala){
 }
 function ligarOuvir(escopo){
   escopo.querySelectorAll('[data-ler]').forEach(b=>b.addEventListener('click',()=>{
-    falarPedido(decodeURIComponent(b.dataset.ler),b.dataset.lang);
+    const t=decodeURIComponent(b.dataset.ler);
+    /* lista de textos (capítulo + missão) vem como JSON e toca em fila */
+    let alvo=t;if(t.charAt(0)==='['){try{alvo=JSON.parse(t);}catch(e){}}
+    falarPedido(alvo,b.dataset.lang);
   }));
 }
 function tecladoHTML(){
@@ -6122,6 +6337,13 @@ function digitar(k){
 }
 /* Fala agendada para depois que a tela pinta. Fica guardada no audio.js: fechar a fase, avançar ou abrir
    outra tela cancela (antes, a fala saía 420 ms depois, com a fase já fechada). */
+/* a abertura do capítulo e a missão são dois clipes separados: tocam em fila */
+function textosDaHistoria(cap,m){
+  const l=[];
+  if(cap&&LIC.li===0)l.push(cap.abre);
+  if(m)l.push(m.t+'. '+m.abre);
+  return l;
+}
 function licaoAberta(){return $('#licao').classList.contains('on');}
 function falarDepois(ms,texto,lang){
   audioAgendar(()=>{if(licaoAberta())falar(texto,lang);},ms);
@@ -6140,14 +6362,14 @@ function pintarLicao(){
     const abreCap=(LIC.li===0&&cap)?'<p class="cap-abre">'+cap.abre+'</p>':'';
     let h='<div class="surge"><div class="et">'+(cap?'Capítulo '+LIC.u.n+' · '+cap.t:'Mundo '+LIC.u.n)+'</div>';
     h+='<div class="aula"><div class="fala">'+MASC('oi')+'<span class="nome">Bobby precisa de você</span>'+
-       '<button class="icobtn ouvir" data-ler="'+encodeURIComponent((cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''))+'" aria-label="Ouvir">'+IC.falar+'</button></div>';
+       '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(JSON.stringify(textosDaHistoria(cap,m)))+'" aria-label="Ouvir">'+IC.falar+'</button></div>';
     h+='<div class="balao historia"><h2>'+(m?m.t:LIC.l.title)+'</h2>'+abreCap+'<p>'+(m?m.abre:'')+'</p></div>';
     h+='<div class="premio-missao">'+ITENS[(cap&&cap.item)||'estrela']+'<span>Cada resposta certa ajuda o Bobby a completar a missão.</span></div>';
     h+='</div></div>';
     $('#palco').innerHTML=h;ligarOuvir($('#palco'));
     $('#acao').textContent='Vamos ajudar!';$('#acao').disabled=false;
     $('.lc-corpo').scrollTo(0,0);
-    if(ehF78())falarDepois(350,(cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''));
+    if(ehF78())falarDepois(350,textosDaHistoria(cap,m));
     return;
   }
   if(LIC.etapa==='aula'){
@@ -6259,6 +6481,9 @@ function pintarLicao(){
     $('#palco').querySelectorAll('.tecla').forEach(b=>b.addEventListener('click',()=>digitar(b.dataset.k)));
   }
   if(ehF78()||q.ouvir)falarDepois(420,q.ouvir||q.prompt,q.lang);
+  /* já deixa pronto o áudio da próxima pergunta (baixa e decodifica enquanto a criança responde) */
+  const prox=LIC.qs[LIC.i+1];
+  if(prox)audioPrecarregarTexto(prox.ouvir||prox.prompt,prox.lang);
 }
 const shufA=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 function barraMissao(){
@@ -6426,7 +6651,9 @@ function conferir(){
     S.xp+=ganho;S.moedas+=ganho;LIC.ganhoFase=(LIC.ganhoFase||0)+ganho;S.acertosTotal=(S.acertosTotal||0)+1;
     S.melhorCombo=Math.max(S.melhorCombo||0,LIC.combo);pe.classList.add('certo');
     $('#selo').innerHTML=MASC('feliz');
-    $('#fb-t').textContent=pick2(['Isso aí!','Boa!','Perfeito!','Mandou bem!','Certinho!','Show!']);
+    const elogio=pick2(['Isso aí!','Boa!','Perfeito!','Mandou bem!','Certinho!','Show!']);
+    $('#fb-t').textContent=elogio;
+    if(ehF78())falar(elogio);
     $('#fb-s').innerHTML='+'+ganho+' moedas'+extra;
     somCerto();somMoeda();
     if(LIC.rev)tirarErrado(q);
@@ -6437,6 +6664,7 @@ function conferir(){
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
     $('#selo').innerHTML=MASC('ops');
     $('#fb-t').textContent='Quase!';
+    if(ehF78())falar('Quase!');
     $('#fb-s').innerHTML='A resposta certa é <b>'+q.answer+'</b>.'+
       (LIC.vidas>0?' Esta pergunta volta no fim para você tentar de novo.':'');
     if(!q.__rep&&LIC.vidas>0){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);}
@@ -7637,58 +7865,34 @@ function instrucaoInstalar(){
 }
 
 
-/* ---------- voz e som ---------- */
+/* ---------- voz e som (voz gravada: só liga/desliga, velocidade e pacotes para jogar sem internet) ---------- */
 function telaVoz(){
-  const pt=vozesDe('pt-BR'),en=vozesDe('en-US');
-  const REGIAO={'pt-br':'português do Brasil','pt-pt':'português de Portugal',
-    'en-us':'inglês americano','en-gb':'inglês britânico','en-au':'inglês australiano',
-    'en-ie':'inglês irlandês','en-za':'inglês sul-africano','en-in':'inglês indiano'};
-  const nomeCurto=v=>{
-    /* nomes vêm como "Eddy (Português (Brasil))" — corta tudo do primeiro parêntese */
-    const i=String(v.name||'').indexOf('(');
-    return (i>0?String(v.name).slice(0,i):String(v.name||'')).trim()||'Voz sem nome';
-  };
-  const detalhe=v=>{
-    const e=[];
-    const reg=REGIAO[idioma(v)];
-    if(reg)e.push(reg);
-    if(/premium|enhanced|neural|natural/i.test(v.name))e.push('melhor qualidade');
-    if(!v.localService)e.push('precisa de internet');
-    return e.join(' · ')||idioma(v);
-  };
-  const lista=(vs,atual,campo)=>{
-    if(!vs.length)return '<p class="galeria-intro">Este aparelho não tem nenhuma voz instalada para este idioma.</p>';
-    let h='<div class="vozes">';
-    h+='<button class="voz-op'+(!atual?' on':'')+'" data-voz="'+campo+'|">'+
-       '<b>Voz padrão do aparelho</b><span>a mesma de sempre</span></button>';
-    /* quando dois nomes iguais aparecem, o detalhe do lado desempata */
-    const vistos={};vs.forEach(v=>{const n=nomeCurto(v);vistos[n]=(vistos[n]||0)+1;});
-    vs.forEach(v=>{
-      const sel=atual===v.name,n=nomeCurto(v);
-      h+='<button class="voz-op'+(sel?' on':'')+'" data-voz="'+campo+'|'+
-         String(v.name).replace(/"/g,'&quot;')+'"><b>'+n+'</b>'+
-         '<span>'+detalhe(v)+'</span></button>';
-    });
-    return h+'</div>';
-  };
-
   let h='<div class="perfil-in">';
-  h+='<p class="galeria-intro">A voz que lê as aulas vem do próprio aparelho. Cada celular tem as suas. '+
-     'Toque numa opção para ouvir e ela já fica escolhida.</p>';
-
-  h+='<h2 class="sec">Voz do português</h2>'+lista(pt,S.vozPt,'pt');
-  h+='<h2 class="sec">Voz do inglês</h2>';
-  if(!en.length)h+='<p class="galeria-intro">Nenhuma voz em inglês instalada. '+
-     'No iPhone: <b>Ajustes → Acessibilidade → Conteúdo Falado → Vozes → Inglês</b>. '+
-     'No Android: <b>Config. → Idiomas → Conversão de texto em voz</b>.</p>';
-  h+=lista(en,S.vozEn,'en');
-
-  const v=Math.round((+S.velocidade||1)*100);
+  h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
+  h+='<h2 class="sec">Sons</h2><div class="ctl">';
+  h+='<div class="ctl-linha"><b>Efeitos e voz</b><div>'+
+     '<button class="chip-ctl'+(S.som?' on':'')+'" data-som="1">Ligados</button>'+
+     '<button class="chip-ctl'+(!S.som?' on':'')+'" data-som="0">Desligados</button></div>'+
+     '<small>Com os sons desligados, o Bobby também fica em silêncio.</small></div>';
+  h+='<div class="ctl-linha"><b>Narração do Bobby</b><div>'+
+     '<button class="chip-ctl'+(S.voz?' on':'')+'" data-voz="1">Ligada</button>'+
+     '<button class="chip-ctl'+(!S.voz?' on':'')+'" data-voz="0">Desligada</button></div></div></div>';
+  const v=Math.round(audioVelocidade()*100);
   h+='<h2 class="sec">Velocidade da fala</h2>';
-  h+='<div class="velocidade"><input type="range" id="vel" min="60" max="130" step="5" value="'+v+'">'+
+  h+='<div class="velocidade"><input type="range" id="vel" min="80" max="120" step="5" value="'+v+'" aria-label="Velocidade da fala">'+
      '<div class="vel-tx"><span>mais devagar</span><b id="vel-n">'+v+'%</b><span>mais rápido</span></div>'+
      '<button class="btn fantasma" id="vel-teste">Ouvir uma frase</button></div>';
-
+  h+='<h2 class="sec">Jogar sem internet</h2>';
+  h+='<p class="galeria-intro">As vozes ficam guardadas neste aparelho. Cada matéria baixa uma vez, quando você entra nela. Pelo celular, o tamanho aparece antes.</p>';
+  const g=audioGuardado();
+  h+='<div class="mundos-lista" id="pacotes-voz">';
+  ['core','mat','pt','en'].forEach(p=>{
+    const ok=g.pacotes&&g.pacotes[p]&&g.formato===audioFormato();
+    h+='<div class="linha-mundo"><div class="mtx"><b>'+NOME_PACOTE[p].replace(/^./,c=>c.toUpperCase())+'</b>'+
+       '<span class="sub-l">'+(audioIndiceCheio()?audioMB(audioTamanhoPacote(p)):'tamanho indisponível')+' · '+(ok?'guardado neste aparelho':'ainda não guardado')+'</span></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="perfil-bts"><button class="btn laranja" id="baixar-vozes">'+IC.baixar+' Guardar todas as vozes</button></div><div id="voz-aviso"></div>';
   h+='<div class="perfil-bts"><button class="btn fantasma" id="volta-voz">Voltar ao perfil</button></div></div>';
 
   $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-voz2" aria-label="Voltar">'+
@@ -7696,22 +7900,31 @@ function telaVoz(){
   $('#perfil').classList.add('on');document.body.style.overflow='hidden';
   $('#volta-voz').addEventListener('click',telaPerfil);
   $('#volta-voz2').addEventListener('click',telaPerfil);
-
+  $('#perfil').querySelectorAll('[data-som]').forEach(b=>b.addEventListener('click',()=>{
+    S.som=b.dataset.som==='1';salvar();pintarTopo();if(!S.som)calar();telaVoz();}));
   $('#perfil').querySelectorAll('[data-voz]').forEach(b=>b.addEventListener('click',()=>{
-    const i=b.dataset.voz.indexOf('|');
-    const campo=b.dataset.voz.slice(0,i),nome=b.dataset.voz.slice(i+1);
-    if(campo==='pt'){S.vozPt=nome;salvar();falarPedido('Oi! Eu sou o Bobby. Vamos aprender juntos?');}
-    else{S.vozEn=nome;salvar();falarPedido('Hello! My name is Bobby. Nice to meet you!','en-US');}
-    telaVoz();
-  }));
+    S.voz=b.dataset.voz==='1';salvar();if(!S.voz)calar();telaVoz();}));
   const r=$('#vel');
   if(r){
     r.addEventListener('input',()=>{$('#vel-n').textContent=r.value+'%';});
-    r.addEventListener('change',()=>{S.velocidade=(+r.value)/100;salvar();
-      falarPedido('Assim está bom para você acompanhar?');});
+    r.addEventListener('change',()=>{S.velocidade=(+r.value)/100;salvar();falarPedido('Boa!');});
   }
   const t=$('#vel-teste');
-  if(t)t.addEventListener('click',()=>falarPedido('Contar é apontar para cada coisa e falar um número em voz alta.'));
+  if(t)t.addEventListener('click',()=>falarPedido('Isso aí!'));
+  const bx=$('#baixar-vozes');
+  if(bx)bx.addEventListener('click',async()=>{
+    bx.disabled=true;
+    const av=$('#voz-aviso');
+    await audioIniciar();
+    let falhas=0;
+    for(const p of ['core','mat','pt','en']){
+      const r2=await audioBaixarPacote(p,(a,b)=>{av.innerHTML='<div class="aviso-ok">Guardando '+NOME_PACOTE[p]+': '+a+' de '+b+'</div>';},false);
+      if(r2&&!r2.ok)falhas++;
+    }
+    av.innerHTML='<div class="aviso-ok">'+(falhas?'Alguns arquivos não baixaram. Tente de novo com internet.':'Pronto! As vozes estão guardadas neste aparelho.')+'</div>';
+    registrarEvento('config_mudou',{chave:'vozes_offline'});
+    bx.disabled=false;
+  });
 }
 
 /* ---------- segurança e dados do perfil ---------- */
@@ -8501,6 +8714,7 @@ else if(STORE.perfis.length===1&&STORE.atual>=0){usarPerfil(STORE.atual);}
 else{telaPerfis();if(STORE.atual>=0){S=estadoDe(STORE.perfis[STORE.atual].dados);S.nome=STORE.perfis[STORE.atual].nome;garantirDia();}
   CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();renderTrilha();}
 iniciarCiclo();
+audioIniciar();
 
 
 /* ---------- céu de galáxia: enfeites grandes (as estrelas são CSS) ---------- */

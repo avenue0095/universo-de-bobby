@@ -45,6 +45,7 @@ function usarMateria(m){
   S.materia=m;salvar();
   $('#nome-materia').textContent=MATERIAS[m].n;
   fecharMaterias();renderTrilha();
+  if(typeof audioPrepararMateria==='function')audioPrepararMateria(m);
   if(typeof mostrarEntradaDoDia==='function')mostrarEntradaDoDia();
 }
 let CAP_ATUAL=null,MISS_ATUAL=null;

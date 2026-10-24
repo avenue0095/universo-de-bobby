@@ -37,7 +37,7 @@ function estadoVazio(){
     config:configPadrao(),revisao:revisaoVazia(),colecao:colecaoVazia(),
     semana:{chave:'',estrelas:0,aulaRevista:0,constelacao:false},
     stats:{porLicao:{},dias:{},tempo:0,amostras:[]},missHist:[],
-    som:true,voz:true,velocidade:1,vozPt:'',vozEn:'',
+    som:true,voz:true,velocidade:1,
     legado:{nivel:'',errados:{},vozPt:'',vozEn:'',migradoEm:''}};
 }
 function clonar(o){
@@ -139,10 +139,10 @@ function estadoDe(dados){
   s.stats=normalizaStats(d.stats);
   s.missHist=listaDe(d.missHist,5).filter(h=>h&&typeof h==='object'&&ehDia(h.dia)).map(h=>({dia:h.dia,ids:textosDe(h.ids,3,4),ok:intDe(h.ok,0,3,0)}));
   s.som=d.som!==false;s.voz=d.voz!==false;
-  s.velocidade=numDe(d.velocidade,.6,1.3,1);
-  s.vozPt=String(d.vozPt||'').slice(0,80);s.vozEn=String(d.vozEn||'').slice(0,80);
+  s.velocidade=numDe(d.velocidade,.8,1.2,1);   /* a voz gravada toca de 80% a 120% */
+  const vozAntiga={pt:String(d.vozPt||'').slice(0,80),en:String(d.vozEn||'').slice(0,80)};
   const l=objDe(d.legado);
-  s.legado={nivel:['','facil','medio','forte'].indexOf(l.nivel)>=0?l.nivel:'',errados:objDe(l.errados),vozPt:String(l.vozPt||'').slice(0,80),vozEn:String(l.vozEn||'').slice(0,80),migradoEm:diaOuVazio(l.migradoEm)};
+  s.legado={nivel:['','facil','medio','forte'].indexOf(l.nivel)>=0?l.nivel:'',errados:objDe(l.errados),vozPt:String(l.vozPt||vozAntiga.pt).slice(0,80),vozEn:String(l.vozEn||vozAntiga.en).slice(0,80),migradoEm:diaOuVazio(l.migradoEm)};
   return s;
 }
 

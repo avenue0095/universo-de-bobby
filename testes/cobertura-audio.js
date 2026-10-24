@@ -1,0 +1,92 @@
+#!/usr/bin/env node
+'use strict';
+/* Cobertura do audio gravado: tudo o que o app FALA nas 150 fases tem clipe no manifesto (audio/manifesto-min.json)?
+   Amostra as perguntas como verifica.js (gera cada fase varias vezes), mais todos os passos de aula, as aberturas de
+   capitulo e missao, os cartoes de ingles e os elogios. Resolve cada texto pelo MESMO caminho do app (audioSequencia).
+   Sem clipe = sem voz (decisao do Filipe: nada de voz do aparelho): vira AVISO aqui, com a lista.
+   Ignora o unico quadro "__" (so lacuna, sem fala) e conta os 68 clipes extras (numeros, nomes, elogios) como cobertura de encaixe.
+   Uso: node testes/cobertura-audio.js [--rodadas=40] [--semente=1] [--minimo=99.5] [--lista]                   */
+const fs = require('fs');
+const path = require('path');
+const { carregarApp } = require('./lib/carregar.js');
+
+const arg = (n, p) => { const a = process.argv.find((x) => x.startsWith('--' + n + '=')); return a ? Number(a.split('=')[1]) : p; };
+const RODADAS = arg('rodadas', 40), SEMENTE = arg('semente', 1), MINIMO = arg('minimo', 99.5);
+const LISTA = process.argv.includes('--lista');
+const min = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifesto-min.json'), 'utf8'));
+const completo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifesto.json'), 'utf8'));
+const ignorados = new Set((completo.ignorados || []).map((i) => i.texto));
+
+const app = carregarApp(SEMENTE);
+app.ctx.__min = min;
+const indexados = app.avaliar('audioIndexar(__min)');
+/* o boot do app tenta baixar o manifesto (sem rede aqui): fixa o estado "com audio" como no app com manifesto carregado */
+app.avaliar('AUDIO.semAudio=false;AUDIO.pronto=Promise.resolve(true)');
+const seq = (texto, lang, mat) => { app.ctx.__t = texto; app.ctx.__l = lang; app.ctx.__m = mat; return app.avaliar('(function(){const s=audioSequencia(__t,__l,__m);return {f:s.faltas,n:s.chaves.length}})()'); };
+
+const cat = {};   // categoria -> { total (distintos), ok, faltas: Map(falta -> exemplo) , usos, usosOk }
+function conta(nome, texto, lang, mat) {
+  const c = cat[nome] = cat[nome] || { vistos: new Set(), ok: 0, total: 0, faltas: new Map(), usos: 0, usosOk: 0 };
+  const chave = lang + '|' + mat + '|' + texto;
+  const r = seq(texto, lang, mat);
+  const faltas = r.f.filter((f) => !(f.startsWith('quadro:') && ignorados.has(f.slice(7).trim()) ) && f !== 'quadro:__');
+  c.usos++;
+  const bom = r.n > 0 && !faltas.length;
+  if (bom) c.usosOk++;
+  if (c.vistos.has(chave)) return;
+  c.vistos.add(chave); c.total++;
+  if (bom) c.ok++; else (faltas.length ? faltas : ['(nada para falar)']).forEach((f) => { if (!c.faltas.has(f)) c.faltas.set(f, texto); });
+}
+
+const UN = [['mat', 'UNITS_MAT'], ['pt', 'UNITS_PT'], ['en', 'UNITS_EN']];
+const CAP = { mat: ['CAPITULOS', 'MISSOES'], pt: ['CAPITULOS_PT', 'MISSOES_PT'], en: ['CAPITULOS_EN', 'MISSOES_EN'] };
+for (const [m, U] of UN) {
+  app.avaliar("MATERIA='" + m + "'");
+  const units = app.avaliar(U);
+  const caps = app.avaliar(CAP[m][0]), miss = app.avaliar(CAP[m][1]);
+  units.forEach((u, ui) => u.lessons.forEach((l, li) => {
+    // aulas: o texto do passo e os cartoes de ingles (data-ler)
+    app.ctx.__l1 = l.id;
+    const passos = app.avaliar('passosDe(' + U + '[' + ui + '].lessons[' + li + '])');
+    passos.forEach((p) => {
+      conta('aula (passo)', p.t + '. ' + p.c, 'pt-BR', m);
+      for (const mm of String(p.fig || '').matchAll(/data-ler="([^"]*)"/g)) conta('aula (cartao em ingles)', decodeURIComponent(mm[1]), 'en-US', m);
+    });
+    // abertura do capitulo (1a fase do mundo) + missao
+    if (li === 0 && caps[u.n]) conta('abertura de capitulo', caps[u.n].abre, 'pt-BR', m);
+    const ms = miss[l.id];
+    if (ms) conta('abertura de missao', ms.t + '. ' + ms.abre, 'pt-BR', m);
+    // perguntas: como o verifica.js, varias rodadas por fase
+    for (let r = 0; r < RODADAS; r++) {
+      const qs = app.avaliar('genQuestions(' + U + '[' + ui + '].lessons[' + li + '],8)');
+      qs.forEach((q) => conta(m === 'mat' ? 'pergunta (matematica)' : m === 'pt' ? 'pergunta (portugues)' : 'pergunta (ingles)', q.ouvir || q.prompt, q.lang || 'pt-BR', m));
+    }
+  }));
+}
+['Isso aí!', 'Boa!', 'Perfeito!', 'Mandou bem!', 'Certinho!', 'Show!', 'Quase!'].forEach((t) => conta('elogio e retorno', t, 'pt-BR', 'mat'));
+
+/* Falas do app que NAO fazem parte do lote gravado (texto novo da Fase 2 e modelos com numero). Informativo: ficam sem voz
+   ate o proximo lote. Nao entram na porcentagem. */
+const novas = [].concat(Object.values(app.avaliar('BILHETES')), ['Por hoje chega! Você fez um ótimo trabalho.', '10 unidades viraram 1 dezena!', '10 dezenas viraram 1 centena!']);
+const semClipeNovas = novas.filter((t) => { const r = seq(t, 'pt-BR', 'mat'); return !r.n || r.f.length; });
+
+let totT = 0, totOk = 0, ruim = [];
+console.log('cobertura-audio.js | clipes indexados: ' + indexados + ' | rodadas por fase: ' + RODADAS + ' | semente ' + SEMENTE);
+console.log('categoria\ttextos distintos\tcom clipe\t%\tusos amostrados (% com clipe)');
+for (const [nome, c] of Object.entries(cat)) {
+  const p = c.total ? c.ok / c.total * 100 : 100;
+  totT += c.total; totOk += c.ok;
+  console.log(nome + '\t' + c.total + '\t' + c.ok + '\t' + p.toFixed(2) + '%\t' + c.usos + ' (' + (c.usosOk / c.usos * 100).toFixed(2) + '%)');
+  if (p < MINIMO) ruim.push(nome + ' ' + p.toFixed(2) + '%');
+}
+const pct = totOk / totT * 100;
+console.log('TOTAL\t' + totT + '\t' + totOk + '\t' + pct.toFixed(2) + '%');
+const faltas = [];
+for (const [nome, c] of Object.entries(cat)) for (const [f, ex] of c.faltas) faltas.push([nome, f, ex]);
+console.log('\nAVISO: ' + faltas.length + ' trechos sem clipe (ficam sem voz; nao ha voz do aparelho):');
+const mostra = LISTA ? faltas : faltas.slice(0, 25);
+mostra.forEach(([n, f, ex]) => console.log('  [' + n + '] ' + f + '   <= ' + String(ex).replace(/<[^>]*>/g, '').slice(0, 70)));
+if (!LISTA && faltas.length > 25) console.log('  ... e mais ' + (faltas.length - 25) + ' (use --lista)');
+console.log('\nINFORMATIVO: ' + semClipeNovas.length + ' de ' + novas.length + ' falas novas do app (bilhetes do Bobby, parada, avisos de troca) ainda nao tem clipe e ficam sem voz ate o proximo lote.');
+if (ruim.length) { console.log('\nFALHOU: cobertura abaixo de ' + MINIMO + '% em: ' + ruim.join(', ')); process.exitCode = 1; }
+else console.log('\nOK: toda categoria com pelo menos ' + MINIMO + '% dos textos distintos com clipe');

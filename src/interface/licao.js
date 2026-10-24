@@ -52,7 +52,10 @@ function blocoPasso(ps,k,comFala){
 }
 function ligarOuvir(escopo){
   escopo.querySelectorAll('[data-ler]').forEach(b=>b.addEventListener('click',()=>{
-    falarPedido(decodeURIComponent(b.dataset.ler),b.dataset.lang);
+    const t=decodeURIComponent(b.dataset.ler);
+    /* lista de textos (capítulo + missão) vem como JSON e toca em fila */
+    let alvo=t;if(t.charAt(0)==='['){try{alvo=JSON.parse(t);}catch(e){}}
+    falarPedido(alvo,b.dataset.lang);
   }));
 }
 function tecladoHTML(){
@@ -75,6 +78,13 @@ function digitar(k){
 }
 /* Fala agendada para depois que a tela pinta. Fica guardada no audio.js: fechar a fase, avançar ou abrir
    outra tela cancela (antes, a fala saía 420 ms depois, com a fase já fechada). */
+/* a abertura do capítulo e a missão são dois clipes separados: tocam em fila */
+function textosDaHistoria(cap,m){
+  const l=[];
+  if(cap&&LIC.li===0)l.push(cap.abre);
+  if(m)l.push(m.t+'. '+m.abre);
+  return l;
+}
 function licaoAberta(){return $('#licao').classList.contains('on');}
 function falarDepois(ms,texto,lang){
   audioAgendar(()=>{if(licaoAberta())falar(texto,lang);},ms);
@@ -93,14 +103,14 @@ function pintarLicao(){
     const abreCap=(LIC.li===0&&cap)?'<p class="cap-abre">'+cap.abre+'</p>':'';
     let h='<div class="surge"><div class="et">'+(cap?'Capítulo '+LIC.u.n+' · '+cap.t:'Mundo '+LIC.u.n)+'</div>';
     h+='<div class="aula"><div class="fala">'+MASC('oi')+'<span class="nome">Bobby precisa de você</span>'+
-       '<button class="icobtn ouvir" data-ler="'+encodeURIComponent((cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''))+'" aria-label="Ouvir">'+IC.falar+'</button></div>';
+       '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(JSON.stringify(textosDaHistoria(cap,m)))+'" aria-label="Ouvir">'+IC.falar+'</button></div>';
     h+='<div class="balao historia"><h2>'+(m?m.t:LIC.l.title)+'</h2>'+abreCap+'<p>'+(m?m.abre:'')+'</p></div>';
     h+='<div class="premio-missao">'+ITENS[(cap&&cap.item)||'estrela']+'<span>Cada resposta certa ajuda o Bobby a completar a missão.</span></div>';
     h+='</div></div>';
     $('#palco').innerHTML=h;ligarOuvir($('#palco'));
     $('#acao').textContent='Vamos ajudar!';$('#acao').disabled=false;
     $('.lc-corpo').scrollTo(0,0);
-    if(ehF78())falarDepois(350,(cap&&LIC.li===0?cap.abre+' ':'')+(m?m.t+'. '+m.abre:''));
+    if(ehF78())falarDepois(350,textosDaHistoria(cap,m));
     return;
   }
   if(LIC.etapa==='aula'){
@@ -212,6 +222,9 @@ function pintarLicao(){
     $('#palco').querySelectorAll('.tecla').forEach(b=>b.addEventListener('click',()=>digitar(b.dataset.k)));
   }
   if(ehF78()||q.ouvir)falarDepois(420,q.ouvir||q.prompt,q.lang);
+  /* já deixa pronto o áudio da próxima pergunta (baixa e decodifica enquanto a criança responde) */
+  const prox=LIC.qs[LIC.i+1];
+  if(prox)audioPrecarregarTexto(prox.ouvir||prox.prompt,prox.lang);
 }
 const shufA=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 function barraMissao(){
@@ -379,7 +392,9 @@ function conferir(){
     S.xp+=ganho;S.moedas+=ganho;LIC.ganhoFase=(LIC.ganhoFase||0)+ganho;S.acertosTotal=(S.acertosTotal||0)+1;
     S.melhorCombo=Math.max(S.melhorCombo||0,LIC.combo);pe.classList.add('certo');
     $('#selo').innerHTML=MASC('feliz');
-    $('#fb-t').textContent=pick2(['Isso aí!','Boa!','Perfeito!','Mandou bem!','Certinho!','Show!']);
+    const elogio=pick2(['Isso aí!','Boa!','Perfeito!','Mandou bem!','Certinho!','Show!']);
+    $('#fb-t').textContent=elogio;
+    if(ehF78())falar(elogio);
     $('#fb-s').innerHTML='+'+ganho+' moedas'+extra;
     somCerto();somMoeda();
     if(LIC.rev)tirarErrado(q);
@@ -390,6 +405,7 @@ function conferir(){
     if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
     $('#selo').innerHTML=MASC('ops');
     $('#fb-t').textContent='Quase!';
+    if(ehF78())falar('Quase!');
     $('#fb-s').innerHTML='A resposta certa é <b>'+q.answer+'</b>.'+
       (LIC.vidas>0?' Esta pergunta volta no fim para você tentar de novo.':'');
     if(!q.__rep&&LIC.vidas>0){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);}

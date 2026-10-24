@@ -25,16 +25,40 @@ async function ativar(existentes) {
 }
 (async () => {
   await teste('1. ativacao apaga so cache antigo da app (bobby-v*) e preserva o atual', async () => {
-    const ap = await ativar(['bobby-v1', 'bobby-v2', 'bobby-v3']);
-    A.strictEqual(JSON.stringify(ap), JSON.stringify(['bobby-v1', 'bobby-v2']));
+    const ap = await ativar(['bobby-v1', 'bobby-v2', 'bobby-v3', 'bobby-v4']);
+    A.strictEqual(JSON.stringify(ap), JSON.stringify(['bobby-v1', 'bobby-v2', 'bobby-v3']));
   });
   await teste('2. nunca apaga bobby-audio-* (cache de audio gravado)', async () => {
-    const ap = await ativar(['bobby-v2', 'bobby-v3', 'bobby-audio-core-v1', 'bobby-audio-en-v1']);
+    const ap = await ativar(['bobby-v2', 'bobby-v4', 'bobby-audio-v1', 'bobby-audio-core-v1', 'bobby-audio-en-v1']);
     A.strictEqual(JSON.stringify(ap), JSON.stringify(['bobby-v2']));
   });
   await teste('3. nao mexe em cache que nao e da app', async () => {
     const ap = await ativar(['outro-app-v1', 'workbox-precache', 'bobby-v1']);
     A.strictEqual(JSON.stringify(ap), JSON.stringify(['bobby-v1']));
+  });
+  await teste('4. clipe de audio: cache primeiro (so vai a rede se faltar) e guarda em bobby-audio-v1; pagina continua network-first', async () => {
+    const guardado = {}; const rede = [];
+    const mk = (nome) => ({ match: async (r) => guardado[nome + '|' + (r.url || r)] || null, put: async (r, resp) => { guardado[nome + '|' + (r.url || r)] = resp; }, addAll: async () => {} });
+    const ouvintes = {};
+    const sandbox = {
+      self: { addEventListener: (n, f) => { ouvintes[n] = f; }, clients: { claim: async () => {} }, skipWaiting: async () => {} },
+      caches: { keys: async () => [], delete: async () => true, open: async (n) => mk(n), match: async () => null },
+      fetch: async (req) => { rede.push(req.url); return { status: 200, type: 'basic', clone() { return this; }, texto: 'rede' }; },
+      URL, console,
+    };
+    vm.createContext(sandbox);
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'sw.js'), 'utf8'), sandbox);
+    const pede = async (url, extra) => { let r; ouvintes.fetch({ request: Object.assign({ url, method: 'GET', mode: 'cors', destination: '', headers: { get: () => '' } }, extra || {}), respondWith: (p) => { r = p; } }); return r && await r; };
+    const clipe = 'https://x.test/audio/pt-br/numero/zero-33dae30b.m4a';
+    await pede(clipe);                       // 1a vez: rede, e guarda
+    A.strictEqual(rede.length, 1); A.ok(guardado['bobby-audio-v1|' + clipe], 'nao guardou em bobby-audio-v1');
+    await pede(clipe);                       // 2a vez: cache, sem rede
+    A.strictEqual(rede.length, 1, 'foi a rede de novo com o clipe em cache');
+    await pede('https://x.test/index.html', { mode: 'navigate' });
+    A.strictEqual(rede.length, 2, 'a pagina tem que ir a rede primeiro');
+    await pede('https://x.test/audio/manifesto-min.json');
+    A.strictEqual(rede.length, 3, 'o manifesto vai a rede primeiro');
+    A.ok(!Object.keys(guardado).some((k) => k.startsWith('bobby-v4|') && /audio/.test(k)), 'audio caiu no cache da app');
   });
   resumo('sw.js');
 })();

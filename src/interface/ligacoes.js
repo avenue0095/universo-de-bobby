@@ -107,5 +107,6 @@ else if(STORE.perfis.length===1&&STORE.atual>=0){usarPerfil(STORE.atual);}
 else{telaPerfis();if(STORE.atual>=0){S=estadoDe(STORE.perfis[STORE.atual].dados);S.nome=STORE.perfis[STORE.atual].nome;garantirDia();}
   CAP_ATUAL=MATERIAS.mat.caps();MISS_ATUAL=MATERIAS.mat.miss();renderTrilha();}
 iniciarCiclo();
+audioIniciar();
 
 

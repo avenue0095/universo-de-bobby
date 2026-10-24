@@ -65,8 +65,7 @@ function migrarDadosV3(d,dia){
     errados:errados,
     stats:{porLicao:Object.assign({},obj(stats.porLicao)),dias:dias,tempo:Math.max(0,n(stats.tempo)),amostras:[]},
     som:d.som!==false,voz:d.voz!==false,
-    velocidade:Math.min(1.3,Math.max(.6,n(d.velocidade,1)||1)),
-    vozPt:String(d.vozPt||'').slice(0,80),vozEn:String(d.vozEn||'').slice(0,80),
+    velocidade:Math.min(1.2,Math.max(.8,n(d.velocidade,1)||1)),    /* a voz gravada toca de 80% a 120% */
     nome:String(d.nome||'').slice(0,18),
     legado:{nivel:['facil','medio','forte'].indexOf(d.nivel)>=0?d.nivel:'facil',errados:JSON.parse(JSON.stringify(errados)),
             vozPt:String(d.vozPt||'').slice(0,80),vozEn:String(d.vozEn||'').slice(0,80),migradoEm:dia||''}

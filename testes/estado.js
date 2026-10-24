@@ -39,7 +39,7 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     A.strictEqual(lua.faixa, 'f78'); A.strictEqual(s.perfis[1].dados.faixa, 'f1112'); A.strictEqual(s.perfis[2].dados.faixa, 'f910');
     A.strictEqual(lua.legado.nivel, 'facil');
     A.deepStrictEqual(lua.comprado, ['bone', 'oculos']); A.strictEqual(lua.look.chapeu, 'bone');
-    A.strictEqual(lua.vozPt, 'Luciana'); A.strictEqual(lua.acertosTotal, 412); A.strictEqual(lua.melhorCombo, 8);
+    A.strictEqual(lua.legado.vozPt, 'Luciana'); A.ok(!('vozPt' in lua), 'voz do aparelho nao fica mais no perfil'); A.strictEqual(lua.velocidade, 1.1); A.strictEqual(v4(a).perfis[2].dados.velocidade, 0.8, 'velocidade 0,7 do v3 vira 0,8 (minimo da voz gravada)'); A.strictEqual(lua.acertosTotal, 412); A.strictEqual(lua.melhorCombo, 8);
   });
 
   await teste('3. XP separado da moeda: xp = max(ganhoTotal, saldo), moedas = saldo antigo', () => {
@@ -202,7 +202,7 @@ const J = (x) => JSON.parse(JSON.stringify(x));
 
   await teste('19. app instalado com service worker velho: HTML segue network-first e o index nao depende de cache', () => {
     const sw = fs.readFileSync(path.join(__dirname, '..', 'sw.js'), 'utf8');
-    A.ok(/fetch\(req\)\.then/.test(sw) && /bobby-v3/.test(sw));
+    A.ok(/fetch\(req\)\.then/.test(sw) && /bobby-v4/.test(sw));
   });
 
   await teste('20. estadoDe tolera lixo: valores absurdos viram valores validos', () => {

@@ -40,12 +40,13 @@ function banco(m,i){
    preenchido pelo ingles-lex.js e usado quando o aparelho não tem voz em inglês */
 var FALA_EN={},SIG_EN={};
 function podeOuvirEN(){
-  try{return typeof temVoz==='function'?temVoz('en-US'):false;}catch(e){return false;}
+  /* voz gravada: a pergunta de ouvir existe sempre que o áudio está disponível (audioPodeOuvir, em interface/audio.js) */
+  try{return typeof audioPodeOuvir==='function'?audioPodeOuvir():true;}catch(e){return true;}
 }
 function ouvirEN(prompt,certa,erradas){
   const fala=FALA_EN[String(certa).toLowerCase()];
   const sig=SIG_EN[String(certa).toLowerCase()];
-  /* sem voz em inglês no aparelho a pergunta de ouvir ficaria impossível:
+  /* sem áudio (primeira visita sem internet) a pergunta de ouvir ficaria impossível:
      vira uma pergunta equivalente que dá para responder lendo */
   if(!podeOuvirEN()){
     if(fala)return Object.assign({type:'mc',prompt:'Qual destas palavras se fala assim: <b>“'+fala+'”</b>?',

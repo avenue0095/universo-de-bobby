@@ -5,6 +5,7 @@ let erroAssincrono = null;
 let emTeste = false;
 process.on('uncaughtException', (e) => { if (emTeste) erroAssincrono = e; else { console.error('ERRO FORA DE TESTE:', e && e.stack || e); process.exit(1); } });
 async function teste(nome, fn) {
+  if (process.env.PASSO) console.error('> ' + nome);
   erroAssincrono = null; emTeste = true;
   try {
     await fn();

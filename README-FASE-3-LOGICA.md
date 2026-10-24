@@ -41,3 +41,13 @@ Nada foi publicado, nenhum áudio ou imagem foi gerado, nenhum crédito foi gast
 - A tela de aviso de migração aparece uma vez; se o responsável fechar a aba antes de tocar, ela volta na próxima abertura.
 
 - Service worker: a ativação agora só apaga caches `bobby-*` antigos e nunca `bobby-audio-*` (reservado ao áudio gravado). `CACHE` continua `bobby-v3`.
+
+## Áudio gravado integrado (24/10/2026, segunda rodada)
+
+- **Voz toda gravada, sem voz do aparelho.** `speechSynthesis` não existe mais em `src/` (teste confere no código e falha se alguém chamar). Texto sem clipe fica sem voz, vira evento `audio_falha` (só código curto, nunca o texto) e aparece como AVISO em `node testes/cobertura-audio.js`.
+- **Resolução texto para clipe** (`audio-clipes.js`): nome do clipe = pasta da classe + slug + FNV-1a em UTF-8 de classe + texto, igual ao gerador. Enunciado com número, nome, palavra ou sílaba sorteados vira fila de quadros e encaixes (porte do `quadrosDe` do `extrair-audio.js`); números por extenso com os 49 clipes de número. O gerador junta "Excuse me" e "excuse me" num clipe só, então o app tenta também em minúscula.
+- **Player** (`audio.js`): Web Audio, fila contígua, pré-carga do próximo texto, cancelamento por token (fechar fase, nova fala, som desligado), velocidade de 80% a 120%. Formato `.m4a` (AAC); `.opus` só se o aparelho não toca AAC e confirma Opus em `canPlayType`. Sem manifesto (primeira visita sem internet) as perguntas de ouvir viram perguntas de ler, e a próxima chamada tenta de novo.
+- **Offline**: cache `bobby-audio-v1`. Pacote `core` na primeira visita; pacote da matéria quando a criança entra na galáxia (aviso com o tamanho; não baixa sozinho com "economia de dados" ligada); botão "Guardar todas as vozes" em Voz e som. O `sw.js` (agora `bobby-v4`) serve clipe em cache-first, manifesto em network-first e continua com o HTML network-first; a ativação nunca apaga `bobby-audio-*`.
+- **Tela Voz e som**: só liga/desliga de sons e narração, velocidade e pacotes. `vozPt`/`vozEn` foram para `legado`; velocidade antiga é recortada para 0,8 a 1,2.
+- **Cobertura**: ver o relatório de `node testes/cobertura-audio.js`. Ficam sem clipe de propósito: dicas e "Ajuda extra", avisos de troca de dezena, bilhetes do Bobby, tela "Por hoje chega" e textos novos da Fase 2 (16 falas no teste, informativo). Entram no próximo lote do agente de áudio.
+- **Pendente**: ouvir as vozes (o Filipe ainda não ouviu), testar `.m4a` e Web Audio em iPhone real, testar `.opus` antes de trocar de formato, parecer de advogado sobre a licença do Kokoro.

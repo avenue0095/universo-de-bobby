@@ -23,7 +23,7 @@ const CHROME = arg('chrome') || process.env.CHROME_BIN || [
 if (!CHROME) { console.log('SEM CHROME: instale o Chrome ou passe --chrome=/caminho. Teste NAO rodou.'); process.exit(2); }
 if (typeof WebSocket === 'undefined') { console.log('Precisa de Node 22+ (WebSocket nativo). Teste NAO rodou.'); process.exit(2); }
 
-const TIPOS = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.webmanifest': 'application/manifest+json' };
+const TIPOS = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.webmanifest': 'application/manifest+json', '.json': 'application/json', '.m4a': 'audio/mp4', '.opus': 'audio/ogg' };
 const servidor = http.createServer((req, res) => {
   let rel = decodeURIComponent(req.url.split('?')[0]);
   if (rel === '/') rel = '/index.html';
@@ -49,7 +49,7 @@ async function main() {
   const perfil = fs.mkdtempSync(path.join(os.tmpdir(), 'bobby-chrome-'));
   const portaCdp = 9300 + Math.floor(Math.random() * 500);
   const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=' + portaCdp, '--user-data-dir=' + perfil,
-    '--no-first-run', '--no-default-browser-check', '--disable-gpu', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
+    '--no-first-run', '--no-default-browser-check', '--disable-gpu', '--mute-audio', '--autoplay-policy=no-user-gesture-required', 'about:blank'], { stdio: 'ignore' });
   const limpa = () => { try { chrome.kill(); } catch (e) {} try { servidor.close(); } catch (e) {} };
   process.on('exit', limpa);
 
@@ -202,6 +202,39 @@ async function main() {
       await js("window.scrollTo(0,0);0"); await dorme(100); await shot('ciclo-8-mapa-final');
       coleta(rot + ' ciclo');
 
+      /* 2c) audio GRAVADO: o tocar() acha o arquivo, o Chrome decodifica e toca ate o fim, sem voz do aparelho */
+      await js("S.som=true;S.voz=true;S.faixa='f78';AUDIO.log.length=0;audioIniciar().then(()=>1)");
+      const r1 = await js("audioTocar('Isso aí!','pt-BR').then(r=>r)");
+      if (r1 !== 'gravado') problemas.push(rot + ': audioTocar(elogio) devolveu ' + r1 + ' (esperava gravado)');
+      const r2 = await js("audioTocar('Qual número vem depois do 16?','pt-BR','mat').then(r=>r)");
+      if (r2 !== 'gravado') problemas.push(rot + ': enunciado composto (quadro + numero) devolveu ' + r2);
+      const log = JSON.parse(await js("JSON.stringify(AUDIO.log)"));
+      const ini = log.filter((l) => l.estado === 'iniciou').length, fim = log.filter((l) => l.estado === 'terminou').length, err = log.filter((l) => l.estado === 'erro').length;
+      if (ini < 3 || fim < 3 || err) problemas.push(rot + ': log de audio inesperado: iniciou ' + ini + ', terminou ' + fim + ', erro ' + err);
+      const infoAudio = await js("JSON.stringify({formato:audioFormato(),ctx:AC&&AC.state,sintese:typeof speechSynthesis!=='undefined'&&speechSynthesis.speaking,indexados:AUDIO_INDICE.chaves.size})");
+      feito.push(rot + ': audio gravado ' + infoAudio + ', clipes tocados ate o fim: ' + fim);
+      if (JSON.parse(infoAudio).sintese) problemas.push(rot + ': speechSynthesis falando');
+      // narracao automatica de uma fase (faixa 7 a 8): o clipe do enunciado toca sozinho
+      await js("AUDIO.log.length=0;abrirLicao(0,0);0"); await dorme(1800);
+      const nar = JSON.parse(await js("JSON.stringify(AUDIO.log)"));
+      if (!nar.some((l) => l.estado === 'iniciou')) problemas.push(rot + ': a abertura da fase nao tocou o clipe da missao');
+      await js("fecharLicao();0"); await dorme(800);
+      const depois = JSON.parse(await js("JSON.stringify(AUDIO.log)")).filter((l) => l.estado === 'iniciou').length;
+      await dorme(1200);
+      const depois2 = JSON.parse(await js("JSON.stringify(AUDIO.log)")).filter((l) => l.estado === 'iniciou').length;
+      if (depois2 !== depois) problemas.push(rot + ': saiu fala depois de fechar a fase');
+      // desligar sons silencia
+      await js("S.som=false;0");
+      const mudo = await js("falar('Boa!').then(r=>r)");
+      if (mudo !== 'mudo') problemas.push(rot + ': com o som desligado falar() devolveu ' + mudo);
+      await js("S.som=true;0");
+      // cache offline: o pacote core ja esta em bobby-audio-v1
+      await dorme(1500);
+      const nCache = await js("caches.open('bobby-audio-v1').then(c=>c.keys()).then(k=>k.length)");
+      const nCore = await js("AUDIO_INDICE.pacotes.core.length");
+      if (nCache < nCore) problemas.push(rot + ': pacote core nao foi para o cache bobby-audio-v1 (' + nCache + ' de ' + nCore + ')');
+      feito.push(rot + ': cache bobby-audio-v1 com ' + nCache + ' clipes (core ' + nCore + ')');
+
       /* 3) sem rolagem lateral no celular */
       const largura = await js('({sw:document.documentElement.scrollWidth,iw:innerWidth})');
       if (largura.sw > largura.iw + 1) problemas.push(rot + ': rolagem horizontal (' + largura.sw + ' > ' + largura.iw + ')');
@@ -237,6 +270,25 @@ async function main() {
       const rotina = await js("document.querySelector('.rotina')&&document.querySelector('.rotina').innerText.replace(/\\s+/g,' ').slice(0,120)");
       feito.push(rot + ': rotina depois de migrar "' + rotina + '"');
       await dorme(200); coleta(rot);
+    }
+    /* 5) offline: com o service worker no controle e a rede cortada, o clipe sai do cache bobby-audio-v1 */
+    {
+      const rot = 'offline';
+      await cdp('Page.navigate', { url: base + '/index.html' }); await dorme(2500);
+      await cdp('Page.navigate', { url: base + '/index.html' }); await dorme(3500);   // 2a carga: ja controlada pelo SW
+      const ctl = await js("!!navigator.serviceWorker.controller");
+      if (!ctl) problemas.push(rot + ': o service worker nao assumiu o controle da pagina');
+      await cdp('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0 });
+      const st = await js("fetch('audio/pt-br/sistema/boa-6376b46f.m4a').then(r=>r.status,()=>0)");
+      if (st !== 200) problemas.push(rot + ': clipe core sem rede deveria vir do cache (status ' + st + ')');
+      const mu = await js("fetch('audio/manifesto-min.json').then(r=>r.status,()=>0)");
+      if (mu !== 200) problemas.push(rot + ': manifesto sem rede deveria vir do cache (status ' + mu + ')');
+      await js("AUDIO.buffers.clear();AUDIO.log.length=0;S.som=true;S.voz=true;0").catch(() => {});
+      const toc = await js("audioTocar('Boa!','pt-BR').then(r=>r)").catch((e) => 'erro ' + e.message);
+      if (toc !== 'gravado') problemas.push(rot + ': audioTocar sem rede devolveu ' + toc);
+      await cdp('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+      feito.push(rot + ': sem rede, clipe core status ' + st + ', manifesto ' + mu + ', tocar ' + toc);
+      coleta(rot);
     }
     ws.close();
     console.log('fumaca.js (Chrome headless via CDP, ' + base + ')');
