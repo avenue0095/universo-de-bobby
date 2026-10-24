@@ -1,0 +1,2292 @@
+[
+ {
+  "id": "BAU-ABERTO",
+  "arquivo": "otimizadas/BAU-ABERTO.webp",
+  "origem": "aprovadas/BAU-ABERTO.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 31450,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "BAU-FECHADO",
+  "arquivo": "otimizadas/BAU-FECHADO.webp",
+  "origem": "aprovadas/BAU-FECHADO.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 32886,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-E01",
+  "arquivo": "otimizadas/BOBBY-E01.webp",
+  "origem": "aprovadas/BOBBY-E01.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 50154,
+  "tipo": "expressao",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-E02",
+  "arquivo": "otimizadas/BOBBY-E02.webp",
+  "origem": "aprovadas/BOBBY-E02.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 45654,
+  "tipo": "expressao",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-E03",
+  "arquivo": "otimizadas/BOBBY-E03.webp",
+  "origem": "aprovadas/BOBBY-E03.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 41376,
+  "tipo": "expressao",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-E04",
+  "arquivo": "otimizadas/BOBBY-E04.webp",
+  "origem": "aprovadas/BOBBY-E04.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 55230,
+  "tipo": "expressao",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-E05",
+  "arquivo": "otimizadas/BOBBY-E05.webp",
+  "origem": "aprovadas/BOBBY-E05.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 56478,
+  "tipo": "expressao",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-E06",
+  "arquivo": "otimizadas/BOBBY-E06.webp",
+  "origem": "aprovadas/BOBBY-E06.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 64324,
+  "tipo": "expressao",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-E07",
+  "arquivo": "otimizadas/BOBBY-E07.webp",
+  "origem": "aprovadas/BOBBY-E07.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 56180,
+  "tipo": "expressao",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-E08",
+  "arquivo": "otimizadas/BOBBY-E08.webp",
+  "origem": "aprovadas/BOBBY-E08.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 61606,
+  "tipo": "expressao",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-ITEM-CHAPEU",
+  "arquivo": "otimizadas/BOBBY-ITEM-CHAPEU.webp",
+  "origem": "aprovadas/BOBBY-ITEM-CHAPEU.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 17840,
+  "tipo": "item",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P01",
+  "arquivo": "otimizadas/BOBBY-P01.webp",
+  "origem": "aprovadas/BOBBY-P01.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 47456,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P02",
+  "arquivo": "otimizadas/BOBBY-P02.webp",
+  "origem": "aprovadas/BOBBY-P02.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 32554,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P03",
+  "arquivo": "otimizadas/BOBBY-P03.webp",
+  "origem": "aprovadas/BOBBY-P03.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 38960,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P04",
+  "arquivo": "otimizadas/BOBBY-P04.webp",
+  "origem": "aprovadas/BOBBY-P04.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 48980,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P05A",
+  "arquivo": "otimizadas/BOBBY-P05A.webp",
+  "origem": "aprovadas/BOBBY-P05A.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 31426,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P05B",
+  "arquivo": "otimizadas/BOBBY-P05B.webp",
+  "origem": "aprovadas/BOBBY-P05B.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 41578,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P06",
+  "arquivo": "otimizadas/BOBBY-P06.webp",
+  "origem": "aprovadas/BOBBY-P06.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 35706,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P07",
+  "arquivo": "otimizadas/BOBBY-P07.webp",
+  "origem": "aprovadas/BOBBY-P07.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 44380,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P08",
+  "arquivo": "otimizadas/BOBBY-P08.webp",
+  "origem": "aprovadas/BOBBY-P08.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 46896,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P09",
+  "arquivo": "otimizadas/BOBBY-P09.webp",
+  "origem": "aprovadas/BOBBY-P09.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 44474,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P10",
+  "arquivo": "otimizadas/BOBBY-P10.webp",
+  "origem": "aprovadas/BOBBY-P10.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 37476,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P11",
+  "arquivo": "otimizadas/BOBBY-P11.webp",
+  "origem": "aprovadas/BOBBY-P11.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 37544,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-P12",
+  "arquivo": "otimizadas/BOBBY-P12.webp",
+  "origem": "aprovadas/BOBBY-P12.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 47546,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-SHEET-FRENTE",
+  "arquivo": "otimizadas/BOBBY-SHEET-FRENTE.webp",
+  "origem": "aprovadas/BOBBY-SHEET-FRENTE.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 53236,
+  "tipo": "personagem",
+  "transparencia": false
+ },
+ {
+  "id": "BOBBY-SHEET",
+  "arquivo": "otimizadas/BOBBY-SHEET.webp",
+  "origem": "aprovadas/BOBBY-SHEET.jpg",
+  "largura": 768,
+  "altura": 429,
+  "bytes": 22864,
+  "tipo": "personagem",
+  "transparencia": false
+ },
+ {
+  "id": "BRISA-P01",
+  "arquivo": "otimizadas/BRISA-P01.webp",
+  "origem": "aprovadas/BRISA-P01.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 21708,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BRISA-P02",
+  "arquivo": "otimizadas/BRISA-P02.webp",
+  "origem": "aprovadas/BRISA-P02.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 22528,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BRISA-P03",
+  "arquivo": "otimizadas/BRISA-P03.webp",
+  "origem": "aprovadas/BRISA-P03.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 20178,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BRISA-P04",
+  "arquivo": "otimizadas/BRISA-P04.webp",
+  "origem": "aprovadas/BRISA-P04.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 19706,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "BRISA-SHEET",
+  "arquivo": "otimizadas/BRISA-SHEET.webp",
+  "origem": "aprovadas/BRISA-SHEET.jpg",
+  "largura": 768,
+  "altura": 429,
+  "bytes": 17132,
+  "tipo": "personagem",
+  "transparencia": false
+ },
+ {
+  "id": "CAPI-P01",
+  "arquivo": "otimizadas/CAPI-P01.webp",
+  "origem": "aprovadas/CAPI-P01.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 43854,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "CAPI-P02",
+  "arquivo": "otimizadas/CAPI-P02.webp",
+  "origem": "aprovadas/CAPI-P02.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 64592,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "CAPI-P03",
+  "arquivo": "otimizadas/CAPI-P03.webp",
+  "origem": "aprovadas/CAPI-P03.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 62206,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "CAPI-P04",
+  "arquivo": "otimizadas/CAPI-P04.webp",
+  "origem": "aprovadas/CAPI-P04.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 53840,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "CAPI-SHEET",
+  "arquivo": "otimizadas/CAPI-SHEET.webp",
+  "origem": "aprovadas/CAPI-SHEET.jpg",
+  "largura": 768,
+  "altura": 429,
+  "bytes": 29676,
+  "tipo": "personagem",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING01-APAGADO",
+  "arquivo": "otimizadas/CEN-ING01-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING01-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 80340,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING01-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING01-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING01-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 111222,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING02-APAGADO",
+  "arquivo": "otimizadas/CEN-ING02-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING02-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 78726,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING02-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING02-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING02-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 116616,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING03-APAGADO",
+  "arquivo": "otimizadas/CEN-ING03-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING03-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 75538,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING03-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING03-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING03-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 109806,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING04-APAGADO",
+  "arquivo": "otimizadas/CEN-ING04-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING04-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 88382,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING04-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING04-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING04-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 134552,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING05-APAGADO",
+  "arquivo": "otimizadas/CEN-ING05-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING05-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 74742,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING05-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING05-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING05-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 106738,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING06-APAGADO",
+  "arquivo": "otimizadas/CEN-ING06-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING06-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 71634,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING06-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING06-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING06-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 110994,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING07-APAGADO",
+  "arquivo": "otimizadas/CEN-ING07-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING07-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 76972,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING07-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING07-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING07-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 106750,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING08-APAGADO",
+  "arquivo": "otimizadas/CEN-ING08-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING08-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 80770,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING08-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING08-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING08-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 116034,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING09-APAGADO",
+  "arquivo": "otimizadas/CEN-ING09-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING09-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 83772,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING09-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING09-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING09-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 113262,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING10-APAGADO",
+  "arquivo": "otimizadas/CEN-ING10-APAGADO.webp",
+  "origem": "aprovadas/CEN-ING10-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 83304,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-ING10-COMPLETO",
+  "arquivo": "otimizadas/CEN-ING10-COMPLETO.webp",
+  "origem": "aprovadas/CEN-ING10-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 113044,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT01-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT01-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT01-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 59092,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT01-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT01-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT01-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 112258,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT02-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT02-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT02-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 54806,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT02-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT02-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT02-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 95174,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT03-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT03-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT03-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 66060,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT03-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT03-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT03-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 103514,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT04-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT04-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT04-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 63582,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT04-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT04-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT04-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 98720,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT05-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT05-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT05-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 56690,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT05-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT05-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT05-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 89732,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT06-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT06-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT06-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 56952,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT06-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT06-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT06-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 114420,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT07-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT07-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT07-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 49742,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT07-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT07-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT07-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 97490,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT08-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT08-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT08-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 79016,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT08-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT08-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT08-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 99328,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT09-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT09-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT09-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 69644,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT09-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT09-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT09-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 111220,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT10-APAGADO",
+  "arquivo": "otimizadas/CEN-MAT10-APAGADO.webp",
+  "origem": "aprovadas/CEN-MAT10-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 58472,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-MAT10-COMPLETO",
+  "arquivo": "otimizadas/CEN-MAT10-COMPLETO.webp",
+  "origem": "aprovadas/CEN-MAT10-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 96582,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR01-APAGADO",
+  "arquivo": "otimizadas/CEN-POR01-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR01-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 58194,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR01-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR01-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR01-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 78466,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR02-APAGADO",
+  "arquivo": "otimizadas/CEN-POR02-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR02-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 96674,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR02-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR02-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR02-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 117428,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR03-APAGADO",
+  "arquivo": "otimizadas/CEN-POR03-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR03-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 106530,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR03-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR03-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR03-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 130888,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR04-APAGADO",
+  "arquivo": "otimizadas/CEN-POR04-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR04-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 96460,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR04-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR04-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR04-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 109000,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR05-APAGADO",
+  "arquivo": "otimizadas/CEN-POR05-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR05-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 95716,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR05-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR05-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR05-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 113190,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR06-APAGADO",
+  "arquivo": "otimizadas/CEN-POR06-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR06-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 92706,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR06-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR06-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR06-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 113860,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR07-APAGADO",
+  "arquivo": "otimizadas/CEN-POR07-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR07-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 73638,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR07-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR07-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR07-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 100280,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR08-APAGADO",
+  "arquivo": "otimizadas/CEN-POR08-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR08-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 73876,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR08-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR08-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR08-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 98542,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR09-APAGADO",
+  "arquivo": "otimizadas/CEN-POR09-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR09-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 54416,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR09-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR09-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR09-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 102194,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR10-APAGADO",
+  "arquivo": "otimizadas/CEN-POR10-APAGADO.webp",
+  "origem": "aprovadas/CEN-POR10-APAGADO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 77852,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "CEN-POR10-COMPLETO",
+  "arquivo": "otimizadas/CEN-POR10-COMPLETO.webp",
+  "origem": "aprovadas/CEN-POR10-COMPLETO.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 100780,
+  "tipo": "cenario",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING01",
+  "arquivo": "otimizadas/DES-ING01.webp",
+  "origem": "aprovadas/DES-ING01.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 55190,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING02",
+  "arquivo": "otimizadas/DES-ING02.webp",
+  "origem": "aprovadas/DES-ING02.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 47340,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING03",
+  "arquivo": "otimizadas/DES-ING03.webp",
+  "origem": "aprovadas/DES-ING03.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 65818,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING04",
+  "arquivo": "otimizadas/DES-ING04.webp",
+  "origem": "aprovadas/DES-ING04.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 69968,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING05",
+  "arquivo": "otimizadas/DES-ING05.webp",
+  "origem": "aprovadas/DES-ING05.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 68682,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING06",
+  "arquivo": "otimizadas/DES-ING06.webp",
+  "origem": "aprovadas/DES-ING06.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 52810,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING07",
+  "arquivo": "otimizadas/DES-ING07.webp",
+  "origem": "aprovadas/DES-ING07.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 55852,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING08",
+  "arquivo": "otimizadas/DES-ING08.webp",
+  "origem": "aprovadas/DES-ING08.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 55720,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING09",
+  "arquivo": "otimizadas/DES-ING09.webp",
+  "origem": "aprovadas/DES-ING09.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 47516,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-ING10",
+  "arquivo": "otimizadas/DES-ING10.webp",
+  "origem": "aprovadas/DES-ING10.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 39628,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT01",
+  "arquivo": "otimizadas/DES-MAT01.webp",
+  "origem": "aprovadas/DES-MAT01.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 88080,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT02",
+  "arquivo": "otimizadas/DES-MAT02.webp",
+  "origem": "aprovadas/DES-MAT02.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 71606,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT03",
+  "arquivo": "otimizadas/DES-MAT03.webp",
+  "origem": "aprovadas/DES-MAT03.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 53006,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT04",
+  "arquivo": "otimizadas/DES-MAT04.webp",
+  "origem": "aprovadas/DES-MAT04.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 66306,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT05",
+  "arquivo": "otimizadas/DES-MAT05.webp",
+  "origem": "aprovadas/DES-MAT05.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 65404,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT06",
+  "arquivo": "otimizadas/DES-MAT06.webp",
+  "origem": "aprovadas/DES-MAT06.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 56478,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT07",
+  "arquivo": "otimizadas/DES-MAT07.webp",
+  "origem": "aprovadas/DES-MAT07.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 65598,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT08",
+  "arquivo": "otimizadas/DES-MAT08.webp",
+  "origem": "aprovadas/DES-MAT08.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 82496,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT09",
+  "arquivo": "otimizadas/DES-MAT09.webp",
+  "origem": "aprovadas/DES-MAT09.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 53984,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-MAT10",
+  "arquivo": "otimizadas/DES-MAT10.webp",
+  "origem": "aprovadas/DES-MAT10.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 51336,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR01",
+  "arquivo": "otimizadas/DES-POR01.webp",
+  "origem": "aprovadas/DES-POR01.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 70150,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR02",
+  "arquivo": "otimizadas/DES-POR02.webp",
+  "origem": "aprovadas/DES-POR02.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 63260,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR03",
+  "arquivo": "otimizadas/DES-POR03.webp",
+  "origem": "aprovadas/DES-POR03.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 61696,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR04",
+  "arquivo": "otimizadas/DES-POR04.webp",
+  "origem": "aprovadas/DES-POR04.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 69972,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR05",
+  "arquivo": "otimizadas/DES-POR05.webp",
+  "origem": "aprovadas/DES-POR05.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 49612,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR06",
+  "arquivo": "otimizadas/DES-POR06.webp",
+  "origem": "aprovadas/DES-POR06.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 77560,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR07",
+  "arquivo": "otimizadas/DES-POR07.webp",
+  "origem": "aprovadas/DES-POR07.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 65560,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR08",
+  "arquivo": "otimizadas/DES-POR08.webp",
+  "origem": "aprovadas/DES-POR08.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 67138,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR09",
+  "arquivo": "otimizadas/DES-POR09.webp",
+  "origem": "aprovadas/DES-POR09.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 61934,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "DES-POR10",
+  "arquivo": "otimizadas/DES-POR10.webp",
+  "origem": "aprovadas/DES-POR10.jpg",
+  "largura": 896,
+  "altura": 1200,
+  "bytes": 57410,
+  "tipo": "desenho",
+  "transparencia": false
+ },
+ {
+  "id": "FAGULHA-P01",
+  "arquivo": "otimizadas/FAGULHA-P01.webp",
+  "origem": "aprovadas/FAGULHA-P01.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 17492,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "FAGULHA-P02",
+  "arquivo": "otimizadas/FAGULHA-P02.webp",
+  "origem": "aprovadas/FAGULHA-P02.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 17086,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "FAGULHA-P03",
+  "arquivo": "otimizadas/FAGULHA-P03.webp",
+  "origem": "aprovadas/FAGULHA-P03.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 15238,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "FAGULHA-P04",
+  "arquivo": "otimizadas/FAGULHA-P04.webp",
+  "origem": "aprovadas/FAGULHA-P04.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 18824,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "FAGULHA-SHEET",
+  "arquivo": "otimizadas/FAGULHA-SHEET.webp",
+  "origem": "aprovadas/FAGULHA-SHEET.jpg",
+  "largura": 768,
+  "altura": 429,
+  "bytes": 11852,
+  "tipo": "personagem",
+  "transparencia": false
+ },
+ {
+  "id": "ITEM-BASE",
+  "arquivo": "otimizadas/ITEM-BASE.webp",
+  "origem": "aprovadas/ITEM-BASE.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 33586,
+  "tipo": "item",
+  "transparencia": false
+ },
+ {
+  "id": "ITEM-BONE",
+  "arquivo": "otimizadas/ITEM-BONE.webp",
+  "origem": "aprovadas/ITEM-BONE.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 45638,
+  "tipo": "item",
+  "transparencia": false
+ },
+ {
+  "id": "ITEM-CAPA",
+  "arquivo": "otimizadas/ITEM-CAPA.webp",
+  "origem": "aprovadas/ITEM-CAPA.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 43418,
+  "tipo": "item",
+  "transparencia": false
+ },
+ {
+  "id": "ITEM-CAPACETE",
+  "arquivo": "otimizadas/ITEM-CAPACETE.webp",
+  "origem": "aprovadas/ITEM-CAPACETE.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 31968,
+  "tipo": "item",
+  "transparencia": false
+ },
+ {
+  "id": "ITEM-COROA",
+  "arquivo": "otimizadas/ITEM-COROA.webp",
+  "origem": "aprovadas/ITEM-COROA.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 45666,
+  "tipo": "item",
+  "transparencia": false
+ },
+ {
+  "id": "ITEM-LENCO",
+  "arquivo": "otimizadas/ITEM-LENCO.webp",
+  "origem": "aprovadas/ITEM-LENCO.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 43878,
+  "tipo": "item",
+  "transparencia": false
+ },
+ {
+  "id": "ITEM-OCULOS",
+  "arquivo": "otimizadas/ITEM-OCULOS.webp",
+  "origem": "aprovadas/ITEM-OCULOS.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 38870,
+  "tipo": "item",
+  "transparencia": false
+ },
+ {
+  "id": "OTTO-P01",
+  "arquivo": "otimizadas/OTTO-P01.webp",
+  "origem": "aprovadas/OTTO-P01.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 41420,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "OTTO-P02",
+  "arquivo": "otimizadas/OTTO-P02.webp",
+  "origem": "aprovadas/OTTO-P02.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 40388,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "OTTO-P03",
+  "arquivo": "otimizadas/OTTO-P03.webp",
+  "origem": "aprovadas/OTTO-P03.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 44144,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "OTTO-P04",
+  "arquivo": "otimizadas/OTTO-P04.webp",
+  "origem": "aprovadas/OTTO-P04.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 48906,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "OTTO-SHEET",
+  "arquivo": "otimizadas/OTTO-SHEET.webp",
+  "origem": "aprovadas/OTTO-SHEET.jpg",
+  "largura": 768,
+  "altura": 429,
+  "bytes": 27330,
+  "tipo": "personagem",
+  "transparencia": false
+ },
+ {
+  "id": "PLANETA-ING",
+  "arquivo": "otimizadas/PLANETA-ING.webp",
+  "origem": "aprovadas/PLANETA-ING.jpg",
+  "largura": 1024,
+  "altura": 1024,
+  "bytes": 79424,
+  "tipo": "planeta",
+  "transparencia": false
+ },
+ {
+  "id": "PLANETA-MAT",
+  "arquivo": "otimizadas/PLANETA-MAT.webp",
+  "origem": "aprovadas/PLANETA-MAT.jpg",
+  "largura": 1024,
+  "altura": 1024,
+  "bytes": 83172,
+  "tipo": "planeta",
+  "transparencia": false
+ },
+ {
+  "id": "PLANETA-POR",
+  "arquivo": "otimizadas/PLANETA-POR.webp",
+  "origem": "aprovadas/PLANETA-POR.jpg",
+  "largura": 1024,
+  "altura": 1024,
+  "bytes": 116440,
+  "tipo": "planeta",
+  "transparencia": false
+ },
+ {
+  "id": "REC-BILHETE",
+  "arquivo": "otimizadas/REC-BILHETE.webp",
+  "origem": "aprovadas/REC-BILHETE.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 17278,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "REC-CONGELADOR",
+  "arquivo": "otimizadas/REC-CONGELADOR.webp",
+  "origem": "aprovadas/REC-CONGELADOR.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 14882,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "REC-ESTRELA",
+  "arquivo": "otimizadas/REC-ESTRELA.webp",
+  "origem": "aprovadas/REC-ESTRELA.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 16108,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "REC-MEDALHA",
+  "arquivo": "otimizadas/REC-MEDALHA.webp",
+  "origem": "aprovadas/REC-MEDALHA.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 25884,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "REC-MOEDA",
+  "arquivo": "otimizadas/REC-MOEDA.webp",
+  "origem": "aprovadas/REC-MOEDA.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 20086,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "REC-PERGAMINHO",
+  "arquivo": "otimizadas/REC-PERGAMINHO.webp",
+  "origem": "aprovadas/REC-PERGAMINHO.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 13282,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "REC-PRESENTE",
+  "arquivo": "otimizadas/REC-PRESENTE.webp",
+  "origem": "aprovadas/REC-PRESENTE.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 18112,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "REC-TROFEU",
+  "arquivo": "otimizadas/REC-TROFEU.webp",
+  "origem": "aprovadas/REC-TROFEU.jpg",
+  "largura": 768,
+  "altura": 768,
+  "bytes": 18180,
+  "tipo": "recompensa",
+  "transparencia": false
+ },
+ {
+  "id": "RUFA-P01",
+  "arquivo": "otimizadas/RUFA-P01.webp",
+  "origem": "aprovadas/RUFA-P01.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 29488,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "RUFA-P02",
+  "arquivo": "otimizadas/RUFA-P02.webp",
+  "origem": "aprovadas/RUFA-P02.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 27826,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "RUFA-P03",
+  "arquivo": "otimizadas/RUFA-P03.webp",
+  "origem": "aprovadas/RUFA-P03.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 29022,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "RUFA-P04",
+  "arquivo": "otimizadas/RUFA-P04.webp",
+  "origem": "aprovadas/RUFA-P04.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 29076,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "RUFA-SHEET",
+  "arquivo": "otimizadas/RUFA-SHEET.webp",
+  "origem": "aprovadas/RUFA-SHEET.jpg",
+  "largura": 768,
+  "altura": 429,
+  "bytes": 17218,
+  "tipo": "personagem",
+  "transparencia": false
+ },
+ {
+  "id": "TEO-P01",
+  "arquivo": "otimizadas/TEO-P01.webp",
+  "origem": "aprovadas/TEO-P01.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 22412,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "TEO-P02",
+  "arquivo": "otimizadas/TEO-P02.webp",
+  "origem": "aprovadas/TEO-P02.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 19532,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "TEO-P03",
+  "arquivo": "otimizadas/TEO-P03.webp",
+  "origem": "aprovadas/TEO-P03.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 20652,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "TEO-P04",
+  "arquivo": "otimizadas/TEO-P04.webp",
+  "origem": "aprovadas/TEO-P04.jpg",
+  "largura": 768,
+  "altura": 1029,
+  "bytes": 21728,
+  "tipo": "pose",
+  "transparencia": false
+ },
+ {
+  "id": "TEO-SHEET",
+  "arquivo": "otimizadas/TEO-SHEET.webp",
+  "origem": "aprovadas/TEO-SHEET.jpg",
+  "largura": 768,
+  "altura": 429,
+  "bytes": 12526,
+  "tipo": "personagem",
+  "transparencia": false
+ },
+ {
+  "id": "BAU-ABERTO-recorte",
+  "arquivo": "otimizadas/BAU-ABERTO-recorte.webp",
+  "origem": "recortes/BAU-ABERTO.png",
+  "largura": 623,
+  "altura": 619,
+  "bytes": 51020,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "BAU-FECHADO-recorte",
+  "arquivo": "otimizadas/BAU-FECHADO-recorte.webp",
+  "origem": "recortes/BAU-FECHADO.png",
+  "largura": 739,
+  "altura": 640,
+  "bytes": 56554,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-E01-recorte",
+  "arquivo": "otimizadas/BOBBY-E01-recorte.webp",
+  "origem": "recortes/BOBBY-E01.png",
+  "largura": 768,
+  "altura": 750,
+  "bytes": 80524,
+  "tipo": "expressao",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-E02-recorte",
+  "arquivo": "otimizadas/BOBBY-E02-recorte.webp",
+  "origem": "recortes/BOBBY-E02.png",
+  "largura": 710,
+  "altura": 722,
+  "bytes": 70684,
+  "tipo": "expressao",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-E03-recorte",
+  "arquivo": "otimizadas/BOBBY-E03-recorte.webp",
+  "origem": "recortes/BOBBY-E03.png",
+  "largura": 725,
+  "altura": 735,
+  "bytes": 65442,
+  "tipo": "expressao",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-E04-recorte",
+  "arquivo": "otimizadas/BOBBY-E04-recorte.webp",
+  "origem": "recortes/BOBBY-E04.png",
+  "largura": 759,
+  "altura": 788,
+  "bytes": 87182,
+  "tipo": "expressao",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-E05-recorte",
+  "arquivo": "otimizadas/BOBBY-E05-recorte.webp",
+  "origem": "recortes/BOBBY-E05.png",
+  "largura": 768,
+  "altura": 766,
+  "bytes": 90100,
+  "tipo": "expressao",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-E06-recorte",
+  "arquivo": "otimizadas/BOBBY-E06-recorte.webp",
+  "origem": "recortes/BOBBY-E06.png",
+  "largura": 768,
+  "altura": 757,
+  "bytes": 92086,
+  "tipo": "expressao",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-E07-recorte",
+  "arquivo": "otimizadas/BOBBY-E07-recorte.webp",
+  "origem": "recortes/BOBBY-E07.png",
+  "largura": 768,
+  "altura": 741,
+  "bytes": 81656,
+  "tipo": "expressao",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-E08-recorte",
+  "arquivo": "otimizadas/BOBBY-E08-recorte.webp",
+  "origem": "recortes/BOBBY-E08.png",
+  "largura": 768,
+  "altura": 744,
+  "bytes": 89682,
+  "tipo": "expressao",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-ITEM-CHAPEU-recorte",
+  "arquivo": "otimizadas/BOBBY-ITEM-CHAPEU-recorte.webp",
+  "origem": "recortes/BOBBY-ITEM-CHAPEU.png",
+  "largura": 753,
+  "altura": 430,
+  "bytes": 41296,
+  "tipo": "item",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P01-recorte",
+  "arquivo": "otimizadas/BOBBY-P01-recorte.webp",
+  "origem": "recortes/BOBBY-P01.png",
+  "largura": 685,
+  "altura": 1009,
+  "bytes": 74214,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P02-recorte",
+  "arquivo": "otimizadas/BOBBY-P02-recorte.webp",
+  "origem": "recortes/BOBBY-P02.png",
+  "largura": 642,
+  "altura": 806,
+  "bytes": 54546,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P03-recorte",
+  "arquivo": "otimizadas/BOBBY-P03-recorte.webp",
+  "origem": "recortes/BOBBY-P03.png",
+  "largura": 523,
+  "altura": 1050,
+  "bytes": 64736,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P04-recorte",
+  "arquivo": "otimizadas/BOBBY-P04-recorte.webp",
+  "origem": "recortes/BOBBY-P04.png",
+  "largura": 742,
+  "altura": 1025,
+  "bytes": 77764,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P05A-recorte",
+  "arquivo": "otimizadas/BOBBY-P05A-recorte.webp",
+  "origem": "recortes/BOBBY-P05A.png",
+  "largura": 624,
+  "altura": 948,
+  "bytes": 54728,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P05B-recorte",
+  "arquivo": "otimizadas/BOBBY-P05B-recorte.webp",
+  "origem": "recortes/BOBBY-P05B.png",
+  "largura": 618,
+  "altura": 976,
+  "bytes": 64508,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P06-recorte",
+  "arquivo": "otimizadas/BOBBY-P06-recorte.webp",
+  "origem": "recortes/BOBBY-P06.png",
+  "largura": 557,
+  "altura": 1013,
+  "bytes": 58978,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P07-recorte",
+  "arquivo": "otimizadas/BOBBY-P07-recorte.webp",
+  "origem": "recortes/BOBBY-P07.png",
+  "largura": 605,
+  "altura": 1013,
+  "bytes": 72762,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P08-recorte",
+  "arquivo": "otimizadas/BOBBY-P08-recorte.webp",
+  "origem": "recortes/BOBBY-P08.png",
+  "largura": 605,
+  "altura": 1035,
+  "bytes": 75036,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P09-recorte",
+  "arquivo": "otimizadas/BOBBY-P09-recorte.webp",
+  "origem": "recortes/BOBBY-P09.png",
+  "largura": 644,
+  "altura": 1025,
+  "bytes": 70724,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P10-recorte",
+  "arquivo": "otimizadas/BOBBY-P10-recorte.webp",
+  "origem": "recortes/BOBBY-P10.png",
+  "largura": 498,
+  "altura": 1012,
+  "bytes": 58428,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P11-recorte",
+  "arquivo": "otimizadas/BOBBY-P11-recorte.webp",
+  "origem": "recortes/BOBBY-P11.png",
+  "largura": 625,
+  "altura": 946,
+  "bytes": 63812,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-P12-recorte",
+  "arquivo": "otimizadas/BOBBY-P12-recorte.webp",
+  "origem": "recortes/BOBBY-P12.png",
+  "largura": 768,
+  "altura": 879,
+  "bytes": 80798,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-SHEET-FRENTE-recorte",
+  "arquivo": "otimizadas/BOBBY-SHEET-FRENTE-recorte.webp",
+  "origem": "recortes/BOBBY-SHEET-FRENTE.png",
+  "largura": 768,
+  "altura": 861,
+  "bytes": 79980,
+  "tipo": "personagem",
+  "transparencia": true
+ },
+ {
+  "id": "BOBBY-SHEET-recorte",
+  "arquivo": "otimizadas/BOBBY-SHEET-recorte.webp",
+  "origem": "recortes/BOBBY-SHEET.png",
+  "largura": 768,
+  "altura": 337,
+  "bytes": 47284,
+  "tipo": "personagem",
+  "transparencia": true
+ },
+ {
+  "id": "BRISA-P01-recorte",
+  "arquivo": "otimizadas/BRISA-P01-recorte.webp",
+  "origem": "recortes/BRISA-P01.png",
+  "largura": 748,
+  "altura": 1000,
+  "bytes": 43376,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "BRISA-SHEET-recorte",
+  "arquivo": "otimizadas/BRISA-SHEET-recorte.webp",
+  "origem": "recortes/BRISA-SHEET.png",
+  "largura": 768,
+  "altura": 338,
+  "bytes": 54908,
+  "tipo": "personagem",
+  "transparencia": true
+ },
+ {
+  "id": "CAPI-P01-recorte",
+  "arquivo": "otimizadas/CAPI-P01-recorte.webp",
+  "origem": "recortes/CAPI-P01.png",
+  "largura": 620,
+  "altura": 928,
+  "bytes": 68468,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "CAPI-P02-recorte",
+  "arquivo": "otimizadas/CAPI-P02-recorte.webp",
+  "origem": "recortes/CAPI-P02.png",
+  "largura": 684,
+  "altura": 1012,
+  "bytes": 94254,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "CAPI-P03-recorte",
+  "arquivo": "otimizadas/CAPI-P03-recorte.webp",
+  "origem": "recortes/CAPI-P03.png",
+  "largura": 658,
+  "altura": 992,
+  "bytes": 93682,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "CAPI-P04-recorte",
+  "arquivo": "otimizadas/CAPI-P04-recorte.webp",
+  "origem": "recortes/CAPI-P04.png",
+  "largura": 720,
+  "altura": 1005,
+  "bytes": 80294,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "CAPI-SHEET-recorte",
+  "arquivo": "otimizadas/CAPI-SHEET-recorte.webp",
+  "origem": "recortes/CAPI-SHEET.png",
+  "largura": 768,
+  "altura": 326,
+  "bytes": 56494,
+  "tipo": "personagem",
+  "transparencia": true
+ },
+ {
+  "id": "FAGULHA-P01-recorte",
+  "arquivo": "otimizadas/FAGULHA-P01-recorte.webp",
+  "origem": "recortes/FAGULHA-P01.png",
+  "largura": 600,
+  "altura": 765,
+  "bytes": 33320,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "FAGULHA-SHEET-recorte",
+  "arquivo": "otimizadas/FAGULHA-SHEET-recorte.webp",
+  "origem": "recortes/FAGULHA-SHEET.png",
+  "largura": 768,
+  "altura": 282,
+  "bytes": 38520,
+  "tipo": "personagem",
+  "transparencia": true
+ },
+ {
+  "id": "ITEM-BASE-recorte",
+  "arquivo": "otimizadas/ITEM-BASE-recorte.webp",
+  "origem": "recortes/ITEM-BASE.png",
+  "largura": 552,
+  "altura": 1022,
+  "bytes": 55320,
+  "tipo": "item",
+  "transparencia": true
+ },
+ {
+  "id": "ITEM-BONE-recorte",
+  "arquivo": "otimizadas/ITEM-BONE-recorte.webp",
+  "origem": "recortes/ITEM-BONE.png",
+  "largura": 595,
+  "altura": 1061,
+  "bytes": 69878,
+  "tipo": "item",
+  "transparencia": true
+ },
+ {
+  "id": "ITEM-CAPA-recorte",
+  "arquivo": "otimizadas/ITEM-CAPA-recorte.webp",
+  "origem": "recortes/ITEM-CAPA.png",
+  "largura": 627,
+  "altura": 1042,
+  "bytes": 69298,
+  "tipo": "item",
+  "transparencia": true
+ },
+ {
+  "id": "ITEM-CAPACETE-recorte",
+  "arquivo": "otimizadas/ITEM-CAPACETE-recorte.webp",
+  "origem": "recortes/ITEM-CAPACETE.png",
+  "largura": 526,
+  "altura": 935,
+  "bytes": 50688,
+  "tipo": "item",
+  "transparencia": true
+ },
+ {
+  "id": "ITEM-COROA-recorte",
+  "arquivo": "otimizadas/ITEM-COROA-recorte.webp",
+  "origem": "recortes/ITEM-COROA.png",
+  "largura": 594,
+  "altura": 1013,
+  "bytes": 73670,
+  "tipo": "item",
+  "transparencia": true
+ },
+ {
+  "id": "ITEM-LENCO-recorte",
+  "arquivo": "otimizadas/ITEM-LENCO-recorte.webp",
+  "origem": "recortes/ITEM-LENCO.png",
+  "largura": 611,
+  "altura": 1024,
+  "bytes": 68616,
+  "tipo": "item",
+  "transparencia": true
+ },
+ {
+  "id": "ITEM-OCULOS-recorte",
+  "arquivo": "otimizadas/ITEM-OCULOS-recorte.webp",
+  "origem": "recortes/ITEM-OCULOS.png",
+  "largura": 575,
+  "altura": 1005,
+  "bytes": 62332,
+  "tipo": "item",
+  "transparencia": true
+ },
+ {
+  "id": "OTTO-P01-recorte",
+  "arquivo": "otimizadas/OTTO-P01-recorte.webp",
+  "origem": "recortes/OTTO-P01.png",
+  "largura": 563,
+  "altura": 1012,
+  "bytes": 67138,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "OTTO-P02-recorte",
+  "arquivo": "otimizadas/OTTO-P02-recorte.webp",
+  "origem": "recortes/OTTO-P02.png",
+  "largura": 614,
+  "altura": 945,
+  "bytes": 69180,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "OTTO-P03-recorte",
+  "arquivo": "otimizadas/OTTO-P03-recorte.webp",
+  "origem": "recortes/OTTO-P03.png",
+  "largura": 647,
+  "altura": 1000,
+  "bytes": 71812,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "OTTO-P04-recorte",
+  "arquivo": "otimizadas/OTTO-P04-recorte.webp",
+  "origem": "recortes/OTTO-P04.png",
+  "largura": 600,
+  "altura": 1075,
+  "bytes": 78068,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "OTTO-SHEET-recorte",
+  "arquivo": "otimizadas/OTTO-SHEET-recorte.webp",
+  "origem": "recortes/OTTO-SHEET.png",
+  "largura": 768,
+  "altura": 366,
+  "bytes": 56074,
+  "tipo": "personagem",
+  "transparencia": true
+ },
+ {
+  "id": "REC-BILHETE-recorte",
+  "arquivo": "otimizadas/REC-BILHETE-recorte.webp",
+  "origem": "recortes/REC-BILHETE.png",
+  "largura": 694,
+  "altura": 579,
+  "bytes": 30672,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "REC-CONGELADOR-recorte",
+  "arquivo": "otimizadas/REC-CONGELADOR-recorte.webp",
+  "origem": "recortes/REC-CONGELADOR.png",
+  "largura": 498,
+  "altura": 719,
+  "bytes": 24434,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "REC-ESTRELA-recorte",
+  "arquivo": "otimizadas/REC-ESTRELA-recorte.webp",
+  "origem": "recortes/REC-ESTRELA.png",
+  "largura": 699,
+  "altura": 673,
+  "bytes": 26390,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "REC-MEDALHA-recorte",
+  "arquivo": "otimizadas/REC-MEDALHA-recorte.webp",
+  "origem": "recortes/REC-MEDALHA.png",
+  "largura": 450,
+  "altura": 785,
+  "bytes": 42822,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "REC-MOEDA-recorte",
+  "arquivo": "otimizadas/REC-MOEDA-recorte.webp",
+  "origem": "recortes/REC-MOEDA.png",
+  "largura": 578,
+  "altura": 629,
+  "bytes": 32122,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "REC-PERGAMINHO-recorte",
+  "arquivo": "otimizadas/REC-PERGAMINHO-recorte.webp",
+  "origem": "recortes/REC-PERGAMINHO.png",
+  "largura": 597,
+  "altura": 732,
+  "bytes": 24292,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "REC-PRESENTE-recorte",
+  "arquivo": "otimizadas/REC-PRESENTE-recorte.webp",
+  "origem": "recortes/REC-PRESENTE.png",
+  "largura": 689,
+  "altura": 742,
+  "bytes": 38028,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "REC-TROFEU-recorte",
+  "arquivo": "otimizadas/REC-TROFEU-recorte.webp",
+  "origem": "recortes/REC-TROFEU.png",
+  "largura": 733,
+  "altura": 745,
+  "bytes": 31398,
+  "tipo": "recompensa",
+  "transparencia": true
+ },
+ {
+  "id": "RUFA-P01-recorte",
+  "arquivo": "otimizadas/RUFA-P01-recorte.webp",
+  "origem": "recortes/RUFA-P01.png",
+  "largura": 667,
+  "altura": 1043,
+  "bytes": 56406,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "RUFA-P02-recorte",
+  "arquivo": "otimizadas/RUFA-P02-recorte.webp",
+  "origem": "recortes/RUFA-P02.png",
+  "largura": 642,
+  "altura": 974,
+  "bytes": 53650,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "RUFA-P03-recorte",
+  "arquivo": "otimizadas/RUFA-P03-recorte.webp",
+  "origem": "recortes/RUFA-P03.png",
+  "largura": 738,
+  "altura": 1078,
+  "bytes": 54914,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "RUFA-P04-recorte",
+  "arquivo": "otimizadas/RUFA-P04-recorte.webp",
+  "origem": "recortes/RUFA-P04.png",
+  "largura": 530,
+  "altura": 1066,
+  "bytes": 52748,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "RUFA-SHEET-recorte",
+  "arquivo": "otimizadas/RUFA-SHEET-recorte.webp",
+  "origem": "recortes/RUFA-SHEET.png",
+  "largura": 768,
+  "altura": 357,
+  "bytes": 48740,
+  "tipo": "personagem",
+  "transparencia": true
+ },
+ {
+  "id": "TEO-P01-recorte",
+  "arquivo": "otimizadas/TEO-P01-recorte.webp",
+  "origem": "recortes/TEO-P01.png",
+  "largura": 567,
+  "altura": 1087,
+  "bytes": 33824,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "TEO-P02-recorte",
+  "arquivo": "otimizadas/TEO-P02-recorte.webp",
+  "origem": "recortes/TEO-P02.png",
+  "largura": 704,
+  "altura": 1000,
+  "bytes": 34632,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "TEO-P03-recorte",
+  "arquivo": "otimizadas/TEO-P03-recorte.webp",
+  "origem": "recortes/TEO-P03.png",
+  "largura": 515,
+  "altura": 712,
+  "bytes": 22400,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "TEO-P04-recorte",
+  "arquivo": "otimizadas/TEO-P04-recorte.webp",
+  "origem": "recortes/TEO-P04.png",
+  "largura": 551,
+  "altura": 1066,
+  "bytes": 37654,
+  "tipo": "pose",
+  "transparencia": true
+ },
+ {
+  "id": "TEO-SHEET-recorte",
+  "arquivo": "otimizadas/TEO-SHEET-recorte.webp",
+  "origem": "recortes/TEO-SHEET.png",
+  "largura": 768,
+  "altura": 361,
+  "bytes": 34208,
+  "tipo": "personagem",
+  "transparencia": true
+ }
+]

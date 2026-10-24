@@ -1,0 +1,689 @@
+id	arquivo	prompt_id	modelo	proporcao	creditos	nota	status
+BOBBY-SHEET-FRENTE-v1	BOBBY-SHEET-FRENTE-v1.jpg	BOBBY-SHEET-FRENTE	Nano Banana 2.1	3:4	0		candidata (4 geradas, esta e a 1a; 896x1200 JPEG)
+BOBBY-SHEET-FRENTE-v2	BOBBY-SHEET-FRENTE-v2.jpg	BOBBY-SHEET-FRENTE	Nano Banana 2.1	3:4	0	5	rodada 1 (prompt da biblia sem ESTILO/NEG). Visual de desenho animado liso, pelo sem textura; estrela na orelha errada. reprovada
+BOBBY-SHEET-FRENTE-v1	BOBBY-SHEET-FRENTE-v1.jpg	BOBBY-SHEET-FRENTE	Nano Banana 2.1	3:4	0	5.5	rodada 1: identidade ok (estrela no lado certo, colete, mochila) mas acabamento de brinquedo/desenho, nao RPG; reprovada por realismo
+BOBBY-SHEET-FRENTE-v7	BOBBY-SHEET-FRENTE-v7.jpg	BOBBY-SHEET-FRENTE	Nano Banana 2.1	3:4	0	8.3	rodada 2 com ajuste A1 (ESTILO+NEG adicionados). Pelo com textura real, colete de lona com costura, botao de estrela, estrela na orelha direita da imagem, mochila com bolsos e fivelas, fundo cinza liso, margem ok. Variantes 5,6 com estrela do lado errado; 8 ok mas menos material. APROVADA
+BOBBY-SHEET-v1	BOBBY-SHEET-v1.jpg	BOBBY-SHEET	Nano Banana 2.1	16:9	0	8.5	rodada 1 (ref: FRENTE-v7). 3 vistas coerentes; estrela so na vista frontal (nao aparece nas costas). boa
+BOBBY-SHEET-v2	BOBBY-SHEET-v2.jpg	BOBBY-SHEET	Nano Banana 2.1	16:9	0	8.5	rodada 1: igual a v1, costas com bolso frontal; estrela nao aparece nas costas
+BOBBY-SHEET-v3	BOBBY-SHEET-v3.jpg	BOBBY-SHEET	Nano Banana 2.1	16:9	0	9	rodada 1: 3 vistas (frente, perfil esquerdo, costas) mesma escala e luz; estrela na orelha esquerda dele aparece na frente e nas costas (lado coerente); colete com botao; mochila com bolsos e rolo (desvio leve: bloco diz mochila redonda, saiu retangular com saco de dormir, aceito). APROVADA
+BOBBY-SHEET-v4	BOBBY-SHEET-v4.jpg	BOBBY-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1: boa, corpo um pouco mais largo; estrela nao aparece nas costas
+BOBBY-P01-v1	BOBBY-P01-v1.jpg	BOBBY-P01	Nano Banana 2.1	3:4	0	9	rodada 1 (refs: FRENTE-v7 + SHEET-v3). Identidade fiel, 3/4, acena, estrela no lado certo, pes visiveis, fundo liso. APROVADA
+BOBBY-P01-v2	BOBBY-P01-v2.jpg	BOBBY-P01	Nano Banana 2.1	3:4	0	8.7	rodada 1: fiel; acena com a pata do outro lado; boa
+BOBBY-P01-v3	BOBBY-P01-v3.jpg	BOBBY-P01	Nano Banana 2.1	3:4	0	8.5	rodada 1: fiel; cabeca mais baixa
+BOBBY-P01-v4	BOBBY-P01-v4.jpg	BOBBY-P01	Nano Banana 2.1	3:4	0	8.6	rodada 1: fiel; rolo da mochila visivel
+BOBBY-P02-v1	BOBBY-P02-v1.jpg	BOBBY-P02	Nano Banana 2.1	3:4	0	7	rodada 1: pulo bom, mas estrela fora da orelha (na testa); reprovada por marca fixa
+BOBBY-P02-v2	BOBBY-P02-v2.jpg	BOBBY-P02	Nano Banana 2.1	3:4	0	7.8	rodada 1: pulo bom, estrela na base da orelha invadindo a testa
+BOBBY-P02-v3	BOBBY-P02-v3.jpg	BOBBY-P02	Nano Banana 2.1	3:4	0	8.8	rodada 1: ambos os pes fora do chao, patas para cima, riso, estrela na orelha direita da imagem, colete com botao, mochila. APROVADA
+BOBBY-P02-v4	BOBBY-P02-v4.jpg	BOBBY-P02	Nano Banana 2.1	3:4	0	7.5	rodada 1: estrela na testa
+BOBBY-P05A-v1	BOBBY-P05A-v1.jpg	BOBBY-P05A	Nano Banana 2.1	3:4	0	6	rodada 1: caminhada boa, mas estrela na orelha PERTO da camera (lado errado: espelhada); reprovada por marca fixa
+BOBBY-P05A-v2	BOBBY-P05A-v2.jpg	BOBBY-P05A	Nano Banana 2.1	3:4	0	6	rodada 1: idem, estrela na orelha errada
+BOBBY-P05A-v3	BOBBY-P05A-v3.jpg	BOBBY-P05A	Nano Banana 2.1	3:4	0	6	rodada 1: idem
+BOBBY-P05A-v4	BOBBY-P05A-v4.jpg	BOBBY-P05A	Nano Banana 2.1	3:4	0	6	rodada 1: idem
+BOBBY-P05A-v5	BOBBY-P05A-v5.jpg	BOBBY-P05A	Nano Banana 2.1	3:4	0	8	rodada 2 com ajuste A2 (frase: estrela na orelha esquerda, que e a orelha distante, quase escondida; orelha proxima lisa). Lado correto; anda bem
+BOBBY-P05A-v6	BOBBY-P05A-v6.jpg	BOBBY-P05A	Nano Banana 2.1	3:4	0	8.6	rodada 2 (A2): marcha clara (calcanhar na frente, ponta atras), bracos opostos, colete com botao, alca da mochila, sorriso decidido, orelha proxima lisa, estrela na orelha distante escondida (coerente). APROVADA
+BOBBY-P05A-v7	BOBBY-P05A-v7.jpg	BOBBY-P05A	Nano Banana 2.1	3:4	0	8.2	rodada 2 (A2): boa; passada menos nitida
+BOBBY-P05A-v8	BOBBY-P05A-v8.jpg	BOBBY-P05A	Nano Banana 2.1	3:4	0	8.2	rodada 2 (A2): boa; corpo mais largo
+OTTO-SHEET-v1	OTTO-SHEET-v1.jpg	OTTO-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1 (sem ref, com ESTILO/NEG): 3 vistas coerentes, cauda mais curta no perfil
+OTTO-SHEET-v2	OTTO-SHEET-v2.jpg	OTTO-SHEET	Nano Banana 2.1	16:9	0	8.8	rodada 1: frente, perfil esquerdo com cauda inteira, costas; cachecol coral de tricô, concha espiral branca no cordao, pelo marrom molhado, barriga bege; mesma escala e luz. APROVADA
+OTTO-SHEET-v3	OTTO-SHEET-v3.jpg	OTTO-SHEET	Nano Banana 2.1	16:9	0	8.2	rodada 1: boa, concha menor
+OTTO-SHEET-v4	OTTO-SHEET-v4.jpg	OTTO-SHEET	Nano Banana 2.1	16:9	0	8.5	rodada 1: boa, corpo mais baixo
+OTTO-P01-v1	OTTO-P01-v1.jpg	OTTO-P01	Nano Banana 2.1	3:4	0	8.8	rodada 1 (ref: OTTO-SHEET-v2). Identico a folha: cachecol coral, concha espiral, pelo marrom, barriga bege; acena, segura ponta do cachecol, cabeca inclinada, cauda apoiada no chao. APROVADA
+OTTO-P01-v2	OTTO-P01-v2.jpg	OTTO-P01	Nano Banana 2.1	3:4	0	8.4	rodada 1: fiel; cauda enrolada para cima (menos apoio)
+OTTO-P01-v3	OTTO-P01-v3.jpg	OTTO-P01	Nano Banana 2.1	3:4	0	8.3	rodada 1: fiel; cauda curva
+OTTO-P01-v4	OTTO-P01-v4.jpg	OTTO-P01	Nano Banana 2.1	3:4	0	8.5	rodada 1: fiel; cauda curva
+CAPI-SHEET-v1	CAPI-SHEET-v1.jpg	CAPI-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1 (FUNDO-B): 3 vistas coerentes, folha pequena
+CAPI-SHEET-v2	CAPI-SHEET-v2.jpg	CAPI-SHEET	Nano Banana 2.1	16:9	0	8.8	rodada 1: frente, perfil esquerdo, costas; focinho marrom grande, olhos meio fechados, folha na cabeca, sentada, pelo dourado; sem adereco extra. APROVADA
+CAPI-SHEET-v3	CAPI-SHEET-v3.jpg	CAPI-SHEET	Nano Banana 2.1	16:9	0	5	rodada 1: ganhou arreio e bolsa de couro (adereco nao listado); reprovada
+CAPI-SHEET-v4	CAPI-SHEET-v4.jpg	CAPI-SHEET	Nano Banana 2.1	16:9	0	8.4	rodada 1: boa, corpo redondo demais
+CAPI-P01-v1	CAPI-P01-v1.jpg	CAPI-P01	Nano Banana 2.1	3:4	0	8.5	rodada 1 (ref: CAPI-SHEET-v2, FUNDO-B): fiel, 3/4, pata erguida; boa
+CAPI-P01-v2	CAPI-P01-v2.jpg	CAPI-P01	Nano Banana 2.1	3:4	0	8.7	rodada 1: frontal, pata esquerda erguida em cumprimento, sorriso sonolento, folha na cabeca, mesmo corpo e cor da folha. APROVADA
+CAPI-P01-v3	CAPI-P01-v3.jpg	CAPI-P01	Nano Banana 2.1	3:4	0	8.4	rodada 1: fiel, 3/4
+CAPI-P01-v4	CAPI-P01-v4.jpg	CAPI-P01	Nano Banana 2.1	3:4	0	7.5	rodada 1: pata erguida pouco legivel
+CEN-ING01-COMPLETO-v1	CEN-ING01-COMPLETO-v1.jpg	CEN-ING01-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: 5 elementos legiveis em 3 planos (aviao, relogio sol e lua sem numeros, balcao com sino, mesa de crachas com fitas, 3 baloes); luz dourada do alto esquerdo; sem texto/personagem; terco inferior livre (trilha de pedras pequena). Estilo 3D de jogo, um pouco colorido de desenho. APROVADA
+CEN-ING01-COMPLETO-v2	CEN-ING01-COMPLETO-v2.jpg	CEN-ING01-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: elementos legiveis, 45% inferior vazio (melhor para botoes), terreno marrom sem graca
+CEN-ING01-COMPLETO-v3	CEN-ING01-COMPLETO-v3.jpg	CEN-ING01-COMPLETO	Nano Banana 2.1	3:4	0	7.5	rodada 1: elementos grandes demais, enquadramento fechado, balcao vira caixote
+CEN-ING01-COMPLETO-v4	CEN-ING01-COMPLETO-v4.jpg	CEN-ING01-COMPLETO	Nano Banana 2.1	3:4	0	7	rodada 1: elementos cortados nas bordas
+CEN-ING01-APAGADO-v1	CEN-ING01-APAGADO-v1.jpg	CEN-ING01-APAGADO	Nano Banana 2.1	3:4	0	8	ref: COMPLETO-v1. composicao igual (correl. de bordas 0.60), mar ainda saturado
+CEN-ING01-APAGADO-v2	CEN-ING01-APAGADO-v2.jpg	CEN-ING01-APAGADO	Nano Banana 2.1	3:4	0	8.5	ref: COMPLETO-v1. mesma composicao (correl. de bordas 0.65, melhor das 4), cinco elementos como fundacao, andaime e panos, tons frios e neblina de crepusculo, sem luzes. APROVADA
+CEN-ING01-APAGADO-v3	CEN-ING01-APAGADO-v3.jpg	CEN-ING01-APAGADO	Nano Banana 2.1	3:4	0	8.2	ref: COMPLETO-v1. boa, aviao coberto grande demais
+CEN-ING01-APAGADO-v4	CEN-ING01-APAGADO-v4.jpg	CEN-ING01-APAGADO	Nano Banana 2.1	3:4	0	7.5	ref: COMPLETO-v1. mudou o aviao e o chao (deriva)
+DES-ING01-v1	DES-ING01-v1.jpg	DES-ING01	Nano Banana 2.1	3:4	0	7.6	rodada 1: tracos limpos, fundo branco, cinco elementos; ~77 regioes (acima de 20 a 30), nuvens e ondas demais
+DES-ING01-v2	DES-ING01-v2.jpg	DES-ING01	Nano Banana 2.1	3:4	0	7.5	rodada 1: elementos legiveis, ~83 regioes, detalhe demais
+DES-ING01-v3	DES-ING01-v3.jpg	DES-ING01	Nano Banana 2.1	3:4	0	7.5	rodada 1: ~80 regioes
+DES-ING01-v4	DES-ING01-v4.jpg	DES-ING01	Nano Banana 2.1	3:4	0	7.3	rodada 1: ~64 regioes, borda de moldura
+DES-ING01-v5	DES-ING01-v5.jpg	DES-ING01	Nano Banana 2.1	3:4	0	7.9	rodada 2 com ajuste A4 (frase de simplicidade): 60 regioes, composicao aberta, aviao pequeno
+DES-ING01-v6	DES-ING01-v6.jpg	DES-ING01	Nano Banana 2.1	3:4	0	8	rodada 2 (A4): linhas fechadas e uniformes, sem cinza (2% de antialias), sem texto nem numeros no relogio (so tracos), urso de linha com estrela na orelha, colete e mochila, 5 elementos legiveis; 59 regioes (acima de 20 a 30, aceito para 7 a 12 anos). APROVADA COM RESSALVA (nao imprimi em A4 nem testei balde de tinta)
+DES-ING01-v7	DES-ING01-v7.jpg	DES-ING01	Nano Banana 2.1	3:4	0	7.8	rodada 2 (A4): 58 regioes, relogio pendurado estranho
+DES-ING01-v8	DES-ING01-v8.jpg	DES-ING01	Nano Banana 2.1	3:4	0	7.5	rodada 2 (A4): 59 regioes, urso recortado na lateral
+BOBBY-ITEM-CHAPEU-v1	BOBBY-ITEM-CHAPEU-v1.jpg	BOBBY-ITEM-CHAPEU	Nano Banana 2.1	1:1	0	8	rodada 1: bom, ligeiramente de lado, botao em aba
+BOBBY-ITEM-CHAPEU-v2	BOBBY-ITEM-CHAPEU-v2.jpg	BOBBY-ITEM-CHAPEU	Nano Banana 2.1	1:1	0	8.6	rodada 1: chapeu creme com faixa laranja e botao de estrela, de frente, centrado, luz coerente, fundo liso, margem. APROVADA
+BOBBY-ITEM-CHAPEU-v3	BOBBY-ITEM-CHAPEU-v3.jpg	BOBBY-ITEM-CHAPEU	Nano Banana 2.1	1:1	0	8.3	rodada 1: bom, formato de capacete
+BOBBY-ITEM-CHAPEU-v4	BOBBY-ITEM-CHAPEU-v4.jpg	BOBBY-ITEM-CHAPEU	Nano Banana 2.1	1:1	0	7.8	rodada 1: aba ondulada irregular
+BOBBY-P03-v1	BOBBY-P03-v1.jpg	BOBBY-P03	Nano Banana 2.1	3:4	0	8.2	rodada 1 (ref: BOBBY-SHEET-v3): pensa, estrela ok, colete quase todo coberto pelos bracos
+BOBBY-P03-v2	BOBBY-P03-v2.jpg	BOBBY-P03	Nano Banana 2.1	3:4	0	8.3	rodada 1: pensa, colete visivel nas bordas, botao visivel. APROVADA
+BOBBY-P03-v3	BOBBY-P03-v3.jpg	BOBBY-P03	Nano Banana 2.1	3:4	0	8	rodada 1: ok, cabeca mais baixa
+BOBBY-P03-v4	BOBBY-P03-v4.jpg	BOBBY-P03	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+BOBBY-P04-v1	BOBBY-P04-v1.jpg	BOBBY-P04	Nano Banana 2.1	3:4	0	8.6	rodada 1: aponta para a esquerda da imagem, outra pata no quadril, boca aberta explicando, colete e botao, estrela na orelha certa. APROVADA
+BOBBY-P04-v2	BOBBY-P04-v2.jpg	BOBBY-P04	Nano Banana 2.1	3:4	0	8.4	rodada 1: ok
+BOBBY-P04-v3	BOBBY-P04-v3.jpg	BOBBY-P04	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok, sorriso fechado
+BOBBY-P04-v4	BOBBY-P04-v4.jpg	BOBBY-P04	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BOBBY-P05B-v1	BOBBY-P05B-v1.jpg	BOBBY-P05B	Nano Banana 2.1	3:4	0	8.2	rodada 1: passada ok
+BOBBY-P05B-v2	BOBBY-P05B-v2.jpg	BOBBY-P05B	Nano Banana 2.1	3:4	0	8.4	rodada 1 (frase A2 da orelha distante): perna levantada passando, bracos opostos, orelha proxima lisa, alca da mochila. APROVADA
+BOBBY-P05B-v3	BOBBY-P05B-v3.jpg	BOBBY-P05B	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BOBBY-P05B-v4	BOBBY-P05B-v4.jpg	BOBBY-P05B	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok, corpo largo
+BOBBY-P06-v1	BOBBY-P06-v1.jpg	BOBBY-P06	Nano Banana 2.1	3:4	0	8.2	rodada 1: le livro azul sem letras, ok
+BOBBY-P06-v2	BOBBY-P06-v2.jpg	BOBBY-P06	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BOBBY-P06-v3	BOBBY-P06-v3.jpg	BOBBY-P06	Nano Banana 2.1	3:4	0	8.4	rodada 1: livro azul com paginas creme em branco, olha o livro, colete e botao visiveis, estrela na orelha certa. APROVADA
+BOBBY-P06-v4	BOBBY-P06-v4.jpg	BOBBY-P06	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+BOBBY-P07-v1	BOBBY-P07-v1.jpg	BOBBY-P07	Nano Banana 2.1	3:4	0	8	rodada 1: ouve, pata junto a orelha
+BOBBY-P07-v2	BOBBY-P07-v2.jpg	BOBBY-P07	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+BOBBY-P07-v3	BOBBY-P07-v3.jpg	BOBBY-P07	Nano Banana 2.1	3:4	0	8.3	rodada 1: pata em concha ao lado da orelha, atento, boca entreaberta, colete e botao, estrela na orelha certa APROVADA
+BOBBY-P07-v4	BOBBY-P07-v4.jpg	BOBBY-P07	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+BOBBY-P08-v1	BOBBY-P08-v1.jpg	BOBBY-P08	Nano Banana 2.1	3:4	0	8.4	rodada 1: tres dedos estendidos mais polegar, outra pata na barriga, concentrado, colete e botao, estrela certa APROVADA
+BOBBY-P08-v2	BOBBY-P08-v2.jpg	BOBBY-P08	Nano Banana 2.1	3:4	0	7.2	rodada 1: so dois dedos claros
+BOBBY-P08-v3	BOBBY-P08-v3.jpg	BOBBY-P08	Nano Banana 2.1	3:4	0	8.1	rodada 1: tres dedos, ok
+BOBBY-P08-v4	BOBBY-P08-v4.jpg	BOBBY-P08	Nano Banana 2.1	3:4	0	8	rodada 1: tres dedos, ok
+BOBBY-P09-v1	BOBBY-P09-v1.jpg	BOBBY-P09	Nano Banana 2.1	3:4	0	8.3	rodada 1: joia ok
+BOBBY-P09-v2	BOBBY-P09-v2.jpg	BOBBY-P09	Nano Banana 2.1	3:4	0	8.5	rodada 1: joia clara, inclinado, sorriso acolhedor, pata no quadril, colete e botao APROVADA
+BOBBY-P09-v3	BOBBY-P09-v3.jpg	BOBBY-P09	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+BOBBY-P09-v4	BOBBY-P09-v4.jpg	BOBBY-P09	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BOBBY-P10-v1	BOBBY-P10-v1.jpg	BOBBY-P10	Nano Banana 2.1	3:4	0	8.2	rodada 1: entrega o bilhete, ok
+BOBBY-P10-v2	BOBBY-P10-v2.jpg	BOBBY-P10	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+BOBBY-P10-v3	BOBBY-P10-v3.jpg	BOBBY-P10	Nano Banana 2.1	3:4	0	8.4	rodada 1: bilhete creme com selo de estrela dourada sem texto, oferecido com as duas patas, olhos brilhantes, colete e botao, estrela certa APROVADA
+BOBBY-P10-v4	BOBBY-P10-v4.jpg	BOBBY-P10	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BOBBY-P11-v1	BOBBY-P11-v1.jpg	BOBBY-P11	Nano Banana 2.1	3:4	0	7.8	rodada 1: de costas, mochila grande e quadrada (desvio: bloco diz redonda), estrela nao visivel
+BOBBY-P11-v2	BOBBY-P11-v2.jpg	BOBBY-P11	Nano Banana 2.1	3:4	0	7.8	rodada 1: estrela visivel mas lado duvidoso
+BOBBY-P11-v3	BOBBY-P11-v3.jpg	BOBBY-P11	Nano Banana 2.1	3:4	0	8	rodada 1: tres quartos de costas olhando para tras, acena com a pata, mochila bem visivel, sorriso calmo; mochila boxy com rolo (desvio recorrente da folha), estrela oculta APROVADA
+BOBBY-P11-v4	BOBBY-P11-v4.jpg	BOBBY-P11	Nano Banana 2.1	3:4	0	7.8	rodada 1: estrela visivel lado duvidoso
+BOBBY-P12-v1	BOBBY-P12-v1.jpg	BOBBY-P12	Nano Banana 2.1	3:4	0	7.8	rodada 1: sombra no chao, estrela quase oculta
+BOBBY-P12-v2	BOBBY-P12-v2.jpg	BOBBY-P12	Nano Banana 2.1	3:4	0	8.5	rodada 1: sentado recostado na mochila, patas na barriga, olhos fechados, sorriso, sem sombra no chao, estrela na orelha certa, colete e botao APROVADA
+BOBBY-P12-v3	BOBBY-P12-v3.jpg	BOBBY-P12	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok, leve sombra
+BOBBY-P12-v4	BOBBY-P12-v4.jpg	BOBBY-P12	Nano Banana 2.1	3:4	0	8	rodada 1: sombra de contato no chao
+BOBBY-E01-v1	BOBBY-E01-v1.jpg	BOBBY-E01	Nano Banana 2.1	3:4	0	8.3	rodada 1 (gerada em 3:4 por engano de ajuste, recortada 1:1): feliz, ok
+BOBBY-E01-v2	BOBBY-E01-v2.jpg	BOBBY-E01	Nano Banana 2.1	3:4	0	8.4	rodada 1: feliz, ok
+BOBBY-E01-v3	BOBBY-E01-v3.jpg	BOBBY-E01	Nano Banana 2.1	3:4	0	8.5	rodada 1: feliz, ok
+BOBBY-E01-v4	BOBBY-E01-v4.jpg	BOBBY-E01	Nano Banana 2.1	3:4	0	8.6	rodada 1: sorriso aberto, olhos brilhantes, estrela na orelha certa, colete e botao; aprovada recortada 1:1 (896x896 do topo) APROVADA
+BOBBY-E02-v1	BOBBY-E02-v1.jpg	BOBBY-E02	Nano Banana 2.1	3:4	0	8.3	rodada 1 (3:4, recorte 1:1): radiante, ok
+BOBBY-E02-v2	BOBBY-E02-v2.jpg	BOBBY-E02	Nano Banana 2.1	3:4	0	8.4	rodada 1: radiante, ok
+BOBBY-E02-v3	BOBBY-E02-v3.jpg	BOBBY-E02	Nano Banana 2.1	3:4	0	8.3	rodada 1: radiante, ok
+BOBBY-E02-v4	BOBBY-E02-v4.jpg	BOBBY-E02	Nano Banana 2.1	3:4	0	8.6	rodada 1: olhos em arcos felizes, sorriso aberto, bochechas, estrela na orelha certa; recorte 1:1 APROVADA
+BOBBY-E03-v1	BOBBY-E03-v1.jpg	BOBBY-E03	Nano Banana 2.1	3:4	0	8.4	rodada 1 (3:4, recorte 1:1): curioso, cabeca inclinada, uma sobrancelha erguida, boca pequena aberta APROVADA
+BOBBY-E03-v2	BOBBY-E03-v2.jpg	BOBBY-E03	Nano Banana 2.1	3:4	0	7.8	rodada 1: sem inclinacao
+BOBBY-E03-v3	BOBBY-E03-v3.jpg	BOBBY-E03	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+BOBBY-E03-v4	BOBBY-E03-v4.jpg	BOBBY-E03	Nano Banana 2.1	3:4	0	7.8	rodada 1: pouca inclinacao
+BOBBY-E04-v1	BOBBY-E04-v1.jpg	BOBBY-E04	Nano Banana 2.1	3:4	0	7.5	rodada 1: pensativo, cabeca pequena no quadro
+BOBBY-E04-v2	BOBBY-E04-v2.jpg	BOBBY-E04	Nano Banana 2.1	3:4	0	8	rodada 1: pensativo ok, olhar quase frontal
+BOBBY-E04-v3	BOBBY-E04-v3.jpg	BOBBY-E04	Nano Banana 2.1	3:4	0	8.3	rodada 1: olhos para cima e esquerda, labios para o lado, estrela certa APROVADA
+BOBBY-E04-v4	BOBBY-E04-v4.jpg	BOBBY-E04	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+BOBBY-E05-v1	BOBBY-E05-v1.jpg	BOBBY-E05	Nano Banana 2.1	3:4	0	8	rodada 1 (3:4, recorte 1:1): surpreso ok
+BOBBY-E05-v2	BOBBY-E05-v2.jpg	BOBBY-E05	Nano Banana 2.1	3:4	0	8.5	rodada 1: olhos grandes, boca redonda, estrela certa APROVADA
+BOBBY-E05-v3	BOBBY-E05-v3.jpg	BOBBY-E05	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BOBBY-E05-v4	BOBBY-E05-v4.jpg	BOBBY-E05	Nano Banana 2.1	3:4	0	7.8	rodada 1: olhos menos arregalados
+BOBBY-E04-v5	BOBBY-E04-v5.jpg	BOBBY-E04	Nano Banana 2.1	3:4	0	7.9	rodada 2 (repeticao acidental do mesmo prompt): ok
+BOBBY-E04-v6	BOBBY-E04-v6.jpg	BOBBY-E04	Nano Banana 2.1	3:4	0	8	rodada 2: ok
+BOBBY-E04-v7	BOBBY-E04-v7.jpg	BOBBY-E04	Nano Banana 2.1	3:4	0	8	rodada 2: ok
+BOBBY-E04-v8	BOBBY-E04-v8.jpg	BOBBY-E04	Nano Banana 2.1	3:4	0	7.9	rodada 2: ok
+BOBBY-E06-v1	BOBBY-E06-v1.jpg	BOBBY-E06	Nano Banana 2.1	3:4	0	8.1	rodada 1 (3:4, recorte 1:1): encorajador ok
+BOBBY-E06-v2	BOBBY-E06-v2.jpg	BOBBY-E06	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BOBBY-E06-v3	BOBBY-E06-v3.jpg	BOBBY-E06	Nano Banana 2.1	3:4	0	8.5	rodada 1: sorriso suave, sobrancelhas elevadas no meio APROVADA
+BOBBY-E06-v4	BOBBY-E06-v4.jpg	BOBBY-E06	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+BOBBY-E07-v1	BOBBY-E07-v1.jpg	BOBBY-E07	Nano Banana 2.1	3:4	0	8	rodada 1 (3:4, recorte 1:1): concentrado ok
+BOBBY-E07-v2	BOBBY-E07-v2.jpg	BOBBY-E07	Nano Banana 2.1	3:4	0	8.5	rodada 1: sobrancelhas baixas, labios firmes, olhar decidido e amigavel APROVADA
+BOBBY-E07-v3	BOBBY-E07-v3.jpg	BOBBY-E07	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BOBBY-E07-v4	BOBBY-E07-v4.jpg	BOBBY-E07	Nano Banana 2.1	3:4	0	7.8	rodada 1: quase neutro
+BOBBY-E08-v1	BOBBY-E08-v1.jpg	BOBBY-E08	Nano Banana 2.1	3:4	0	7.8	rodada 1 (3:4, recorte 1:1): calmo, cabeca pequena
+BOBBY-E08-v2	BOBBY-E08-v2.jpg	BOBBY-E08	Nano Banana 2.1	3:4	0	8.2	rodada 1: calmo, olhos entrefechados
+BOBBY-E08-v3	BOBBY-E08-v3.jpg	BOBBY-E08	Nano Banana 2.1	3:4	0	8.4	rodada 1: olhos entrefechados relaxados, sorriso suave APROVADA
+BOBBY-E08-v4	BOBBY-E08-v4.jpg	BOBBY-E08	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+TEO-SHEET-v1	TEO-SHEET-v1.jpg	TEO-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1 (FUNDO-B, sem ref): robo branco perola com juntas azul ardosia, visor escuro opaco com olhos ambar, antena inclinada para a direita da imagem, painel com 4 luzes 2x2, 3 vistas coerentes APROVADA
+TEO-SHEET-v2	TEO-SHEET-v2.jpg	TEO-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1: bom, leve reflexo ambar no corpo
+TEO-SHEET-v3	TEO-SHEET-v3.jpg	TEO-SHEET	Nano Banana 2.1	16:9	0	5	rodada 1: ganhou mochila de lona (adereco nao listado)
+TEO-SHEET-v4	TEO-SHEET-v4.jpg	TEO-SHEET	Nano Banana 2.1	16:9	0	8.4	rodada 1: bom, limpo
+TEO-P01-v1	TEO-P01-v1.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 1: acena, olhos em arco, mas painel do peito com 5 luzes (alvo 4, 2x2): deriva de marca fixa
+TEO-P01-v2	TEO-P01-v2.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 1: 6 luzes | ACEITA COM RESSALVA apos 3 rodadas: painel com 5 a 6 luzes em vez de 4; pose e demais marcas ok
+TEO-P01-v3	TEO-P01-v3.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 1: 5 luzes
+TEO-P01-v4	TEO-P01-v4.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 1: 5 luzes
+TEO-P01-v5	TEO-P01-v5.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 2 (frase: exatamente quatro luzes): 5 luzes
+TEO-P01-v6	TEO-P01-v6.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 2: 6 luzes
+TEO-P01-v7	TEO-P01-v7.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 2: 6 luzes
+TEO-P01-v8	TEO-P01-v8.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 2: 6 luzes
+TEO-P02-v1	TEO-P02-v1.jpg	TEO-P02	Nano Banana 2.1	3:4	0	6.8	rodada 1: pulo bom, mas 5 a 6 luzes no peito
+TEO-P02-v2	TEO-P02-v2.jpg	TEO-P02	Nano Banana 2.1	3:4	0	6.8	rodada 1: idem
+TEO-P02-v3	TEO-P02-v3.jpg	TEO-P02	Nano Banana 2.1	3:4	0	6.8	rodada 1: idem
+TEO-P02-v4	TEO-P02-v4.jpg	TEO-P02	Nano Banana 2.1	3:4	0	6.8	rodada 1: idem
+TEO-P01-v9	TEO-P01-v9.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 3 (frase: quadrado 2x2 de quatro luzes): 5 luzes
+TEO-P01-v10	TEO-P01-v10.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 3: 6 luzes
+TEO-P01-v11	TEO-P01-v11.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 3: 6 luzes
+TEO-P01-v12	TEO-P01-v12.jpg	TEO-P01	Nano Banana 2.1	3:4	0	6.5	rodada 3: 5 luzes
+TEO-P02-v3	TEO-P02-v3.jpg	TEO-P02	Nano Banana 2.1	3:4	0	7	ACEITA COM RESSALVA (1 rodada, mesma deriva de 5 luzes no peito; pulo claro, antena, olhos em arco)
+TEO-P03-v1	TEO-P03-v1.jpg	TEO-P03	Nano Banana 2.1	3:4	0	7.3	rodada 1: explica com cubo azul; 5 luzes no peito; cubo levemente translucido
+TEO-P03-v2	TEO-P03-v2.jpg	TEO-P03	Nano Banana 2.1	3:4	0	7.5	rodada 1: cubo mais solido, aponta para ele, olhos ambar; ressalva 5 luzes APROVADA
+TEO-P03-v3	TEO-P03-v3.jpg	TEO-P03	Nano Banana 2.1	3:4	0	7.3	rodada 1: ok, cubo translucido
+TEO-P03-v4	TEO-P03-v4.jpg	TEO-P03	Nano Banana 2.1	3:4	0	7.2	rodada 1: ok
+TEO-P04-v1	TEO-P04-v1.jpg	TEO-P04	Nano Banana 2.1	3:4	0	7.2	rodada 1: polegar, 5 luzes
+TEO-P04-v2	TEO-P04-v2.jpg	TEO-P04	Nano Banana 2.1	3:4	0	7.4	rodada 1: polegar para cima, inclinado, cabeca inclinada, olhos felizes; ressalva 5 luzes APROVADA
+TEO-P04-v3	TEO-P04-v3.jpg	TEO-P04	Nano Banana 2.1	3:4	0	7.2	rodada 1: olhos retangulares
+TEO-P04-v4	TEO-P04-v4.jpg	TEO-P04	Nano Banana 2.1	3:4	0	7.2	rodada 1: ok
+RUFA-SHEET-v1	RUFA-SHEET-v1.jpg	RUFA-SHEET	Nano Banana 2.1	16:9	0	8.4	rodada 1 (FUNDO-A): raposa fiel, 3 vistas, cauda cheia ponta creme, bolsa ameixa; pena violeta na orelha DIREITA da imagem (bloco pedia a esquerda): lado espelhado
+RUFA-SHEET-v2	RUFA-SHEET-v2.jpg	RUFA-SHEET	Nano Banana 2.1	16:9	0	8.5	rodada 1: idem, pena na direita da imagem
+RUFA-SHEET-v3	RUFA-SHEET-v3.jpg	RUFA-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1: idem
+RUFA-SHEET-v4	RUFA-SHEET-v4.jpg	RUFA-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1: idem
+RUFA-SHEET-v5	RUFA-SHEET-v5.jpg	RUFA-SHEET	Nano Banana 2.1	16:9	0	8.4	rodada 2 (frase forcando a pena na esquerda da imagem): o Flow ignorou, pena continua na direita da imagem; ACEITA com decisao: o lado do Flow vira o canonico (ver AJUSTES A6) APROVADA
+RUFA-SHEET-v6	RUFA-SHEET-v6.jpg	RUFA-SHEET	Nano Banana 2.1	16:9	0	8.5	rodada 2: idem
+RUFA-SHEET-v7	RUFA-SHEET-v7.jpg	RUFA-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 2: idem
+RUFA-SHEET-v8	RUFA-SHEET-v8.jpg	RUFA-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 2: idem
+RUFA-P01-v1	RUFA-P01-v1.jpg	RUFA-P01	Nano Banana 2.1	3:4	0	8.4	rodada 1 (ref: RUFA-SHEET-v5; bloco com pena a direita da imagem): acena, cauda em S, pena ok
+RUFA-P01-v2	RUFA-P01-v2.jpg	RUFA-P01	Nano Banana 2.1	3:4	0	8.7	rodada 1: aceno elegante, cauda em S, cabeca inclinada, sorriso brincalhao, pena violeta, bolsa ameixa, meias marrons APROVADA
+RUFA-P01-v3	RUFA-P01-v3.jpg	RUFA-P01	Nano Banana 2.1	3:4	0	8.5	rodada 1: ok
+RUFA-P01-v4	RUFA-P01-v4.jpg	RUFA-P01	Nano Banana 2.1	3:4	0	8.2	rodada 1: cauda de lado
+RUFA-P02-v1	RUFA-P02-v1.jpg	RUFA-P02	Nano Banana 2.1	3:4	0	8.4	rodada 1: salto com giro, patas para cima, cauda ao vento, riso de olhos fechados
+RUFA-P02-v2	RUFA-P02-v2.jpg	RUFA-P02	Nano Banana 2.1	3:4	0	8.6	rodada 1: salto, patas erguidas, riso, cauda, pena e bolsa APROVADA
+RUFA-P02-v3	RUFA-P02-v3.jpg	RUFA-P02	Nano Banana 2.1	3:4	0	8.4	rodada 1: ok
+RUFA-P02-v4	RUFA-P02-v4.jpg	RUFA-P02	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+RUFA-P03-v1	RUFA-P03-v1.jpg	RUFA-P03	Nano Banana 2.1	3:4	0	8.3	rodada 1: le em voz alta, livro creme/ameixa sem letras
+RUFA-P03-v2	RUFA-P03-v2.jpg	RUFA-P03	Nano Banana 2.1	3:4	0	8.5	rodada 1: livro aberto com paginas creme em branco e capa ameixa, outra pata gesticulando, rosto teatral APROVADA
+RUFA-P03-v3	RUFA-P03-v3.jpg	RUFA-P03	Nano Banana 2.1	3:4	0	8.3	rodada 1: livro de lado
+RUFA-P03-v4	RUFA-P03-v4.jpg	RUFA-P03	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+RUFA-P04-v1	RUFA-P04-v1.jpg	RUFA-P04	Nano Banana 2.1	3:4	0	8.3	rodada 1: polegar, cauda ao lado
+RUFA-P04-v2	RUFA-P04-v2.jpg	RUFA-P04	Nano Banana 2.1	3:4	0	8.5	rodada 1: polegar para cima, cauda enrolada nos pes, sobrancelha erguida, sorriso gentil APROVADA
+RUFA-P04-v3	RUFA-P04-v3.jpg	RUFA-P04	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+RUFA-P04-v4	RUFA-P04-v4.jpg	RUFA-P04	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+OTTO-P02-v1	OTTO-P02-v1.jpg	OTTO-P02	Nano Banana 2.1	3:4	0	8.3	rodada 1 (ref OTTO-SHEET-v2): salto, patas para cima, riso, cachecol e concha
+OTTO-P02-v2	OTTO-P02-v2.jpg	OTTO-P02	Nano Banana 2.1	3:4	0	8.4	rodada 1: ok
+OTTO-P02-v3	OTTO-P02-v3.jpg	OTTO-P02	Nano Banana 2.1	3:4	0	8.6	rodada 1: arco em S, patas erguidas, cauda balancando, olhos fechados rindo, cachecol coral e concha espiral APROVADA
+OTTO-P02-v4	OTTO-P02-v4.jpg	OTTO-P02	Nano Banana 2.1	3:4	0	8.4	rodada 1: ok, cachecol voando
+OTTO-P03-v1	OTTO-P03-v1.jpg	OTTO-P03	Nano Banana 2.1	3:4	0	8.2	rodada 1: concha na orelha, ok
+OTTO-P03-v2	OTTO-P03-v2.jpg	OTTO-P03	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+OTTO-P03-v3	OTTO-P03-v3.jpg	OTTO-P03	Nano Banana 2.1	3:4	0	8.4	rodada 1: concha na orelha, outra pata em concha convidando, atento, cachecol coral APROVADA
+OTTO-P03-v4	OTTO-P03-v4.jpg	OTTO-P03	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+OTTO-P04-v1	OTTO-P04-v1.jpg	OTTO-P04	Nano Banana 2.1	3:4	0	8.3	rodada 1: joia, mao no quadril, cachecol, concha
+OTTO-P04-v2	OTTO-P04-v2.jpg	OTTO-P04	Nano Banana 2.1	3:4	0	8.5	rodada 1: polegar para cima, outra pata no quadril, sorriso, cachecol coral e concha APROVADA
+OTTO-P04-v3	OTTO-P04-v3.jpg	OTTO-P04	Nano Banana 2.1	3:4	0	8.4	rodada 1: ok
+OTTO-P04-v4	OTTO-P04-v4.jpg	OTTO-P04	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+CAPI-P02-v1	CAPI-P02-v1.jpg	CAPI-P02	Nano Banana 2.1	3:4	0	8	rodada 1 (ref CAPI-SHEET-v2, FUNDO-B): patas erguidas, lado
+CAPI-P02-v2	CAPI-P02-v2.jpg	CAPI-P02	Nano Banana 2.1	3:4	0	8.4	rodada 1: sentada, patas um pouco erguidas, cabeca para tras, sorriso quieto de olhos fechados, folha na cabeca APROVADA
+CAPI-P02-v3	CAPI-P02-v3.jpg	CAPI-P02	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+CAPI-P02-v4	CAPI-P02-v4.jpg	CAPI-P02	Nano Banana 2.1	3:4	0	8.1	rodada 1: de lado
+CAPI-P03-v1	CAPI-P03-v1.jpg	CAPI-P03	Nano Banana 2.1	3:4	0	8.2	rodada 1: respira fundo, pata no peito
+CAPI-P03-v2	CAPI-P03-v2.jpg	CAPI-P03	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+CAPI-P03-v3	CAPI-P03-v3.jpg	CAPI-P03	Nano Banana 2.1	3:4	0	8.5	rodada 1: olhos fechados, peito levantado, pata sobre o peito, folha na cabeca APROVADA
+CAPI-P03-v4	CAPI-P03-v4.jpg	CAPI-P03	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+CAPI-P04-v1	CAPI-P04-v1.jpg	CAPI-P04	Nano Banana 2.1	3:4	0	8.4	rodada 1: inclinada, oferece uma folha verde com a pata, olhar gentil, folha na cabeca APROVADA
+CAPI-P04-v2	CAPI-P04-v2.jpg	CAPI-P04	Nano Banana 2.1	3:4	0	8	rodada 1: folha caida
+CAPI-P04-v3	CAPI-P04-v3.jpg	CAPI-P04	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CAPI-P04-v4	CAPI-P04-v4.jpg	CAPI-P04	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BRISA-SHEET-v1	BRISA-SHEET-v1.jpg	BRISA-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1 (FUNDO-A): dragao azul-petroleo, barriga creme-amarelada, asas lilas opacas, chifres curtos, nuvem na ponta da cauda; 3 vistas
+BRISA-SHEET-v2	BRISA-SHEET-v2.jpg	BRISA-SHEET	Nano Banana 2.1	16:9	0	8.5	rodada 1: S claro, frente/perfil esquerdo/costas, asas lilas com veias, nuvenzinha creme APROVADA
+BRISA-SHEET-v3	BRISA-SHEET-v3.jpg	BRISA-SHEET	Nano Banana 2.1	16:9	0	8.4	rodada 1: ok
+BRISA-SHEET-v4	BRISA-SHEET-v4.jpg	BRISA-SHEET	Nano Banana 2.1	16:9	0	8.2	rodada 1: corpo mais reto
+FAGULHA-SHEET-v1	FAGULHA-SHEET-v1.jpg	FAGULHA-SHEET	Nano Banana 2.1	16:9	0	6	rodada 1 (FUNDO-C): corpo laranja-pessego (esperado azul-noite), resto ok
+FAGULHA-SHEET-v2	FAGULHA-SHEET-v2.jpg	FAGULHA-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1: azul-noite, casca com pintas, olhos grandes, lanterna creme opaca
+FAGULHA-SHEET-v3	FAGULHA-SHEET-v3.jpg	FAGULHA-SHEET	Nano Banana 2.1	16:9	0	8.6	rodada 1: corpo azul-noite felpudo, olhos enormes brilhantes, antenas curvas com pontas, elitros azul-meia-noite com pintas creme, asas internas cinza-azuladas, lanterna creme opaca sem brilho; 3 vistas APROVADA
+FAGULHA-SHEET-v4	FAGULHA-SHEET-v4.jpg	FAGULHA-SHEET	Nano Banana 2.1	16:9	0	8.3	rodada 1: ok, olhos menores
+BRISA-P01-v1	BRISA-P01-v1.jpg	BRISA-P01	Nano Banana 2.1	3:4	0	8.2	rodada 1 (ref BRISA-SHEET-v2): acena, asas abertas
+BRISA-P01-v2	BRISA-P01-v2.jpg	BRISA-P01	Nano Banana 2.1	3:4	0	8.4	rodada 1: ok
+BRISA-P01-v3	BRISA-P01-v3.jpg	BRISA-P01	Nano Banana 2.1	3:4	0	8.6	rodada 1: flutua em laco, uma pata acenando, asas lilas abertas, sorriso travesso, nuvem na cauda APROVADA
+BRISA-P01-v4	BRISA-P01-v4.jpg	BRISA-P01	Nano Banana 2.1	3:4	0	8.4	rodada 1: ok
+FAGULHA-P01-v1	FAGULHA-P01-v1.jpg	FAGULHA-P01	Nano Banana 2.1	3:4	0	8.2	rodada 1 (ref FAGULHA-SHEET-v3, FUNDO-C): acena, ok
+FAGULHA-P01-v2	FAGULHA-P01-v2.jpg	FAGULHA-P01	Nano Banana 2.1	3:4	0	8.4	rodada 1: paira, acena com perninha, elitros entreabertos, sorriso timido, lanterna creme opaca APROVADA
+FAGULHA-P01-v3	FAGULHA-P01-v3.jpg	FAGULHA-P01	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+FAGULHA-P01-v4	FAGULHA-P01-v4.jpg	FAGULHA-P01	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-MAT01-COMPLETO-v1	CEN-MAT01-COMPLETO-v1.jpg	CEN-MAT01-COMPLETO	Nano Banana 2.1	3:4	0	8.5	rodada 1: casa de cristal azul, canteiros, balanca de dois pratos, cenouras amarradas em dezenas, estante de 3 degraus com 3 caixas, cerca regua com espantalho robo; luz dourada; terco inferior livre APROVADA
+CEN-MAT01-COMPLETO-v2	CEN-MAT01-COMPLETO-v2.jpg	CEN-MAT01-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: bom, 3 canteiros so, chao grande e vazio
+CEN-MAT01-COMPLETO-v3	CEN-MAT01-COMPLETO-v3.jpg	CEN-MAT01-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: bom, elementos misturados
+CEN-MAT01-COMPLETO-v4	CEN-MAT01-COMPLETO-v4.jpg	CEN-MAT01-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: chao verde menos azul
+CEN-POR01-COMPLETO-v1	CEN-POR01-COMPLETO-v1.jpg	CEN-POR01-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: sotao biblioteca, 5 elementos, chao com tapete
+CEN-POR01-COMPLETO-v2	CEN-POR01-COMPLETO-v2.jpg	CEN-POR01-COMPLETO	Nano Banana 2.1	3:4	0	8.6	rodada 1: 5 lanternas coloridas em fila, estante arqueada com blocos de madeira em branco, bau grande e pequeno, parede de gavetinhas com figuras, estante em degraus, janela redonda, luz dourada, chao livre embaixo APROVADA
+CEN-POR01-COMPLETO-v3	CEN-POR01-COMPLETO-v3.jpg	CEN-POR01-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: bom, trilha no chao
+CEN-POR01-COMPLETO-v4	CEN-POR01-COMPLETO-v4.jpg	CEN-POR01-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: chao com grama
+CEN-MAT01-APAGADO-v1	CEN-MAT01-APAGADO-v1.jpg	CEN-MAT01-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (ref COMPLETO-v1, correl. de bordas 0.55): mesma composicao, tudo coberto por panos e andaimes, tons frios, sem luz APROVADA
+CEN-MAT01-APAGADO-v2	CEN-MAT01-APAGADO-v2.jpg	CEN-MAT01-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.53): canteiro muda
+CEN-MAT01-APAGADO-v3	CEN-MAT01-APAGADO-v3.jpg	CEN-MAT01-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.55): casa muda de forma
+CEN-MAT01-APAGADO-v4	CEN-MAT01-APAGADO-v4.jpg	CEN-MAT01-APAGADO	Nano Banana 2.1	3:4	0	7.5	rodada 1 (0.47): derivou
+CEN-POR01-APAGADO-v1	CEN-POR01-APAGADO-v1.jpg	CEN-POR01-APAGADO	Nano Banana 2.1	3:4	0	6.5	rodada 1 (ref COMPLETO-v2, correl. 0.36): derivou, composicao diferente
+CEN-POR01-APAGADO-v2	CEN-POR01-APAGADO-v2.jpg	CEN-POR01-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (0.67): mesma composicao, tons frios com neblina de crepusculo, lanternas apagadas, estante vazia coberta APROVADA
+CEN-POR01-APAGADO-v3	CEN-POR01-APAGADO-v3.jpg	CEN-POR01-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (0.64): ok
+CEN-POR01-APAGADO-v4	CEN-POR01-APAGADO-v4.jpg	CEN-POR01-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.68): ok
+DES-ING02-v1	DES-ING02-v1.jpg	DES-ING02	Nano Banana 2.1	3:4	0	8	rodada 1 (prompt com frase A4): 52 regioes, 3+3 arcos coloridos, 3 bandeiras, livros com lapis, escola com sino, urso de linha APROVADA
+DES-ING02-v2	DES-ING02-v2.jpg	DES-ING02	Nano Banana 2.1	3:4	0	7.8	rodada 1: 54 regioes, so um jogo de arcos
+DES-ING02-v3	DES-ING02-v3.jpg	DES-ING02	Nano Banana 2.1	3:4	0	7.6	rodada 1: moldura, 53 regioes
+DES-ING02-v4	DES-ING02-v4.jpg	DES-ING02	Nano Banana 2.1	3:4	0	7.6	rodada 1: 62 regioes
+DES-ING03-v1	DES-ING03-v1.jpg	DES-ING03	Nano Banana 2.1	3:4	0	7.5	rodada 1: 79 regioes
+DES-ING03-v2	DES-ING03-v2.jpg	DES-ING03	Nano Banana 2.1	3:4	0	7.5	rodada 1: 78 regioes
+DES-ING03-v3	DES-ING03-v3.jpg	DES-ING03	Nano Banana 2.1	3:4	0	7.9	rodada 1: casa com varanda, poltronas, cadeiras de balanco, mesa de jardim, berco e triciclo; 59 regioes APROVADA
+DES-ING03-v4	DES-ING03-v4.jpg	DES-ING03	Nano Banana 2.1	3:4	0	7.4	rodada 1: 86 regioes
+DES-ING04-v1	DES-ING04-v1.jpg	DES-ING04	Nano Banana 2.1	3:4	0	7.5	rodada 1: 82 regioes
+DES-ING04-v2	DES-ING04-v2.jpg	DES-ING04	Nano Banana 2.1	3:4	0	8	rodada 1: zoologico, 70 regioes: cercado com urso e coelho, lago com peixe, viveiro, celeiro, pedras e capim, casinha de cachorro, portao APROVADA
+DES-ING04-v3	DES-ING04-v3.jpg	DES-ING04	Nano Banana 2.1	3:4	0	7.5	rodada 1: moldura, 85 regioes
+DES-ING04-v4	DES-ING04-v4.jpg	DES-ING04	Nano Banana 2.1	3:4	0	7.7	rodada 1: 72 regioes
+DES-ING05-v1	DES-ING05-v1.jpg	DES-ING05	Nano Banana 2.1	3:4	0	7.6	rodada 1: 81 regioes
+DES-ING05-v2	DES-ING05-v2.jpg	DES-ING05	Nano Banana 2.1	3:4	0	7.8	rodada 1: 84 regioes
+DES-ING05-v3	DES-ING05-v3.jpg	DES-ING05	Nano Banana 2.1	3:4	0	8	rodada 1: lanchonete com toldo listrado, agua, leite, pao, queijo, frutas, bolo, mesa posta; 63 regioes; placa em branco APROVADA
+DES-ING05-v4	DES-ING05-v4.jpg	DES-ING05	Nano Banana 2.1	3:4	0	7.7	rodada 1: 70 regioes
+DES-ING06-v1	DES-ING06-v1.jpg	DES-ING06	Nano Banana 2.1	3:4	0	7.6	rodada 1: 70 regioes
+DES-ING06-v2	DES-ING06-v2.jpg	DES-ING06	Nano Banana 2.1	3:4	0	7.7	rodada 1: 70 regioes
+DES-ING06-v3	DES-ING06-v3.jpg	DES-ING06	Nano Banana 2.1	3:4	0	7.8	rodada 1: 66 regioes
+DES-ING06-v4	DES-ING06-v4.jpg	DES-ING06	Nano Banana 2.1	3:4	0	8	rodada 1: loja de roupas, manequim com cabeca maos e pes, espelho redondo, prateleira de camisetas e sapatos, arara com vestidos e chapeus, provador com roupa; 58 regioes APROVADA
+DES-ING07-v1	DES-ING07-v1.jpg	DES-ING07	Nano Banana 2.1	3:4	0	7.8	rodada 1: 47 regioes, corte lateral
+DES-ING07-v2	DES-ING07-v2.jpg	DES-ING07	Nano Banana 2.1	3:4	0	7.9	rodada 1: 58 regioes
+DES-ING07-v3	DES-ING07-v3.jpg	DES-ING07	Nano Banana 2.1	3:4	0	7.9	rodada 1: 58 regioes
+DES-ING07-v4	DES-ING07-v4.jpg	DES-ING07	Nano Banana 2.1	3:4	0	8.1	rodada 1: casa em corte, porta com capacho, cozinha/quarto, mesa com cadeiras, jardim, chave e lampada no gancho; 46 regioes APROVADA
+DES-ING08-v1	DES-ING08-v1.jpg	DES-ING08	Nano Banana 2.1	3:4	0	7.4	rodada 1: 95 regioes
+DES-ING08-v2	DES-ING08-v2.jpg	DES-ING08	Nano Banana 2.1	3:4	0	7.8	rodada 1: 75 regioes
+DES-ING08-v3	DES-ING08-v3.jpg	DES-ING08	Nano Banana 2.1	3:4	0	7.8	rodada 1: 73 regioes
+DES-ING08-v4	DES-ING08-v4.jpg	DES-ING08	Nano Banana 2.1	3:4	0	8	rodada 1: pista com bebedouro, banco, escorregador, banca e livros, palco com microfone, faixa de pedestres, painel coracao e joinha sem texto; 45 regioes APROVADA
+DES-ING09-v1	DES-ING09-v1.jpg	DES-ING09	Nano Banana 2.1	3:4	0	7.8	rodada 1: moldura, 47 regioes, bolo pequeno
+DES-ING09-v2	DES-ING09-v2.jpg	DES-ING09	Nano Banana 2.1	3:4	0	8.1	rodada 1: baloes de fala, torre do relogio sem numeros, mesa com grupos de objetos, roda de bancos, bolo com velas; 49 regioes APROVADA
+DES-ING09-v3	DES-ING09-v3.jpg	DES-ING09	Nano Banana 2.1	3:4	0	7.8	rodada 1: 58 regioes
+DES-ING09-v4	DES-ING09-v4.jpg	DES-ING09	Nano Banana 2.1	3:4	0	7.7	rodada 1: 68 regioes
+DES-ING10-v1	DES-ING10-v1.jpg	DES-ING10	Nano Banana 2.1	3:4	0	7.8	rodada 1: 63 regioes
+DES-ING10-v2	DES-ING10-v2.jpg	DES-ING10	Nano Banana 2.1	3:4	0	7.5	rodada 1: 85 regioes
+DES-ING10-v3	DES-ING10-v3.jpg	DES-ING10	Nano Banana 2.1	3:4	0	7.8	rodada 1: 45 regioes, espelhos estranhos
+DES-ING10-v4	DES-ING10-v4.jpg	DES-ING10	Nano Banana 2.1	3:4	0	8	rodada 1: parede de calendario com janelas, painel de pictogramas, balcao com sino e presente, espelhos, pódio, mastro com bandeira; 59 regioes APROVADA
+BRISA-P02-v1	BRISA-P02-v1.jpg	BRISA-P02	Nano Banana 2.1	3:4	0	8.2	rodada 1 (ref BRISA-SHEET-v2): rolamento, asas abertas, ri
+BRISA-P02-v2	BRISA-P02-v2.jpg	BRISA-P02	Nano Banana 2.1	3:4	0	8.4	rodada 1: giro no ar rindo, asas lilas abertas, cauda com nuvem APROVADA
+BRISA-P02-v3	BRISA-P02-v3.jpg	BRISA-P02	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+BRISA-P02-v4	BRISA-P02-v4.jpg	BRISA-P02	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+BRISA-P03-v1	BRISA-P03-v1.jpg	BRISA-P03	Nano Banana 2.1	3:4	0	8	rodada 1: curvada em ponto de interrogacao, chama com a pata
+BRISA-P03-v2	BRISA-P03-v2.jpg	BRISA-P03	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+BRISA-P03-v3	BRISA-P03-v3.jpg	BRISA-P03	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+BRISA-P03-v4	BRISA-P03-v4.jpg	BRISA-P03	Nano Banana 2.1	3:4	0	8.3	rodada 1: corpo em interrogacao, pata chamando, sobrancelha erguida de desafio APROVADA
+BRISA-P04-v1	BRISA-P04-v1.jpg	BRISA-P04	Nano Banana 2.1	3:4	0	8.2	rodada 1: joia, asas dobradas
+BRISA-P04-v2	BRISA-P04-v2.jpg	BRISA-P04	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+BRISA-P04-v3	BRISA-P04-v3.jpg	BRISA-P04	Nano Banana 2.1	3:4	0	8.4	rodada 1: perto do espectador, joia, asas suaves, sorriso acolhedor APROVADA
+BRISA-P04-v4	BRISA-P04-v4.jpg	BRISA-P04	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+FAGULHA-P02-v1	FAGULHA-P02-v1.jpg	FAGULHA-P02	Nano Banana 2.1	3:4	0	8	rodada 1 (ref FAGULHA-SHEET-v3): loop alegre, elitros abertos
+FAGULHA-P02-v2	FAGULHA-P02-v2.jpg	FAGULHA-P02	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+FAGULHA-P02-v3	FAGULHA-P02-v3.jpg	FAGULHA-P02	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+FAGULHA-P02-v4	FAGULHA-P02-v4.jpg	FAGULHA-P02	Nano Banana 2.1	3:4	0	8.2	rodada 1: antenas para cima, elitros bem abertos, olhos fechados de alegria APROVADA
+FAGULHA-P03-v1	FAGULHA-P03-v1.jpg	FAGULHA-P03	Nano Banana 2.1	3:4	0	8.3	rodada 1: paira segurando um rolinho creme com selo de estrela dourada, sem texto, olhos para o espectador APROVADA
+FAGULHA-P03-v2	FAGULHA-P03-v2.jpg	FAGULHA-P03	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+FAGULHA-P03-v3	FAGULHA-P03-v3.jpg	FAGULHA-P03	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+FAGULHA-P03-v4	FAGULHA-P03-v4.jpg	FAGULHA-P03	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+FAGULHA-P04-v1	FAGULHA-P04-v1.jpg	FAGULHA-P04	Nano Banana 2.1	3:4	0	7.9	rodada 1: joia com perninha, antenas para frente
+FAGULHA-P04-v2	FAGULHA-P04-v2.jpg	FAGULHA-P04	Nano Banana 2.1	3:4	0	8	rodada 1: perninha com joia visivel, antenas inclinadas, sorriso timido APROVADA
+FAGULHA-P04-v3	FAGULHA-P04-v3.jpg	FAGULHA-P04	Nano Banana 2.1	3:4	0	7.9	rodada 1: ok
+FAGULHA-P04-v4	FAGULHA-P04-v4.jpg	FAGULHA-P04	Nano Banana 2.1	3:4	0	7.9	rodada 1: ok
+PLANETA-ING-v1	PLANETA-ING-v1.jpg	PLANETA-ING	Nano Banana 2.1	1:1	0	8.2	rodada 1 (1:1, fundo carvao): planeta turquesa, ilhas e pontes
+PLANETA-ING-v2	PLANETA-ING-v2.jpg	PLANETA-ING	Nano Banana 2.1	1:1	0	8.6	rodada 1: esfera limpa, ilhas ligadas por pontes de madeira, casas brancas de telhado azul, veleiros, farol, aeroporto, luz de fim de tarde APROVADA
+PLANETA-ING-v3	PLANETA-ING-v3.jpg	PLANETA-ING	Nano Banana 2.1	1:1	0	8.4	rodada 1: ok
+PLANETA-ING-v4	PLANETA-ING-v4.jpg	PLANETA-ING	Nano Banana 2.1	1:1	0	7.8	rodada 1: borda esfumada no topo
+PLANETA-MAT-v1	PLANETA-MAT-v1.jpg	PLANETA-MAT	Nano Banana 2.1	1:1	0	8	rodada 1: bom, anel de engrenagens
+PLANETA-MAT-v2	PLANETA-MAT-v2.jpg	PLANETA-MAT	Nano Banana 2.1	1:1	0	8.3	rodada 1: mundo azul de cristais, telhados de oficina, baia, montanha, deserto, castelo no morro, anel de engrenagens de latao APROVADA
+PLANETA-MAT-v3	PLANETA-MAT-v3.jpg	PLANETA-MAT	Nano Banana 2.1	1:1	0	8.2	rodada 1: bom
+PLANETA-MAT-v4	PLANETA-MAT-v4.jpg	PLANETA-MAT	Nano Banana 2.1	1:1	0	7.8	rodada 1: menor
+PLANETA-POR-v1	PLANETA-POR-v1.jpg	PLANETA-POR	Nano Banana 2.1	1:1	0	8.4	rodada 1: mundo violeta, torre da biblioteca, teatro com cortinas, trem a vapor em trilho, mercado, jardim, correio, livros flutuando, luz de lanterna APROVADA
+PLANETA-POR-v2	PLANETA-POR-v2.jpg	PLANETA-POR	Nano Banana 2.1	1:1	0	8.2	rodada 1: bom
+PLANETA-POR-v3	PLANETA-POR-v3.jpg	PLANETA-POR	Nano Banana 2.1	1:1	0	8.2	rodada 1: bom, mais verde
+PLANETA-POR-v4	PLANETA-POR-v4.jpg	PLANETA-POR	Nano Banana 2.1	1:1	0	7.9	rodada 1: bom
+DES-MAT01-v1	DES-MAT01-v1.jpg	DES-MAT01	Nano Banana 2.1	3:4	0	7.3	rodada 1 (frase A4 + reforco areas grandes, urso de costas/lado): 94 regioes, estrelas e planeta
+DES-MAT01-v2	DES-MAT01-v2.jpg	DES-MAT01	Nano Banana 2.1	3:4	0	7.8	rodada 1: contorno grosso, formas grandes, canteiros, balanca, cenouras, estante de 3 degraus com caixas, cerca regua, espantalho; 83 regioes (marcas da regua contam) APROVADA
+DES-MAT01-v3	DES-MAT01-v3.jpg	DES-MAT01	Nano Banana 2.1	3:4	0	7.6	rodada 1: 89 regioes
+DES-MAT01-v4	DES-MAT01-v4.jpg	DES-MAT01	Nano Banana 2.1	3:4	0	7.6	rodada 1: 81 regioes
+DES-MAT02-v1	DES-MAT02-v1.jpg	DES-MAT02	Nano Banana 2.1	3:4	0	7.6	rodada 1: 86 regioes
+DES-MAT02-v2	DES-MAT02-v2.jpg	DES-MAT02	Nano Banana 2.1	3:4	0	7.5	rodada 1: moldura, 84 regioes
+DES-MAT02-v3	DES-MAT02-v3.jpg	DES-MAT02	Nano Banana 2.1	3:4	0	7.4	rodada 1: 112 regioes
+DES-MAT02-v4	DES-MAT02-v4.jpg	DES-MAT02	Nano Banana 2.1	3:4	0	7.9	rodada 1: barraca com rede de conchas, vitrine de 3 prateleiras, poças com conchas, onda; 84 regioes APROVADA
+DES-MAT03-v1	DES-MAT03-v1.jpg	DES-MAT03	Nano Banana 2.1	3:4	0	8.1	rodada 1: camelo com caixas, tendas em grupos, cisterna com jarros, torre de potes, palmeiras, lago; 45 regioes APROVADA
+DES-MAT03-v2	DES-MAT03-v2.jpg	DES-MAT03	Nano Banana 2.1	3:4	0	7.7	rodada 1: 61 regioes
+DES-MAT03-v3	DES-MAT03-v3.jpg	DES-MAT03	Nano Banana 2.1	3:4	0	7.8	rodada 1: 51 regioes
+DES-MAT03-v4	DES-MAT03-v4.jpg	DES-MAT03	Nano Banana 2.1	3:4	0	7.7	rodada 1: 66 regioes
+DES-MAT04-v1	DES-MAT04-v1.jpg	DES-MAT04	Nano Banana 2.1	3:4	0	7.5	rodada 1: 93 regioes
+DES-MAT04-v2	DES-MAT04-v2.jpg	DES-MAT04	Nano Banana 2.1	3:4	0	7.3	rodada 1: moldura, 112 regioes
+DES-MAT04-v3	DES-MAT04-v3.jpg	DES-MAT04	Nano Banana 2.1	3:4	0	7.9	rodada 1: manta com pratos, mesa com cestas iguais, cesta sobrando, gangorra-balanca, portas redondas nos troncos; 57 regioes; moldura de pagina APROVADA
+DES-MAT04-v4	DES-MAT04-v4.jpg	DES-MAT04	Nano Banana 2.1	3:4	0	7.6	rodada 1: 76 regioes, moldura
+DES-MAT05-v1	DES-MAT05-v1.jpg	DES-MAT05	Nano Banana 2.1	3:4	0	7.9	rodada 1: forno de pedra com pizza inteira, bancada com pizzas de tamanhos e fatias diferentes, prateleira de potes, montanhas; 74 regioes; moldura APROVADA
+DES-MAT05-v2	DES-MAT05-v2.jpg	DES-MAT05	Nano Banana 2.1	3:4	0	7.6	rodada 1: 90 regioes
+DES-MAT05-v3	DES-MAT05-v3.jpg	DES-MAT05	Nano Banana 2.1	3:4	0	7.4	rodada 1: 111 regioes
+DES-MAT05-v4	DES-MAT05-v4.jpg	DES-MAT05	Nano Banana 2.1	3:4	0	7.4	rodada 1: 108 regioes
+DES-MAT06-v1	DES-MAT06-v1.jpg	DES-MAT06	Nano Banana 2.1	3:4	0	7.5	rodada 1: 87 regioes
+DES-MAT06-v2	DES-MAT06-v2.jpg	DES-MAT06	Nano Banana 2.1	3:4	0	7.3	rodada 1: 114 regioes
+DES-MAT06-v3	DES-MAT06-v3.jpg	DES-MAT06	Nano Banana 2.1	3:4	0	7.3	rodada 1: 100 regioes
+DES-MAT06-v4	DES-MAT06-v4.jpg	DES-MAT06	Nano Banana 2.1	3:4	0	7.9	rodada 1: barraca de feira com caixas, plaquinhas em branco, balanca, caixa registradora, porta dupla com setas; 67 regioes APROVADA
+DES-MAT07-v1	DES-MAT07-v1.jpg	DES-MAT07	Nano Banana 2.1	3:4	0	7.7	rodada 1: 76 regioes
+DES-MAT07-v2	DES-MAT07-v2.jpg	DES-MAT07	Nano Banana 2.1	3:4	0	7.9	rodada 1: esquina de loja, vitrine com etiquetas em branco, balcao com calculadora, arara com setas, copos medidores, 3 janelas altas, mostrador; 76 regioes APROVADA
+DES-MAT07-v3	DES-MAT07-v3.jpg	DES-MAT07	Nano Banana 2.1	3:4	0	7.5	rodada 1: 90 regioes
+DES-MAT07-v4	DES-MAT07-v4.jpg	DES-MAT07	Nano Banana 2.1	3:4	0	7.7	rodada 1: 58 regioes, cortada nas bordas
+DES-MAT08-v1	DES-MAT08-v1.jpg	DES-MAT08	Nano Banana 2.1	3:4	0	7.4	rodada 1: 108 regioes
+DES-MAT08-v2	DES-MAT08-v2.jpg	DES-MAT08	Nano Banana 2.1	3:4	0	7.5	rodada 1: 93 regioes
+DES-MAT08-v3	DES-MAT08-v3.jpg	DES-MAT08	Nano Banana 2.1	3:4	0	7.9	rodada 1: gangorra, trepa-trepa, cerca ao redor da caixa de areia em grade, escorregador e rampa, fita e regua; 67 regioes; moldura APROVADA
+DES-MAT08-v4	DES-MAT08-v4.jpg	DES-MAT08	Nano Banana 2.1	3:4	0	7.4	rodada 1: 102 regioes
+DES-MAT09-v1	DES-MAT09-v1.jpg	DES-MAT09	Nano Banana 2.1	3:4	0	8	rodada 1: foguete, torre de caixas em degraus, presente com fita, painel com botoes, balanca de pesos iguais, campo de paineis solares; 67 regioes APROVADA
+DES-MAT09-v2	DES-MAT09-v2.jpg	DES-MAT09	Nano Banana 2.1	3:4	0	7.9	rodada 1: 69 regioes
+DES-MAT09-v3	DES-MAT09-v3.jpg	DES-MAT09	Nano Banana 2.1	3:4	0	7.6	rodada 1: 88 regioes
+DES-MAT09-v4	DES-MAT09-v4.jpg	DES-MAT09	Nano Banana 2.1	3:4	0	7.6	rodada 1: 78 regioes
+DES-MAT10-v1	DES-MAT10-v1.jpg	DES-MAT10	Nano Banana 2.1	3:4	0	8.1	rodada 1: mesa de banquete, quadro de barras, roleta, escada para o porao, torre com estrela, lanternas; 51 regioes APROVADA
+DES-MAT10-v2	DES-MAT10-v2.jpg	DES-MAT10	Nano Banana 2.1	3:4	0	7.8	rodada 1: 67 regioes
+DES-MAT10-v3	DES-MAT10-v3.jpg	DES-MAT10	Nano Banana 2.1	3:4	0	7.6	rodada 1: 85 regioes
+DES-MAT10-v4	DES-MAT10-v4.jpg	DES-MAT10	Nano Banana 2.1	3:4	0	7.8	rodada 1: 65 regioes
+DES-POR01-v1	DES-POR01-v1.jpg	DES-POR01	Nano Banana 2.1	3:4	0	7.6	rodada 1: 88 regioes
+DES-POR01-v2	DES-POR01-v2.jpg	DES-POR01	Nano Banana 2.1	3:4	0	7.3	rodada 1: moldura, 125 regioes
+DES-POR01-v3	DES-POR01-v3.jpg	DES-POR01	Nano Banana 2.1	3:4	0	7.9	rodada 1: 5 lanternas, estante arqueada, 2 baus, gavetas com figuras, estante em degraus, janela redonda; 83 regioes APROVADA
+DES-POR01-v4	DES-POR01-v4.jpg	DES-POR01	Nano Banana 2.1	3:4	0	7.4	rodada 1: 113 regioes
+DES-POR02-v1	DES-POR02-v1.jpg	DES-POR02	Nano Banana 2.1	3:4	0	7.6	rodada 1: moldura, 99 regioes
+DES-POR02-v2	DES-POR02-v2.jpg	DES-POR02	Nano Banana 2.1	3:4	0	8	rodada 1: locomotiva, sino de bronze, vagao de cargas, vagao de feira, torre com relogio sem numeros, lua; 86 regioes APROVADA
+DES-POR02-v3	DES-POR02-v3.jpg	DES-POR02	Nano Banana 2.1	3:4	0	7.5	rodada 1: 105 regioes
+DES-POR02-v4	DES-POR02-v4.jpg	DES-POR02	Nano Banana 2.1	3:4	0	7.7	rodada 1: 87 regioes
+DES-POR03-v1	DES-POR03-v1.jpg	DES-POR03	Nano Banana 2.1	3:4	0	7.5	rodada 1: 93 regioes
+DES-POR03-v2	DES-POR03-v2.jpg	DES-POR03	Nano Banana 2.1	3:4	0	7.3	rodada 1: 106 regioes
+DES-POR03-v3	DES-POR03-v3.jpg	DES-POR03	Nano Banana 2.1	3:4	0	7.6	rodada 1: 84 regioes
+DES-POR03-v4	DES-POR03-v4.jpg	DES-POR03	Nano Banana 2.1	3:4	0	7.9	rodada 1: barracas de tecido com 2 e 3 bandeiras em branco, uma com lacuna, azulejos embaralhados, pares de objetos; 81 regioes APROVADA
+DES-POR04-v1	DES-POR04-v1.jpg	DES-POR04	Nano Banana 2.1	3:4	0	7.9	rodada 1: 5 bancadas (engrenagens, polia com corda, serra com serragem, 3 funis, prensa), lampadas; 88 regioes mas formas grandes e sem moldura APROVADA
+DES-POR04-v2	DES-POR04-v2.jpg	DES-POR04	Nano Banana 2.1	3:4	0	7.6	rodada 1: 87 regioes
+DES-POR04-v3	DES-POR04-v3.jpg	DES-POR04	Nano Banana 2.1	3:4	0	7.5	rodada 1: moldura, 83 regioes
+DES-POR04-v4	DES-POR04-v4.jpg	DES-POR04	Nano Banana 2.1	3:4	0	7.7	rodada 1: moldura, 70 regioes
+DES-POR05-v1	DES-POR05-v1.jpg	DES-POR05	Nano Banana 2.1	3:4	0	8.2	rodada 1: caixa de correio, balcao com sino, esteira com envelopes, carimbo de ponto e bandeira, torre dos pombos com janela redonda; 42 regioes APROVADA
+DES-POR05-v2	DES-POR05-v2.jpg	DES-POR05	Nano Banana 2.1	3:4	0	7.7	rodada 1: moldura, 55 regioes
+DES-POR05-v3	DES-POR05-v3.jpg	DES-POR05	Nano Banana 2.1	3:4	0	8	rodada 1: 43 regioes
+DES-POR05-v4	DES-POR05-v4.jpg	DES-POR05	Nano Banana 2.1	3:4	0	7.9	rodada 1: 53 regioes
+DES-POR06-v1	DES-POR06-v1.jpg	DES-POR06	Nano Banana 2.1	3:4	0	7.9	rodada 1: etiquetas em branco, prateleira com potes, pares de botas e sapatos, 2 manequins, quadro de crachas; 85 regioes APROVADA
+DES-POR06-v2	DES-POR06-v2.jpg	DES-POR06	Nano Banana 2.1	3:4	0	7.5	rodada 1: moldura, 99
+DES-POR06-v3	DES-POR06-v3.jpg	DES-POR06	Nano Banana 2.1	3:4	0	7.3	rodada 1: 120
+DES-POR06-v4	DES-POR06-v4.jpg	DES-POR06	Nano Banana 2.1	3:4	0	7.6	rodada 1: 99
+DES-POR07-v1	DES-POR07-v1.jpg	DES-POR07	Nano Banana 2.1	3:4	0	7.5	rodada 1: moldura, 94 regioes
+DES-POR07-v2	DES-POR07-v2.jpg	DES-POR07	Nano Banana 2.1	3:4	0	7.9	rodada 1: fileira de poltronas, arara de fantasias, cordas e roldana, tres portas em arco com sol nascente, sol alto e lua, palco com cenario; 94 regioes APROVADA
+DES-POR07-v3	DES-POR07-v3.jpg	DES-POR07	Nano Banana 2.1	3:4	0	7.8	rodada 1: 56 regioes, sem cordas e roldana
+DES-POR07-v4	DES-POR07-v4.jpg	DES-POR07	Nano Banana 2.1	3:4	0	7.7	rodada 1: 81 regioes
+DES-POR08-v1	DES-POR08-v1.jpg	DES-POR08	Nano Banana 2.1	3:4	0	7.5	rodada 1: 99 regioes
+DES-POR08-v2	DES-POR08-v2.jpg	DES-POR08	Nano Banana 2.1	3:4	0	7.2	rodada 1: 121
+DES-POR08-v3	DES-POR08-v3.jpg	DES-POR08	Nano Banana 2.1	3:4	0	7.4	rodada 1: 104
+DES-POR08-v4	DES-POR08-v4.jpg	DES-POR08	Nano Banana 2.1	3:4	0	7.9	rodada 1: prensa de impressao, bandeja de tipos em branco, pote de tinta com rolo, cortador de papel, jornais enrolados; 85 regioes APROVADA
+DES-POR09-v1	DES-POR09-v1.jpg	DES-POR09	Nano Banana 2.1	3:4	0	7.6	rodada 1: 87 regioes
+DES-POR09-v2	DES-POR09-v2.jpg	DES-POR09	Nano Banana 2.1	3:4	0	8.1	rodada 1: canteiros com marcas de folha, arco de trepadeira, fonte, pedras em virgula, arvore de baloes de fala; 61 regioes APROVADA
+DES-POR09-v3	DES-POR09-v3.jpg	DES-POR09	Nano Banana 2.1	3:4	0	7.3	rodada 1: 109
+DES-POR09-v4	DES-POR09-v4.jpg	DES-POR09	Nano Banana 2.1	3:4	0	7.5	rodada 1: 88
+DES-POR10-v1	DES-POR10-v1.jpg	DES-POR10	Nano Banana 2.1	3:4	0	7.5	rodada 1: moldura, 105 regioes
+DES-POR10-v2	DES-POR10-v2.jpg	DES-POR10	Nano Banana 2.1	3:4	0	7.7	rodada 1: 85 regioes
+DES-POR10-v3	DES-POR10-v3.jpg	DES-POR10	Nano Banana 2.1	3:4	0	8	rodada 1: balcao com bilhetes dobrados, mesa com livro aberto e utensilios, poltrona com livro, mapa com fios e alfinetes, estante com trofeu; 71 regioes APROVADA
+DES-POR10-v4	DES-POR10-v4.jpg	DES-POR10	Nano Banana 2.1	3:4	0	7.7	rodada 1: 89 regioes
+CEN-ING02-COMPLETO-v1	CEN-ING02-COMPLETO-v1.jpg	CEN-ING02-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (refs: PLANETA-ING-v2 + CEN-ING01-COMPLETO-v1): escola com torre do sino, 3+3 arcos, 3 bandeiras, livros
+CEN-ING02-COMPLETO-v2	CEN-ING02-COMPLETO-v2.jpg	CEN-ING02-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+CEN-ING02-COMPLETO-v3	CEN-ING02-COMPLETO-v3.jpg	CEN-ING02-COMPLETO	Nano Banana 2.1	3:4	0	8.6	rodada 1: arcos vermelho azul verde e laranja roxo rosa, bandeiras amarela preta branca, mesa com livros, escola com sino, mesmo estilo da etapa 1 APROVADA
+CEN-ING02-COMPLETO-v4	CEN-ING02-COMPLETO-v4.jpg	CEN-ING02-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: ok
+CEN-ING03-COMPLETO-v1	CEN-ING03-COMPLETO-v1.jpg	CEN-ING03-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: casa com varanda, ok
+CEN-ING03-COMPLETO-v2	CEN-ING03-COMPLETO-v2.jpg	CEN-ING03-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: varanda com poltronas e capacho, balanco de dois lugares, cadeiras de balanco, mesa de jardim, berco e triciclo APROVADA
+CEN-ING03-COMPLETO-v3	CEN-ING03-COMPLETO-v3.jpg	CEN-ING03-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+CEN-ING03-COMPLETO-v4	CEN-ING03-COMPLETO-v4.jpg	CEN-ING03-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-ING04-COMPLETO-v1	CEN-ING04-COMPLETO-v1.jpg	CEN-ING04-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: zoo, portal e curral, ok
+CEN-ING04-COMPLETO-v2	CEN-ING04-COMPLETO-v2.jpg	CEN-ING04-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: cantinho dos bichos com casinha e cesta, viveiro, lago de peixes, celeiro, savana com pedras e capim, urso na toca e abrigo do coelho; sem texto APROVADA
+CEN-ING04-COMPLETO-v3	CEN-ING04-COMPLETO-v3.jpg	CEN-ING04-COMPLETO	Nano Banana 2.1	3:4	0	6.5	rodada 1: portal com letras ZOO (texto proibido); reprovada
+CEN-ING04-COMPLETO-v4	CEN-ING04-COMPLETO-v4.jpg	CEN-ING04-COMPLETO	Nano Banana 2.1	3:4	0	7.8	rodada 1: fundo esverdeado, elementos pequenos
+CEN-ING05-COMPLETO-v1	CEN-ING05-COMPLETO-v1.jpg	CEN-ING05-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: lanchonete, elementos ok
+CEN-ING05-COMPLETO-v2	CEN-ING05-COMPLETO-v2.jpg	CEN-ING05-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: toldo grande
+CEN-ING05-COMPLETO-v3	CEN-ING05-COMPLETO-v3.jpg	CEN-ING05-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: balcao com copo e garrafa de leite, pao e queijo, cesta de frutas, bolo na redoma, mesa posta, toldo listrado APROVADA
+CEN-ING05-COMPLETO-v4	CEN-ING05-COMPLETO-v4.jpg	CEN-ING05-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-ING06-COMPLETO-v1	CEN-ING06-COMPLETO-v1.jpg	CEN-ING06-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: manequim com cabeca maos e pes, espelho redondo, estante de camisetas e sapatos, arara de vestidos e chapeus, provador com roupa APROVADA
+CEN-ING06-COMPLETO-v2	CEN-ING06-COMPLETO-v2.jpg	CEN-ING06-COMPLETO	Nano Banana 2.1	3:4	0	7.2	rodada 1: aviao da referencia vazou para a cena
+CEN-ING06-COMPLETO-v3	CEN-ING06-COMPLETO-v3.jpg	CEN-ING06-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: manequim grande, ok
+CEN-ING06-COMPLETO-v4	CEN-ING06-COMPLETO-v4.jpg	CEN-ING06-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-ING07-COMPLETO-v1	CEN-ING07-COMPLETO-v1.jpg	CEN-ING07-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: casa em corte, cozinha e quarto, jardim, chave e lampada no gancho
+CEN-ING07-COMPLETO-v2	CEN-ING07-COMPLETO-v2.jpg	CEN-ING07-COMPLETO	Nano Banana 2.1	3:4	0	8.5	rodada 1: porta com capacho, corte cozinha/quarto, mesa com cadeiras, jardim, chave e lampada no gancho ao lado da porta APROVADA
+CEN-ING07-COMPLETO-v3	CEN-ING07-COMPLETO-v3.jpg	CEN-ING07-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+CEN-ING07-COMPLETO-v4	CEN-ING07-COMPLETO-v4.jpg	CEN-ING07-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-ING09-COMPLETO-v1	CEN-ING09-COMPLETO-v1.jpg	CEN-ING09-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: baloes de fala sobre bancos, torre com relogio sem numeros, bolo com velas
+CEN-ING09-COMPLETO-v2	CEN-ING09-COMPLETO-v2.jpg	CEN-ING09-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok, cena cheia
+CEN-ING09-COMPLETO-v3	CEN-ING09-COMPLETO-v3.jpg	CEN-ING09-COMPLETO	Nano Banana 2.1	3:4	0	7.5	rodada 1: fundo verde diferente do estilo
+CEN-ING09-COMPLETO-v4	CEN-ING09-COMPLETO-v4.jpg	CEN-ING09-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: baloes de fala, torre do relogio, mesa com grupos de objetos, bancos em roda, bolo com velas APROVADA
+CEN-ING08-COMPLETO-v1	CEN-ING08-COMPLETO-v1.jpg	CEN-ING08-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: pista, bebedouro, banco, play, banca com livros, palco, painel coracao e joinha sem texto
+CEN-ING08-COMPLETO-v2	CEN-ING08-COMPLETO-v2.jpg	CEN-ING08-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-ING08-COMPLETO-v3	CEN-ING08-COMPLETO-v3.jpg	CEN-ING08-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok, tira de grama
+CEN-ING08-COMPLETO-v4	CEN-ING08-COMPLETO-v4.jpg	CEN-ING08-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: pista com bebedouro, banco, brinquedos, banca e livraria com livros abertos, palco com microfone, faixa, painel coracao e joinha APROVADA
+CEN-ING10-COMPLETO-v1	CEN-ING10-COMPLETO-v1.jpg	CEN-ING10-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: calendario com 3 janelas, painel de pictogramas, balcao com sino e presente, espelhos, bandeira; sem podio claro
+CEN-ING10-COMPLETO-v2	CEN-ING10-COMPLETO-v2.jpg	CEN-ING10-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: parede de calendario com janelas, painel de pictogramas, balcao com sino e presente, parede de espelhos, mastro com bandeira APROVADA
+CEN-ING10-COMPLETO-v3	CEN-ING10-COMPLETO-v3.jpg	CEN-ING10-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-ING10-COMPLETO-v4	CEN-ING10-COMPLETO-v4.jpg	CEN-ING10-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+CEN-ING03-APAGADO-v1	CEN-ING03-APAGADO-v1.jpg	CEN-ING03-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (ref COMPLETO aprovado, correl. 0.64): ok
+CEN-ING03-APAGADO-v2	CEN-ING03-APAGADO-v2.jpg	CEN-ING03-APAGADO	Nano Banana 2.1	3:4	0	8.5	rodada 1 (0.68): mesma composicao, fundacoes, andaimes e panos, tons frios APROVADA
+CEN-ING03-APAGADO-v3	CEN-ING03-APAGADO-v3.jpg	CEN-ING03-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.60): casa muda
+CEN-ING03-APAGADO-v4	CEN-ING03-APAGADO-v4.jpg	CEN-ING03-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (0.67): ok
+CEN-ING02-APAGADO-v1	CEN-ING02-APAGADO-v1.jpg	CEN-ING02-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (correl. 0.68): mesma composicao, arcos como estruturas cobertas, bandeiras em mastros nus, escola em andaime, tons frios APROVADA
+CEN-ING02-APAGADO-v2	CEN-ING02-APAGADO-v2.jpg	CEN-ING02-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.66): ok
+CEN-ING02-APAGADO-v3	CEN-ING02-APAGADO-v3.jpg	CEN-ING02-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.71): ok
+CEN-ING02-APAGADO-v4	CEN-ING02-APAGADO-v4.jpg	CEN-ING02-APAGADO	Nano Banana 2.1	3:4	0	7.5	rodada 1 (0.76): telhado ainda azul, sem apagar o suficiente
+CEN-ING04-APAGADO-v1	CEN-ING04-APAGADO-v1.jpg	CEN-ING04-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (correl. 0.80): mesma composicao, portal, curral, celeiro, viveiro e lago cobertos/andaimes, tons frios APROVADA
+CEN-ING04-APAGADO-v2	CEN-ING04-APAGADO-v2.jpg	CEN-ING04-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.71)
+CEN-ING04-APAGADO-v3	CEN-ING04-APAGADO-v3.jpg	CEN-ING04-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.72)
+CEN-ING04-APAGADO-v4	CEN-ING04-APAGADO-v4.jpg	CEN-ING04-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.80): tom marrom
+CEN-ING05-APAGADO-v1	CEN-ING05-APAGADO-v1.jpg	CEN-ING05-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (correl. 0.61): ok
+CEN-ING05-APAGADO-v2	CEN-ING05-APAGADO-v2.jpg	CEN-ING05-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.63): ok
+CEN-ING05-APAGADO-v3	CEN-ING05-APAGADO-v3.jpg	CEN-ING05-APAGADO	Nano Banana 2.1	3:4	0	8.5	rodada 1 (0.73): mesma composicao, toldo como estrutura nua, mesas cobertas, tons frios e neblina APROVADA
+CEN-ING05-APAGADO-v4	CEN-ING05-APAGADO-v4.jpg	CEN-ING05-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.63): ok
+CEN-ING06-APAGADO-v1	CEN-ING06-APAGADO-v1.jpg	CEN-ING06-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (correl. 0.58): ok
+CEN-ING06-APAGADO-v2	CEN-ING06-APAGADO-v2.jpg	CEN-ING06-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.58): ok
+CEN-ING06-APAGADO-v3	CEN-ING06-APAGADO-v3.jpg	CEN-ING06-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (0.68): mesma composicao, tudo coberto por panos, tons frios; manequim coberto APROVADA
+CEN-ING06-APAGADO-v4	CEN-ING06-APAGADO-v4.jpg	CEN-ING06-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.67): ok
+CEN-ING07-APAGADO-v1	CEN-ING07-APAGADO-v1.jpg	CEN-ING07-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (correl. 0.62): ok
+CEN-ING07-APAGADO-v2	CEN-ING07-APAGADO-v2.jpg	CEN-ING07-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (0.71): estrutura de madeira nua, moveis cobertos, jardim, chave e lampada penduradas, tons frios APROVADA
+CEN-ING07-APAGADO-v3	CEN-ING07-APAGADO-v3.jpg	CEN-ING07-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.58): ok
+CEN-ING07-APAGADO-v4	CEN-ING07-APAGADO-v4.jpg	CEN-ING07-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.66): ok
+CEN-ING08-APAGADO-v1	CEN-ING08-APAGADO-v1.jpg	CEN-ING08-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (correl. 0.76): mesma composicao, palco, painel, bancas, pista cobertos, tons frios APROVADA
+CEN-ING08-APAGADO-v2	CEN-ING08-APAGADO-v2.jpg	CEN-ING08-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.77): ok, chao ainda quente
+CEN-ING08-APAGADO-v3	CEN-ING08-APAGADO-v3.jpg	CEN-ING08-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.67)
+CEN-ING08-APAGADO-v4	CEN-ING08-APAGADO-v4.jpg	CEN-ING08-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.67)
+CEN-ING09-APAGADO-v1	CEN-ING09-APAGADO-v1.jpg	CEN-ING09-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (correl. 0.66): mesma composicao, torre do relogio coberta, bancos e mesa cobertos, tons frios APROVADA
+CEN-ING09-APAGADO-v2	CEN-ING09-APAGADO-v2.jpg	CEN-ING09-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.58)
+CEN-ING09-APAGADO-v3	CEN-ING09-APAGADO-v3.jpg	CEN-ING09-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.53)
+CEN-ING09-APAGADO-v4	CEN-ING09-APAGADO-v4.jpg	CEN-ING09-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.58)
+CEN-ING10-APAGADO-v1	CEN-ING10-APAGADO-v1.jpg	CEN-ING10-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (correl. 0.58)
+CEN-ING10-APAGADO-v2	CEN-ING10-APAGADO-v2.jpg	CEN-ING10-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (0.64): mesma composicao, mastro com bandeira escura, paineis e balcao cobertos, tons frios APROVADA
+CEN-ING10-APAGADO-v3	CEN-ING10-APAGADO-v3.jpg	CEN-ING10-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.62)
+CEN-ING10-APAGADO-v4	CEN-ING10-APAGADO-v4.jpg	CEN-ING10-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.61)
+CEN-MAT02-COMPLETO-v1	CEN-MAT02-COMPLETO-v1.jpg	CEN-MAT02-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1 (refs: PLANETA-MAT-v2 + CEN-MAT01-COMPLETO-v1): cobalto e latao ok, poças pequenas
+CEN-MAT02-COMPLETO-v2	CEN-MAT02-COMPLETO-v2.jpg	CEN-MAT02-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-MAT02-COMPLETO-v3	CEN-MAT02-COMPLETO-v3.jpg	CEN-MAT02-COMPLETO	Nano Banana 2.1	3:4	0	8.5	rodada 1: enseada de baixa mare, 2 poças com conchas, redes com dez conchas, vitrine de 3 prateleiras, barraca de conchas com toldo; estilo MAT mantido APROVADA
+CEN-MAT02-COMPLETO-v4	CEN-MAT02-COMPLETO-v4.jpg	CEN-MAT02-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+CEN-MAT03-COMPLETO-v1	CEN-MAT03-COMPLETO-v1.jpg	CEN-MAT03-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: oasis, camelo deitado
+CEN-MAT03-COMPLETO-v2	CEN-MAT03-COMPLETO-v2.jpg	CEN-MAT03-COMPLETO	Nano Banana 2.1	3:4	0	8.5	rodada 1: camelo com caixas iguais, tendas pequenas em grupos, tendas maiores com cisterna, torre de potes em degraus, palmeiras em grade em volta do lago APROVADA
+CEN-MAT03-COMPLETO-v3	CEN-MAT03-COMPLETO-v3.jpg	CEN-MAT03-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-MAT03-COMPLETO-v4	CEN-MAT03-COMPLETO-v4.jpg	CEN-MAT03-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-MAT04-COMPLETO-v1	CEN-MAT04-COMPLETO-v1.jpg	CEN-MAT04-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok, cesta unica sobra
+CEN-MAT04-COMPLETO-v2	CEN-MAT04-COMPLETO-v2.jpg	CEN-MAT04-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-MAT04-COMPLETO-v3	CEN-MAT04-COMPLETO-v3.jpg	CEN-MAT04-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: manta com pratos para dividir, mesa com cestas iguais, cesta com poucas frutas sobrando, balanca com 1,2,3 cestas, portas redondas nos troncos APROVADA
+CEN-MAT04-COMPLETO-v4	CEN-MAT04-COMPLETO-v4.jpg	CEN-MAT04-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-MAT05-COMPLETO-v1	CEN-MAT05-COMPLETO-v1.jpg	CEN-MAT05-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: forno de pedra com pizza inteira, pizzas de tamanhos diferentes em fatias, bancada, estante de potes, montanhas APROVADA
+CEN-MAT05-COMPLETO-v2	CEN-MAT05-COMPLETO-v2.jpg	CEN-MAT05-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-MAT05-COMPLETO-v3	CEN-MAT05-COMPLETO-v3.jpg	CEN-MAT05-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+CEN-MAT05-COMPLETO-v4	CEN-MAT05-COMPLETO-v4.jpg	CEN-MAT05-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-MAT06-COMPLETO-v1	CEN-MAT06-COMPLETO-v1.jpg	CEN-MAT06-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: feira, setas na porta
+CEN-MAT06-COMPLETO-v2	CEN-MAT06-COMPLETO-v2.jpg	CEN-MAT06-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-MAT06-COMPLETO-v3	CEN-MAT06-COMPLETO-v3.jpg	CEN-MAT06-COMPLETO	Nano Banana 2.1	3:4	0	8.5	rodada 1: barraca com caixas de dez e caixotes maiores, duas plaquinhas em branco, balanca com moedas, caixa registradora, porta dupla com setas APROVADA
+CEN-MAT06-COMPLETO-v4	CEN-MAT06-COMPLETO-v4.jpg	CEN-MAT06-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-MAT07-COMPLETO-v1	CEN-MAT07-COMPLETO-v1.jpg	CEN-MAT07-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: loja de esquina, vitrine com etiquetas em branco, balcao com calculadora de latao, arara com setas, medidores, 3 janelas altas, mostrador de latao, fitas APROVADA
+CEN-MAT07-COMPLETO-v2	CEN-MAT07-COMPLETO-v2.jpg	CEN-MAT07-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: 2 janelas
+CEN-MAT07-COMPLETO-v3	CEN-MAT07-COMPLETO-v3.jpg	CEN-MAT07-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: fitas com padrao
+CEN-MAT07-COMPLETO-v4	CEN-MAT07-COMPLETO-v4.jpg	CEN-MAT07-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+CEN-MAT08-COMPLETO-v1	CEN-MAT08-COMPLETO-v1.jpg	CEN-MAT08-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok, fita no chao
+CEN-MAT08-COMPLETO-v2	CEN-MAT08-COMPLETO-v2.jpg	CEN-MAT08-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: locomotiva extra nao listada
+CEN-MAT08-COMPLETO-v3	CEN-MAT08-COMPLETO-v3.jpg	CEN-MAT08-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-MAT08-COMPLETO-v4	CEN-MAT08-COMPLETO-v4.jpg	CEN-MAT08-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: gangorra triangular, trepa-trepa quadrado, cerca em volta da caixa de areia em grade, escorregador e rampa, fita e regua gigantes APROVADA
+CEN-MAT09-COMPLETO-v1	CEN-MAT09-COMPLETO-v1.jpg	CEN-MAT09-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: oficina, foguete
+CEN-MAT09-COMPLETO-v2	CEN-MAT09-COMPLETO-v2.jpg	CEN-MAT09-COMPLETO	Nano Banana 2.1	3:4	0	7.8	rodada 1: cena muito carregada
+CEN-MAT09-COMPLETO-v3	CEN-MAT09-COMPLETO-v3.jpg	CEN-MAT09-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: caixa misteriosa com fita, painel de botoes em ordem, balanca com pesos iguais, torre de caixas em degraus, campo de paineis solares ao lado do foguete APROVADA
+CEN-MAT09-COMPLETO-v4	CEN-MAT09-COMPLETO-v4.jpg	CEN-MAT09-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-MAT10-COMPLETO-v1	CEN-MAT10-COMPLETO-v1.jpg	CEN-MAT10-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: castelo ao fundo
+CEN-MAT10-COMPLETO-v2	CEN-MAT10-COMPLETO-v2.jpg	CEN-MAT10-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-MAT10-COMPLETO-v3	CEN-MAT10-COMPLETO-v3.jpg	CEN-MAT10-COMPLETO	Nano Banana 2.1	3:4	0	8.5	rodada 1: mesa de banquete dividida, quadro de barras de alturas diferentes, roleta de cores, escada para o porao, torre do rei com estrela dourada, lanternas ao anoitecer APROVADA
+CEN-MAT10-COMPLETO-v4	CEN-MAT10-COMPLETO-v4.jpg	CEN-MAT10-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR02-COMPLETO-v1	CEN-POR02-COMPLETO-v1.jpg	CEN-POR02-COMPLETO	Nano Banana 2.1	3:4	0	8.5	rodada 1 (refs: planeta POR + CEN-POR01): locomotiva com chamine redonda, sino de latao, vagao de cargas coloridas, vagao-feira, estacao com relogio sem numeros; violeta e luz de lanterna APROVADA
+CEN-POR02-COMPLETO-v2	CEN-POR02-COMPLETO-v2.jpg	CEN-POR02-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok, relogio com marcas
+CEN-POR02-COMPLETO-v3	CEN-POR02-COMPLETO-v3.jpg	CEN-POR02-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: ok
+CEN-POR02-COMPLETO-v4	CEN-POR02-COMPLETO-v4.jpg	CEN-POR02-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: fundo bege
+CEN-POR03-COMPLETO-v1	CEN-POR03-COMPLETO-v1.jpg	CEN-POR03-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: feira de tecidos, ok
+CEN-POR03-COMPLETO-v2	CEN-POR03-COMPLETO-v2.jpg	CEN-POR03-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR03-COMPLETO-v3	CEN-POR03-COMPLETO-v3.jpg	CEN-POR03-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: barracas com 2 e 3 bandeiras em branco, barraca com lacuna, azulejos embaralhados, pares de objetos, lanternas; violeta APROVADA
+CEN-POR03-COMPLETO-v4	CEN-POR03-COMPLETO-v4.jpg	CEN-POR03-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR04-COMPLETO-v1	CEN-POR04-COMPLETO-v1.jpg	CEN-POR04-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: oficina com 5 bancadas (engrenagens, polia e corda, serra com serragem, 3 funis, prensa de madeira), lampadas APROVADA
+CEN-POR04-COMPLETO-v2	CEN-POR04-COMPLETO-v2.jpg	CEN-POR04-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR04-COMPLETO-v3	CEN-POR04-COMPLETO-v3.jpg	CEN-POR04-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR04-COMPLETO-v4	CEN-POR04-COMPLETO-v4.jpg	CEN-POR04-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-POR05-COMPLETO-v1	CEN-POR05-COMPLETO-v1.jpg	CEN-POR05-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: correio, ok
+CEN-POR05-COMPLETO-v2	CEN-POR05-COMPLETO-v2.jpg	CEN-POR05-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: carimbo pendurado
+CEN-POR05-COMPLETO-v3	CEN-POR05-COMPLETO-v3.jpg	CEN-POR05-COMPLETO	Nano Banana 2.1	3:4	0	8.5	rodada 1: caixa de correio, balcao, esteira com envelopes, carimbo redondo com bandeira, torre dos pombos com janela redonda APROVADA
+CEN-POR05-COMPLETO-v4	CEN-POR05-COMPLETO-v4.jpg	CEN-POR05-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR06-COMPLETO-v1	CEN-POR06-COMPLETO-v1.jpg	CEN-POR06-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+CEN-POR06-COMPLETO-v2	CEN-POR06-COMPLETO-v2.jpg	CEN-POR06-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-POR06-COMPLETO-v3	CEN-POR06-COMPLETO-v3.jpg	CEN-POR06-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: barraca de etiquetas em branco, prateleiras, botas e sapatos em pares, dois manequins de estilos diferentes, quadro de crachas em branco APROVADA
+CEN-POR06-COMPLETO-v4	CEN-POR06-COMPLETO-v4.jpg	CEN-POR06-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-POR07-COMPLETO-v1	CEN-POR07-COMPLETO-v1.jpg	CEN-POR07-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: fileira de poltronas de veludo, arara de fantasias, cordas e roldanas, tres portas em arco com sol nascente, sol alto e lua, palco com cenario pintado, cortinas ameixa APROVADA
+CEN-POR07-COMPLETO-v2	CEN-POR07-COMPLETO-v2.jpg	CEN-POR07-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR07-COMPLETO-v3	CEN-POR07-COMPLETO-v3.jpg	CEN-POR07-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+CEN-POR07-COMPLETO-v4	CEN-POR07-COMPLETO-v4.jpg	CEN-POR07-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+CEN-POR08-COMPLETO-v1	CEN-POR08-COMPLETO-v1.jpg	CEN-POR08-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+CEN-POR08-COMPLETO-v2	CEN-POR08-COMPLETO-v2.jpg	CEN-POR08-COMPLETO	Nano Banana 2.1	3:4	0	8.4	rodada 1: prensa de madeira, bandeja de tipos com faces em branco (textura leve), pote de tinta com rolos, cortador de papel, estante de jornais enrolados APROVADA
+CEN-POR08-COMPLETO-v3	CEN-POR08-COMPLETO-v3.jpg	CEN-POR08-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR08-COMPLETO-v4	CEN-POR08-COMPLETO-v4.jpg	CEN-POR08-COMPLETO	Nano Banana 2.1	3:4	0	8.1	rodada 1: ok
+CEN-POR09-COMPLETO-v1	CEN-POR09-COMPLETO-v1.jpg	CEN-POR09-COMPLETO	Nano Banana 2.1	3:4	0	8.3	rodada 1: canteiros com marcas de folha, arco de trepadeira ondulada, fonte de pedra, pedras em virgula, arvore de folhas em formato de balao APROVADA
+CEN-POR09-COMPLETO-v2	CEN-POR09-COMPLETO-v2.jpg	CEN-POR09-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR09-COMPLETO-v3	CEN-POR09-COMPLETO-v3.jpg	CEN-POR09-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+CEN-POR09-COMPLETO-v4	CEN-POR09-COMPLETO-v4.jpg	CEN-POR09-COMPLETO	Nano Banana 2.1	3:4	0	8	rodada 1: ok
+CEN-POR10-COMPLETO-v1	CEN-POR10-COMPLETO-v1.jpg	CEN-POR10-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: biblioteca, ok
+CEN-POR10-COMPLETO-v2	CEN-POR10-COMPLETO-v2.jpg	CEN-POR10-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR10-COMPLETO-v3	CEN-POR10-COMPLETO-v3.jpg	CEN-POR10-COMPLETO	Nano Banana 2.1	3:4	0	8.2	rodada 1: ok
+CEN-POR10-COMPLETO-v4	CEN-POR10-COMPLETO-v4.jpg	CEN-POR10-COMPLETO	Nano Banana 2.1	3:4	0	8.5	rodada 1: balcao com bilhetes dobrados, mesa com livro aberto e utensilios de cozinha, poltrona com livro, mapa com fios e alfinetes, torre com trofeu dourado APROVADA
+CEN-MAT02-APAGADO-v1	CEN-MAT02-APAGADO-v1.jpg	CEN-MAT02-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (correl. 0.77): mesma composicao, redes e vitrine cobertas, tons frios, sem conchas APROVADA
+CEN-MAT02-APAGADO-v2	CEN-MAT02-APAGADO-v2.jpg	CEN-MAT02-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.74)
+CEN-MAT02-APAGADO-v3	CEN-MAT02-APAGADO-v3.jpg	CEN-MAT02-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.73)
+CEN-MAT02-APAGADO-v4	CEN-MAT02-APAGADO-v4.jpg	CEN-MAT02-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.75)
+CEN-MAT03-APAGADO-v1	CEN-MAT03-APAGADO-v1.jpg	CEN-MAT03-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (correl. 0.72): mesma composicao, camelo e tendas cobertos, torre de potes em andaime, oasis mantido APROVADA
+CEN-MAT03-APAGADO-v2	CEN-MAT03-APAGADO-v2.jpg	CEN-MAT03-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.71)
+CEN-MAT03-APAGADO-v3	CEN-MAT03-APAGADO-v3.jpg	CEN-MAT03-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.65)
+CEN-MAT03-APAGADO-v4	CEN-MAT03-APAGADO-v4.jpg	CEN-MAT03-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.76): camelo ainda colorido
+CEN-MAT04-APAGADO-v1	CEN-MAT04-APAGADO-v1.jpg	CEN-MAT04-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (correl. 0.58): composicao reorganizada mas mesmos elementos cobertos; tons frios APROVADA
+CEN-MAT04-APAGADO-v2	CEN-MAT04-APAGADO-v2.jpg	CEN-MAT04-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.58)
+CEN-MAT04-APAGADO-v3	CEN-MAT04-APAGADO-v3.jpg	CEN-MAT04-APAGADO	Nano Banana 2.1	3:4	0	7.8	rodada 1 (0.53)
+CEN-MAT04-APAGADO-v4	CEN-MAT04-APAGADO-v4.jpg	CEN-MAT04-APAGADO	Nano Banana 2.1	3:4	0	7.9	rodada 1 (0.56)
+CEN-MAT05-APAGADO-v1	CEN-MAT05-APAGADO-v1.jpg	CEN-MAT05-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (correl. 0.66): mesma composicao, forno e bancadas cobertos, casa em andaime, tons frios APROVADA
+CEN-MAT05-APAGADO-v2	CEN-MAT05-APAGADO-v2.jpg	CEN-MAT05-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.64)
+CEN-MAT05-APAGADO-v3	CEN-MAT05-APAGADO-v3.jpg	CEN-MAT05-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.56)
+CEN-MAT05-APAGADO-v4	CEN-MAT05-APAGADO-v4.jpg	CEN-MAT05-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.61)
+CEN-MAT06-APAGADO-v1	CEN-MAT06-APAGADO-v1.jpg	CEN-MAT06-APAGADO	Nano Banana 2.1	3:4	0	7.5	rodada 1 (correl. 0.39): enquadramento mudou
+CEN-MAT06-APAGADO-v2	CEN-MAT06-APAGADO-v2.jpg	CEN-MAT06-APAGADO	Nano Banana 2.1	3:4	0	7.9	rodada 1 (0.49): elementos cobertos e tons frios, com leve mudanca de enquadramento (RESSALVA: nao coincide pixel a pixel com o completo) APROVADA
+CEN-MAT06-APAGADO-v3	CEN-MAT06-APAGADO-v3.jpg	CEN-MAT06-APAGADO	Nano Banana 2.1	3:4	0	7.7	rodada 1 (0.46)
+CEN-MAT06-APAGADO-v4	CEN-MAT06-APAGADO-v4.jpg	CEN-MAT06-APAGADO	Nano Banana 2.1	3:4	0	7.6	rodada 1 (0.45)
+CEN-MAT07-APAGADO-v1	CEN-MAT07-APAGADO-v1.jpg	CEN-MAT07-APAGADO	Nano Banana 2.1	3:4	0	7.4	rodada 1 (correl. 0.39): ok
+CEN-MAT07-APAGADO-v2	CEN-MAT07-APAGADO-v2.jpg	CEN-MAT07-APAGADO	Nano Banana 2.1	3:4	0	7.2	rodada 1 (0.33)
+CEN-MAT07-APAGADO-v3	CEN-MAT07-APAGADO-v3.jpg	CEN-MAT07-APAGADO	Nano Banana 2.1	3:4	0	7.7	rodada 1 (0.44): elementos cobertos e tons frios; RESSALVA: enquadramento mudou em relacao ao completo (bordas 0.44) APROVADA
+CEN-MAT07-APAGADO-v4	CEN-MAT07-APAGADO-v4.jpg	CEN-MAT07-APAGADO	Nano Banana 2.1	3:4	0	7.5	rodada 1 (0.37)
+CEN-MAT08-APAGADO-v1	CEN-MAT08-APAGADO-v1.jpg	CEN-MAT08-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (correl. 0.66): ok
+CEN-MAT08-APAGADO-v2	CEN-MAT08-APAGADO-v2.jpg	CEN-MAT08-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (0.70): mesma composicao, brinquedos e caixa de areia cobertos, castelo ao fundo, tons frios APROVADA
+CEN-MAT08-APAGADO-v3	CEN-MAT08-APAGADO-v3.jpg	CEN-MAT08-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.66)
+CEN-MAT08-APAGADO-v4	CEN-MAT08-APAGADO-v4.jpg	CEN-MAT08-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.64)
+CEN-MAT09-APAGADO-v1	CEN-MAT09-APAGADO-v1.jpg	CEN-MAT09-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (correl. 0.74): mesma composicao, foguete e caixas cobertos, andaimes, tons frios APROVADA
+CEN-MAT09-APAGADO-v2	CEN-MAT09-APAGADO-v2.jpg	CEN-MAT09-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.65)
+CEN-MAT09-APAGADO-v3	CEN-MAT09-APAGADO-v3.jpg	CEN-MAT09-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.65)
+CEN-MAT09-APAGADO-v4	CEN-MAT09-APAGADO-v4.jpg	CEN-MAT09-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.69)
+CEN-MAT10-APAGADO-v1	CEN-MAT10-APAGADO-v1.jpg	CEN-MAT10-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (correl. 0.56): torre do rei em andaime, mesa coberta, escada ao porao, tons frios APROVADA
+CEN-MAT10-APAGADO-v2	CEN-MAT10-APAGADO-v2.jpg	CEN-MAT10-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.45)
+CEN-MAT10-APAGADO-v3	CEN-MAT10-APAGADO-v3.jpg	CEN-MAT10-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.55)
+CEN-MAT10-APAGADO-v4	CEN-MAT10-APAGADO-v4.jpg	CEN-MAT10-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.53)
+CEN-POR02-APAGADO-v1	CEN-POR02-APAGADO-v1.jpg	CEN-POR02-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (correl. 0.68): ok
+CEN-POR02-APAGADO-v2	CEN-POR02-APAGADO-v2.jpg	CEN-POR02-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (0.75): mesma composicao, locomotiva, sino, vagoes e estacao cobertos, tons frios APROVADA
+CEN-POR02-APAGADO-v3	CEN-POR02-APAGADO-v3.jpg	CEN-POR02-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.69)
+CEN-POR02-APAGADO-v4	CEN-POR02-APAGADO-v4.jpg	CEN-POR02-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.75)
+CEN-POR03-APAGADO-v1	CEN-POR03-APAGADO-v1.jpg	CEN-POR03-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (correl. 0.74): mesma composicao, barracas cobertas com panos, tons frios de crepusculo APROVADA
+CEN-POR03-APAGADO-v2	CEN-POR03-APAGADO-v2.jpg	CEN-POR03-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.62)
+CEN-POR03-APAGADO-v3	CEN-POR03-APAGADO-v3.jpg	CEN-POR03-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.65)
+CEN-POR03-APAGADO-v4	CEN-POR03-APAGADO-v4.jpg	CEN-POR03-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (0.66)
+CEN-POR04-APAGADO-v1	CEN-POR04-APAGADO-v1.jpg	CEN-POR04-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (correl. 0.63): oficina com bancadas cobertas, tons frios APROVADA
+CEN-POR04-APAGADO-v2	CEN-POR04-APAGADO-v2.jpg	CEN-POR04-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.54)
+CEN-POR04-APAGADO-v3	CEN-POR04-APAGADO-v3.jpg	CEN-POR04-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.53)
+CEN-POR04-APAGADO-v4	CEN-POR04-APAGADO-v4.jpg	CEN-POR04-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.63)
+CEN-POR05-APAGADO-v1	CEN-POR05-APAGADO-v1.jpg	CEN-POR05-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (correl. 0.66): ok
+CEN-POR05-APAGADO-v2	CEN-POR05-APAGADO-v2.jpg	CEN-POR05-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (0.72): ok
+CEN-POR05-APAGADO-v3	CEN-POR05-APAGADO-v3.jpg	CEN-POR05-APAGADO	Nano Banana 2.1	3:4	0	8.5	rodada 1 (0.73): mesma composicao, carimbo e torre em andaime, balcao e esteira cobertos, tons frios APROVADA
+CEN-POR05-APAGADO-v4	CEN-POR05-APAGADO-v4.jpg	CEN-POR05-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (0.68)
+CEN-POR06-APAGADO-v1	CEN-POR06-APAGADO-v1.jpg	CEN-POR06-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (correl. 0.67): mesma composicao, barracas, manequins e quadro cobertos, tons frios APROVADA
+CEN-POR06-APAGADO-v2	CEN-POR06-APAGADO-v2.jpg	CEN-POR06-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.62)
+CEN-POR06-APAGADO-v3	CEN-POR06-APAGADO-v3.jpg	CEN-POR06-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.65)
+CEN-POR06-APAGADO-v4	CEN-POR06-APAGADO-v4.jpg	CEN-POR06-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.64)
+CEN-POR07-APAGADO-v1	CEN-POR07-APAGADO-v1.jpg	CEN-POR07-APAGADO	Nano Banana 2.1	3:4	0	8.1	rodada 1 (correl. 0.61)
+CEN-POR07-APAGADO-v2	CEN-POR07-APAGADO-v2.jpg	CEN-POR07-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (0.69): teatro com portas, arara e poltronas cobertas, palco em andaime, tons frios APROVADA
+CEN-POR07-APAGADO-v3	CEN-POR07-APAGADO-v3.jpg	CEN-POR07-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.59)
+CEN-POR07-APAGADO-v4	CEN-POR07-APAGADO-v4.jpg	CEN-POR07-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.55)
+CEN-POR08-APAGADO-v1	CEN-POR08-APAGADO-v1.jpg	CEN-POR08-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (correl. 0.66)
+CEN-POR08-APAGADO-v2	CEN-POR08-APAGADO-v2.jpg	CEN-POR08-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.67)
+CEN-POR08-APAGADO-v3	CEN-POR08-APAGADO-v3.jpg	CEN-POR08-APAGADO	Nano Banana 2.1	3:4	0	8.4	rodada 1 (0.70): prensa, mesas e estante cobertas, andaime, tons frios APROVADA
+CEN-POR08-APAGADO-v4	CEN-POR08-APAGADO-v4.jpg	CEN-POR08-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.62)
+CEN-POR09-APAGADO-v1	CEN-POR09-APAGADO-v1.jpg	CEN-POR09-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (correl. 0.53): arco, arvore e fonte cobertos, canteiros vazios, tons frios APROVADA
+CEN-POR09-APAGADO-v2	CEN-POR09-APAGADO-v2.jpg	CEN-POR09-APAGADO	Nano Banana 2.1	3:4	0	8.2	rodada 1 (0.52)
+CEN-POR09-APAGADO-v3	CEN-POR09-APAGADO-v3.jpg	CEN-POR09-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.51)
+CEN-POR09-APAGADO-v4	CEN-POR09-APAGADO-v4.jpg	CEN-POR09-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.51)
+CEN-POR10-APAGADO-v1	CEN-POR10-APAGADO-v1.jpg	CEN-POR10-APAGADO	Nano Banana 2.1	3:4	0	7.8	rodada 1 (correl. 0.44)
+CEN-POR10-APAGADO-v2	CEN-POR10-APAGADO-v2.jpg	CEN-POR10-APAGADO	Nano Banana 2.1	3:4	0	7.8	rodada 1 (0.47)
+CEN-POR10-APAGADO-v3	CEN-POR10-APAGADO-v3.jpg	CEN-POR10-APAGADO	Nano Banana 2.1	3:4	0	8	rodada 1 (0.52)
+CEN-POR10-APAGADO-v4	CEN-POR10-APAGADO-v4.jpg	CEN-POR10-APAGADO	Nano Banana 2.1	3:4	0	8.3	rodada 1 (0.66): biblioteca com torre, escada, poltrona e mesa cobertas, tons frios APROVADA
+BAU-FECHADO-v1	BAU-FECHADO-v1.jpg	BAU-FECHADO	Nano Banana 2.1	1:1	0	8.3	rodada 1 (FUNDO-OBJETO, 1:1): bau de carvalho com cintas de latao, fechadura; chaveiro comum
+BAU-FECHADO-v2	BAU-FECHADO-v2.jpg	BAU-FECHADO	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+BAU-FECHADO-v3	BAU-FECHADO-v3.jpg	BAU-FECHADO	Nano Banana 2.1	1:1	0	8.4	rodada 1: ok
+BAU-FECHADO-v4	BAU-FECHADO-v4.jpg	BAU-FECHADO	Nano Banana 2.1	1:1	0	8.7	rodada 1: carvalho com veios, cintas de latao e rebites, fechadura com buraco em estrela, frontal APROVADA
+BAU-ABERTO-v1	BAU-ABERTO-v1.jpg	BAU-ABERTO	Nano Banana 2.1	1:1	0	8.5	rodada 1: bau aberto, moedas, faiscas e estrelas subindo, mesmo estilo do fechado APROVADA
+BAU-ABERTO-v2	BAU-ABERTO-v2.jpg	BAU-ABERTO	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+BAU-ABERTO-v3	BAU-ABERTO-v3.jpg	BAU-ABERTO	Nano Banana 2.1	1:1	0	8.2	rodada 1: faiscas laterais
+BAU-ABERTO-v4	BAU-ABERTO-v4.jpg	BAU-ABERTO	Nano Banana 2.1	1:1	0	8.2	rodada 1: tampa muito aberta
+REC-MOEDA-v1	REC-MOEDA-v1.jpg	REC-MOEDA	Nano Banana 2.1	1:1	0	6	rodada 1: moeda com rosto e lenco (indesejado)
+REC-MOEDA-v2	REC-MOEDA-v2.jpg	REC-MOEDA	Nano Banana 2.1	1:1	0	8.2	rodada 1: moeda dourada com estrela em relevo, borda com rebites
+REC-MOEDA-v3	REC-MOEDA-v3.jpg	REC-MOEDA	Nano Banana 2.1	1:1	0	8.5	rodada 1: moeda limpa, estrela em relevo, borda chanfrada APROVADA
+REC-MOEDA-v4	REC-MOEDA-v4.jpg	REC-MOEDA	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+REC-ESTRELA-v1	REC-ESTRELA-v1.jpg	REC-ESTRELA	Nano Banana 2.1	1:1	0	5	rodada 1 (com ESTILO de personagem): estrela ganhou rosto e lenco, reprovada
+REC-ESTRELA-v2	REC-ESTRELA-v2.jpg	REC-ESTRELA	Nano Banana 2.1	1:1	0	5	rodada 1: rosto, reprovada
+REC-ESTRELA-v3	REC-ESTRELA-v3.jpg	REC-ESTRELA	Nano Banana 2.1	1:1	0	5	rodada 1: rosto, reprovada
+REC-ESTRELA-v4	REC-ESTRELA-v4.jpg	REC-ESTRELA	Nano Banana 2.1	1:1	0	4	rodada 1: virou personagem, reprovada
+REC-CONGELADOR-v1	REC-CONGELADOR-v1.jpg	REC-CONGELADOR	Nano Banana 2.1	1:1	0	8.6	rodada 1: cristal de gelo facetado azul claro com pequena chama laranja dentro, sem rosto APROVADA
+REC-CONGELADOR-v2	REC-CONGELADOR-v2.jpg	REC-CONGELADOR	Nano Banana 2.1	1:1	0	5	rodada 1: virou personagem com olhos e cinto, reprovada
+REC-CONGELADOR-v3	REC-CONGELADOR-v3.jpg	REC-CONGELADOR	Nano Banana 2.1	1:1	0	5	rodada 1: personagem, reprovada
+REC-CONGELADOR-v4	REC-CONGELADOR-v4.jpg	REC-CONGELADOR	Nano Banana 2.1	1:1	0	5	rodada 1: personagem, reprovada
+REC-ESTRELA-v5	REC-ESTRELA-v5.jpg	REC-ESTRELA	Nano Banana 2.1	1:1	0	8.2	rodada 2 (ESTILO_OBJ, sem rosto): estrela dourada chanfrada, ok
+REC-ESTRELA-v6	REC-ESTRELA-v6.jpg	REC-ESTRELA	Nano Banana 2.1	1:1	0	8.2	rodada 2: ok
+REC-ESTRELA-v7	REC-ESTRELA-v7.jpg	REC-ESTRELA	Nano Banana 2.1	1:1	0	8.3	rodada 2: borda dupla
+REC-ESTRELA-v8	REC-ESTRELA-v8.jpg	REC-ESTRELA	Nano Banana 2.1	1:1	0	8.6	rodada 2: estrela grande dourada com chanfro duplo e brilho, sem rosto APROVADA
+REC-MEDALHA-v1	REC-MEDALHA-v1.jpg	REC-MEDALHA	Nano Banana 2.1	1:1	0	8.2	rodada 1: medalha dourada com estrela e fita laranja e creme
+REC-MEDALHA-v2	REC-MEDALHA-v2.jpg	REC-MEDALHA	Nano Banana 2.1	1:1	0	8.2	rodada 1: ok
+REC-MEDALHA-v3	REC-MEDALHA-v3.jpg	REC-MEDALHA	Nano Banana 2.1	1:1	0	8.6	rodada 1: medalha com estrela, borda ornamentada, fita listrada laranja e creme APROVADA
+REC-MEDALHA-v4	REC-MEDALHA-v4.jpg	REC-MEDALHA	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+REC-PERGAMINHO-v1	REC-PERGAMINHO-v1.jpg	REC-PERGAMINHO	Nano Banana 2.1	1:1	0	8.5	rodada 1: pergaminho creme com fita laranja e selo de estrela dourado, sem escrita APROVADA
+REC-PERGAMINHO-v2	REC-PERGAMINHO-v2.jpg	REC-PERGAMINHO	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+REC-PERGAMINHO-v3	REC-PERGAMINHO-v3.jpg	REC-PERGAMINHO	Nano Banana 2.1	1:1	0	8.4	rodada 1: ok
+REC-PERGAMINHO-v4	REC-PERGAMINHO-v4.jpg	REC-PERGAMINHO	Nano Banana 2.1	1:1	0	8.2	rodada 1: ok
+REC-PRESENTE-v1	REC-PRESENTE-v1.jpg	REC-PRESENTE	Nano Banana 2.1	1:1	0	8.5	rodada 1: caixa creme com fita laranja e lacre de estrela dourada APROVADA
+REC-PRESENTE-v2	REC-PRESENTE-v2.jpg	REC-PRESENTE	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+REC-PRESENTE-v3	REC-PRESENTE-v3.jpg	REC-PRESENTE	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+REC-PRESENTE-v4	REC-PRESENTE-v4.jpg	REC-PRESENTE	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+REC-BILHETE-v1	REC-BILHETE-v1.jpg	REC-BILHETE	Nano Banana 2.1	1:1	0	8.5	rodada 1: envelope creme com selo de cera de estrela dourada e faixa laranja, sem escrita APROVADA
+REC-BILHETE-v2	REC-BILHETE-v2.jpg	REC-BILHETE	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+REC-BILHETE-v3	REC-BILHETE-v3.jpg	REC-BILHETE	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+REC-BILHETE-v4	REC-BILHETE-v4.jpg	REC-BILHETE	Nano Banana 2.1	1:1	0	8.2	rodada 1: ok
+REC-TROFEU-v1	REC-TROFEU-v1.jpg	REC-TROFEU	Nano Banana 2.1	1:1	0	8.3	rodada 1: trofeu dourado com estrela e base de madeira
+REC-TROFEU-v2	REC-TROFEU-v2.jpg	REC-TROFEU	Nano Banana 2.1	1:1	0	8.6	rodada 1: trofeu dourado, duas alcas, estrela em relevo, placa em branco, base de madeira APROVADA
+REC-TROFEU-v3	REC-TROFEU-v3.jpg	REC-TROFEU	Nano Banana 2.1	1:1	0	8.3	rodada 1: ok
+REC-TROFEU-v4	REC-TROFEU-v4.jpg	REC-TROFEU	Nano Banana 2.1	1:1	0	8.2	rodada 1: ok
+ITEM-BONE-v1	ITEM-BONE-v1.jpg	ITEM-BONE	Nano Banana 2.1	3:4	0	8.4	rodada 1 (ref BOBBY-P01-v4, pose frontal estatica, boné de explorador): fiel, frontal, bone creme com faixa laranja
+ITEM-BONE-v2	ITEM-BONE-v2.jpg	ITEM-BONE	Nano Banana 2.1	3:4	0	8.7	rodada 1: bone centrado entre as orelhas, estrela na orelha, colete e mochila, fundo cinza APROVADA
+ITEM-BONE-v3	ITEM-BONE-v3.jpg	ITEM-BONE	Nano Banana 2.1	3:4	0	8.5	rodada 1: ok
+ITEM-BONE-v4	ITEM-BONE-v4.jpg	ITEM-BONE	Nano Banana 2.1	3:4	0	8.5	rodada 1: ok
+ITEM-BASE-v1	ITEM-BASE-v1.jpg	ITEM-BASE	Nano Banana 2.1	3:4	0	8	rodada 1: base sem item, estrela na testa
+ITEM-BASE-v2	ITEM-BASE-v2.jpg	ITEM-BASE	Nano Banana 2.1	3:4	0	8.6	rodada 1: base frontal sem item, estrela na orelha direita da imagem, usada como referencia de alinhamento APROVADA
+ITEM-BASE-v3	ITEM-BASE-v3.jpg	ITEM-BASE	Nano Banana 2.1	3:4	0	7.8	rodada 1: estrela dupla
+ITEM-BASE-v4	ITEM-BASE-v4.jpg	ITEM-BASE	Nano Banana 2.1	3:4	0	7.8	rodada 1: estrela na testa
+ITEM-OCULOS-v1	ITEM-OCULOS-v1.jpg	ITEM-OCULOS	Nano Banana 2.1	3:4	0	8.4	rodada 1: oculos de astronauta com armacao prateada sobre a testa, estrela na orelha direita da imagem APROVADA
+ITEM-OCULOS-v2	ITEM-OCULOS-v2.jpg	ITEM-OCULOS	Nano Banana 2.1	3:4	0	7.2	rodada 1: estrela em duas orelhas
+ITEM-OCULOS-v3	ITEM-OCULOS-v3.jpg	ITEM-OCULOS	Nano Banana 2.1	3:4	0	7.8	rodada 1: sem estrela visivel
+ITEM-OCULOS-v4	ITEM-OCULOS-v4.jpg	ITEM-OCULOS	Nano Banana 2.1	3:4	0	7.2	rodada 1: estrela em duas orelhas
+ITEM-CAPA-v1	ITEM-CAPA-v1.jpg	ITEM-CAPA	Nano Banana 2.1	3:4	0	7.6	rodada 1: capa azul, estrela fora da orelha, bicho menor
+ITEM-CAPA-v2	ITEM-CAPA-v2.jpg	ITEM-CAPA	Nano Banana 2.1	3:4	0	8.5	rodada 1: capa azul royal com broche de estrela, pose frontal igual a base APROVADA
+ITEM-CAPA-v3	ITEM-CAPA-v3.jpg	ITEM-CAPA	Nano Banana 2.1	3:4	0	8.2	rodada 1: capa boa, estrela na orelha
+ITEM-CAPA-v4	ITEM-CAPA-v4.jpg	ITEM-CAPA	Nano Banana 2.1	3:4	0	8.0	rodada 1: capa boa, estrela na testa
+ITEM-CAPACETE-v1	ITEM-CAPACETE-v1.jpg	ITEM-CAPACETE	Nano Banana 2.1	3:4	0	8.0	rodada 1: capacete com viseira transparente, rosto visivel, escala maior que a base
+ITEM-CAPACETE-v2	ITEM-CAPACETE-v2.jpg	ITEM-CAPACETE	Nano Banana 2.1	3:4	0	7.6	rodada 1: capacete pequeno, colete aberto
+ITEM-CAPACETE-v3	ITEM-CAPACETE-v3.jpg	ITEM-CAPACETE	Nano Banana 2.1	3:4	0	8.3	rodada 1: capacete branco com viseira levantada, rosto visivel, escala proxima da base APROVADA
+ITEM-CAPACETE-v4	ITEM-CAPACETE-v4.jpg	ITEM-CAPACETE	Nano Banana 2.1	3:4	0	7.9	rodada 1: capacete bom, sombra no chao
+ITEM-COROA-v1	ITEM-COROA-v1.jpg	ITEM-COROA	Nano Banana 2.1	3:4	0	8.4	rodada 1: coroa de papel amarela com estrela laranja, estrela na orelha direita da imagem APROVADA
+ITEM-COROA-v2	ITEM-COROA-v2.jpg	ITEM-COROA	Nano Banana 2.1	3:4	0	7.8	rodada 1: estrela em duas orelhas
+ITEM-COROA-v3	ITEM-COROA-v3.jpg	ITEM-COROA	Nano Banana 2.1	3:4	0	7.5	rodada 1: estrela na orelha esquerda
+ITEM-COROA-v4	ITEM-COROA-v4.jpg	ITEM-COROA	Nano Banana 2.1	3:4	0	7.4	rodada 1: estrela na orelha esquerda, proporcao diferente
+ITEM-LENCO-v1	ITEM-LENCO-v1.jpg	ITEM-LENCO	Nano Banana 2.1	3:4	0	8.0	rodada 1: lenco verde-azulado, bom
+ITEM-LENCO-v2	ITEM-LENCO-v2.jpg	ITEM-LENCO	Nano Banana 2.1	3:4	0	8.5	rodada 1: lenco de tricô com ponta pendurada, escala igual a base APROVADA
+ITEM-LENCO-v3	ITEM-LENCO-v3.jpg	ITEM-LENCO	Nano Banana 2.1	3:4	0	8.1	rodada 1: bom, bicho menor
+ITEM-LENCO-v4	ITEM-LENCO-v4.jpg	ITEM-LENCO	Nano Banana 2.1	3:4	0	8.2	rodada 1: bom
+CEN-MAT06-APAGADO-v5	CEN-MAT06-APAGADO-v5.jpg	CEN-MAT06-APAGADO	Nano Banana 2.1	3:4	0	8.2	refeito por edicao deterministica do completo aprovado (cor reduzida a 12%, tom frio, contraste e neblina; correl. de bordas com o completo medida): mesmo enquadramento APROVADA
+CEN-MAT07-APAGADO-v5	CEN-MAT07-APAGADO-v5.jpg	CEN-MAT07-APAGADO	Nano Banana 2.1	3:4	0	8.2	refeito por edicao deterministica do completo aprovado (cor reduzida a 12%, tom frio, contraste e neblina; correl. de bordas com o completo medida): mesmo enquadramento APROVADA
+CEN-POR09-APAGADO-v5	CEN-POR09-APAGADO-v5.jpg	CEN-POR09-APAGADO	Nano Banana 2.1	3:4	0	8.2	refeito por edicao deterministica do completo aprovado (cor reduzida a 12%, tom frio, contraste e neblina; correl. de bordas com o completo medida): mesmo enquadramento APROVADA

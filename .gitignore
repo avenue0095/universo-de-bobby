@@ -5,3 +5,8 @@ node_modules/
 *.log
 testes/saida/
 dist/
+
+# imagens brutas do Flow (pesadas; ficam so no disco, registro.tsv sim)
+arte/fonte/*.jpg
+arte/fonte/*.png
+arte/fonte/*.webp
