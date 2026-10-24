@@ -69,7 +69,7 @@ Nada foi publicado, nenhum áudio ou imagem foi gerado, nenhum crédito foi gast
 
 Looks (menores): chapéu de explorador 150, boné 200, óculos 250, lenço 300, capacete 450, capa 600, coroa 900. O primeiro presente do baú continua grátis. Quem já tinha companheiro escolhido (inclusive o personagem antigo `nina`, `pim`, `zeca`, `lulu`, que migra para Rufa, Otto, Capi e Brisa) mantém e ele entra na lista de comprados. Interpretação a confirmar com o Filipe: os prazos de 3, 5 e 10 a 14 dias contam juntando do zero para cada um, não acumulados. Reversível: é só mudar `PRECOS`.
 
-**Pendente de advogado.** O botão "continuar por 50 moedas" (corações): ver decisão D1 do coordenador (remover).
+**D1 (decidida pelo coordenador no lugar do Filipe, reversível): o botão "continuar por 50 moedas" foi removido** (estava pendente de advogado e contra "sem culpa"). Os corações continuam como ritmo; acabar os corações encerra a rodada com gentileza ("Vamos descansar e revisar"), os erros já estão no caderno e o progresso de etapa não se perde. Para voltar atrás é só restaurar o botão (está no histórico do git, commit desta linha).
 
 **O personagem escolhido aparece em todo o jogo** (mapa, aula, pergunta, reações, baú, bilhete, fim de fase, topo e barra). Companheiro toma o lugar do Bobby; Bobby usa o look de frente onde a pose é de frente, e boné, coroa e óculos são sobrepostos (recortados do próprio look por `build/ativos.py`, ancorados uma vez em `OVERLAYS`) nas outras poses de frente. Capa, capacete e lenço só aparecem na pose de frente. Caminhada do Bobby no mapa é a base (pose de três quartos): o item não aparece andando. Pendente de arte: poses Comemora, Caminha e Pensa de cada look.
 

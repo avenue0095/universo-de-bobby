@@ -754,9 +754,6 @@ h2.sec{font-size:var(--t-corpo);margin:0 0 16px}
 .item .btn svg{width:16px;height:16px}
 .item .btn.pobre{background:var(--cor-superficie-2);color:var(--cor-texto-suave);box-shadow:none;}
 .dica-loja{font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:700;text-align:center}
-.comprar-vida{display:inline-flex;align-items:center;gap:4px;background:var(--cor-ouro);color:var(--cor-ouro-sobre);border-radius:var(--raio-16);
-  padding:4px 8px;font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600;margin-top:4px}
-.comprar-vida svg{width:12px;height:12px}
 .abas{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding-bottom:4px;margin-bottom:16px}
 .aba{flex:0 0 auto;border:2px solid var(--cor-linha);background:var(--cor-superficie);border-radius:var(--raio-pilula);padding:8px 16px;
   font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600;color:var(--cor-texto-suave)}
@@ -1315,8 +1312,6 @@ body:has(#licao.on) .aviso-voz{display:none}
 .bau-cena .bau-fig{width:96px;height:84px;margin:0 0 0 calc(-1 * var(--esp-16))}
 .bau-cena .bau-fig svg{width:100%;height:100%}
 .bau-cena.aberto .bau-fig svg{filter:drop-shadow(0 0 14px var(--cor-ouro))}
-.comprar-vida{display:inline-flex;align-items:center;gap:var(--esp-8);min-height:var(--toque-min);margin-top:var(--esp-8);padding:var(--esp-4) var(--esp-16);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);white-space:normal;text-align:left}
-.comprar-vida svg{width:20px;height:20px;flex:none}
 @media (max-width:480px){
   .pe.mostra .pe-in{flex-wrap:wrap}
   .pe.mostra .msg{flex:1 1 100%}
@@ -7037,15 +7032,8 @@ function conferir(){
   cicloPergunta(q,{ok:ok,ms:ms,dica:LIC.dica||0});
   if(primeira&&(LIC.diaria||q.__aquec)){const st=diaDeStats();st.rev=(st.rev||0)+1;if(ok)st.revAc=(st.revAc||0)+1;}
   pintarTopo();salvar();
-  $('#acao').textContent=(LIC.vidas<=0)?'Ver resultado':(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');
-  if(LIC.vidas<=0&&S.moedas>=PRECO_CORACAO&&!LIC.comprou){
-    $('#fb-s').innerHTML+=' <button class="comprar-vida" id="comprar-vida">'+IC.coracao+' continuar por '+PRECO_CORACAO+' moedas</button>';
-    const cv=$('#comprar-vida');
-    if(cv)cv.addEventListener('click',()=>{
-      S.moedas-=PRECO_CORACAO;LIC.vidas=2;LIC.comprou=true;salvar();pintarVidas();pintarTopo();
-      $('#acao').textContent=(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');cv.remove();somVida();
-    });
-  }
+  $('#acao').textContent=(LIC.vidas<=0)?'Continuar':(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');
+  /* sem 'continuar por moedas': acabar os corações encerra a rodada com gentileza (ver pintarFim) */
 }
 function avancar(){
   $('#pe').className='pe';calar();
@@ -7118,11 +7106,11 @@ function pintarFim(){
     MASC(passou?'comemora':'incentiva')+
     '<div class="estrelao">'+estrelasSVG(est)+'</div>'+
     '<h2>'+(passou?(LIC.rev?'Revisão concluída!':(LIC.erros===0?'Fase perfeita!':'Fase concluída!'))
-      :'Acabaram os corações')+'</h2>'+
+      :'Vamos descansar e revisar')+'</h2>'+
     (passou&&LIC.miss&&LIC.miss.fim?'<p class="fecho">'+LIC.miss.fim+'</p>':'')+
     '<p class="sub">'+(passou?'Você acertou '+LIC.acertos+' de '+LIC.base+' perguntas.'+
         (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros. Volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
-      :'Tudo bem! Vamos rever a aula e tentar de novo. Errar faz parte de aprender.')+'</p>'+
+      :'Os erros foram para o seu caderno e voltam amanhã na revisão. Seu progresso está guardado. Errar faz parte de aprender.')+'</p>'+
     (completouMundo?'<div class="mundo-ok">'+IC.trofeu+' Etapa '+LIC.u.n+' completa!</div>':'')+
     (passou&&!LIC.rev?premioDesenhoHTML(completouMundo):'')+
     '<div class="placar">'+
@@ -7931,7 +7919,6 @@ function marcarBilheteVisto(){
   S.espera=Object.assign({},e,{vistoEm:hoje(),mundoNovo:false,erroDificil:false,usouCongelador:''});
   salvar();
 }
-const PRECO_CORACAO=50;
 /* ---------- conquistas ---------- */
 const CONQUISTAS=[
  {id:'c1',n:'Primeira fase',d:'Concluir 1 fase',ok:()=>fases()>=1},

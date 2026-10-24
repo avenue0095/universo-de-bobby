@@ -6,7 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 const A = require('assert');
-const { carregarApp } = require('./lib/carregar.js');
+const { carregarApp, HTML_LOG } = require('./lib/carregar.js');
 const { teste, resumo } = require('./lib/mini.js');
 
 const FIX = fs.readFileSync(path.join(__dirname, 'fixtures', 'estado-v3-exemplo.json'), 'utf8');
@@ -138,14 +138,23 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     A.strictEqual(a.avaliar('S.moedas'), 10); A.strictEqual(a.avaliar('S.xp'), 2480);
   });
 
-  await teste('14. acerto soma XP e moeda; "continuar por 50 moedas" tira so moeda', () => {
+  await teste('14. acerto soma XP e moeda; sem coracoes nao existe "continuar por moedas": a rodada encerra com gentileza e o erro vai ao caderno', () => {
     const a = abrir({});
     a.avaliar("novoPerfil('Zeca','#12A06E')");
     a.avaliar("abrirLicao(0,0);LIC.etapa='questao';pintarLicao()");
     a.avaliar("LIC.resp=LIC.qs[LIC.i].answer;conferir()");
     A.strictEqual(a.avaliar('S.xp'), 10); A.strictEqual(a.avaliar('S.moedas'), 10);
-    a.avaliar('S.moedas=60;LIC.vidas=0;LIC.i=0;LIC.conferido=false;LIC.resp="x";conferir()');
+    a.avaliar('S.moedas=60;LIC.vidas=1;LIC.i=1;LIC.conferido=false;LIC.resp="x";conferir()');
     A.ok(a.avaliar('S.xp') >= 10);
+    A.strictEqual(a.avaliar('S.moedas'), 60, 'errar nao cobra moedas');
+    A.strictEqual(a.avaliar('LIC.vidas'), 0);
+    A.ok(a.avaliar("(S.errados[MATERIA+LIC.u.n]||[]).length") >= 1, 'o erro deveria estar no caderno');
+    const n0 = HTML_LOG.length;
+    a.avaliar('pintarFim()');
+    const novo = HTML_LOG.slice(n0).join(' ');
+    A.ok(/Vamos descansar e revisar/.test(novo), 'fim sem a mensagem gentil');
+    A.ok(!/continuar por|comprar-vida/.test(novo + HTML_LOG.join(' ')), 'sobrou o botao de continuar por moedas');
+    A.strictEqual(a.avaliar('S.moedas'), 60);
   });
 
   await teste('15. backup v4: soma confere, nao leva pid nem eventos; round trip identico', () => {

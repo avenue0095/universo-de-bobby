@@ -742,9 +742,6 @@ h2.sec{font-size:var(--t-corpo);margin:0 0 16px}
 .item .btn svg{width:16px;height:16px}
 .item .btn.pobre{background:var(--cor-superficie-2);color:var(--cor-texto-suave);box-shadow:none;}
 .dica-loja{font-size:var(--t-legenda);color:var(--cor-texto-suave);font-weight:700;text-align:center}
-.comprar-vida{display:inline-flex;align-items:center;gap:4px;background:var(--cor-ouro);color:var(--cor-ouro-sobre);border-radius:var(--raio-16);
-  padding:4px 8px;font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600;margin-top:4px}
-.comprar-vida svg{width:12px;height:12px}
 .abas{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding-bottom:4px;margin-bottom:16px}
 .aba{flex:0 0 auto;border:2px solid var(--cor-linha);background:var(--cor-superficie);border-radius:var(--raio-pilula);padding:8px 16px;
   font-family:"Fredoka",sans-serif;font-size:var(--t-legenda);font-weight:600;color:var(--cor-texto-suave)}
@@ -1303,8 +1300,6 @@ body:has(#licao.on) .aviso-voz{display:none}
 .bau-cena .bau-fig{width:96px;height:84px;margin:0 0 0 calc(-1 * var(--esp-16))}
 .bau-cena .bau-fig svg{width:100%;height:100%}
 .bau-cena.aberto .bau-fig svg{filter:drop-shadow(0 0 14px var(--cor-ouro))}
-.comprar-vida{display:inline-flex;align-items:center;gap:var(--esp-8);min-height:var(--toque-min);margin-top:var(--esp-8);padding:var(--esp-4) var(--esp-16);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);white-space:normal;text-align:left}
-.comprar-vida svg{width:20px;height:20px;flex:none}
 @media (max-width:480px){
   .pe.mostra .pe-in{flex-wrap:wrap}
   .pe.mostra .msg{flex:1 1 100%}

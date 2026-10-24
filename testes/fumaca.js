@@ -474,10 +474,7 @@ async function main() {
           const msg = await js("document.querySelector('#fb-s').innerText.replace(/\\s+/g,' ')");
           if (/\n/.test(await js("document.querySelector('#fb-s').innerText")) && false) problemas.push(rot + ' ' + mat + ': resposta quebrada em linhas soltas');
           await shot('toque-' + mat + '-erro');
-          if (await js("!!document.querySelector('#comprar-vida')")) {
-            await toque('#comprar-vida', 'botao continuar por 50 moedas');
-            if ((await js('LIC.vidas')) !== 2) problemas.push(rot + ' ' + mat + ' toque real: comprar vida nao funcionou (vidas=' + (await js('LIC.vidas')) + ')');
-          } else problemas.push(rot + ' ' + mat + ': o botao de comprar vida nao apareceu com 0 coracoes e 500 moedas');
+          if (await js("!!document.querySelector('#comprar-vida')||/continuar por/.test(document.body.innerText)")) problemas.push(rot + ' ' + mat + ': sobrou o botao de continuar por moedas');
           const i0 = await js('LIC.i');
           await toque('#acao', 'botao Continuar');
           if ((await js('LIC.i')) !== i0 + 1 && (await js('LIC.etapa')) !== 'fim') problemas.push(rot + ' ' + mat + ' toque real: Continuar nao avancou');

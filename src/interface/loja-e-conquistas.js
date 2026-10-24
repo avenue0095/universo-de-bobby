@@ -1,4 +1,3 @@
-const PRECO_CORACAO=50;
 /* ---------- conquistas ---------- */
 const CONQUISTAS=[
  {id:'c1',n:'Primeira fase',d:'Concluir 1 fase',ok:()=>fases()>=1},

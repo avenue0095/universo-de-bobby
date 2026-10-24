@@ -461,15 +461,8 @@ function conferir(){
   cicloPergunta(q,{ok:ok,ms:ms,dica:LIC.dica||0});
   if(primeira&&(LIC.diaria||q.__aquec)){const st=diaDeStats();st.rev=(st.rev||0)+1;if(ok)st.revAc=(st.revAc||0)+1;}
   pintarTopo();salvar();
-  $('#acao').textContent=(LIC.vidas<=0)?'Ver resultado':(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');
-  if(LIC.vidas<=0&&S.moedas>=PRECO_CORACAO&&!LIC.comprou){
-    $('#fb-s').innerHTML+=' <button class="comprar-vida" id="comprar-vida">'+IC.coracao+' continuar por '+PRECO_CORACAO+' moedas</button>';
-    const cv=$('#comprar-vida');
-    if(cv)cv.addEventListener('click',()=>{
-      S.moedas-=PRECO_CORACAO;LIC.vidas=2;LIC.comprou=true;salvar();pintarVidas();pintarTopo();
-      $('#acao').textContent=(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');cv.remove();somVida();
-    });
-  }
+  $('#acao').textContent=(LIC.vidas<=0)?'Continuar':(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');
+  /* sem 'continuar por moedas': acabar os corações encerra a rodada com gentileza (ver pintarFim) */
 }
 function avancar(){
   $('#pe').className='pe';calar();
@@ -542,11 +535,11 @@ function pintarFim(){
     MASC(passou?'comemora':'incentiva')+
     '<div class="estrelao">'+estrelasSVG(est)+'</div>'+
     '<h2>'+(passou?(LIC.rev?'Revisão concluída!':(LIC.erros===0?'Fase perfeita!':'Fase concluída!'))
-      :'Acabaram os corações')+'</h2>'+
+      :'Vamos descansar e revisar')+'</h2>'+
     (passou&&LIC.miss&&LIC.miss.fim?'<p class="fecho">'+LIC.miss.fim+'</p>':'')+
     '<p class="sub">'+(passou?'Você acertou '+LIC.acertos+' de '+LIC.base+' perguntas.'+
         (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros. Volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
-      :'Tudo bem! Vamos rever a aula e tentar de novo. Errar faz parte de aprender.')+'</p>'+
+      :'Os erros foram para o seu caderno e voltam amanhã na revisão. Seu progresso está guardado. Errar faz parte de aprender.')+'</p>'+
     (completouMundo?'<div class="mundo-ok">'+IC.trofeu+' Etapa '+LIC.u.n+' completa!</div>':'')+
     (passou&&!LIC.rev?premioDesenhoHTML(completouMundo):'')+
     '<div class="placar">'+
