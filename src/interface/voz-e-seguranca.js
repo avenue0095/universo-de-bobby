@@ -44,13 +44,14 @@ function telaVoz(){
   h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
   h+='<p class="galeria-intro" id="voz-estado" role="status">'+escapa(AUDIO.avisoPacote||'As vozes ficam guardadas no aparelho depois de baixadas, para jogar sem internet.')+'</p>';
   h+='<h2 class="sec">Sons</h2><div class="ctl">';
-  h+='<div class="ctl-linha"><b>Efeitos e voz</b><div>'+
-     '<button class="chip-ctl'+(S.som?' on':'')+'" data-som="1">Ligados</button>'+
-     '<button class="chip-ctl'+(!S.som?' on':'')+'" data-som="0">Desligados</button></div>'+
-     '<small>Com os sons desligados, o Bobby também fica em silêncio.</small></div>';
-  h+='<div class="ctl-linha"><b>Narração do Bobby</b><div>'+
-     '<button class="chip-ctl'+(S.voz?' on':'')+'" data-voz="1">Ligada</button>'+
-     '<button class="chip-ctl'+(!S.voz?' on':'')+'" data-voz="0">Desligada</button></div></div></div>';
+  const chave=(rot,atr,on,txtOn,txtOff,dica)=>'<div class="ctl-linha"><b>'+rot+'</b><div>'+
+     '<button class="chip-ctl'+(on?' on':'')+'" '+atr+'="1" aria-pressed="'+on+'">'+txtOn+'</button>'+
+     '<button class="chip-ctl'+(!on?' on':'')+'" '+atr+'="0" aria-pressed="'+(!on)+'">'+txtOff+'</button></div>'+(dica?'<small>'+dica+'</small>':'')+'</div>';
+  h+=chave('Efeitos','data-som',S.som!==false,'Ligados','Desligados','Cliques, acertos, passos e o baú.');
+  h+=chave('Música','data-musica',S.musica!==false,'Ligada','Desligada','Uma música leve de cada planeta, em volume baixo.');
+  h+=chave('Voz','data-voz',S.voz!==false,'Ligada','Desligada','A voz do Bobby e dos amigos. Funciona sozinha, mesmo sem os efeitos.');
+  h+=chave('Vibração','data-vibra',S.vibra!==false,'Ligada','Desligada','Uma vibração bem curta ao acertar, só em aparelhos que têm (Android).');
+  h+='</div>';
   const v=Math.round(audioVelocidade()*100);
   h+='<h2 class="sec">Velocidade da fala</h2>';
   h+='<div class="velocidade"><input type="range" id="vel" min="80" max="120" step="5" value="'+v+'" aria-label="Velocidade da fala">'+
@@ -69,7 +70,11 @@ function telaVoz(){
   $('#volta-voz').addEventListener('click',telaPerfil);
   $('#volta-voz2').addEventListener('click',telaPerfil);
   $('#perfil').querySelectorAll('[data-som]').forEach(b=>b.addEventListener('click',()=>{
-    S.som=b.dataset.som==='1';salvar();pintarTopo();if(!S.som)calar();telaVoz();}));
+    S.som=b.dataset.som==='1';salvar();pintarTopo();telaVoz();if(S.som)sfx('moeda');}));
+  $('#perfil').querySelectorAll('[data-musica]').forEach(b=>b.addEventListener('click',()=>{
+    S.musica=b.dataset.musica==='1';salvar();pintarTopo();if(S.musica){SFXG.gesto=true;musicaLigar(MATERIA);}else musicaDesligar();telaVoz();}));
+  $('#perfil').querySelectorAll('[data-vibra]').forEach(b=>b.addEventListener('click',()=>{
+    S.vibra=b.dataset.vibra==='1';salvar();telaVoz();if(S.vibra)vibrar(20);}));
   $('#perfil').querySelectorAll('[data-voz]').forEach(b=>b.addEventListener('click',()=>{
     S.voz=b.dataset.voz==='1';salvar();if(!S.voz)calar();telaVoz();}));
   const r=$('#vel');

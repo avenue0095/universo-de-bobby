@@ -13,10 +13,10 @@ Object.assign(IC,{
 /* ---------- folha (diálogo) ---------- */
 function abrirFolha(html){
   const f=$('#folha');
-  f.innerHTML=html;f.classList.add('on');
+  f.innerHTML=html;if(!f.classList.contains('on'))sfx('abre');f.classList.add('on');
   const b=f.querySelector('button');if(b&&b.focus)try{b.focus();}catch(e){}
 }
-function fecharFolha(){$('#folha').classList.remove('on');$('#folha').innerHTML='';}
+function fecharFolha(){if($('#folha').classList.contains('on'))sfx('fecha');$('#folha').classList.remove('on');$('#folha').innerHTML='';}
 
 /* ---------- topo: ofensiva e moedas ---------- */
 function textoOfensiva(){
@@ -91,6 +91,7 @@ function mostrarAvisoMigracao(depois){
 function mostrarBilhete(){
   const b=bilheteDeHoje();
   if(!b)return;
+  sfx('motivo','fagulha');
   abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('presente')+'</div><h2>Um bilhete do Bobby</h2>'+
     '<p class="fala-p">'+falaDe('bilhete')+'</p><p class="bilhete-texto">'+b.texto+'</p>'+
     '<ul class="folha-lista icones"><li>'+IC.presente+'<span>No baú de amanhã: '+escapa(b.presente)+'</span></li><li>'+IC.bilhete+'<span>'+b.pronto+'</span></li></ul>'+
@@ -123,7 +124,7 @@ function mostrarBau(){
   abrirFolha('<div class="folha-in">'+bauCena(false)+'<h2>Seu baú de hoje</h2>'+
     '<p class="fala-p">'+falaDe('bauPronto')+'</p><p>Você completou a meta de hoje. Dentro do baú tem '+categoriaDoBau(dia)+'.</p>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-abrir">Abrir o baú</button></div></div>');
-  $('#fl-abrir').addEventListener('click',()=>{abrirBau();salvar();mostrarBauAberto();});
+  $('#fl-abrir').addEventListener('click',()=>{sfx('bauRange');setTimeout(()=>sfx('bauTampa'),380);setTimeout(()=>sfx('bauMoedas'),560);setTimeout(()=>sfx('bauRevela'),1300);abrirBau();salvar();mostrarBauAberto();});
 }
 function mostrarBauAberto(){
   const b=S.diario.bau;
@@ -138,7 +139,7 @@ function mostrarBauAberto(){
 
 /* ---------- "Por hoje chega!" ---------- */
 function mostrarParada(limite){
-  garantirDia();
+  garantirDia();sfx('parada');
   if(limite){
     abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('tchau')+'</div><h2>Por hoje chega!</h2>'+
       '<p class="fala-p">'+falaDe('parada')+'</p><p>Amanhã tem mais.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+

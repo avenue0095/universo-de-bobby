@@ -164,7 +164,7 @@ function atualizarMissoes(){
     const cat=missaoPorId(m.id);if(!cat)return;
     m.prog=Math.min(m.alvo,cat.conta(d.c,d));
     if(!m.ok&&m.prog>=m.alvo){
-      m.ok=true;
+      m.ok=true;sfx('missao');
       registrarEvento('missao_ok',{id:m.id});
     }
   });
@@ -187,7 +187,7 @@ function garantirDia(){
   o.diasLivres=S.config.diasLivres.slice();o.pausaAte=S.config.pausaAte;
   const antes={cong:o.congeladores,desc:o.descansando,ultimo:o.ultimo};
   ofensivaAbrir(o,d);
-  if(o.congeladores<antes.cong){registrarEvento('congelador_usado',{saldo:o.congeladores});S.espera=S.espera||{};S.espera.usouCongelador=d;}
+  if(o.congeladores<antes.cong){sfx('gelo');registrarEvento('congelador_usado',{saldo:o.congeladores});S.espera=S.espera||{};S.espera.usouCongelador=d;}
   if(!antes.desc&&o.descansando)registrarEvento('ofensiva_descansa',{valor:o.valorAntes,lacuna:o.lacuna});
   if(o.relogioEstranho){registrarEvento('relogio_estranho',{});o.relogioEstranho=false;}
   if(S.semana.chave!==semanaIso(d))S.semana={chave:semanaIso(d),estrelas:0,aulaRevista:0,constelacao:false};

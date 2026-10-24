@@ -53,7 +53,7 @@ function normalizaDesenhos(x,feitas){
 }
 function colecaoVazia(){return {adesivos:[],ornamentos:[],medalhas:[],poses:[],molduras:[],trilhas:[],constelacao:[]};}
 function estadoVazio(){
-  return {nome:'',faixa:'f78',materia:'mat',matEsc:false,
+  return {nome:'',faixa:'f78',materia:'mat',matEsc:false,musica:true,vibra:true,
     xp:0,moedas:0,acertosTotal:0,melhorCombo:0,
     feitas:{},errados:{},comprado:[],look:{},desenhos:desenhosVazios(),
     ofensiva:ofensivaNova(),diario:diarioVazio(''),espera:null,
@@ -146,6 +146,7 @@ function estadoDe(dados){
   s.faixa=FAIXAS.indexOf(d.faixa)>=0?d.faixa:'f78';
   s.materia=['mat','pt','en'].indexOf(d.materia)>=0?d.materia:'mat';
   s.matEsc=d.matEsc===true;
+  s.musica=d.musica!==false;s.vibra=d.vibra!==false;      /* música ligada por padrão em volume baixo; vibração leve só onde existe (Android) */
   s.xp=intDe(d.xp,0,1e9,0);s.moedas=intDe(d.moedas,0,1e9,0);
   s.acertosTotal=intDe(d.acertosTotal,0,1e9,0);s.melhorCombo=intDe(d.melhorCombo,0,1e6,0);
   const f=objDe(d.feitas);Object.keys(f).forEach(k=>{const e=estrelasDe(f[k]);if(e>0)s.feitas[k]=e;});

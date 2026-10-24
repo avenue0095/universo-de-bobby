@@ -120,7 +120,7 @@ function animarMapa(prox){
     NO_ANTES[chave]=no;
     if(antes!=null&&antes!==no){
       const alvo=NOS[no];
-      const vai=()=>{v.classList.add('anda');v.style.left=alvo[0]+'%';v.style.top=alvo[1]+'%';
+      const vai=()=>{if(typeof sfx==='function')sfx('passo',{mat:'madeira',pt:'grama',en:'areia'}[MATERIA]||'grama');v.classList.add('anda');v.style.left=alvo[0]+'%';v.style.top=alvo[1]+'%';
         if(reduz)v.classList.remove('anda');else setTimeout(()=>v.classList.remove('anda'),520);};
       if(reduz)vai();else requestAnimationFrame(()=>requestAnimationFrame(vai));
     }
@@ -147,8 +147,10 @@ function pintarTopo(){
   fogo.setAttribute('aria-label',textoOfensiva()+'. Congeladores: '+o.congeladores);
   $('#st-moedas').innerHTML=IC.moeda+'<em>'+S.moedas+'</em>';
   $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
-  $('#som').innerHTML=S.som?IC.falar:IC.somOff;
-  $('#som').setAttribute('aria-label',S.som?'Desligar sons':'Ligar sons');
+  const algumSom=S.som!==false||S.voz!==false||S.musica!==false;
+  $('#som').innerHTML=algumSom?IC.falar:IC.somOff;
+  $('#som').setAttribute('aria-label','Voz e som');
+  if(typeof musicaLigar==='function'&&SFXG.gesto&&(SFXG.musicaPlaneta!==MATERIA||!musicaTocando()))musicaLigar(MATERIA);
   /* o retrato do topo e da barra é o do personagem em uso (companheiro ou Bobby com o look), sempre atualizado */
   $('#logo').innerHTML=retratoPers();
   const rb=$('#retrato-bb');if(rb)rb.innerHTML=retratoPers();
@@ -198,7 +200,7 @@ function renderTrilha(){
     setTimeout(()=>{
       if(['#folha','#modal','#licao','#perfis','#materias','#perfil','#galeria'].some(q=>{const e=$(q);return e&&e.classList&&e.classList.contains('on');}))return;
       const h=new Date().getHours(),sit=feitas()===0?'chegada.curta':(S.diario&&S.diario.blocos>0?null:(h<12?'chegada.manha':(h<18?'chegada.tarde':'chegada.noite')));
-      if(sit)avisoNo(falaDe(sit));
+      if(sit){avisoNo(falaDe(sit));sfx('motivo','bobby');}
     },1400);
   }
   if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelector('.no.atual')||document.querySelector('.voce');if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}

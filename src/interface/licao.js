@@ -24,6 +24,7 @@ function abrirLicao(ui,li){
   $('#licao').style.setProperty('--ub',corUnidade(u));
   document.body.style.overflow='hidden';
   pintarLicao();
+  sfx('motivo',guiaDaMateria());
 }
 function fecharLicao(){
   calar();
@@ -350,6 +351,7 @@ function mostrarDica(){
      LIC.i já avançou e LIC.qs[LIC.i] vem undefined — dava TypeError e a dica sumia.
      Agora só mostra se ainda houver pergunta na tela. */
   if(LIC.etapa!=='questao')return;
+  sfx('dica');
   const q=LIC.qs[LIC.i];
   const cx=$('#caixa-dica');
   if(!q||!cx)return;

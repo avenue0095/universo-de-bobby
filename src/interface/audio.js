@@ -10,14 +10,15 @@
      audioAgendar(fn, ms)       setTimeout que o audioParar() cancela
      audioIniciar()             carrega o manifesto, escolhe .m4a (AAC) ou .opus, baixa o pacote core na primeira visita
      audioBaixarPacote(nome)    guarda um pacote (core, mat, pt, en) no cache 'bobby-audio-v1' para jogar sem internet
-   Regras: S.som=false ou S.voz=false silenciam TUDO. Formato: .m4a por padrão; .opus só se o aparelho não toca AAC
+   Regras: S.voz=false cala a voz (Efeitos e Música têm interruptor próprio). Formato: .m4a por padrão; .opus só se o aparelho não toca AAC
    e confirma Opus em canPlayType (docs/FASE-2-especificacao.md, 9.5). */
 const AUDIO_CACHE='bobby-audio-v1';
 const AUDIO_CHAVE_LS='universo-bobby-audio';
 const AUDIO={base:'audio/',token:0,timers:[],fontes:[],buffers:new Map(),max:80,pronto:null,semAudio:false,
   formato:null,log:[],avisados:new Set(),baixando:{},fins:[]};
 
-function audioAtivo(){return !!S&&S.som!==false&&S.voz!==false;}
+/* a voz só depende do interruptor Voz: com os Efeitos desligados ela continua (três interruptores independentes) */
+function audioAtivo(){return !!S&&S.voz!==false;}
 function ctxAudio(){
   try{
     AC=AC||new (window.AudioContext||window.webkitAudioContext)();
@@ -115,6 +116,7 @@ function audioParar(){
   AUDIO.token++;
   AUDIO.timers.splice(0).forEach(clearTimeout);
   AUDIO.fontes.splice(0).forEach(f=>{try{f.onended=null;f.stop();}catch(e){}});
+  if(typeof sfxVoz==='function')sfxVoz(false);
   AUDIO.fins.splice(0).forEach(f=>f('cancelado'));      /* quem esperava a fala terminar recebe 'cancelado' */
 }
 function audioFalhou(chave,motivo){
@@ -148,7 +150,8 @@ async function audioTocar(alvo,idioma,mat){
   if(!ok.length)return 'sem-clipe';
   const vel=audioVelocidade();
   return new Promise(fim0=>{
-    const fim=r=>{const i=AUDIO.fins.indexOf(fim0);if(i>=0)AUDIO.fins.splice(i,1);fim0(r);};
+    if(typeof sfxVoz==='function')sfxVoz(true);
+    const fim=r=>{const i=AUDIO.fins.indexOf(fim0);if(i>=0)AUDIO.fins.splice(i,1);if(typeof sfxVoz==='function')sfxVoz(false);fim0(r);};
     AUDIO.fins.push(fim0);
     let t=ctx.currentTime+0.04;
     ok.forEach((x,i)=>{

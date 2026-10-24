@@ -5669,7 +5669,7 @@ function normalizaDesenhos(x,feitas){
 }
 function colecaoVazia(){return {adesivos:[],ornamentos:[],medalhas:[],poses:[],molduras:[],trilhas:[],constelacao:[]};}
 function estadoVazio(){
-  return {nome:'',faixa:'f78',materia:'mat',matEsc:false,
+  return {nome:'',faixa:'f78',materia:'mat',matEsc:false,musica:true,vibra:true,
     xp:0,moedas:0,acertosTotal:0,melhorCombo:0,
     feitas:{},errados:{},comprado:[],look:{},desenhos:desenhosVazios(),
     ofensiva:ofensivaNova(),diario:diarioVazio(''),espera:null,
@@ -5762,6 +5762,7 @@ function estadoDe(dados){
   s.faixa=FAIXAS.indexOf(d.faixa)>=0?d.faixa:'f78';
   s.materia=['mat','pt','en'].indexOf(d.materia)>=0?d.materia:'mat';
   s.matEsc=d.matEsc===true;
+  s.musica=d.musica!==false;s.vibra=d.vibra!==false;      /* música ligada por padrão em volume baixo; vibração leve só onde existe (Android) */
   s.xp=intDe(d.xp,0,1e9,0);s.moedas=intDe(d.moedas,0,1e9,0);
   s.acertosTotal=intDe(d.acertosTotal,0,1e9,0);s.melhorCombo=intDe(d.melhorCombo,0,1e6,0);
   const f=objDe(d.feitas);Object.keys(f).forEach(k=>{const e=estrelasDe(f[k]);if(e>0)s.feitas[k]=e;});
@@ -6173,14 +6174,15 @@ function audioSequencia(html,idioma,mat){
      audioAgendar(fn, ms)       setTimeout que o audioParar() cancela
      audioIniciar()             carrega o manifesto, escolhe .m4a (AAC) ou .opus, baixa o pacote core na primeira visita
      audioBaixarPacote(nome)    guarda um pacote (core, mat, pt, en) no cache 'bobby-audio-v1' para jogar sem internet
-   Regras: S.som=false ou S.voz=false silenciam TUDO. Formato: .m4a por padrão; .opus só se o aparelho não toca AAC
+   Regras: S.voz=false cala a voz (Efeitos e Música têm interruptor próprio). Formato: .m4a por padrão; .opus só se o aparelho não toca AAC
    e confirma Opus em canPlayType (docs/FASE-2-especificacao.md, 9.5). */
 const AUDIO_CACHE='bobby-audio-v1';
 const AUDIO_CHAVE_LS='universo-bobby-audio';
 const AUDIO={base:'audio/',token:0,timers:[],fontes:[],buffers:new Map(),max:80,pronto:null,semAudio:false,
   formato:null,log:[],avisados:new Set(),baixando:{},fins:[]};
 
-function audioAtivo(){return !!S&&S.som!==false&&S.voz!==false;}
+/* a voz só depende do interruptor Voz: com os Efeitos desligados ela continua (três interruptores independentes) */
+function audioAtivo(){return !!S&&S.voz!==false;}
 function ctxAudio(){
   try{
     AC=AC||new (window.AudioContext||window.webkitAudioContext)();
@@ -6278,6 +6280,7 @@ function audioParar(){
   AUDIO.token++;
   AUDIO.timers.splice(0).forEach(clearTimeout);
   AUDIO.fontes.splice(0).forEach(f=>{try{f.onended=null;f.stop();}catch(e){}});
+  if(typeof sfxVoz==='function')sfxVoz(false);
   AUDIO.fins.splice(0).forEach(f=>f('cancelado'));      /* quem esperava a fala terminar recebe 'cancelado' */
 }
 function audioFalhou(chave,motivo){
@@ -6311,7 +6314,8 @@ async function audioTocar(alvo,idioma,mat){
   if(!ok.length)return 'sem-clipe';
   const vel=audioVelocidade();
   return new Promise(fim0=>{
-    const fim=r=>{const i=AUDIO.fins.indexOf(fim0);if(i>=0)AUDIO.fins.splice(i,1);fim0(r);};
+    if(typeof sfxVoz==='function')sfxVoz(true);
+    const fim=r=>{const i=AUDIO.fins.indexOf(fim0);if(i>=0)AUDIO.fins.splice(i,1);if(typeof sfxVoz==='function')sfxVoz(false);fim0(r);};
     AUDIO.fins.push(fim0);
     let t=ctx.currentTime+0.04;
     ok.forEach((x,i)=>{
@@ -6404,19 +6408,20 @@ function nota(f,t,dur,vol){
   try{
     ctxAudio();
     const o=AC.createOscillator(),g=AC.createGain();
-    o.type='sine';o.frequency.value=f;o.connect(g);g.connect(AC.destination);
+    o.type='sine';o.frequency.value=f;o.connect(g);g.connect((typeof sfxGrafo==='function'&&sfxGrafo())?SFXG.efeitos:AC.destination);
     const t0=AC.currentTime+t;
     g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol||.12,t0+.02);
     g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
     o.start(t0);o.stop(t0+dur+.02);
   }catch(e){}
 }
-const somCerto=()=>{nota(660,0,.13);nota(880,.09,.2);};
-const somErro=()=>{nota(200,0,.18,.14);nota(150,.1,.25,.12);};
-const somFim=()=>[523,659,784,1046].forEach((f,i)=>nota(f,i*.11,.35));
-const somMoeda=()=>{nota(988,0,.07,.08);nota(1319,.06,.16,.08);};
-const somPasso=()=>nota(520,0,.08,.06);
-const somVida=()=>{nota(784,0,.1,.09);nota(1047,.08,.2,.09);};
+/* os sons do jogo vêm do sfx.js (síntese): o acerto sobe a escala a cada seguida, o erro é baixo e gentil */
+const somCerto=()=>{sfx('acerto',(typeof LIC==='object'&&LIC&&LIC.combo)||1);vibrar(10);};
+const somErro=()=>sfx('erro');
+const somFim=()=>{sfx('faseOk');vibrar(20);};
+const somMoeda=()=>sfx('moeda');
+const somPasso=()=>sfx('aba');
+const somVida=()=>sfx('moeda');
 
 function emTexto(html){
   let t=String(html)
@@ -6450,6 +6455,204 @@ function limpaEN(html){
     .replace(/&amp;/g,'and').replace(/[“”"]/g,'').replace(/\s+/g,' ').trim();
 }
 const calar=()=>audioParar();
+/* ---------- som sintetizado: efeitos, motivos dos personagens e música dos planetas (Web Audio, 0 KB de arquivo) ----------
+   docs/PLANO-DE-IDENTIDADE.md, seção 6. Três interruptores independentes: Efeitos (S.som), Música (S.musica) e Voz (S.voz).
+   Regras de som para criança: pico limitado (compressor mestre), entrada de 10 ms, nada de alarme, o ERRO é mais baixo e mais curto que o
+   ACERTO (6 dB a menos) e não tem energia abaixo de 250 Hz, e a voz manda: com uma fala tocando, efeitos e música caem 10 dB.
+   Cada receita recebe (contexto, saída, instante) e devolve a duração, assim o mesmo código toca ao vivo e renderiza em OfflineAudioContext
+   para o teste medir pico, duração e energia. */
+const SFXG={ctx:null,mestre:null,efeitos:null,musica:null,gesto:false,voz:false,ruido:null,musicaTimer:null,musicaPlaneta:'',musicaProx:0,musicaPasso:0};
+const SFX_PENT=[523.25,587.33,659.25,783.99,880,1046.5];       /* C5 D5 E5 G5 A5 C6 */
+const sfxDb=db=>Math.pow(10,db/20);
+
+function sfxGrafo(){
+  const c=ctxAudio();if(!c)return null;
+  if(SFXG.ctx===c)return SFXG;
+  try{return sfxMontaGrafo(c);}catch(e){return null;}      /* ambiente sem Web Audio completo (teste em Node): fica sem som, sem erro */
+}
+function sfxMontaGrafo(c){
+  const comp=c.createDynamicsCompressor();
+  comp.threshold.value=-18;comp.knee.value=12;comp.ratio.value=5;comp.attack.value=.004;comp.release.value=.2;
+  const mestre=c.createGain();mestre.gain.value=.9;
+  const ef=c.createGain(),mu=c.createGain();ef.gain.value=1;mu.gain.value=.5;
+  ef.connect(comp);mu.connect(comp);comp.connect(mestre);mestre.connect(c.destination);
+  SFXG.ctx=c;SFXG.mestre=mestre;SFXG.efeitos=ef;SFXG.musica=mu;SFXG.ruido=null;
+  return SFXG;
+}
+/* a voz manda: efeitos e música caem 10 dB enquanto a fala toca e voltam em 400 ms */
+function sfxVoz(fala){
+  SFXG.voz=!!fala;
+  const g=SFXG.ctx&&SFXG.mestre;if(!g)return;
+  const t=SFXG.ctx.currentTime;
+  try{g.gain.cancelScheduledValues(t);g.gain.setTargetAtTime(fala?.9*sfxDb(-10):.9,t,fala?.03:.15);}catch(e){}
+}
+/* ---------- instrumentos ---------- */
+function sfxRuidoBuf(c){
+  if(c._ruido)return c._ruido;
+  const n=Math.floor(c.sampleRate*1.2),b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0);
+  let s=12345;for(let i=0;i<n;i++){s=(s*1664525+1013904223)>>>0;d[i]=(s/4294967296)*2-1;}
+  c._ruido=b;return b;
+}
+function sTom(c,out,t,f,dur,o){
+  o=o||{};
+  const os=c.createOscillator(),g=c.createGain();
+  os.type=o.tipo||'sine';os.frequency.setValueAtTime(f,t);
+  if(o.ate)os.frequency.exponentialRampToValueAtTime(o.ate,t+dur);
+  let n=os;
+  if(o.filtro){const fl=c.createBiquadFilter();fl.type=o.filtro[0];fl.frequency.value=o.filtro[1];os.connect(fl);n=fl;}
+  n.connect(g);
+  let saida=g;
+  if(o.pan&&c.createStereoPanner){const p=c.createStereoPanner();p.pan.value=o.pan;g.connect(p);saida=p;}
+  saida.connect(out);
+  const v=o.vol||.2,a=o.ataque||.01;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+Math.max(dur,a+.02));
+  os.start(t);os.stop(t+dur+.05);
+  if(o.h2){sTom(c,out,t,f*2,dur,{tipo:'sine',vol:v*o.h2,ataque:a,ate:o.ate?o.ate*2:0});}
+}
+function sRuido(c,out,t,dur,o){
+  o=o||{};
+  const s=c.createBufferSource();s.buffer=sfxRuidoBuf(c);s.loop=true;
+  const fl=c.createBiquadFilter();fl.type=o.tipo||'bandpass';fl.Q.value=o.q||1.2;
+  fl.frequency.setValueAtTime(o.de||1000,t);if(o.ate)fl.frequency.exponentialRampToValueAtTime(o.ate,t+dur);
+  const g=c.createGain();s.connect(fl);fl.connect(g);g.connect(out);
+  const v=o.vol||.1,a=o.ataque||.01;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  s.start(t);s.stop(t+dur+.05);
+}
+const sSino=(c,out,t,f,dur,v)=>sTom(c,out,t,f,dur,{vol:v,ataque:.008,h2:.3});
+/* ---------- as receitas (nível de pico entre parênteses, da tabela da seção 6.2) ---------- */
+const SFX={
+  clique:(c,o,t)=>{sRuido(c,o,t,.012,{de:1200,vol:.14,q:2});sTom(c,o,t,330,.06,{vol:.16});return .06;},                     /* 1 (-14) */
+  seleciona:(c,o,t)=>{sTom(c,o,t,1200,.04,{vol:.2});return .04;},                                                       /* 2 (-14) */
+  verifica:(c,o,t)=>{sTom(c,o,t,520,.09,{vol:.24,ate:700});return .09;},                                                 /* 3 (-12) */
+  acerto:(c,o,t,n)=>{n=Math.max(1,n||1);const i=Math.min(n-1,5);                                                        /* 4 e 5 (-6): sobe a escala a cada seguida */
+    if(n<=1){sSino(c,o,t,783.99,.35,.3);sSino(c,o,t+.09,1046.5,.4,.3);}
+    else{sSino(c,o,t,SFX_PENT[i],.4,.28);sSino(c,o,t+.09,SFX_PENT[Math.min(i+2,5)],.45,.28);}
+    sRuido(c,o,t+.05,.2,{tipo:'highpass',de:6000,vol:.02});return .55;},
+  erro:(c,o,t)=>{sTom(c,o,t,392,.18,{tipo:'triangle',vol:.13,ate:349,filtro:['lowpass',1200]});return .18;},                /* 6 (-12): toc de madeira G4 a F4, nada abaixo de 250 Hz */
+  dica:(c,o,t)=>{sSino(c,o,t,659.25,.25,.2);sSino(c,o,t+.1,880,.3,.2);return .35;},                                      /* 7 */
+  moeda:(c,o,t)=>{sTom(c,o,t,987.8,.12,{vol:.28,ataque:.005});sTom(c,o,t+.06,1318.5,.16,{vol:.28,ataque:.005});return .22;}, /* 8 */
+  faseOk:(c,o,t)=>{[523.25,659.25,783.99,1046.5].forEach((f,i)=>sSino(c,o,t+i*.11,f,.5,.3));return .95;},                 /* 9 */
+  estrela:(c,o,t,i)=>{sSino(c,o,t,[783.99,987.77,1174.7][Math.min(2,i||0)],.35,.36);return .35;},                         /* 10 */
+  pecaAcende:(c,o,t)=>{sRuido(c,o,t,.48,{de:500,ate:2500,vol:.28});[261.6,329.6,392].forEach(f=>sTom(c,o,t+.2,f,.5,{vol:.12,ataque:.08}));return .7;}, /* 11 */
+  etapaOk:(c,o,t)=>{[261.6,329.6,392].forEach(f=>sTom(c,o,t,f,1.2,{vol:.12,ataque:.2,tipo:'triangle'}));
+    [523.25,587.33,659.25,783.99,880,1046.5].forEach((f,i)=>sSino(c,o,t+.2+i*.28,f,.5,.26));return 2.4;},                   /* 12 */
+  planetaOk:(c,o,t)=>{[392,523.25,659.25,783.99].forEach((f,i)=>sSino(c,o,t+i*.35,f,.9,.2));sRuido(c,o,t+1.4,1.5,{de:400,ate:3000,vol:.1});
+    [523.25,659.25,783.99,1046.5].forEach(f=>sSino(c,o,t+2.9,f,1.4,.1));return 4.4;},                                       /* 13 */
+  passo:(c,o,t,sup)=>{                                                                                                    /* 14 (-16): dois passos por nó, 110 e 100 Hz */
+    [110,100].forEach((f,i)=>{const a=t+i*.18;sTom(c,o,a,f,.07,{vol:.12,filtro:['lowpass',400]});
+      if(sup==='madeira'){sRuido(c,o,a,.05,{de:800,vol:.12,q:3});}else if(sup==='areia'){sRuido(c,o,a,.07,{tipo:'highpass',de:2500,vol:.1});}else{sRuido(c,o,a,.07,{tipo:'lowpass',de:1200,vol:.12});}});
+    return .27;},
+  abre:(c,o,t)=>{sRuido(c,o,t,.22,{de:300,ate:900,vol:.18});return .22;},                                                 /* 15 */
+  fecha:(c,o,t)=>{sRuido(c,o,t,.13,{de:900,ate:300,vol:.16});return .13;},                                                /* 16 */
+  aba:(c,o,t)=>{sTom(c,o,t,180,.07,{vol:.16});sTom(c,o,t,900,.05,{vol:.08});return .07;},                                 /* 17 */
+  bauRange:(c,o,t)=>{sRuido(c,o,t,.35,{de:400,ate:900,vol:.28,q:4});return .35;},                                         /* 18 */
+  bauTampa:(c,o,t)=>{sRuido(c,o,t,.03,{de:900,vol:.3,q:3});sRuido(c,o,t+.02,.1,{tipo:'lowpass',de:1500,vol:.2});return .12;}, /* 19 */
+  bauMoedas:(c,o,t)=>{for(let i=0;i<12;i++)sTom(c,o,t+i*.05,2000+((i*379)%2000),.1,{vol:.22,ataque:.004,pan:((i*7)%11)/5-1});return .7;}, /* 20 */
+  bauRevela:(c,o,t)=>{[523.25,659.25,783.99,1046.5].forEach((f,i)=>sSino(c,o,t+i*.08,f,.7,.2));return .8;},                /* 21 */
+  cadeado:(c,o,t)=>{sRuido(c,o,t,.09,{tipo:'lowpass',de:800,vol:.2});return .09;},                                        /* 22 */
+  desbloqueia:(c,o,t)=>{sRuido(c,o,t,.03,{de:2500,vol:.2,q:4});sSino(c,o,t+.08,783.99,.3,.28);sSino(c,o,t+.17,1174.7,.3,.28);return .4;}, /* 23 */
+  gelo:(c,o,t)=>{sRuido(c,o,t,.4,{tipo:'highpass',de:7000,vol:.1});sSino(c,o,t+.05,1046.5,.45,.3);return .5;},             /* 24 */
+  missao:(c,o,t)=>{sSino(c,o,t,783.99,.3,.35);sSino(c,o,t+.12,987.77,.3,.35);return .35;},                                 /* 25 */
+  pega:(c,o,t)=>{sTom(c,o,t,1800,.05,{vol:.2});return .05;},                                                              /* 26 */
+  encaixa:(c,o,t)=>{sTom(c,o,t,140,.12,{vol:.3,tipo:'triangle'});sSino(c,o,t+.02,1318.5,.3,.2);return .3;},
+  solta:(c,o,t)=>{sRuido(c,o,t,.12,{tipo:'highpass',de:2000,vol:.14});return .12;},
+  conquista:(c,o,t)=>{sSino(c,o,t,880,.5,.32);sSino(c,o,t+.12,1318.5,.5,.32);sRuido(c,o,t+.1,.3,{de:1500,ate:4000,vol:.12});return .65;}, /* 27 */
+  parada:(c,o,t)=>{[659.25,523.25,392].forEach((f,i)=>sTom(c,o,t+i*.45,f,.9,{tipo:'triangle',vol:.22,ataque:.02,h2:.25}));return 1.6;}, /* 28 */
+  /* motivos dos personagens, 2 a 4 notas */
+  motivo:(c,o,t,quem)=>{
+    if(quem==='teo'){[392,523.25,659.25].forEach((f,i)=>sTom(c,o,t+i*.09,f,.09,{tipo:'square',vol:.1,filtro:['lowpass',2400]}));return .3;}
+    if(quem==='rufa'){sTom(c,o,t,659.25,.5,{tipo:'sine',vol:.22,ate:880,ataque:.06});sTom(c,o,t,663,.5,{vol:.1,ate:884,ataque:.06});return .55;}
+    if(quem==='otto'){sTom(c,o,t,520,.22,{vol:.3,ate:200});sTom(c,o,t+.15,620,.2,{vol:.2,ate:260});return .4;}
+    if(quem==='brisa'){sRuido(c,o,t,.5,{de:900,ate:2600,vol:.12,q:6});return .5;}
+    if(quem==='capi'){sTom(c,o,t,98,.5,{tipo:'triangle',vol:.14,filtro:['lowpass',500]});sTom(c,o,t+.55,110,.5,{tipo:'triangle',vol:.14,filtro:['lowpass',500]});return 1;}
+    if(quem==='fagulha'){[2093,2349,2637].forEach((f,i)=>sTom(c,o,t+i*.06,f,.1,{vol:.14,ataque:.004}));return .3;}
+    if(quem==='embaralho'){sRuido(c,o,t,.25,{de:3000,vol:.14});sTom(c,o,t+.1,330,.2,{tipo:'sawtooth',vol:.08,ate:440,filtro:['lowpass',900]});return .35;}
+    [392,523.25,659.25,783.99].forEach((f,i)=>sSino(c,o,t+i*.1,f,.5,.28));return .65;     /* Bobby: G4 C5 E5 G5 em sino */
+  }
+};
+/* toca ao vivo (só com Efeitos ligados). Devolve false quando calado. */
+function sfx(nome,arg){
+  if(!S||S.som===false)return false;
+  const g=sfxGrafo();if(!g)return false;
+  const f=SFX[nome];if(!f)return false;
+  try{f(g.ctx,g.efeitos,g.ctx.currentTime+.005,arg);return true;}catch(e){return false;}
+}
+/* renderização offline para o teste: devolve {amostras, dur} com a mesma receita */
+async function sfxRender(nome,arg,filtroBaixo){
+  const OC=window.OfflineAudioContext||window.webkitOfflineAudioContext,sr=44100,seg=5;
+  const c=new OC(1,sr*seg,sr);
+  let saida=c.destination;
+  if(filtroBaixo){const fl=c.createBiquadFilter();fl.type='lowpass';fl.frequency.value=filtroBaixo;fl.connect(c.destination);saida=fl;}
+  const mix=c.createGain();mix.gain.value=1;mix.connect(saida);
+  const dur=SFX[nome](c,mix,.01,arg);
+  const b=await c.startRendering();
+  return {amostras:b.getChannelData(0),dur:dur};
+}
+/* vibração curta (Android); iPhone não oferece, e nada vibra com movimento reduzido ou com o interruptor desligado */
+function vibrar(ms){
+  try{
+    if(!S||S.vibra===false||!navigator.vibrate)return false;
+    if(navigator.userActivation&&!navigator.userActivation.hasBeenActive)return false;     /* o navegador só deixa vibrar depois de um toque */
+    if(matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return false;
+    return navigator.vibrate(ms||10);
+  }catch(e){return false;}
+}
+/* ---------- música por planeta: um laço leve gerado no navegador (volume baixo, interruptor próprio) ---------- */
+const MUSICA={
+  mat:{escala:[293.66,329.63,392,440,523.25,587.33],tipo:'sine',bpm:72,sino:true,fundo:'engrenagem'},     /* Numeral: sinos e madeira */
+  pt:{escala:[220,246.94,261.63,329.63,392,440],tipo:'triangle',bpm:66,sino:false,fundo:'vento'},          /* Fábula: caixa de música e flauta */
+  en:{escala:[261.63,293.66,329.63,392,440,523.25],tipo:'triangle',bpm:80,sino:false,fundo:'onda'}         /* Horizonte: pluck e gotas */
+};
+function musicaNota(c,o,t,m,passo){
+  const e=m.escala,b=60/m.bpm;
+  /* passeio melódico determinístico (sem sorteio): o mesmo laço em toda volta */
+  const i=[0,2,1,3,2,4,3,1,0,2,4,5,3,2,1,0][passo%16];
+  if(passo%2===0)sTom(c,o,t,e[i],b*1.6,{tipo:m.tipo,vol:.18,ataque:.02,h2:m.sino?.25:.08});
+  if(passo%8===0){[e[0]/2,e[2]/2].forEach(f=>sTom(c,o,t,f,b*6,{tipo:'sine',vol:.1,ataque:.5}));}
+  if(passo%4===3)sTom(c,o,t+b*.5,e[(i+2)%6]*2,b*.6,{tipo:'sine',vol:.06,ataque:.01});
+}
+function musicaAgenda(){
+  const g=sfxGrafo();if(!g||!SFXG.musicaPlaneta)return;
+  const m=MUSICA[SFXG.musicaPlaneta]||MUSICA.mat,b=60/m.bpm/2,c=g.ctx;
+  if(SFXG.musicaProx<c.currentTime)SFXG.musicaProx=c.currentTime+.05;
+  while(SFXG.musicaProx<c.currentTime+.6){musicaNota(c,g.musica,SFXG.musicaProx,m,SFXG.musicaPasso++);SFXG.musicaProx+=b;}
+}
+function musicaLigar(planeta){
+  if(!S||S.musica===false||!SFXG.gesto)return musicaDesligar();
+  const g=sfxGrafo();if(!g)return;
+  if(SFXG.musicaTimer&&SFXG.musicaPlaneta===planeta)return;
+  musicaDesligar(true);
+  SFXG.musicaPlaneta=planeta;SFXG.musicaPasso=0;SFXG.musicaProx=0;
+  SFXG.musicaTimer=setInterval(musicaAgenda,150);musicaAgenda();
+}
+function musicaDesligar(manterPlaneta){
+  if(SFXG.musicaTimer){clearInterval(SFXG.musicaTimer);SFXG.musicaTimer=null;}
+  if(!manterPlaneta)SFXG.musicaPlaneta='';
+}
+const musicaTocando=()=>!!SFXG.musicaTimer;
+/* o primeiro toque destrava o áudio do navegador e liga a música do planeta; aba escondida pausa a música */
+function sfxDestravar(){
+  if(SFXG.gesto)return;
+  SFXG.gesto=true;ctxAudio();sfxGrafo();
+  if(typeof MATERIA!=='undefined')musicaLigar(MATERIA);
+}
+if(typeof document!=='undefined'&&document.addEventListener){
+  document.addEventListener('pointerdown',sfxDestravar,{passive:true});
+  document.addEventListener('keydown',sfxDestravar);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)musicaDesligar(true);else if(SFXG.musicaPlaneta||SFXG.gesto)musicaLigar(typeof MATERIA!=='undefined'?MATERIA:'mat');});
+  /* toque em qualquer botão: o som certo para cada tipo (opção, verificar, aba, nó trancado, o resto) */
+  document.addEventListener('pointerdown',e=>{
+    const b=e.target&&e.target.closest?e.target.closest('button,.alt,.tecla,.chip'):null;
+    if(!b||b.disabled)return;
+    if(b.matches('.alt'))sfx('seleciona');
+    else if(b.id==='acao')sfx('verifica');
+    else if(b.closest('.barra-baixo'))sfx('aba');
+    else if(b.matches('.no .bt[aria-disabled="true"]'))sfx('cadeado');
+    else if(b.matches('.md-bt,.tecla,.chip'))return;
+    else sfx('clique');
+  },{passive:true});
+}
 /* ---------- utilidades ---------- */
 /* O nome do perfil é digitado pela criança e entra em innerHTML em vários lugares.
    Sem escapar, um nome como <img src=x onerror=...> vira código — e o nome viaja
@@ -6611,7 +6814,7 @@ function animarMapa(prox){
     NO_ANTES[chave]=no;
     if(antes!=null&&antes!==no){
       const alvo=NOS[no];
-      const vai=()=>{v.classList.add('anda');v.style.left=alvo[0]+'%';v.style.top=alvo[1]+'%';
+      const vai=()=>{if(typeof sfx==='function')sfx('passo',{mat:'madeira',pt:'grama',en:'areia'}[MATERIA]||'grama');v.classList.add('anda');v.style.left=alvo[0]+'%';v.style.top=alvo[1]+'%';
         if(reduz)v.classList.remove('anda');else setTimeout(()=>v.classList.remove('anda'),520);};
       if(reduz)vai();else requestAnimationFrame(()=>requestAnimationFrame(vai));
     }
@@ -6638,8 +6841,10 @@ function pintarTopo(){
   fogo.setAttribute('aria-label',textoOfensiva()+'. Congeladores: '+o.congeladores);
   $('#st-moedas').innerHTML=IC.moeda+'<em>'+S.moedas+'</em>';
   $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
-  $('#som').innerHTML=S.som?IC.falar:IC.somOff;
-  $('#som').setAttribute('aria-label',S.som?'Desligar sons':'Ligar sons');
+  const algumSom=S.som!==false||S.voz!==false||S.musica!==false;
+  $('#som').innerHTML=algumSom?IC.falar:IC.somOff;
+  $('#som').setAttribute('aria-label','Voz e som');
+  if(typeof musicaLigar==='function'&&SFXG.gesto&&(SFXG.musicaPlaneta!==MATERIA||!musicaTocando()))musicaLigar(MATERIA);
   /* o retrato do topo e da barra é o do personagem em uso (companheiro ou Bobby com o look), sempre atualizado */
   $('#logo').innerHTML=retratoPers();
   const rb=$('#retrato-bb');if(rb)rb.innerHTML=retratoPers();
@@ -6689,7 +6894,7 @@ function renderTrilha(){
     setTimeout(()=>{
       if(['#folha','#modal','#licao','#perfis','#materias','#perfil','#galeria'].some(q=>{const e=$(q);return e&&e.classList&&e.classList.contains('on');}))return;
       const h=new Date().getHours(),sit=feitas()===0?'chegada.curta':(S.diario&&S.diario.blocos>0?null:(h<12?'chegada.manha':(h<18?'chegada.tarde':'chegada.noite')));
-      if(sit)avisoNo(falaDe(sit));
+      if(sit){avisoNo(falaDe(sit));sfx('motivo','bobby');}
     },1400);
   }
   if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelector('.no.atual')||document.querySelector('.voce');if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}
@@ -6720,6 +6925,7 @@ function abrirLicao(ui,li){
   $('#licao').style.setProperty('--ub',corUnidade(u));
   document.body.style.overflow='hidden';
   pintarLicao();
+  sfx('motivo',guiaDaMateria());
 }
 function fecharLicao(){
   calar();
@@ -7046,6 +7252,7 @@ function mostrarDica(){
      LIC.i já avançou e LIC.qs[LIC.i] vem undefined — dava TypeError e a dica sumia.
      Agora só mostra se ainda houver pergunta na tela. */
   if(LIC.etapa!=='questao')return;
+  sfx('dica');
   const q=LIC.qs[LIC.i];
   const cx=$('#caixa-dica');
   if(!q||!cx)return;
@@ -7895,7 +8102,7 @@ function atualizarMissoes(){
     const cat=missaoPorId(m.id);if(!cat)return;
     m.prog=Math.min(m.alvo,cat.conta(d.c,d));
     if(!m.ok&&m.prog>=m.alvo){
-      m.ok=true;
+      m.ok=true;sfx('missao');
       registrarEvento('missao_ok',{id:m.id});
     }
   });
@@ -7918,7 +8125,7 @@ function garantirDia(){
   o.diasLivres=S.config.diasLivres.slice();o.pausaAte=S.config.pausaAte;
   const antes={cong:o.congeladores,desc:o.descansando,ultimo:o.ultimo};
   ofensivaAbrir(o,d);
-  if(o.congeladores<antes.cong){registrarEvento('congelador_usado',{saldo:o.congeladores});S.espera=S.espera||{};S.espera.usouCongelador=d;}
+  if(o.congeladores<antes.cong){sfx('gelo');registrarEvento('congelador_usado',{saldo:o.congeladores});S.espera=S.espera||{};S.espera.usouCongelador=d;}
   if(!antes.desc&&o.descansando)registrarEvento('ofensiva_descansa',{valor:o.valorAntes,lacuna:o.lacuna});
   if(o.relogioEstranho){registrarEvento('relogio_estranho',{});o.relogioEstranho=false;}
   if(S.semana.chave!==semanaIso(d))S.semana={chave:semanaIso(d),estrelas:0,aulaRevista:0,constelacao:false};
@@ -8388,13 +8595,14 @@ function telaVoz(){
   h+='<p class="galeria-intro">A voz do Bobby é gravada e vem junto com o app. Aqui você liga ou desliga os sons e escolhe a velocidade da fala.</p>';
   h+='<p class="galeria-intro" id="voz-estado" role="status">'+escapa(AUDIO.avisoPacote||'As vozes ficam guardadas no aparelho depois de baixadas, para jogar sem internet.')+'</p>';
   h+='<h2 class="sec">Sons</h2><div class="ctl">';
-  h+='<div class="ctl-linha"><b>Efeitos e voz</b><div>'+
-     '<button class="chip-ctl'+(S.som?' on':'')+'" data-som="1">Ligados</button>'+
-     '<button class="chip-ctl'+(!S.som?' on':'')+'" data-som="0">Desligados</button></div>'+
-     '<small>Com os sons desligados, o Bobby também fica em silêncio.</small></div>';
-  h+='<div class="ctl-linha"><b>Narração do Bobby</b><div>'+
-     '<button class="chip-ctl'+(S.voz?' on':'')+'" data-voz="1">Ligada</button>'+
-     '<button class="chip-ctl'+(!S.voz?' on':'')+'" data-voz="0">Desligada</button></div></div></div>';
+  const chave=(rot,atr,on,txtOn,txtOff,dica)=>'<div class="ctl-linha"><b>'+rot+'</b><div>'+
+     '<button class="chip-ctl'+(on?' on':'')+'" '+atr+'="1" aria-pressed="'+on+'">'+txtOn+'</button>'+
+     '<button class="chip-ctl'+(!on?' on':'')+'" '+atr+'="0" aria-pressed="'+(!on)+'">'+txtOff+'</button></div>'+(dica?'<small>'+dica+'</small>':'')+'</div>';
+  h+=chave('Efeitos','data-som',S.som!==false,'Ligados','Desligados','Cliques, acertos, passos e o baú.');
+  h+=chave('Música','data-musica',S.musica!==false,'Ligada','Desligada','Uma música leve de cada planeta, em volume baixo.');
+  h+=chave('Voz','data-voz',S.voz!==false,'Ligada','Desligada','A voz do Bobby e dos amigos. Funciona sozinha, mesmo sem os efeitos.');
+  h+=chave('Vibração','data-vibra',S.vibra!==false,'Ligada','Desligada','Uma vibração bem curta ao acertar, só em aparelhos que têm (Android).');
+  h+='</div>';
   const v=Math.round(audioVelocidade()*100);
   h+='<h2 class="sec">Velocidade da fala</h2>';
   h+='<div class="velocidade"><input type="range" id="vel" min="80" max="120" step="5" value="'+v+'" aria-label="Velocidade da fala">'+
@@ -8413,7 +8621,11 @@ function telaVoz(){
   $('#volta-voz').addEventListener('click',telaPerfil);
   $('#volta-voz2').addEventListener('click',telaPerfil);
   $('#perfil').querySelectorAll('[data-som]').forEach(b=>b.addEventListener('click',()=>{
-    S.som=b.dataset.som==='1';salvar();pintarTopo();if(!S.som)calar();telaVoz();}));
+    S.som=b.dataset.som==='1';salvar();pintarTopo();telaVoz();if(S.som)sfx('moeda');}));
+  $('#perfil').querySelectorAll('[data-musica]').forEach(b=>b.addEventListener('click',()=>{
+    S.musica=b.dataset.musica==='1';salvar();pintarTopo();if(S.musica){SFXG.gesto=true;musicaLigar(MATERIA);}else musicaDesligar();telaVoz();}));
+  $('#perfil').querySelectorAll('[data-vibra]').forEach(b=>b.addEventListener('click',()=>{
+    S.vibra=b.dataset.vibra==='1';salvar();telaVoz();if(S.vibra)vibrar(20);}));
   $('#perfil').querySelectorAll('[data-voz]').forEach(b=>b.addEventListener('click',()=>{
     S.voz=b.dataset.voz==='1';salvar();if(!S.voz)calar();telaVoz();}));
   const r=$('#vel');
@@ -9044,10 +9256,10 @@ Object.assign(IC,{
 /* ---------- folha (diálogo) ---------- */
 function abrirFolha(html){
   const f=$('#folha');
-  f.innerHTML=html;f.classList.add('on');
+  f.innerHTML=html;if(!f.classList.contains('on'))sfx('abre');f.classList.add('on');
   const b=f.querySelector('button');if(b&&b.focus)try{b.focus();}catch(e){}
 }
-function fecharFolha(){$('#folha').classList.remove('on');$('#folha').innerHTML='';}
+function fecharFolha(){if($('#folha').classList.contains('on'))sfx('fecha');$('#folha').classList.remove('on');$('#folha').innerHTML='';}
 
 /* ---------- topo: ofensiva e moedas ---------- */
 function textoOfensiva(){
@@ -9122,6 +9334,7 @@ function mostrarAvisoMigracao(depois){
 function mostrarBilhete(){
   const b=bilheteDeHoje();
   if(!b)return;
+  sfx('motivo','fagulha');
   abrirFolha('<div class="folha-in bilhete"><div class="folha-bobby">'+MASC('presente')+'</div><h2>Um bilhete do Bobby</h2>'+
     '<p class="fala-p">'+falaDe('bilhete')+'</p><p class="bilhete-texto">'+b.texto+'</p>'+
     '<ul class="folha-lista icones"><li>'+IC.presente+'<span>No baú de amanhã: '+escapa(b.presente)+'</span></li><li>'+IC.bilhete+'<span>'+b.pronto+'</span></li></ul>'+
@@ -9154,7 +9367,7 @@ function mostrarBau(){
   abrirFolha('<div class="folha-in">'+bauCena(false)+'<h2>Seu baú de hoje</h2>'+
     '<p class="fala-p">'+falaDe('bauPronto')+'</p><p>Você completou a meta de hoje. Dentro do baú tem '+categoriaDoBau(dia)+'.</p>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-abrir">Abrir o baú</button></div></div>');
-  $('#fl-abrir').addEventListener('click',()=>{abrirBau();salvar();mostrarBauAberto();});
+  $('#fl-abrir').addEventListener('click',()=>{sfx('bauRange');setTimeout(()=>sfx('bauTampa'),380);setTimeout(()=>sfx('bauMoedas'),560);setTimeout(()=>sfx('bauRevela'),1300);abrirBau();salvar();mostrarBauAberto();});
 }
 function mostrarBauAberto(){
   const b=S.diario.bau;
@@ -9169,7 +9382,7 @@ function mostrarBauAberto(){
 
 /* ---------- "Por hoje chega!" ---------- */
 function mostrarParada(limite){
-  garantirDia();
+  garantirDia();sfx('parada');
   if(limite){
     abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASC('tchau')+'</div><h2>Por hoje chega!</h2>'+
       '<p class="fala-p">'+falaDe('parada')+'</p><p>Amanhã tem mais.</p><p>Quando voltar, seu bilhete estará aqui.</p>'+
@@ -9466,7 +9679,8 @@ $('#fechar').addEventListener('click',fecharLicao);
 $('#rever').addEventListener('click',abrirRevisao);
 $('#dica').addEventListener('click',mostrarDica);
 $('#fechar-rev').addEventListener('click',()=>{calar();$('#revisao').classList.remove('on');});
-$('#som').addEventListener('click',()=>{S.som=!S.som;salvar();pintarTopo();if(S.som)somCerto();else calar();});
+/* o alto-falante do topo abre Voz e som, com os três interruptores (Efeitos, Música, Voz) e a vibração */
+$('#som').addEventListener('click',()=>{fecharTelasDaBarra();lojaOrigem='perfil';telaVoz();});
 $('#salvar-nome').addEventListener('click',salvarNome);
 $('#pular-nome').addEventListener('click',()=>{$('#modal').classList.remove('on');if(criando&&STORE.atual<0)telaPerfis();});
 $('#campo-nome').addEventListener('keydown',e=>{if(e.key==='Enter')salvarNome();});

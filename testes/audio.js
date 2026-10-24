@@ -125,16 +125,17 @@ const chaveDe = (a, classe, lang, texto) => a.avaliar('audioChaveDe(' + JSON.str
     A.strictEqual(prova('', ''), '.m4a');
   });
 
-  await teste('7. desligar sons silencia a voz: nem baixa clipe (S.som e S.voz)', async () => {
+  await teste('7. tres interruptores independentes: Voz desligada cala a fala e nem baixa clipe; Efeitos desligados NAO calam a voz', async () => {
     const a = novo(); await pronto(a); await espera(60);          // deixa o pacote core da 1a visita terminar
     const antes = a.reg.fetch.length;
-    a.avaliar('S.som=false');
+    a.avaliar('S.voz=false');
     A.strictEqual(await a.avaliar("falar('Boa!')"), 'mudo');
     A.strictEqual(await a.avaliar("falarPedido('Boa!')"), 'mudo');
-    A.strictEqual(a.reg.fontes.length, 0); A.strictEqual(a.reg.fetch.length, antes, 'baixou clipe com o som desligado');
-    a.avaliar('S.som=true;S.voz=false');
-    A.strictEqual(await a.avaliar("falar('Boa!')"), 'mudo');
-    a.avaliar('S.voz=true');
+    A.strictEqual(a.reg.fontes.length, 0); A.strictEqual(a.reg.fetch.length, antes, 'baixou clipe com a voz desligada');
+    a.avaliar('S.som=false;S.voz=true');
+    A.strictEqual(await a.avaliar("falar('Boa!')"), 'gravado', 'a voz deveria continuar com os efeitos desligados');
+    A.strictEqual(a.avaliar("sfx('acerto',1)"), false, 'efeito tocou com Efeitos desligados');
+    a.avaliar('S.som=true');
     A.strictEqual(await a.avaliar("falar('Boa!')"), 'gravado');
   });
 
@@ -142,7 +143,7 @@ const chaveDe = (a, classe, lang, texto) => a.avaliar('audioChaveDe(' + JSON.str
     const a = novo(); await pronto(a);
     const p = a.avaliar("audioTocar('Qual número vem depois do 16?','pt-BR','mat')");
     await espera(1);
-    a.avaliar('S.som=false;calar()');
+    a.avaliar('S.voz=false;calar()');
     await p;
     await espera(10);
     A.ok(a.reg.fontes.every((f) => f.parada || f.inicio === null) || a.reg.paradas >= 0);

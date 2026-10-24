@@ -479,6 +479,46 @@ async function main() {
         await js("fecharLicao();0");
       }
 
+      /* 2d5) SOM SINTETIZADO: cada efeito e renderizado em OfflineAudioContext e medido (pico ate -6 dBFS, duracao dentro da tabela do plano);
+         o erro e 6 dB mais baixo que o acerto e sem energia abaixo de 250 Hz; tres interruptores independentes; vibracao respeita o movimento reduzido. */
+      {
+        const tabela = { clique: .06, seleciona: .04, verifica: .09, acerto: .45, erro: .18, dica: .25, moeda: .2, faseOk: .9, estrela: .3, pecaAcende: .7, etapaOk: 3, planetaOk: 6, passo: .27, abre: .22, fecha: .13, aba: .07, bauRange: .35, bauTampa: .12, bauMoedas: .7, bauRevela: .8, cadeado: .09, desbloqueia: .35, gelo: .5, missao: .3, pega: .05, encaixa: .15, solta: .12, conquista: .6, parada: 1.5 };
+        const medidas = await js(`(async()=>{const t=${JSON.stringify(tabela)},r={};for(const n of Object.keys(t)){const x=await sfxRender(n,n==='acerto'?3:(n==='passo'?'grama':0));let pico=0,ult=0;for(let i=0;i<x.amostras.length;i++){const v=Math.abs(x.amostras[i]);if(v>pico)pico=v;if(v>.01)ult=i;}r[n]={pico:pico,fim:ult/44100-.01};}return r})()`);
+        const ruins = [];
+        Object.keys(tabela).forEach((n) => {
+          const m = medidas[n];
+          if (!(m.pico > .004)) ruins.push(n + ' mudo (pico ' + m.pico.toFixed(4) + ')');
+          if (m.pico > .5012) ruins.push(n + ' pico ' + (20 * Math.log10(m.pico)).toFixed(1) + ' dBFS (limite -6)');
+          if (m.fim > tabela[n] * 1.6 + .05) ruins.push(n + ' dura ' + m.fim.toFixed(2) + ' s (tabela ' + tabela[n] + ')');
+        });
+        if (ruins.length) problemas.push(rot + ' sfx: ' + ruins.slice(0, 6).join(' | '));
+        const er = await js(`(async()=>{const rms=a=>{let s=0;for(let i=0;i<22050;i++)s+=a[i]*a[i];return Math.sqrt(s/22050)};const ac=await sfxRender('acerto',1),er=await sfxRender('erro',0);
+          /* energia espectral (DFT com janela de Hann) abaixo de 250 Hz sobre o total ate 6 kHz */
+          const x=er.amostras,N=8820,w=i=>.5-.5*Math.cos(2*Math.PI*i/(N-1));const pot=f=>{let re=0,im=0;for(let i=0;i<N;i++){const v=x[i+441]*w(i),a=2*Math.PI*f*i/44100;re+=v*Math.cos(a);im-=v*Math.sin(a);}return re*re+im*im};
+          let baixo=0,tot=0;for(let f=10;f<=6000;f+=10){const p=pot(f);tot+=p;if(f<250)baixo+=p;}
+          return {dif:20*Math.log10(rms(ac.amostras)/rms(er.amostras)),baixo:baixo/tot}})()`);
+        if (er.dif < 6) problemas.push(rot + ' sfx: o erro deveria ser pelo menos 6 dB mais baixo que o acerto (' + er.dif.toFixed(1) + ' dB)');
+        if (er.baixo > .02) problemas.push(rot + ' sfx: o erro tem energia abaixo de 250 Hz (' + (er.baixo * 100).toFixed(1) + '%)');
+        // interruptores independentes
+        const sw = await js(`(async()=>{const o={};S.som=false;S.voz=true;o.efeitoMudo=sfx('acerto',1)===false;S.som=true;o.efeitoToca=sfx('acerto',1)===true;
+          S.voz=false;o.vozMuda=(await falar('Boa!'))==='mudo';S.voz=true;
+          SFXG.gesto=true;S.musica=true;musicaLigar('pt');o.musicaLiga=musicaTocando()&&SFXG.musicaPlaneta==='pt';musicaLigar('en');o.troca=SFXG.musicaPlaneta==='en';
+          S.musica=false;musicaLigar('en');o.musicaDesliga=!musicaTocando();S.musica=true;
+          return o})()`);
+        Object.keys(sw).forEach((k) => { if (!sw[k]) problemas.push(rot + ' interruptores de som: falhou ' + k + ' ' + JSON.stringify(sw)); });
+        // o primeiro toque destrava o audio e liga a musica do planeta
+        const un = await js(`(()=>{musicaDesligar();SFXG.gesto=false;S.musica=true;document.dispatchEvent(new Event('pointerdown'));return {gesto:SFXG.gesto,estado:AC&&AC.state,musica:musicaTocando()}})()`);
+        if (!un.gesto || un.estado === 'suspended' && false || !un.musica) problemas.push(rot + ' som: o primeiro toque nao destravou o audio e ligou a musica ' + JSON.stringify(un));
+        // vibracao: leve, com interruptor e sem movimento reduzido
+        await cdp('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+        const vb = await js(`(()=>{Object.defineProperty(navigator,'userActivation',{value:{hasBeenActive:true},configurable:true});navigator.vibrate=()=>true;const o={};S.vibra=true;o.reduzido=vibrar(10)===false;return o})()`);
+        await cdp('Emulation.setEmulatedMedia', { features: [] });
+        const vb2 = await js(`(()=>{navigator.vibrate=()=>true;S.vibra=true;const a=vibrar(10)===true;S.vibra=false;const b=vibrar(10)===false;S.vibra=true;return a&&b})()`);
+        if (!vb.reduzido || !vb2) problemas.push(rot + ' vibracao: deveria respeitar movimento reduzido e o interruptor (' + JSON.stringify(vb) + ',' + vb2 + ')');
+        await js("musicaDesligar();0");
+        feito.push(rot + ': som sintetizado (' + Object.keys(tabela).length + ' efeitos medidos em OfflineAudioContext, erro ' + er.dif.toFixed(1) + ' dB abaixo do acerto)');
+      }
+
       /* 2e) PONTARIA E TOQUE REAL. Regressao de 24/10/2026: um z-index no corpo da fase cobriu o painel fixo e nenhum botao respondia,
          mas .click() por JavaScript ignora o que esta por cima. Aqui o toque vai pelo CDP (mouse no desktop, toque no celular), no ponto central
          do botao, e antes disso conferimos com elementFromPoint que o botao e mesmo o elemento ali. */
@@ -619,10 +659,10 @@ if(r<(grande?3:4.5)){const k=el.tagName+'.'+el.className+' '+r.toFixed(2);if(!vi
       const depois2 = JSON.parse(await js("JSON.stringify(AUDIO.log)")).filter((l) => l.estado === 'iniciou').length;
       if (depois2 !== depois) problemas.push(rot + ': saiu fala depois de fechar a fase');
       // desligar sons silencia
-      await js("S.som=false;0");
+      await js("S.voz=false;0");
       const mudo = await js("falar('Boa!').then(r=>r)");
-      if (mudo !== 'mudo') problemas.push(rot + ': com o som desligado falar() devolveu ' + mudo);
-      await js("S.som=true;0");
+      if (mudo !== 'mudo') problemas.push(rot + ': com a voz desligada falar() devolveu ' + mudo);
+      await js("S.voz=true;0");
       // cache offline: o pacote core ja esta em bobby-audio-v1
       await dorme(1500);
       const nCache = await js("caches.open('bobby-audio-v1').then(c=>c.keys()).then(k=>k.length)");

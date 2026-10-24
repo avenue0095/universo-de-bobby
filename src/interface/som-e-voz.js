@@ -5,19 +5,20 @@ function nota(f,t,dur,vol){
   try{
     ctxAudio();
     const o=AC.createOscillator(),g=AC.createGain();
-    o.type='sine';o.frequency.value=f;o.connect(g);g.connect(AC.destination);
+    o.type='sine';o.frequency.value=f;o.connect(g);g.connect((typeof sfxGrafo==='function'&&sfxGrafo())?SFXG.efeitos:AC.destination);
     const t0=AC.currentTime+t;
     g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol||.12,t0+.02);
     g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
     o.start(t0);o.stop(t0+dur+.02);
   }catch(e){}
 }
-const somCerto=()=>{nota(660,0,.13);nota(880,.09,.2);};
-const somErro=()=>{nota(200,0,.18,.14);nota(150,.1,.25,.12);};
-const somFim=()=>[523,659,784,1046].forEach((f,i)=>nota(f,i*.11,.35));
-const somMoeda=()=>{nota(988,0,.07,.08);nota(1319,.06,.16,.08);};
-const somPasso=()=>nota(520,0,.08,.06);
-const somVida=()=>{nota(784,0,.1,.09);nota(1047,.08,.2,.09);};
+/* os sons do jogo vêm do sfx.js (síntese): o acerto sobe a escala a cada seguida, o erro é baixo e gentil */
+const somCerto=()=>{sfx('acerto',(typeof LIC==='object'&&LIC&&LIC.combo)||1);vibrar(10);};
+const somErro=()=>sfx('erro');
+const somFim=()=>{sfx('faseOk');vibrar(20);};
+const somMoeda=()=>sfx('moeda');
+const somPasso=()=>sfx('aba');
+const somVida=()=>sfx('moeda');
 
 function emTexto(html){
   let t=String(html)

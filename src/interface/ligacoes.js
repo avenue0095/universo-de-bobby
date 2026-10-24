@@ -79,7 +79,8 @@ $('#fechar').addEventListener('click',fecharLicao);
 $('#rever').addEventListener('click',abrirRevisao);
 $('#dica').addEventListener('click',mostrarDica);
 $('#fechar-rev').addEventListener('click',()=>{calar();$('#revisao').classList.remove('on');});
-$('#som').addEventListener('click',()=>{S.som=!S.som;salvar();pintarTopo();if(S.som)somCerto();else calar();});
+/* o alto-falante do topo abre Voz e som, com os três interruptores (Efeitos, Música, Voz) e a vibração */
+$('#som').addEventListener('click',()=>{fecharTelasDaBarra();lojaOrigem='perfil';telaVoz();});
 $('#salvar-nome').addEventListener('click',salvarNome);
 $('#pular-nome').addEventListener('click',()=>{$('#modal').classList.remove('on');if(criando&&STORE.atual<0)telaPerfis();});
 $('#campo-nome').addEventListener('keydown',e=>{if(e.key==='Enter')salvarNome();});
