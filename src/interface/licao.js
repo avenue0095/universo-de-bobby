@@ -522,7 +522,7 @@ function conferir(){
       }
       if(!voltaIrma){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);voltaIgual=true;}
     }
-    $('#fb-s').innerHTML='A resposta certa é <b>'+htmlSeguro(q.answer,120)+'</b>.'+
+    $('#fb-s').innerHTML=(q.verbo==='ligar'?'Veja as linhas verdes: são as ligações certas.':'A resposta certa é <b>'+htmlSeguro(q.answer,120)+'</b>.')+
       (voltaIrma?' Vamos treinar uma parecida daqui a pouco.':(voltaIgual?' Esta pergunta volta no fim para você tentar de novo.':''));
     somErro();pintarVidas();
     if(ehF78()&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);

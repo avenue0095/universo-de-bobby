@@ -1806,15 +1806,15 @@ html.hitstop *{animation-play-state:paused!important;transition:none!important}
 @keyframes balanca{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
 .balanca{animation:balanca 320ms var(--curva-move) 2}
 @media (prefers-reduced-motion:reduce){.pressionado{transform:none!important;background:var(--materia-suave)!important}.squash,.balanca{animation:none}}
-/* painel de feedback de base: no máximo 20% da altura; a cena continua visível */
-.pe.mostra{padding:var(--esp-8) var(--esp-16) calc(var(--esp-8) + var(--area-segura-baixo))}
+/* painel de feedback de base: a frase de erro aparece inteira (sem corte); em tela baixa o painel rola em vez de cortar */
+.pe.mostra{max-height:28vh;overflow-y:auto;padding:var(--esp-8) var(--esp-16) calc(var(--esp-8) + var(--area-segura-baixo))}
 .pe.mostra .pe-in{display:grid;grid-template-columns:40px minmax(0,1fr) auto;grid-template-rows:auto auto;gap:var(--esp-4) var(--esp-8);align-items:center}
 .pe.mostra .msg{display:contents}
 .pe.mostra .selo{width:40px;height:40px;grid-row:1}
 .pe.mostra .msg>div{display:contents}
-.pe.mostra #fb-t{grid-column:2;grid-row:1;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pe.mostra #fb-t{grid-column:2;grid-row:1;font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
 .pe.mostra #fb-t svg{width:20px;height:20px}
-.pe.mostra #fb-s{grid-column:1/3;grid-row:2;font-size:var(--t-legenda);line-height:var(--lh-legenda);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pe.mostra #fb-s{grid-column:1/3;grid-row:2;font-size:var(--t-legenda);line-height:var(--lh-legenda)}
 .pe.mostra #acao{grid-column:3;grid-row:1/3;margin:0;min-height:var(--toque-min);padding:var(--esp-8) var(--esp-16)}
 .obj.nova{outline:3px solid var(--cor-ouro);outline-offset:2px;border-radius:var(--raio-16)}
 .obj.tirada{opacity:.35}

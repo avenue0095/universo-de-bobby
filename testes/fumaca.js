@@ -677,7 +677,8 @@ async function main() {
         const hs2 = await js("document.documentElement.classList.contains('hitstop')");
         if (hs.ms < 60 || hs.ms > 80 || hs2) problemas.push(rot + ' hit-stop: ' + JSON.stringify({ hs, depois: hs2 }));
         const painel = await js("(()=>{const r=document.querySelector('.pe').getBoundingClientRect();const c=document.querySelector('.cena-q').getBoundingClientRect();const y=c.top+c.height/2;const e=y>0&&y<innerHeight?document.elementFromPoint(c.left+c.width/2,y):null;return {pct:r.height/innerHeight*100,cena:!(e&&e.closest('.pe')),h:Math.round(r.height)}})()");
-        if (painel.pct > 20 || !painel.cena) problemas.push(rot + ' painel de feedback: ' + JSON.stringify(painel));
+        /* até 28%: a frase de erro aparece inteira (revisão 3, 08/11); acima disso o painel rola. A cena precisa continuar visível. */
+        if (painel.pct > 28 || !painel.cena) problemas.push(rot + ' painel de feedback: ' + JSON.stringify(painel));
         await shot0('verbo-feedback-' + nomeTela);
         // de Verificar a proxima pergunta pronta em ate 1,8 s (um toque em Continuar)
         await js("LIC.qs.push(comVerbo(mc('Quantas bolinhas tem aqui?',5,[4,6,7],{figure:dots(5)}),UNITS[0].lessons[0]));0");

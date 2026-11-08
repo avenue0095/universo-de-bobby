@@ -49,3 +49,11 @@ cd ~/Projetos/universo-de-bobby && git checkout reforma-fase-2 && npm test && py
 Leia `README.md`, `README-FASE-3-LOGICA.md`, `README-FASE-3-VISUAL.md`, `docs/mesa/00-SINTESE.md` e este arquivo. Contexto no cofre: `04-Projetos/bobby-site/INDICE-bobby-site.md`.
 
 Custo total das gerações: R$ 0 (imagens no Flow a 0 créditos, voz local, música CC0).
+
+## Rodada de 08/11/2026 (aprovada pelo revisor independente com nota 8)
+Commits: a74d6e1 (preço R$ 47 e R$ 297 na Fase 4), d705539 (1B2 e estrutura de venda), f0bb56c e b724395 (mapa da 1C e caderno com verbo), 29b0833 e 5c1e1ac (correções das revisões 6 e 7), e o commit do painel de erro sem corte e do gabarito do ligar.
+Pendentes que o revisor deixou, sem bloquear:
+- Em 320x568, ligar de português com 3 cartões longos: o 3º par fica sob a barra e o arrastar exige rolar (o toque-toque funciona). Reduzir fonte e espaço do `.lig-txt` em tela baixa.
+- Sobreposição leve de recortes na vista completa de mat 3, mat 4, en 2 e en 4; recortes de topo encostados na borda em pt 2, pt 3 e en 7.
+- Uma vez a fumaça falhou no verbo tocar em 360 ("número não apareceu em até 100 ms" com 15 ms medidos) e passou na rodada seguinte: teste instável, investigar.
+- O ligar de inglês não saiu em 40 sorteios do revisor: conferir a frequência por matéria.
