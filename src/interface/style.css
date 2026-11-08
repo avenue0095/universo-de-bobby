@@ -1806,7 +1806,8 @@ html.hitstop *{animation-play-state:paused!important;transition:none!important}
 
 /* ---------- o mundo reage (1C): nós como objetos, personagem que anda, fim de fase no mapa ---------- */
 .trilha.objetos .passo-trilha{display:none}
-.no.obj-no{width:auto;transform:translate(-50%,-100%);align-items:center}
+.no.obj-no{width:auto;transform:translate(-50%,-100%);align-items:center;z-index:var(--camada,1)}
+.no.obj-no .rot,.no.obj-no .estrelas,.no.obj-no .selo-feito{pointer-events:none}   /* o rótulo de um objeto nunca tampa o toque no vizinho */
 .no.obj-no .bt{width:max(64px,calc(var(--w) * 1cqw));height:max(64px,calc(var(--h) * 1cqh));border-radius:var(--raio-16);background:none;border:0;box-shadow:none;color:transparent;transform:none;margin:0}
 .no.obj-no .bt::after{inset:0}
 .no.obj-no.disp .bt{box-shadow:0 0 0 2px color-mix(in srgb,var(--materia-luz) 70%,transparent),0 0 24px 6px color-mix(in srgb,var(--materia-luz) 45%,transparent);animation:brilho-obj 2.4s var(--curva-move) infinite}

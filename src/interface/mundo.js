@@ -23,10 +23,33 @@ function posNo(u,li){
 function pecaStyle(r){return 'clip-path:inset('+r[1].toFixed(2)+'% '+(100-r[2]).toFixed(2)+'% '+(100-r[3]).toFixed(2)+'% '+r[0].toFixed(2)+'%)';}
 /* ---------- câmera: rola a janela com lerp até o elemento ficar no terço inferior ---------- */
 const CAM={raf:0};
+/* faixa onde o mapa aparece de verdade: entre o topo fixo e a barra de baixo (8 px de folga em cada ponta) */
+function faixaVisivel(){
+  const topo=document.querySelector('.topo'),barra=document.querySelector('.barra-baixo');
+  const cima=(topo?Math.max(0,topo.getBoundingClientRect().bottom):0)+8;
+  const bb=barra&&barra.getBoundingClientRect();
+  return {cima:cima,baixo:(bb&&bb.height?bb.top:innerHeight)-8};
+}
+/* o objeto de destino (com o rótulo) e o lugar onde o personagem fica ao lado dele: a câmera leva esse grupo para a faixa visível.
+   Cabe: centraliza; não cabe: o topo do grupo encosta no topo da faixa. */
+const PE_DO_PERSONAGEM=40;   /* o personagem passa um pouco da base do objeto (translate -76%) */
+function grupoDoNo(no){
+  if(!no)return [];
+  const rot=no.querySelector('.rot');
+  return [no,rot&&getComputedStyle(rot).display!=='none'?rot:null].filter(Boolean);
+}
+function alvoDoGrupo(els){
+  const rs=els.filter(Boolean).map(e=>e.getBoundingClientRect()).filter(r=>r.height>0);
+  const max=Math.max(0,document.documentElement.scrollHeight-innerHeight);
+  if(!rs.length)return window.scrollY;
+  const t=Math.min(...rs.map(r=>r.top)),b=Math.max(...rs.map(r=>r.bottom))+PE_DO_PERSONAGEM,f=faixaVisivel();
+  const desloca=(b-t)<=(f.baixo-f.cima)?(t+b)/2-(f.cima+f.baixo)/2:t-f.cima;
+  return Math.max(0,Math.min(max,window.scrollY+desloca));
+}
 function cameraPara(el,frac,ms,fim){
   if(!el){if(fim)fim();return;}
   const reduz=(typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches)||typeof requestAnimationFrame!=='function'||typeof cancelAnimationFrame!=='function';
-  const alvoDe=()=>{const r=el.getBoundingClientRect();return Math.max(0,Math.min(document.documentElement.scrollHeight-innerHeight,window.scrollY+r.top+r.height/2-innerHeight*(frac||.66)));};
+  const alvoDe=Array.isArray(el)?()=>alvoDoGrupo(el):()=>{const r=el.getBoundingClientRect();return Math.max(0,Math.min(document.documentElement.scrollHeight-innerHeight,window.scrollY+r.top+r.height/2-innerHeight*(frac||.66)));};
   if(reduz||!ms){try{window.scrollTo(0,alvoDe());}catch(e){}if(fim)fim();return;}
   cancelAnimationFrame(CAM.raf);
   const t0=performance.now();
@@ -38,26 +61,41 @@ function cameraPara(el,frac,ms,fim){
   CAM.raf=requestAnimationFrame(passo);
 }
 /* ---------- o personagem anda até um nó (600 a 900 ms), com passos e câmera ---------- */
-const ANDA={ocupado:false};
+const ANDA={ocupado:false,t:0,v:null};
+/* para a caminhada em curso onde o personagem está agora (toque novo no meio do caminho, ou o mapa redesenhado) */
+function pararCaminhada(){
+  clearTimeout(ANDA.t);
+  const v=ANDA.v;ANDA.ocupado=false;ANDA.v=null;
+  if(!v||!v.isConnected||typeof getComputedStyle!=='function')return;
+  const pai=v.offsetParent||v.parentNode,cs=getComputedStyle(v),w=pai&&pai.clientWidth,h=pai&&pai.clientHeight;
+  v.style.transition='none';
+  if(w&&h){v.style.left=(parseFloat(cs.left)/w*100).toFixed(2)+'%';v.style.top=(parseFloat(cs.top)/h*100).toFixed(2)+'%';}
+  void v.offsetWidth;v.style.transition='';v.classList.remove('anda');
+}
 function andarAte(ui,no,depois){
   const sec=$('#etapa-'+(ui+1)),v=sec&&sec.querySelector('.voce');
-  if(!v||ANDA.ocupado){if(depois)depois();return;}
+  if(!v){if(depois)depois();return;}
+  /* já andando: o toque mais novo vale. Ele muda de rumo de onde está (a caminhada anterior não abre nada) e a fase tocada só abre quando ele chega */
+  if(ANDA.ocupado)pararCaminhada();
   const alvo=posNo(UNITS[ui],no),de=+v.dataset.no;
-  if(de===no){if(depois)depois();return;}
+  if(de===no&&!v.classList.contains('anda')&&Math.abs((parseFloat(v.style.left)||0)-alvo[0])<.5&&Math.abs((parseFloat(v.style.top)||0)-alvo[1])<.5){if(depois)depois();return;}
   const reduz=(typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches)||typeof requestAnimationFrame!=='function';
-  ANDA.ocupado=true;v.dataset.no=no;NO_ANTES[MATERIA+UNITS[ui].n]=no;
+  ANDA.ocupado=true;ANDA.v=v;v.dataset.no=no;NO_ANTES[MATERIA+UNITS[ui].n]=no;
   v.classList.toggle('d',alvo[0]<=16);v.classList.toggle('e',alvo[0]>16);
-  const chega=()=>{v.classList.remove('anda');v.classList.add('chega');ANDA.ocupado=false;setTimeout(()=>v.classList.remove('chega'),400);if(depois)depois();};
-  if(reduz){v.classList.add('pula');v.style.left=alvo[0]+'%';v.style.top=alvo[1]+'%';setTimeout(()=>{v.classList.remove('pula');chega();},320);return;}
+  const chega=()=>{v.classList.remove('anda');v.classList.add('chega');ANDA.ocupado=false;ANDA.v=null;setTimeout(()=>v.classList.remove('chega'),400);if(depois)depois();};
+  if(reduz){v.classList.add('pula');v.style.left=alvo[0]+'%';v.style.top=alvo[1]+'%';ANDA.t=setTimeout(()=>{v.classList.remove('pula');chega();},320);return;}
   const dist=Math.hypot(alvo[0]-(parseFloat(v.style.left)||0),alvo[1]-(parseFloat(v.style.top)||0));
   const ms=Math.max(600,Math.min(900,600+dist*4));
   v.style.setProperty('--anda-ms',ms+'ms');
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+  const passo1=()=>{
+    if(ANDA.v!==v)return;      /* outra caminhada tomou o lugar desta antes de ela começar */
     v.classList.add('anda');v.style.left=alvo[0]+'%';v.style.top=alvo[1]+'%';
     if(typeof sfx==='function')sfx('passo',{mat:'madeira',pt:'grama',en:'areia'}[MATERIA]||'grama');
-    cameraPara(v,.66,ms);
-    setTimeout(chega,ms+40);
-  }));
+    const noEl=sec.querySelector('.no[data-li="'+no+'"]');
+    cameraPara(noEl?grupoDoNo(noEl):v,.66,ms);
+    ANDA.t=setTimeout(chega,ms+40);
+  };
+  requestAnimationFrame(()=>requestAnimationFrame(passo1));
 }
 /* ---------- respiração: a cada 6 a 10 s o personagem troca de pose com fusão de 300 ms ---------- */
 const IDLE={t:0,n:0};

@@ -86,7 +86,9 @@ function etapaHTML(u,ui,prox){
   /* nó = objeto do cenário (recorte retangular, área de toque de pelo menos 64 x 64) ou, sem recorte, um marco genérico com brilho */
   const noHTML=(li,cls,atrs,rotulo,aria,miolo,est)=>{
     const p=posNo(u,li),r=hs&&hs[li];
-    const estilo=r?'left:'+p[0].toFixed(2)+'%;top:'+p[1].toFixed(2)+'%;--w:'+(r[2]-r[0]).toFixed(2)+';--h:'+(r[3]-r[1]).toFixed(2)
+    /* objetos que se sobrepõem na arte (os balões na frente da casa grande): o menor fica por cima, para o centro de cada um receber o toque */
+    const camada=r?1+hs.filter(o=>(o[2]-o[0])*(o[3]-o[1])>(r[2]-r[0])*(r[3]-r[1])).length:0;
+    const estilo=r?'left:'+p[0].toFixed(2)+'%;top:'+p[1].toFixed(2)+'%;--w:'+(r[2]-r[0]).toFixed(2)+';--h:'+(r[3]-r[1]).toFixed(2)+';--camada:'+camada
                   :'left:'+p[0]+'%;top:'+p[1]+'%;--nx:'+Math.min(p[0],100-p[0]);
     return '<div class="'+cls.join(' ')+(r?' obj-no':'')+'" data-li="'+li+'" style="'+estilo+'">'+
       '<button class="bt" '+atrs+' aria-label="'+aria+'">'+miolo+'</button>'+
@@ -171,6 +173,8 @@ function pintarTopo(){
   const rb=$('#retrato-bb');if(rb)rb.innerHTML=retratoPers();
 }
 function renderTrilha(){
+  /* o mapa vai ser redesenhado: a caminhada em curso é de um personagem que vai sumir (a nova começa em animarMapa) */
+  if(typeof pararCaminhada==='function')pararCaminhada();
   pintarTopo();calar();
   const p=proxima();
   garantirDia();
@@ -223,5 +227,15 @@ function renderTrilha(){
     },1400);
   }
   if(MAPA.fim){ligarFimCena(MAPA.fim);}
-  if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;const v=document.querySelector('.no.atual')||document.querySelector('.voce');if(v&&v.scrollIntoView)setTimeout(()=>{try{v.scrollIntoView({block:'nearest'});}catch(e){}},60);}
+  if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;setTimeout(mostrarNoAtual,60);}
+}
+/* primeira dobra: o nó atual (com o rótulo) e o personagem ficam juntos na faixa visível, entre o topo fixo e a barra de baixo.
+   Antes era scrollIntoView({block:'nearest'}): com o objeto alto da etapa 1 (até 160 px) ele parava atrás da barra ou embaixo do topo. */
+function mostrarNoAtual(){
+  if(typeof document==='undefined'||typeof getComputedStyle!=='function'||typeof window==='undefined'||typeof window.scrollTo!=='function')return;
+  /* com o personagem andando, a câmera da caminhada já leva o grupo do destino para a mesma faixa: não briga com ela */
+  if(ANDA.ocupado)return;
+  const no=document.querySelector('.no.atual');
+  if(!no)return;
+  try{window.scrollTo(0,alvoDoGrupo(grupoDoNo(no)));}catch(e){}
 }

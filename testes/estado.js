@@ -253,5 +253,61 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     A.strictEqual(a.avaliar('estadoVazio().musica'), false);
   });
 
+  await teste('23. caderno de erros com verbo: salva, rele o estado e a pergunta volta com os objetos; item antigo sem objetos e reconstruido ou vira escolha coerente', () => {
+    const a = abrir({});
+    a.avaliar("novoPerfil('Lia','#12A06E');usarMateria('mat')");
+    /* quatro verbos de tela propria, como a fase 1.1 e a de portugues os montam (comVerbo), mais o arrastar das cestas */
+    const montadas = J(a.avaliar(`(()=>{const l=UNITS[0].lessons[0];LIC={u:UNITS[0],l:l};
+      const qs=[comVerbo(mc('Quantas bolinhas tem aqui?',5,[4,6,3],{figure:dots(5)}),l),comVerbo(mc('Que número vem antes do 7?',6,[5,8]),l),
+        comVerbo({type:'input',prompt:'12 bolinhas repartidas igualmente em 3 grupos. Quantas em cada grupo?',answer:'4'},l),
+        comVerbo(mc('Coloque em ordem: D, B, C','B C D',['D C B','C B D']),l),comVerbo(mc('Com que letra começa BOLA?','B',['A','L']),l)];
+      qs.forEach(q=>{guardarErrado(q);revisaoErro(q);});salvar();return qs})()`));
+    A.deepStrictEqual(montadas.map((q) => q.verbo), ['tocar-objetos', 'tocar-objetos', 'arrastar', 'ordenar', 'tocar-letra']);
+    /* o aparelho fecha e abre: o estado e relido do localStorage (passa por perguntaSegura) */
+    const b = abrir({ 'universo-bobby-v4': a.guarda['universo-bobby-v4'] }, { ms: quando(2026, 11, 9, 10) });
+    const errados = J(b.avaliar('S.errados.mat1'));
+    A.strictEqual(errados.length, 5);
+    errados.forEach((q, i) => {
+      const m = montadas[i];
+      A.strictEqual(q.verbo, m.verbo, 'caderno perdeu o verbo de: ' + m.prompt);
+      A.deepStrictEqual(q.objetos, m.objetos); A.strictEqual(q.cestas, m.cestas); A.strictEqual(q.modo, m.modo);
+      A.deepStrictEqual(q.cartas, m.cartas); A.strictEqual(q.palavra, m.palavra); A.strictEqual(q.prompt, m.prompt);
+    });
+    /* a revisao do dia (amanha) monta a pergunta pelo item congelado: a tela tem os objetos que o texto manda tocar */
+    const revisao = J(b.avaliar(`revisaoSelecionar(10).map(perguntaDoItem).map(q=>({v:q.verbo,p:q.prompt,objs:(verbosHTML(q).match(/<button type="button" class="obj[ "]/g)||[]).length,cestas:(verbosHTML(q).match(/class="cesta"/g)||[]).length,cartas:(verbosHTML(q).match(/class="carta"/g)||[]).length,letras:(verbosHTML(q).match(/class="letra-t"/g)||[]).length}))`));
+    A.strictEqual(revisao.length, 5, 'a revisao do dia precisa trazer os 5 itens');
+    const por = (v, p) => revisao.find((r) => r.v === v && (!p || p.test(r.p)));
+    A.strictEqual(por('tocar-objetos', /^Toque em cada semente/).objs, 5, 'revisao sem as 5 sementes');
+    A.strictEqual(por('tocar-objetos', /saiu/).objs, 7, 'sao 7 sementes e a ultima sai (desabilitada)');
+    A.strictEqual(por('arrastar').objs, 12); A.strictEqual(por('arrastar').cestas, 3);
+    A.strictEqual(por('ordenar').cartas, 3); A.strictEqual(por('tocar-letra').letras, 4);
+    /* migracao: itens gravados ANTES da correcao (sem verbo nem objetos) */
+    const velho = J(JSON.parse(a.guarda['universo-bobby-v4']));
+    const d = velho.perfis[0].dados;
+    const tira = (q) => { delete q.verbo; delete q.objetos; delete q.cestas; delete q.modo; delete q.cartas; delete q.palavra; return q; };
+    d.errados.mat1 = d.errados.mat1.map(tira);
+    Object.keys(d.revisao.congelados).forEach((k) => tira(d.revisao.congelados[k]));
+    d.errados.mat2 = [{ type: 'mc', prompt: 'Toque no balão e escolha a resposta.', answer: '3', options: ['2', '3', '4'] },
+      { type: 'mc', prompt: 'Quanto é 2 + 2?', answer: '4', options: ['3', '4', '5'] }];
+    const c = abrir({ 'universo-bobby-v4': JSON.stringify(velho) }, { ms: quando(2026, 11, 9, 10) });
+    const rec = J(c.avaliar('S.errados.mat1'));
+    A.deepStrictEqual(rec.map((q) => q.verbo), ['tocar-objetos', 'tocar-objetos', 'arrastar', 'ordenar', 'tocar-letra'], 'reconstrucao pelo enunciado');
+    A.deepStrictEqual(rec[0].objetos, { n: 5, tipo: 'semente' });
+    A.deepStrictEqual(rec[1].objetos, { n: 7, tipo: 'semente', nova: 0, tirada: 1 });
+    A.deepStrictEqual([rec[2].objetos.n, rec[2].cestas, rec[2].modo], [12, 3, 'cada']);
+    A.deepStrictEqual(rec[3].cartas.slice().sort(), ['B', 'C', 'D']); A.notStrictEqual(rec[3].cartas.join(' '), 'B C D', 'as cartas nao podem ja vir na ordem');
+    A.strictEqual(rec[4].palavra, 'BOLA'); A.strictEqual(rec[4].prompt, 'Com que letra começa BOLA?');
+    const m2 = J(c.avaliar('S.errados.mat2'));
+    A.strictEqual(m2[0].verbo, undefined); A.strictEqual(m2[0].prompt, 'Escolha a resposta certa.');
+    A.strictEqual(m2[1].prompt, 'Quanto é 2 + 2?', 'pergunta comum nao muda');
+    /* nenhuma pergunta lida do aparelho manda tocar ou arrastar algo sem o verbo que desenha o objeto */
+    const todas = J(c.avaliar("[].concat(...Object.values(S.errados),Object.keys(S.revisao.congelados).map(perguntaDoItem))"));
+    todas.forEach((q) => { if (!q.verbo) A.ok(!/\b(Toque|Arraste|Monte)\b/.test(q.prompt), 'texto manda tocar sem objeto: ' + q.prompt); });
+    /* backup adulterado: verbo com objetos absurdos nao entra (cai no reparo) */
+    const ruim = J(c.avaliar(`perguntaSegura({type:'mc',prompt:'Toque em cada semente para contar. Quantas sementes tem aqui?',answer:'4',options:['3','4','5'],verbo:'tocar-objetos',objetos:{n:9999,tipo:'<img>'}})`));
+    A.deepStrictEqual(ruim.objetos, { n: 4, tipo: 'semente' });
+    A.strictEqual(c.avaliar(`perguntaSegura({type:'mc',prompt:'x',answer:'1',options:['1','2'],verbo:'<script>'}).verbo`), undefined);
+  });
+
   resumo('estado.js');
 })();

@@ -72,6 +72,101 @@ function perguntaSegura(q){
   if(q.m!==undefined&&['mat','pt','en'].indexOf(q.m)>=0)r.m=q.m;
   if(q.f!==undefined&&/^[a-z0-9._]{0,12}$/.test(String(q.f)))r.f=String(q.f);
   if(q.sk!==undefined&&/^[a-z0-9._:-]{0,40}$/.test(String(q.sk)))r.sk=String(q.sk);
+  verboSeguro(q,r);
+  return repararVerbo(r);
+}
+/* ---------- pergunta com verbo guardada (caderno de erros e revisão espaçada) ----------
+   Antes de 08/11/2026 o verbo e os objetos ficavam de fora daqui: a pergunta voltava com "Toque em cada semente..." e sem as sementes.
+   Agora os campos do verbo entram validados; e item antigo (sem eles) é reconstruído pelo próprio enunciado e pela resposta. Se não der,
+   vira pergunta de escolha com texto que não manda tocar em nada que não existe. O ligar nunca chega aqui (vai a pergunta de origem). */
+const VERBOS_GUARDAVEIS=/^(tocar-objetos|arrastar|tocar-letra|ordenar|tracar|arrastar-resposta|tocar-ouvir)$/;
+/* [singular, plural, tipo] (o mesmo NOME_OBJ de verbos.js, aqui sem depender da ordem dos scripts) */
+const OBJ_NOMES=[['semente','sementes','semente'],['maçã','maçãs','maca'],['concha','conchas','concha'],['caixa','caixas','caixa'],['lanche','lanches','lanche'],
+  ['fatia','fatias','fatia'],['peça','peças','letra'],['vagão','vagões','vagao'],['placa','placas','placa'],['bilhete','bilhetes','bilhete']];
+const TIPOS_OBJ=OBJ_NOMES.map(o=>o[2]);
+const intEntre=(v,a,b)=>{const n=+v;return Number.isInteger(n)&&n>=a&&n<=b?n:null;};
+function verboSeguro(q,r){
+  if(typeof q.verbo!=='string'||!VERBOS_GUARDAVEIS.test(q.verbo))return;
+  const o=q.objetos;
+  if(o&&typeof o==='object'&&!Array.isArray(o)){
+    const n=intEntre(o.n,1,30);
+    if(n!=null&&TIPOS_OBJ.indexOf(o.tipo)>=0){r.objetos={n:n,tipo:o.tipo};if(o.nova!==undefined)r.objetos.nova=o.nova?1:0;if(o.tirada!==undefined)r.objetos.tirada=o.tirada?1:0;}
+  }
+  if(q.cestas!==undefined){const c=intEntre(q.cestas,1,6);if(c!=null)r.cestas=c;}
+  if(q.modo==='cada'||q.modo==='total')r.modo=q.modo;
+  if(typeof q.palavra==='string'&&/^[A-ZÁ-ÚÀÂÊÔÃÕÇ]{2,16}$/.test(q.palavra))r.palavra=q.palavra;
+  if(Array.isArray(q.cartas)&&q.cartas.length>=3&&q.cartas.length<=5&&q.cartas.every(c=>typeof c==='string'&&/^[\p{L}0-9]{1,3}$/u.test(c)))r.cartas=q.cartas.slice();
+  r.verbo=q.verbo;
+}
+const objPorNome=t=>{t=String(t||'').toLowerCase();return OBJ_NOMES.find(o=>o[0]===t||o[1]===t)||null;};
+const temOpcoes=r=>Array.isArray(r.options)&&r.options.length>=2&&r.options.some(o=>String(o)===String(r.answer));
+/* o verbo tem tudo o que a tela dele precisa? */
+function verboCompleto(r){
+  switch(r.verbo){
+    case 'tocar-objetos':return !!r.objetos&&r.type==='mc'&&temOpcoes(r);
+    case 'arrastar':return !!r.objetos&&!!r.cestas&&(r.modo==='cada'||r.modo==='total');
+    case 'tocar-letra':return !!r.palavra&&r.type==='mc'&&temOpcoes(r);
+    case 'ordenar':return !!r.cartas&&r.type==='mc';
+    case 'tracar':case 'arrastar-resposta':return r.type==='mc'&&temOpcoes(r)&&r.options.length<=4;
+    case 'tocar-ouvir':return r.type==='mc'&&temOpcoes(r);
+  }
+  return false;
+}
+/* reconstrói pelo enunciado que o próprio app escreveu (comVerbo); devolve true se conseguiu */
+function reconstruirVerbo(r){
+  const p=String(r.prompt).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(),num=+String(r.answer).replace(',','.');
+  let m;
+  if((m=p.match(/^Toque em cada (\S+) para contar\. Quant[ao]s (\S+) (?:tem aqui|são ao todo)\?$/))&&objPorNome(m[1])&&Number.isInteger(num)&&num>=1&&num<=30){
+    r.verbo='tocar-objetos';r.objetos={n:num,tipo:objPorNome(m[1])[2]};return true;}
+  if((m=p.match(/^São (\d+) (\S+) e chegou mais (?:um|uma)\./))&&objPorNome(m[2])&&+m[1]<=29){
+    r.verbo='tocar-objetos';r.objetos={n:+m[1]+1,tipo:objPorNome(m[2])[2],nova:1,tirada:0};return true;}
+  if((m=p.match(/^São (\d+) (\S+) e (?:um|uma) saiu\./))&&objPorNome(m[2])&&+m[1]>=1&&+m[1]<=30){
+    r.verbo='tocar-objetos';r.objetos={n:+m[1],tipo:objPorNome(m[2])[2],nova:0,tirada:1};return true;}
+  if((m=p.match(/^Você tinha (\d+) (\S+) e ganhou mais/))&&objPorNome(m[2])&&+m[1]<=29){
+    r.verbo='tocar-objetos';r.objetos={n:+m[1]+1,tipo:objPorNome(m[2])[2],nova:1,tirada:0};return true;}
+  if((m=p.match(/^Arraste (?:as|os) (\d+) (\S+) para as (\d+) cestas/))&&objPorNome(m[2])&&+m[1]>=1&&+m[1]<=30&&+m[3]>=1&&+m[3]<=6){
+    r.verbo='arrastar';r.objetos={n:+m[1],tipo:objPorNome(m[2])[2]};r.cestas=+m[3];r.modo='cada';return true;}
+  if((m=p.match(/^Monte (\d+) grupos de (\d+): arraste \d+ (\S+) para cada cesta/))&&objPorNome(m[3])&&+m[1]>=1&&+m[1]<=6&&+m[1]*+m[2]<=30){
+    r.verbo='arrastar';r.objetos={n:+m[1]*+m[2],tipo:objPorNome(m[3])[2]};r.cestas=+m[1];r.modo='total';r.alvoG=+m[1];r.alvoP=+m[2];return true;}
+  if(r.type==='mc'&&temOpcoes(r)&&(m=p.match(/(primeira vogal|primeira letra|última letra|com que letra começa|com que letra termina) (?:de |a palavra )?([A-ZÁ-ÚÀÂÊÔÃÕÇ]{3,16})\b/i))){
+    r.verbo='tocar-letra';r.palavra=m[2].toUpperCase();return true;}
+  if(/^Toque nas letras na ordem do alfabeto\.$/.test(p)&&r.type==='mc'){
+    const letras=String(r.answer).split(/[\s,]+/).filter(Boolean);
+    if(letras.length>=3&&letras.length<=5&&letras.every(c=>/^[\p{L}]{1,3}$/u.test(c))){
+      /* a ordem original se perdeu: embaralha de um jeito fixo que nunca começa certo */
+      r.verbo='ordenar';r.cartas=letras.slice(2).concat(letras.slice(0,2)).reverse();return true;}
+  }
+  return false;
+}
+/* texto de escolha coerente quando não dá para reconstruir: tira a instrução de tocar ou arrastar */
+function semInstrucaoDeVerbo(r){
+  const p=String(r.prompt).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+  let m;
+  if((m=p.match(/vem (depois|antes) do (\d+)\?$/)))return 'Que número vem '+m[1]+' do '+m[2]+'?';
+  if((m=p.match(/^Você tinha (\d+) (\S+) e ganhou mais (um|uma) (\S+)/)))return 'Você tinha '+m[1]+' '+m[2]+' e ganhou mais '+m[3]+'. Com quant'+(m[3]==='um'?'o':'a')+'s ficou?';
+  if((m=p.match(/^Arraste (?:as|os) (\d+) (\S+) para as (\d+) cestas/)))return m[1]+' '+m[2]+' repartid'+(objPorNome(m[2])&&/o$/.test(m[2].replace(/s$/,''))?'o':'a')+'s em '+m[3]+' cestas, o mesmo tanto em cada uma. Quant'+(/o$/.test(m[2].replace(/s$/,''))?'o':'a')+'s em cada cesta?';
+  if((m=p.match(/^Monte (\d+) grupos de (\d+)/)))return m[1]+' grupos de '+m[2]+'. Quantos são ao todo?';
+  if(/^Toque nas letras na ordem do alfabeto/.test(p))return 'Qual é a ordem do alfabeto?';
+  if(/^(Toque|Arraste|Ligue|Siga|Solte)\b/i.test(p))return 'Escolha a resposta certa.';
+  /* "Toque em cada semente para contar. Quantas sementes tem aqui?" sem as sementes não tem como responder: escolha pelo número */
+  return null;
+}
+function repararVerbo(r){
+  if(r.verbo&&verboCompleto(r))return r;
+  delete r.verbo;delete r.objetos;delete r.cestas;delete r.modo;delete r.palavra;delete r.cartas;
+  if(reconstruirVerbo(r)&&verboCompleto(r))return r;
+  delete r.verbo;delete r.objetos;delete r.cestas;delete r.modo;delete r.cartas;
+  const p=String(r.prompt).replace(/<[^>]+>/g,' ');
+  if(!/\b(Toque|toque|Arraste|arraste|Ligue|Siga|Solte|Monte)\b/.test(p))return r;
+  /* não reconstruiu, mas o texto manda tocar ou arrastar: vira escolha com texto coerente, nunca instrução sem objeto */
+  const novo=semInstrucaoDeVerbo(r);
+  if(!novo)return null;          /* sem texto coerente possível: o item sai (a fase gera outra pergunta) */
+  r.prompt=novo;
+  if(r.type!=='mc'||!temOpcoes(r)){
+    const a=String(r.answer),n=parseInt(a,10);
+    if(!/^\d{1,3}$/.test(a))return null;
+    r.type='mc';r.options=[a,String(n+1),String(n>0?n-1:n+2)].sort();
+  }
   return r;
 }
 /* texto curto de lista fechada de caracteres (o "presente" do baú de amanhã) */
