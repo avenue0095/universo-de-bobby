@@ -43,6 +43,7 @@ Precisa de Node 22+ e Python 3. Nada para instalar. `npm test` roda tudo menos o
 | `node testes/ofensiva.js` | os 12 casos de `docs/anexos/referencia-ofensiva.js` contra o código real, mais dia local e relógio |
 | `node testes/estado.js` | estado v4, migração do v3 (fixture em `testes/fixtures/`), backup, XP x moeda, dia local às 21h30 |
 | `node testes/ciclo.js` | meta em perguntas, baú sem sorteio, missões, bilhete, ponto de parada, congelador no fluxo real, tom dos textos |
+| `node testes/ligar.js [--rodadas=12]` | gera o ligar pelo gerador de verdade em todas as fases e reprova cartão de ouvir, lacuna ou par cuja resposta sirva para outro par (regras próprias do teste) |
 | `node testes/revisao.js` | caixas 1, 3, 7, 14, 30, teto de 10 por dia, aquecimento, freios |
 | `node testes/medicao.js` | eventos sem dado pessoal, D1/D7/D30, teto de 4.000 eventos |
 | `node testes/sw.js` | a ativação do service worker só apaga caches `bobby-v*` antigos e preserva `bobby-audio-*` |

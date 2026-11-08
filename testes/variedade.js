@@ -83,14 +83,31 @@ const J = (x) => JSON.parse(JSON.stringify(x));
       const vogal=P(mc('Qual delas é uma vogal?','I',['C','B','D'])),depoisA=P(txtQ('Escreva a vogal que vem depois de A.','E')),quantas=P(inp('Quantas vogais tem PIPA?',2));
       const sil1=P(mc('Qual é a primeira sílaba de PORTA?','por',['ca','pi','lo'])),sil2=P(mc('Qual é a primeira sílaba de CANETA?','ca',['por','pi','lo'])),ult=P(mc('Qual é a última sílaba de CAMA?','ma',['ca','la','ta']));
       const conta=P(mc('Quanto é 5 × 9?','45',['50','40','14']));
-      return {vogalComE:parCombina(vogal,depoisA),contaPura:conta.unica&&conta.e==='5 × 9',silabas:parCombina(sil1,sil2)&&parCombina(sil2,sil1),
+      return {vogalComE:depoisA?parCombina(vogal,depoisA):false,depoisAFora:depoisA===null,contaPura:conta.unica&&conta.e==='5 × 9',silabas:parCombina(sil1,sil2)&&parCombina(sil2,sil1),
         camaCa:parCombina(ult,sil2),figura:P(mc('Este ângulo é...','reto',['agudo','obtuso'],{figure:'<svg></svg>'})),fracao:P(mc('Quanto é <span class="frac"><b>1</b><i>2</i></span> + <span class="frac"><b>1</b><i>2</i></span>?','1',['2','3'])),
         vf:P(mc('O sapo pula.','Verdadeiro',['Falso'])),quantas:!!quantas}})()`);
     A.strictEqual(r.vogalComE, false, '"Qual delas e uma vogal?" nao pode ficar ao lado da resposta E (tambem e vogal)');
+    A.ok(r.depoisAFora, 'texto digitado sem numero nem ancora (revisao de 08/11/2026) fica fora do ligar');
     A.ok(r.contaPura, 'conta pura vira so a conta no cartao');
     A.ok(r.silabas, 'primeira silaba de PORTA e de CANETA combinam (ancora na palavra)');
     A.strictEqual(r.camaCa, false, 'ultima silaba de CAMA nao pode ficar ao lado de "ca" (cabe em CAMA)');
     A.strictEqual(r.figura, null); A.strictEqual(r.fracao, null); A.strictEqual(r.vf, null); A.ok(r.quantas);
+  });
+  await teste('8. tracar na faixa de 7 a 8 anos: no maximo 2 caminhos e eles nao se cruzam; a partir de 9 anos podem cruzar (revisao de 08/11/2026)', () => {
+    const r = a.avaliar(`(()=>{
+      const cruza=(p,q)=>{const s=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);let n=0;
+        for(let i=4;i<p.length-1;i++)for(let j=4;j<q.length-1;j++){const a1=p[i],a2=p[i+1],b1=q[j],b2=q[j+1];
+          if(s(a1,a2,b1)*s(a1,a2,b2)<0&&s(b1,b2,a1)*s(b1,b2,a2)<0)n++;}return n;};
+      const o={f78max:0,f78cruza:0,f78n:0,f910cruza:0};
+      S.faixa='f78';['mat','pt','en'].forEach(m=>{usarMateria(m);MATERIAS[m].units().forEach(u=>u.lessons.forEach(l=>{for(let t=0;t<3;t++)genQuestions(l,8).forEach(q=>{if(q.verbo!=='tracar')return;o.f78n++;o.f78max=Math.max(o.f78max,q.options.length);});}));});
+      [2,3,4].forEach(n=>{const cs=caminhosTracar(n,true);for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)o.f78cruza+=cruza(cs[i],cs[j]);});
+      const c3=caminhosTracar(3,false);o.f910cruza=cruza(c3[0],c3[1])+cruza(c3[1],c3[2])+cruza(c3[0],c3[2]);
+      S.faixa='f910';const n910=[];usarMateria('pt');MATERIAS.pt.units().forEach(u=>u.lessons.forEach(l=>genQuestions(l,8).forEach(q=>{if(q.verbo==='tracar')n910.push(q.options.length);})));o.f910max=Math.max(...n910);
+      S.faixa='f78';return o;})()`);
+    A.ok(r.f78n > 100, 'poucas perguntas de tracar geradas: ' + r.f78n);
+    A.ok(r.f78max <= 2, 'faixa 7 a 8 com ' + r.f78max + ' caminhos');
+    A.strictEqual(r.f78cruza, 0, 'caminhos da faixa 7 a 8 se cruzam');
+    A.ok(r.f910cruza > 0, 'a partir de 9 anos os caminhos continuam se cruzando');
   });
   resumo('variedade.js');
 })();

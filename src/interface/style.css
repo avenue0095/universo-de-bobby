@@ -174,6 +174,12 @@
   --clima-petala: #f5b3c6;
   --vivo-luz: #fff6d6;
   --moldura-desenho: #8a5a2b;
+
+  /* ---------- traçar: uma cor por caminho, repetida na borda da resposta ---------- */
+  --caminho-1: #2f7fd6;
+  --caminho-2: #e0782b;
+  --caminho-3: #2f9e5b;
+  --caminho-4: #9a4fd0;
 }
 
 /* ---------- escuro: "Espaço" (segue o sistema, a menos que o usuário tenha escolhido claro) ---------- */
@@ -1906,3 +1912,23 @@ body[data-hora="noite"] .cena>.hora{background:var(--hora-noite);mix-blend-mode:
 .pendurado::before{content:"";position:absolute;left:50%;top:calc(var(--esp-16) * -1);width:var(--esp-24);height:var(--esp-16);transform:translateX(-50%);
   border:2px solid var(--moldura-desenho);border-bottom:0;border-radius:var(--raio-8) var(--raio-8) 0 0}
 .pendurado canvas{display:block;width:100%;height:100%;border:3px solid var(--moldura-desenho);border-radius:var(--raio-8);box-shadow:var(--sombra-2);background:var(--cor-superficie)}
+
+/* traçar (revisão de 08/11/2026): cada caminho com a sua cor, a resposta com a borda da mesma cor; tocar na resposta destaca o caminho e chama a estrela */
+.tracar-svg .caminho[data-k="0"]{stroke:var(--caminho-1)}
+.tracar-svg .caminho[data-k="1"]{stroke:var(--caminho-2)}
+.tracar-svg .caminho[data-k="2"]{stroke:var(--caminho-3)}
+.tracar-svg .caminho[data-k="3"]{stroke:var(--caminho-4)}
+.tracar-svg .caminho{opacity:.75}
+.tracar-svg .caminho.destaca{stroke-dasharray:none;opacity:1;stroke-width:16}
+.tracar-svg .caminho.feito{opacity:.45}
+.tracar-fim[data-k="0"]{border-color:var(--caminho-1)}
+.tracar-fim[data-k="1"]{border-color:var(--caminho-2)}
+.tracar-fim[data-k="2"]{border-color:var(--caminho-3)}
+.tracar-fim[data-k="3"]{border-color:var(--caminho-4)}
+.tracar-fim.destaca{border-width:3px}
+.tracar-estrela.chama svg{animation:estrela-chama 700ms var(--curva-move) 2}
+@keyframes estrela-chama{50%{transform:scale(1.35)}}
+@media (prefers-reduced-motion:reduce){.tracar-estrela.chama svg{animation:none}}
+.tracar-fim[data-k].sel{border-color:var(--materia-base)}
+.tracar-fim[data-k].certa{border-color:var(--cor-acerto)}
+.tracar-fim[data-k].errada{border-color:var(--cor-ainda)}

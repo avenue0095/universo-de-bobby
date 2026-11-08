@@ -46,7 +46,7 @@ L('1.4','100','Unidade, dezena e centena',
   ()=>{const c=R(1,3),d=R(1,5),u=R(1,6);return inp('Que número está montado aqui?',c*100+d*10+u,{figure:dourado(c,d,u,true)});},
   ()=>{const c=R(1,3),d=R(1,4),u=R(1,5);return blocos('Monte o número <b>'+(c*100+d*10+u)+'</b> com as peças.',c*100+d*10+u,{max:{c:9,d:9,u:9}});},
   ()=>{const n=R(112,989);return mc('No número '+n+', quanto vale o algarismo '+Math.floor(n/100)+'?',Math.floor(n/100)*100,[Math.floor(n/100),Math.floor(n/100)*10]);},
-  ()=>{const c=R(1,9),d=R(0,9),u=R(1,9);return inp(c+' centenas + '+d+' dezenas + '+u+' unidades = ?',c*100+d*10+u);},
+  ()=>{const c=R(1,9),d=R(0,9),u=R(1,9);return inp(c+(c===1?' centena':' centenas')+' + '+d+(d===1?' dezena':' dezenas')+' + '+u+(u===1?' unidade':' unidades')+' = ?',c*100+d*10+u);},
   ()=>{const c=R(1,5);return mc('Quantas barrinhas cabem em 1 placa?',10,[100,5,1],{figure:dourado(1,0,0)});},
   ()=>{const n=R(120,980);return mc('Como se lê o número '+n+'?',extenso(n),[extenso(n+100>999?n-100:n+100),extenso(Math.floor(n/10)*10+((n%10)+1)%10)]);}
  ]),

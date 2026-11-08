@@ -202,6 +202,23 @@ const C = carregarConteudo(11);
     assert(proximo > 50, 'a pergunta "mais proximo" quase nao apareceu (' + proximo + ')');
   });
 
+  /* 9) concordancia (revisao de 08/11/2026): "1 centenas + 2 dezenas" virou "1 centena + 2 dezenas"; a ajuda do material dourado tambem */
+  await teste('9. concordancia: 1 centena, 1 dezena, 1 unidade, 1 barrinha, 1 cubinho, 1 placa (nunca "1 centenas")', () => {
+    const app = carregarApp(5);
+    const r = app.avaliar(`(()=>{const ruins=[],vistos={c:0,d:0,u:0};usarMateria('mat');
+      const RUIM=/(^|[^\\d,])1 (centenas|dezenas|unidades|barrinhas|cubinhos|placas)\\b/;
+      UNITS.forEach(u=>u.lessons.forEach(l=>{for(let t=0;t<${Math.min(RODADAS, 30)};t++)genQuestions(l,8).forEach(q=>{
+        const p=String(q.prompt);if(RUIM.test(p))ruins.push(p);
+        if(/^1 centena \\+/.test(p))vistos.c++;if(/\\+ 1 dezena \\+/.test(p))vistos.d++;if(/\\+ 1 unidade =/.test(p))vistos.u++;
+        const h=ajudaDe(q);[h.metodo,h.resposta,h.exemplo].forEach(x=>{if(x&&RUIM.test(String(x)))ruins.push('ajuda: '+x);});});}));
+      /* a ajuda de "monte o numero" com 1 dezena e 1 unidade e com 1 centena */
+      [ajudaDe({type:'input',prompt:'Monte o número 111 com barrinhas e cubinhos.',answer:111}),ajudaDe({type:'input',prompt:'Monte o número 11 com barrinhas.',answer:11})]
+        .forEach(h=>Object.values(h).forEach(x=>{if(typeof x==='string'&&RUIM.test(x))ruins.push('ajuda monte: '+x);}));
+      return {ruins:ruins.slice(0,5),vistos:vistos};})()`);
+    assert.deepStrictEqual(JSON.parse(JSON.stringify(r.ruins)), [], 'plural errado: ' + r.ruins.join(' | '));
+    assert(r.vistos.c + r.vistos.d + r.vistos.u > 0, 'o gerador de centenas, dezenas e unidades com 1 nao apareceu ' + JSON.stringify(r.vistos));
+  });
+
   console.log('regressao.js (8 defeitos de 02/09/2026), rodadas=' + RODADAS);
   let ruins = 0;
   for (const [ok, nome, msg] of resultados) {

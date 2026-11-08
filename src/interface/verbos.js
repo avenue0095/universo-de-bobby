@@ -137,9 +137,15 @@ const txtVerbo=s=>String(s==null?'':s).replace(/<br\s*\/?>/gi,' ').replace(/<[^>
 const nucleoDoEnunciado=p=>txtVerbo(p).replace(/^Quanto é (.+)\?$/i,'$1').replace(/^(.+?) = \?$/,'$1');
 const chaveNucleo=q=>chaveVerbo(nucleoDoEnunciado(q.prompt))+'|'+chaveVerbo(q.answer);
 const chaveVerbo=s=>txtVerbo(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+/* enunciado que só se responde ouvindo (o cartão do ligar não tem áudio) ou que tem lacuna (a lacuna aceita mais de uma resposta: GAT___ é
+   gato e gata, MA - ___ é mala e mana); revisão independente de 08/11/2026 */
+const PEDE_OUVIR=/\b(ouça|ouvir|ouviu|ouve|escute|escutou|listen|hear)\b/i;
+const TEM_LACUNA=/_{2,}|\bfalta\b|\bque falta\b|complete/i;
+const ehNumero=t=>/^-?\d{1,7}([.,]\d{1,3})?$/.test(String(t).trim());
 function parDe(q){
   if(!q||typeof q!=='object'||q.figure||q.__item||q.__aquec||q.__irma)return null;
-  if(q.verbo&&q.verbo!=='tocar-ouvir')return null;
+  if(q.verbo||q.ouvir)return null;
+  if(PEDE_OUVIR.test(txtVerbo(q.prompt))||TEM_LACUNA.test(txtVerbo(q.prompt)))return null;
   if(['mc','input','texto'].indexOf(q.type)<0)return null;
   /* marcação que carrega sentido (fração, expoente, figura) não sobrevive ao texto puro do cartão: fica de fora */
   if(/<(?!\/?(b|br|strong|em)\b)[a-z]/i.test(String(q.prompt))||/[<&]/.test(String(q.answer))||/&(?!nbsp;)[a-z]+;/i.test(String(q.prompt)))return null;
@@ -156,7 +162,11 @@ function parDe(q){
     ancora=pedacos.map(soLetras).join('|');
     if(ancora&&!ancoraTem(ancora,soLetras(r)))ancora='';
   }
-  return {e:e,r:r,kr:chaveVerbo(r),ke:chaveVerbo(e),q:q,unica:q.type!=='mc'||conta,ancora:ancora,ops:(q.options||[]).map(chaveVerbo)};
+  /* resposta única por construção só quando é conta pura ou, em pergunta digitada, um número (texto digitado pode ter sinônimo ou outra flexão);
+     o resto só entra se as outras respostas do conjunto forem distratores dela (ops) ou não couberem na âncora */
+  const unica=conta||(q.type!=='mc'&&ehNumero(r));
+  if(!unica&&!ancora&&!(q.options&&q.options.length))return null;
+  return {e:e,r:r,kr:chaveVerbo(r),ke:chaveVerbo(e),q:q,unica:unica,ancora:ancora,ops:(q.options||[]).map(chaveVerbo)};
 }
 /* o par p aceita o par o ao lado? (a resposta de o não pode servir para p) */
 const soLetras=t=>chaveVerbo(t).replace(/[^a-z0-9]/g,'');
@@ -185,14 +195,14 @@ function montarLigar(pares){
     pares:pares.map(p=>({e:p.e,r:p.r})),dir:dir,
     answer:pares.map(p=>p.e+' → '+p.r).join('; ')};
   /* a pergunta de origem é quem vai para o caderno, para a revisão e para a pergunta irmã (ligar é o jeito de responder, não um conteúdo novo) */
-  q.__base=pares[0].q;q.__mk=pares[0].q.__mk;
+  q.__base=pares[0].q;q.__mk=pares[0].q.__mk;q.__origens=pares.map(p=>p.q);
   return q;
 }
 function comLigar(qs){
   if(qs.some(q=>q&&q.verbo==='ligar'))return qs;
   /* troca uma pergunta de digitar ou de tocar simples (nunca a 1ª, de reconhecer); os pares vêm de amostras NOVAS dos geradores da fase
      (mesma habilidade, outros números e palavras) e nunca repetem uma pergunta que continua na fase */
-  const simples=i=>i>0&&(!qs[i].verbo||qs[i].verbo==='tocar-ouvir')&&['mc','input','texto'].indexOf(qs[i].type)>=0;
+  const simples=i=>i>0&&!qs[i].verbo&&['mc','input','texto'].indexOf(qs[i].type)>=0;
   const cands=qs.map((q,i)=>i).filter(simples);
   if(!cands.length)return qs;
   const ja=new Set(qs.map(chaveNucleo));
@@ -240,6 +250,8 @@ function comTracar(qs){
   if(k<0)k=virarEscolha(qs);
   if(k<0)return qs;
   qs[k].verbo='tracar';
+  /* 7 a 8 anos: só 2 caminhos (a resposta e um distrator) */
+  if(tracarSimples()&&qs[k].options.length>2){const q=qs[k],d=q.options.filter(o=>o!==q.answer);q.options=shufA([q.answer,d[0]]);}
   return qs;
 }
 /* ---------- ARRASTAR A RESPOSTA (1B2): quando a fase não comporta ligar, uma pergunta de escolha vira "arraste a resposta até o balão" ---------- */
@@ -574,9 +586,13 @@ function ligarLigar(q,palco){
 /* ----- TRAÇAR ----- */
 const TRACO={W:300,H:200,amostras:28};
 const ESTRELA_SVG='<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>';
-/* caminhos da estrela (topo, meio) até cada resposta (embaixo), cruzando no meio: a criança precisa seguir o traço com o dedo */
-function caminhosTracar(n){
-  const W=TRACO.W,H=TRACO.H,col=k=>(k+.5)*W/n,meio=k=>col((k+1)%n);
+/* caminhos da estrela (topo, meio) até cada resposta (embaixo). Faixa de 7 a 8 anos (revisão de 08/11/2026: estava um labirinto): no máximo
+   2 respostas e caminhos que NÃO se cruzam, cada um descendo para o seu lado. A partir de 9 anos os caminhos se cruzam no meio (a criança
+   precisa seguir o traço). Em todas as faixas cada caminho tem a sua cor, repetida na borda da resposta. */
+const tracarSimples=()=>typeof ehF78==='function'&&ehF78();
+function caminhosTracar(n,simples){
+  if(simples==null)simples=tracarSimples();
+  const W=TRACO.W,H=TRACO.H,col=k=>(k+.5)*W/n,meio=k=>simples?col(k):col((k+1)%n);
   const bez=(a,b,c,d,t)=>{const u=1-t;return u*u*u*a+3*u*u*t*b+3*u*t*t*c+t*t*t*d;};
   const seg=(p0,p1,p2,p3)=>{const o=[];for(let i=0;i<=TRACO.amostras;i++){const t=i/TRACO.amostras;o.push([bez(p0[0],p1[0],p2[0],p3[0],t),bez(p0[1],p1[1],p2[1],p3[1],t)]);}return o;};
   const out=[];
@@ -635,8 +651,11 @@ function ligarTracar(q,palco){
   box.querySelectorAll('.tracar-fim').forEach(b=>b.addEventListener('click',e=>{
     if(LIC.conferido||Date.now()-VER.escolheuEm<120)return;
     if(e.detail===0){escolheTracado(q,+b.dataset.k);return;}
-    contagemTexto('Use o dedo: comece na estrela e siga o caminho até '+txtVerbo(q.options[+b.dataset.k]));
-    const c=palco.querySelector('.caminho[data-k="'+b.dataset.k+'"]');if(c){c.classList.remove('mostra');void c.getBoundingClientRect();c.classList.add('mostra');}
+    /* tocar na resposta não escolhe (o verbo é traçar), mas mostra o que fazer: o caminho dela fica forte e a estrela de partida chama */
+    contagemTexto('Use o dedo: ponha na estrela e siga o caminho colorido até '+txtVerbo(q.options[+b.dataset.k]));
+    palco.querySelectorAll('.caminho').forEach(c=>c.classList.toggle('destaca',c.dataset.k===b.dataset.k));
+    palco.querySelectorAll('.tracar-fim').forEach(f=>f.classList.toggle('destaca',f===b));
+    const est=palco.querySelector('.tracar-estrela');if(est){est.classList.remove('chama');void est.getBoundingClientRect();est.classList.add('chama');}
   }));
 }
 /* ----- ARRASTAR A RESPOSTA até o balão ----- */

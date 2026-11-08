@@ -5,6 +5,7 @@
    Texto segue as regras das falas: "você", frase curta, sem travessão, sem culpa. */
 const AJ_TXT=h=>String(h==null?'':h).replace(/<br\s*\/?>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
 const AJ_NUMS=p=>(p.match(/-?\d+(?:[.,]\d+)?/g)||[]);
+const AJ_PL=(n,nome)=>n+' '+nome+(n===1?'':'s');   /* 1 barrinha, 2 barrinhas, 0 cubinhos */
 const AJ_ASPAS=p=>{const m=p.match(/[“"]([^”"]+)[”"]/);return m?m[1]:'';};
 const AJ_MAIUSC=p=>(p.match(/\b[A-ZÁÉÍÓÚÂÊÔÃÕÇ][A-ZÁÉÍÓÚÂÊÔÃÕÇ_-]{1,}\b/g)||[]).filter(w=>!/^(R\$|NÃO|COMO|ONDE|QUE|ELE|FAZ)$/.test(w));
 const AJ_B=p=>{const m=String(p).match(/<b>([^<]+)<\/b>/);return m?AJ_TXT(m[1]):'';};
@@ -16,7 +17,7 @@ function ajudaMat(q,p,a,n){
   if((m=p.match(/vem depois d[oe] (\d+)/i)))return aj('Conte para a frente a partir do '+m[1]+'. O número seguinte é o que vem depois.','Depois do '+m[1]+' vem o '+a+'.');
   if(/quant[ao]s (bolinhas|cubinhos|bolas)/i.test(p)&&!/a mais|azuis|caixa/i.test(p))return aj('Toque em cada bolinha com o dedo e conte em voz alta, sem pular nem repetir. O último número que você falar é a quantidade.','São '+a+'.');
   if(/barrinha/i.test(p)&&/quanto vale/i.test(p))return aj('Cada barrinha vale 10. Conte de 10 em 10, uma vez para cada barrinha: 10, 20, 30...','Dá '+a+'.');
-  if(/monte .* barrinhas|monte o n[úu]mero/i.test(p))return aj('Separe o número em dezenas e unidades: cada barrinha vale 10 e cada cubinho vale 1.','Para '+a+': '+Math.floor(+a/10)%10+' barrinhas e '+(+a%10)+' cubinhos'+(+a>=100?', mais '+Math.floor(+a/100)+' placa':'')+'.');
+  if(/monte .* barrinhas|monte o n[úu]mero/i.test(p))return aj('Separe o número em dezenas e unidades: cada barrinha vale 10 e cada cubinho vale 1.','Para '+a+': '+AJ_PL(Math.floor(+a/10)%10,'barrinha')+' e '+AJ_PL(+a%10,'cubinho')+(+a>=100?', mais '+AJ_PL(Math.floor(+a/100),'placa'):'')+'.');
   if(/centenas? \+|dezenas? \+|unidades? =/i.test(p))return aj('Centena vale 100, dezena vale 10 e unidade vale 1. Multiplique cada um pelo seu valor e some tudo.','Dá '+a+'.');
   if(/maior que|menor que|sinal completa|qual sinal|maior ou menor/i.test(p)&&n.length>=2)return aj('Compare '+n[0]+' e '+n[1]+': quem tem mais algarismos é maior; se tiver o mesmo tanto, olhe o primeiro algarismo da esquerda.','A resposta é '+a+'.');
   if(/complete a sequ[êe]ncia|contando de|de tr[áa]s pra frente/i.test(p)&&n.length>=3){const d=(+n[1].replace(',','.'))-(+n[0].replace(',','.'));return aj('Veja quanto pula de um número para o outro: de '+n[0]+' para '+n[1]+' '+(d>=0?'sobe':'desce')+' '+Math.abs(d)+'. Continue pulando igual.','Depois do '+n[n.length-1]+' vem '+a+'.');}

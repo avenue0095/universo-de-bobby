@@ -151,7 +151,9 @@ async function main() {
       await arrasta([c0[0]].concat(linha(c0[0], [c0[0][0] + 120, c0[0][1] + 40], 8)));   /* sai do caminho */
       const tr1 = await js("({resp:LIC.resp,txt:document.querySelector('#contagem').textContent})");
       await toque('.tracar-fim[data-k="1"]', 'tocar na resposta do tracar', false);
-      const tr2 = await js("({resp:LIC.resp,txt:document.querySelector('#contagem').textContent})");
+      const tr2 = await js("({resp:LIC.resp,txt:document.querySelector('#contagem').textContent,destaca:[...document.querySelectorAll('.caminho.destaca')].map(c=>c.dataset.k).join(),estrela:document.querySelector('.tracar-estrela').classList.contains('chama'),cores:new Set([...document.querySelectorAll('.caminho')].map(c=>getComputedStyle(c).stroke)).size})");
+      /* revisao de 08/11/2026: tocar na resposta destaca o caminho DELA e chama a estrela de partida; cada caminho com a sua cor */
+      if (tr2.destaca !== '1' || !tr2.estrela || tr2.cores !== 3) problemas.push(rot + ' tracar: tocar na resposta deveria destacar o caminho 1 e a estrela, com 3 cores ' + JSON.stringify(tr2));
       const c1p = await caminho(1);
       await arrasta(c1p);
       const tr3 = await js("({resp:LIC.resp,acao:document.querySelector('#acao').disabled,sel:document.querySelector('.tracar-fim.sel')&&document.querySelector('.tracar-fim.sel').dataset.k})");
