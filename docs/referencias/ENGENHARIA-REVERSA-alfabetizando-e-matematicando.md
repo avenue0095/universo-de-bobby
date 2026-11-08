@@ -60,6 +60,6 @@ Emojis como arte, voz do aparelho, banco fixo, "marcar como completado", só mú
 
 ## 7. Resposta direta às perguntas do Filipe
 - **São bons de verdade?** São corretos e bem organizados para o que são: um caderno de exercícios digital com 650 itens, 20 dias de plano e dicas para o adulto. Pedagogicamente a sequência faz sentido. Como produto, estão abaixo do Bobby atual em quase tudo (visual, voz, variedade, retenção, offline).
-- **Por que foram "validados"?** Não há evidência no código. OPINIÃO: a validação provável é de mercado (vendem para mães e professoras como material pronto), não de aprendizado medido.
+- **Por que foram "validados"?** Não há evidência no código. Segundo o Filipe (08/11), a validação é de mercado e uso: os apps foram vendidos, várias crianças usaram e há recorrência (informação do vendedor do pacote, não verificável no código). Vale como sinal de que o formato engaja; não como medida de aprendizado.
 - **Diferencial de cada um:** Alfabetizando: progressão fonológica e distratores por confusão de letras. Matematicando: cobertura de medidas, tempo, dinheiro, formas e problemas em palavras, que o Bobby não tem.
 - **Como agregam ao Bobby:** como banco de ideias de conteúdo e de geradores (itens 1 a 3 acima), como fonte das dicas ao responsável (item 4) e como modo "treinar por tema" (item 5). Não como modelo de app.
