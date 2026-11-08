@@ -25,7 +25,7 @@ function contadoresVazios(){
 }
 function diarioVazio(dia){
   return {dia:dia||'',blocos:0,perguntas:0,acertos:0,metaOk:false,estrela:false,liberados:0,kit:0,
-    bau:{aberto:false,dia:0,itens:[]},missoes:[],paradaVista:false,paradaAcao:'',c:contadoresVazios()};
+    bau:{aberto:false,dia:0,itens:[]},missoes:[],paradaVista:false,paradaAcao:'',c:contadoresVazios(),vivos:[]};
 }
 function revisaoVazia(){return {itens:{},congelados:{},ultimoAquecimento:''};}
 /* desenhos (1 por etapa): herdado = etapas que já tinham fase concluída antes do modelo novo (mantêm o direito),
@@ -103,6 +103,7 @@ function normalizaDiario(x){
   d.paradaVista=!!x.paradaVista;d.paradaAcao=['terminar','continuar'].indexOf(x.paradaAcao)>=0?x.paradaAcao:'';
   Object.keys(d.c).forEach(k=>{if(k!=='materiasBloco')d.c[k]=intDe(c[k],0,99999,0);});
   d.c.materiasBloco=textosDe(c.materiasBloco,3,4).filter(m=>['mat','pt','en'].indexOf(m)>=0);
+  d.vivos=listaDe(x.vivos,90).filter(k=>typeof k==='string'&&/^(mat|pt|en)\d{1,2}-[0-2]$/.test(k));   /* pontos vivos que já falaram hoje */
   return d;
 }
 function normalizaRevisao(x){

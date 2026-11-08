@@ -1,6 +1,6 @@
 {
  "gerado": "2026-11-08",
- "total": 115,
+ "total": 135,
  "itens": [
   {
    "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
@@ -1303,6 +1303,166 @@
    "materia": "pt",
    "categoria": "ajuda extra",
    "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Esse cristal azul brilha mais quando alguém aprende.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Psiu! Daqui dá para ouvir as sementes crescendo.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Olha que capricho! Cada tábua foi medida duas vezes.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O vento conta até dez e começa de novo.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Achei uma pedrinha redonda. Vou guardar na mochila.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Se a gente contar as folhas, perde a conta. Eu já tentei.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Essa lanterna acende sozinha quando alguém lê em voz alta.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Shh! As letras estão dormindo nas prateleiras.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Aqui tem cheiro de livro novo. Adoro!",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Cada janela desta rua guarda uma história diferente.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Encontrei uma vírgula perdida. Vou devolver para a frase.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Se você bater palmas devagar, ouve as sílabas.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Hello, gaivota! Ela só fala inglês.",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Daqui dá para ver o mar inteiro. Que bonito!",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O barco chegou cheio de palavras novas.",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Esse telhado azul é o meu preferido da cidade.",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Ouvi alguém dizer good morning lá do porto.",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A brisa daqui tem gosto de aventura.",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "categoria": "fala do mapa",
+   "motivo": "texto novo da sessao 1C (pontos vivos do mapa); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Escolha a resposta certa.",
+   "idioma": "pt-BR",
+   "materia": "todas",
+   "categoria": "pergunta (caderno de erros)",
+   "motivo": "texto novo de 08/11/2026: pergunta com verbo antiga que volta do caderno sem os objetos vira escolha com este enunciado; regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Qual é a ordem do alfabeto?",
+   "idioma": "pt-BR",
+   "materia": "todas",
+   "categoria": "pergunta (caderno de erros)",
+   "motivo": "texto novo de 08/11/2026: pergunta com verbo antiga que volta do caderno sem os objetos vira escolha com este enunciado; regerar com a voz local",
    "trechos_sem_clipe": []
   }
  ]

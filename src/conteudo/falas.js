@@ -5,6 +5,15 @@
    Duas pequenas trocas em relação ao lote original: "Isso conta em dobro" saiu (nada conta em dobro no jogo) e "a pergunta volta mais tarde"
    só aparece quando a mesma pergunta realmente volta (erroIgual); quando volta uma parecida, o painel já diz isso. */
 const FALAS={
+  /* pontos vivos do mapa (sessão 1C): uma por ponto, uma vez por dia; quem fala é o Bobby */
+  vivo:{
+    mat:['Esse cristal azul brilha mais quando alguém aprende.','Psiu! Daqui dá para ouvir as sementes crescendo.','Olha que capricho! Cada tábua foi medida duas vezes.',
+      'O vento conta até dez e começa de novo.','Achei uma pedrinha redonda. Vou guardar na mochila.','Se a gente contar as folhas, perde a conta. Eu já tentei.'],
+    pt:['Essa lanterna acende sozinha quando alguém lê em voz alta.','Shh! As letras estão dormindo nas prateleiras.','Aqui tem cheiro de livro novo. Adoro!',
+      'Cada janela desta rua guarda uma história diferente.','Encontrei uma vírgula perdida. Vou devolver para a frase.','Se você bater palmas devagar, ouve as sílabas.'],
+    en:['Hello, gaivota! Ela só fala inglês.','Daqui dá para ver o mar inteiro. Que bonito!','O barco chegou cheio de palavras novas.',
+      'Esse telhado azul é o meu preferido da cidade.','Ouvi alguém dizer good morning lá do porto.','A brisa daqui tem gosto de aventura.']
+  },
   chegada:{
     manha:['Bom dia, explorador! Hoje o céu está limpo e a mochila está cheia.'],
     tarde:['Boa tarde! Trouxe lanche, lupa e muita curiosidade. E você?'],

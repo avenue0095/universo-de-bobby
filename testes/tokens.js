@@ -41,7 +41,7 @@ const HEX = /#[0-9a-fA-F]{3,8}\b/;
   });
   await teste('2. todo var(--x) do CSS existe como token (ou e definido inline pelo componente)', () => {
     const definidos = new Set(limpo.match(/--[a-z0-9-]+(?=\s*:)/g) || []);
-    ['--p', '--e', '--ub', '--c1', '--c2', '--x', '--y', '--aro', '--d', '--w', '--cor-da-tinta', '--op', '--nx', '--dx', '--dy', '--w', '--h', '--anda-ms', '--obj', '--jit', '--camada'].forEach((x) => definidos.add(x));
+    ['--p', '--e', '--ub', '--c1', '--c2', '--x', '--y', '--aro', '--d', '--w', '--cor-da-tinta', '--op', '--nx', '--dx', '--dy', '--w', '--h', '--anda-ms', '--obj', '--jit', '--camada', '--rot-dx', '--i', '--camada-pendurado'].forEach((x) => definidos.add(x));
     const usados = new Set((limpo.match(/var\((--[a-z0-9-]+)/g) || []).map((x) => x.slice(4)));
     const faltam = [...usados].filter((u) => !definidos.has(u));
     vazio(faltam, 'token inexistente: ');

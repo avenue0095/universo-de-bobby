@@ -235,6 +235,8 @@ async function main() {
     }
   } catch (e) { problemas.push('erro: ' + (e && e.stack || e)); }
   limpa();
+  /* o perfil temporario do Chrome (cerca de 120 MB com o cache de arte e voz) sai junto, como na fumaca: antes ficava um por rodada na pasta temporaria */
+  await new Promise((r) => setTimeout(r, 300)); try { fs.rmSync(perfil, { recursive: true, force: true }); } catch (e) {}
   feito.forEach((f) => console.log('  ok  ' + f));
   if (problemas.length) { console.log('\nFALHOU (' + problemas.length + '):'); problemas.forEach((p) => console.log('  - ' + p)); process.exit(1); }
   console.log('\nOK: toque.js'); process.exit(0);

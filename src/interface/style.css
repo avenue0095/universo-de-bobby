@@ -164,6 +164,16 @@
   --z-modal: 40;
   --z-celebra: 50;
   --z-painel: 5;     /* painel de feedback da fase: SEMPRE acima do corpo da fase (z 1), senão não recebe toque */
+
+  /* ---------- hora do dia e clima do mapa (sessão 1C): só sobre a arte da cena, nunca sobre texto ---------- */
+  --hora-manha: #ffe2b0;
+  --hora-entardecer: #ff9d5c;
+  --hora-noite: #22305e;
+  --clima-folha: #c98a3a;
+  --clima-vagalume: #ffeaa6;
+  --clima-petala: #f5b3c6;
+  --vivo-luz: #fff6d6;
+  --moldura-desenho: #8a5a2b;
 }
 
 /* ---------- escuro: "Espaço" (segue o sistema, a menos que o usuário tenha escolhido claro) ---------- */
@@ -1807,7 +1817,8 @@ html.hitstop *{animation-play-state:paused!important;transition:none!important}
 /* ---------- o mundo reage (1C): nós como objetos, personagem que anda, fim de fase no mapa ---------- */
 .trilha.objetos .passo-trilha{display:none}
 .no.obj-no{width:auto;transform:translate(-50%,-100%);align-items:center;z-index:var(--camada,1)}
-.no.obj-no .rot,.no.obj-no .estrelas,.no.obj-no .selo-feito{pointer-events:none}   /* o rótulo de um objeto nunca tampa o toque no vizinho */
+.no.obj-no .rot,.no.obj-no .estrelas,.no.obj-no .selo-feito{pointer-events:none}
+.no.obj-no .rot{translate:var(--rot-dx,0) 0}   /* o rótulo de um objeto nunca tampa o toque no vizinho */
 .no.obj-no .bt{width:max(64px,calc(var(--w) * 1cqw));height:max(64px,calc(var(--h) * 1cqh));border-radius:var(--raio-16);background:none;border:0;box-shadow:none;color:transparent;transform:none;margin:0}
 .no.obj-no .bt::after{inset:0}
 .no.obj-no.disp .bt{box-shadow:0 0 0 2px color-mix(in srgb,var(--materia-luz) 70%,transparent),0 0 24px 6px color-mix(in srgb,var(--materia-luz) 45%,transparent);animation:brilho-obj 2.4s var(--curva-move) infinite}
@@ -1866,3 +1877,32 @@ html.hitstop *{animation-play-state:paused!important;transition:none!important}
 .assinatura-bts{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:var(--esp-8)}
 .aviso-breve{margin:0 0 var(--esp-24);text-align:center;font-size:var(--t-pequeno);line-height:var(--lh-pequeno);font-weight:var(--peso-forte);color:var(--cor-texto-suave)}
 .cartao-bt.novo[disabled]{opacity:.6;cursor:not-allowed}
+
+/* ---------- sessão 1C, fechamento (08/11/2026): pontos vivos, hora do dia, clima e desenho pendurado ---------- */
+.cena>.hora{position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;opacity:0;transition:opacity var(--mov-lento) var(--curva-entra)}
+body[data-hora="manha"] .cena>.hora{background:var(--hora-manha);opacity:.45}
+body[data-hora="entardecer"] .cena>.hora{background:linear-gradient(to bottom,var(--hora-entardecer),transparent 70%);opacity:.6}
+body[data-hora="noite"] .cena>.hora{background:var(--hora-noite);mix-blend-mode:multiply;opacity:.38}
+.cena>.clima{position:absolute;inset:0 0 40% 0;pointer-events:none;overflow:hidden}
+.clima i{position:absolute;top:-4%;left:calc(8% + var(--i) * 16%);width:var(--esp-8);height:var(--esp-8);border-radius:50% 0;opacity:.85;
+  animation:clima-cai calc(11s + var(--i) * 1.3s) linear calc(var(--i) * -2.1s) infinite}
+.clima.folhas i{background:var(--clima-folha)}
+.clima.petalas i{background:var(--clima-petala);border-radius:50% 50% 50% 0}
+.clima.vagalumes i{top:auto;bottom:4%;border-radius:50%;width:6px;height:6px;background:var(--clima-vagalume);box-shadow:0 0 var(--esp-8) var(--clima-vagalume);
+  animation:clima-sobe calc(13s + var(--i) * 1.7s) ease-in-out calc(var(--i) * -2.3s) infinite}
+@keyframes clima-cai{from{transform:translate(0,0) rotate(0)}to{transform:translate(calc(var(--esp-48) * -1),110cqh) rotate(320deg)}}
+@keyframes clima-sobe{0%{transform:translate(0,0)}50%{transform:translate(var(--esp-16),-30cqh)}100%{transform:translate(0,-60cqh)}}
+.cena>.clima{container-type:size}
+@media (prefers-reduced-motion:reduce){.cena>.clima{display:none}}
+.vivo{position:absolute;width:var(--toque-min);height:var(--toque-min);transform:translate(-50%,-50%);border-radius:50%;background:none;border:0;padding:0;z-index:0;cursor:pointer}
+.vivo-brilho{position:absolute;left:50%;top:50%;width:var(--esp-16);height:var(--esp-16);transform:translate(-50%,-50%) rotate(45deg);border-radius:var(--raio-8) 0;
+  background:var(--vivo-luz);opacity:.55;box-shadow:0 0 var(--esp-8) var(--vivo-luz)}
+.vivo.reage .vivo-brilho{animation:vivo-reage 640ms var(--curva-entra) both}
+.vivo:focus-visible{outline:3px solid var(--materia-luz);outline-offset:2px}
+@keyframes vivo-reage{0%{transform:translate(-50%,-50%) rotate(45deg) scale(1)}35%{transform:translate(-50%,-50%) rotate(65deg) scale(1.9);opacity:1}70%{transform:translate(-50%,-50%) rotate(30deg) scale(1.3)}100%{transform:translate(-50%,-50%) rotate(45deg) scale(1);opacity:.55}}
+@media (prefers-reduced-motion:reduce){.vivo.reage .vivo-brilho{animation:none;opacity:1}}
+.pendurado{position:absolute;width:var(--esp-48);height:var(--esp-64);transform:translate(-50%,0);pointer-events:none;z-index:var(--camada-pendurado,7);opacity:0;transition:opacity var(--mov-lento) var(--curva-entra)}
+.pendurado.pronto{opacity:1}
+.pendurado::before{content:"";position:absolute;left:50%;top:calc(var(--esp-16) * -1);width:var(--esp-24);height:var(--esp-16);transform:translateX(-50%);
+  border:2px solid var(--moldura-desenho);border-bottom:0;border-radius:var(--raio-8) var(--raio-8) 0 0}
+.pendurado canvas{display:block;width:100%;height:100%;border:3px solid var(--moldura-desenho);border-radius:var(--raio-8);box-shadow:var(--sombra-2);background:var(--cor-superficie)}

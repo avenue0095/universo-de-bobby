@@ -759,6 +759,34 @@ async function main() {
         const abriu = await js("document.querySelector('#licao').classList.contains('on')&&LIC.li===0");
         if (abriuCedo || !abriu) problemas.push(rot + ' tocar num objeto: a fase ' + (abriuCedo ? 'abriu antes de o personagem chegar' : 'nao abriu depois da caminhada'));
         await js("fecharLicao();S.feitas={};salvar();renderTrilha();0");
+        // pontos vivos (3 por cenario): reage no toque e fala UMA vez por dia
+        await js("S.diario.vivos=[];renderTrilha();document.querySelector('#etapa-1').scrollIntoView({block:'center'});0"); await dorme(300);
+        const viv = await js("(()=>{const n=document.querySelectorAll('#tela .etapa').length,v=document.querySelectorAll('#tela .vivo').length;const b=document.querySelector('#etapa-1 .vivo');b.click();const a=document.querySelector('#aviso-no');return {n,v,reage:b.classList.contains('reage'),fala:a?a.innerText:''}})()");
+        await dorme(3300);
+        const viv2 = await js("(()=>{const b=document.querySelector('#etapa-1 .vivo');b.click();const a=document.querySelector('#aviso-no');return {reage:b.classList.contains('reage'),fala:a?a.innerText:''}})()");
+        if (viv.v !== viv.n * 3 || !viv.reage || !viv.fala || viv2.fala || !viv2.reage) problemas.push(rot + ' pontos vivos: ' + JSON.stringify({ viv, viv2 }));
+        // hora do dia e clima: so a etapa atual tem particulas, no maximo 12 animacoes continuas no mapa e nada pisca (opacidade nao anima)
+        const cl = await js("(()=>{const inf=[...document.querySelectorAll('#tela *')].filter(e=>{const c=getComputedStyle(e);return c.animationName!=='none'&&c.animationIterationCount==='infinite'});return {hora:document.body.dataset.hora,particulas:document.querySelectorAll('#tela .clima i').length,inf:inf.length}})()");
+        if (!/^(manha|tarde|entardecer|noite)$/.test(cl.hora) || cl.particulas > 6 || cl.inf > 12) problemas.push(rot + ' hora e clima: ' + JSON.stringify(cl));
+        // desenho pintado: aparece pendurado na casa da etapa em ate 2 s, com cor
+        await js("UNITS[0].lessons.forEach(l=>S.feitas[l.id]=3);S.feitas['revmat1']=3;S.desenhos.tinta['des-mat01']=[[380,500,3],[200,300,6]];salvar();renderTrilha();0");
+        const tPend = Date.now(); let pend = null;
+        for (let k = 0; k < 20 && !pend; k++) { await dorme(100); pend = await js("(()=>{const e=document.querySelector('#etapa-1 .pendurado.pronto canvas');if(!e)return null;const d=e.getContext('2d').getImageData(0,0,96,128).data;let c=0;for(let i=0;i<d.length;i+=4){if(Math.abs(d[i]-d[i+1])+Math.abs(d[i+1]-d[i+2])>60)c++;}return {c:c,w:Math.round(e.getBoundingClientRect().width)}})()"); }
+        const pendMs = Date.now() - tPend;
+        if (!pend || pend.c < 20 || pend.w < 40 || pendMs > 2000) problemas.push(rot + ' desenho pendurado: ' + JSON.stringify({ pend, pendMs }));
+        await js("document.querySelector('#etapa-1').scrollIntoView({block:'center'});0"); await dorme(200); await shot0('mundo-pendurado-' + nomeTela);
+        await js("S.desenhos.tinta={};S.feitas={};salvar();renderTrilha();0");
+        // 320 x 568: o objeto atual, o rotulo e o personagem aparecem juntos acima da barra (captura com --foto)
+        if (medidas.mobile && medidas.width === 360) {
+          await cdp('Emulation.setDeviceMetricsOverride', Object.assign({}, medidas, { width: 320, height: 568 })); await dorme(300);
+          await js("renderTrilha.jaMostrou=false;renderTrilha();0"); await dorme(600);
+          const d3 = await js("(()=>{const r=s=>{const e=document.querySelector(s);const b=e.getBoundingClientRect();return {t:Math.round(b.top),b:Math.round(b.bottom),l:Math.round(b.left),r:Math.round(b.right)}};return {no:r('.no.atual .bt'),rot:r('.no.atual .rot'),voce:r('.voce'),cena:r('#etapa-1 .cena'),topo:r('.topo'),barra:r('.barra-baixo'),sw:document.documentElement.scrollWidth}})()");
+          if (d3.no.t < d3.topo.b || d3.no.b > d3.barra.t + 1 || d3.voce.b > d3.barra.t + 1 || d3.rot.b > d3.barra.t + 1 || d3.rot.l < d3.cena.l + 7 || d3.rot.r > d3.cena.r - 7 || d3.sw > 321) problemas.push(rot + ' 320x568: objeto, rotulo ou personagem fora da faixa visivel ' + JSON.stringify(d3));
+          await shot0('mapa-320x568');
+          feito.push(rot + ': 320x568 objeto y=' + d3.no.t + '..' + d3.no.b + ', rotulo ate y=' + d3.rot.b + ', personagem ate y=' + d3.voce.b + ' (barra em y=' + d3.barra.t + ')');
+          await cdp('Emulation.setDeviceMetricsOverride', medidas); await dorme(300);
+        }
+        feito.push(rot + ': pontos vivos (' + viv.v + ', fala uma vez por dia), hora ' + cl.hora + ' com ' + cl.particulas + ' particulas e ' + cl.inf + ' animacoes continuas, desenho pendurado em ' + pendMs + ' ms');
         feito.push(rot + ': mundo reage (objetos com area ' + areas[0].join('x') + ', peca acesa em ' + pecaMs + ' ms, botao em ' + btnMs + ' ms, diferenca ' + dif.toFixed(0) + '%, andou ' + (Math.abs(v1.x - v0[0]) + Math.abs(v1.y - v0[1])) + ' px)');
       }
 

@@ -80,9 +80,9 @@ function etapaHTML(u,ui,prox){
   h+='<header class="etapa-cab"><div class="etapa-tx"><span class="etapa-n">Etapa '+u.n+'</span>'+
      '<h3 id="etapa-t-'+(ui+1)+'">'+tituloEmDuasLinhas(u.title)+'</h3><p>'+escapa(u.sub)+'</p></div>'+
      '<span class="etapa-prog'+(completo?' ok':'')+'">'+(completo?IC.certo+' Completa':feitasN+' de '+u.lessons.length+' fases')+'</span></header>';
-  h+=cenaHTML(u,feitasN,ehAtual);
+  h+=cenaHTML(u,feitasN,ehAtual)+climaHTML(ehAtual);
   const hs=hotspotsDe(MATERIA,u.n),fimAqui=MAPA.fim&&MAPA.fim.ui===ui;
-  h+='<div class="trilha'+(hs?' objetos':'')+'">'+(hs?'':trilhaPontos());
+  h+='<div class="trilha'+(hs?' objetos':'')+'">'+(hs?'':trilhaPontos())+(hs?vivosHTML(u)+penduradoHTML(u):'');
   /* nó = objeto do cenário (recorte retangular, área de toque de pelo menos 64 x 64) ou, sem recorte, um marco genérico com brilho */
   const noHTML=(li,cls,atrs,rotulo,aria,miolo,est)=>{
     const p=posNo(u,li),r=hs&&hs[li];
@@ -205,9 +205,12 @@ function renderTrilha(){
   const en=$('#editar-nome');if(en)en.addEventListener('click',telaPerfil);
   ligarRotina();
   /* nó trancado: continua no caminho do teclado (aria-disabled, não disabled) e explica o que falta em vez de ficar mudo */
+  document.body.dataset.hora=horaDoDia();
+  $('#tela').querySelectorAll('.vivo').forEach(b=>b.addEventListener('click',()=>tocarVivo(b)));
+  pintarPendurados();
   $('#tela').querySelectorAll('.bt').forEach(b=>
     b.addEventListener('click',()=>{
-      const noEl=b.closest('.no');if(noEl)noEl.classList.add('mostra');
+      const noEl=b.closest('.no');if(noEl){noEl.classList.add('mostra');rotulosNaCena(noEl.closest('.etapa'));}
       if(b.getAttribute('aria-disabled')==='true'){avisoNo(b.dataset.rev!==undefined?'Termine as 5 fases da etapa para abrir a revisão.':(TRANCAR_ETAPAS&&b.dataset.l==='0'?'Termine a revisão da etapa anterior para abrir esta.':'Termine a fase anterior para abrir esta.'));return;}
       const abre=()=>{if(b.dataset.rev!==undefined)abrirRevisaoMundo(+b.dataset.rev);else abrirLicao(+b.dataset.u,+b.dataset.l);};
       /* o personagem anda até o objeto antes de abrir (quando está nesta etapa); a fase só abre quando ele chega */
@@ -216,19 +219,34 @@ function renderTrilha(){
       if(v&&+v.dataset.no!==li)andarAte(ui,li,abre);else abre();
     }));
   pintarPontoGaleria();
+  rotulosNaCena();
   animarMapa(p);
   /* chegada: uma frase do Bobby pela hora do dia (uma vez por abertura, só se nada estiver por cima) */
   if(!renderTrilha.chegou&&p){
     renderTrilha.chegou=true;
     setTimeout(()=>{
       if(['#folha','#modal','#licao','#perfis','#materias','#perfil','#galeria'].some(q=>{const e=$(q);return e&&e.classList&&e.classList.contains('on');}))return;
-      const h=new Date().getHours(),sit=feitas()===0?'chegada.curta':(S.diario&&S.diario.blocos>0?null:(h<12?'chegada.manha':(h<18?'chegada.tarde':'chegada.noite')));
+      /* a mesma faixa da luz da cena (horaDoDia): de madrugada é boa noite, não bom dia */
+      const fx=horaDoDia(),sit=feitas()===0?'chegada.curta':(S.diario&&S.diario.blocos>0?null:(fx==='manha'?'chegada.manha':(fx==='noite'?'chegada.noite':'chegada.tarde')));
       if(sit){avisoNo(falaDe(sit));sfx('motivo','bobby');}
     },1400);
   }
   if(MAPA.fim){ligarFimCena(MAPA.fim);}
   if(!renderTrilha.jaMostrou&&p){renderTrilha.jaMostrou=true;setTimeout(mostrarNoAtual,60);}
 }
+/* rótulo de objeto perto da borda da cena (o objeto pode até passar do corte da imagem): desliza para dentro, a 8 px da borda */
+function rotulosNaCena(raiz){
+  if(typeof document==='undefined'||typeof getComputedStyle!=='function')return;
+  (raiz||document).querySelectorAll('.no.obj-no .rot').forEach(rot=>{
+    rot.style.removeProperty('--rot-dx');
+    if(getComputedStyle(rot).display==='none')return;
+    const cena=rot.closest('.etapa')&&rot.closest('.etapa').querySelector('.cena');if(!cena)return;
+    const r=rot.getBoundingClientRect(),c=cena.getBoundingClientRect();
+    const dx=Math.max(0,c.left+8-r.left)+Math.min(0,c.right-8-r.right);
+    if(dx)rot.style.setProperty('--rot-dx',Math.round(dx)+'px');
+  });
+}
+if(typeof window!=='undefined'&&window.addEventListener)window.addEventListener('resize',()=>{if(typeof rotulosNaCena==='function')rotulosNaCena();});
 /* primeira dobra: o nó atual (com o rótulo) e o personagem ficam juntos na faixa visível, entre o topo fixo e a barra de baixo.
    Antes era scrollIntoView({block:'nearest'}): com o objeto alto da etapa 1 (até 160 px) ele parava atrás da barra ou embaixo do topo. */
 function mostrarNoAtual(){
