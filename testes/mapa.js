@@ -34,6 +34,10 @@ const J = (x) => JSON.parse(JSON.stringify(x));
         hs.forEach((r) => { A.ok(r[0] >= 0 && r[1] >= 0 && r[2] <= 1 && r[3] <= 1 && r[2] > r[0] && r[3] > r[1], et + ' ' + r); A.ok((r[2] - r[0]) >= .12 - 1e-9 && (r[3] - r[1]) >= .1 - 1e-9, 'recorte pequeno ' + et + ' ' + r); });
         /* o menor fica por cima (--camada): o centro de um objeto nao pode cair dentro de outro menor que ele */
         hs.forEach((r, i) => { const cx = (r[0] + r[2]) / 2, cy = (r[1] + r[3]) / 2; hs.forEach((o, k) => { if (k !== i && area(o) < area(r)) A.ok(!dentro(cx, cy, o), et + ': o centro do objeto ' + i + ' fica embaixo do objeto ' + k); }); });
+        /* revisao de 08/11/2026: cada recorte com pelo menos 90% dentro do quadro visivel (a cena corta 8,17% de cada lado da imagem),
+           e nas etapas 2 a 10 nenhuma peca cobre mais de 25% da outra */
+        hs.forEach((r, i) => { const dentro = Math.max(0, Math.min(r[2], .9183) - Math.max(r[0], .0817)) / (r[2] - r[0]); A.ok(dentro >= .9, et + ': objeto ' + i + ' com ' + Math.round(dentro * 100) + '% dentro do quadro'); });
+        if (n > 1) hs.forEach((r, i) => hs.forEach((o, k) => { if (k <= i) return; const ix = Math.max(0, Math.min(r[2], o[2]) - Math.max(r[0], o[0])), iy = Math.max(0, Math.min(r[3], o[3]) - Math.max(r[1], o[1])); A.ok(ix * iy <= .25 * Math.min(area(r), area(o)), et + ': objetos ' + i + ' e ' + k + ' sobrepostos'); }));
         /* o centro visivel: a cena corta 8,17% de cada lado da imagem */
         hs.forEach((r, i) => { const cx = (r[0] + r[2]) / 2; A.ok(cx > .0817 && cx < .9183, et + ': objeto ' + i + ' com o centro fora da cena'); });
         A.ok(a.avaliar('!!hotspotsDe("' + m + '",' + n + ')'), et + ' sem recorte');

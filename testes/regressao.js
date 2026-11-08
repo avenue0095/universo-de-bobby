@@ -219,6 +219,18 @@ const C = carregarConteudo(11);
     assert(r.vistos.c + r.vistos.d + r.vistos.u > 0, 'o gerador de centenas, dezenas e unidades com 1 nao apareceu ' + JSON.stringify(r.vistos));
   });
 
+  /* 10) "São 1 sementes" (revisao de 08/11/2026): nenhum enunciado gerado com 1 e substantivo no plural, em todas as fases */
+  await teste('10. plural: nenhum enunciado gerado com "1" seguido de palavra no plural ("São 1 sementes"), nas 150 fases', () => {
+    const app = carregarApp(6); app.avaliar("novoPerfil('Z','#12A06E')");
+    const r = app.avaliar(`(()=>{const ruins={};let n=0;['mat','pt','en'].forEach(m=>{usarMateria(m);UNITS.forEach(u=>u.lessons.forEach(l=>{for(let t=0;t<${Math.min(RODADAS, 15)};t++)genQuestions(l,8).forEach(q=>{n++;
+      const p=String(q.prompt).replace(/<[^>]+>/g,' ');(p.match(/(^|[^\\d,.])1 \\p{L}+s\\b/gu)||[]).forEach(x=>{if(!/1 (mais|menos)$/.test(x.trim()))ruins[x.trim()+' :: '+p.slice(0,60)]=1;});});}));});return {ruins:Object.keys(ruins).slice(0,6),n:n};})()`);
+    assert(r.n > 10000, 'poucas perguntas geradas: ' + r.n);
+    assert.deepStrictEqual(JSON.parse(JSON.stringify(r.ruins)), [], 'plural errado: ' + r.ruins.join(' | '));
+    /* e o caso que o revisor viu, gerado direto */
+    const p = app.avaliar("usarMateria('mat');comVerbo(mc('Que número vem depois do 1?',2,[1,3]),UNITS[0].lessons[0]).prompt");
+    assert(/^É 1 semente e chegou mais uma\./.test(p), p);
+  });
+
   console.log('regressao.js (8 defeitos de 02/09/2026), rodadas=' + RODADAS);
   let ruins = 0;
   for (const [ok, nome, msg] of resultados) {

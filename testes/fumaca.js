@@ -138,6 +138,24 @@ async function main() {
       if (new Set(bar).size > 1) problemas.push(rot + ': itens da barra com alturas diferentes ' + bar.join(','));
       feito.push(rot + ': topo com ofensiva, moedas e som a vista');
 
+      /* 1b2) FOLHAS PRINCIPAIS cabem (revisao de 08/11/2026: o "Vamos jogar" do bilhete ficava cortado em 360x640): bilhete, bau aberto e
+         as duas paradas; todo botao da folha inteiro na janela e livre para o toque, sem rolar a folha. Em celular360 repete em 320x568. */
+      {
+        const tamanhos = [medidas].concat(medidas.mobile && medidas.width === 360 ? [Object.assign({}, medidas, { width: 320, height: 568 })] : []);
+        for (const med of tamanhos) {
+          await cdp('Emulation.setDeviceMetricsOverride', med); await dorme(200);
+          for (const [nomeF, ex] of [['bilhete', 'mostrarBilhete()'], ['bau aberto', 'mostrarBauAberto()'], ['parada do limite', 'mostrarParada(true)'], ['parada', 'mostrarParada(false)']]) {
+            await js('fecharFolha();' + ex + ';0'); await dorme(250);
+            const f = await js("(()=>{const f=document.querySelector('#folha.on .folha-in');if(!f)return {abriu:false};f.scrollTop=0;const ruins=[];f.querySelectorAll('.folha-bts button').forEach(b=>{const r=b.getBoundingClientRect(),t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);if(r.top<0||r.bottom>innerHeight+1||!(t&&(t===b||b.contains(t))))ruins.push((b.id||b.textContent.trim().slice(0,16))+' '+Math.round(r.top)+'..'+Math.round(r.bottom)+' de '+innerHeight);});return {abriu:true,ruins:ruins,n:f.querySelectorAll('.folha-bts button').length}})()");
+            if (!f.abriu || !f.n || f.ruins.length) problemas.push(rot + ' folha ' + nomeF + ' em ' + med.width + 'x' + med.height + ': ' + JSON.stringify(f));
+            if (nomeF === 'bilhete') await shot0('folha-bilhete-' + med.width + 'x' + med.height);
+          }
+          await js('fecharFolha();0');
+        }
+        await cdp('Emulation.setDeviceMetricsOverride', medidas); await dorme(200);
+        feito.push(rot + ': folhas (bilhete, bau, paradas) com os botoes inteiros na janela' + (tamanhos.length > 1 ? ' e em 320x568' : ''));
+      }
+
       /* 1c) PRIMEIRA DOBRA = O MAPA COM O BOBBY (4a revisao, 24/10/2026). Jogador novo, mapa sem rolar: o cenario da etapa atual comeca
          acima de y=300 e o primeiro no e o Bobby aparecem sem rolar (390x844). Em tela mais baixa (360x640) a propria tela rola ate o Bobby e
          conferimos que ele fica acima da barra. */

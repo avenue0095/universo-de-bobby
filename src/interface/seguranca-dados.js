@@ -118,15 +118,15 @@ function reconstruirVerbo(r){
   let m;
   if((m=p.match(/^Toque em cada (\S+) para contar\. Quant[ao]s (\S+) (?:tem aqui|são ao todo)\?$/))&&objPorNome(m[1])&&Number.isInteger(num)&&num>=1&&num<=30){
     r.verbo='tocar-objetos';r.objetos={n:num,tipo:objPorNome(m[1])[2]};return true;}
-  if((m=p.match(/^São (\d+) (\S+) e chegou mais (?:um|uma)\./))&&objPorNome(m[2])&&+m[1]<=29){
+  if((m=p.match(/^(?:São|É) (\d+) (\S+) e chegou mais (?:um|uma)\./))&&objPorNome(m[2])&&+m[1]<=29){
     r.verbo='tocar-objetos';r.objetos={n:+m[1]+1,tipo:objPorNome(m[2])[2],nova:1,tirada:0};return true;}
-  if((m=p.match(/^São (\d+) (\S+) e (?:um|uma) saiu\./))&&objPorNome(m[2])&&+m[1]>=1&&+m[1]<=30){
+  if((m=p.match(/^(?:São|É) (\d+) (\S+) e (?:um|uma) saiu\./))&&objPorNome(m[2])&&+m[1]>=1&&+m[1]<=30){
     r.verbo='tocar-objetos';r.objetos={n:+m[1],tipo:objPorNome(m[2])[2],nova:0,tirada:1};return true;}
   if((m=p.match(/^Você tinha (\d+) (\S+) e ganhou mais/))&&objPorNome(m[2])&&+m[1]<=29){
     r.verbo='tocar-objetos';r.objetos={n:+m[1]+1,tipo:objPorNome(m[2])[2],nova:1,tirada:0};return true;}
-  if((m=p.match(/^Arraste (?:as|os) (\d+) (\S+) para as (\d+) cestas/))&&objPorNome(m[2])&&+m[1]>=1&&+m[1]<=30&&+m[3]>=1&&+m[3]<=6){
+  if((m=p.match(/^Arraste (?:as|os|a|o) (\d+) (\S+) para as (\d+) cestas/))&&objPorNome(m[2])&&+m[1]>=1&&+m[1]<=30&&+m[3]>=1&&+m[3]<=6){
     r.verbo='arrastar';r.objetos={n:+m[1],tipo:objPorNome(m[2])[2]};r.cestas=+m[3];r.modo='cada';return true;}
-  if((m=p.match(/^Monte (\d+) grupos de (\d+): arraste \d+ (\S+) para cada cesta/))&&objPorNome(m[3])&&+m[1]>=1&&+m[1]<=6&&+m[1]*+m[2]<=30){
+  if((m=p.match(/^Monte (\d+) grupos? de (\d+): arraste \d+ (\S+) para cada cesta/))&&objPorNome(m[3])&&+m[1]>=1&&+m[1]<=6&&+m[1]*+m[2]<=30){
     r.verbo='arrastar';r.objetos={n:+m[1]*+m[2],tipo:objPorNome(m[3])[2]};r.cestas=+m[1];r.modo='total';r.alvoG=+m[1];r.alvoP=+m[2];return true;}
   if(r.type==='mc'&&temOpcoes(r)&&(m=p.match(/(primeira vogal|primeira letra|última letra|com que letra começa|com que letra termina) (?:de |a palavra )?([A-ZÁ-ÚÀÂÊÔÃÕÇ]{3,16})\b/i))){
     r.verbo='tocar-letra';r.palavra=m[2].toUpperCase();return true;}

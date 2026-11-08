@@ -70,5 +70,27 @@ const RODADAS = arg('rodadas', 12);
   await teste('4. nenhuma resposta de um par serve para o enunciado de outro par do mesmo ligar', () => {
     A.ok(r.ambiguo.length === 0, r.ambiguo.length + ' pares ambiguos: ' + amostra(r.ambiguo));
   });
+  await teste('5. caderno do ligar: errar so o par 3 guarda a pergunta de origem do par 3 (e nao a do par 1) no caderno, na revisao e no historico', () => {
+    const b = carregarApp(13, {}); b.avaliar("novoPerfil('Lia','#12A06E');usarMateria('mat')");
+    const r = b.avaliar(`(()=>{
+      let ui=-1,li=-1,q=null;
+      for(let u=0;u<UNITS.length&&!q;u++)for(let l=0;l<UNITS[u].lessons.length&&!q;l++)for(let t=0;t<10&&!q;t++){const x=genQuestions(UNITS[u].lessons[l],8).find(z=>z.verbo==='ligar'&&Array.isArray(z.__origens));if(x){q=x;ui=u;li=l;}}
+      if(!q)return {semLigar:true};
+      abrirLicao(ui,li);LIC.etapa='questao';LIC.qs=[q,genQuestions(UNITS[ui].lessons[li],8).find(z=>z.verbo!=='ligar')];LIC.i=0;LIC.base=2;pintarLicao();
+      S.errados={};S.revisao.itens={};S.revisao.congelados={};
+      VER.lig={0:0,1:1,2:1};LIC.resp=textoDoLigar(q,VER.lig);conferir();
+      const n=MATERIA+LIC.u.n,lista=S.errados[n]||[],ch=x=>chaveQ(x);
+      const o=q.__origens;
+      return {n:lista.length,tem3:lista.some(x=>ch(x)===ch(o[2])),tem1:lista.some(x=>ch(x)===ch(o[0])),tem2:lista.some(x=>ch(x)===ch(o[1])),
+        rev3:!!S.revisao.congelados[chaveItem(o[2])],rev1:!!S.revisao.congelados[chaveItem(o[0])],
+        hist:LIC.hist.map(h=>h.ok),histQ:LIC.hist.map(h=>ch(h.q)===ch(o[0])?1:ch(h.q)===ch(o[1])?2:ch(h.q)===ch(o[2])?3:0)};})()`);
+    A.ok(!r.semLigar, 'nenhum ligar gerado em matematica');
+    A.strictEqual(r.tem3, true, 'o par 3 (errado) nao foi para o caderno');
+    A.strictEqual(r.tem1, false, 'o par 1 (certo) foi para o caderno');
+    A.strictEqual(r.tem2, false, 'o par 2 (certo) foi para o caderno');
+    A.strictEqual(r.n, 1);
+    A.strictEqual(r.rev3, true, 'o par 3 nao entrou na revisao espacada'); A.strictEqual(r.rev1, false);
+    A.deepStrictEqual(J(r.hist), [true, true, false]); A.deepStrictEqual(J(r.histQ), [1, 2, 3]);
+  });
   resumo('ligar.js');
 })();

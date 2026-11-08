@@ -465,7 +465,10 @@ function conferir(){
   const qb=typeof perguntaBase==='function'?perguntaBase(q):q;
   const ms=LIC.tQ?Date.now()-LIC.tQ:0;
   LIC.respondidas=(LIC.respondidas||0)+1;
-  if(primeira)LIC.hist.push({q:qb,ok:ok,ms:ms,dica:LIC.dica||0});
+  /* ligar: cada par conta como a sua pergunta de origem (certo ou errado), no histórico, no caderno, na revisão e na irmã */
+  const origens=typeof origensDoLigar==='function'?origensDoLigar(q):null,certosLig=origens?ligarParesCertos(q):null;
+  const erradas=origens?origens.filter((o,i)=>!certosLig[i]):[qb];
+  if(primeira){if(origens)origens.forEach((o,i)=>LIC.hist.push({q:o,ok:!!certosLig[i],ms:ms,dica:LIC.dica||0}));else LIC.hist.push({q:qb,ok:ok,ms:ms,dica:LIC.dica||0});}
   const pe=$('#pe');pe.classList.add('mostra');
   $('#dica').style.display='none';
   if(typeof temTelaPropria==='function'&&temTelaPropria(q))verbosConferir(q,ok);
@@ -494,14 +497,15 @@ function conferir(){
     if(ehF78())falar(elogio);
     $('#fb-s').innerHTML='+'+ganho+' moedas'+extra;
     somCerto();somMoeda();
-    if(LIC.rev)tirarErrado(qb);
+    if(LIC.rev)(origens||[qb]).forEach(tirarErrado);
     if(primeira&&q.__item)revisaoResultado(q.__item,true,LIC.dica||0);
   }else{
     LIC.erros++;LIC.combo=0;LIC.vidas--;LIC.errosSeguidos=(LIC.errosSeguidos||0)+1;guiaPose('p04');regStat(LIC.l.id,'erros');pe.classList.add('errado');
     if(LIC.errosSeguidos>=2){const lm=$('#palco .lembrete');if(lm)lm.open=true;}
-    guardarErrado(qb);
+    const vaiProCaderno=erradas.length?erradas:[qb];
+    vaiProCaderno.forEach(guardarErrado);
     if(!temTelaPropria(q)&&typeof balanca==='function')balanca($('#palco .alt.errada'));
-    if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(qb);}
+    if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else vaiProCaderno.forEach(o=>revisaoErro(o));}
     $('#selo').innerHTML=(LIC.errosSeguidos||0)>=2&&ativo('capi-p04')?imgArte('capi-p04',{cls:'mascote comp avatar',alt:'Capi'}):MASC('pensa','avatar');
     const calma=falaDoErro(q);
     $('#fb-t').innerHTML=IC.refazer+'<span>'+escapa(calma)+'</span>';
@@ -510,9 +514,13 @@ function conferir(){
        2 perguntas depois. O item errado em si já foi para o caderno (guardarErrado) e volta amanhã na revisão espaçada. */
     let voltaIrma=false,voltaIgual=false;
     if(!q.__rep&&LIC.vidas>0){
-      const irma=irmaDe(qb);
-      if(irma){LIC.qs.splice(Math.min(LIC.qs.length,LIC.i+3),0,irma);voltaIrma=true;}
-      else{const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);voltaIgual=true;}
+      /* um erro, uma reaparição (regra de testes/irmas.js): no ligar, a irmã é do primeiro par errado que tenha irmã; os outros pares
+         errados já foram para o caderno e para a revisão espaçada logo acima */
+      for(const o of vaiProCaderno){
+        const irma=irmaDe(o);
+        if(irma){LIC.qs.splice(Math.min(LIC.qs.length,LIC.i+3),0,irma);voltaIrma=true;break;}
+      }
+      if(!voltaIrma){const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);voltaIgual=true;}
     }
     $('#fb-s').innerHTML='A resposta certa é <b>'+htmlSeguro(q.answer,120)+'</b>.'+
       (voltaIrma?' Vamos treinar uma parecida daqui a pouco.':(voltaIgual?' Esta pergunta volta no fim para você tentar de novo.':''));

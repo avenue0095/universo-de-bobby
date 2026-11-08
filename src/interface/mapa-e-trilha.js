@@ -206,6 +206,8 @@ function renderTrilha(){
   ligarRotina();
   /* nó trancado: continua no caminho do teclado (aria-disabled, não disabled) e explica o que falta em vez de ficar mudo */
   document.body.dataset.hora=horaDoDia();
+  /* a cena nunca rola de lado (navegador sem overflow:clip): se o foco de um nó da borda rolar a cena, ela volta na hora */
+  $('#tela').querySelectorAll('.cena').forEach(c=>c.addEventListener('scroll',()=>{if(c.scrollLeft||c.scrollTop){c.scrollLeft=0;c.scrollTop=0;}},{passive:true}));
   $('#tela').querySelectorAll('.vivo').forEach(b=>b.addEventListener('click',()=>tocarVivo(b)));
   pintarPendurados();
   $('#tela').querySelectorAll('.bt').forEach(b=>

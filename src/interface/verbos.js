@@ -34,6 +34,9 @@ const OBJ_POR_ETAPA={
 const NOME_OBJ={semente:['semente','sementes','a'],maca:['maçã','maçãs','a'],concha:['concha','conchas','a'],caixa:['caixa','caixas','a'],lanche:['lanche','lanches','o'],fatia:['fatia','fatias','a'],letra:['peça','peças','a'],vagao:['vagão','vagões','o'],placa:['placa','placas','a'],bilhete:['bilhete','bilhetes','o']};
 const art=(nome,pl)=>(nome[2]==='o'?(pl?'os':'o'):(pl?'as':'a'));
 const quant=nome=>nome[2]==='o'?'Quantos':'Quantas';
+/* "1 semente", "2 sementes" (revisão de 08/11/2026: saía "São 1 sementes") */
+const contaObj=(n,nome)=>n+' '+(n===1?nome[0]:nome[1]);
+const saoObj=(n,nome)=>(n===1?'É ':'São ')+contaObj(n,nome);
 const umA=nome=>nome[2]==='o'?'um':'uma';
 function objetoDaFase(l){
   const id=String(l&&l.id||''),mat=id.charAt(0)==='p'?'pt':(id.charAt(0)==='e'?'en':'mat');
@@ -66,27 +69,27 @@ function comVerbo(q,l){
   if(q.type==='mc'&&(m=p.match(/vem (depois|antes) do (\d+)\?/i))&&+m[2]<=20&&+m[2]>=1){
     const n=+m[2],dep=m[1].toLowerCase()==='depois',nome=NOME_OBJ[tipoObj];
     q.verbo='tocar-objetos';q.objetos={n:dep?n+1:n,tipo:tipoObj,nova:dep?1:0,tirada:dep?0:1};q.figure='';
-    q.prompt=dep?'São '+n+' '+nome[1]+' e chegou mais '+umA(nome)+'. Toque em cada '+umA(nome)+' para contar: que número vem depois do '+n+'?'
-              :'São '+n+' '+nome[1]+' e '+umA(nome)+' saiu. Toque n'+art(nome,true)+' que ficaram para contar: que número vem antes do '+n+'?';
+    q.prompt=dep?saoObj(n,nome)+' e chegou mais '+umA(nome)+'. Toque em cada '+umA(nome)+' para contar: que número vem depois do '+n+'?'
+              :saoObj(n,nome)+' e '+umA(nome)+' saiu. Toque n'+art(nome,true)+' que ficaram para contar: que número vem antes do '+n+'?';
     return q;
   }
   if(q.type==='input'&&(m=p.match(/Se você tem (\d+) figurinhas e ganha mais 1, fica com quantas\?/i))&&+m[1]<=20){
     const n=+m[1],nome=NOME_OBJ[tipoObj];
     q.type='mc';q.options=shufA([String(n+1),String(n),String(n+2)]);q.answer=String(n+1);
     q.verbo='tocar-objetos';q.objetos={n:n+1,tipo:tipoObj,nova:1,tirada:0};
-    q.prompt='Você tinha '+n+' '+nome[1]+' e ganhou mais '+umA(nome)+'. Toque em cada '+umA(nome)+' para contar: com '+quant(nome).toLowerCase()+' ficou?';
+    q.prompt='Você tinha '+contaObj(n,nome)+' e ganhou mais '+umA(nome)+'. Toque em cada '+umA(nome)+' para contar: com '+quant(nome).toLowerCase()+' ficou?';
     return q;
   }
   if(q.type==='input'&&(m=p.match(/^(\d+) (bolinhas|balas) (repartidas igualmente em|divididas entre) (\d+) (grupos|crianças)/i))&&+m[1]<=24&&+m[4]<=5){
     const n=+m[1],g=+m[4],nome=NOME_OBJ[tipoObj];
     q.verbo='arrastar';q.objetos={n:n,tipo:tipoObj};q.cestas=g;q.figure='';q.modo='cada';
-    q.prompt='Arraste '+art(nome,true)+' '+n+' '+nome[1]+' para as '+g+' cestas, o mesmo tanto em cada uma. '+quant(nome)+' ficam em cada cesta?';
+    q.prompt='Arraste '+art(nome,n!==1)+' '+contaObj(n,nome)+' para as '+g+' cestas, o mesmo tanto em cada uma. '+quant(nome)+' ficam em cada cesta?';
     return q;
   }
   if(q.type==='grupinhos'&&q.alvoG<=5&&q.alvoG*q.alvoP<=24){
     const n=q.alvoG*q.alvoP,nome=NOME_OBJ[tipoObj];
     q.verbo='arrastar';q.objetos={n:n,tipo:tipoObj};q.cestas=q.alvoG;q.modo='total';
-    q.prompt='Monte '+q.alvoG+' grupos de '+q.alvoP+': arraste '+q.alvoP+' '+nome[1]+' para cada cesta. '+quant(nome)+' são ao todo?';
+    q.prompt='Monte '+q.alvoG+(q.alvoG===1?' grupo':' grupos')+' de '+q.alvoP+': arraste '+contaObj(q.alvoP,nome)+' para cada cesta. '+quant(nome)+' são ao todo?';
     return q;
   }
   /* letra dentro da palavra → tocar na letra */
@@ -481,6 +484,16 @@ function verbosAcertou(q){
   return undefined;
 }
 /* a pergunta que vai para o caderno, a revisão e a irmã: no ligar, a pergunta de origem do primeiro par */
+/* no ligar, quais pares ficaram certos: pelos traços (VER.lig) ou, sem traços (teclado, testes), pelo texto da resposta */
+function ligarParesCertos(q){
+  if(!q||q.verbo!=='ligar')return null;
+  const lig=(typeof VER==='object'&&VER.lig)||{};
+  if(Object.keys(lig).length)return q.pares.map((p,i)=>lig[i]===i);
+  const partes=String(LIC.resp==null?'':LIC.resp).split('; ');
+  return q.pares.map((p,i)=>partes.indexOf(p.e+' → '+p.r)>=0);
+}
+/* as perguntas de origem de cada par (o caderno guarda o par errado, não o primeiro) */
+const origensDoLigar=q=>q&&q.verbo==='ligar'&&Array.isArray(q.__origens)&&q.__origens.length===q.pares.length?q.__origens:null;
 function perguntaBase(q){return q&&q.verbo==='ligar'&&q.__base?q.__base:q;}
 /* "Ainda não entendi" nos verbos com tela própria: tira caminhos ou cartas erradas, ou liga o primeiro par */
 function verbosAjuda(q){

@@ -44,7 +44,9 @@ async function main() {
   const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=' + portaCdp, '--user-data-dir=' + perfil, '--no-first-run', '--no-default-browser-check',
     '--disable-gpu', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
   const limpa = () => { try { chrome.kill(); } catch (e) {} try { servidor.close(); } catch (e) {} };
-  process.on('exit', limpa);
+  /* o perfil temporario do Chrome sai em QUALQUER saida (fim normal, falha ou excecao), nao so no fim feliz */
+  const tiraPerfil = () => { try { fs.rmSync(perfil, { recursive: true, force: true }); } catch (e) {} };
+  process.on('exit', () => { limpa(); tiraPerfil(); });
   const problemas = [], feito = [];
   try {
     const alvos = await esperaHttp('http://127.0.0.1:' + portaCdp + '/json/list');
@@ -102,6 +104,34 @@ async function main() {
       const linha = (a, b, n) => Array.from({ length: n + 1 }, (_, k) => [a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n]);
       /* abre uma pergunta montada (preparo por JS; a interacao e por toque real) */
       const pergunta = async (materia, ui, li, expr) => { await js("fecharLicao();fecharFolha();usarMateria('" + materia + "');fecharFolha();document.querySelector('#modal').classList.remove('on');S.faixa='f910';abrirLicao(" + ui + ',' + li + ");LIC.etapa='questao';LIC.i=0;LIC.qs=[" + expr + "];pintarLicao();0"); await dorme(300); };
+
+      /* (0) MAPA (revisao de 08/11/2026). (a) tocar num objeto trancado ou a frente nao rola a cena de lado (scrollLeft fica 0; antes
+         o foco rolava ate 25 px e abria uma faixa vazia); (b) o rotulo do objeto atual nunca fica embaixo do personagem e nao vira uma palavra
+         por linha (elementFromPoint nos cantos do rotulo, so o personagem e o rotulo recebendo toque no teste) */
+      if (toqueTela) {
+        let tocados = 0; const desliza = [];
+        for (const mat of ['mat', 'pt', 'en']) for (const n of [1, 4, 7, 10]) {
+          await js("(()=>{fecharLicao();fecharFolha();document.querySelector('#modal').classList.remove('on');usarMateria('" + mat + "');fecharFolha();S.feitas={};UNITS.forEach(u=>{if(u.n<" + n + "){u.lessons.forEach(l=>S.feitas[l.id]=3);S.feitas['rev'+MATERIA+u.n]=3;}});salvar();renderTrilha();0})()"); await dorme(250);
+          for (const li of [1, 3, 5]) {
+            const sel = '#etapa-' + n + ' .no[data-li="' + li + '"] .bt';
+            if (!(await js('!!document.querySelector(' + JSON.stringify(sel) + ')'))) continue;
+            await toque(sel, 'objeto trancado ' + mat + n + ' ' + li); tocados++; await dorme(120);
+            const sl = await js("(()=>{const c=document.querySelector('#etapa-" + n + " .cena');return c.scrollLeft+c.scrollTop})()");
+            if (sl) desliza.push(mat + n + ':' + li + '=' + sl);
+          }
+        }
+        if (desliza.length) problemas.push(rot + ' a cena rolou de lado depois do toque: ' + desliza.slice(0, 8).join(' '));
+        const rotRuins = await js(`(()=>{const out=[];const st=document.createElement('style');st.textContent='#tela .trilha *{pointer-events:none!important} #tela .voce,#tela .voce *,#tela .no.atual .rot,#tela .no.atual .rot *{pointer-events:auto!important}';
+          ['mat','pt','en'].forEach(m=>{usarMateria(m);fecharFolha();for(let n=1;n<=10;n++)for(const li of [0,2,4]){S.feitas={};UNITS.forEach(u=>{if(u.n<n){u.lessons.forEach(l=>S.feitas[l.id]=3);S.feitas['rev'+MATERIA+u.n]=3;}});UNITS[n-1].lessons.slice(0,li).forEach(l=>S.feitas[l.id]=3);
+            Object.keys(NO_ANTES).forEach(k=>delete NO_ANTES[k]);renderTrilha();document.head.appendChild(st);
+            const no=document.querySelector('.no.atual'),rot=no&&no.querySelector('.rot');if(!rot){out.push(m+n+' sem rotulo');st.remove();continue;}rot.scrollIntoView({block:'center'});
+            const b=rot.getBoundingClientRect();[[b.left+12,b.top+6],[b.right-12,b.top+6],[b.left+12,b.bottom-6],[b.right-12,b.bottom-6],[b.left+b.width/2,b.top+b.height/2]].forEach(p=>{const t=document.elementFromPoint(p[0],p[1]);if(!(t&&(t===rot||rot.contains(t))))out.push(m+n+':'+li+' "'+rot.textContent+'" coberto por '+(t?String(t.className.baseVal!==undefined?t.className.baseVal:t.className):'nada'));});
+            if(b.width<80)out.push(m+n+':'+li+' "'+rot.textContent+'" estreito '+Math.round(b.width));st.remove();}});
+          S.feitas={};salvar();usarMateria('mat');fecharFolha();renderTrilha();return out;})()`);
+        if (rotRuins.length) problemas.push(rot + ' rotulo do objeto atual: ' + [...new Set(rotRuins)].slice(0, 6).join(' | '));
+        feito.push(rot + ': mapa, ' + tocados + ' toques em objetos trancados sem a cena rolar de lado; rotulo do objeto atual livre do personagem nas 30 etapas');
+        coleta(rot + ' mapa');
+      }
 
       const centro = (sel) => js("(()=>{const e=document.querySelector(" + JSON.stringify(sel) + ");const r=e.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]})()");
 

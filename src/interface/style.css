@@ -383,7 +383,7 @@ img{max-width:100%}
 .etapa-prog svg{width:16px;height:16px;color:var(--cor-acerto)}
 .etapa-prog.ok{background:var(--cor-acerto-suave);border-color:var(--cor-acerto)}
 
-.cena{position:relative;aspect-ratio:5/8;background:var(--materia-chao);overflow:hidden;--rev:70%}
+.cena{position:relative;aspect-ratio:5/8;background:var(--materia-chao);overflow:hidden;overflow:clip;--rev:70%}   /* clip: o foco num nó da borda não rola a cena de lado (hidden ainda deixa rolar por programa e por foco) */
 .cena-base,.cena-luz{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block}
 .cena-luz{-webkit-mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));
   mask-image:linear-gradient(to bottom,transparent var(--rev),black calc(var(--rev) + 10%));transition:--rev var(--mov-lento) var(--curva-move)}
@@ -1932,3 +1932,21 @@ body[data-hora="noite"] .cena>.hora{background:var(--hora-noite);mix-blend-mode:
 .tracar-fim[data-k].sel{border-color:var(--materia-base)}
 .tracar-fim[data-k].certa{border-color:var(--cor-acerto)}
 .tracar-fim[data-k].errada{border-color:var(--cor-ainda)}
+/* revisão de 08/11/2026: no cenário por peça o personagem fica em pé SOBRE a base do objeto (pés na linha) e o rótulo fica embaixo dela,
+   então um nunca cobre o outro; o rótulo tem largura mínima para não virar uma palavra por linha */
+.trilha.objetos .voce{transform:translate(calc(-100% - var(--esp-8)),-100%)}
+.trilha.objetos .voce.d{transform:translate(var(--esp-8),-100%)}
+.no.obj-no .rot{width:max-content;min-width:88px;max-width:140px;text-align:center}
+/* revisão de 08/11/2026: folha (bilhete, baú, parada...) cabe na tela pequena. A folha nunca passa da altura da janela, os botões ficam
+   presos no pé da folha (sempre à vista, mesmo quando o texto rola) e, em tela baixa, o Bobby e o texto encolhem */
+.folha-in{max-height:calc(100vh - var(--esp-48));max-height:calc(100dvh - var(--esp-48))}
+.folha-in .folha-bts{position:sticky;bottom:calc(-1 * var(--esp-24));z-index:1;background:var(--cor-superficie);padding:var(--esp-8) 0;margin-bottom:calc(-1 * var(--esp-8))}
+@media (max-height:700px){
+  .folha{padding:var(--esp-16)}
+  .folha-in{padding:var(--esp-16);max-height:calc(100vh - var(--esp-32));max-height:calc(100dvh - var(--esp-32))}
+  .folha-in .folha-bts{bottom:calc(-1 * var(--esp-16));margin-top:var(--esp-8)}
+  .folha-bobby,.folha-bobby .mascote{height:72px}
+  .folha-bobby .acompanhante{width:40px;height:40px}
+  .folha-in h2{margin-top:0}
+  .bilhete-texto{font-size:var(--t-corpo)!important;line-height:var(--lh-corpo)!important}
+}
