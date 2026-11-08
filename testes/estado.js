@@ -231,5 +231,27 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     A.strictEqual(a.avaliar('STORE.perfis[0].dados.config.diasLivres.length'), 0);
   });
 
+  await teste('22. musica: perfil gravado antes da marca musicaRevista abre com a musica desligada UMA vez; o resto do estado fica igual; depois vale a escolha', () => {
+    const a = abrir({});
+    a.avaliar("novoPerfil('Lia','#12A06E');S.musica=true;S.moedas=321;S.feitas['1.1']=2;S.vibra=false;salvar()");
+    const guarda = JSON.parse(a.guarda['universo-bobby-v4']);
+    const antes = guarda.perfis[0].dados;
+    delete antes.musicaRevista; antes.musica = true;                    /* como ficou o perfil de quem jogou antes da correcao */
+    const b = abrir({ 'universo-bobby-v4': JSON.stringify(guarda) });
+    const depois = J(b.avaliar('S'));
+    A.strictEqual(depois.musica, false, 'perfil antigo continuou com a musica ligada');
+    A.strictEqual(depois.musicaRevista, true);
+    const sem = (o) => { const c = J(o); delete c.musica; delete c.musicaRevista; return c; };
+    A.deepStrictEqual(sem(depois), sem(J(b.avaliar('estadoDe(' + JSON.stringify(Object.assign({}, antes, { musica: false, musicaRevista: true })) + ')'))));
+    A.strictEqual(depois.moedas, 321); A.strictEqual(depois.feitas['1.1'], 2); A.strictEqual(depois.vibra, false);
+    /* a crianca liga de novo: agora a escolha fica */
+    b.avaliar('S.musica=true;salvar()');
+    const c = abrir({ 'universo-bobby-v4': b.guarda['universo-bobby-v4'] });
+    A.strictEqual(c.avaliar('S.musica'), true, 'depois da migracao a escolha de ligar precisa ficar');
+    /* perfil antigo que ja estava com a musica desligada continua desligado */
+    A.strictEqual(a.avaliar('estadoDe({musica:false}).musica'), false);
+    A.strictEqual(a.avaliar('estadoVazio().musica'), false);
+  });
+
   resumo('estado.js');
 })();

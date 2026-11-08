@@ -149,6 +149,7 @@ function telaResponsavel(){
      'Ela não é controle parental com valor legal: quem sabe mexer no navegador consegue tirá-la. '+
      'A cópia do perfil é um arquivo de texto comum, sem proteção: guarde com cuidado, porque tem o progresso de uma criança. '+
      'O app registra números de uso (dias, perguntas, acertos) só neste aparelho, sem nome nem texto.</p>';
+  if(typeof planoHTML==='function')h+=planoHTML();
   h+=controlesHTML();
   h+=medidorHTML();
   h+='<div id="resp-aviso"></div>';
@@ -168,6 +169,7 @@ function telaResponsavel(){
   $('#bx-perfil').addEventListener('click',baixarPerfil);
   $('#rs-perfil').addEventListener('click',restaurarPerfil);
   $('#apagar-tudo').addEventListener('click',apagarTudoPasso1);
+  const va=$('#ver-assinatura');if(va)va.addEventListener('click',telaAssinatura);
   $('#sn-perfil').addEventListener('click',()=>pedirSenha(
     temSenha()?'Nova senha':'Criar senha',
     'Escolha de 4 a 6 números. É uma trava neste aparelho para a criança não entrar sozinha, não um controle parental com valor legal. Anote em algum lugar, não dá para recuperar.',

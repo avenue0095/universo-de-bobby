@@ -1,6 +1,8 @@
 /* ---------- lição ---------- */
 let LIC={};
 function abrirLicao(ui,li){
+  /* muro da venda (planos.js): no modo 'aberto' passa direto; no 'pago' sem assinatura a fase não abre e aparece a tela Assinatura */
+  if(typeof portaoDeAcesso==='function'&&!portaoDeAcesso())return;
   calar();if(LIC&&LIC.tDica){clearTimeout(LIC.tDica);}
   garantirDia();
   /* limite de blocos do dia, definido pelo responsável: só "até amanhã" (o responsável libera com a senha) */
@@ -366,7 +368,9 @@ function ajudaForte(){
   LIC.dica=2;
   const cx=$('#caixa-dica');
   let msg='';
-  if(q.type==='mc'){
+  const mv=typeof verbosAjuda==='function'?verbosAjuda(q):'';
+  if(mv){msg=mv;}
+  else if(q.type==='mc'){
     const errs=$('#palco').querySelectorAll('.alt');
     let tirados=0;
     errs.forEach(b=>{
@@ -454,11 +458,14 @@ function conferir(){
   const q=LIC.qs[LIC.i];LIC.conferido=true;
   /* escolha: compara o texto exato da opcao (Lívia e lívia são opções diferentes de propósito);
      o resto passa por acertou(), que aceita 1,5 e 1.5 e ignora acento e maiúscula na digitação */
-  const ok=q.type==='mc'?String(LIC.resp)===String(q.answer):acertou(LIC.resp,q.answer);
+  const okV=typeof verbosAcertou==='function'?verbosAcertou(q):undefined;
+  const ok=okV!==undefined?okV:(q.type==='mc'?String(LIC.resp)===String(q.answer):acertou(LIC.resp,q.answer));
   const primeira=!q.__rep;
+  /* no ligar, quem vai para o caderno, para a revisão espaçada e para a pergunta irmã é a pergunta de origem (ligar é o jeito de responder) */
+  const qb=typeof perguntaBase==='function'?perguntaBase(q):q;
   const ms=LIC.tQ?Date.now()-LIC.tQ:0;
   LIC.respondidas=(LIC.respondidas||0)+1;
-  if(primeira)LIC.hist.push({q:q,ok:ok,ms:ms,dica:LIC.dica||0});
+  if(primeira)LIC.hist.push({q:qb,ok:ok,ms:ms,dica:LIC.dica||0});
   const pe=$('#pe');pe.classList.add('mostra');
   $('#dica').style.display='none';
   if(typeof temTelaPropria==='function'&&temTelaPropria(q))verbosConferir(q,ok);
@@ -487,14 +494,14 @@ function conferir(){
     if(ehF78())falar(elogio);
     $('#fb-s').innerHTML='+'+ganho+' moedas'+extra;
     somCerto();somMoeda();
-    if(LIC.rev)tirarErrado(q);
+    if(LIC.rev)tirarErrado(qb);
     if(primeira&&q.__item)revisaoResultado(q.__item,true,LIC.dica||0);
   }else{
     LIC.erros++;LIC.combo=0;LIC.vidas--;LIC.errosSeguidos=(LIC.errosSeguidos||0)+1;guiaPose('p04');regStat(LIC.l.id,'erros');pe.classList.add('errado');
     if(LIC.errosSeguidos>=2){const lm=$('#palco .lembrete');if(lm)lm.open=true;}
-    guardarErrado(q);
+    guardarErrado(qb);
     if(!temTelaPropria(q)&&typeof balanca==='function')balanca($('#palco .alt.errada'));
-    if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(q);}
+    if(primeira){if(q.__item)revisaoResultado(q.__item,false,0);else revisaoErro(qb);}
     $('#selo').innerHTML=(LIC.errosSeguidos||0)>=2&&ativo('capi-p04')?imgArte('capi-p04',{cls:'mascote comp avatar',alt:'Capi'}):MASC('pensa','avatar');
     const calma=falaDoErro(q);
     $('#fb-t').innerHTML=IC.refazer+'<span>'+escapa(calma)+'</span>';
@@ -503,7 +510,7 @@ function conferir(){
        2 perguntas depois. O item errado em si já foi para o caderno (guardarErrado) e volta amanhã na revisão espaçada. */
     let voltaIrma=false,voltaIgual=false;
     if(!q.__rep&&LIC.vidas>0){
-      const irma=irmaDe(q);
+      const irma=irmaDe(qb);
       if(irma){LIC.qs.splice(Math.min(LIC.qs.length,LIC.i+3),0,irma);voltaIrma=true;}
       else{const c=Object.assign({},q);c.__rep=true;LIC.qs.push(c);voltaIgual=true;}
     }

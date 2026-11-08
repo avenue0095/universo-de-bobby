@@ -17,6 +17,7 @@ function tirarErrado(q){
   S.errados[n]=lista.filter(x=>chaveQ(x)!==k);salvar();
 }
 function abrirRevisaoMundo(ui){
+  if(typeof portaoDeAcesso==='function'&&!portaoDeAcesso())return;
   const u=UNITS[ui];
   let qs=(S.errados[MATERIA+u.n]||[]).slice().sort(()=>Math.random()-.5).slice(0,10);
   const faltam=Math.max(0,6-qs.length);
@@ -68,6 +69,7 @@ function revisaoDoDiaPronta(){
   return n;
 }
 function abrirRevisaoDia(){
+  if(typeof portaoDeAcesso==='function'&&!portaoDeAcesso())return;
   garantirDia();
   if(limiteDeBlocosAtingido()){mostrarParada(true);return;}
   const chaves=revisaoSelecionar(S.config.revisaoPorDia);

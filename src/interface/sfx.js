@@ -100,7 +100,8 @@ const SFX={
   missao:(c,o,t)=>{sSino(c,o,t,783.99,.3,.35);sSino(c,o,t+.12,987.77,.3,.35);return .35;},                                 /* 25 */
   pega:(c,o,t)=>{sTom(c,o,t,1800,.05,{vol:.2});return .05;},                                                              /* 26 */
   encaixa:(c,o,t)=>{sTom(c,o,t,140,.12,{vol:.3,tipo:'triangle'});sSino(c,o,t+.02,1318.5,.3,.2);return .3;},
-  solta:(c,o,t)=>{sRuido(c,o,t,.12,{tipo:'highpass',de:2000,vol:.14});return .12;},
+  /* solta (objeto volta ao lugar): "plop" macio que desce de E5 para A4, com um toque de madeira por baixo. Antes era ruído acima de 2 kHz (chiado) */
+  solta:(c,o,t)=>{sTom(c,o,t,659.25,.14,{vol:.22,ate:440,ataque:.006});sTom(c,o,t+.01,329.63,.1,{tipo:'triangle',vol:.08,filtro:['lowpass',1200]});return .15;},
   conquista:(c,o,t)=>{sSino(c,o,t,880,.5,.32);sSino(c,o,t+.12,1318.5,.5,.32);sRuido(c,o,t+.1,.3,{de:1500,ate:4000,vol:.12});return .65;}, /* 27 */
   parada:(c,o,t)=>{[659.25,523.25,392].forEach((f,i)=>sTom(c,o,t+i*.45,f,.9,{tipo:'triangle',vol:.22,ataque:.02,h2:.25}));return 1.6;}, /* 28 */
   /* motivos dos personagens, 2 a 4 notas */

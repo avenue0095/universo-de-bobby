@@ -141,6 +141,8 @@ function ajudaEn(q,p,a,n){
 }
 function ajudaDe(q){
   if(!q)return aj('Leia a pergunta de novo devagar.','','generica');
+  /* ligar (1B2): o "Como fazer" é o da pergunta de origem (mesma habilidade); a resposta não é falada, os traços certos aparecem na tela */
+  if(q.verbo==='ligar'){const h=q.__base?ajudaDe(q.__base):aj('Leia a pergunta de novo devagar.','','generica');return aj(h.metodo,'',h.fonte||'maker');}
   const a=AJ_TXT(q.answer),p=AJ_TXT(q.prompt),n=AJ_NUMS(p);
   if(q.dica)return aj(AJ_TXT(q.dica)?String(q.dica):'', 'A resposta é '+a+'.','maker');
   if(q.type==='blocos'){const v=+a,c=Math.floor(v/100),d=Math.floor((v%100)/10),u=v%10;const pt=[];if(c)pt.push(c+' placa'+(c>1?'s':''));if(d)pt.push(d+' barrinha'+(d>1?'s':''));if(u)pt.push(u+' cubinho'+(u>1?'s':''));

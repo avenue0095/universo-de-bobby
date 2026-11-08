@@ -3,12 +3,13 @@
 /* Verbos na cena (sintese 1B, mesa 03 mudancas 1 e 2). Percorre 30 fases geradas por materia e mede:
    (a) na fase de contagem 1.1, pelo menos 5 das 8 perguntas com objetos tocaveis;
    (b) o reordenador nunca deixa 3 verbos iguais seguidos quando a fase tem verbos suficientes para evitar;
-   (c) quantas fases tem 3 ou mais verbos oficiais (tocar, arrastar, ligar, ordenar, tracar). ATENCAO: a regra "3 verbos por fase" so fecha
-       na sessao 1B2 (ligar e tracar, que valem para qualquer pergunta); aqui ela e MEDIDA e impressa, e falha so se regredir abaixo do piso atual.
+   (c) 1B2: TODA fase das 150 (20 rodadas cada) tem 3 ou mais verbos oficiais (tocar, arrastar, ligar, ordenar, tracar) e nenhuma trinca;
+   (d) o ligar so monta pares de gabarito unico.
    Uso: node testes/variedade.js */
 const A = require('assert');
 const { carregarApp } = require('./lib/carregar.js');
 const { teste, resumo } = require('./lib/mini.js');
+const J = (x) => JSON.parse(JSON.stringify(x));
 
 (async () => {
   const a = carregarApp(9, {}); a.avaliar("novoPerfil('Zeca','#12A06E')");
@@ -38,10 +39,58 @@ const { teste, resumo } = require('./lib/mini.js');
   await teste('3. cada verbo da sessao 1B1 aparece em fases geradas: tocar com objetos, arrastar, tocar na letra, ordenar, ouvir e tocar', () => {
     ['tocar', 'arrastar', 'ordenar', 'digitar'].forEach((v) => A.ok(r.verbos[v] > 0, 'sem ' + v));
     const q = a.avaliar(`(()=>{const o={};['mat','pt','en'].forEach(m=>{usarMateria(m);MATERIAS[m].units().forEach(u=>u.lessons.forEach(l=>{for(let t=0;t<3;t++)genQuestions(l,8).forEach(q=>{if(q.verbo)o[q.verbo]=(o[q.verbo]||0)+1;});}));});return o;})()`);
-    ['tocar-objetos', 'arrastar', 'tocar-letra', 'ordenar', 'tocar-ouvir'].forEach((v) => A.ok(q[v] > 0, 'nenhuma pergunta com verbo ' + v));
+    ['tocar-objetos', 'arrastar', 'tocar-letra', 'ordenar', 'tocar-ouvir', 'ligar', 'tracar', 'arrastar-resposta'].forEach((v) => A.ok(q[v] > 0, 'nenhuma pergunta com verbo ' + v));
   });
-  await teste('4. piso de variedade (nao regredir): pelo menos 8 das 90 fases com 2+ verbos oficiais (medido em 1B1: 9); 3+ verbos fica para 1B2', () => {
-    A.ok(r.fases2 >= 8, 'fases com 2+ verbos: ' + r.fases2);
+  /* 1B2: as 150 fases, 20 rodadas cada, com o gerador de verdade (inclui ligar, tracar e arrastar a resposta) */
+  const v = a.avaliar(`(()=>{const o={fases:0,rodadas:0,menos3:{},trincas:[],ligar:0,tracar:0,arrastarR:0,fasesComLigar:new Set(),ligarRuim:[],ligarRepete:[],semBase:0,dist:{}};
+    ['mat','pt','en'].forEach(m=>{usarMateria(m);MATERIAS[m].units().forEach(u=>u.lessons.forEach(l=>{o.fases++;
+      for(let t=0;t<20;t++){const qs=genQuestions(l,8);o.rodadas++;
+        const vs=qs.map(q=>verboDe(q)),of=new Set(vs.filter(v=>VERBOS_OFICIAIS.indexOf(v)>=0));
+        if(of.size<3)o.menos3[l.id]=(o.menos3[l.id]||0)+1;
+        o.dist[of.size]=(o.dist[of.size]||0)+1;
+        for(let i=2;i<vs.length;i++)if(vs[i]===vs[i-1]&&vs[i]===vs[i-2]){o.trincas.push(l.id+' '+vs.join(','));break;}
+        const chaves=new Set(qs.filter(q=>q.verbo!=='ligar').map(chaveNucleo));
+        qs.forEach(q=>{
+          if(q.verbo==='tracar')o.tracar++;
+          if(q.verbo==='arrastar-resposta')o.arrastarR++;
+          if(q.verbo!=='ligar')return;
+          o.ligar++;o.fasesComLigar.add(l.id);
+          if(!q.__base||typeof q.__base.prompt!=='string')o.semBase++;
+          const es=new Set(q.pares.map(p=>chaveVerbo(p.e))),rs=new Set(q.pares.map(p=>chaveVerbo(p.r)));
+          const resp=q.pares.map(p=>p.e+' → '+p.r).join('; ');
+          if(q.pares.length!==3||es.size!==3||rs.size!==3||q.answer!==resp||q.dir.every((d,i)=>d===i)||/—/.test(resp))o.ligarRuim.push(l.id+': '+q.answer);
+          q.pares.forEach(p=>{if(chaves.has(chaveVerbo(p.e)+'|'+chaveVerbo(p.r)))o.ligarRepete.push(l.id+': '+p.e);});
+        });
+      }}));});
+    o.fasesComLigar=o.fasesComLigar.size;return o;})()`);
+  console.log('          1B2: ' + v.fases + ' fases x 20 rodadas | verbos oficiais por fase (rodadas): ' + JSON.stringify(v.dist) + ' | ligar em ' + v.fasesComLigar + ' fases (' + v.ligar + ' perguntas) | tracar ' + v.tracar + ' | arrastar a resposta ' + v.arrastarR);
+  await teste('4. 1B2: TODA fase (150, 20 rodadas cada) tem pelo menos 3 verbos oficiais diferentes (tocar, arrastar, ligar, ordenar, tracar)', () => {
+    A.strictEqual(v.fases, 150);
+    A.deepStrictEqual(JSON.parse(JSON.stringify(v.menos3)), {}, 'fases com menos de 3 verbos: ' + JSON.stringify(v.menos3));
+  });
+  await teste('5. 1B2: nenhuma trinca de verbos iguais seguidos em nenhuma das 3.000 rodadas', () => {
+    A.deepStrictEqual(J(v.trincas.slice(0, 5)), []);
+  });
+  await teste('6. 1B2: ligar tem 3 pares sem repeticao, direita embaralhada, gabarito legivel, pergunta de origem para o caderno, e nao repete pergunta da fase', () => {
+    A.ok(v.ligar > 1500 && v.fasesComLigar >= 90, 'ligar em poucas fases: ' + v.fasesComLigar);
+    A.deepStrictEqual(J(v.ligarRuim.slice(0, 5)), []);
+    A.deepStrictEqual(J(v.ligarRepete.slice(0, 5)), []);
+    A.strictEqual(v.semBase, 0);
+    A.ok(v.tracar >= 2900, 'tracar em poucas rodadas: ' + v.tracar);
+  });
+  await teste('7. 1B2: regra do gabarito unico do ligar (pergunta de escolha so entra se as outras respostas forem distratores dela)', () => {
+    const r = a.avaliar(`(()=>{const P=(q)=>parDe(q);
+      const vogal=P(mc('Qual delas é uma vogal?','I',['C','B','D'])),depoisA=P(txtQ('Escreva a vogal que vem depois de A.','E')),quantas=P(inp('Quantas vogais tem PIPA?',2));
+      const sil1=P(mc('Qual é a primeira sílaba de PORTA?','por',['ca','pi','lo'])),sil2=P(mc('Qual é a primeira sílaba de CANETA?','ca',['por','pi','lo'])),ult=P(mc('Qual é a última sílaba de CAMA?','ma',['ca','la','ta']));
+      const conta=P(mc('Quanto é 5 × 9?','45',['50','40','14']));
+      return {vogalComE:parCombina(vogal,depoisA),contaPura:conta.unica&&conta.e==='5 × 9',silabas:parCombina(sil1,sil2)&&parCombina(sil2,sil1),
+        camaCa:parCombina(ult,sil2),figura:P(mc('Este ângulo é...','reto',['agudo','obtuso'],{figure:'<svg></svg>'})),fracao:P(mc('Quanto é <span class="frac"><b>1</b><i>2</i></span> + <span class="frac"><b>1</b><i>2</i></span>?','1',['2','3'])),
+        vf:P(mc('O sapo pula.','Verdadeiro',['Falso'])),quantas:!!quantas}})()`);
+    A.strictEqual(r.vogalComE, false, '"Qual delas e uma vogal?" nao pode ficar ao lado da resposta E (tambem e vogal)');
+    A.ok(r.contaPura, 'conta pura vira so a conta no cartao');
+    A.ok(r.silabas, 'primeira silaba de PORTA e de CANETA combinam (ancora na palavra)');
+    A.strictEqual(r.camaCa, false, 'ultima silaba de CAMA nao pode ficar ao lado de "ca" (cabe em CAMA)');
+    A.strictEqual(r.figura, null); A.strictEqual(r.fracao, null); A.strictEqual(r.vf, null); A.ok(r.quantas);
   });
   resumo('variedade.js');
 })();

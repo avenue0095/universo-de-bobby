@@ -83,7 +83,10 @@ for (const [m, U] of UN) {
           if (h && h.m) conta('dica (como fazer)', h.m, 'pt-BR', m);
           if (h && h.r) conta('resposta da dica', h.r, 'pt-BR', m);
           const A = [];
-          if (q.type === 'mc') [1, 2, 3].forEach((n) => A.push('Tirei ' + n + ' resposta' + (n > 1 ? 's' : '') + ' errada' + (n > 1 ? 's' : '') + '. Agora escolha entre as que sobraram.'));
+          /* verbos com ajuda propria (verbos.js, verbosAjuda): ligar liga um par; tocar na letra apaga letras; tracar e arrastar a resposta tiram opcoes */
+          if (q.verbo === 'ligar') A.push('Liguei uma para você. Agora ligue as outras.', 'Os traços estão certos. Toque em Verificar.');
+          else if (q.verbo === 'tocar-letra') { const mx = Math.max(1, Math.floor(String(q.palavra || '').length / 2)); for (let n = 1; n <= mx; n++) A.push('Apaguei ' + n + ' letra' + (n > 1 ? 's' : '') + ' que não ' + (n > 1 ? 'são' : 'é') + '. Procure entre as que sobraram.'); }
+          else if (q.type === 'mc') [1, 2, 3].forEach((n) => A.push('Tirei ' + n + ' resposta' + (n > 1 ? 's' : '') + ' errada' + (n > 1 ? 's' : '') + '. Agora escolha entre as que sobraram.'));
           else if (q.type === 'blocos') A.push('Já coloquei as placas e as barrinhas para você. Agora complete só os <b>cubinhos</b>.');
           else if (q.type === 'fracao') A.push('Pintei quase tudo. Falta pintar <b>1 parte</b>.');
           else if (q.type === 'grupinhos') A.push('Já montei os grupos. Agora coloque <b>' + q.alvoP + '</b> em cada um.');

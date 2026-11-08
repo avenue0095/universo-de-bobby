@@ -14,8 +14,10 @@ function telaPerfis(){
        '<button class="lixo" data-del="'+i+'" aria-label="Apagar jogador '+escapa(p.nome)+'">'+IC.lixo+'</button>'+
        (apagando===i?'<div class="apagar-conf" role="alertdialog" aria-label="Apagar jogador"><span>Apagar este jogador?</span><div><button class="btn-acao" data-sim="'+i+'">Sim, apagar</button><button class="btn-sec" data-nao="1">Não</button></div></div>':'')+'</div>';
   });
-  h+='<button class="cartao-bt novo" id="novo-perfil"><span class="mais">+</span><b>Novo jogador</b>'+
-     '<span class="pg">começar do zero</span></button>';
+  /* limite de jogadores da assinatura (planos.js): só vale no modo 'pago' */
+  const cabeMais=typeof podeCriarPerfil!=='function'||podeCriarPerfil();
+  h+='<button class="cartao-bt novo" id="novo-perfil"'+(cabeMais?'':' disabled')+'><span class="mais">+</span><b>Novo jogador</b>'+
+     '<span class="pg">'+(cabeMais?'começar do zero':'até '+MAX_PERFIS+' jogadores por assinatura')+'</span></button>';
   h+='</div></div>';
   $('#perfis').innerHTML=h;
   $('#perfis').classList.add('on');
@@ -28,7 +30,7 @@ function telaPerfis(){
     }));
   $('#perfis').querySelectorAll('[data-sim]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.sim;apagando=-1;comSenha(()=>apagarPerfil(i));}));
   $('#perfis').querySelectorAll('[data-nao]').forEach(b=>b.addEventListener('click',()=>{apagando=-1;telaPerfis();}));
-  $('#novo-perfil').addEventListener('click',()=>pedirNome(true));
+  $('#novo-perfil').addEventListener('click',()=>{if(typeof podeCriarPerfil==='function'&&!podeCriarPerfil())return;pedirNome(true);});
 }
 function fecharPerfis(){
   apagando=-1;$('#perfis').classList.remove('on');document.body.style.overflow='';

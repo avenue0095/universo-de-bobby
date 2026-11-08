@@ -1,6 +1,6 @@
 {
- "gerado": "2026-10-24",
- "total": 99,
+ "gerado": "2026-11-08",
+ "total": 115,
  "itens": [
   {
    "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
@@ -1176,6 +1176,134 @@
     "quadro:&mdash",
     "quadro:vamos"
    ]
+  },
+  {
+   "texto": "Ligue cada pergunta à resposta certa.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "pergunta (matematica)",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Liguei uma para você. Agora ligue as outras.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Os traços estão certos. Toque em Verificar.",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Ligue cada pergunta à resposta certa.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "pergunta (portugues)",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Liguei uma para você. Agora ligue as outras.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Os traços estão certos. Toque em Verificar.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Ligue cada pergunta à resposta certa.",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "categoria": "pergunta (ingles)",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Liguei uma para você. Agora ligue as outras.",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Os traços estão certos. Toque em Verificar.",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Apaguei 1 letra que não é. Procure entre as que sobraram.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Apaguei 2 letras que não são. Procure entre as que sobraram.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Apaguei 3 letras que não são. Procure entre as que sobraram.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Apaguei 4 letras que não são. Procure entre as que sobraram.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Apaguei 5 letras que não são. Procure entre as que sobraram.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Apaguei 6 letras que não são. Procure entre as que sobraram.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Apaguei 7 letras que não são. Procure entre as que sobraram.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "ajuda extra",
+   "motivo": "texto novo da sessao 1B2 (ligar, tracar, ajuda dos verbos); regerar com a voz local",
+   "trechos_sem_clipe": []
   }
  ]
 }
