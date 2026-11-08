@@ -22,7 +22,7 @@ Sessão encerrada a pedido do Filipe por custo. Tudo abaixo está na branch `ref
 2. Lote 6 de áudio (fragmentos de resposta) e os 99 textos das perguntas com verbo.
 3. Onda 1 da síntese: 1B2 (ligar e traçar), 1D (computador como tela de jogo), 1A (dias de exploração no lugar da ofensiva na tela da criança; corações ficam), 1E (economia: portão duplo, cofrinho, loja da semana, ralos; teste de 180 dias), 1F (editor em camadas com os 52 itens, álbum, base do Bobby, companheiro em 3 estágios; toda combinação personagem x item por composição, com teste), 1G (adaptação por habilidade, diagnóstico de 10 perguntas, relatório dos pais citando BNCC só com `citavel:true`).
 4. Arte: itens do guarda-roupa por camadas (`arte/PEDIDOS-DE-ARTE.md`), 3 folhas de objetos das cenas, looks em 4 poses.
-5. Conteúdo novo: 3º ano (medidas e tempo em matemática, 20 textos curtos em português), lacunas em `docs/bncc-mapa.md`.
+5. Conteúdo novo: 3º ano (medidas e tempo em matemática, 20 textos curtos em português), lacunas em `docs/bncc-mapa.md`. APROVADO em 08/11/2026: entram os 7 itens de `docs/referencias/ENGENHARIA-REVERSA-alfabetizando-e-matematicando.md` (dinheiro, relógio, formas, padrões e historinhas como makers com arte do Flow; trilha fonológica 7-8 anos; distratores por letras confundíveis e gerador de erros de ortografia; 20 dicas ao responsável no relatório; modo 'treinar por tema'; acerto de primeira por pergunta; programa de 20 dias), nessa ordem.
 6. Fase 4: S0 a S8 em `docs/fase4/PLANO.md` (começa quando o Filipe criar Supabase, Asaas, CNPJ, advogado, contador, domínio, e-mail).
 7. Testes com crianças: filha, uma de 7 e uma de 11 a 12 anos (roteiro na mesa 03).
 
