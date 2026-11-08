@@ -6,7 +6,7 @@ Skills aplicadas, nesta ordem: `architect-first` (desenho antes do código, opç
 
 Marcas: **DADO (fonte)** é o que abri e li; **OPINIÃO** é leitura minha; **[FILIPE]** precisa da mão ou da decisão dele; **[ADV]** e **[CONT]** precisam de advogado e contador. Isto não é parecer jurídico nem contábil.
 
-**Decisões do Filipe que este documento obedece (24/10/2026):** Fase 4 começa agora; sem período de teste gratuito (tudo pago desde o primeiro dia); assinatura do responsável por família, até 4 perfis; R$ 19,90/mês ou R$ 149/ano no primeiro ano (`docs/mesa/05-negocio.md`, seção 7); web primeiro (PWA + cartão + Pix), lojas depois.
+**Decisões do Filipe que este documento obedece (24/10/2026):** Fase 4 começa agora; sem período de teste gratuito (tudo pago desde o primeiro dia); assinatura do responsável por família, até 4 perfis; R$ 47/mês ou R$ 297/ano (decisão do Filipe em 08/11/2026; substitui a sugestão R$ 19,90 e R$ 149 da mesa 05); web primeiro (PWA + cartão + Pix), lojas depois.
 
 **Conflito com o que está registrado, para o Filipe confirmar (regra da casa: avisar antes, nunca sobrescrever em silêncio).** A mesa 05 (§3, §6 item 3 e §10.1) e a síntese 00 (C8 e Q3) recomendam **1 planeta grátis para sempre** (ou as 3 primeiras etapas de cada planeta) com muro que nunca se move, e a síntese Q4 recomenda abrir a Fase 4 **depois** do piloto local de 60 dias. A decisão de hoje ("sem teste grátis", "imediatamente") contraria as duas. Este documento segue a decisão de hoje e deixa o muro **parametrizado** (seção 6.5) para que trocar para "3 etapas grátis" seja uma constante, não uma reforma. Pergunta única no PLANO.md, seção 5.
 
@@ -175,8 +175,8 @@ Segundo aparelho com a mesma conta: o app lista os perfis da nuvem e os locais; 
 
 | Plano | Preço (decisão do Filipe, mesa 05 §7) | Perfis | Renovação |
 |---|---|---|---|
-| Mensal | R$ 19,90 | até 4 | automática, aviso por e-mail antes de cada cobrança |
-| Anual | R$ 149,00 | até 4 | automática, aviso 7 dias antes; direito de arrependimento em 7 dias (CDC art. 49, citado de memória na mesa 05; [ADV] confirma) |
+| Mensal | R$ 47,00 | até 4 | automática, aviso por e-mail antes de cada cobrança |
+| Anual | R$ 297,00 | até 4 | automática, aviso 7 dias antes; direito de arrependimento em 7 dias (CDC art. 49, citado de memória na mesa 05; [ADV] confirma) |
 
 Preço e `max_perfis` ficam na Edge Function como **configuração** (`PLANOS` em arquivo próprio, nunca no app). O app lê o preço da função para exibir (nada hardcoded no `index.html`). A tela de preço fica **na área do responsável, atrás do PIN e da sessão**; a criança nunca vê preço, nem contagem regressiva, nem desconto (Decreto 12.880 art. 10, pesquisa 03).
 
@@ -254,21 +254,21 @@ Tudo abaixo é do que abri em 24/10/2026. Onde não consegui abrir, está marcad
 | Critério | Stripe (BR) | Pagar.me / Stone | Asaas |
 |---|---|---|---|
 | Cartão nacional | **3,99% + R$ 0,39** (DADO stripe.com/br/pricing) | **4,19%** à vista (DADO pagar.me/precos) | **Não confirmado**: a página de preços exige login; o blog (26/09/2025, atualizado 23/04/2026) diz só que a taxa é fixa independente das parcelas. **DADO FRACO: pedir a tabela no cadastro** |
-| Pix | **1,19%, só por convite** (DADO pricing) | **0,99%** (DADO) | **R$ 0,99 por transação nos 3 primeiros meses, R$ 1,99 depois** (DADO blog taxas). Em R$ 19,90 isso é **10%**; em R$ 149 é 1,3% |
+| Pix | **1,19%, só por convite** (DADO pricing) | **0,99%** (DADO) | **R$ 0,99 por transação nos 3 primeiros meses, R$ 1,99 depois** (DADO blog taxas). Em R$ 47 isso é **4,2%**; em R$ 297 é 0,7% |
 | Assinatura recorrente em BRL | Billing: **+0,7%** do volume. Cartão recorrente ok. **Pix: só pagamento avulso; "O Pix Automático não está disponível para empresas domiciliadas no Brasil"** (DADO docs.stripe.com/payments/pix, lido 24/10/2026) | Página cita "venda por assinatura" e "pagamento por recorrência" (DADO); a doc de assinaturas deu 404; detalhe de Pix recorrente **não confirmado** | **Assinatura nativa** com boleto, Pix e cartão: gera a cobrança a cada ciclo (40, 14 ou 7 dias antes), tenta o cartão no vencimento; **Pix Automático** com criação automática de cobranças (changelog 19/05/2026) (DADO docs.asaas.com) |
 | Webhook | Maduro, assinado por `Stripe-Signature` (HMAC) | Existe (não abri o detalhe) | Existe; autentica por token no cabeçalho `asaas-access-token` (DADO docs) e eventos por cobrança (`PAYMENT_*`) |
 | Nota fiscal (NFS-e) | Não emite; precisa de integração externa ou contador | Não achei menção | **NFS-e integrada**, cobrada por nota emitida, com emissão automática para as cobranças da assinatura (DADO blog e docs) |
 | Cancelamento fácil (CDC) | Customer Portal pronto (cancelar, trocar cartão) | Via API (sem portal pronto confirmado) | Via API; portal do pagador existe mas não confirmei o cancelamento pelo próprio assinante. **No Bobby o botão é nosso, na área do responsável, qualquer que seja o provedor** |
 | Mensalidade | 0 | 0 | 0 (DADO blog) |
 | Suporte e documentação | Excelente, em inglês e português; SDKs | Em português | Em português; doc razoável |
-| Conta de padaria, anual R$ 149 | 149 × 4,69% + 0,39 = R$ 7,38 → sobram **R$ 141,62** (mesa 05) | Pix: R$ 1,48 → **R$ 147,52**; cartão 4,19%: R$ 6,24 → **R$ 142,76** | Pix: R$ 1,99 → **R$ 147,01** + NFS-e por nota; cartão: depende da taxa não confirmada |
-| Conta de padaria, mensal R$ 19,90 | cartão: R$ 1,32 → R$ 18,58 | Pix: R$ 0,20; cartão: R$ 0,83 | **Pix: R$ 1,99 (10%)**; cartão: ? |
+| Conta de padaria, anual R$ 297 | 297 × 4,69% + 0,39 = R$ 14,32 → sobram **R$ 282,68** | Pix: R$ 2,94 → **R$ 294,06**; cartão 4,19%: R$ 12,44 → **R$ 284,56** | Pix: R$ 1,99 → **R$ 295,01** + NFS-e por nota; cartão: depende da taxa não confirmada |
+| Conta de padaria, mensal R$ 47 | cartão: R$ 2,59 → R$ 44,41 | Pix: R$ 0,47; cartão: R$ 1,97 | **Pix: R$ 1,99 (4,2%)**; cartão: ? |
 
 **Recomendação (OPINIÃO, com os dados acima): Asaas no primeiro ano**, por três motivos que pesam mais que taxa: (1) é o único dos três em que **assinatura com Pix** existe de fato para empresa brasileira, e Pix é metade do argumento "web primeiro, cartão e Pix" do Filipe; (2) **NFS-e integrada por cobrança**, que tira do contador a emissão manual de cada mensalidade (o contador decide se usa [CONT]); (3) tudo em português, para uma pessoa só cuidar.
 
 **Condições para fechar o Asaas** (sessão S0 do PLANO, antes de qualquer código): confirmar a taxa de cartão à vista e recorrente na tabela da conta; testar o sandbox (criar assinatura, pagar com cartão de teste e com Pix simulado, receber os webhooks `PAYMENT_CONFIRMED`, `PAYMENT_OVERDUE`, `PAYMENT_REFUNDED`); confirmar que a NFS-e automática funciona para o município da empresa. Se a taxa de cartão vier acima de **5%** ou o sandbox falhar nos webhooks, **plano B: Stripe** para cartão (Billing + Customer Portal, melhor experiência de cancelamento) **e sem Pix mensal**; Pix só no anual, avulso, com lembrete de renovação por e-mail 15 dias antes.
 
-**Mensal por Pix no Asaas custa 10% em taxa.** Decisão sugerida [FILIPE]: mensal **só no cartão**; Pix **só no anual** (R$ 1,99 em R$ 149). Alternativa: aceitar os 10% nos primeiros 3 meses (R$ 0,99) e medir quantos escolhem Pix mensal.
+**Com o mensal a R$ 47, o Pix do Asaas custa 4,2% (era 10% a R$ 19,90).** Sugestão [FILIPE]: aceitar Pix nos dois planos (anual a R$ 1,99 em R$ 297 é 0,7%) e medir quantos escolhem cada forma.
 
 **O que fica igual qualquer que seja o provedor:** o app nunca vê cartão; o webhook é a única coisa que libera acesso; o botão de cancelar é nosso; preço e plano são configuração do servidor.
 
@@ -340,7 +340,7 @@ Todas em `supabase/functions/<nome>/index.ts`, Deno, com `verify_jwt = true` exc
 | `apagar-conta` | JWT; `{confirmacao:'APAGAR'}` | cancela no provedor; `consentimento` revogados; `auth.admin.deleteUser(uid)`; e-mail final | `{apagado:true}` |
 | `relatorio-semanal` | cron (segunda 8h) | para cada `responsavel.relatorio_email = true` com perfil ativo na semana: monta o cartão (dados de `dia_atividade` e `progresso_fase`) e envia; link de descadastro assinado | nada |
 
-Configuração (não código): `PLANOS = { mensal: {centavos: 1990, ciclo: 'MONTHLY'}, anual: {centavos: 14900, ciclo: 'YEARLY'} }`, `TOLERANCIA_DIAS = 3`, `MAX_PERFIS = 4`, `MURO`, em `supabase/functions/_shared/config.ts`.
+Configuração (não código): `PLANOS = { mensal: {centavos: 4700, ciclo: 'MONTHLY'}, anual: {centavos: 29700, ciclo: 'YEARLY'} }`, `TOLERANCIA_DIAS = 3`, `MAX_PERFIS = 4`, `MURO`, em `supabase/functions/_shared/config.ts`.
 
 ---
 

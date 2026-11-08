@@ -70,7 +70,7 @@ Hoje, no desenho: (a) e-mail próprio confirmado por link; (b) declaração de m
 >
 > **Quem pode criar conta.** Só pessoas com 18 anos ou mais, que sejam pai, mãe ou responsável legal da criança. A criança não cria conta, não informa e-mail e não paga nada.
 >
-> **O que você contrata.** Uma assinatura por família, que libera o jogo completo para até 4 perfis de criança, nos aparelhos em que você entrar com a sua conta. Planos e preços: mensal R$ 19,90 e anual R$ 149,00 (valores de [data]; mudanças são avisadas por e-mail com 30 dias de antecedência e nunca valem para o período já pago). [FILIPE]
+> **O que você contrata.** Uma assinatura por família, que libera o jogo completo para até 4 perfis de criança, nos aparelhos em que você entrar com a sua conta. Planos e preços: mensal R$ 47,00 e anual R$ 297,00 (valores de [data]; mudanças são avisadas por e-mail com 30 dias de antecedência e nunca valem para o período já pago). [FILIPE]
 >
 > **Como funciona o pagamento.** O pagamento é feito na página do nosso provedor de pagamento ([Asaas/●]); nós não vemos nem guardamos o número do seu cartão. A renovação é automática. Avisamos por e-mail antes de cada cobrança do plano anual e você pode cancelar a qualquer momento.
 >
@@ -183,7 +183,7 @@ Regras: até 60 palavras; sem "privacidade", "dados", "lei"; narrado pela voz do
 
 ### Contador [CONT]
 
-1. **Abertura da ME no Simples Nacional** (MEI não cobre CNAE de licenciamento de software, mesa 05 §4.1): CNAE, anexo, fator R, estimativa de imposto sobre R$ 19,90 e R$ 149.
+1. **Abertura da ME no Simples Nacional** (MEI não cobre CNAE de licenciamento de software, mesa 05 §4.1): CNAE, anexo, fator R, estimativa de imposto sobre R$ 47 e R$ 297.
 2. **NFS-e**: município de emissão, padrão nacional, emissão automática pelo provedor (Asaas) ou pelo sistema do contador; CPF do pagador é obrigatório na nota? (isso define o que o checkout pede).
 3. **Prazo de guarda** dos registros de pagamento (define a retenção de `pagamento`).
 4. **Reembolso**: como estornar a nota; como lançar o cancelamento.
