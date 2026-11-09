@@ -89,6 +89,61 @@ bloco('B', async (c, feito) => {
   feito.push('B: 5 acessorios ao mesmo tempo no mapa e no palco em Oi, Comemora, Caminha, Pensa e Rosto (390, 320 e 1280); experimentar sem cobrar; abas da loja sem urgencia');
 });
 
+/* ---------- C ---------- */
+bloco('C', async (c, feito) => {
+  for (const rot of ['1280x800', '1440x900']) {
+    const med = TELAS[rot];
+    await c.tela(med, 'Duda');
+    await c.js("fecharFolha();window.scrollTo(0,0);0"); await dorme(400);
+    /* (a) o conteúdo útil ocupa pelo menos 85% da largura: barra lateral + mapa + painel do lado */
+    const larg = await c.js(`(()=>{const ivs=[];const add=e=>{if(!e)return;const r=e.getBoundingClientRect();if(r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight)ivs.push([Math.max(0,r.left),Math.min(innerWidth,r.right)]);};
+      add(document.querySelector('#barra'));add(document.querySelector('.painel-lado'));document.querySelectorAll('#tela .etapa').forEach(add);
+      ivs.sort((a,b)=>a[0]-b[0]);let tot=0,fim=-1;ivs.forEach(([a,b])=>{if(b<=fim)return;tot+=b-Math.max(a,fim);fim=b;});return {pct:tot/innerWidth,lado:document.documentElement.scrollWidth>innerWidth};})()`);
+    if (larg.pct < 0.85 || larg.lado) c.problemas.push(rot + ' mapa: conteudo em ' + Math.round(larg.pct * 100) + '% da largura' + (larg.lado ? ' e rola de lado' : ''));
+    await c.foto('C-mapa-' + rot);
+    /* (b) teclado: setas rolam o mapa, Enter abre a fase, Enter passa história e aula, 1 escolhe, Enter confere e segue, Esc sai */
+    const y0 = await c.js('window.scrollY'); await c.tecla('ArrowDown', 'ArrowDown', 40); await dorme(700);
+    const y1 = await c.js('window.scrollY'); if (!(y1 > y0)) c.problemas.push(rot + ' teclado: seta para baixo nao rolou o mapa');
+    await c.js("window.scrollTo(0,0);document.activeElement&&document.activeElement.blur&&document.activeElement.blur();0");
+    await c.tecla('Enter', 'Enter', 13); await dorme(600);
+    if (!(await c.js("document.querySelector('#licao').classList.contains('on')"))) { c.problemas.push(rot + ' teclado: Enter no mapa nao abriu a fase'); continue; }
+    for (let k = 0; k < 8 && (await c.js('LIC.etapa')) !== 'questao'; k++) { await c.tecla('Enter', 'Enter', 13); await dorme(250); }
+    await c.js("LIC.qs[LIC.i]=mc('Quanto é 2 + 3?','5',['4','6','7']);LIC.qs[LIC.i].__mk=UNITS[0].lessons[0].makers[0];pintarLicao();0"); await dorme(300);
+    await c.foto('C-pergunta-' + rot);
+    const lay = await c.js(`(()=>{const a=document.querySelector('.q-cena'),b=document.querySelector('.q-lado'),pe=document.querySelector('#pe');if(!a||!b)return {sem:1};
+      const ra=a.getBoundingClientRect(),rb=b.getBoundingClientRect(),rp=pe.getBoundingClientRect();return {lado:rb.left>=ra.right-1,larg:Math.round(rb.width),pe:Math.round(rp.width)};})()`);
+    if (lay.sem || !lay.lado || lay.larg < 380 || lay.larg > 440) c.problemas.push(rot + ' pergunta: cena e painel lado a lado com 420 px ' + JSON.stringify(lay));
+    const idx = await c.js("LIC.qs[LIC.i].options.indexOf('5')");
+    await c.tecla(String(idx + 1), 'Digit' + (idx + 1), 49 + idx); await dorme(150);
+    await c.tecla('Enter', 'Enter', 13); await dorme(400);
+    const conf = await c.js('({c:LIC.conferido,ac:LIC.acertos})');
+    if (!conf.c || conf.ac < 1) c.problemas.push(rot + ' teclado: 1 a 4 e Enter nao conferiram ' + JSON.stringify(conf));
+    await c.tecla('Enter', 'Enter', 13); await dorme(400);
+    if (await c.js('LIC.conferido')) c.problemas.push(rot + ' teclado: Enter nao foi para a proxima pergunta');
+    /* setas andam entre as alternativas */
+    await c.js("LIC.qs[LIC.i]=mc('Quanto é 1 + 1?','2',['3','4','5']);pintarLicao();0"); await dorme(200);
+    await c.tecla('ArrowDown', 'ArrowDown', 40); await dorme(100); await c.tecla('ArrowDown', 'ArrowDown', 40); await dorme(100);
+    const sel = await c.js("[...document.querySelectorAll('#palco .alt')].findIndex(b=>b.classList.contains('sel'))");
+    if (sel !== 1) c.problemas.push(rot + ' teclado: setas nao andaram entre as alternativas (' + sel + ')');
+    await c.tecla('Escape', 'Escape', 27); await dorme(400);
+    if (await c.js("document.querySelector('#licao').classList.contains('on')")) c.problemas.push(rot + ' teclado: Esc nao saiu da fase');
+    /* (c) hover em tudo que se toca; (d) nenhum texto cortado */
+    const hov = await c.js(`(()=>{let ok=false;for(const sh of document.styleSheets){let rs;try{rs=sh.cssRules}catch(e){continue}
+      const varre=l=>{for(const r of l){if(r.cssRules)varre(r.cssRules);if(r.selectorText&&r.selectorText.indexOf('button:not(:disabled):hover')>=0&&r.selectorText.indexOf('[role="button"]:hover')>=0)ok=true;}};varre(rs);}return ok;})()`);
+    if (!hov) c.problemas.push(rot + ' hover: falta a regra de :hover para botoes e role=button');
+    const cort = await c.js(`[...document.querySelectorAll('#tela h1,#tela h2,#tela p,#tela b,#tela span,.barra-baixo span,.topo b,.topo span')].filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&getComputedStyle(e).overflow!=='visible'&&e.scrollWidth>e.clientWidth+1;}).slice(0,5).map(e=>e.textContent.slice(0,30))`);
+    if (cort.length) c.problemas.push(rot + ' texto cortado: ' + JSON.stringify(cort));
+    c.coleta(rot + ' C');
+  }
+  feito.push('C: computador em 1280x800 e 1440x900 (85% da largura, pergunta em 2 colunas, setas, Enter, 1 a 4 e Esc, hover, nada cortado)');
+  /* 1A no navegador: o topo mostra os dias de exploração, nunca a ofensiva */
+  await c.tela(TELAS['390x844'], 'Gabi');
+  const topo = await c.js("(()=>{S.ofensiva.atual=7;S.ofensiva.congeladores=2;S.exploracao={dias:12,ultimo:hoje()};salvar();pintarTopo();renderTrilha();const t=document.body.innerText;return {exp:/12/.test(document.querySelector('#st-fogo').innerText),proib:(t.match(/ofensiva|dias seguidos|congelador|seguidas|combo|continuar por/i)||[''])[0]}})()");
+  if (!topo.exp || topo.proib) c.problemas.push('390x844 1A: topo ' + JSON.stringify(topo));
+  c.coleta('1A');
+  feito.push('C: 1A no navegador (topo com 12 dias de exploracao, nenhuma palavra de ofensiva na tela do mapa)');
+});
+
 (async () => {
   const c = await abrirChrome();
   const feito = [];

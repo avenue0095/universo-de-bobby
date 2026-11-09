@@ -16,11 +16,11 @@ const textosDe=(v,max,tam)=>listaDe(v,max).filter(x=>typeof x==='string').map(x=
    Um objeto "vazio" compartilhado faria o progresso de um jogador vazar para o outro. Por isso e uma funcao. */
 function configPadrao(){
   return {metaMin:5,revisaoPorDia:8,limiteBlocosDia:null,diasLivres:[],pausaAte:'',
-    ofensivaLigada:true,missoesLigadas:true,lojaSemanaLigada:true,petiscoLigado:true,
+    ofensivaLigada:true,missoesLigadas:true,lojaSemanaLigada:true,petiscoLigado:true,ofensivaVisivel:false,
     lembrete:{ics:false,hora:'17:00',dias:[1,2,3,4,5],comApelido:false},ligaFamilia:false};
 }
 function contadoresVazios(){
-  return {fase:0,faseNova:0,revisao:0,fatos:0,historia:0,combo:0,enAudio:0,ditado:0,aulaRevista:0,
+  return {fase:0,faseNova:0,revisao:0,fatos:0,historia:0,combo:0,acertos:0,enAudio:0,ditado:0,aulaRevista:0,
     lapso:0,mat:0,itensNovos:0,porque:0,materiasBloco:[]};
 }
 function diarioVazio(dia){
@@ -91,7 +91,7 @@ function normalizaConfig(x){
   c.diasLivres=listaDe(x.diasLivres,7).map(Number).filter(n=>n>=0&&n<=6);
   c.pausaAte=diaOuVazio(x.pausaAte);
   c.ofensivaLigada=x.ofensivaLigada!==false;c.missoesLigadas=x.missoesLigadas!==false;
-  c.lojaSemanaLigada=x.lojaSemanaLigada!==false;c.petiscoLigado=x.petiscoLigado!==false;
+  c.lojaSemanaLigada=x.lojaSemanaLigada!==false;c.petiscoLigado=x.petiscoLigado!==false;c.ofensivaVisivel=x.ofensivaVisivel===true;
   c.lembrete={ics:!!l.ics,hora:/^\d{2}:\d{2}$/.test(l.hora)?l.hora:'17:00',
     dias:listaDe(l.dias,7).map(Number).filter(n=>n>=0&&n<=6),comApelido:!!l.comApelido};
   c.ligaFamilia=false;       /* só existe na Fase 4 */

@@ -94,7 +94,7 @@ function entregarRecompensa(lista,dia){
 const MISSOES_CAT=[
  {id:'M01',g:'revisao',alvo:[1,1,1],t:n=>'Faça a Revisão do dia',conta:c=>c.revisao,ok:()=>true},
  {id:'M02',g:'fase',alvo:[1,1,1],t:n=>'Complete uma fase',conta:c=>c.fase,ok:()=>true},
- {id:'M03',g:'combo',alvo:[4,5,6],t:n=>'Acerte '+n+' seguidas',conta:c=>c.combo,ok:()=>true},
+ {id:'M03',g:'combo',alvo:[8,10,12],t:n=>'Acerte '+n+' perguntas',conta:c=>c.acertos,ok:()=>true},
  {id:'M04',g:'en-audio',alvo:[4,5,6],t:n=>'Ouça e acerte '+n+' palavras em inglês',conta:c=>c.enAudio,ok:()=>true},
  {id:'M05',g:'fatos',alvo:[1,1,1],t:n=>'Faça uma rodada de fatos',conta:c=>c.fatos,ok:()=>false},          /* rodada de fatos ainda não existe */
  {id:'M06',g:'historia',alvo:[1,1,1],t:n=>'Leia um texto com o Bobby',conta:c=>c.historia,ok:()=>false},     /* histórias e leituras ainda não existem */
@@ -220,7 +220,7 @@ function cicloPergunta(q,info){
   d.perguntas++;st.q=(st.q||0)+1;
   /* dias de exploração (1A e portões da loja): todo dia com pelo menos uma resposta conta, para sempre */
   if(typeof marcarDiaDeExploracao==='function')marcarDiaDeExploracao(hoje());
-  if(info.ok){d.acertos++;st.ac=(st.ac||0)+1;}
+  if(info.ok){d.acertos++;st.ac=(st.ac||0)+1;d.c.acertos=(d.c.acertos||0)+1;}
   if(info.ms>0){S.stats.amostras.push(Math.max(1,Math.min(60,Math.round(info.ms/1000))));if(S.stats.amostras.length>CICLO.maxAmostras)S.stats.amostras.shift();}
   if(MATERIA==='mat')d.c.mat++;
   if(info.ok&&MATERIA==='en'&&q.ouvir)d.c.enAudio++;
@@ -265,7 +265,8 @@ const bauPronto=()=>S.diario.metaOk&&S.diario.blocos>=1&&!S.diario.bau.aberto;
 function abrirBau(){
   garantirDia();
   if(!bauPronto())return null;
-  const dia=Math.max(1,S.ofensiva.atual);
+  /* 1A: o baú segue os dias de exploração (nunca caem), não a ofensiva */
+  const dia=Math.max(1,diasDeExploracao());
   const itens=entregarRecompensa(recompensaDoDia(dia),dia);
   S.diario.bau={aberto:true,dia:dia,itens:itens};
   registrarEvento('bau_aberto',{dia:dia});
@@ -315,7 +316,7 @@ const BILHETES={
 function gravarEspera(info){
   const e=S.espera||{};
   const dia=hoje();
-  S.espera={bilhete:e.bilhete||'',presente:categoriaDoBau(Math.max(1,S.ofensiva.atual)+1),desde:dia,vistoEm:e.vistoEm||'',
+  S.espera={bilhete:e.bilhete||'',presente:categoriaDoBau(Math.max(1,diasDeExploracao())+1),desde:dia,vistoEm:e.vistoEm||'',
     mundoNovo:!!(e.mundoNovo||(info&&info.completouMundo)),erroDificil:!!(e.erroDificil||(info&&info.erros>=3)),
     usouCongelador:e.usouCongelador};
   return S.espera;
@@ -326,9 +327,11 @@ function escolherBilhete(){
   const ultimo=o.ultimo,fora=ultimo?difDias(ultimo,dia):0;
   const nunca=!ultimo&&Object.keys(S.stats.dias).length===0&&Object.keys(S.feitas).length===0;
   if(nunca)return 'primeiro';
-  if(e.usouCongelador===dia)return 'congelador';
-  if(o.descansando)return 'descansando';
-  if(OF_MARCOS.indexOf(o.atual+1)>=0&&fora<=1)return 'marco';
+  /* 1A: bilhetes da sequência (congelador, descansando, marco) só se o responsável pediu para mostrar a ofensiva antiga */
+  const of=typeof mostrarOfensiva==='function'&&mostrarOfensiva();
+  if(of&&e.usouCongelador===dia)return 'congelador';
+  if(of&&o.descansando)return 'descansando';
+  if(of&&OF_MARCOS.indexOf(o.atual+1)>=0&&fora<=1)return 'marco';
   if(e.mundoNovo)return 'mundo';
   if(e.erroDificil)return 'erroDificil';
   if(fora>=4)return 'quatroOuMais';

@@ -164,7 +164,7 @@ async function main() {
          conferimos que ele fica acima da barra. */
       {
         await js("usarMateria('mat');fecharFolha();document.querySelector('#modal').classList.remove('on');window.scrollTo(0,0);0"); await dorme(500);
-        const medeDobra = () => js("(()=>{const r=s=>{const e=document.querySelector(s);if(!e)return null;const b=e.getBoundingClientRect();return {t:Math.round(b.top),b:Math.round(b.bottom),l:Math.round(b.left),r:Math.round(b.right)}};return {cena:r('.etapa .cena'),no:r('.no.atual .bt'),voce:r('.voce'),barra:r('.barra-baixo'),ih:innerHeight}})()");
+        const medeDobra = () => js("(()=>{const r=s=>{const e=document.querySelector(s);if(!e)return null;const b=e.getBoundingClientRect();return {t:Math.round(b.top),b:Math.round(b.bottom),l:Math.round(b.left),r:Math.round(b.right)}};return {cena:r('.etapa .cena'),no:r('.no.atual .bt'),voce:r('.voce'),barra:(()=>{const q=document.querySelector('.barra-baixo').getBoundingClientRect();return q.height>q.width?{t:innerHeight,b:innerHeight}:{t:Math.round(q.top),b:Math.round(q.bottom)}})(),ih:innerHeight}})()");
         await js("window.scrollTo(0,0);0"); await dorme(150);
         const d0 = await medeDobra();
         if (!d0.cena || !d0.no || !d0.voce) problemas.push(rot + ' primeira dobra: faltou cenario, no atual ou Bobby ' + JSON.stringify(d0));
@@ -178,9 +178,11 @@ async function main() {
         if (d1.no && (d1.no.t >= d1.ih || d1.no.b > d1.barra.t + 1 || d1.voce.b > d1.barra.t + 1 || d1.no.b <= 0)) problemas.push(rot + ' primeira dobra apos a rolagem do app: no (y ' + d1.no.t + '..' + d1.no.b + ') ou Bobby (' + d1.voce.t + '..' + d1.voce.b + ') fora da area visivel (barra em y=' + d1.barra.t + ')');
         await shot0('dobra-mapa-' + nomeTela);
         feito.push(rot + ': primeira dobra sem rolar: cenario y=' + d0.cena.t + ', 1o no y=' + d0.no.t + '..' + d0.no.b + ', Bobby y=' + d0.voce.t + '..' + d0.voce.b + ' | apos a rolagem do app: no y=' + d1.no.t + ', Bobby y=' + d1.voce.t);
-        // uma unica coluna: planeta, rotina e etapa com a mesma esquerda e largura
+        // uma unica coluna no celular: planeta, rotina e etapa com a mesma esquerda e largura (barra de baixo vira barra lateral no computador: a 'barra' de baixo e a borda da tela)
         const col = await js("(()=>{const r=s=>{const b=document.querySelector(s).getBoundingClientRect();return [Math.round(b.left),Math.round(b.width)]};return [r('.planeta'),r('.rotina'),r('.etapa')]})()");
-        if (col.some((c) => Math.abs(c[0] - col[0][0]) > 1 || Math.abs(c[1] - col[0][1]) > 1 || c[1] > 480)) problemas.push(rot + ' mapa: colunas diferentes (planeta, rotina, etapa) ' + JSON.stringify(col));
+        /* 1D: a partir de 1024 px o planeta e a rotina vão para o painel da direita e a etapa ocupa a coluna larga do meio (testes/onda1.js, bloco C) */
+        if (medidas.width >= 1024) { if (Math.abs(col[0][0] - col[1][0]) > 1 || col[2][0] >= col[0][0]) problemas.push(rot + ' mapa no computador: painel e etapa fora do lugar ' + JSON.stringify(col)); }
+        else if (col.some((c) => Math.abs(c[0] - col[0][0]) > 1 || Math.abs(c[1] - col[0][1]) > 1 || c[1] > 480)) problemas.push(rot + ' mapa: colunas diferentes (planeta, rotina, etapa) ' + JSON.stringify(col));
         // rotulos dos nos: pelo menos 8 px da borda da cena e sem sobrepor o vizinho
         const rot8 = await js("(()=>{const ruins=[];document.querySelectorAll('.etapa').forEach((et,k)=>{if(k>2)return;const c=et.querySelector('.cena').getBoundingClientRect();const rs=Array.from(et.querySelectorAll('.no')).filter(n=>getComputedStyle(n.querySelector('.rot')).display!=='none').map(n=>({n:n,b:n.querySelector('.rot').getBoundingClientRect(),t:n.querySelector('.rot').textContent}));rs.forEach(a=>{if(a.b.left<c.left+7.5||a.b.right>c.right-7.5)ruins.push('borda '+a.t+' '+Math.round(a.b.left-c.left)+'/'+Math.round(c.right-a.b.right));rs.forEach(z=>{if(a!==z&&a.b.left<z.b.right&&z.b.left<a.b.right&&a.b.top<z.b.bottom&&z.b.top<a.b.bottom)ruins.push('encosta '+a.t+' em '+z.t)})})});return ruins})()");
         if (rot8.length) problemas.push(rot + ' rotulos dos nos: ' + [...new Set(rot8)].slice(0, 5).join(' | '));
@@ -190,7 +192,7 @@ async function main() {
           if (cort.length) problemas.push(rot + ' rotulos de no cortados ou fora da cena: ' + cort.slice(0, 5).join(' | '));
         }
         await js("renderTrilha.jaMostrou=false;renderTrilha();0"); await dorme(450);
-        const atual = await js("(()=>{const n=document.querySelector('.no.atual').getBoundingClientRect(),b=document.querySelector('.barra-baixo').getBoundingClientRect();return {nb:Math.round(n.bottom),bt:Math.round(b.top)}})()");
+        const atual = await js("(()=>{const n=document.querySelector('.no.atual').getBoundingClientRect(),b=((q)=>q.height>q.width?{top:innerHeight,bottom:innerHeight,left:q.left,right:q.right,width:q.width,height:0}:q)(document.querySelector('.barra-baixo').getBoundingClientRect());return {nb:Math.round(n.bottom),bt:Math.round(b.top)}})()");
         if (atual.nb > atual.bt + 1) problemas.push(rot + ' o no atual com o rotulo (termina em y=' + atual.nb + ') fica atras da barra (y=' + atual.bt + ')');
         // em 320x568 o nome da materia continua a vista (abreviado se precisar)
         await cdp('Emulation.setDeviceMetricsOverride', Object.assign({}, medidas, { width: 320, height: 568 })); await dorme(300);
@@ -775,14 +777,14 @@ async function main() {
           const corta=(im)=>{cx.clearRect(0,0,W,H);const esc=H/im.naturalHeight,sw=W/esc,sx=(im.naturalWidth-sw)/2;cx.drawImage(im,sx,0,sw,im.naturalHeight,0,0,W,H);return cx.getImageData(Math.round(r[0]/100*W),Math.round(r[1]/100*H),Math.max(1,Math.round((r[2]-r[0])/100*W)),Math.max(1,Math.round((r[3]-r[1])/100*H))).data;};
           const d1=corta(a),d2=corta(b);let n=0,t=d1.length/4;for(let i=0;i<d1.length;i+=4){if(Math.abs(d1[i]-d2[i])+Math.abs(d1[i+1]-d2[i+1])+Math.abs(d1[i+2]-d2[i+2])>60)n++;}return n/t*100})()`);
         if (dif < 2) problemas.push(rot + ' peca feita: diferenca de pixels na regiao ' + dif.toFixed(1) + '% (minimo 2)');
-        if (medidas.width >= 1280) { const cz = await js("(()=>{const f=document.querySelector('.fim-cena').getBoundingClientRect(),b=document.querySelector('.barra-baixo').getBoundingClientRect();return {fb:Math.round(f.bottom),bt:Math.round(b.top)}})()"); if (cz.fb > cz.bt) problemas.push(rot + ' fim de fase no computador cruza o rodape ' + JSON.stringify(cz)); }
+        if (medidas.width >= 1280) { const cz = await js("(()=>{const f=document.querySelector('.fim-cena').getBoundingClientRect(),b=((q)=>q.height>q.width?{top:innerHeight,bottom:innerHeight,left:q.left,right:q.right,width:q.width,height:0}:q)(document.querySelector('.barra-baixo').getBoundingClientRect());return {fb:Math.round(f.bottom),bt:Math.round(b.top)}})()"); if (cz.fb > cz.bt) problemas.push(rot + ' fim de fase no computador cruza o rodape ' + JSON.stringify(cz)); }
         await shot0('mundo-fim-' + nomeTela);
         // Continuar: o personagem ANDA do objeto 1 ao objeto 2 (deslocamento medido) e a camera o mantem na tela
         const v0 = await js("(()=>{const b=document.querySelector('.voce').getBoundingClientRect();return [Math.round(b.left),Math.round(b.top)]})()");
         await js("document.querySelector('#fim-continuar').click();0"); await dorme(350);
         const andando = await js("document.querySelector('.voce').classList.contains('anda')");
         await dorme(1100);
-        const v1 = await js("(()=>{const v=document.querySelector('.voce'),b=v.getBoundingClientRect(),bar=document.querySelector('.barra-baixo').getBoundingClientRect();return {no:v.dataset.no,x:Math.round(b.left),y:Math.round(b.top),dentro:b.top>=0&&b.bottom<=bar.top+1,anda:v.classList.contains('anda')}})()");
+        const v1 = await js("(()=>{const v=document.querySelector('.voce'),b=v.getBoundingClientRect(),bar=((q)=>q.height>q.width?{top:innerHeight,bottom:innerHeight,left:q.left,right:q.right,width:q.width,height:0}:q)(document.querySelector('.barra-baixo').getBoundingClientRect());return {no:v.dataset.no,x:Math.round(b.left),y:Math.round(b.top),dentro:b.top>=0&&b.bottom<=bar.top+1,anda:v.classList.contains('anda')}})()");
         if (!andando) problemas.push(rot + ' o personagem nao andou (classe anda) depois do fim da fase');
         if (v1.no !== '1' || (Math.abs(v1.x - v0[0]) + Math.abs(v1.y - v0[1])) < 20) problemas.push(rot + ' deslocamento do personagem: ' + JSON.stringify({ v0, v1 }));
         if (!v1.dentro) problemas.push(rot + ' camera: o personagem ficou fora da tela depois de andar ' + JSON.stringify(v1));
@@ -816,7 +818,7 @@ async function main() {
         if (medidas.mobile && medidas.width === 360) {
           await cdp('Emulation.setDeviceMetricsOverride', Object.assign({}, medidas, { width: 320, height: 568 })); await dorme(300);
           await js("renderTrilha.jaMostrou=false;renderTrilha();0"); await dorme(600);
-          const d3 = await js("(()=>{const r=s=>{const e=document.querySelector(s);const b=e.getBoundingClientRect();return {t:Math.round(b.top),b:Math.round(b.bottom),l:Math.round(b.left),r:Math.round(b.right)}};return {no:r('.no.atual .bt'),rot:r('.no.atual .rot'),voce:r('.voce'),cena:r('#etapa-1 .cena'),topo:r('.topo'),barra:r('.barra-baixo'),sw:document.documentElement.scrollWidth}})()");
+          const d3 = await js("(()=>{const r=s=>{const e=document.querySelector(s);const b=e.getBoundingClientRect();return {t:Math.round(b.top),b:Math.round(b.bottom),l:Math.round(b.left),r:Math.round(b.right)}};return {no:r('.no.atual .bt'),rot:r('.no.atual .rot'),voce:r('.voce'),cena:r('#etapa-1 .cena'),topo:r('.topo'),barra:(()=>{const q=document.querySelector('.barra-baixo').getBoundingClientRect();return q.height>q.width?{t:innerHeight,b:innerHeight}:{t:Math.round(q.top),b:Math.round(q.bottom)}})(),sw:document.documentElement.scrollWidth}})()");
           if (d3.no.t < d3.topo.b || d3.no.b > d3.barra.t + 1 || d3.voce.b > d3.barra.t + 1 || d3.rot.b > d3.barra.t + 1 || d3.rot.l < d3.cena.l + 7 || d3.rot.r > d3.cena.r - 7 || d3.sw > 321) problemas.push(rot + ' 320x568: objeto, rotulo ou personagem fora da faixa visivel ' + JSON.stringify(d3));
           await shot0('mapa-320x568');
           feito.push(rot + ': 320x568 objeto y=' + d3.no.t + '..' + d3.no.b + ', rotulo ate y=' + d3.rot.b + ', personagem ate y=' + d3.voce.b + ' (barra em y=' + d3.barra.t + ')');

@@ -18,7 +18,10 @@ function abrirFolha(html){
 }
 function fecharFolha(){if($('#folha').classList.contains('on'))sfx('fecha');$('#folha').classList.remove('on');$('#folha').innerHTML='';}
 
-/* ---------- topo: ofensiva e moedas ---------- */
+/* ---------- topo: dias de exploração e moedas (1A: a ofensiva saiu da tela da criança; segue guardada só para o responsável) ---------- */
+function textoExploracao(){const n=diasDeExploracao();return n+(n===1?' dia de exploração':' dias de exploração');}
+/* a ofensiva antiga só aparece se o responsável pedir (Controles: "Mostrar a ofensiva antiga"); padrão: escondida */
+const mostrarOfensiva=()=>!!(S.config&&S.config.ofensivaVisivel);
 function textoOfensiva(){
   const o=S.ofensiva;
   if(o.descansando)return 'Ofensiva descansando';
@@ -39,7 +42,7 @@ function rotinaHTML(){
     '<span class="rotina-mini"><span class="meta-barra mini" aria-hidden="true"><i style="width:'+pct+'%"></i></span>'+Math.min(d.perguntas,meta)+' de '+meta+
     (S.config.missoesLigadas&&d.missoes.length?' · '+feitasM+' de '+d.missoes.length+' missões':'')+'</span></summary>';
   h+='<div class="rotina-corpo">';
-  if(S.config.ofensivaLigada)h+='<span class="rotina-of'+(S.ofensiva.descansando?' descansa':'')+'">'+IC.fogo+textoOfensiva()+'</span>';
+  h+='<span class="rotina-of">'+IC.bussola+textoExploracao()+'</span>';
   h+='<div class="meta-linha"><div class="meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="'+meta+'" aria-valuenow="'+Math.min(meta,d.perguntas)+
      '" aria-label="Meta do dia"><i style="width:'+pct+'%"></i></div><span>'+Math.min(d.perguntas,meta)+' de '+meta+' perguntas</span></div>';
   h+='<p class="rotina-vivo">'+(d.blocos>0?'Seu dia está vivo. Você já jogou hoje.':'Jogue uma fase e o dia fica vivo.')+'</p>';
@@ -52,9 +55,8 @@ function rotinaHTML(){
     if(d.estrela)h+='<p class="rotina-estrela">'+IC.estrelaDia+' Estrela do dia conquistada!</p>';
   }
   h+='<p class="rotina-rodape">';
-  if(S.config.ofensivaLigada)h+='<span class="gelo-chip" title="Congeladores guardam sua sequência">'+IC.gelo+'Congeladores: '+S.ofensiva.congeladores+'</span> ';
-  h+=d.bau.aberto?'<span>Amanhã no baú: '+categoriaDoBau(Math.max(1,S.ofensiva.atual)+1)+'</span></p>'
-    :'<span>No baú de hoje: '+categoriaDoBau(Math.max(1,S.ofensiva.atual))+'</span></p>';
+  h+=d.bau.aberto?'<span>Amanhã no baú: '+categoriaDoBau(Math.max(1,diasDeExploracao())+1)+'</span></p>'
+    :'<span>No baú de hoje: '+categoriaDoBau(Math.max(1,diasDeExploracao()))+'</span></p>';
   h+='</div></details>';
   let acoes='';
   if(bauPronto())acoes+='<button class="btn-acao" id="rt-bau">'+IC.bau+' Abrir o baú do dia</button>';
@@ -84,7 +86,7 @@ function mostrarEntradaDoDia(){
 function mostrarAvisoMigracao(depois){
   STORE.avisoVisto=true;salvarStore();
   abrirFolha('<div class="folha-in"><div class="folha-bobby">'+MASCB('surpreso')+'</div><h2>O Bobby ganhou novidades</h2>'+
-    '<p>Seu progresso está todo aqui. Você também ganhou um congelador para guardar sua sequência.</p>'+
+    '<p>Seu progresso está todo aqui.</p>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-ok">Vamos lá</button></div></div>');
   $('#fl-ok').addEventListener('click',()=>{fecharFolha();if(depois)depois();});
 }
@@ -120,7 +122,7 @@ function mostrarBau(){
   garantirDia();
   if(S.diario.bau.aberto){mostrarBauAberto();return;}
   if(!bauPronto())return;
-  const dia=Math.max(1,S.ofensiva.atual);
+  const dia=Math.max(1,diasDeExploracao());
   abrirFolha('<div class="folha-in">'+bauCena(false)+'<h2>Seu baú de hoje</h2>'+
     '<p class="fala-p">'+falaDe('bauPronto')+'</p><p>Você completou a meta de hoje. Dentro do baú tem '+categoriaDoBau(dia)+'.</p>'+
     '<div class="folha-bts"><button class="btn-acao" id="fl-abrir">Abrir o baú</button></div></div>');
@@ -177,11 +179,11 @@ function blocoFimHTML(bloco){
   let h='';
   if(bloco&&bloco.contou){
     const m=bloco.mudou||{};
-    if(S.config.ofensivaLigada){
+    if(m.primeiroDoDia)h+='<p class="fim-of">'+IC.bussola+' Mais um dia de exploração: '+textoExploracao()+'.</p>';
+    if(mostrarOfensiva()){
       let t='';
       if(m.recuperou)t='Sua sequência foi recuperada: '+S.ofensiva.atual+' dias.';
       else if(m.voltouPelaMetade)t='Sua sequência voltou com tudo: '+S.ofensiva.atual+(S.ofensiva.atual===1?' dia':' dias')+'. O seu recorde continua guardado.';
-      else if(m.primeiroDoDia)t=textoOfensiva()+'.';
       if(m.ganhouCongelador)t+=' Você ganhou um congelador!';
       if(t)h+='<p class="fim-of">'+IC.fogo+' '+t.trim()+'</p>';
     }
@@ -264,6 +266,7 @@ function controlesHTML(){
   h+='<div class="ctl-linha"><b>Meta do dia</b><div>'+opt([5,10,15],c.metaMin,'metaMin',v=>v+' min')+'</div><small>Contada em perguntas: cerca de '+perguntasMeta()+' hoje.</small></div>';
   h+='<div class="ctl-linha"><b>Revisão por dia</b><div>'+opt([5,8,12],c.revisaoPorDia,'revisaoPorDia',v=>v+' perguntas')+'</div><small>No máximo 10 revisões por dia.</small></div>';
   h+='<div class="ctl-linha"><b>Limite de blocos por dia</b><div>'+opt(['','2','3','4','6','8'],c.limiteBlocosDia||'','limiteBlocosDia',v=>v?v:'Sem limite')+'</div><small>Ao chegar no limite, só o responsável libera mais um bloco.</small></div>';
+  h+='<div class="ctl-linha"><b>Mostrar a ofensiva antiga</b><div>'+opt([0,1],c.ofensivaVisivel?1:0,'ofensivaVisivel',v=>v?'Mostrar':'Esconder')+'</div><small>A criança vê só os dias de exploração, que nunca caem. A ofensiva (dias seguidos) continua contando aqui embaixo, escondida dela.</small></div>';
   h+='<div class="ctl-linha"><b>Dias livres da ofensiva</b><div>'+dsem.map((n,i)=>'<button class="chip-ctl'+(c.diasLivres.indexOf(i)>=0?' on':'')+'" data-dia="'+i+'">'+n+'</button>').join('')+'</div><small>Nesses dias a ofensiva não perde nada.</small></div>';
   h+='<div class="ctl-linha"><b>Pausar a ofensiva</b><div>'+
      '<button class="chip-ctl'+(!pausada?' on':'')+'" data-pausa="0">Sem pausa</button>'+

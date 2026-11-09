@@ -31,8 +31,8 @@ const FALAS={
     otto:['Great! Great job! Isso mesmo.','Say it with me: hello, hello! Agora você.'],
     rara:['Duvido que você consiga. Ah, conseguiu!','Mais uma rodada? Eu não perco com graça, perco com estilo.']
   },
-  sequencia3:['Três seguidas! A mochila está chacoalhando de alegria.'],
-  sequencia5:['Cinco seguidas! Você está voando mais que a Brisa.'],
+  sequencia3:['Que ritmo! A mochila está chacoalhando de alegria.'],
+  sequencia5:['Que embalo! Você está voando mais que a Brisa.'],
   primeira:['Acertou de primeira. Eu nem tinha terminado de torcer.'],
   recuperou:['Agora sim! Tentar de novo funciona.'],
   dificil:['Esse foi difícil e você resolveu. Caprichou!'],

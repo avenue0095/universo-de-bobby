@@ -56,8 +56,10 @@ async function abrirChrome() {
   async function tela(med, nome) {
     await cdp('Emulation.setDeviceMetricsOverride', med);
     await cdp('Emulation.setTouchEmulationEnabled', { enabled: !!med.mobile, maxTouchPoints: med.mobile ? 5 : 1 });
-    await cdp('Page.navigate', { url: base + '/index.html' }); await dorme(1200);
-    await js('STORE.atual=-1;localStorage.clear();location.reload();0'); await dorme(1500);
+    /* com a máquina carregada a página pode demorar: espera o app existir (até 15 s) antes e depois de recarregar */
+    const pronto = async () => { for (let k = 0; k < 75; k++) { let ok = false; try { ok = await js("typeof novoPerfil==='function'&&typeof STORE!=='undefined'&&document.readyState==='complete'"); } catch (e) {} if (ok) return; await dorme(200); } };
+    await cdp('Page.navigate', { url: base + '/index.html' }); await dorme(800); await pronto();
+    await js('STORE.atual=-1;localStorage.clear();location.reload();0'); await dorme(800); await pronto();
     await js("(()=>{document.querySelector('#modal').classList.remove('on');novoPerfil(" + JSON.stringify(nome || 'Teste') + ",'#12A06E');return 1})()"); await dorme(600); await js('fecharFolha();if(typeof fecharMaterias==="function")fecharMaterias();document.querySelector("#modal").classList.remove("on");0'); await dorme(300);
   }
   async function tocar(x, y, mobile) {

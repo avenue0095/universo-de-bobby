@@ -71,8 +71,11 @@ async function main() {
       await cdp('Emulation.setDeviceMetricsOverride', med);
       await cdp('Emulation.setTouchEmulationEnabled', { enabled: toqueTela, maxTouchPoints: toqueTela ? 5 : 1 });
       await cdp('Page.navigate', { url: base + '/index.html' }); await dorme(1200);
+      for (let k = 0; k < 70; k++) { let ok = false; try { ok = await js("typeof STORE!=='undefined'"); } catch (e) {} if (ok) break; await dorme(200); }
       await js("STORE.atual=-1;localStorage.clear();location.reload();0"); await dorme(1500);
       /* preparo (nao e o que se testa): cria o jogador */
+      /* com a máquina carregada o modal pode demorar: espera o campo existir e estar visível (até 10 s) */
+      for (let k = 0; k < 50; k++) { let ok = false; try { ok = await js("!!document.querySelector('#campo-nome')&&document.querySelector('#modal').classList.contains('on')"); } catch (e) {} if (ok) break; await dorme(200); }
       await js("(()=>{document.querySelector('#campo-nome').value='Toque';document.querySelector('#salvar-nome').click();return 1})()"); await dorme(500);
       coleta(rot + ' abrir');
 
@@ -249,7 +252,9 @@ async function main() {
           "const objs=[...document.querySelectorAll('.obj')].map(o=>o.getBoundingClientRect());const cortados=objs.filter(r=>r.bottom>cr.bottom+1||r.top<cr.top-1).length,atras=objs.filter(r=>r.bottom>pe.top+1).length;" +
           "const alts=[...document.querySelectorAll('.alt')].map(a=>{const r=a.getBoundingClientRect();const t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return {b:Math.round(r.bottom),livre:!!t&&(t===a||a.contains(t))}});" +
           "return {pe:Math.round(pe.top),cortados,atras,rola:cena.scrollHeight>cena.clientHeight+1,alts,obj:Math.round(objs[0].width),altsOk:alts.every(a=>a.b<=pe.top+1&&a.livre)}})()");
-        const m = await medir(false);
+        let m = await medir(false);
+        /* a cena mede o espaço e escolhe o tamanho do objeto depois de pintar: com a máquina carregada isso pode atrasar; mede de novo uma vez */
+        if (!m.altsOk && rot !== '320x568') { await dorme(800); m = await medir(false); }
         if (m.cortados || m.rola) problemas.push(rot + ' 20 objetos: ' + m.cortados + ' cortados pela cena, area interna rola=' + m.rola);
         await foto('20objetos-' + rot);
         if (rot === '320x568' && !m.altsOk) {

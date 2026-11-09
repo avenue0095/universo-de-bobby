@@ -17,8 +17,7 @@ function telaPerfil(){
     stat(IC.medalha,feitasGeral+'/'+totalGeral,'fases')+
     stat(IC.estrelaDia,estrelasTotal(),'estrelas')+
     stat(IC.moeda,S.moedas,'moedas')+
-    stat(IC.fogo,S.ofensiva.atual,S.ofensiva.atual===1?'dia seguido':'dias seguidos')+
-    stat(IC.trofeu,S.ofensiva.melhor,S.ofensiva.melhor===1?'dia de recorde':'dias de recorde')+
+    stat(IC.bussola,diasDeExploracao(),diasDeExploracao()===1?'dia de exploração':'dias de exploração')+
     stat(IC.pergaminho||IC.quadro,desenhos+'/'+desenhosCatalogo().length,'desenhos')+'</div>';
 
   /* progresso das três galáxias, sempre visível */

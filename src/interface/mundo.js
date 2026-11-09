@@ -30,7 +30,9 @@ function faixaVisivel(){
   const topo=document.querySelector('.topo'),barra=document.querySelector('.barra-baixo');
   const cima=(topo?Math.max(0,topo.getBoundingClientRect().bottom):0)+8;
   const bb=barra&&barra.getBoundingClientRect();
-  return {cima:cima,baixo:(bb&&bb.height?bb.top:innerHeight)-8};
+  /* no computador (1D) a barra é lateral: o limite de baixo é a própria tela */
+  const lateral=!!bb&&bb.height>bb.width;
+  return {cima:cima,baixo:(bb&&bb.height&&!lateral?bb.top:innerHeight)-8};
 }
 /* o objeto de destino (com o rótulo) e o lugar onde o personagem fica ao lado dele: a câmera leva esse grupo para a faixa visível.
    Cabe: centraliza; não cabe: o topo do grupo encosta no topo da faixa. */

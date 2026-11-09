@@ -153,11 +153,17 @@ function pintarTopo(){
   if(typeof aplicarVisual==='function')aplicarVisual();
   document.body.dataset.materia=MATCOD[MATERIA]||'mat';
   const o=S.ofensiva,fogo=$('#st-fogo');
-  fogo.innerHTML=IC.fogo+'<em>'+o.atual+'</em>'+(o.congeladores>0?'<span class="gelo-n" aria-hidden="true">'+IC.gelo+o.congeladores+'</span>':'');
-  fogo.style.display=S.config.ofensivaLigada?'':'none';
-  fogo.classList.toggle('descansa',!!o.descansando);
-  fogo.setAttribute('title',textoOfensiva()+(o.congeladores?' · Congeladores: '+o.congeladores:''));
-  fogo.setAttribute('aria-label',textoOfensiva()+'. Congeladores: '+o.congeladores);
+  /* 1A: no topo, os dias de exploração (cumulativos, nunca caem); a ofensiva só se o responsável pedir */
+  if(mostrarOfensiva()){
+    fogo.innerHTML=IC.fogo+'<em>'+o.atual+'</em>'+(o.congeladores>0?'<span class="gelo-n" aria-hidden="true">'+IC.gelo+o.congeladores+'</span>':'');
+    fogo.classList.toggle('descansa',!!o.descansando);
+    fogo.setAttribute('title',textoOfensiva());fogo.setAttribute('aria-label',textoOfensiva());
+  }else{
+    fogo.innerHTML=IC.bussola+'<em>'+diasDeExploracao()+'</em>';
+    fogo.classList.remove('descansa');
+    fogo.setAttribute('title',textoExploracao());fogo.setAttribute('aria-label',textoExploracao());
+  }
+  fogo.style.display='';
   $('#st-moedas').innerHTML=IC.moeda+'<em>'+S.moedas+'</em>';
   $('#st-moedas').setAttribute('aria-label','Moedas: '+S.moedas);
   const algumSom=S.som!==false||S.voz!==false;
@@ -184,14 +190,14 @@ function renderTrilha(){
     :(p?'Sua próxima fase é “'+escapa(tituloDaProxima(p))+'”. Bora?'
        :'Você terminou este planeta inteiro! Pode refazer as fases ou visitar outro planeta lá em cima.');
   const curta=feitas()===0?'Escolha por onde começar.':(p?'Próxima fase: “'+escapa(nomeCurto(tituloDaProxima(p)))+'”.':'Você terminou este planeta inteiro!');
-  let h='<section class="planeta" aria-label="Planeta '+pl.n+'">'+
+  let h='<aside class="painel-lado" aria-label="Seu planeta e a rotina"><section class="planeta" aria-label="Planeta '+pl.n+'">'+
     '<div class="planeta-img">'+imgArte(pl.img,{eager:true})+'</div>'+
     '<div class="planeta-txt"><span class="planeta-nome">Planeta '+pl.n+' · '+MATERIAS[MATERIA].n+'</span>'+
     '<h1><span class="oi-nome">Oi, '+nome+'</span> <button class="lapis" id="editar-nome" aria-label="Trocar nome e cor">'+IC.lapis+'</button></h1>'+
     '<p>'+curta+'</p>'+
     '<div class="meta-linha"><div class="meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="'+TOTAL_LESSONS+'" aria-valuenow="'+feitas()+
     '" aria-label="Fases deste planeta"><i style="width:'+pct+'%"></i></div><span>'+feitas()+' de '+TOTAL_LESSONS+' fases</span></div></div>'+
-    '</section>'+rotinaHTML();
+    '</section>'+rotinaHTML()+'</aside>';
   /* o mapa vem primeiro: a etapa onde o Bobby está sobe para o topo da lista, e as outras seguem na ordem de sempre */
   const ordem=UNITS.map((u,i)=>i);
   if(p){ordem.splice(ordem.indexOf(p[0]),1);ordem.unshift(p[0]);}

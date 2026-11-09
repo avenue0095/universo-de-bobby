@@ -7,9 +7,9 @@ const CONQUISTAS=[
  {id:'c5',n:'Primeiro castelo',d:'Completar 1 mundo',ok:()=>mundosOk()>=1},
  {id:'c6',n:'Meia jornada',d:'Completar 5 mundos',ok:()=>mundosOk()>=5},
  {id:'c7',n:'Rei dos mundos',d:'Completar os 10 mundos',ok:()=>mundosOk()>=10},
- {id:'c8',n:'Três dias',d:'Ofensiva de 3 dias',ok:()=>S.ofensiva.melhor>=3},
- {id:'c9',n:'Uma semana',d:'Ofensiva de 7 dias',ok:()=>S.ofensiva.melhor>=7},
- {id:'c10',n:'Sem errar',d:'8 acertos seguidos',ok:()=>(S.melhorCombo||0)>=8},
+ {id:'c8',n:'Três dias',d:'3 dias de exploração',ok:()=>diasDeExploracao()>=3},
+ {id:'c9',n:'Uma semana',d:'7 dias de exploração',ok:()=>diasDeExploracao()>=7},
+ {id:'c10',n:'Sem errar',d:'Uma fase sem nenhum erro',ok:()=>Object.keys(S.feitas).some(k=>estrelasDaFase(k)===3)},
  {id:'c11',n:'Cofre cheio',d:'Ganhar 500 moedas',ok:()=>(S.xp||0)>=500},
  {id:'c12',n:'Perfeccionista',d:'3 estrelas em 10 fases',ok:()=>Object.keys(S.feitas).filter(k=>estrelasDaFase(k)===3).length>=10}
 ];

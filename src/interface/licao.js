@@ -144,7 +144,8 @@ function pintarLicao(){
   /* A pergunta acontece dentro da cena: o guia da matéria (Teo, Rufa ou Otto) fala o enunciado num balão, com o cenário da etapa ao fundo.
      Com companheiro escolhido ele acompanha como amigo (retrato ao lado do número da pergunta) e o guia da matéria continua ensinando. */
   const guia=PLANETAS[MATERIA].guia,pa=persAtivo(),amigo=pa.tipo==='comp'&&pa.id===guia?'':MASC('pensa','avatar');
-  let h='<div class="surge">'+barraMissao()+'<div class="cena-q" data-guia="'+guia+'">'+
+  /* 1D: q-cena (guia, balão, lembrete, figura) e q-lado (respostas); no celular os dois somem do layout (display:contents), no computador viram 2 colunas */
+  let h='<div class="surge"><div class="q-cena">'+barraMissao()+'<div class="cena-q" data-guia="'+guia+'">'+
     '<div class="guia-q">'+imgArte(guia+'-p04',{cls:'guia-img',eager:true,alt:PLANETAS[MATERIA].guiaNome+', o guia'})+'</div>'+
     '<div class="balao-q"><div class="balao-topo">'+amigo+'<div class="et">'+
     (LIC.diag?'Exploração · ':(LIC.rev?'Revisão · ':''))+'Pergunta '+(LIC.i+1)+
@@ -162,6 +163,7 @@ function pintarLicao(){
     if(lem)h+='<details class="lembrete"'+(q.__exemplo?' open':'')+'><summary class="tit">'+IC.lampada+' Lembre da aula</summary><div class="lembrete-txt">'+lem+'</div></details>';
   }
   if(q.figure)h+='<div class="figura">'+q.figure+'</div>';
+  h+='</div><div class="q-lado">';
   if(typeof temTelaPropria==='function'&&temTelaPropria(q)){
     h+=verbosHTML(q);
   }else if(q.type==='mc'){
@@ -185,7 +187,7 @@ function pintarLicao(){
     h+='<div class="resp" id="campo"></div>'+tecladoHTML();
   }
   h+='<div class="caixa-dica" id="caixa-dica" hidden></div>';
-  h+='</div>';
+  h+='</div></div>';
   $('#palco').innerHTML=h;
   /* cenário da etapa atrás da pergunta (escurecido e desfocado por CSS); sem a arte da etapa fica o planeta de sempre */
   const cn=cenaDaEtapa(MATERIA,LIC.u.n);
@@ -488,7 +490,7 @@ function conferir(){
     LIC.melhorCombo=Math.max(LIC.melhorCombo,LIC.combo);
     let ganho=ECON.ganhoAcerto,extra='';
     if(LIC.combo>=ECON.sequenciaDe&&LIC.combo%ECON.sequenciaDe===0&&bonusDeComboAtivo()){
-      ganho+=ECON.bonusSequencia;extra=' · <b>'+LIC.combo+' seguidas!</b> +'+ECON.bonusSequencia+' de bônus';
+      ganho+=ECON.bonusSequencia;extra=' · <b>Bônus!</b> +'+ECON.bonusSequencia;
       if(LIC.vidas<5){LIC.vidas++;extra+=' e +1 coração';somVida();pintarVidas();}
     }
     /* XP nunca diminui; moedas são o saldo que a loja gasta */

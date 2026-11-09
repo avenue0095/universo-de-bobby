@@ -1,6 +1,6 @@
 {
  "gerado": "2026-11-08",
- "total": 171,
+ "total": 173,
  "itens": [
   {
    "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
@@ -1750,6 +1750,22 @@
    "materia": "en",
    "categoria": "pista da história (loja, 1E)",
    "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 10); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Que ritmo! A mochila está chacoalhando de alegria.",
+   "materia": "todas",
+   "categoria": "fala do Bobby (acerto)",
+   "motivo": "texto novo de 08/11/2026 (1A: sem 'seguidas' na tela da criança); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Que embalo! Você está voando mais que a Brisa.",
+   "materia": "todas",
+   "categoria": "fala do Bobby (acerto)",
+   "motivo": "texto novo de 08/11/2026 (1A: sem 'seguidas' na tela da criança); regerar com a voz local",
    "idioma": "pt-BR",
    "trechos_sem_clipe": []
   }

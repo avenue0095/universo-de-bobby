@@ -2063,3 +2063,40 @@ body[data-moldura="moldura-ouro"]{--item-moldura:var(--cor-ouro)}body[data-moldu
 body[data-trilha^="trilha-"] .voce::after{content:"";position:absolute;inset:10% 0 0;border-radius:50%;background:var(--item-trilha);opacity:.35;filter:blur(12px);z-index:-1}
 body[data-trilha="trilha-ouro"]{--item-trilha:var(--cor-ouro)}body[data-trilha="trilha-mar"]{--item-trilha:var(--item-mar)}body[data-trilha="trilha-rosa"]{--item-trilha:var(--item-rosa)}
 body[data-trilha="trilha-verde"]{--item-trilha:var(--item-folha)}body[data-trilha="trilha-lilas"]{--item-trilha:var(--item-lilas)}body[data-trilha="trilha-arco"]{--item-trilha:var(--item-sol)}
+
+/* ---------- 1D: computador como tela de jogo (a partir de 1024 px) ----------
+   Barra de baixo vira barra lateral fina à esquerda; o mapa ocupa a coluna do meio e o planeta e a rotina ficam num painel à direita;
+   a pergunta tem a cena à esquerda e um painel de 420 px à direita (respostas e Verificar). Teclado: interface/teclado.js. */
+.painel-lado,.q-cena,.q-lado{display:contents}
+@media (min-width:1024px){
+  :root{--lado-barra:96px;--painel-pc:420px}
+  body{padding-left:var(--lado-barra)}
+  .barra-baixo{top:0;bottom:0;left:0;right:auto;width:var(--lado-barra);flex-direction:column;justify-content:flex-start;align-items:stretch;
+    padding:var(--esp-96) var(--esp-8) var(--esp-16);gap:var(--esp-8);border-top:0;border-right:1px solid var(--cor-linha);min-height:0}
+  .barra-baixo button{flex:0 0 auto;height:auto;min-height:var(--esp-64);padding:var(--esp-8) 0;justify-content:center}
+  .barra-baixo button.ativo::before{left:0;right:auto;top:var(--esp-8);bottom:var(--esp-8);width:4px;height:auto}
+  .tela{display:grid;grid-template-columns:minmax(0,1fr) 360px;column-gap:var(--esp-32);align-items:start;
+    padding-left:var(--esp-32);padding-right:var(--esp-32);padding-bottom:var(--esp-48)}
+  .tela>*{grid-column:1}
+  .licao .q-cena,.licao .q-lado{display:block}
+  .tela .painel-lado{display:block;grid-column:2;grid-row:1 / span 40;position:sticky;top:calc(var(--topo-h) + var(--esp-16))}
+  .tela .painel-lado .planeta{max-width:none;margin:0 0 var(--esp-16)}
+  :root{--larg-mapa:min(900px,100%)}
+  .tela>.etapa,.tela>.etapa-faixa{width:100%;max-width:var(--larg-mapa);justify-self:center}
+  .topo-in{padding-left:var(--esp-32);padding-right:var(--esp-32)}
+  /* a pergunta: cena à esquerda (guia, balão, figura), painel de 420 px à direita (respostas); o painel de Verificar fica embaixo dele */
+  .licao .lc-corpo{padding-left:var(--esp-32);padding-right:var(--esp-32);padding-bottom:calc(200px + var(--esp-32))}
+  .licao .lc-in>.surge:has(>.q-lado){display:grid;grid-template-columns:minmax(0,1fr) var(--painel-pc);column-gap:var(--esp-32);align-items:start}
+  .licao .q-lado{position:sticky;top:0}
+  .licao .pe{left:auto;right:var(--esp-32);width:var(--painel-pc);border-radius:var(--raio-24) var(--raio-24) 0 0}
+  .licao .pe .pe-in{padding-left:var(--esp-16);padding-right:var(--esp-16);flex-wrap:wrap}
+  .guia-q{width:160px}
+}
+/* hover em tudo que se toca (só onde existe mouse) e cursor por tipo de objeto */
+@media (hover:hover){
+  button:not(:disabled),[role="button"],.alt,.lig,.obj,.mini-pose,.chip-ctl,summary{cursor:pointer}
+  button:not(:disabled):hover,[role="button"]:hover,.lig:hover,.obj:hover,summary:hover{filter:brightness(1.08)}
+  .alt:not(:disabled):hover{transform:translateY(-2px)}
+  .tracar-svg{cursor:crosshair}
+  .tela.arrastando{cursor:grabbing}
+}

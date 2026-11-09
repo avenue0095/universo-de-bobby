@@ -136,21 +136,21 @@ const proximoDia = (a, n) => { relogio.ms += 864e5 * (n || 1); a.avaliar('garant
     A.strictEqual(JSON.stringify(a.avaliar('S.diario.missoes')), a1.replace(/"prog":0/g, '"prog":0'));
   });
 
-  await teste('11. alvo por faixa: M03 = 4/5/6 seguidas; texto da missao traz o numero', () => {
+  await teste('11. alvo por faixa (1A): M03 = acertar 8/10/12 perguntas (sem "seguidas"); texto da missao traz o numero', () => {
     const a = novoApp();
     const alvo = (f) => { a.avaliar("S.faixa='" + f + "'"); return a.avaliar("alvoDaMissao(missaoPorId('M03'))"); };
-    A.strictEqual(alvo('f78'), 4); A.strictEqual(alvo('f910'), 5); A.strictEqual(alvo('f1112'), 6);
-    A.strictEqual(a.avaliar("textoDaMissao({id:'M03',alvo:5})"), 'Acerte 5 seguidas');
+    A.strictEqual(alvo('f78'), 8); A.strictEqual(alvo('f910'), 10); A.strictEqual(alvo('f1112'), 12);
+    A.strictEqual(a.avaliar("textoDaMissao({id:'M03',alvo:10})"), 'Acerte 10 perguntas');
   });
 
   await teste('12. ajuste silencioso do alvo: cai 1 degrau com 3 dias fracos; sobe com 5 dias perfeitos (teto f1112)', () => {
     const a = novoApp('f910');
     a.avaliar("S.missHist=[{dia:'2026-10-20',ids:[],ok:1},{dia:'2026-10-21',ids:[],ok:0},{dia:'2026-10-22',ids:[],ok:1}]");
-    A.strictEqual(a.avaliar("alvoDaMissao(missaoPorId('M03'))"), 4);
+    A.strictEqual(a.avaliar("alvoDaMissao(missaoPorId('M03'))"), 8);
     a.avaliar("S.missHist=[1,2,3,4,5].map(i=>({dia:'2026-10-2'+i,ids:[],ok:3}))");
-    A.strictEqual(a.avaliar("alvoDaMissao(missaoPorId('M03'))"), 6);
+    A.strictEqual(a.avaliar("alvoDaMissao(missaoPorId('M03'))"), 12);
     a.avaliar("S.faixa='f1112'");
-    A.strictEqual(a.avaliar("alvoDaMissao(missaoPorId('M03'))"), 6, 'teto');
+    A.strictEqual(a.avaliar("alvoDaMissao(missaoPorId('M03'))"), 12, 'teto');
   });
 
   await teste('13. missao conclui pelo jogo real, vira estrela do dia com as 3, e 5 estrelas acendem a constelacao da semana', () => {
@@ -272,21 +272,27 @@ const proximoDia = (a, n) => { relogio.ms += 864e5 * (n || 1); a.avaliar('garant
     proximoDia(a, 3);   // 3 dias fora (e sem congelador gasto: ganhou 0)
     a.avaliar('S.espera.vistoEm=""');
     const c = a.avaliar('bilheteDeHoje()').chave;
-    A.ok(['doisATres', 'descansando', 'congelador'].indexOf(c) >= 0, c);
+    /* 1A: sem a ofensiva visivel, os bilhetes de sequencia (descansando, congelador) nao aparecem; fica o de quem voltou */
+    A.ok(['doisATres', 'quatroOuMais'].indexOf(c) >= 0, c);
     proximoDia(a, 6); a.avaliar('S.espera.vistoEm="";S.ofensiva.descansando=false');
     const d = a.avaliar('bilheteDeHoje()').chave;
     A.ok(['quatroOuMais', 'descansando'].indexOf(d) >= 0, d);
   });
 
   await teste('23. bilhete "congelador" depois de gastar um; "descansando" quando a ofensiva descansa', () => {
+    /* 1A: so quando o responsavel mostra a ofensiva antiga; escondida (padrao), esses bilhetes nao aparecem */
     const a = novoApp();
-    a.avaliar('S.ofensiva.congeladores=1');
+    a.avaliar('S.ofensiva.congeladores=1;S.config.ofensivaVisivel=true');
     bloco(a, 0, 0); proximoDia(a, 2);
     A.strictEqual(a.avaliar('bilheteDeHoje().chave'), 'congelador');
     const b = novoApp();
-    b.avaliar('S.ofensiva.congeladores=0');
+    b.avaliar('S.ofensiva.congeladores=0;S.config.ofensivaVisivel=true');
     bloco(b, 0, 0); proximoDia(b, 4); b.avaliar('S.espera.vistoEm=""');
     A.strictEqual(b.avaliar('bilheteDeHoje().chave'), 'descansando');
+    const c = novoApp();
+    c.avaliar('S.ofensiva.congeladores=1');
+    bloco(c, 0, 0); proximoDia(c, 2);
+    A.ok(['congelador', 'descansando', 'marco'].indexOf(c.avaliar('bilheteDeHoje().chave')) < 0, 'bilhete de sequencia com a ofensiva escondida');
   });
 
   await teste('24. tom: nenhum texto do ciclo culpa, entristece, cobra ou faz contagem regressiva', () => {
