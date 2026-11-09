@@ -32,10 +32,12 @@ async function abrirChrome() {
   const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=' + porta, '--user-data-dir=' + perfil, '--no-first-run', '--no-default-browser-check',
     '--disable-gpu', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
   let fechado = false;
-  const fechar = () => { if (fechado) return; fechado = true; try { chrome.kill('SIGKILL'); } catch (e) {} try { servidor.close(); } catch (e) {} try { fs.rmSync(perfil, { recursive: true, force: true }); } catch (e) {} };
+  /* mata o Chrome, espera ele soltar os arquivos e apaga o perfil temporário (tenta de novo por até 3 s: o Chrome ainda grava ao morrer) */
+  const fechar = () => { if (fechado) return; fechado = true; try { chrome.kill('SIGKILL'); } catch (e) {} try { servidor.close(); } catch (e) {}
+    for (let i = 0; i < 30 && fs.existsSync(perfil); i++) { try { fs.rmSync(perfil, { recursive: true, force: true }); } catch (e) {} if (fs.existsSync(perfil)) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 100); } };
   process.on('exit', fechar);
   let alvos = null;
-  for (let i = 0; i < 80 && !alvos; i++) { try { const r = await fetch('http://127.0.0.1:' + porta + '/json/list'); if (r.ok) alvos = await r.json(); } catch (e) {} if (!alvos) await dorme(250); }
+  for (let i = 0; i < 240 && !alvos; i++) { try { const r = await fetch('http://127.0.0.1:' + porta + '/json/list'); if (r.ok) alvos = await r.json(); } catch (e) {} if (!alvos) await dorme(250); }
   if (!alvos) { fechar(); throw new Error('Chrome nao respondeu'); }
   const ws = new WebSocket(alvos.find((a) => a.type === 'page').webSocketDebuggerUrl);
   await new Promise((ok, no) => { ws.onopen = ok; ws.onerror = no; });

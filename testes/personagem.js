@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
-/* Meu personagem: um look por vez, dono de item antigo e dono do look novo, so peca com arte entra no bau, MASC troca a imagem (look) ou sobrepoe (chapeu).
+/* Meu personagem (1F, guarda-roupa em camadas): varios acessorios ao mesmo tempo, dono de item antigo e dono do novo, so peca com arte entra no bau,
+   MASC monta a pose com uma camada por acessorio (o teste de todas as combinacoes em todas as poses e testes/camadas.js).
    Uso: node testes/personagem.js */
 const fs = require('fs');
 const path = require('path');
@@ -15,50 +16,48 @@ const novo = () => { const a = carregarApp(4); a.avaliar('ATIVOS=' + JSON.string
   await teste('1. os 6 looks e o chapeu tem arte no manifesto (sem item = base)', () => {
     ['item-base', 'item-bone', 'item-oculos', 'item-capa', 'item-capacete', 'item-coroa', 'item-lenco', 'bobby-item-chapeu'].forEach((id) => A.ok(man[id], id));
   });
-  await teste('2. so um look por vez: vestir um tira o outro; comprar veste', () => {
+  await teste('2. (1F) varios acessorios ao mesmo tempo: comprar nao tira o que ja esta vestido; vestir de novo o mesmo item tira so ele', () => {
     const a = novo();
-    a.avaliar("S.moedas=1000;S.comprado=[];comprar('chapeu','bone');comprar('rosto','oculos')");
-    A.strictEqual(a.avaliar('S.look.rosto'), 'oculos'); A.strictEqual(a.avaliar('S.look.chapeu'), '');
+    a.avaliar("S.moedas=1000;S.comprado=[];comprarItem('bone');vestir('cabeca','bone');comprarItem('oculos');vestir('rosto','oculos')");
+    A.strictEqual(a.avaliar('S.look.rosto'), 'oculos'); A.strictEqual(a.avaliar('S.look.cabeca'), 'bone');
     A.strictEqual(a.avaliar('S.moedas'), 1000 - a.avaliar('PRECOS.look.bone') - a.avaliar('PRECOS.look.oculos'));
-    a.avaliar("equipar('rosto','oculos')");                 // de novo: tira
-    A.strictEqual(a.avaliar('S.look.rosto'), '');
+    a.avaliar("vestir('rosto','')");
+    A.strictEqual(a.avaliar('S.look.rosto'), ''); A.strictEqual(a.avaliar('S.look.cabeca'), 'bone');
   });
-  await teste('3. quem comprou o item antigo e dono do look novo (espacial->capacete, cachecol->lenco, sol->oculos)', () => {
+  await teste('3. quem comprou o item antigo e dono do novo (espacial->capacete, cachecol->lenco, sol->oculos de sol)', () => {
     const a = novo();
     a.avaliar("S.comprado=['espacial','cachecol','sol']");
-    ['capacete', 'lenco', 'oculos'].forEach((id) => A.strictEqual(a.avaliar("temItem('" + id + "')"), true, id));
+    ['capacete', 'lenco', 'oculos-sol'].forEach((id) => A.strictEqual(a.avaliar("temItem('" + id + "')"), true, id));
     A.strictEqual(a.avaliar("temItem('coroa')"), false);
-    A.strictEqual(a.avaliar("guardadosDa('look').length"), 0, 'item antigo substituido nao deve aparecer como guardado');
+    A.strictEqual(a.avaliar("guardadosDa().length"), 0, 'item antigo substituido nao deve aparecer como guardado');
+    a.avaliar("S.comprado=['festa']");
+    A.deepStrictEqual(JSON.parse(JSON.stringify(a.avaliar("guardadosDa()"))), ['Chapéu de festa']);
   });
-  await teste('4. bau so entrega peca com arte; o que o jogador ja tem (inclusive pelo item antigo) nao se repete', () => {
+  await teste('4. bau so entrega acessorio com arte e sem portao; o que o jogador ja tem (inclusive pelo item antigo) nao se repete', () => {
     const a = novo();
     a.avaliar("S.comprado=[]");
-    const ids = new Set();
-    for (let i = 0; i < 20; i++) { const r = a.avaliar("(function(){var r=entregarRecompensa([['roupa-p']],5);return r[0].k+'|'+r[0].n})()"); ids.add(r); }
-    const arte = new Set(['Chapéu de explorador', 'Boné', 'Óculos de astronauta', 'Lenço']);
-    ids.forEach((x) => { const [k, n] = x.split('|'); A.ok(k === 'moedas' || arte.has(n), 'bau entregou peca sem arte: ' + x); });
-    A.strictEqual(a.avaliar("S.comprado.filter(function(c){return !PECAS.chapeu[c]&&!PECAS.rosto[c]&&!PECAS.pescoco[c]}).length"), 0);
+    for (let i = 0; i < 20; i++) {
+      const r = JSON.parse(JSON.stringify(a.avaliar("entregarRecompensa([['roupa-p']],5)[0]")));
+      if (r.k === 'moedas') continue;
+      const id = a.avaliar("S.comprado[S.comprado.length-1]");
+      A.ok(a.avaliar("temArteDoItem(" + JSON.stringify(id) + ")&&!portaoDe(" + JSON.stringify(id) + ")"), 'bau entregou ' + id);
+    }
+    A.strictEqual(a.avaliar("S.comprado.length"), a.avaliar("new Set(S.comprado).size"), 'repetiu peca');
   });
-  await teste('5. MASC: look de urso inteiro vira a imagem na pose Oi, recorte nas expressoes e fica base nas outras poses; chapeu sobrepoe', () => {
+  await teste('5. (1F) MASC: o acessorio aparece por camada em TODAS as poses (nunca a imagem do look inteiro); sem nada vestido fica a pose', () => {
     const a = novo();
-    a.avaliar("S.look={chapeu:'bone'}");
-    A.ok(/item-bone/.test(a.avaliar("MASC('oi')")), 'Oi com look');
-    A.ok(/look-retrato/.test(a.avaliar("MASC('feliz')")) && /item-bone/.test(a.avaliar("MASC('feliz')")), 'expressao com look');
-    A.ok(/bobby-p02/.test(a.avaliar("MASC('comemora')")) && /ov-bone/.test(a.avaliar("MASC('comemora')")) && !/item-bone/.test(a.avaliar("MASC('comemora')")), 'comemora: base com o bone sobreposto');
-    a.avaliar("S.look={pescoco:'capa'}");
-    A.ok(/bobby-p02/.test(a.avaliar("MASC('comemora')")) && !/item-ov|ov-/.test(a.avaliar("MASC('comemora')")), 'capa nao tem sobreposicao: Comemora na base');
-    A.ok(/item-capa/.test(a.avaliar("retratoPers()")), 'o topo nunca perde o look (capa)');
-    a.avaliar("S.look={chapeu:'coroa'}");
-    ['comemora','conta','incentiva','presente'].forEach((e) => A.ok(/ov-coroa/.test(a.avaliar("MASC('" + e + "')")) === (e !== 'presente' ? e !== 'incentiva' : true) || true));
-    A.ok(/ov-coroa/.test(a.avaliar("MASC('comemora')")) && /ov-coroa/.test(a.avaliar("MASC('conta')")), 'coroa sobreposta nas poses de frente');
-    a.avaliar("S.look={rosto:'oculos'}");
-    A.ok(/ov-oculos/.test(a.avaliar("MASC('comemora')")), 'oculos sobrepostos');
-    a.avaliar("S.look={chapeu:'explorador'}");
-    A.ok(/item-chapeu/.test(a.avaliar("MASC('feliz')")) && /bobby-e01/.test(a.avaliar("MASC('feliz')")), 'chapeu sobreposto');
-    A.ok(/item-chapeu/.test(a.avaliar("MASC('feliz','avatar')")) && /ret-pers/.test(a.avaliar("MASC('feliz','avatar')")), 'avatar redondo com o chapeu dentro do aro');
-    A.ok(/item-chapeu/.test(a.avaliar("retratoPers()")), 'o retrato do topo mostra o chapeu');
+    a.avaliar("S.comprado=['bone','capa','explorador'];S.look={cabeca:'bone'}");
+    ['oi', 'comemora', 'anda', 'pensa', 'feliz', 'aponta', 'descansa'].forEach((e) => {
+      const h = a.avaliar("MASC('" + e + "')");
+      A.ok(/ov-bone/.test(h) && !/looks\/item-/.test(h), e + ': ' + h.slice(0, 120));
+    });
+    A.ok(/bobby-p02/.test(a.avaliar("MASC('comemora')")), 'comemora usa a pose de verdade');
+    a.avaliar("S.look={costas:'capa'}");
+    A.ok(/data-item="capa"/.test(a.avaliar("MASC('comemora')")) && /data-item="capa"/.test(a.avaliar("retratoPers()")), 'capa em comemora e no topo');
+    a.avaliar("S.look={cabeca:'explorador'}");
+    A.ok(/bobby-item-chapeu/.test(a.avaliar("MASC('feliz','avatar')")), 'avatar com o chapeu');
     a.avaliar("S.look={}");
-    A.ok(/bobby-p01/.test(a.avaliar("MASC('oi')")));
+    A.ok(/bobby-p01/.test(a.avaliar("MASC('oi')")) && !/camada/.test(a.avaliar("MASC('oi')")));
   });
   await teste('6. companheiro escolhido toma o lugar do Bobby: Oi, Comemora, Caminha e Pensa (erro e Pensa); migracao do personagem antigo', () => {
     const a = novo();

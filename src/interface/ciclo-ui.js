@@ -271,6 +271,10 @@ function controlesHTML(){
      '<small>'+(pausada?'Pausada até '+c.pausaAte.split('-').reverse().join('/')+'.':'Máximo de 7 dias.')+'</small></div>';
   h+='<div class="ctl-linha"><b>Ofensiva</b><div>'+opt([1,0],c.ofensivaLigada?1:0,'ofensivaLigada',v=>v?'Ligada':'Desligada')+'</div></div>';
   h+='<div class="ctl-linha"><b>Missões do dia</b><div>'+opt([1,0],c.missoesLigadas?1:0,'missoesLigadas',v=>v?'Ligadas':'Desligadas')+'</div></div>';
+  /* 1E: loja da semana e petisco podem ser desligados; total gasto em moedas do jogo (nada é dinheiro de verdade) */
+  h+='<div class="ctl-linha"><b>Loja da semana</b><div>'+opt([1,0],c.lojaSemanaLigada?1:0,'lojaSemanaLigada',v=>v?'Ligada':'Desligada')+'</div></div>';
+  h+='<div class="ctl-linha"><b>Petisco do companheiro</b><div>'+opt([1,0],c.petiscoLigado?1:0,'petiscoLigado',v=>v?'Ligado':'Desligado')+'</div>'+
+     '<small>Total gasto na loja até hoje: '+(S.gasto||0)+' moedas do jogo. Moeda só se ganha jogando; nada aqui é dinheiro de verdade.</small></div>';
   return h+'</div>';
 }
 function ligarControles(refaz){

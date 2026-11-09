@@ -62,7 +62,7 @@ const COLECAO_DE={adesivo:'adesivos',ornamento:'ornamentos',medalha:'medalhas',p
 function pecaParaBau(tam){
   const todas=[];
   /* só peça com arte nova entra no baú: dar o que a criança não consegue ver seria promessa vazia */
-  ['chapeu','rosto','pescoco'].forEach(sl=>Object.keys(PECAS[sl]||{}).forEach(id=>{if(PECAS[sl][id].arte)todas.push({id:id,n:PECAS[sl][id].n,p:PECAS[sl][id].p});}));
+  Object.keys(VESTIVEIS).forEach(id=>{if(temArteDoItem(id)&&!portaoDe(id))todas.push({id:id,n:VESTIVEIS[id].n,p:custoDe(id)});});
   const livres=todas.filter(x=>!temItem(x.id)).sort((a,b)=>a.p-b.p||(a.id<b.id?-1:1));
   if(!livres.length)return null;
   if(tam==='roupa-p')return livres.find(x=>x.p<=220)||null;
@@ -218,6 +218,8 @@ function cicloPergunta(q,info){
   garantirDia();
   const d=S.diario,st=diaDeStats();
   d.perguntas++;st.q=(st.q||0)+1;
+  /* dias de exploração (1A e portões da loja): todo dia com pelo menos uma resposta conta, para sempre */
+  if(typeof marcarDiaDeExploracao==='function')marcarDiaDeExploracao(hoje());
   if(info.ok){d.acertos++;st.ac=(st.ac||0)+1;}
   if(info.ms>0){S.stats.amostras.push(Math.max(1,Math.min(60,Math.round(info.ms/1000))));if(S.stats.amostras.length>CICLO.maxAmostras)S.stats.amostras.shift();}
   if(MATERIA==='mat')d.c.mat++;

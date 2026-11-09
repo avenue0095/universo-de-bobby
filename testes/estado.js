@@ -38,7 +38,7 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     A.deepStrictEqual(lua.feitas, V3.perfis[0].dados.feitas);
     A.strictEqual(lua.faixa, 'f78'); A.strictEqual(s.perfis[1].dados.faixa, 'f1112'); A.strictEqual(s.perfis[2].dados.faixa, 'f910');
     A.strictEqual(lua.legado.nivel, 'facil');
-    A.deepStrictEqual(lua.comprado, ['bone', 'oculos']); A.strictEqual(lua.look.chapeu, 'bone');
+    A.deepStrictEqual(lua.comprado, ['bone', 'oculos']); A.strictEqual(lua.look.cabeca, 'bone', 'o chapeu antigo vira o slot cabeca (1F)');
     A.strictEqual(lua.legado.vozPt, 'Luciana'); A.ok(!('vozPt' in lua), 'voz do aparelho nao fica mais no perfil'); A.strictEqual(lua.velocidade, 1.1); A.strictEqual(v4(a).perfis[2].dados.velocidade, 0.8, 'velocidade 0,7 do v3 vira 0,8 (minimo da voz gravada)'); A.strictEqual(lua.acertosTotal, 412); A.strictEqual(lua.melhorCombo, 8);
   });
 
@@ -130,11 +130,11 @@ const J = (x) => JSON.parse(JSON.stringify(x));
   await teste('13. XP nunca diminui; gastar na loja so mexe nas moedas', () => {
     const a = abrir({ 'mundo-numeros-v2': FIX });
     a.avaliar('usarPerfil(0)');
-    a.avaliar("S.moedas=500;S.xp=2480;comprar('chapeu','explorador')");
+    a.avaliar("S.moedas=500;S.xp=2480;comprarItem('explorador')");
     A.strictEqual(a.avaliar('S.xp'), 2480);
     A.strictEqual(a.avaliar('S.moedas'), 500 - a.avaliar('PRECOS.look.explorador'));
     A.ok(a.avaliar("S.comprado.indexOf('explorador')>=0"));
-    a.avaliar("S.moedas=10;S.comprado=[];comprar('chapeu','explorador');comprar('chapeu','coroa')");   // sem saldo (ou item sem arte nova): nao compra, nao mexe
+    a.avaliar("S.moedas=10;S.comprado=[];comprarItem('explorador');comprarItem('coroa')");   // sem saldo (ou item com portao): nao compra, nao mexe
     A.strictEqual(a.avaliar('S.moedas'), 10); A.strictEqual(a.avaliar('S.xp'), 2480);
   });
 

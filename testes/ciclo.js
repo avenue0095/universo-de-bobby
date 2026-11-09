@@ -106,7 +106,7 @@ const proximoDia = (a, n) => { relogio.ms += 864e5 * (n || 1); a.avaliar('garant
     a.avaliar("entregarRecompensa([['roupa-p']],5)");
     A.strictEqual(a.avaliar('S.comprado.length'), antes + 1); A.strictEqual(a.avaliar('S.moedas'), 100);
     const id = a.avaliar('S.comprado[S.comprado.length-1]');
-    A.ok(a.avaliar("['chapeu','rosto','pescoco'].some(s=>PECAS[s]['" + id + "'])"));
+    A.ok(a.avaliar("!!VESTIVEIS['" + id + "']"), 'o bau deveria entregar um acessorio do guarda-roupa em camadas: ' + id);
   });
 
   await teste('9. 3 missoes: sempre 3, sem grupos repetidos, so as disponiveis, iguais o dia inteiro', () => {

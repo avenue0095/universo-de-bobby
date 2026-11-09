@@ -34,7 +34,7 @@ const servidor = http.createServer((req, res) => {
 });
 
 const dorme = (ms) => new Promise((r) => setTimeout(r, ms));
-async function esperaHttp(url, tentativas = 60) {
+async function esperaHttp(url, tentativas = 240) {   /* até 60 s: o Chrome headless chegou a levar 16 s para subir nesta máquina (08/11/2026) */
   for (let i = 0; i < tentativas; i++) {
     try { const r = await fetch(url); if (r.ok) return r.json(); } catch (e) { /* ainda subindo */ }
     await dorme(250);
@@ -50,7 +50,7 @@ async function main() {
   const portaCdp = 9300 + Math.floor(Math.random() * 500);
   const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=' + portaCdp, '--user-data-dir=' + perfil,
     '--no-first-run', '--no-default-browser-check', '--disable-gpu', '--mute-audio', '--autoplay-policy=no-user-gesture-required', 'about:blank'], { stdio: 'ignore' });
-  const limpa = () => { try { chrome.kill(); } catch (e) {} try { servidor.close(); } catch (e) {} };
+  const limpa = () => { try { chrome.kill('SIGKILL'); } catch (e) {} try { servidor.close(); } catch (e) {} };
   process.on('exit', limpa);
 
   try {
@@ -103,13 +103,16 @@ async function main() {
       await js("try{localStorage.clear()}catch(e){}").catch(() => {});
       await cdp('Page.navigate', { url: base + '/index.html' });
       await dorme(1200);
+      /* com a máquina carregada a página pode levar mais de 1,2 s: espera o app existir (até 15 s) */
+      for (let k = 0; k < 70; k++) { let ok = false; try { ok = await js("typeof STORE!=='undefined'&&typeof S!=='undefined'"); } catch (e) {} if (ok) break; await dorme(200); }
       /* limpa o armazenamento do app para sempre comecar com jogador novo */
       /* STORE.atual=-1: o app grava o estado ao sair da pagina (pagehide); sem isso ele regravaria o jogador antigo logo apos o clear */
       await js("STORE.atual=-1;localStorage.clear();location.reload();0");
       await dorme(1500);
       const rot = nomeTela;
-      /* 1) cria o jogador pelo modal, como a crianca faria */
-      const modalAberto = await js("document.querySelector('#modal').classList.contains('on')");
+      /* 1) cria o jogador pelo modal, como a crianca faria (espera até 5 s: com a máquina carregada o recarregar passou de 1,5 s) */
+      let modalAberto = false;
+      for (let k = 0; k < 18 && !modalAberto; k++) { try { modalAberto = await js("!!document.querySelector('#modal')&&document.querySelector('#modal').classList.contains('on')"); } catch (e) {} if (!modalAberto) await dorme(200); }
       if (!modalAberto) problemas.push(rot + ': o modal de novo jogador nao abriu no primeiro acesso');
       /* o modal precisa caber (ou rolar) em celular pequeno, inclusive com o teclado aberto (viewport 300 px mais baixo) */
       const cabeModal = async (quando) => {
@@ -314,24 +317,27 @@ async function main() {
         await js("document.querySelector('#fechar-des').click();0"); await dorme(300);
         // Meu personagem: expressao, chapeu e companheiro
         await js("S.moedas=500;document.querySelector('#bb-pers').click();0"); await dorme(500);
-        await js("document.querySelector('[data-pose=\"bobby-e03\"]').click();0"); await dorme(200);
-        await js("document.querySelector('[data-aba=\"look\"]').click();0"); await dorme(200);
-        await js("document.querySelector('[data-buy]').click();0"); await dorme(300);
-        const roupa = await js("({chapeu:!!document.querySelector('.palco .item-chapeu'),look:S.look.chapeu,moedas:S.moedas})");
+        await js("document.querySelector('[data-pose=\"bobby-e01\"]').click();0"); await dorme(200);
+        await js("document.querySelector('[data-aba=\"vestir\"]').click();0"); await dorme(200);
+        await js("document.querySelector('[data-compra=\"explorador\"]').click();0"); await dorme(200);
+        await js("document.querySelector('#compra-sim').click();0"); await dorme(300);
+        const roupa = await js("({chapeu:!!document.querySelector('.palco [data-item=\"explorador\"]'),look:S.look.cabeca,moedas:S.moedas})");
         if (!roupa.chapeu || roupa.look !== 'explorador') problemas.push(rot + ' personagem: chapeu nao apareceu ' + JSON.stringify(roupa));
         await js("document.querySelector('[data-aba=\"comp\"]').click();0"); await dorme(200);
         // companheiro novo custa moedas do jogo: bloqueado com preco visivel, confirma a compra, depois escolhe
-        const preco = await js("(()=>{const b=document.querySelector('[data-buycomp=\"rufa\"]');return b?b.innerText.trim():null})()");
-        if (!preco || !/\d{3,4}/.test(preco)) problemas.push(rot + ' companheiros: a Rufa deveria estar bloqueada com o preco em moedas visivel (' + preco + ')');
-        await js("S.moedas=3000;telaLoja();document.querySelector('[data-buycomp=\"rufa\"]').click();0"); await dorme(250);
+        const preco = await js("(()=>{const b=document.querySelector('[data-buycomp=\"teo\"]');return b?b.innerText.trim():null})()");
+        if (!preco || !/\d{3,4}/.test(preco)) problemas.push(rot + ' companheiros: o Teo deveria estar bloqueado com o preco em moedas visivel (' + preco + ')');
+        const port = await js("(()=>{const c=[...document.querySelectorAll('.vitrine .item')].find(i=>/Fagulha/.test(i.innerText));return c?c.innerText:''})()");
+        if (!/Abre com 30 dias de exploração/.test(port)) problemas.push(rot + ' companheiros: a Fagulha deveria mostrar o portao com a origem: ' + port.slice(0, 80));
+        await js("S.moedas=3000;telaLoja();document.querySelector('[data-buycomp=\"teo\"]').click();0"); await dorme(250);
         const conf = await js("(document.querySelector('#loja-aviso')||{}).innerText||''");
-        if (!/Quer levar Rufa por \d+ moedas\?/.test(conf)) problemas.push(rot + ' companheiros: faltou a confirmacao da compra: ' + conf);
-        await js("document.querySelector('#comp-sim').click();0"); await dorme(300);
-        if (!(await js("S.look.companheiro==='rufa'&&S.comprado.indexOf('rufa')>=0"))) problemas.push(rot + ' companheiros: comprar a Rufa nao a escolheu');
+        if (!/Quer levar “Teo” por \d+ moedas\?/.test(conf)) problemas.push(rot + ' companheiros: faltou a confirmacao da compra: ' + conf);
+        await js("document.querySelector('#compra-sim').click();0"); await dorme(300);
+        if (!(await js("S.look.companheiro==='teo'&&S.comprado.indexOf('teo')>=0"))) problemas.push(rot + ' companheiros: comprar o Teo nao o escolheu');
         await js("document.querySelector('[data-aba=\"comp\"]').click();0"); await dorme(150);
         await js("document.querySelector('#palco-bobby').click();0"); await dorme(300);
         await shot('visual-4-meu-personagem'); await semRolagem('personagem');
-        await js("document.querySelector('[data-modo=\"corpo\"]').click();0"); await dorme(500);
+        await js("document.querySelector('[data-pose=\"bobby-p02\"]').click();0"); await dorme(500);
         await shot('visual-5-corpo');
         await js("document.querySelector('#bb-mapa').click();0"); await dorme(500);
         const ruins = await quebradas();
@@ -361,13 +367,13 @@ async function main() {
         await js("document.querySelector('#fechar-des').click();0"); await dorme(200); await js('fecharTelasDaBarra();0');
         // vitrine de looks: figura dentro do cartao, nome, selo e botao tocaveis (nada por cima)
         await js("S.moedas=900;document.querySelector('#bb-pers').click();0"); await dorme(500);
-        await js("document.querySelector('[data-aba=\"look\"]').click();0"); await dorme(500);
+        await js("document.querySelector('[data-aba=\"vestir\"]').click();0"); await dorme(500);
         const lk = await js("(()=>{const ruins=[];document.querySelectorAll('.vitrine .item').forEach(it=>{const c=it.getBoundingClientRect();const f=it.querySelector('.item-img');if(f){const b=f.getBoundingClientRect();if(b.bottom>c.bottom+1||b.right>c.right+1||b.left<c.left-1)ruins.push('figura fora do cartao');}it.querySelectorAll('b,.selo,button').forEach(e=>{e.scrollIntoView({block:'center'});const q=e.getBoundingClientRect();const t=document.elementFromPoint(q.left+q.width/2,q.top+q.height/2);if(!(t&&(t===e||e.contains(t))))ruins.push((e.className||e.tagName)+' '+e.textContent.trim().slice(0,20)+' coberto por '+(t?(t.className||t.tagName):'nada'));});});return {ruins:ruins,n:document.querySelectorAll('.vitrine .item').length}})()");
         if (lk.n < 2 || lk.ruins.length) problemas.push(rot + ' looks: ' + JSON.stringify(lk));
         await shot('looks');
         await js('fecharTelasDaBarra();0');
         // nenhum SVG gigante (icone sem tamanho ocupa a largura toda) nas telas de interface
-        const svgGrande = async (nome) => { const g = await js("Array.from(document.querySelectorAll('svg')).filter(v=>!v.closest('#licao,.figura,.quadro,.aula')).map(v=>({w:Math.round(v.getBoundingClientRect().width),h:Math.round(v.getBoundingClientRect().height),c:(v.parentElement&&(v.parentElement.className||v.parentElement.tagName))||''})).filter(v=>v.w>64||v.h>64)"); if (g.length) problemas.push(rot + ' SVG gigante em ' + nome + ': ' + JSON.stringify(g.slice(0, 3))); };
+        const svgGrande = async (nome) => { const g = await js("Array.from(document.querySelectorAll('svg')).filter(v=>!v.closest('#licao,.figura,.quadro,.aula')&&!v.matches('.item-solo,.camada,.adesivo')).map(v=>({w:Math.round(v.getBoundingClientRect().width),h:Math.round(v.getBoundingClientRect().height),c:(v.parentElement&&(v.parentElement.className||v.parentElement.tagName))||''})).filter(v=>v.w>64||v.h>64)"); if (g.length) problemas.push(rot + ' SVG gigante em ' + nome + ': ' + JSON.stringify(g.slice(0, 3))); };
         await js("document.querySelector('#bb-mapa').click();window.scrollTo(0,0);document.querySelector('.rotina details').open=true;0"); await dorme(400); await svgGrande('mapa com a rotina aberta');
         await js("document.querySelector('.rotina details').open=false;document.querySelector('#bb-gal').click();0"); await dorme(500); await svgGrande('galeria'); await js('fecharTelasDaBarra();0');
         await js("document.querySelector('#bb-pers').click();0"); await dorme(400); await svgGrande('Meu personagem'); await js('fecharTelasDaBarra();0');
@@ -479,8 +485,10 @@ async function main() {
         await shot0('rotulo-ajuda-' + nomeTela);
         await js("fecharLicao();0");
         await verifica('rufa', "S.look={companheiro:'rufa'};S.comprado=['rufa']", /rufa-p0[1-4]/);
-        await verifica('coroa', "S.look={chapeu:'coroa'};S.comprado=['coroa']", /(item|ov)-coroa/);
-        await verifica('explorador', "S.look={chapeu:'explorador'};S.comprado=['explorador']", /bobby-item-chapeu/);
+        await verifica('coroa', "S.look={cabeca:'coroa'};S.comprado=['coroa']", /ov-coroa/);
+        await verifica('explorador', "S.look={cabeca:'explorador'};S.comprado=['explorador']", /bobby-item-chapeu/);
+        /* 1F: 5 acessorios ao mesmo tempo, em todas as telas */
+        await verifica('cinco', "S.comprado=['bone','oculos','lenco','capa','bandeira'];S.look={cabeca:'bone',rosto:'oculos',pescoco:'lenco',costas:'capa',mao:'bandeira'}", /data-item="bone"[\s\S]*data-item="bandeira"|data-item="bandeira"[\s\S]*data-item="bone"/);
         // trocar em Meu personagem muda tudo na hora (o topo e a barra mudam sem recarregar)
         await js("S.look={};S.comprado=['otto'];fecharTelasDaBarra();document.querySelector('#bb-pers').click();0"); await dorme(400);
         await js("document.querySelector('[data-aba=\"comp\"]').click();0"); await dorme(250);
@@ -650,7 +658,9 @@ async function main() {
          caminho tocar-tocar com ima), tocar a letra na palavra, ordenar cartas; pressionado no mesmo quadro; hit-stop de 60 a 80 ms; painel de
          feedback ate 20% da altura com a cena visivel; de Verificar a proxima pergunta em ate 1,8 s; nenhuma alternativa atras do rodape. */
       {
-        const toqueEm = async (sel) => { const c = await js("(()=>{const e=document.querySelector(" + JSON.stringify(sel) + ");if(!e)return null;e.scrollIntoView({block:'center'});const r=e.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()"); if (!c) return null;
+        /* rola, espera a rolagem assentar e só então lê o ponto (instável em 360: o toque saía no ponto de antes da rolagem e um objeto não contava) */
+        const toqueEm = async (sel) => { if (!(await js("(()=>{const e=document.querySelector(" + JSON.stringify(sel) + ");if(!e)return false;e.scrollIntoView({block:'center',behavior:'instant'});return true})()"))) return null; await dorme(80);
+          const c = await js("(()=>{const e=document.querySelector(" + JSON.stringify(sel) + ");const r=e.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()");
           if (medidas.mobile) { await cdp('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: c.x, y: c.y }] }); await cdp('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); }
           else { await cdp('Input.dispatchMouseEvent', { type: 'mouseMoved', x: c.x, y: c.y }); await cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: c.x, y: c.y, button: 'left', clickCount: 1 }); await cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: c.x, y: c.y, button: 'left', clickCount: 1 }); }
           await dorme(60); return c; };
@@ -673,7 +683,9 @@ async function main() {
         await toqueEm('.alt:nth-child(4)');
         const certa = await js("(()=>{const q=LIC.qs[0];const k=q.options.indexOf(q.answer);document.querySelectorAll('.alt').forEach(a=>a.classList.remove('sel'));return k})()");
         await toqueEm('.alt[data-v="' + certa + '"]');
-        const t0 = Date.now();
+        /* o tempo do Verificar à próxima pergunta conta só o que é do app, medido na página (antes a conta incluía as esperas, a foto e a fila
+           do CDP do próprio teste, e oscilava entre 1,7 e 2,5 s conforme a carga da máquina) */
+        await js("window.__tv=[];if(!window.__tvOuv){window.__tvOuv=1;document.querySelector('#acao').addEventListener('click',()=>{const t=performance.now();setTimeout(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>window.__tv.push(performance.now()-t))),0);});}0");
         await toqueEm('#acao'); await dorme(40);
         const hs = await js("({parado:document.documentElement.classList.contains('hitstop'),ms:JUICE.ultimoHitStop,ok:LIC.conferido})");
         await dorme(150);
@@ -685,9 +697,11 @@ async function main() {
         await shot0('verbo-feedback-' + nomeTela);
         // de Verificar a proxima pergunta pronta em ate 1,8 s (um toque em Continuar)
         await js("LIC.qs.push(comVerbo(mc('Quantas bolinhas tem aqui?',5,[4,6,7],{figure:dots(5)}),UNITS[0].lessons[0]));0");
-        await toqueEm('#acao');
+        await toqueEm('#acao'); await dorme(120);
         const pronta = await js("!!document.querySelector('.obj')&&LIC.i===1&&!LIC.conferido");
-        const dt = Date.now() - t0;
+        /* dentro da página: do clique em Verificar até 2 quadros pintados, mais o mesmo para Continuar (a fila do CDP e a carga da máquina ficam fora) */
+        const tv = await js('window.__tv'); const dt = Math.round((tv || []).reduce((x, y) => x + y, 0));
+        if (!tv || tv.length < 2) problemas.push(rot + ' Verificar ate a proxima pergunta: medida incompleta ' + JSON.stringify(tv));
         if (!pronta || dt > 1800) problemas.push(rot + ' Verificar ate a proxima pergunta: ' + dt + ' ms, pronta=' + pronta);
         // arrastar: arraste real ate a cesta (ima de 24 px) e caminho tocar-tocar
         await js("fecharLicao();abrirLicao(3,0);LIC.etapa='questao';LIC.i=0;LIC.qs=[comVerbo(inp('6 bolinhas repartidas igualmente em 2 grupos. Quantas em cada grupo?',3),UNITS[3].lessons[0])];pintarLicao();0"); await dorme(300);
@@ -1029,6 +1043,10 @@ if(r<(grande?3:4.5)){const k=el.tagName+'.'+el.className+' '+r.toFixed(2);if(!vi
     if (avisos.length) { console.log('\nAVISOS (recursos externos, esperado sem internet):'); [...new Set(avisos)].forEach((a) => console.log('  ' + a.slice(0, 160))); }
     if (problemas.length) { console.log('\nFALHOU:'); [...new Set(problemas)].forEach((p) => console.log('  ' + p.slice(0, 300))); process.exitCode = 1; }
     else console.log('\nOK: nenhuma excecao nem console.error; 3 fases jogadas em desktop e celular');
-  } finally { limpa(); try { fs.rmSync(perfil, { recursive: true, force: true }); } catch (e) {} }
+  } finally {
+    limpa();
+    /* o Chrome ainda grava no perfil enquanto morre: tenta apagar por até 3 s (perfil temporário criado por este teste) */
+    for (let i = 0; i < 30 && fs.existsSync(perfil); i++) { try { fs.rmSync(perfil, { recursive: true, force: true }); } catch (e) {} if (fs.existsSync(perfil)) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 100); }
+  }
 }
 main().then(() => process.exit(process.exitCode || 0)).catch((e) => { console.error('ERRO no teste:', e.message); process.exit(1); });

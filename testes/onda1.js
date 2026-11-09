@@ -55,6 +55,40 @@ bloco('A', async (c, feito) => {
   feito.push('A: relatorio e missao de exploracao em 320x568, 390x844 e 1280x800, sem corte de lado e sem erro no console');
 });
 
+/* ---------- B ---------- */
+bloco('B', async (c, feito) => {
+  for (const rot of ['390x844', '320x568', '1280x800']) {
+    await c.tela(TELAS[rot], 'Caio');
+    await c.js("S.comprado=['bone','oculos','lenco','capa','bandeira'];S.look={cabeca:'bone',rosto:'oculos',pescoco:'lenco',costas:'capa',mao:'bandeira'};S.moedas=600;salvar();pintarTopo();renderTrilha();0"); await dorme(400);
+    /* no mapa: parado e andando com os 5 */
+    const mapa = await c.js("(()=>{const v=document.querySelector('.voce');return v?[...v.querySelectorAll('.bobby-camadas')].map(b=>b.querySelectorAll('.camada').length):[]})()");
+    if (!mapa.length || mapa.some((n) => n !== 5)) c.problemas.push(rot + ' mapa: camadas por pose ' + JSON.stringify(mapa));
+    await c.js("fecharFolha();lojaOrigem='perfil';abaLoja='vestir';palcoId='bobby-p01';telaLoja();0"); await dorme(400);
+    for (const pose of ['bobby-p01', 'bobby-p02', 'bobby-p05a', 'bobby-p03', 'bobby-e01']) {
+      await c.js("document.querySelector('[data-pose=\"" + pose + "\"]').click();0"); await dorme(450);
+      const m = await c.js(`(()=>{const b=document.querySelector('.palco .bobby-camadas');if(!b)return {sem:1};const base=b.querySelector('.camada-base').getBoundingClientRect();
+        const cs=[...b.querySelectorAll('.camada')].map(e=>{const r=e.getBoundingClientRect();return {id:e.dataset.item,w:r.width,h:r.height,
+          perto:r.right>base.left-base.width*.3&&r.left<base.right+base.width*.3&&r.bottom>base.top-base.height*.3&&r.top<base.bottom+base.height*.3}});
+        return {pose:b.dataset.vista,n:cs.length,ruins:cs.filter(x=>!(x.w>4&&x.h>4&&x.perto)).map(x=>x.id),lado:document.documentElement.scrollWidth>innerWidth};})()`);
+      if (m.sem || m.pose !== pose || m.n !== 5 || m.ruins.length || m.lado) c.problemas.push(rot + ' palco ' + pose + ': ' + JSON.stringify(m));
+      await c.foto('B-palco-' + pose + '-' + rot);
+    }
+    /* experimentar: nao cobra; comprar e o 2o toque */
+    await c.js("document.querySelector('[data-slot=\"cabeca\"]').click();0"); await dorme(250);
+    await c.js("document.querySelector('[data-prova=\"explorador\"]').click();0"); await dorme(250);
+    const pr = await c.js("({prova:!!document.querySelector('.palco [data-item=\"explorador\"]'),marca:!!document.querySelector('.marca-prova'),moedas:S.moedas,cab:S.look.cabeca})");
+    if (!pr.prova || !pr.marca || pr.moedas !== 600 || pr.cab !== 'bone') c.problemas.push(rot + ' experimentar: ' + JSON.stringify(pr));
+    for (const aba of ['semana', 'mais', 'comp']) {
+      await c.js("document.querySelector('[data-aba=\"" + aba + "\"]').click();0"); await dorme(300);
+      const m = await c.js("({itens:document.querySelectorAll('#perfil .vitrine .item, #perfil .album-vaga, #perfil .cofrinho, #perfil .dica-loja').length,lado:document.documentElement.scrollWidth>innerWidth,urg:/resta|última|só hoje|acaba em/i.test(document.querySelector('#perfil').innerText)})");
+      if (!m.itens || m.lado || m.urg) c.problemas.push(rot + ' aba ' + aba + ': ' + JSON.stringify(m));
+      await c.foto('B-aba-' + aba + '-' + rot);
+    }
+    c.coleta(rot + ' B');
+  }
+  feito.push('B: 5 acessorios ao mesmo tempo no mapa e no palco em Oi, Comemora, Caminha, Pensa e Rosto (390, 320 e 1280); experimentar sem cobrar; abas da loja sem urgencia');
+});
+
 (async () => {
   const c = await abrirChrome();
   const feito = [];

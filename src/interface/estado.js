@@ -16,7 +16,7 @@ const textosDe=(v,max,tam)=>listaDe(v,max).filter(x=>typeof x==='string').map(x=
    Um objeto "vazio" compartilhado faria o progresso de um jogador vazar para o outro. Por isso e uma funcao. */
 function configPadrao(){
   return {metaMin:5,revisaoPorDia:8,limiteBlocosDia:null,diasLivres:[],pausaAte:'',
-    ofensivaLigada:true,missoesLigadas:true,
+    ofensivaLigada:true,missoesLigadas:true,lojaSemanaLigada:true,petiscoLigado:true,
     lembrete:{ics:false,hora:'17:00',dias:[1,2,3,4,5],comApelido:false},ligaFamilia:false};
 }
 function contadoresVazios(){
@@ -62,6 +62,7 @@ function estadoVazio(){
     stats:{porLicao:{},dias:{},tempo:0,amostras:[]},missHist:[],
     som:true,voz:true,velocidade:1,
     habil:{},habilSemana:{w:'',p0:{}},diag:{},
+    exploracao:{dias:0,ultimo:''},desejos:[],cofrinho:{meta:'',base:0},visual:{moldura:'',trilha:''},amizade:{},ceu:[],gasto:0,
     legado:{nivel:'',errados:{},vozPt:'',vozEn:'',migradoEm:''}};
 }
 function clonar(o){
@@ -90,6 +91,7 @@ function normalizaConfig(x){
   c.diasLivres=listaDe(x.diasLivres,7).map(Number).filter(n=>n>=0&&n<=6);
   c.pausaAte=diaOuVazio(x.pausaAte);
   c.ofensivaLigada=x.ofensivaLigada!==false;c.missoesLigadas=x.missoesLigadas!==false;
+  c.lojaSemanaLigada=x.lojaSemanaLigada!==false;c.petiscoLigado=x.petiscoLigado!==false;
   c.lembrete={ics:!!l.ics,hora:/^\d{2}:\d{2}$/.test(l.hora)?l.hora:'17:00',
     dias:listaDe(l.dias,7).map(Number).filter(n=>n>=0&&n<=6),comApelido:!!l.comApelido};
   c.ligaFamilia=false;       /* só existe na Fase 4 */
@@ -162,7 +164,12 @@ function estadoDe(dados){
   const f=objDe(d.feitas);Object.keys(f).forEach(k=>{const e=estrelasDe(f[k]);if(e>0)s.feitas[k]=e;});
   const er=objDe(d.errados);Object.keys(er).forEach(k=>{if(!chaveOk(k)||!/^(mat|pt|en)[0-9]{1,2}$/.test(k))return;if(Array.isArray(er[k]))s.errados[k]=er[k].map(perguntaSegura).filter(Boolean).slice(-30);});
   s.comprado=listaDe(d.comprado,400).map(x=>idSimples(x)).filter(Boolean);
-  s.look={};const lk=objDe(d.look);['chapeu','rosto','pescoco','pelo','pers','companheiro'].forEach(k=>{if(lk[k]!==undefined){const v=k==='pelo'||lk[k]===''?String(lk[k]).replace(/[^a-z0-9-]/g,'').slice(0,24):idSimples(lk[k]);s.look[k]=v;}});
+  s.look={};const lk=objDe(d.look);['pelo','pers','companheiro'].forEach(k=>{if(lk[k]!==undefined){const v=k==='pelo'||lk[k]===''?String(lk[k]).replace(/[^a-z0-9-]/g,'').slice(0,24):idSimples(lk[k]);s.look[k]=v;}});
+  /* 1F: guarda-roupa em camadas (5 slots ao mesmo tempo). Os 3 slots antigos (um look por vez) migram: chapeu vira cabeca; a capa, que
+     ficava no pescoco, vai para costas. Só entra item que existe e é do slot. */
+  const lkN={cabeca:lk.cabeca!==undefined?lk.cabeca:lk.chapeu,rosto:lk.rosto,pescoco:lk.pescoco,costas:lk.costas,mao:lk.mao};
+  if(lk.pescoco==='capa'&&lk.costas===undefined){lkN.costas='capa';lkN.pescoco='';}
+  Object.keys(lkN).forEach(sl=>{const id=typeof lkN[sl]==='string'?idSimples(lkN[sl]):'';if(id&&VESTIVEIS[id]&&VESTIVEIS[id].slot===sl)s.look[sl]=id;});
   /* personagem escolhido na versão antiga (look.pers: nina, pim, zeca, lulu) vira o companheiro equivalente; quem já tinha um companheiro escolhido
      o mantém, e ele entra na lista de comprados (a partir de agora companheiro novo custa moedas do jogo) */
   const V3_COMP={nina:'rufa',pim:'otto',zeca:'capi',lulu:'brisa'},IDS_COMP=['teo','rufa','otto','capi','brisa','fagulha'];
@@ -180,6 +187,15 @@ function estadoDe(dados){
   const w=objDe(d.semana);s.semana={chave:String(w.chave||'').slice(0,10),estrelas:intDe(w.estrelas,0,99,0),aulaRevista:intDe(w.aulaRevista,0,99,0),constelacao:!!w.constelacao};
   s.stats=normalizaStats(d.stats);
   /* 1G: adaptação por habilidade e diagnóstico (interface/adaptacao.js) */
+  /* 1E e 1A: dias de exploração (cumulativo), lista de desejos, cofrinho, moldura e brilho, amizade (petisco), céu estrelado, total gasto */
+  const ex=objDe(d.exploracao);s.exploracao={dias:intDe(ex.dias,0,100000,0),ultimo:diaOuVazio(ex.ultimo)};
+  if(!d.exploracao){const ds=Object.keys(s.stats.dias).filter(k=>s.stats.dias[k].q||s.stats.dias[k].fases).sort();s.exploracao={dias:ds.length,ultimo:ds.length?ds[ds.length-1]:''};}   /* perfil de antes: conta os dias já jogados */
+  s.desejos=listaDe(d.desejos,3).filter(x=>typeof x==='string'&&PRECOS.semana[x]!==undefined);
+  const cf=objDe(d.cofrinho);s.cofrinho={meta:typeof cf.meta==='string'&&precoDe(cf.meta)?cf.meta:'',base:intDe(cf.base,0,1e9,0)};
+  const vi=objDe(d.visual);s.visual={moldura:/^moldura-[a-z]+$/.test(vi.moldura)&&PRECOS.semana[vi.moldura]?vi.moldura:'',trilha:/^trilha-[a-z]+$/.test(vi.trilha)&&PRECOS.semana[vi.trilha]?vi.trilha:''};
+  const am=objDe(d.amizade);s.amizade={};Object.keys(PRECOS.companheiro).forEach(c=>{const a=objDe(am[c]);if(am[c])s.amizade[c]={xp:intDe(a.xp,0,1e6,0),dia:diaOuVazio(a.dia)};});
+  s.ceu=listaDe(d.ceu,500).filter(x=>typeof x==='string').map(x=>nomeSeguro(x,18)).filter(Boolean);
+  s.gasto=intDe(d.gasto,0,1e9,0);
   s.habil=normalizaHabil(d.habil);s.habilSemana=normalizaHabilSemana(d.habilSemana);s.diag=normalizaDiag(d.diag);
   s.missHist=listaDe(d.missHist,5).filter(h=>h&&typeof h==='object'&&ehDia(h.dia)).map(h=>({dia:h.dia,ids:textosDe(h.ids,3,4),ok:intDe(h.ok,0,3,0)}));
   s.som=d.som!==false;s.voz=d.voz!==false;

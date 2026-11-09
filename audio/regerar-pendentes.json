@@ -1,6 +1,6 @@
 {
  "gerado": "2026-11-08",
- "total": 141,
+ "total": 171,
  "itens": [
   {
    "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
@@ -1510,6 +1510,246 @@
    "materia": "todas",
    "categoria": "fim (missão de exploração)",
    "motivo": "texto novo de 08/11/2026 (1G); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: na horta, a poeira brilhante ficou grudada num saquinho de feijão. Ela tem cheiro de chuva de estrelas.",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 1); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: na praia, achei uma concha com um risco prateado. Parece o rabo de alguma coisa que voa.",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 2); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: as caixas da caravana tinham marcas de mãozinhas pequenas. Quem será que conta tão rápido?",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 3); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: no piquenique, alguém deixou migalhas em forma de espiral. Teo acha que é um recado.",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 4); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: vi um cometinha na janela da pizzaria. Ele piscou para mim antes de sumir.",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 5); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: o Embaralho trocou as etiquetas, mas deixou cada preço certinho na barraca do lado.",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 6); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: ele guardou o pedaço da Estrela Cobalto numa caixa de moedas. Acho que queria um tesouro.",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 7); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: no parquinho, a gangorra só equilibrou quando contamos juntos. O Embaralho riu lá de cima.",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 8); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: o número escondido do foguete estava escrito ao contrário. Coisa de quem gosta de brincar.",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 9); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: na festa, o Embaralho dançou com todo mundo. A Estrela Cobalto brilha mais forte agora.",
+   "materia": "mat",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 10); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: na caixa de letras, o A estava de cabeça para baixo. Rufa diz que é a assinatura de alguém.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 1); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: um vagão do trem tinha uma letra a mais pintada na porta. O rastro vai para a feira.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 2); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: os cartazes da feira formavam uma palavra secreta quando lidos de trás para frente.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 3); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: na oficina dos sons, ouvi uma risadinha que rimava com tudo o que eu falava.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 4); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: uma carta sem ponto final dizia só assim: quero um amigo para brincar.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 5); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: o Embaralho tem cauda de letras. Vi um T, um E e um O caindo dela no mercado.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 6); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: no teatro, a Estrela Violeta estava escondida dentro de um chapéu de mágico.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 7); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: as letras trocadas da gráfica viraram um recado quando arrumei tudo certinho.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 8); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: no jardim dos acentos, cada flor tinha um chapeuzinho. O Embaralho pediu desculpa.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 9); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: Rufa leu uma história e o Embaralho dormiu abraçado na Estrela Violeta.",
+   "materia": "pt",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 10); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: as placas da cidade nova diziam hello e olá ao mesmo tempo. Otto achou engraçado.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 1); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: os arcos da escola mudaram de cor de novo. O rastro de poeira está mais forte.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 2); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: o bilhete com palavras faltando tinha um desenho de cometa no canto.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 3); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: o macaco do zoológico apontou para o céu quando falei the star.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 4); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: no restaurante, alguém pediu pizza de estrela. O garçom disse que foi um cometinha.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 5); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: o manequim ao contrário usava um cachecol com a palavra friend bordada.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 6); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: a chave da casa nova abria uma caixinha com poeira turquesa dentro.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 7); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: da ponte dá para ver a Estrela Turquesa. Falta pouco para encontrar o Embaralho.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 8); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: o Embaralho perguntou what is your name. Respondi e ele sorriu.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 9); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Diário do Bobby: as três estrelas voltaram e o Embaralho ganhou um lugar na constelação.",
+   "materia": "en",
+   "categoria": "pista da história (loja, 1E)",
+   "motivo": "texto novo de 08/11/2026 (pistas da história, etapa 10); regerar com a voz local",
    "idioma": "pt-BR",
    "trechos_sem_clipe": []
   }

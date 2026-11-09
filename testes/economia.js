@@ -1,95 +1,165 @@
 #!/usr/bin/env node
 'use strict';
-/* Economia: simula uma criança média (80% de acerto, meta de 5 minutos = 20 perguntas por dia em fases de 8, 8 e 4, uma sequência de dias)
-   com as constantes REAIS do app (ECON, PRECOS e a tabela do baú) e confere os prazos para juntar cada preço partindo do zero:
-   1º companheiro ~3 dias, 2º ~5, os mais raros 10 a 14. Também confere que o Bobby é grátis, que nada liga a dinheiro real e que a
-   tabela de preços vive num lugar só.   Uso: node testes/economia.js */
+/* Economia 1E em 180 dias (porte de docs/mesa/economia-sim.py para o catálogo REAL do app: ECON, PRECOS, PORTOES, semanasDoItem, portaoOk).
+   Três perfis (fraca 65% / 15 perguntas / 4 dias por semana; média 80% / 20 / 5,5; forte 90% / 35 / 6,5), 200 rodadas cada, com o cofrinho
+   (metade do ganho para a meta grande; metade das crianças escolhe o companheiro mais raro como meta, a outra metade vai por preço), a loja da semana (ciclo de 12 semanas, 4 por semana, lista de desejos de 3), petisco e céu estrelado.
+   Limites (mesa 01 §7.1 item 12, OPINIÃO a calibrar com famílias): a média sobra no máximo 15% do ganho; a forte não zera a loja antes do dia 60;
+   a fraca chega na Fagulha em pelo menos 40% das rodadas. Mais as regras do catálogo.   Uso: node testes/economia.js */
 const A = require('assert');
 const fs = require('fs');
 const path = require('path');
 const { carregarApp } = require('./lib/carregar.js');
 const { teste, resumo } = require('./lib/mini.js');
-
 function mulberry(a) { return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const J = (x) => JSON.parse(JSON.stringify(x));
+const PERFIS = { fraca: { acerto: 0.65, perguntas: 15, dias: 4.0, novas: 0.5 }, media: { acerto: 0.8, perguntas: 20, dias: 5.5, novas: 0.6 }, forte: { acerto: 0.9, perguntas: 35, dias: 6.5, novas: 0.7 } };
 
 (async () => {
   const app = carregarApp(5, {});
   app.avaliar("novoPerfil('Zeca','#12A06E')");
-  const E = JSON.parse(app.avaliar('JSON.stringify(ECON)'));
-  const P = JSON.parse(app.avaliar('JSON.stringify(PRECOS)'));
-  const bau = (dia) => app.avaliar('recompensaDoDia(' + dia + ').filter(function(r){return r[0]==="moedas"}).reduce(function(a,r){return a+r[1]},0)');
+  const E = J(app.avaliar('ECON')), P = J(app.avaliar('PRECOS')), PORT = J(app.avaliar('PORTOES'));
+  const bau = {}; for (let d = 1; d <= 200; d++) bau[d] = app.avaliar('recompensaDoDia(' + d + ').filter(function(r){return r[0]==="moedas"}).reduce(function(a,r){return a+r[1]},0)');
+  const semanas = {}; Object.keys(P.semana).forEach((id) => { semanas[id] = J(app.avaliar('semanasDoItem(' + JSON.stringify(id) + ')')); });
+  /* catálogo real: companheiro, vestível, semana, pista (uma por etapa) */
+  const CAT = [];
+  Object.keys(P.companheiro).forEach((id) => CAT.push({ id, g: 'companheiro', p: P.companheiro[id], prio: 1 }));
+  Object.keys(P.look).forEach((id) => CAT.push({ id, g: 'look', p: P.look[id], prio: 3 }));
+  Object.keys(P.semana).forEach((id) => CAT.push({ id, g: 'semana', p: P.semana[id], prio: 8, sem: semanas[id] }));
+  for (let e = 1; e <= 30; e++) CAT.push({ id: 'pista' + e, g: 'pista', p: P.pista, prio: 7, etapa: e });
+  CAT.sort((a, b) => a.prio - b.prio || a.p - b.p);
+  const portaoOk = (id, c) => { const q = PORT[id]; return !q || (c[q.t] || 0) >= q.n; };
 
-  /* ganho médio por dia de jogo de uma criança média, N crianças simuladas */
-  function simula(criancas, dias, acerto, seed) {
-    const rnd = mulberry(seed), porDia = new Array(dias).fill(0);
-    for (let c = 0; c < criancas; c++) {
-      for (let d = 1; d <= dias; d++) {
-        let moedas = bau(d), restantes = E.perguntasPorDia;
-        for (const tam of [8, 8, 4]) {
-          if (restantes <= 0) break;
-          const n = Math.min(tam, restantes); restantes -= n;
-          let combo = 0, erros = 0;
-          for (let i = 0; i < n; i++) {
-            if (rnd() < acerto) { combo++; moedas += E.ganhoAcerto; if (combo >= E.sequenciaDe && combo % E.sequenciaDe === 0) moedas += E.bonusSequencia; }
-            else { combo = 0; erros++; }
-          }
-          if (n === 8 && erros === 0) moedas += E.bonusFasePerfeita;
-        }
-        porDia[d - 1] += moedas / criancas;
+  function simula(perfil, seed) {
+    const rnd = mulberry(seed), Pf = PERFIS[perfil];
+    const s = { moedas: 0, ganho: 0, gasto: 0, dias: 0, fases: 0, perfeitas: 0, etapas: 0, tem: new Set(), desejos: [], equipado: null, cofre: 0, fimCatalogo: null };
+    for (let dia = 1; dia <= 180; dia++) {
+      if (rnd() >= Pf.dias / 7) continue;
+      s.dias++;
+      let ganho = bau[Math.min(200, s.dias)], rest = Pf.perguntas;
+      while (rest > 0) {
+        const n = Math.min(8, rest); rest -= n; let combo = 0, erros = 0;
+        for (let i = 0; i < n; i++) { if (rnd() < Pf.acerto) { combo++; ganho += E.ganhoAcerto; if (combo >= E.sequenciaDe && combo % E.sequenciaDe === 0) ganho += E.bonusSequencia; } else { combo = 0; erros++; } }
+        if (n === 8 && erros === 0) { ganho += E.bonusFasePerfeita; s.perfeitas++; }
+        if (rnd() < Pf.novas) s.fases++;
+      }
+      s.moedas += ganho; s.ganho += ganho; s.etapas = Math.min(30, Math.floor(s.fases / 5));
+      const ctx = { dias: s.dias, perfeitas: s.perfeitas, fases: s.fases, etapas: s.etapas };
+      const semana = Math.floor((s.dias - 1) / 7) % E.semanasCiclo;
+      const disp = (it) => !s.tem.has(it.id) && portaoOk(it.id, ctx) && (it.g !== 'pista' || s.etapas >= it.etapa) &&
+        (it.g !== 'semana' || it.sem.indexOf(semana) >= 0 || s.desejos.indexOf(it.id) >= 0);
+      /* lista de desejos: o item mais caro da semana que ainda não dá para pagar */
+      CAT.filter((it) => it.g === 'semana' && it.sem.indexOf(semana) >= 0 && !s.tem.has(it.id) && portaoOk(it.id, ctx) && it.p > s.moedas)
+        .sort((a, b) => b.p - a.p).forEach((it) => { if (s.desejos.length < E.desejosMax && s.desejos.indexOf(it.id) < 0) s.desejos.push(it.id); });
+      if (s.equipado && s.moedas - s.cofre >= E.petisco) { s.moedas -= E.petisco; s.gasto += E.petisco; }
+      const grande = (it) => it.g === 'companheiro' || it.p > E.portaoAcima;
+      /* meta do cofrinho (OPINIÃO): metade das crianças junta para o companheiro mais raro que já abriu; a outra metade vai do mais barato ao
+         mais caro. Só na ordem de preço a fraca chega na Fagulha em 14% das rodadas (medido em 08/11/2026): decisão de calibragem em PROXIMAS-ETAPAS. */
+      const abertos = CAT.filter((it) => disp(it) && grande(it));
+      const meta = (seed % 2 ? abertos.slice().sort((a, b) => (b.g === 'companheiro') - (a.g === 'companheiro') || b.p - a.p)[0] : abertos[0]) || null;
+      if (meta) s.cofre += Math.floor(ganho * E.cofrinhoParte); else s.cofre = 0;
+      let comprouGrande = false;
+      for (const it of CAT) {
+        if (!disp(it) || it.p > s.moedas) continue;
+        if (grande(it)) { if (comprouGrande || it !== meta) continue; comprouGrande = true; }
+        else if (it.p > s.moedas - s.cofre) continue;
+        s.moedas -= it.p; s.gasto += it.p; s.tem.add(it.id); s.desejos = s.desejos.filter((x) => x !== it.id);
+        if (grande(it)) s.cofre = 0;
+        if (it.g === 'companheiro' && !s.equipado) s.equipado = it.id;
+        if (s.tem.size === CAT.length && !s.fimCatalogo) s.fimCatalogo = dia;
+      }
+      s.cofre = Math.min(s.cofre, s.moedas);
+      if (s.moedas > E.estrelaSobra + E.estrela && !CAT.some((it) => disp(it) && it.p <= s.moedas)) {
+        const n = Math.floor((s.moedas - E.estrelaSobra) / E.estrela); s.moedas -= n * E.estrela; s.gasto += n * E.estrela;
       }
     }
-    return porDia;
+    return s;
   }
-  const dias = 30, media = simula(400, dias, 0.8, 7);
-  const diasPara = (preco, serie) => { let t = 0; for (let d = 0; d < serie.length; d++) { t += serie[d]; if (t >= preco) return d + 1; } return Infinity; };
-  const ganhoDia = media.slice(0, 14).reduce((a, b) => a + b, 0) / 14;
-  console.log('          ganho medio: ' + Math.round(ganhoDia) + ' moedas por dia de jogo');
-  const tab = Object.keys(P.companheiro).map((k) => k + ' ' + P.companheiro[k] + ' = ' + diasPara(P.companheiro[k], media) + ' dias').join(' | ');
-  console.log('          prazos: ' + tab);
+  const res = {};
+  Object.keys(PERFIS).forEach((pf) => { res[pf] = []; for (let i = 0; i < 200; i++) res[pf].push(simula(pf, 1000 + i)); });
+  const med = (l, f) => l.reduce((a, x) => a + f(x), 0) / l.length;
+  Object.keys(res).forEach((pf) => console.log('          ' + pf + ': ganho ' + Math.round(med(res[pf], (x) => x.ganho)) + ', sobra ' + Math.round(med(res[pf], (x) => x.moedas)) +
+    ' (' + Math.round(100 * med(res[pf], (x) => x.moedas / Math.max(1, x.ganho))) + '%), itens ' + Math.round(med(res[pf], (x) => x.tem.size)) + '/' + CAT.length +
+    ', Fagulha em ' + Math.round(100 * res[pf].filter((x) => x.tem.has('fagulha')).length / 200) + '%'));
 
-  await teste('1. 1o companheiro em cerca de 3 dias, 2o em cerca de 5, os mais raros em 10 a 14 (crianca media, do zero)', () => {
-    const preco = Object.values(P.companheiro).sort((a, b) => a - b);
-    const prazo = preco.map((p) => diasPara(p, media));
-    A.ok(prazo[0] >= 2 && prazo[0] <= 4, '1o: ' + prazo[0] + ' dias');
-    A.ok(prazo[1] >= 4 && prazo[1] <= 6, '2o: ' + prazo[1] + ' dias');
-    A.ok(prazo[prazo.length - 1] >= 10 && prazo[prazo.length - 1] <= 14, 'mais raro: ' + prazo[prazo.length - 1] + ' dias');
-    A.ok(prazo[prazo.length - 2] >= 10 && prazo[prazo.length - 2] <= 14, 'penultimo: ' + prazo[prazo.length - 2] + ' dias');
-    for (let i = 1; i < prazo.length; i++) A.ok(prazo[i] >= prazo[i - 1], 'precos fora de ordem');
+  await teste('1. 180 dias, 200 rodadas: a crianca media sobra no maximo 15% do que ganhou', () => {
+    const r = med(res.media, (x) => x.moedas / x.ganho); A.ok(r <= 0.15, 'sobra media ' + Math.round(r * 100) + '%');
   });
-  await teste('2. nao forca jogo excessivo: mesmo errando mais (60% de acerto) o mais raro sai em ate 20 dias; com 90% ainda leva 9 dias ou mais', () => {
-    const baixo = simula(200, dias, 0.6, 3), alto = simula(200, dias, 0.9, 4), raro = Math.max(...Object.values(P.companheiro));
-    A.ok(diasPara(raro, baixo) <= 20, '60%: ' + diasPara(raro, baixo));
-    A.ok(diasPara(raro, alto) >= 9, '90%: ' + diasPara(raro, alto));
+  await teste('2. a forte nao zera a loja antes do dia 60 (em nenhuma rodada)', () => {
+    const cedo = res.forte.filter((x) => x.fimCatalogo && x.fimCatalogo < 60).length; A.strictEqual(cedo, 0, cedo + ' rodadas zeraram antes do dia 60');
   });
-  await teste('3. looks custam menos que qualquer companheiro, e todo preco e moeda do jogo (inteiro positivo)', () => {
-    const maxLook = Math.max(...Object.values(P.look)), minComp = Math.min(...Object.values(P.companheiro));
-    A.ok(maxLook > 0 && maxLook < Math.max(...Object.values(P.companheiro)), 'looks devem ser menores que os mais caros');
-    A.ok(Math.min(...Object.values(P.look)) < minComp, 'o look mais barato deve custar menos que o 1o companheiro');
-    Object.values(P.companheiro).concat(Object.values(P.look)).forEach((v) => A.ok(Number.isInteger(v) && v > 0));
+  await teste('3. a fraca chega na Fagulha em pelo menos 40% das rodadas', () => {
+    const r = res.fraca.filter((x) => x.tem.has('fagulha')).length / 200; A.ok(r >= 0.4, 'Fagulha em ' + Math.round(r * 100) + '%');
   });
-  await teste('4. o Bobby e gratis e companheiro nao escolhido sem comprar nao entra (compra confirma, tira moedas e escolhe)', () => {
+  await teste('4. portao duplo: nenhum item acima de 500 compravel so com moeda; portao escrito com a origem, nunca "compre para destravar"', () => {
+    CAT.filter((it) => it.g !== 'pista').forEach((it) => { if (it.p > E.portaoAcima) A.ok(PORT[it.id], it.id + ' (' + it.p + ') sem portao'); });
+    A.strictEqual(app.avaliar("S.moedas=99999;podeComprar('fagulha').motivo"), 'portao');
+    A.ok(/^Abre com 30 dias de exploração/.test(app.avaliar("portaoTexto('fagulha')")));
+    const src = fs.readdirSync(path.join(__dirname, '..', 'src', 'interface')).map((f) => fs.readFileSync(path.join(__dirname, '..', 'src', 'interface', f), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')).join('');
+    A.ok(!/compre para (destravar|liberar)|desbloqueie comprando/i.test(src));
+  });
+  await teste('5. preco nunca muda sem subir CATALOGO_VERSAO (fotografia em testes/fixtures/precos.json)', () => {
+    const arq = path.join(__dirname, 'fixtures', 'precos.json');
+    const v = app.avaliar('CATALOGO_VERSAO');
+    const foto = JSON.parse(fs.readFileSync(arq, 'utf8'));
+    if (foto.versao === v) A.deepStrictEqual(P, foto.precos, 'preco mudou sem subir CATALOGO_VERSAO');
+    else A.ok(v > foto.versao, 'versao do catalogo voltou');
+  });
+  await teste('6. lista de desejos: item marcado continua compravel fora da semana dele (todas as semanas do ciclo); 3 vagas', () => {
+    const a = carregarApp(9, {}); a.avaliar("novoPerfil('Lia','#12A06E')");
+    const r = J(a.avaliar(`(()=>{const out={fora:0,ok:0,quarta:null};const id=ITENS_SEMANA[0];S.moedas=5000;S.exploracao={dias:30,ultimo:''};
+      alternarDesejo(id);alternarDesejo(ITENS_SEMANA[1]);alternarDesejo(ITENS_SEMANA[2]);out.quarta=alternarDesejo(ITENS_SEMANA[3]);
+      for(let w=0;w<12;w++){const dia=somaDias('2026-01-05',w*7);if(itensDaSemana(dia).indexOf(id)<0){out.fora++;if(podeComprar(id,dia).ok)out.ok++;}}
+      const sem=ITENS_SEMANA.find(x=>desejos().indexOf(x)<0&&itensDaSemana('2026-01-05').indexOf(x)<0);out.semDesejo=podeComprar(sem,'2026-01-05').motivo;return out;})()`));
+    A.ok(r.fora >= 8, 'semanas fora: ' + r.fora); A.strictEqual(r.ok, r.fora); A.strictEqual(r.quarta, false, 'aceitou 4o desejo'); A.strictEqual(r.semDesejo, 'fora-da-semana');
+  });
+  await teste('7. ciclo fixo: 4 itens por semana, igual para todo mundo, sem sorteio; item comprado sai da vitrine', () => {
+    const a = carregarApp(10, {}); a.avaliar("novoPerfil('Lia','#12A06E')");
+    for (let w = 0; w < 24; w++) A.strictEqual(a.avaliar("itensDaSemana(somaDias('2026-01-05'," + (w * 7) + ")).length"), 4, 'semana ' + w);
+    A.strictEqual(a.avaliar("itensDaSemana('2026-03-02').join()"), a.avaliar("itensDaSemana(somaDias('2026-03-02',84)).join()"), 'ciclo de 12 semanas');
+    const id = a.avaliar("itensDaSemana(hoje())[0]");
+    a.avaliar("S.moedas=5000;S.exploracao={dias:30,ultimo:''};comprarItem(" + JSON.stringify(id) + ")");
+    A.ok(a.avaliar("vitrineDaSemana().indexOf(" + JSON.stringify(id) + ")<0"), 'comprado continua na vitrine');
+  });
+  await teste('8. ceu estrelado so aparece sem item compravel e com mais de 2.000; petisco so mexe em moeda e amizade', () => {
+    const a = carregarApp(11, {}); a.avaliar("novoPerfil('Lia','#12A06E')");
+    A.strictEqual(a.avaliar("S.moedas=5000;ceuDisponivel()"), false, 'ceu com item compravel');
+    a.avaliar("S.comprado=Object.keys(PRECOS.companheiro).concat(Object.keys(PRECOS.look)).concat(ITENS_SEMANA);S.exploracao={dias:99,ultimo:''}");
+    A.strictEqual(a.avaliar("S.moedas=1900;ceuDisponivel()"), false, 'ceu abaixo de 2000');
+    A.strictEqual(a.avaliar("S.moedas=2500;ceuDisponivel()"), true);
+    A.strictEqual(a.avaliar("comprarEstrela('Lua da Lia').ok"), true); A.strictEqual(a.avaliar('S.moedas'), 2400);
+    a.avaliar("S.look={companheiro:'teo'};S.moedas=100");
+    const antes = a.avaliar('JSON.stringify(Object.assign({},S,{moedas:0,amizade:0,gasto:0}))');
+    const r1 = J(a.avaliar("darPetisco('2026-11-08')")), r2 = J(a.avaliar("darPetisco('2026-11-08')"));
+    A.ok(r1.ok && r1.contou && r2.ok && !r2.contou, '1 por dia conta');
+    A.strictEqual(a.avaliar('S.moedas'), 60); A.strictEqual(a.avaliar('S.amizade.teo.xp'), 1);
+    A.strictEqual(a.avaliar('JSON.stringify(Object.assign({},S,{moedas:0,amizade:0,gasto:0}))'), antes, 'petisco mexeu em outra coisa');
+  });
+  await teste('9. cofrinho: metade do ganho vai para a meta, um toque desfaz, nada trava (item pequeno usa o bolso)', () => {
+    const a = carregarApp(12, {}); a.avaliar("novoPerfil('Lia','#12A06E')");
+    a.avaliar("S.moedas=0;S.xp=0;escolherMeta('rufa');S.xp+=400;S.moedas+=400");
+    A.strictEqual(a.avaliar('cofrinho().guardado'), 200); A.strictEqual(a.avaliar('noBolso()'), 200);
+    A.strictEqual(a.avaliar("podeComprar('bone').ok"), true, 'bone de 200 cabe no bolso');
+    A.strictEqual(a.avaliar("podeComprar('oculos').motivo"), 'moedas', 'oculos de 250 nao cabe no bolso');
+    a.avaliar('desfazerCofrinho()'); A.strictEqual(a.avaliar('cofrinho().guardado'), 0); A.strictEqual(a.avaliar('noBolso()'), 400);
+  });
+  await teste('10. a tabela de precos vive so em economia.js e nada liga a dinheiro real', () => {
+    fs.readdirSync(path.join(__dirname, '..', 'src', 'interface')).filter((f) => f.endsWith('.js')).forEach((f) => {
+      const t = fs.readFileSync(path.join(__dirname, '..', 'src', 'interface', f), 'utf8');
+      if (f !== 'economia.js') A.ok(!/companheiro:\{teo:/.test(t), 'precos fora de economia.js: ' + f);
+      const m = /cart[aã]o de cr[eé]dito|\bpix\b|in-app purchase|compra no app|comprar com dinheiro/i.exec(t.replace(/\/\*[\s\S]*?\*\//g, '')); A.ok(!m, 'pagamento real em ' + f);
+    });
+    const loja = fs.readFileSync(path.join(__dirname, '..', 'src', 'interface', 'editor.js'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+    A.ok(!/\b(resta|restam|última|ultima chance|só hoje|so hoje|acaba em)\b/i.test(loja), 'texto de urgencia na loja');
+  });
+  await teste('11. o Bobby e gratis; companheiro so entra comprado; compra confirma, tira moedas e escolhe; migracao mantem companheiro antigo', () => {
     const a = carregarApp(6, {}); a.avaliar("novoPerfil('Zeca','#12A06E')");
     A.strictEqual(a.avaliar("persAtivo().tipo"), 'bobby');
-    a.avaliar("S.moedas=100;escolherCompanheiro('rufa')");
-    A.strictEqual(a.avaliar("S.look.companheiro===undefined||S.look.companheiro===''"), true, 'escolheu sem comprar');
-    a.avaliar("comprarCompanheiro('rufa')");
-    A.strictEqual(a.avaliar('S.moedas'), 100, 'sem saldo nao compra');
-    a.avaliar("S.moedas=" + (P.companheiro.rufa + 40) + ";comprarCompanheiro('rufa')");
+    a.avaliar("S.moedas=100;escolherCompanheiro('teo')");
+    A.ok(a.avaliar("!S.look.companheiro"), 'escolheu sem comprar');
+    a.avaliar("S.moedas=" + (P.companheiro.teo + 40) + ";comprarItem('teo');S.look.companheiro='teo'");
     A.strictEqual(a.avaliar('S.moedas'), 40);
-    A.strictEqual(a.avaliar("S.look.companheiro"), 'rufa');
-    A.ok(a.avaliar("S.comprado.indexOf('rufa')>=0"));
-    a.avaliar("S.moedas=5000;comprarCompanheiro('rufa')");
-    A.strictEqual(a.avaliar('S.moedas'), 5000, 'comprou duas vezes');
-    // migracao: quem tinha um companheiro escolhido mantem sem pagar
+    a.avaliar("S.moedas=5000;comprarItem('teo')"); A.strictEqual(a.avaliar('S.moedas'), 5000, 'comprou duas vezes');
     A.strictEqual(a.avaliar("estadoDe({look:{companheiro:'capi'},comprado:[],moedas:0}).look.companheiro"), 'capi');
-  });
-  await teste('5. a tabela de precos vive so em economia.js e nada liga a dinheiro real', () => {
-    const src = fs.readdirSync(path.join(__dirname, '..', 'src', 'interface')).filter((f) => f.endsWith('.js'));
-    src.forEach((f) => {
-      const t = fs.readFileSync(path.join(__dirname, '..', 'src', 'interface', f), 'utf8');
-      if (f !== 'economia.js') A.ok(!/companheiro:\{teo:/.test(t), 'precos de companheiro fora de economia.js: ' + f);
-      const m = /cart[aã]o de cr[eé]dito|\bpix\b|in-app purchase|compra no app|comprar com dinheiro/i.exec(t.replace(/\/\*[\s\S]*?\*\//g, '')); A.ok(!m, 'pagamento real em ' + f + ': ' + (m && m[0]));
-    });
   });
   resumo('economia.js');
 })();

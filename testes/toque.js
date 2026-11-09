@@ -34,7 +34,7 @@ const servidor = http.createServer((req, res) => {
   fs.createReadStream(arq).pipe(res);
 });
 const dorme = (ms) => new Promise((r) => setTimeout(r, ms));
-async function esperaHttp(url) { for (let i = 0; i < 60; i++) { try { const r = await fetch(url); if (r.ok) return r.json(); } catch (e) { /* subindo */ } await dorme(250); } throw new Error('Chrome nao respondeu'); }
+async function esperaHttp(url) { for (let i = 0; i < 240; i++) { try { const r = await fetch(url); if (r.ok) return r.json(); } catch (e) { /* subindo */ } await dorme(250); } throw new Error('Chrome nao respondeu'); }
 
 async function main() {
   await new Promise((r) => servidor.listen(0, '127.0.0.1', r));
@@ -43,9 +43,9 @@ async function main() {
   const portaCdp = 9800 + Math.floor(Math.random() * 150);
   const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=' + portaCdp, '--user-data-dir=' + perfil, '--no-first-run', '--no-default-browser-check',
     '--disable-gpu', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
-  const limpa = () => { try { chrome.kill(); } catch (e) {} try { servidor.close(); } catch (e) {} };
+  const limpa = () => { try { chrome.kill('SIGKILL'); } catch (e) {} try { servidor.close(); } catch (e) {} };
   /* o perfil temporario do Chrome sai em QUALQUER saida (fim normal, falha ou excecao), nao so no fim feliz */
-  const tiraPerfil = () => { try { fs.rmSync(perfil, { recursive: true, force: true }); } catch (e) {} };
+  const tiraPerfil = () => { for (let i = 0; i < 30 && fs.existsSync(perfil); i++) { try { fs.rmSync(perfil, { recursive: true, force: true }); } catch (e) {} if (fs.existsSync(perfil)) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 100); } };
   process.on('exit', () => { limpa(); tiraPerfil(); });
   const problemas = [], feito = [];
   try {

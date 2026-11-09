@@ -1,0 +1,57 @@
+{
+ "versao": 1,
+ "precos": {
+  "companheiro": {
+   "teo": 500,
+   "rufa": 900,
+   "otto": 1000,
+   "capi": 1500,
+   "brisa": 2000,
+   "fagulha": 2500
+  },
+  "look": {
+   "explorador": 150,
+   "bone": 200,
+   "oculos": 250,
+   "lenco": 300,
+   "capacete": 450,
+   "capa": 600,
+   "coroa": 900,
+   "gorro": 250,
+   "oculos-sol": 220,
+   "gravata": 140,
+   "medalha": 350,
+   "mochila-foguete": 480,
+   "bandeira": 160,
+   "lanterna": 260,
+   "varinha": 380
+  },
+  "semana": {
+   "moldura-sol": 250,
+   "moldura-mar": 300,
+   "moldura-folha": 350,
+   "moldura-noite": 400,
+   "moldura-ouro": 500,
+   "moldura-arco": 600,
+   "trilha-ouro": 300,
+   "trilha-mar": 350,
+   "trilha-rosa": 400,
+   "trilha-verde": 450,
+   "trilha-lilas": 600,
+   "trilha-arco": 700,
+   "adesivo-estrela": 80,
+   "adesivo-foguete": 80,
+   "adesivo-planeta": 80,
+   "adesivo-cometa": 80,
+   "adesivo-lua": 80,
+   "adesivo-folha": 80,
+   "adesivo-coracao": 80,
+   "adesivo-nuvem": 80,
+   "adesivo-raio": 80,
+   "adesivo-flor": 80,
+   "adesivo-concha": 80,
+   "adesivo-livro": 80
+  },
+  "pista": 100
+ }
+}

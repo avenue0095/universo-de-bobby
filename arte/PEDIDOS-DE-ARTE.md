@@ -24,3 +24,28 @@ Hoje as 30 cenas acendem por peça com recortes **retangulares** da arte que já
 - Uma máscara em tons de cinza por peça (6 por cena, 180 no total), 765 x 1024, branco = a peça, preto = o resto, borda suave de 8 px, no mesmo enquadramento do `completo` e do `apagado`. Pode sair do próprio `completo` com recorte manual ou por segmentação; não precisa de imagem nova da cena.
 - Peças que não aparecem sozinhas na arte de hoje (o recorte usa o objeto mais próximo do tema): Matemática 2 (onda levando conchas), Português 2 (vagão-mercado), Português 10 (balcão de recepção com bilhetes), Inglês 3 (berço), Inglês 10 (parede de espelhos). Se a cena for refeita, essas peças precisam estar visíveis e separadas, na ordem das fases.
 - Quando chegarem: `peca-luz` troca o `clip-path` retangular por `mask-image` da máscara da peça; o resto (estado, toque, câmera, testes) fica igual.
+
+## Guarda-roupa em camadas (onda 1, pacote B, 08/11/2026): NÃO gerado, registrado para a próxima rodada de arte
+
+O guarda-roupa agora monta o Bobby por camadas: a imagem da pose (12 poses, 2 quadros da caminhada e 8 expressões) e UMA camada por
+acessório, posicionada pela âncora da pose (`src/interface/camadas.js`, `ANCORAS`). Nenhuma imagem por combinação. O que existe hoje:
+- Arte de verdade: chapéu de explorador (`bobby-item-chapeu`), boné (`ov-bone`), coroa (`ov-coroa`), óculos de astronauta (`ov-oculos`).
+  São vistas de FRENTE; nas poses de três quartos (Caminha, Tchau, Escuta, Aponta) elas entram giradas alguns graus, o que serve de
+  provisório mas não é a vista certa.
+- Desenhado no código em SVG (provisório, chapado, fora do estilo 3D semirrealista): capacete, gorro, óculos de sol, lenço, gravata-borboleta,
+  medalha, capa, mochila-foguete, bandeirinha, lanterna e varinha de estrela. Os looks inteiros antigos (`assets/looks/item-*.webp`) não são
+  mais usados na tela; ficam no repositório como referência de estilo.
+
+Pedido (sem gerar agora), no padrão da família 3D, fundo transparente, 512 px no lado maior:
+| Item | Vistas | Slot e ponto de encaixe |
+|---|---|---|
+| Capacete aberto, gorro de lã | frente e 3/4 | cabeça: base do item no topo da orelha |
+| Óculos de sol | frente e 3/4 | rosto: centro das lentes na linha dos olhos |
+| Lenço, gravata-borboleta, medalha | frente e 3/4 | pescoço: centro da gola |
+| Capa azul, mochila-foguete | costas vistas de frente (aparece por trás do urso) e 3/4 | costas: alto das costas |
+| Bandeirinha, lanterna, varinha de estrela | 1 vista, cabo vertical | mão: ponto onde a pata segura |
+| Chapéu de explorador, boné, coroa, óculos de astronauta | 3/4 (a frente já existe) | iguais aos de hoje |
+| Adesivos da loja da semana (12) e molduras (6) | 1 vista | hoje são SVG e CSS no código |
+
+Ajuste fino das âncoras: as 22 âncoras foram medidas a olho sobre a grade de 10% (`testes/saida/B-*.png` mostra o resultado com `--foto`).
+Quando a arte definitiva chegar, conferir cada pose e corrigir `ANCORAS` (um número por slot por pose).
