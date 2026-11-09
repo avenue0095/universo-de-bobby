@@ -201,7 +201,8 @@ function estadoDe(dados){
   s.gasto=intDe(d.gasto,0,1e9,0);
   /* programa de 20 dias: dias feitos por matéria (0 a 19) */
   const pg=objDe(d.programa);s.programa={};['mat','pt','en'].forEach(m=>{if(Array.isArray(pg[m]))s.programa[m]=pg[m].map(Number).filter(n=>Number.isInteger(n)&&n>=0&&n<20).filter((n,i,a)=>a.indexOf(n)===i);});
-  const pa=objDe(d.programaAtual);s.programaAtual=pa.m&&['mat','pt','en'].indexOf(pa.m)>=0?{m:pa.m,i:intDe(pa.i,0,19,0)}:null;
+  /* programa em andamento nunca sobrevive a fechar o app: um treino interrompido não marca o dia (revisão de 09/11) */
+  s.programaAtual=null;
   s.habil=normalizaHabil(d.habil);s.habilSemana=normalizaHabilSemana(d.habilSemana);s.diag=normalizaDiag(d.diag);
   s.missHist=listaDe(d.missHist,5).filter(h=>h&&typeof h==='object'&&ehDia(h.dia)).map(h=>({dia:h.dia,ids:textosDe(h.ids,3,4),ok:intDe(h.ok,0,3,0)}));
   s.som=d.som!==false;s.voz=d.voz!==false;

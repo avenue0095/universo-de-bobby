@@ -43,7 +43,9 @@ function telaTreino(m){
   $('#folha').querySelectorAll('[data-tema]').forEach(b=>b.addEventListener('click',()=>{fecharFolha();abrirTreino(m,b.dataset.tema);}));
   $('#treino-fecha').addEventListener('click',fecharFolha);
 }
-function abrirTreino(m,id){
+function abrirTreino(m,id,doPrograma){
+  /* treino aberto fora do programa de 20 dias nunca marca dia do programa */
+  if(!doPrograma)S.programaAtual=null;
   const t=(TEMAS[m]||[]).filter(x=>x.id===id)[0];if(!t)return;
   if(typeof portaoDeAcesso==='function'&&!portaoDeAcesso())return;
   if(MATERIA!==m){usarMateria(m);if(typeof fecharFolha==='function')fecharFolha();}
@@ -76,7 +78,7 @@ function programaHTML(){
 function ligarPrograma(){
   $('#perfil').querySelectorAll('[data-prog]').forEach(b=>b.addEventListener('click',()=>{
     const i=+b.dataset.prog,id=PROGRAMA20[MATERIA][i];
-    S.programaAtual={m:MATERIA,i:i};fecharPerfil2();abrirTreino(MATERIA,id);
+    S.programaAtual={m:MATERIA,i:i};fecharPerfil2();abrirTreino(MATERIA,id,true);
   }));
 }
 /* fim do treino: marca o dia do programa (se veio dele) */

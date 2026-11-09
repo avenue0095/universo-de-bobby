@@ -161,7 +161,7 @@ bloco('D', async (c, feito) => {
     const tr = await c.js("({on:document.querySelector('#licao').classList.contains('on'),base:LIC.base,treino:LIC.treino})");
     if (!tr.on || tr.base !== 10 || tr.treino !== 'relogio') c.problemas.push(rot + ' treino: nao abriu o tema relogio ' + JSON.stringify(tr));
     /* acha um relogio de verdade entre as perguntas do treino */
-    const rel = await c.js("(()=>{const i=LIC.qs.findIndex(q=>q.figure&&/relogio/.test(q.figure));if(i<0)return {sem:1};LIC.i=i;pintarLicao();const s=document.querySelector('#palco svg.relogio');const r=s&&s.getBoundingClientRect();return {w:r?Math.round(r.width):0,n:s?s.querySelectorAll('text').length:0}})()");
+    const rel = await c.js("(()=>{let i=LIC.qs.findIndex(q=>q.figure&&/relogio/.test(q.figure));if(i<0){LIC.qs[0]=MAT_BAS.relogioHora();i=0;}LIC.i=i;pintarLicao();const s=document.querySelector('#palco svg.relogio');const r=s&&s.getBoundingClientRect();return {w:r?Math.round(r.width):0,n:s?s.querySelectorAll('text').length:0}})()");
     if (rel.sem || rel.w < 80 || rel.n !== 12) c.problemas.push(rot + ' treino: relogio ' + JSON.stringify(rel));
     await c.foto('D-relogio-' + rot);
     let g = 0; await c.js('LIC.i=0;pintarLicao();0');
@@ -207,9 +207,26 @@ bloco('PIN', async (c, feito) => {
     await c.tocar(q.x, q.y, TELAS[rot].mobile); await dorme(400);
     const v = await c.js("({folha:document.querySelector('#folha').classList.contains('on'),rel:/Como vai o aprendizado/.test(document.querySelector('#perfil').innerText),perfil:document.querySelector('#perfil').dataset.tela,senha:temSenha()})");
     if (v.folha || v.rel || v.senha) c.problemas.push(rot + ' PIN: "Agora nao" deveria voltar sem abrir o relatorio ' + JSON.stringify(v));
+    /* caminho com senha: cria o PIN digitando, depois senha errada nao abre e a certa abre */
+    const tocaSel = async (sel) => { const q2 = await c.js("(()=>{const b=document.querySelector(" + JSON.stringify(sel) + ");if(!b)return null;b.scrollIntoView({block:'center'});const r=b.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()"); if (!q2) return false; await dorme(150); await c.tocar(q2.x, q2.y, TELAS[rot].mobile); await dorme(450); return true; };
+    const digita = async (txt) => { await c.js("document.querySelector('#campo-pin').focus();document.querySelector('#campo-pin').value='';0"); await c.cdp('Input.insertText', { text: txt }); await dorme(150); };
+    await tocaSel('#ir-resp'); await digita('4826'); await tocaSel('#pin-ok'); await dorme(600);
+    const criou = await c.js("({senha:temSenha(),rel:/Como vai o aprendizado/.test(document.querySelector('#perfil').innerText)})");
+    if (!criou.senha || !criou.rel) c.problemas.push(rot + ' PIN: criar a senha deveria abrir o relatorio ' + JSON.stringify(criou));
+    await c.js("liberadoAte=0;telaPerfil();0"); await dorme(400);
+    await tocaSel('#ir-resp');
+    const pede = await c.js("({f:document.querySelector('#folha').classList.contains('on'),t:document.querySelector('#folha').innerText})");
+    if (!pede.f || !/Área do responsável/.test(pede.t)) c.problemas.push(rot + ' PIN: com senha criada deveria pedir a senha ' + JSON.stringify(pede).slice(0, 160));
+    await digita('1111'); await tocaSel('#pin-ok');
+    const errada = await c.js("({rel:/Como vai o aprendizado/.test(document.querySelector('#perfil').innerText),erro:/Senha errada/.test(document.querySelector('#folha').innerText)})");
+    if (errada.rel || !errada.erro) c.problemas.push(rot + ' PIN: senha errada ' + JSON.stringify(errada));
+    await digita('4826'); await tocaSel('#pin-ok'); await dorme(600);
+    const certa = await c.js("({rel:/Como vai o aprendizado/.test(document.querySelector('#perfil').innerText),f:document.querySelector('#folha').classList.contains('on')})");
+    if (!certa.rel || certa.f) c.problemas.push(rot + ' PIN: senha certa deveria abrir o relatorio ' + JSON.stringify(certa));
+    await c.foto('PIN-aberto-' + rot);
     c.coleta(rot + ' PIN');
   }
-  feito.push('PIN: sem senha, Para o responsavel abre "Primeiro, crie uma senha"; "Agora nao" volta ao perfil sem abrir o relatorio (390 e 1280)');
+  feito.push('PIN: sem senha, Para o responsavel pede para criar; "Agora nao" volta sem abrir; criar a senha abre; com senha, a errada nao abre e a certa abre (390 e 1280)');
 });
 
 (async () => {

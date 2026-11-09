@@ -3457,14 +3457,25 @@ const reserva='abcdefgilmnoprstuv'.split('');
 while(out.length<n){const x=pick(reserva);if(x!==l&&out.indexOf(x)<0)out.push(x);}
 return out;
 }
+const ENCONTROS=/^(br|bl|cr|cl|dr|fr|fl|gr|gl|pr|pl|tr|vr|ch|lh|nh)/;
+function hiatoNovo(t,p){const pares=w=>(String(w).toLowerCase().match(/[aeiou](?=[aeiou])/g)?[...String(w).toLowerCase().matchAll(/(?=([aeiou][aeiou]))/g)].map(m=>m[1]):[]);const ok=new Set(pares(p));return pares(t).some(x=>!ok.has(x));}
+function legivel(t){
+t=String(t).toLowerCase();
+if(/[^aeiouãõáéíóúâêôy]{3,}/.test(t.replace(/(ch|lh|nh|qu|gu)/g,'C')))return false;
+if(/^[^aeiouãõáéíóúâêô]{2}/.test(t)&&!ENCONTROS.test(t))return false;
+if(/[^aeiouãõáéíóúâêômrslz]$/.test(t))return false;
+return /[aeiouãõáéíóúâêô]/.test(t);
+}
 function errosDeGrafia(p,n){
 p=String(p).toLowerCase();const out=new Set(),tenta=[];
 for(let i=0;i<p.length-1;i++)if(p[i]!==p[i+1])tenta.push(p.slice(0,i)+p[i+1]+p[i]+p.slice(i+2));
-for(let i=0;i<p.length;i++)(CONFUNDE[p[i]]||[]).forEach(c=>tenta.push(p.slice(0,i)+c+p.slice(i+1)));
-for(let i=1;i<p.length;i++)tenta.push(p.slice(0,i)+p.slice(i+1));
+const Vg=c=>/[aeiou]/.test(c||'');
+for(let i=0;i<p.length;i++)(CONFUNDE[p[i]]||[]).forEach(c=>{if(c.length===1&&Vg(c)===Vg(p[i]))tenta.push(p.slice(0,i)+c+p.slice(i+1));});
+const V=c=>/[aeiouãõáéíóúâêô]/.test(c||'');
+for(let i=1;i<p.length;i++)if(!V(p[i])&&!(V(p[i-1])&&V(p[i+1])))tenta.push(p.slice(0,i)+p.slice(i+1));
 for(let i=1;i<p.length-1;i++)if(/[bcdfglmnprstv]/.test(p[i])&&p[i]!==p[i-1]&&p[i]!==p[i+1])tenta.push(p.slice(0,i+1)+p[i]+p.slice(i+1));
 const w=PALAVRAS_BASE.find(x=>x.p===p);if(w&&w.s.length>=2){const t=w.s.slice();[t[0],t[1]]=[t[1],t[0]];tenta.push(t.join(''));}
-shuf(tenta).forEach(t=>{if(out.size<n&&t!==p&&t.length>=2&&!ehPalavraReal(t))out.add(t);});
+shuf(tenta).forEach(t=>{if(out.size<n&&t!==p&&t.length>=2&&!ehPalavraReal(t)&&legivel(t)&&!hiatoNovo(t,p))out.add(t);});
 return [...out];
 }
 const ehPalavraReal=t=>(typeof PALAVRAS_REAIS==='object'&&PALAVRAS_REAIS.has(String(t).toLowerCase()))||PALAVRAS_BASE.some(w=>w.p===String(t).toLowerCase());
@@ -3480,9 +3491,16 @@ const PALAVRAS_BASE=[
 {p:'foguete',s:['fo','gue','te']},{p:'dente',s:['den','te']},{p:'fada',s:['fa','da']},{p:'vela',s:['ve','la']},{p:'tijolo',s:['ti','jo','lo']}
 ];
 const RIMAS=[['pão','mão','chão','feijão','balão'],['gato','pato','rato','sapato','prato'],['bola','cola','mola','sacola'],['janela','panela','vela','tigela'],
-['dedo','medo','cedo','segredo'],['mel','papel','anel','pastel'],['chapéu','céu','véu','troféu'],['flor','cor','amor','calor'],['casa','asa','brasa'],['foguete','sorvete','tapete','chiclete'],
+['dedo','medo','cedo','segredo'],['mel','papel','anel','pastel','chapéu','céu','véu','troféu'],['flor','cor','amor','calor'],['casa','asa','brasa'],['foguete','sorvete','tapete','chiclete'],
 ['bico','rico','fico','penico'],['lua','rua','sua','nua'],['caneca','boneca','peteca','sapeca']];
 const MAI=s=>String(s).toUpperCase();
+function somDaRima(w){
+w=String(w).toLowerCase();const oxi=/[áéíóúâêôãõ]|[rlzui]$|ão$|ãe$/.test(w.slice(-3));
+let t=w.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/([gq])u([ei])/g,'$1$2').replace(/([aeiou])l$/,'$1u');
+const vs=[...t.matchAll(/[aeiou]+/g)];if(!vs.length)return t;
+const v=oxi||vs.length<2?vs[vs.length-1]:vs[vs.length-2];
+return t.slice(v.index).replace(/^([aeiou])[aeiou](?=[^aeiou])/,'$1');
+}
 const PISTA_PALAVRA={bola:'brinquedo redondo que rola',dado:'cubo com pontinhos do jogo',pato:'ave que nada e faz quá-quá',gato:'bicho que mia',mala:'leva a roupa na viagem',
 casa:'onde a família mora',bolo:'doce de aniversário',vaca:'bicho que dá leite',faca:'corta o pão',sapo:'pula na lagoa',tatu:'bicho com casco que cava buraco',
 dedo:'a mão tem cinco',pipa:'voa no céu presa na linha',mapa:'mostra o caminho',rato:'bichinho que gosta de queijo',nuvem:'fica no céu e traz chuva',
@@ -3494,7 +3512,7 @@ const PT_BAS={
 somInicial(){const w=pick(PALAVRAS_BASE),l=w.p[0];
 return mc('Com que letra começa a palavra <b>'+MAI(w.p)+'</b>?',MAI(l),distratoresDaLetra(l,3).map(MAI),{ouvir:'Com que letra começa a palavra '+w.p+'?'});},
 rima(){const f=pick(RIMAS),a=pick(f),certa=pick(f.filter(x=>x!==a));
-const outras=shuf(RIMAS.filter(x=>x!==f)).slice(0,3).map(x=>pick(x));
+const outras=shuf(RIMAS.filter(x=>x!==f&&somDaRima(x[0])!==somDaRima(a))).slice(0,3).map(x=>pick(x));
 return mc('Qual palavra rima com <b>'+MAI(a)+'</b>?',MAI(certa),outras.map(MAI));},
 contarSilabas(){const w=pick(PALAVRAS_BASE);
 return mc('Bata uma palma para cada pedaço: <b>'+MAI(w.p)+'</b>. Quantas sílabas?',String(w.s.length),[1,2,3,4,5].filter(n=>n!==w.s.length).map(String).slice(0,3));},
@@ -3509,7 +3527,7 @@ const e=pick(pos),w=e.w,i=pick(e.i),l=w.p[i];
 const lac=MAI(w.p.slice(0,i))+'__'+MAI(w.p.slice(i+1));
 return mc('Qual letra completa <b>'+lac+'</b>?',MAI(l),distratoresDaLetra(l,3).map(MAI),{ouvir:'Qual letra completa a palavra '+w.p+'?'});},
 grafiaCerta(){const w=pick(PALAVRAS_BASE.filter(x=>x.p.length>=4&&PISTA_PALAVRA[x.p]&&errosDeGrafia(x.p,3).length>=3));
-return mc('Qual está escrita do jeito certo? <b>'+PISTA_PALAVRA[w.p]+'</b>',MAI(w.p),errosDeGrafia(w.p,3).map(MAI),{ouvir:'Qual palavra está escrita do jeito certo? '+PISTA_PALAVRA[w.p]+': '+w.p});}
+return mc('Qual é o jeito certo de escrever: <b>'+PISTA_PALAVRA[w.p]+'</b>?',MAI(w.p),errosDeGrafia(w.p,3).map(MAI),{ouvir:'Qual é o jeito certo de escrever: '+PISTA_PALAVRA[w.p]+'? '+w.p});}
 };
 function relogioSVG(h,m){
 const am=m/60*360,ah=((h%12)+m/60)/12*360,p=(a,r)=>[(50+r*Math.sin(a*Math.PI/180)).toFixed(1),(50-r*Math.cos(a*Math.PI/180)).toFixed(1)];
@@ -3582,15 +3600,15 @@ const BASICAS_POR_FASE={
 [UNITS_MAT,UNITS_PT,UNITS_EN].forEach(us=>us.forEach(u=>u.lessons.forEach(l=>{const ex=BASICAS_POR_FASE[l.id];if(ex)l.makers=l.makers.concat(ex);})));
 })();
 const MED3={
-cmM(){const m=R(1,5);return mc('Quantos centímetros tem '+(m===1?'1 metro':m+' metros')+'?',String(m*100),[m*10,m*1000,m*100+10].map(String));},
-kgG(){const k=R(1,4);return mc('Quantos gramas tem '+(k===1?'1 quilo':k+' quilos')+'?',String(k*1000),[k*100,k*10,k*1000+100].map(String));},
-litroMl(){const l=pick([1,2,3]);return mc('Quantos mililitros tem '+(l===1?'1 litro':l+' litros')+'?',String(l*1000),[l*100,l*10,l*500].map(String));},
+cmM(){const m=R(1,5);return mc('Quantos centímetros '+(m===1?'tem':'têm')+' '+(m===1?'1 metro':m+' metros')+'?',String(m*100),[m*10,m*1000,m*100+10].map(String));},
+kgG(){const k=R(1,4);return mc('Quantos gramas '+(k===1?'tem':'têm')+' '+(k===1?'1 quilo':k+' quilos')+'?',String(k*1000),[k*100,k*10,k*1000+100].map(String));},
+litroMl(){const l=pick([1,2,3]);return mc('Quantos mililitros '+(l===1?'tem':'têm')+' '+(l===1?'1 litro':l+' litros')+'?',String(l*1000),[l*100,l*10,l*500].map(String));},
 qualUnidade(){const it=pick([['a altura de uma porta','metro'],['o peso de uma melancia','quilograma'],['a água de um balde','litro'],['o comprimento de uma borracha','centímetro'],
 ['o remédio numa colher','mililitro'],['o peso de uma bala','grama']]);
 return mc('Qual unidade é melhor para medir '+it[0]+'?',it[1],['metro','quilograma','litro','centímetro','mililitro','grama'].filter(x=>x!==it[1]).slice(0,3));},
 maisPesado(){const b=R(1,3),gs=shuf([200,300,400,500,600,700,800,900]).slice(0,3);
 return mc('O que pesa mais?',(b===1?'1 quilo':b+' quilos'),gs.map(g=>g+' gramas'));},
-minutosHora(){const h=pick([1,2,3]);return mc('Quantos minutos tem '+(h===1?'1 hora':h+' horas')+'?',String(h*60),[h*100,h*30,h*60+10].map(String));},
+minutosHora(){const h=pick([1,2,3]);return mc('Quantos minutos '+(h===1?'tem':'têm')+' '+(h===1?'1 hora':h+' horas')+'?',String(h*60),[h*100,h*30,h*60+10].map(String));},
 meiaHora(){return mc('Meia hora tem quantos minutos?','30',['50','15','60']);},
 duracao(){const ini=R(1,8),d=R(1,3),fim=ini+d,H=n=>n===1?'1 hora':n+' horas';
 const cand=[fim+1,ini,fim-1,fim+2,fim-2,ini+d+3].filter((x,i,a)=>x>0&&x<=12&&x!==fim&&a.indexOf(x)===i);
@@ -3602,7 +3620,7 @@ diaDepois(){const d=['domingo','segunda-feira','terça-feira','quarta-feira','qu
 return mc('Que dia da semana vem depois de '+d[i]+'?',d[(i+1)%7],[d[(i+6)%7],d[(i+2)%7],d[(i+3)%7]]);},
 mesDepois(){const m=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'],i=R(0,11);
 return mc('Que mês vem depois de '+m[i]+'?',m[(i+1)%12],[m[(i+11)%12],m[(i+2)%12],m[(i+6)%12]]);},
-semanaDias(){const s=R(1,4);return mc('Quantos dias têm '+(s===1?'1 semana':s+' semanas')+'?',String(s*7),[s*5,s*7+1,s*10].map(String));}
+semanaDias(){const s=R(1,4);return mc('Quantos dias '+(s===1?'tem':'têm')+' '+(s===1?'1 semana':s+' semanas')+'?',String(s*7),[s*5,s*7+1,s*10].map(String));}
 };
 const TEXTOS3=[
 {t:'Lia plantou um feijão num copo. Todo dia ela molhava a terra. Na sexta, nasceu um broto verde.',q:[['O que Lia plantou?','Um feijão',['Uma flor','Uma laranja','Um milho']],['Quando nasceu o broto?','Na sexta',['Na segunda','No domingo','Na quarta']]]},
@@ -4724,7 +4742,7 @@ const ac=objDe(d.acessorioComp);s.acessorioComp={};Object.keys(PRECOS.companheir
 s.ceu=listaDe(d.ceu,500).filter(x=>typeof x==='string').map(x=>nomeSeguro(x,18)).filter(Boolean);
 s.gasto=intDe(d.gasto,0,1e9,0);
 const pg=objDe(d.programa);s.programa={};['mat','pt','en'].forEach(m=>{if(Array.isArray(pg[m]))s.programa[m]=pg[m].map(Number).filter(n=>Number.isInteger(n)&&n>=0&&n<20).filter((n,i,a)=>a.indexOf(n)===i);});
-const pa=objDe(d.programaAtual);s.programaAtual=pa.m&&['mat','pt','en'].indexOf(pa.m)>=0?{m:pa.m,i:intDe(pa.i,0,19,0)}:null;
+s.programaAtual=null;
 s.habil=normalizaHabil(d.habil);s.habilSemana=normalizaHabilSemana(d.habilSemana);s.diag=normalizaDiag(d.diag);
 s.missHist=listaDe(d.missHist,5).filter(h=>h&&typeof h==='object'&&ehDia(h.dia)).map(h=>({dia:h.dia,ids:textosDe(h.ids,3,4),ok:intDe(h.ok,0,3,0)}));
 s.som=d.som!==false;s.voz=d.voz!==false;
@@ -8124,7 +8142,8 @@ $('#folha').querySelectorAll('[data-treino-m]').forEach(b=>b.addEventListener('c
 $('#folha').querySelectorAll('[data-tema]').forEach(b=>b.addEventListener('click',()=>{fecharFolha();abrirTreino(m,b.dataset.tema);}));
 $('#treino-fecha').addEventListener('click',fecharFolha);
 }
-function abrirTreino(m,id){
+function abrirTreino(m,id,doPrograma){
+if(!doPrograma)S.programaAtual=null;
 const t=(TEMAS[m]||[]).filter(x=>x.id===id)[0];if(!t)return;
 if(typeof portaoDeAcesso==='function'&&!portaoDeAcesso())return;
 if(MATERIA!==m){usarMateria(m);if(typeof fecharFolha==='function')fecharFolha();}
@@ -8156,7 +8175,7 @@ return h+'</ol>';
 function ligarPrograma(){
 $('#perfil').querySelectorAll('[data-prog]').forEach(b=>b.addEventListener('click',()=>{
 const i=+b.dataset.prog,id=PROGRAMA20[MATERIA][i];
-S.programaAtual={m:MATERIA,i:i};fecharPerfil2();abrirTreino(MATERIA,id);
+S.programaAtual={m:MATERIA,i:i};fecharPerfil2();abrirTreino(MATERIA,id,true);
 }));
 }
 function treinoConcluido(){

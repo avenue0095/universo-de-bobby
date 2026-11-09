@@ -746,7 +746,7 @@ async function main() {
         if (rod.bottom > rod.pe + 1 || !rod.livre) problemas.push(rot + ' alternativa atras do rodape (20 objetos): ' + JSON.stringify(rod));
         await js("fecharLicao();0");
         if (medidas.mobile) await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
-        feito.push(rot + ': verbos na cena (tocar objetos em <100 ms, arrastar com ima e tocar-tocar, letra, ordenar), pressionado no quadro, hit-stop ' + hs.ms + ' ms, painel ' + painel.pct.toFixed(0) + '% da altura');
+        feito.push(rot + ': verbos na cena (tocar objetos em <100 ms, ' + retoques + ' retoque(s) de toque perdido, arrastar com ima e tocar-tocar, letra, ordenar), pressionado no quadro, hit-stop ' + hs.ms + ' ms, painel ' + painel.pct.toFixed(0) + '% da altura');
       }
 
       /* 2d8) O MUNDO REAGE (1C): nos como objetos do cenario (area >= 64 x 64, rotulo so ao tocar ou chegar, nunca truncado), o personagem anda

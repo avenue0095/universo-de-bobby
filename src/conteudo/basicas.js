@@ -14,17 +14,32 @@ function distratoresDaLetra(l,n){
   while(out.length<n){const x=pick(reserva);if(x!==l&&out.indexOf(x)<0)out.push(x);}
   return out;
 }
+/* dá para ler em voz alta: nenhuma sílaba sem vogal (sem 3 consoantes seguidas, começo só com encontro que existe: BR, CL, CH...) */
+const ENCONTROS=/^(br|bl|cr|cl|dr|fr|fl|gr|gl|pr|pl|tr|vr|ch|lh|nh)/;
+/* duas vogais juntas que a palavra certa não tinha (MAAL, BLOO, SAAPTO): ruim de ler */
+function hiatoNovo(t,p){const pares=w=>(String(w).toLowerCase().match(/[aeiou](?=[aeiou])/g)?[...String(w).toLowerCase().matchAll(/(?=([aeiou][aeiou]))/g)].map(m=>m[1]):[]);const ok=new Set(pares(p));return pares(t).some(x=>!ok.has(x));}
+function legivel(t){
+  t=String(t).toLowerCase();
+  if(/[^aeiouãõáéíóúâêôy]{3,}/.test(t.replace(/(ch|lh|nh|qu|gu)/g,'C')))return false;
+  if(/^[^aeiouãõáéíóúâêô]{2}/.test(t)&&!ENCONTROS.test(t))return false;
+  if(/[^aeiouãõáéíóúâêômrslz]$/.test(t))return false;
+  return /[aeiouãõáéíóúâêô]/.test(t);
+}
 /* ---------- gerador de erros de ortografia: as 4 operações (trocar vizinhas, trocar por letra parecida, tirar uma, dobrar uma) ---------- */
 function errosDeGrafia(p,n){
   p=String(p).toLowerCase();const out=new Set(),tenta=[];
   for(let i=0;i<p.length-1;i++)if(p[i]!==p[i+1])tenta.push(p.slice(0,i)+p[i+1]+p[i]+p.slice(i+2));
-  for(let i=0;i<p.length;i++)(CONFUNDE[p[i]]||[]).forEach(c=>tenta.push(p.slice(0,i)+c+p.slice(i+1)));
-  for(let i=1;i<p.length;i++)tenta.push(p.slice(0,i)+p.slice(i+1));
+  /* letra parecida, mas vogal só vira vogal e consoante só vira consoante (N por U dava BOUECA, impossível de ler) */
+  const Vg=c=>/[aeiou]/.test(c||'');
+  for(let i=0;i<p.length;i++)(CONFUNDE[p[i]]||[]).forEach(c=>{if(c.length===1&&Vg(c)===Vg(p[i]))tenta.push(p.slice(0,i)+c+p.slice(i+1));});
+  /* letra a menos: só consoante (tirar vogal deixa sílaba sem vogal: MLA, VCA, PPA, impossível de ler) */
+  const V=c=>/[aeiouãõáéíóúâêô]/.test(c||'');
+  for(let i=1;i<p.length;i++)if(!V(p[i])&&!(V(p[i-1])&&V(p[i+1])))tenta.push(p.slice(0,i)+p.slice(i+1));   /* nem vogal com vogal (CAA, PAO, SAO) */
   for(let i=1;i<p.length-1;i++)if(/[bcdfglmnprstv]/.test(p[i])&&p[i]!==p[i-1]&&p[i]!==p[i+1])tenta.push(p.slice(0,i+1)+p[i]+p.slice(i+1));
   /* sílaba trocada de lugar (BOLA -> LABO) */
   const w=PALAVRAS_BASE.find(x=>x.p===p);if(w&&w.s.length>=2){const t=w.s.slice();[t[0],t[1]]=[t[1],t[0]];tenta.push(t.join(''));}
   /* nunca uma palavra de verdade (BALA no lugar de BOLA): conferido contra PALAVRAS_REAIS (corretor pt_BR, build/palavras-reais.swift) */
-  shuf(tenta).forEach(t=>{if(out.size<n&&t!==p&&t.length>=2&&!ehPalavraReal(t))out.add(t);});
+  shuf(tenta).forEach(t=>{if(out.size<n&&t!==p&&t.length>=2&&!ehPalavraReal(t)&&legivel(t)&&!hiatoNovo(t,p))out.add(t);});
   return [...out];
 }
 const ehPalavraReal=t=>(typeof PALAVRAS_REAIS==='object'&&PALAVRAS_REAIS.has(String(t).toLowerCase()))||PALAVRAS_BASE.some(w=>w.p===String(t).toLowerCase());
@@ -41,11 +56,20 @@ const PALAVRAS_BASE=[
   {p:'peteca',s:['pe','te','ca']},{p:'tapete',s:['ta','pe','te']},{p:'galinha',s:['ga','li','nha']},{p:'abacate',s:['a','ba','ca','te']},{p:'borboleta',s:['bor','bo','le','ta']},
   {p:'foguete',s:['fo','gue','te']},{p:'dente',s:['den','te']},{p:'fada',s:['fa','da']},{p:'vela',s:['ve','la']},{p:'tijolo',s:['ti','jo','lo']}
 ];
-/* famílias de rima (fim igual) */
+/* famílias de rima pelo SOM final no português do Brasil (o L final soa U: MEL rima com CÉU), conferidas em testes/geradores.js */
 const RIMAS=[['pão','mão','chão','feijão','balão'],['gato','pato','rato','sapato','prato'],['bola','cola','mola','sacola'],['janela','panela','vela','tigela'],
-  ['dedo','medo','cedo','segredo'],['mel','papel','anel','pastel'],['chapéu','céu','véu','troféu'],['flor','cor','amor','calor'],['casa','asa','brasa'],['foguete','sorvete','tapete','chiclete'],
+  ['dedo','medo','cedo','segredo'],['mel','papel','anel','pastel','chapéu','céu','véu','troféu'],['flor','cor','amor','calor'],['casa','asa','brasa'],['foguete','sorvete','tapete','chiclete'],
   ['bico','rico','fico','penico'],['lua','rua','sua','nua'],['caneca','boneca','peteca','sapeca']];
 const MAI=s=>String(s).toUpperCase();
+/* som final que rima: L final vira U (el=éu, il=iu, al=au, ol=óu); oxítona (acento, ão, r, l, z, u, i no fim) rima a partir da última vogal,
+   paroxítona a partir da penúltima */
+function somDaRima(w){
+  w=String(w).toLowerCase();const oxi=/[áéíóúâêôãõ]|[rlzui]$|ão$|ãe$/.test(w.slice(-3));
+  let t=w.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/([gq])u([ei])/g,'$1$2').replace(/([aeiou])l$/,'$1u');   /* GUE e QUI: o U não soa */
+  const vs=[...t.matchAll(/[aeiou]+/g)];if(!vs.length)return t;
+  const v=oxi||vs.length<2?vs[vs.length-1]:vs[vs.length-2];
+  return t.slice(v.index).replace(/^([aeiou])[aeiou](?=[^aeiou])/,'$1');
+}
 /* pista curta da palavra alvo da "escrita certa" */
 const PISTA_PALAVRA={bola:'brinquedo redondo que rola',dado:'cubo com pontinhos do jogo',pato:'ave que nada e faz quá-quá',gato:'bicho que mia',mala:'leva a roupa na viagem',
   casa:'onde a família mora',bolo:'doce de aniversário',vaca:'bicho que dá leite',faca:'corta o pão',sapo:'pula na lagoa',tatu:'bicho com casco que cava buraco',
@@ -60,7 +84,7 @@ const PT_BAS={
   somInicial(){const w=pick(PALAVRAS_BASE),l=w.p[0];
     return mc('Com que letra começa a palavra <b>'+MAI(w.p)+'</b>?',MAI(l),distratoresDaLetra(l,3).map(MAI),{ouvir:'Com que letra começa a palavra '+w.p+'?'});},
   rima(){const f=pick(RIMAS),a=pick(f),certa=pick(f.filter(x=>x!==a));
-    const outras=shuf(RIMAS.filter(x=>x!==f)).slice(0,3).map(x=>pick(x));
+    const outras=shuf(RIMAS.filter(x=>x!==f&&somDaRima(x[0])!==somDaRima(a))).slice(0,3).map(x=>pick(x));
     return mc('Qual palavra rima com <b>'+MAI(a)+'</b>?',MAI(certa),outras.map(MAI));},
   contarSilabas(){const w=pick(PALAVRAS_BASE);
     return mc('Bata uma palma para cada pedaço: <b>'+MAI(w.p)+'</b>. Quantas sílabas?',String(w.s.length),[1,2,3,4,5].filter(n=>n!==w.s.length).map(String).slice(0,3));},
@@ -76,7 +100,7 @@ const PT_BAS={
     return mc('Qual letra completa <b>'+lac+'</b>?',MAI(l),distratoresDaLetra(l,3).map(MAI),{ouvir:'Qual letra completa a palavra '+w.p+'?'});},
   /* a palavra alvo aparece por uma pista (sem voz dá para saber qual é a palavra; as erradas nunca são palavra de verdade) */
   grafiaCerta(){const w=pick(PALAVRAS_BASE.filter(x=>x.p.length>=4&&PISTA_PALAVRA[x.p]&&errosDeGrafia(x.p,3).length>=3));
-    return mc('Qual está escrita do jeito certo? <b>'+PISTA_PALAVRA[w.p]+'</b>',MAI(w.p),errosDeGrafia(w.p,3).map(MAI),{ouvir:'Qual palavra está escrita do jeito certo? '+PISTA_PALAVRA[w.p]+': '+w.p});}
+    return mc('Qual é o jeito certo de escrever: <b>'+PISTA_PALAVRA[w.p]+'</b>?',MAI(w.p),errosDeGrafia(w.p,3).map(MAI),{ouvir:'Qual é o jeito certo de escrever: '+PISTA_PALAVRA[w.p]+'? '+w.p});}
 };
 /* ---------- matemática: dinheiro, relógio, formas, padrões e historinhas (com figura em SVG, sem emoji) ---------- */
 function relogioSVG(h,m){

@@ -30,11 +30,20 @@ for (p, s) in base {
 }
 let sc = NSSpellChecker.shared
 var reais = Set(base.map { $0.0 })
+// a lista atual entra junto: regenerar SOMA palavras (o corretor de outra versão do macOS pode não conhecer alguma), nunca tira
+let destino = raiz.appendingPathComponent("src/conteudo/palavras-reais.js")
+var antigas = 0
+if let atual = try? String(contentsOf: destino, encoding: .utf8), let ini = atual.range(of: "new Set(["), let fim = atual.range(of: "]);", range: ini.upperBound..<atual.endIndex) {
+  for w in atual[ini.upperBound..<fim.lowerBound].split(separator: ",") { let p = w.trimmingCharacters(in: CharacterSet(charactersIn: "' ")); if !p.isEmpty { reais.insert(p); antigas += 1 } }
+}
 for w in cand.sorted() where w.count >= 2 {
   let r = sc.checkSpelling(of: w, startingAt: 0, language: "pt_BR", wrap: false, inSpellDocumentWithTag: 0, wordCount: nil)
   if r.location == NSNotFound { reais.insert(w) }
 }
 let lista = reais.sorted().map { "'\($0)'" }.joined(separator: ",")
-let js = "/* GERADO por build/palavras-reais.swift (corretor pt_BR do macOS). Não edite à mão.\n   Variações das palavras do banco que SÃO palavras reais: nunca viram opção \"errada\" nem lacuna ambígua. \(cand.count) variações testadas. */\nconst PALAVRAS_REAIS=new Set([\(lista)]);\n"
-try! js.write(to: raiz.appendingPathComponent("src/conteudo/palavras-reais.js"), atomically: true, encoding: .utf8)
+let so = ProcessInfo.processInfo.operatingSystemVersion
+let versao = "\(so.majorVersion).\(so.minorVersion).\(so.patchVersion)"
+let fmt = DateFormatter(); fmt.dateFormat = "yyyy-MM-dd"; let data = fmt.string(from: Date())
+let js = "/* GERADO por build/palavras-reais.swift (corretor pt_BR do macOS \(versao), em \(data)). Não edite à mão.\n   Variações das palavras do banco que SÃO palavras reais: nunca viram opção \"errada\" nem lacuna ambígua. \(cand.count) variações testadas;\n   a lista anterior (\(antigas) palavras) foi somada, nunca substituída. */\nconst PALAVRAS_REAIS=new Set([\(lista)]);\n"
+try! js.write(to: destino, atomically: true, encoding: .utf8)
 print("palavras-reais.js: \(reais.count) reais de \(cand.count) variações (\(base.count) palavras do banco)")

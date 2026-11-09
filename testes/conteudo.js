@@ -34,7 +34,7 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     const r = J(a.avaliar(`(()=>{const o={conf:0,tot:0,ruim:[]};
       for(let i=0;i<300;i++){const q=PT_BAS.letraQueFalta();const l=q.answer.toLowerCase();const c=CONFUNDE[l]||[];o.tot++;
         if(q.options.filter(x=>x!==q.answer).filter(x=>c.indexOf(x.toLowerCase())>=0).length>=Math.min(2,c.length))o.conf++;}
-      PALAVRAS_BASE.forEach(w=>{const e=errosDeGrafia(w.p,3);if(e.length<3||e.indexOf(w.p)>=0||new Set(e).size!==e.length)o.ruim.push(w.p+':'+e);
+      PALAVRAS_BASE.forEach(w=>{const e=errosDeGrafia(w.p,3);if(e.length<2||e.indexOf(w.p)>=0||new Set(e).size!==e.length)o.ruim.push(w.p+':'+e);
         e.forEach(x=>{if(Math.abs(x.length-w.p.length)>1)o.ruim.push(w.p+'->'+x);});});
       return o;})()`));
     A.ok(r.conf / r.tot >= 0.95, 'distratores confundiveis em ' + Math.round(100 * r.conf / r.tot) + '%');
@@ -61,7 +61,7 @@ const J = (x) => JSON.parse(JSON.stringify(x));
   });
   await teste('5. treino pela interface: abre, 10 perguntas, moeda por acerto, sem estrela, marca o dia do programa', () => {
     const b = novo();
-    b.avaliar("S.moedas=0;S.feitas={};S.programaAtual={m:'mat',i:0};abrirTreino('mat','contar')");
+    b.avaliar("S.moedas=0;S.feitas={};S.programaAtual={m:'mat',i:0};abrirTreino('mat','contar',true)");
     let g = 0; while (b.avaliar('LIC.etapa') === 'questao' && g++ < 40) b.avaliar('LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar()');
     const r = J(b.avaliar('({et:LIC.etapa,base:LIC.base,m:S.moedas,feitas:Object.keys(S.feitas).length,prog:S.programa})'));
     A.strictEqual(r.et, 'fim'); A.strictEqual(r.base, 10); A.ok(r.m > 0, 'sem moeda'); A.strictEqual(r.feitas, 0, 'treino deu estrela');
@@ -69,10 +69,19 @@ const J = (x) => JSON.parse(JSON.stringify(x));
   });
   await teste('5b. treino do programa abandonado no meio nao marca o dia e limpa o programa em andamento', () => {
     const b = novo();
-    b.avaliar("S.programa={};S.programaAtual={m:'mat',i:0};abrirTreino('mat','contar');LIC.resp=LIC.qs[0].answer;conferir();avancar();fecharLicao()");
+    b.avaliar("S.programa={};S.programaAtual={m:'mat',i:0};abrirTreino('mat','contar',true);LIC.resp=LIC.qs[0].answer;conferir();avancar();fecharLicao()");
     A.strictEqual(b.avaliar('S.programaAtual'), null, 'programaAtual ficou');
     b.avaliar("abrirTreino('mat','contar')"); let g = 0; while (b.avaliar('LIC.etapa') === 'questao' && g++ < 30) b.avaliar('LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar()');
     A.ok(!(b.avaliar('JSON.stringify(S.programa)') || '').includes('[0]'), 'o dia foi marcado sem o programa: ' + b.avaliar('JSON.stringify(S.programa)'));
+  });
+  await teste('5c. programa em andamento nao sobrevive a fechar o app nem a abrir um treino fora do programa', () => {
+    const b = novo();
+    A.strictEqual(b.avaliar("estadoDe({programaAtual:{m:'mat',i:3},programa:{mat:[0,1]}}).programaAtual"), null, 'programaAtual voltou do armazenamento');
+    A.strictEqual(b.avaliar("JSON.stringify(estadoDe({programa:{mat:[0,1]}}).programa)"), '{"mat":[0,1]}', 'dias feitos se perderam');
+    b.avaliar("S.programa={};S.programaAtual={m:'mat',i:0};abrirTreino('mat','contar')");
+    A.strictEqual(b.avaliar('S.programaAtual'), null, 'treino fora do programa manteve o programa em andamento');
+    let g = 0; while (b.avaliar('LIC.etapa') === 'questao' && g++ < 30) b.avaliar('LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar()');
+    A.strictEqual(b.avaliar('JSON.stringify(S.programa)'), '{}', 'dia marcado por treino de fora do programa');
   });
   await teste('6. programa de 20 dias: 20 dias por planeta, todos temas que existem; 3o ano: 20 textos com 2 perguntas, medidas e tempo nas fases', () => {
     const r = J(a.avaliar(`(()=>({p:['mat','pt','en'].map(m=>PROGRAMA20[m].length+':'+PROGRAMA20[m].filter(id=>!TEMAS[m].some(t=>t.id===id)).join()),

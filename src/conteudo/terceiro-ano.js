@@ -3,15 +3,15 @@
    Entram como geradores no FIM das fases que já tratam do assunto (8.5 Unidades de medida, 1.5 com o relógio, p10.1 a p10.4 Ler e entender)
    e como temas do modo "treinar por tema" (conteudo/temas.js). Textos novos com voz pendente: audio/regerar-pendentes.json. */
 const MED3={
-  cmM(){const m=R(1,5);return mc('Quantos centímetros tem '+(m===1?'1 metro':m+' metros')+'?',String(m*100),[m*10,m*1000,m*100+10].map(String));},
-  kgG(){const k=R(1,4);return mc('Quantos gramas tem '+(k===1?'1 quilo':k+' quilos')+'?',String(k*1000),[k*100,k*10,k*1000+100].map(String));},
-  litroMl(){const l=pick([1,2,3]);return mc('Quantos mililitros tem '+(l===1?'1 litro':l+' litros')+'?',String(l*1000),[l*100,l*10,l*500].map(String));},
+  cmM(){const m=R(1,5);return mc('Quantos centímetros '+(m===1?'tem':'têm')+' '+(m===1?'1 metro':m+' metros')+'?',String(m*100),[m*10,m*1000,m*100+10].map(String));},
+  kgG(){const k=R(1,4);return mc('Quantos gramas '+(k===1?'tem':'têm')+' '+(k===1?'1 quilo':k+' quilos')+'?',String(k*1000),[k*100,k*10,k*1000+100].map(String));},
+  litroMl(){const l=pick([1,2,3]);return mc('Quantos mililitros '+(l===1?'tem':'têm')+' '+(l===1?'1 litro':l+' litros')+'?',String(l*1000),[l*100,l*10,l*500].map(String));},
   qualUnidade(){const it=pick([['a altura de uma porta','metro'],['o peso de uma melancia','quilograma'],['a água de um balde','litro'],['o comprimento de uma borracha','centímetro'],
       ['o remédio numa colher','mililitro'],['o peso de uma bala','grama']]);
     return mc('Qual unidade é melhor para medir '+it[0]+'?',it[1],['metro','quilograma','litro','centímetro','mililitro','grama'].filter(x=>x!==it[1]).slice(0,3));},
   maisPesado(){const b=R(1,3),gs=shuf([200,300,400,500,600,700,800,900]).slice(0,3);
     return mc('O que pesa mais?',(b===1?'1 quilo':b+' quilos'),gs.map(g=>g+' gramas'));},
-  minutosHora(){const h=pick([1,2,3]);return mc('Quantos minutos tem '+(h===1?'1 hora':h+' horas')+'?',String(h*60),[h*100,h*30,h*60+10].map(String));},
+  minutosHora(){const h=pick([1,2,3]);return mc('Quantos minutos '+(h===1?'tem':'têm')+' '+(h===1?'1 hora':h+' horas')+'?',String(h*60),[h*100,h*30,h*60+10].map(String));},
   meiaHora(){return mc('Meia hora tem quantos minutos?','30',['50','15','60']);},
   duracao(){const ini=R(1,8),d=R(1,3),fim=ini+d,H=n=>n===1?'1 hora':n+' horas';
     /* 3 distratores sempre diferentes entre si e da resposta (antes saíam repetidos e a pergunta ficava com 3 opções) */
@@ -24,7 +24,7 @@ const MED3={
     return mc('Que dia da semana vem depois de '+d[i]+'?',d[(i+1)%7],[d[(i+6)%7],d[(i+2)%7],d[(i+3)%7]]);},
   mesDepois(){const m=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'],i=R(0,11);
     return mc('Que mês vem depois de '+m[i]+'?',m[(i+1)%12],[m[(i+11)%12],m[(i+2)%12],m[(i+6)%12]]);},
-  semanaDias(){const s=R(1,4);return mc('Quantos dias têm '+(s===1?'1 semana':s+' semanas')+'?',String(s*7),[s*5,s*7+1,s*10].map(String));}
+  semanaDias(){const s=R(1,4);return mc('Quantos dias '+(s===1?'tem':'têm')+' '+(s===1?'1 semana':s+' semanas')+'?',String(s*7),[s*5,s*7+1,s*10].map(String));}
 };
 /* 20 textos curtos (2 ou 3 frases, palavras de uso comum) com 2 perguntas cada: quem, o quê, onde ou por quê. Escritos aqui (08/11/2026). */
 const TEXTOS3=[
