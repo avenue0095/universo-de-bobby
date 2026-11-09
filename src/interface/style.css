@@ -201,6 +201,10 @@
   --item-rosa: #F5B3C6;
   --item-moldura: #F2B134;
   --item-trilha: #F2B134;
+  --comp-lenco: #12A06E;
+  --comp-lenco-2: #0B7A4B;
+  --comp-selo: #F2B134;
+  --comp-selo-2: #8A5A00;
   --moldura-desenho: #8a5a2b;
 
   /* ---------- traçar: uma cor por caminho, repetida na borda da resposta ---------- */
@@ -2129,3 +2133,18 @@ body[data-trilha="trilha-verde"]{--item-trilha:var(--item-folha)}body[data-trilh
 .treino-bt{display:none;margin:var(--esp-8) auto 0}
 /* no celular o treino fica em Perfil (a primeira dobra é do mapa); no computador também ganha botão no painel do lado */
 @media (min-width:1024px){.tela .painel-lado .treino-bt{display:block}}
+
+/* ---------- B2: companheiro em 3 estágios (selo) e o lenço comprável, desenhados no código ---------- */
+.comp-camadas{position:relative;display:inline-block;line-height:0}
+.comp-camadas>img{display:block;width:100%;height:auto}
+.comp-camadas .lenco-comp{position:absolute;left:30%;top:42%;width:40%;height:auto;pointer-events:none}
+.comp-camadas .lc-a{fill:var(--comp-lenco)}.comp-camadas .lc-b{fill:var(--comp-lenco-2)}
+.comp-camadas .selo-estagio{position:absolute;right:0;top:0;width:28%;max-width:40px;height:auto;pointer-events:none}
+.selo-estagio .se-a{fill:var(--comp-selo)}.selo-estagio .se-b{fill:var(--comp-selo-2);stroke:var(--comp-selo-2)}
+/* no mapa o companheiro com camadas fica no mesmo lugar da imagem simples */
+.voce .comp-camadas{position:absolute;left:0;bottom:0;width:100%}
+.voce .comp-camadas>img{position:relative;max-height:none}
+.voce .comp-camadas.voce-a1,.voce .comp-camadas.voce-a2{display:none}
+.voce.anda .comp-camadas.voce-pe{display:none}
+.voce.anda .comp-camadas.voce-a1{display:block;animation:passo var(--mov-lento) steps(1) infinite}
+.voce.anda .comp-camadas.voce-a2{display:block;animation:passo var(--mov-lento) steps(1) infinite reverse}

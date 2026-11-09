@@ -17,14 +17,7 @@ const FRONTAIS={
   'bobby-p01':[.45,.645],'bobby-p02':[.49,.58],'bobby-p08':[.60,.71],'bobby-p09':[.50,.69],'bobby-p10':[.50,.88],
   'bobby-e01':[.5,.94],'bobby-e02':[.5,.92],'bobby-e03':[.5,.94],'bobby-e04':[.5,.92],'bobby-e05':[.5,.92],'bobby-e06':[.5,.92],'bobby-e07':[.5,.87],'bobby-e08':[.5,.92]
 };
-/* itens antigos (versão anterior ao guarda-roupa novo). Quem comprou continua dono: os que têm sucessor viram o item de camada (DONOS);
-   os que não têm arte ficam "guardados para a arte nova". Os 7 looks de hoje são itens de camada (VESTIVEIS em camadas.js). */
-const PECAS_ANTIGAS={festa:'Chapéu de festa',chef:'Chapéu de chef',pirata:'Chapéu de pirata',heroi:'Máscara de herói',tapaolho:'Tapa-olho',cachecol:'Cachecol',
-  gravata:'Gravata-borboleta',medalha:'Medalha de ouro',espacial:'Capacete espacial',sol:'Óculos de sol',
-  mel:'Pelo mel',cinza:'Pelo cinza',panda:'Pelo panda',polar:'Pelo polar',rosa:'Pelo rosa',choco:'Chocolate',
-  nina:'Nina, a coelhinha',pim:'Pim, o gatinho',zeca:'Zeca, o macaquinho',lulu:'Lulu, a corujinha'};
-/* dono do item antigo é dono do item novo que o substitui */
-const DONOS={capacete:['espacial'],lenco:['cachecol'],'oculos-sol':['sol']};
+/* P6 (Filipe, 09/11/2026): ninguém jogou a versão antiga; não há item antigo sem arte para guardar nem dono de item antigo para converter. */
 /* slots antigos (um look por vez) -> slots novos */
 const SLOT_ANTIGO={chapeu:'cabeca'};
 const EXPRESSAO_IDS=['feliz','radiante','curioso','pensa','surpreso','ops','concentrado','tranquilo'];
@@ -43,8 +36,8 @@ function MASC(exp,cls,look,alt){
   if(look===undefined||look===null){
     const pa=persAtivo();
     if(pa.tipo==='comp'){
-      const pose=POSE_COMP[exp]||'p01',id=ativo(pa.id+'-'+pose)?pa.id+'-'+pose:pa.id+'-p01';
-      return imgArte(id,{cls:'mascote comp'+(cls?' '+cls:''),alt:alt||''});
+      const pose=POSE_COMP[exp]||'p01',p2=ativo(pa.id+'-'+pose)?pose:'p01';
+      return typeof compComCamadas==='function'?compComCamadas(pa.id,p2,'mascote comp'+(cls?' '+cls:''),alt):imgArte(pa.id+'-'+p2,{cls:'mascote comp'+(cls?' '+cls:''),alt:alt||''});
     }
   }
   return MASCB(exp,cls,look,alt);
@@ -61,16 +54,15 @@ function MASCB(exp,cls,look,alt){
 function retratoPers(cls,look){
   const L=look||(typeof S!=='undefined'&&S.look)||{};
   const pa=persAtivo(L);
-  if(pa.tipo==='comp')return imgArte(pa.id+'-p01',{cls:'retrato retrato-comp'+(cls?' '+cls:''),eager:true,alt:pa.n});
+  if(pa.tipo==='comp')return typeof compComCamadas==='function'&&L===S.look?compComCamadas(pa.id,'p01','retrato retrato-comp'+(cls?' '+cls:''),pa.n):imgArte(pa.id+'-p01',{cls:'retrato retrato-comp'+(cls?' '+cls:''),eager:true,alt:pa.n});
   return bobbyEmCamadas('bobby-e01','retrato retrato-camadas'+(cls?' '+cls:''),L,'')||imgArte('bobby-e01',{cls:'retrato'+(cls?' '+cls:''),eager:true});
 }
 /* o Bobby de sempre (cartão de novo jogador, onde ainda não há look nem companheiro) */
 const retratoBobby=cls=>imgArte('bobby-e01',{cls:'retrato'+(cls?' '+cls:''),eager:true});
 
 /* ---------- Meu personagem: posse e vestir (a tela está em editor.js) ---------- */
-const temItemEm=(st,id)=>((st&&st.comprado)||[]).indexOf(id)>=0||(DONOS[id]||[]).some(o=>((st&&st.comprado)||[]).indexOf(o)>=0);
+const temItemEm=(st,id)=>((st&&st.comprado)||[]).indexOf(id)>=0;
 const temItem=id=>temItemEm(S,id);
-const antigoSubstituido=id=>Object.keys(DONOS).some(k=>DONOS[k].indexOf(id)>=0);
 /* vestir num slot (vários slots ao mesmo tempo). id vazio tira. Só veste o que a criança tem e o que pertence ao slot. */
 function vestir(slot,id){
   if(SLOTS.indexOf(slot)<0)return false;
@@ -91,7 +83,3 @@ function escolherCompanheiro(id){
   salvar();somPasso();pintarTopo();telaLoja();
 }
 function lojaAviso(t){const a=$('#loja-aviso');if(a)a.innerHTML=t?'<div class="aviso">'+t+'</div>':'';}
-/* itens que o jogador comprou na versão antiga e ainda não têm arte nova: ficam guardados */
-function guardadosDa(){
-  return Object.keys(PECAS_ANTIGAS).filter(id=>!antigoSubstituido(id)&&!VESTIVEIS[id]&&temItem(id)).map(id=>PECAS_ANTIGAS[id]);
-}

@@ -24,14 +24,11 @@ const novo = () => { const a = carregarApp(4); a.avaliar('ATIVOS=' + JSON.string
     a.avaliar("vestir('rosto','')");
     A.strictEqual(a.avaliar('S.look.rosto'), ''); A.strictEqual(a.avaliar('S.look.cabeca'), 'bone');
   });
-  await teste('3. quem comprou o item antigo e dono do novo (espacial->capacete, cachecol->lenco, sol->oculos de sol)', () => {
+  await teste('3. (P6) sem legado: item antigo sem arte (festa, sol, espacial) nao entra nem converte; so o catalogo de hoje vale', () => {
     const a = novo();
-    a.avaliar("S.comprado=['espacial','cachecol','sol']");
-    ['capacete', 'lenco', 'oculos-sol'].forEach((id) => A.strictEqual(a.avaliar("temItem('" + id + "')"), true, id));
-    A.strictEqual(a.avaliar("temItem('coroa')"), false);
-    A.strictEqual(a.avaliar("guardadosDa().length"), 0, 'item antigo substituido nao deve aparecer como guardado');
-    a.avaliar("S.comprado=['festa']");
-    A.deepStrictEqual(JSON.parse(JSON.stringify(a.avaliar("guardadosDa()"))), ['Chapéu de festa']);
+    const c = JSON.parse(JSON.stringify(a.avaliar("estadoDe({comprado:['festa','sol','espacial','bone','rufa','__x']}).comprado")));
+    A.deepStrictEqual(c, ['bone', 'rufa']);
+    a.avaliar("S.comprado=['espacial']"); A.strictEqual(a.avaliar("temItem('capacete')"), false);
   });
   await teste('4. bau so entrega acessorio com arte e sem portao; o que o jogador ja tem (inclusive pelo item antigo) nao se repete', () => {
     const a = novo();

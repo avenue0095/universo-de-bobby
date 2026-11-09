@@ -534,6 +534,8 @@ function conferir(){
     if(ehF78()&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
   }
   cicloPergunta(q,{ok:ok,ms:ms,dica:LIC.dica||0});
+  /* B2: o companheiro escolhido ganha 1 ponto de companhia por resposta (de graça; o estágio nunca cai) */
+  if(primeira&&typeof companhiaResposta==='function')companhiaResposta();
   /* 1G: cada resposta alimenta a habilidade (gerador) de origem; no ligar, cada par conta pela sua pergunta de origem */
   if(typeof adaptRegistrar==='function')(origens||[qb]).forEach((o,i)=>adaptRegistrar(chaveDaPergunta(o)?o:q,origens?!!certosLig[i]:ok,
     {primeira:primeira,irma:!!q.__irma,rev:!!(q.__item||LIC.diaria||q.__aquec)}));

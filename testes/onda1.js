@@ -176,6 +176,22 @@ bloco('D', async (c, feito) => {
   feito.push('D: treinar por tema pelo botao do mapa (390 e 1280), relogio desenhado, rodada de 10 com fim de treino, programa de 20 dias na area do responsavel');
 });
 
+/* ---------- B2 ---------- */
+bloco('B2', async (c, feito) => {
+  for (const rot of ['390x844', '1280x800']) {
+    await c.tela(TELAS[rot], 'Ivo');
+    await c.js("S.comprado=['teo','aces-teo'];S.look={companheiro:'teo'};S.amizade={teo:{xp:0,dia:'',u:1200}};S.acessorioComp={teo:true};salvar();fecharFolha();pintarTopo();renderTrilha();0"); await dorme(500);
+    const m = await c.js("(()=>{const v=document.querySelector('.voce');return {lenco:!!(v&&v.querySelector('.lenco-comp')),selo:!!document.querySelector('#logo .selo-estagio,#retrato-bb .selo-estagio')}})()");
+    if (!m.lenco || !m.selo) c.problemas.push(rot + ' B2: lenco no mapa e selo no retrato ' + JSON.stringify(m));
+    await c.js("lojaOrigem='perfil';abaLoja='comp';telaLoja();0"); await dorme(400);
+    const t = await c.js("({txt:document.querySelector('#perfil').innerText,lado:document.documentElement.scrollWidth>innerWidth})");
+    if (!/Melhor amigo/.test(t.txt) || /fome|triste|saudade/i.test(t.txt) || t.lado) c.problemas.push(rot + ' B2: tela do companheiro ' + t.txt.slice(0, 80));
+    await c.foto('B2-companheiro-' + rot);
+    c.coleta(rot + ' B2');
+  }
+  feito.push('B2: companheiro Melhor amigo com o lenco no mapa, selo no retrato e estagio na tela Meu personagem (390 e 1280)');
+});
+
 (async () => {
   const c = await abrirChrome();
   const feito = [];

@@ -59,8 +59,10 @@ function cenaHTML(u,k,agora){
 function vocePecas(){
   const pa=persAtivo();
   if(pa.tipo==='comp'){
-    const c=pa.id;
-    return imgArte(c+'-p01',{cls:'voce-pe',eager:true})+imgArte(ativo(c+'-p04')?c+'-p04':c+'-p01',{cls:'voce-pe2'})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a1',eager:true})+imgArte(ativo(c+'-p03')?c+'-p03':c+'-p01',{cls:'voce-a2',eager:true});
+    const c=pa.id,pz=p=>ativo(c+'-'+p)?p:'p01';
+    /* B2: o lenço de amizade e o selo do estágio acompanham cada pose (compComCamadas) */
+    const q=(p,cls)=>typeof compComCamadas==='function'?compComCamadas(c,pz(p),cls,''):imgArte(c+'-'+pz(p),{cls:cls,eager:true});
+    return q('p01','voce-pe')+q('p04','voce-pe2')+q('p03','voce-a1')+q('p03','voce-a2');
   }
   /* o Bobby com tudo o que está vestido, parado e andando (camadas.js: o acessório acompanha cada pose) */
   const p=(pose,cls,eager)=>bobbyEmCamadas(pose,cls,S.look,'')||imgArte(pose,{cls:cls,eager:eager});

@@ -1,5 +1,5 @@
 {
- "versao": 1,
+ "versao": 2,
  "precos": {
   "companheiro": {
    "teo": 500,
@@ -52,6 +52,14 @@
    "adesivo-concha": 80,
    "adesivo-livro": 80
   },
-  "pista": 100
+  "pista": 100,
+  "acessorio": {
+   "teo": 300,
+   "rufa": 300,
+   "otto": 300,
+   "capi": 350,
+   "brisa": 400,
+   "fagulha": 400
+  }
  }
 }

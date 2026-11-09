@@ -35,6 +35,7 @@ function nomeDoItem(id){
   if(NOMES_SEMANA[id])return NOMES_SEMANA[id];
   const c=COMPANHEIROS.filter(x=>x.id===id)[0];if(c)return c.n;
   if(/^pista-/.test(id))return 'Página do diário';
+  if(/^aces-/.test(id)){const c=COMPANHEIROS.filter(x=>x.id===id.slice(5))[0];return 'Lenço d'+(c&&/^a /.test(c.quem)?'a ':'o ')+(c?c.n:'');}
   return id;
 }
 /* o Bobby do palco: o que está vestido, mais o item em prova */
@@ -131,9 +132,9 @@ function abaCompHTML(){
     const eq=(L.companheiro||'')===c.id,tem=companheiroComprado(c.id);
     h+='<div class="item'+(eq?' equipado':'')+(tem?'':' bloqueado')+'">'+(eq?'<span class="selo">'+IC.certo+' com você</span>':'')+
       '<div class="item-img">'+imgArte(c.id+'-p01',{})+'</div><b>'+c.n+'</b><span class="tipo">'+c.quem+'</span>'+
-      (tem?'<button class="btn-sec" data-comp="'+c.id+'"'+(eq?' aria-pressed="true"':'')+'>'+(eq?'Tirar':'Chamar')+'</button>':botaoPreco(c.id,' data-buycomp="'+c.id+'"'))+'</div>';
+      (tem?'<button class="btn-sec" data-comp="'+c.id+'"'+(eq?' aria-pressed="true"':'')+'>'+(eq?'Tirar':'Chamar')+'</button>'+(typeof amizadeHTML==='function'?amizadeHTML(c):''):botaoPreco(c.id,' data-buycomp="'+c.id+'"'))+'</div>';
   });
-  return h+'</div><p class="dica-loja">O companheiro aparece no mapa e na sua tela.</p>';
+  return h+'</div><p class="dica-loja">O companheiro aparece no mapa e na sua tela. Jogando junto, vocês ficam mais amigos: Amigo, Grande amigo e Melhor amigo. Isso é de graça.</p>';
 }
 function telaLoja(){
   let h='<div class="perfil-in guarda">'+palcoHTML();
@@ -143,8 +144,6 @@ function telaLoja(){
     '<button class="aba'+(abaLoja===a[0]?' on':'')+'" role="tab" aria-selected="'+(abaLoja===a[0])+'" data-aba="'+a[0]+'">'+a[1]+'</button>').join('')+'</div>';
   h+='<div id="loja-aviso"></div>';
   h+=abaLoja==='comp'?abaCompHTML():(abaLoja==='semana'?abaSemanaHTML():(abaLoja==='mais'?abaMaisHTML():abaVestirHTML()));
-  const guard=guardadosDa();
-  if(guard.length)h+='<p class="guardados"><b>Guardados para a arte nova:</b> '+guard.map(escapa).join(', ')+'. Eles continuam seus e voltam quando ficarem prontos.</p>';
   h+='</div>';
   $('#perfil').dataset.tela='loja';
   $('#perfil').innerHTML='<div class="rev-topo"><button class="icobtn" id="volta-perfil" aria-label="Voltar">'+IC.volta+
@@ -163,6 +162,7 @@ function ligarLoja(){
   on('[data-veste]',b=>{const id=b.dataset.veste,v=VESTIVEIS[id];vestir(v.slot,(S.look||{})[v.slot]===id?'':id);provando=null;salvar();somPasso();pintarTopo();refazLoja();});
   on('[data-prova]',b=>{provando=provando===b.dataset.prova?null:b.dataset.prova;somPasso();refazLoja();});
   on('[data-compra]',b=>pedirCompra(b.dataset.compra));
+  on('[data-aces]',b=>{const id=b.dataset.aces;vestirAcessorioComp(id,!acessorioVestido(id));salvar();pintarTopo();refazLoja();});
   on('[data-comp]',b=>escolherCompanheiro(S.look&&S.look.companheiro===b.dataset.comp?'':b.dataset.comp));
   on('[data-desejo]',b=>{if(!alternarDesejo(b.dataset.desejo))lojaAviso('A lista de desejos já tem 3 itens. Tire um para guardar outro.');else{salvar();refazLoja();}});
   on('[data-usa]',b=>{const id=b.dataset.usa,k=/^moldura-/.test(id)?'moldura':'trilha';S.visual=Object.assign({moldura:'',trilha:''},S.visual);S.visual[k]=S.visual[k]===id?'':id;salvar();aplicarVisual();pintarTopo();refazLoja();});

@@ -49,3 +49,10 @@ Pedido (sem gerar agora), no padrão da família 3D, fundo transparente, 512 px 
 
 Ajuste fino das âncoras: as 22 âncoras foram medidas a olho sobre a grade de 10% (`testes/saida/B-*.png` mostra o resultado com `--foto`).
 Quando a arte definitiva chegar, conferir cada pose e corrigir `ANCORAS` (um número por slot por pose).
+
+## Companheiro em 3 estágios e acessório (pacote B2, 09/11/2026): NÃO gerado
+Hoje o estágio aparece como um selo desenhado no código no canto do retrato (Grande amigo: visto; Melhor amigo: estrela) e o acessório
+de cada companheiro é um lenço em SVG posto sobre a imagem da pose (posição genérica, igual para os 6 companheiros e as 4 poses).
+Pedido: para cada um dos 6 companheiros, o acessório de amizade (1 peça própria, não um lenço genérico) em 4 poses (P01 a P04) e um
+detalhe visual por estágio (2 e 3), com fundo transparente: 6 x (4 + 2) = 36 imagens. Âncora de pescoço por pose de cada companheiro
+para encaixar o acessório por camada, como no Bobby.

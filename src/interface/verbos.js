@@ -426,7 +426,9 @@ function ligarVerbos(q){
 /* 20 objetos cabem: o objeto encolhe (de 48 até 36 px) até a cena, a contagem e as alternativas caberem acima do rodapé, sem rolar e sem
    área interna que rola. Se nem com 36 px couber (telefone muito baixo), a cena cresce e quem rola é a página: nada fica cortado nem atrás do rodapé. */
 const OBJ_TAM={max:48,min:36,gap:4,pad:8};
-function encaixaObjetos(){
+function encaixaObjetos(forca){
+  /* depois do primeiro toque a cena não muda mais de tamanho (o reajuste dos 350 ms mexia nos objetos debaixo do dedo); girar a tela força */
+  if(!forca&&typeof VER==='object'&&VER&&VER.marcados&&VER.marcados.length)return;
   const cena=document.querySelector('#palco .cena-obj:not(.arrastar)'),pe=document.querySelector('#pe'),alts=document.querySelector('#palco .alts');
   if(!cena||!pe||!alts)return;
   const n=cena.querySelectorAll('.obj').length;if(!n)return;
@@ -439,7 +441,7 @@ function encaixaObjetos(){
   cena.style.setProperty('--jit',s>=OBJ_TAM.max?'1':'0');
   cena.classList.toggle('apertada',s<OBJ_TAM.max);
 }
-if(typeof window!=='undefined'&&window.addEventListener)window.addEventListener('resize',()=>{if(document.querySelector('#palco .cena-obj'))encaixaObjetos();});
+if(typeof window!=='undefined'&&window.addEventListener)window.addEventListener('resize',()=>{if(document.querySelector('#palco .cena-obj'))encaixaObjetos(true);});
 function atualizaArrastar(q){
   const total=VER.cestas.reduce((a,l)=>a+l.length,0),falta=q.objetos.n-total;
   const iguais=VER.cestas.every(l=>l.length===VER.cestas[0].length);

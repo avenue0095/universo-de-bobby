@@ -12,7 +12,7 @@
    Calibragem do ganho (criança média, 80% de acerto, 20 perguntas por dia): cerca de 180 moedas por dia de jogo. */
 const ECON={ganhoAcerto:10,bonusSequencia:5,sequenciaDe:3,bonusFasePerfeita:20,bonusRevisao:5,perguntasPorDia:20,
   petisco:20,estrela:100,estrelaSobra:2000,portaoAcima:500,cofrinhoParte:.5,desejosMax:3,semanasCiclo:12,porSemana:4};
-const CATALOGO_VERSAO=1;
+const CATALOGO_VERSAO=2;   /* 2 (09/11/2026): acessórios dos companheiros (B2); nenhum preço antigo mudou */
 /* preço em moedas (só do jogo) */
 const PRECOS={
   companheiro:{teo:500,rufa:900,otto:1000,capi:1500,brisa:2000,fagulha:2500},
@@ -22,7 +22,9 @@ const PRECOS={
     'trilha-ouro':300,'trilha-mar':350,'trilha-rosa':400,'trilha-verde':450,'trilha-lilas':600,'trilha-arco':700,
     'adesivo-estrela':80,'adesivo-foguete':80,'adesivo-planeta':80,'adesivo-cometa':80,'adesivo-lua':80,'adesivo-folha':80,
     'adesivo-coracao':80,'adesivo-nuvem':80,'adesivo-raio':80,'adesivo-flor':80,'adesivo-concha':80,'adesivo-livro':80},
-  pista:100
+  pista:100,
+  /* B2: o companheiro evolui de graça; só o acessório dele se compra (abre no estágio Grande amigo) */
+  acessorio:{teo:300,rufa:300,otto:300,capi:350,brisa:400,fagulha:400}
 };
 /* portões (conquista que vem junto com a moeda): {t:'dias'|'perfeitas'|'fases'|'etapas', n} */
 const PORTOES={

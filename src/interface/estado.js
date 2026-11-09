@@ -62,7 +62,7 @@ function estadoVazio(){
     stats:{porLicao:{},dias:{},tempo:0,amostras:[]},missHist:[],
     som:true,voz:true,velocidade:1,
     habil:{},habilSemana:{w:'',p0:{}},diag:{},
-    exploracao:{dias:0,ultimo:''},programa:{},programaAtual:null,desejos:[],cofrinho:{meta:'',base:0},visual:{moldura:'',trilha:''},amizade:{},ceu:[],gasto:0,
+    exploracao:{dias:0,ultimo:''},acessorioComp:{},programa:{},programaAtual:null,desejos:[],cofrinho:{meta:'',base:0},visual:{moldura:'',trilha:''},amizade:{},ceu:[],gasto:0,
     legado:{nivel:'',errados:{},vozPt:'',vozEn:'',migradoEm:''}};
 }
 function clonar(o){
@@ -164,6 +164,8 @@ function estadoDe(dados){
   const f=objDe(d.feitas);Object.keys(f).forEach(k=>{const e=estrelasDe(f[k]);if(e>0)s.feitas[k]=e;});
   const er=objDe(d.errados);Object.keys(er).forEach(k=>{if(!chaveOk(k)||!/^(mat|pt|en)[0-9]{1,2}$/.test(k))return;if(Array.isArray(er[k]))s.errados[k]=er[k].map(perguntaSegura).filter(Boolean).slice(-30);});
   s.comprado=listaDe(d.comprado,400).map(x=>idSimples(x)).filter(Boolean);
+  /* P6: só o que existe no catálogo de hoje (compra antiga sem arte não é guardada: ninguém jogou a versão antiga) */
+  s.comprado=s.comprado.filter(id=>typeof precoDe!=='function'||precoDe(id)>0);
   s.look={};const lk=objDe(d.look);['pelo','pers','companheiro'].forEach(k=>{if(lk[k]!==undefined){const v=k==='pelo'||lk[k]===''?String(lk[k]).replace(/[^a-z0-9-]/g,'').slice(0,24):idSimples(lk[k]);s.look[k]=v;}});
   /* 1F: guarda-roupa em camadas (5 slots ao mesmo tempo). Os 3 slots antigos (um look por vez) migram: chapeu vira cabeca; a capa, que
      ficava no pescoco, vai para costas. Só entra item que existe e é do slot. */
@@ -193,7 +195,8 @@ function estadoDe(dados){
   s.desejos=listaDe(d.desejos,3).filter(x=>typeof x==='string'&&PRECOS.semana[x]!==undefined);
   const cf=objDe(d.cofrinho);s.cofrinho={meta:typeof cf.meta==='string'&&precoDe(cf.meta)?cf.meta:'',base:intDe(cf.base,0,1e9,0)};
   const vi=objDe(d.visual);s.visual={moldura:/^moldura-[a-z]+$/.test(vi.moldura)&&PRECOS.semana[vi.moldura]?vi.moldura:'',trilha:/^trilha-[a-z]+$/.test(vi.trilha)&&PRECOS.semana[vi.trilha]?vi.trilha:''};
-  const am=objDe(d.amizade);s.amizade={};Object.keys(PRECOS.companheiro).forEach(c=>{const a=objDe(am[c]);if(am[c])s.amizade[c]={xp:intDe(a.xp,0,1e6,0),dia:diaOuVazio(a.dia)};});
+  const am=objDe(d.amizade);s.amizade={};Object.keys(PRECOS.companheiro).forEach(c=>{const a=objDe(am[c]);if(am[c])s.amizade[c]={xp:intDe(a.xp,0,1e6,0),dia:diaOuVazio(a.dia),u:intDe(a.u,0,1e7,0)};});
+  const ac=objDe(d.acessorioComp);s.acessorioComp={};Object.keys(PRECOS.companheiro).forEach(c=>{if(ac[c]===true&&s.comprado.indexOf('aces-'+c)>=0)s.acessorioComp[c]=true;});
   s.ceu=listaDe(d.ceu,500).filter(x=>typeof x==='string').map(x=>nomeSeguro(x,18)).filter(Boolean);
   s.gasto=intDe(d.gasto,0,1e9,0);
   /* programa de 20 dias: dias feitos por matéria (0 a 19) */

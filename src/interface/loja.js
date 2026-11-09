@@ -20,6 +20,7 @@ const portaoDe=id=>PORTOES[id]||null;
 function portaoOk(id,ctx){const p=portaoDe(id);if(!p)return true;ctx=ctx||contextoDeConquista();return (ctx[p.t]||0)>=p.n;}
 /* texto do portão, sempre com a origem ("abre com 14 dias de exploração"), nunca "compre para destravar" */
 function portaoTexto(id,ctx){
+  if(/^aces-/.test(id)){const c=id.slice(5);return companheiroComprado(c)?'Abre quando vocês forem Grande amigo ('+companhiaDe(c)+' de '+COMPANHIA.estagio2+')':'Abre depois que o companheiro estiver com você';}
   const p=portaoDe(id);if(!p)return '';
   ctx=ctx||contextoDeConquista();const tem=ctx[p.t]||0;
   return 'Abre com '+PORTAO_TXT[p.t](p.n)+' (você tem '+tem+')';
@@ -62,6 +63,7 @@ function precoDe(id){
   if(PRECOS.look[id])return PRECOS.look[id];
   if(PRECOS.semana[id])return PRECOS.semana[id];
   if(/^pista-(mat|pt|en)(10|[1-9])$/.test(id))return PRECOS.pista;
+  if(/^aces-[a-z]+$/.test(id))return PRECOS.acessorio[id.slice(5)]||0;
   return 0;
 }
 /* o mesmo valor em moedas do jogo, com outro nome para o ciclo diário (o baú só entrega, nunca vende) */
@@ -74,6 +76,7 @@ function podeComprar(id,dia){
   if(!portaoOk(id))return {ok:false,motivo:'portao'};
   if(ITENS_SEMANA.indexOf(id)>=0&&vitrineDaSemana(dia).indexOf(id)<0)return {ok:false,motivo:'fora-da-semana'};
   if(/^pista-/.test(id)&&!pistaAberta(id))return {ok:false,motivo:'portao'};
+  if(/^aces-/.test(id)&&!(companheiroComprado(id.slice(5))&&estagioDe(id.slice(5))>=2))return {ok:false,motivo:'portao'};
   const meta=cofrinho().meta===id,saldo=meta?S.moedas:noBolso();
   if(saldo<p)return {ok:false,motivo:'moedas',falta:p-saldo};
   return {ok:true};

@@ -72,10 +72,10 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     b.avaliar("vestir('cabeca','coroa')"); A.strictEqual(b.avaliar('S.look.cabeca'), 'bone', 'vestiu item que nao tem');
     b.avaliar("vestir('cabeca','')"); A.ok(!b.avaliar('S.look.cabeca') && b.avaliar('S.look.rosto') === 'oculos', 'tirar a cabeca nao mexe no resto');
   });
-  await teste('5. migracao dos 3 slots antigos (chapeu, rosto, pescoco com capa) para os 5 novos; dono de item antigo continua dono', () => {
-    const r = J(a.avaliar("(()=>{const s=estadoDe({look:{chapeu:'bone',rosto:'oculos',pescoco:'capa'},comprado:['bone','oculos','capa','espacial']});return {l:s.look,cap:temItemEm(s,'capacete')};})()"));
+  await teste('5. migracao dos 3 slots antigos (chapeu, rosto, pescoco com capa) para os 5 novos; quem comprou continua dono', () => {
+    const r = J(a.avaliar("(()=>{const s=estadoDe({look:{chapeu:'bone',rosto:'oculos',pescoco:'capa'},comprado:['bone','oculos','capa']});return {l:s.look,cap:temItemEm(s,'capa')};})()"));
     A.strictEqual(r.l.cabeca, 'bone'); A.strictEqual(r.l.rosto, 'oculos'); A.strictEqual(r.l.costas, 'capa'); A.ok(!r.l.chapeu && !r.l.pescoco);
-    A.strictEqual(r.cap, true, 'quem tinha capacete espacial e dono do capacete');
+    A.strictEqual(r.cap, true, 'quem comprou a capa continua dono');
     const l2 = J(a.avaliar("estadoDe({look:{chapeu:'xyz',mao:'__proto__',costas:'bone'}}).look"));
     A.ok(!l2.cabeca && !l2.mao && !l2.costas, 'item invalido ou no slot errado entrou: ' + JSON.stringify(l2));
   });
