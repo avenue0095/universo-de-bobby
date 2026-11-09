@@ -672,7 +672,11 @@ async function main() {
         /* instavel uma vez em 360 (08/11): o ouvinte ficava preso ao elemento e a leitura podia sair antes do quadro seguinte. Agora o ouvinte
            e delegado no documento (sobrevive a qualquer repintura), le o numero pelo data-i no quadro seguinte e o teste espera 2 quadros antes de ler. */
         await js("window.__t=[];if(!window.__tOuv){window.__tOuv=1;document.addEventListener('pointerdown',e=>{const o=e.target.closest&&e.target.closest('.obj');if(!o||!window.__t)return;const i=o.dataset.i,t0=performance.now();requestAnimationFrame(()=>{const n=document.querySelector('.obj[data-i=\"'+i+'\"] .obj-n');window.__t.push({ms:performance.now()-t0,txt:n?n.textContent:''})})},true);}0");
-        for (let i = 0; i < 7; i++) await toqueEm('.obj[data-i="' + i + '"]');
+        /* o toque sintético do CDP às vezes não marca o objeto com a máquina carregada (1 em 84 toques numa sonda de 09/11, com o ponto certo
+           sobre o objeto; 0 em 420 na repetição com ouvintes no documento, então a causa não foi isolada). Um objeto que não marcou recebe UM toque de novo; mais de um toque perdido na rodada é falha. */
+        let retoques = 0;
+        for (let i = 0; i < 7; i++) { await toqueEm('.obj[data-i="' + i + '"]'); if (!(await js("document.querySelector('.obj[data-i=\"" + i + "\"]').classList.contains('marcado')"))) { retoques++; await toqueEm('.obj[data-i="' + i + '"]'); } }
+        if (retoques > 1) problemas.push(rot + ' verbo tocar: ' + retoques + ' toques perdidos em 7');
         await js("new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>r(0))))");
         const tq = await js("({t:window.__t,marcados:document.querySelectorAll('.obj.marcado').length,cont:document.querySelector('#contagem').textContent,pressionado:!!window.__p})");
         if (tq.marcados !== 7 || !/7 contadas/.test(tq.cont)) problemas.push(rot + ' verbo tocar: ' + JSON.stringify({ marcados: tq.marcados, cont: tq.cont }));

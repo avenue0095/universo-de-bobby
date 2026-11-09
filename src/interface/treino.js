@@ -12,7 +12,7 @@ function geradoresDoTema(t){
 function perguntasDoTreino(t,n){
   n=n||TREINO.n;
   /* o ligar junta 3 perguntas em 1: gera um pouco mais até a rodada ter as n perguntas */
-  let r=[];for(let k=n;k<=n+12&&r.length<n;k+=3){r=perguntasCruas(t,k);r=typeof aplicarVerbos==='function'?aplicarVerbos(r,{id:'treino',makers:geradoresDoTema(t)}):r;}
+  let r=[];for(let k=n;k<=n+30&&r.length<n;k+=3){r=perguntasCruas(t,k);r=typeof aplicarVerbos==='function'?aplicarVerbos(r,{id:'treino',makers:geradoresDoTema(t)}):r;}
   return r.slice(0,n);
 }
 function perguntasCruas(t,n){

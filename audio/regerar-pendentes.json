@@ -1,6 +1,6 @@
 {
  "gerado": "2026-11-09",
- "total": 631,
+ "total": 697,
  "itens": [
   {
    "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
@@ -2178,7 +2178,7 @@
    "trechos_sem_clipe": []
   },
   {
-   "texto": "Caio estava com frio no acampamento. O avô acendeu uma fogueira e todos contaram histórias.",
+   "texto": "Era noite no acampamento e ventava muito. Caio sentiu frio, e o avô acendeu uma fogueira. Todos contaram histórias.",
    "materia": "pt",
    "categoria": "texto curto (3º ano, leitura)",
    "motivo": "texto novo de 08/11/2026 (pacote D, texto 18 de 20); regerar com a voz local",
@@ -2186,7 +2186,7 @@
    "trechos_sem_clipe": []
   },
   {
-   "texto": "Por que Caio estava com frio?",
+   "texto": "Por que Caio sentiu frio?",
    "materia": "pt",
    "categoria": "pergunta do texto curto (3º ano)",
    "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
@@ -5814,6 +5814,600 @@
    "classe": "quadro-enunciado",
    "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
    "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é triângulo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "abre para entrar ar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "acende",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "aniversário",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "asas coloridas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ave que nada",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "barulho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "bater com",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "bichinho que gosta",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "bicho com casco que cava buraco",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "bicho que dá leite",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "bicho que galopa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "bicho que mia",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "bota ovo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "brinquedo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "brinquedo com cara",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "brinquedo redondo que rola",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "caroço grande",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "comida",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "corta o pão",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "cozinha",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "criança",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "doce",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "era noite",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "família mora",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "faz quá quá",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "fruta amarela",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "fruta verde",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "fruto vermelho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "gente",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "inseto",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "inverno",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "leva",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "luz",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "mostra o caminho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "mão",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "mão tem cinco",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "o avô acendeu uma fogueira",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com calor",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com cedo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com feijã",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com papel",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com pastel",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com penico",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com rico",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com tigela",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com trofé",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que os netos chegam cedo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é abacate",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é era noite",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é milho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é os pratos",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é param",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é planetas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é um dente",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é às oito horas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "roupa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "salada",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sentiu frio",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "serve para fazer parede",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "tem varinha mágica",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "traz chuva",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "vai",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "vai para o espaço",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ventava muito",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "viagem",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (segunda passada de 09/11/2026)",
+   "motivo": "trecho sem clipe (pista da escrita certa, 3º ano revisado); gravar com a voz local",
    "trechos_sem_clipe": []
   }
  ]

@@ -192,6 +192,26 @@ bloco('B2', async (c, feito) => {
   feito.push('B2: companheiro Melhor amigo com o lenco no mapa, selo no retrato e estagio na tela Meu personagem (390 e 1280)');
 });
 
+/* ---------- senha antes do relatório (revisão de 09/11) ---------- */
+bloco('PIN', async (c, feito) => {
+  for (const rot of ['390x844', '1280x800']) {
+    await c.tela(TELAS[rot], 'Lia');
+    await c.js("fecharFolha();telaPerfil();0"); await dorme(400);
+    const p = await c.js("(()=>{const b=document.querySelector('#ir-resp');b.scrollIntoView({block:'center'});const r=b.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,senha:temSenha()}})()");
+    if (p.senha) c.problemas.push(rot + ' PIN: o jogador novo ja tinha senha');
+    await dorme(200); await c.tocar(p.x, p.y, TELAS[rot].mobile); await dorme(500);
+    const f = await c.js("({folha:document.querySelector('#folha').classList.contains('on'),txt:document.querySelector('#folha').innerText,rel:/Como vai o aprendizado/.test(document.querySelector('#perfil').innerText)})");
+    if (!f.folha || !/Primeiro, crie uma senha/.test(f.txt) || !/Agora não/.test(f.txt) || f.rel) c.problemas.push(rot + ' PIN: primeira abertura ' + JSON.stringify(f).slice(0, 200));
+    await c.foto('PIN-criar-' + rot);
+    const q = await c.js("(()=>{const b=document.querySelector('#pin-cancela');const r=b.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()");
+    await c.tocar(q.x, q.y, TELAS[rot].mobile); await dorme(400);
+    const v = await c.js("({folha:document.querySelector('#folha').classList.contains('on'),rel:/Como vai o aprendizado/.test(document.querySelector('#perfil').innerText),perfil:document.querySelector('#perfil').dataset.tela,senha:temSenha()})");
+    if (v.folha || v.rel || v.senha) c.problemas.push(rot + ' PIN: "Agora nao" deveria voltar sem abrir o relatorio ' + JSON.stringify(v));
+    c.coleta(rot + ' PIN');
+  }
+  feito.push('PIN: sem senha, Para o responsavel abre "Primeiro, crie uma senha"; "Agora nao" volta ao perfil sem abrir o relatorio (390 e 1280)');
+});
+
 (async () => {
   const c = await abrirChrome();
   const feito = [];

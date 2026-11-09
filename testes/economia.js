@@ -32,7 +32,7 @@ const PERFIS = { fraca: { acerto: 0.65, perguntas: 15, dias: 4.0, novas: 0.5 }, 
   /* politica da meta do cofrinho: 'preco' (do mais barato ao mais caro) ou 'raro' (direto ao companheiro mais raro que já abriu) */
   function simula(perfil, seed, politica) {
     const rnd = mulberry(seed), Pf = PERFIS[perfil];
-    const s = { moedas: 0, ganho: 0, gasto: 0, dias: 0, fases: 0, perfeitas: 0, etapas: 0, tem: new Set(), desejos: [], equipado: null, cofre: 0, fimCatalogo: null };
+    const s = { moedas: 0, ganho: 0, gasto: 0, dias: 0, fases: 0, perfeitas: 0, etapas: 0, tem: new Set(), desejos: [], equipado: null, cofre: 0, fimCatalogo: null, petisco: 0, diaFagulha: 0 };
     for (let dia = 1; dia <= 180; dia++) {
       if (rnd() >= Pf.dias / 7) continue;
       s.dias++;
@@ -51,17 +51,19 @@ const PERFIS = { fraca: { acerto: 0.65, perguntas: 15, dias: 4.0, novas: 0.5 }, 
       /* lista de desejos: o item mais caro da semana que ainda não dá para pagar */
       CAT.filter((it) => it.g === 'semana' && it.sem.indexOf(semana) >= 0 && !s.tem.has(it.id) && portaoOk(it.id, ctx) && it.p > s.moedas)
         .sort((a, b) => b.p - a.p).forEach((it) => { if (s.desejos.length < E.desejosMax && s.desejos.indexOf(it.id) < 0) s.desejos.push(it.id); });
-      if (s.equipado && s.moedas - s.cofre >= E.petisco) { s.moedas -= E.petisco; s.gasto += E.petisco; }
+      if (s.equipado && s.moedas - s.cofre >= E.petisco) { s.moedas -= E.petisco; s.gasto += E.petisco; s.petisco += E.petisco; }
       const grande = (it) => it.g === 'companheiro' || it.p > E.portaoAcima;
       const abertos = CAT.filter((it) => disp(it) && grande(it));
       const meta = (politica === 'raro' ? abertos.slice().sort((a, b) => (b.g === 'companheiro') - (a.g === 'companheiro') || b.p - a.p)[0] : abertos[0]) || null;
-      if (meta) s.cofre += Math.floor(ganho * E.cofrinhoParte); else s.cofre = 0;
+      /* como no app (loja.js escolherMeta): trocar de meta zera o guardado (antes a simulação levava o cofrinho da meta velha para a nova) */
+      if (meta && s.metaId !== meta.id) { s.cofre = 0; s.metaId = meta.id; }
+      if (meta) s.cofre += Math.floor(ganho * E.cofrinhoParte); else { s.cofre = 0; s.metaId = null; }
       let comprouGrande = false;
       for (const it of CAT) {
         if (!disp(it) || it.p > s.moedas) continue;
         if (grande(it)) { if (comprouGrande || it !== meta) continue; comprouGrande = true; }
         else if (it.p > s.moedas - s.cofre) continue;
-        s.moedas -= it.p; s.gasto += it.p; s.tem.add(it.id); s.desejos = s.desejos.filter((x) => x !== it.id);
+        s.moedas -= it.p; s.gasto += it.p; s.tem.add(it.id); if (it.id === 'fagulha') s.diaFagulha = dia; s.desejos = s.desejos.filter((x) => x !== it.id);
         if (grande(it)) s.cofre = 0;
         if (it.g === 'companheiro' && !s.equipado) s.equipado = it.id;
         if (s.tem.size === CAT.length && !s.fimCatalogo) s.fimCatalogo = dia;
@@ -93,6 +95,11 @@ const PERFIS = { fraca: { acerto: 0.65, perguntas: 15, dias: 4.0, novas: 0.5 }, 
     const preco = res.fraca.filter((x) => x.tem.has('fagulha')).length / 200, raro = raroFraca.filter((x) => x.tem.has('fagulha')).length / 200;
     console.log('          PENDENTE: Fagulha na crianca fraca em 180 dias: ' + Math.round(preco * 100) + '% com a meta na ordem de preco, ' + Math.round(raro * 100) +
       '% com a meta direto no mais raro. Meta da mesa 01: 40%. ' + (preco >= 0.4 ? 'A ordem de preco ja passa.' : 'Na ordem de preco NAO passa: decisao do Filipe.'));
+    /* investigação de 09/11: por que "raro" dá 100%? Mostra quantos companheiros cada cenário compra, o dia médio da Fagulha e o gasto com petisco */
+    const comps = (l) => (med(l, (x) => ['teo', 'rufa', 'otto', 'capi', 'brisa', 'fagulha'].filter((c) => x.tem.has(c)).length)).toFixed(1);
+    const diaF = (l) => { const f = l.filter((x) => x.diaFagulha); return f.length ? Math.round(med(f, (x) => x.diaFagulha)) : 0; };
+    console.log('          preco: ' + comps(res.fraca) + ' companheiros, Fagulha no dia ' + diaF(res.fraca) + ', petisco ' + Math.round(med(res.fraca, (x) => x.petisco)) +
+      ' | raro: ' + comps(raroFraca) + ' companheiros, Fagulha no dia ' + diaF(raroFraca) + ', petisco ' + Math.round(med(raroFraca, (x) => x.petisco)));
     A.ok(preco >= 0 && raro >= preco, 'medida invalida');
   });
   await teste('4. portao duplo: nenhum item acima de 500 compravel so com moeda; portao escrito com a origem, nunca "compre para destravar"', () => {

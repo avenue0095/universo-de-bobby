@@ -3447,6 +3447,7 @@ return aj('Leia a pergunta de novo com calma e pense no que ela pede. Compare ca
 }
 </script>
 <script>
+const PALAVRAS_REAIS=new Set(['aaca','aada','abacate','abarate','abatate','ada','ado','aedo','afca','afda','ala','alinha','anela','apto','asa','aspo','ato','avo','baca','bacana','bada','badana','bagana','baiana','bala','balinha','balo','banana','banano','bato','bela','belo','bipa','boa','boba','bobo','boca','boco','boda','bodo','bofa','bofo','boga','boia','boio','boja','bojo','bola','bold','bole','bolo','boneca','boneco','bool','bora','borboleta','boro','bota','boto','boça','bua','bula','bulo','caaa','caba','cabalo','caca','cada','cado','caea','cafa','caga','caia','cala','cama','cana','canana','canela','capa','capo','cara','casa','case','caso','cassa','cast','cata','cato','cava','cavaco','cavado','cavala','cavale','cavalo','cavilo','caça','cedo','cela','cisa','cola','colo','cosa','daca','dada','dadb','dadc','dadd','dade','dadf','dado','dafa','dano','dato','debo','deco','deda','dedb','dedc','dedd','dede','dedf','dedo','deite','dela','delo','demo','denta','dente','dento','depo','deste','devo','dolo','eaca','eada','ela','ente','evo','faaa','faac','faad','faba','faca','facb','facc','facd','face','facf','fada','fadb','fadc','fadd','fade','fadf','fado','faea','fafa','faia','fala','fama','fana','fato','fava','faça','fbca','fbda','fcaa','fcca','fcda','fdaa','fdca','fdda','feca','feda','fedo','ffca','ffda','fica','fida','foca','foda','fogueie','foguete','gabo','gado','gafo','gago','gaio','gajo','gala','galinha','galinhe','galinho','galo','gamo','gano','garo','gata','gatinha','gato','gavinha','gela','gente','gola','golo','goto','iva','jaca','janela','japa','jato','joguete','la','laca','lada','lado','lama','lapa','lato','lave','ledo','lente','lha','lia','loa','lobo','lua','lux','luz','maca','macaca','macaco','macuco','maga','maia','mal','mala','malaco','malinha','mama','mana','map','mapa','mata','mato','maça','medo','mela','menina','menino','mente','merino','mola','mula','naca','nada','nado','napa','nato','nela','nevem','novem','nua','nutem','nuvem','oco','ooo','opo','oro','ouvem','ova','ove','ovo','oxo','paca','paco','pada','pado','pago','paio','pala','paneja','panela','pano','papa','papo','paro','pata','pate','patela','pati','pato','paty','paço','pela','pente','peteca','peteco','peto','pgto','pia','pica','pifa','pila','pina','pipa','pipi','pipo','pira','pisa','pita','pito','piza','pola','polo','popa','posa','pua','pupa','puto','rabo','rada','rado','rafo','raio','rajo','rala','ralo','ramo','rapa','rapo','raro','rasa','raso','rata','rate','rato','razo','rela','rente','reto','ripa','rito','rola','rolo','roto','rua','saca','saco','sado','safo','saio','sala','salinha','samo','sano','sap','sapa','sapata','sapato','sapo','saro','sedo','sela','sente','sola','solo','soneca','sua','tabu','taca','tala','tapa','tapeie','tapeta','tapete','tapeto','tapo','tato','tatu','tau','tela','tente','tijolo','tipa','toga','tola','tolo','tomate','topa','topete','tora','tua','tutu','uca','ufa','uma','una','upa','ura','usa','uta','uva','vaca','vaco','vacu','vaga','vaia','vaja','vala','vara','vasa','vau','vaza','veda','vedo','veia','veja','vel','vela','veld','vele','velo','vente','vera','veta','vexa','vila','volo','voo','zela','zipa']);
 const CONFUNDE={b:['d','p','q'],d:['b','p','q'],p:['q','b','d'],q:['p','d','b'],m:['n','u'],n:['m','u'],u:['v','n'],v:['u','f'],f:['t','v'],t:['f','l'],
 i:['l','j'],l:['i','t'],a:['o','e'],o:['a','e'],e:['a','o'],c:['e','o'],g:['q','j'],j:['g','i'],s:['z','c'],z:['s','x'],r:['n','l'],x:['z','ch']};
 function distratoresDaLetra(l,n){
@@ -3462,9 +3463,13 @@ for(let i=0;i<p.length-1;i++)if(p[i]!==p[i+1])tenta.push(p.slice(0,i)+p[i+1]+p[i
 for(let i=0;i<p.length;i++)(CONFUNDE[p[i]]||[]).forEach(c=>tenta.push(p.slice(0,i)+c+p.slice(i+1)));
 for(let i=1;i<p.length;i++)tenta.push(p.slice(0,i)+p.slice(i+1));
 for(let i=1;i<p.length-1;i++)if(/[bcdfglmnprstv]/.test(p[i])&&p[i]!==p[i-1]&&p[i]!==p[i+1])tenta.push(p.slice(0,i+1)+p[i]+p.slice(i+1));
-shuf(tenta).forEach(t=>{if(out.size<n&&t!==p&&t.length>=2&&!PALAVRAS_BASE.some(w=>w.p===t))out.add(t);});
+const w=PALAVRAS_BASE.find(x=>x.p===p);if(w&&w.s.length>=2){const t=w.s.slice();[t[0],t[1]]=[t[1],t[0]];tenta.push(t.join(''));}
+shuf(tenta).forEach(t=>{if(out.size<n&&t!==p&&t.length>=2&&!ehPalavraReal(t))out.add(t);});
 return [...out];
 }
+const ehPalavraReal=t=>(typeof PALAVRAS_REAIS==='object'&&PALAVRAS_REAIS.has(String(t).toLowerCase()))||PALAVRAS_BASE.some(w=>w.p===String(t).toLowerCase());
+const LETRAS_AZ='abcdefghijklmnopqrstuvwxyzç'.split('');
+function lacunaUnica(p,i){return LETRAS_AZ.every(c=>c===p[i]||!ehPalavraReal(p.slice(0,i)+c+p.slice(i+1)));}
 const PALAVRAS_BASE=[
 {p:'bola',s:['bo','la']},{p:'dado',s:['da','do']},{p:'pato',s:['pa','to']},{p:'gato',s:['ga','to']},{p:'mala',s:['ma','la']},{p:'casa',s:['ca','sa']},
 {p:'bolo',s:['bo','lo']},{p:'vaca',s:['va','ca']},{p:'faca',s:['fa','ca']},{p:'lua',s:['lu','a']},{p:'sapo',s:['sa','po']},{p:'tatu',s:['ta','tu']},
@@ -3475,9 +3480,16 @@ const PALAVRAS_BASE=[
 {p:'foguete',s:['fo','gue','te']},{p:'dente',s:['den','te']},{p:'fada',s:['fa','da']},{p:'vela',s:['ve','la']},{p:'tijolo',s:['ti','jo','lo']}
 ];
 const RIMAS=[['pão','mão','chão','feijão','balão'],['gato','pato','rato','sapato','prato'],['bola','cola','mola','sacola'],['janela','panela','vela','tigela'],
-['dedo','medo','cedo','segredo'],['mel','papel','anel','chapéu'],['flor','cor','amor','calor'],['casa','asa','brasa'],['foguete','sorvete','tapete','chiclete'],
+['dedo','medo','cedo','segredo'],['mel','papel','anel','pastel'],['chapéu','céu','véu','troféu'],['flor','cor','amor','calor'],['casa','asa','brasa'],['foguete','sorvete','tapete','chiclete'],
 ['bico','rico','fico','penico'],['lua','rua','sua','nua'],['caneca','boneca','peteca','sapeca']];
 const MAI=s=>String(s).toUpperCase();
+const PISTA_PALAVRA={bola:'brinquedo redondo que rola',dado:'cubo com pontinhos do jogo',pato:'ave que nada e faz quá-quá',gato:'bicho que mia',mala:'leva a roupa na viagem',
+casa:'onde a família mora',bolo:'doce de aniversário',vaca:'bicho que dá leite',faca:'corta o pão',sapo:'pula na lagoa',tatu:'bicho com casco que cava buraco',
+dedo:'a mão tem cinco',pipa:'voa no céu presa na linha',mapa:'mostra o caminho',rato:'bichinho que gosta de queijo',nuvem:'fica no céu e traz chuva',
+janela:'abre para entrar ar e luz',boneca:'brinquedo com cara de gente',macaco:'bicho que pula de galho em galho',sapato:'vai no pé',tomate:'fruto vermelho da salada',
+panela:'cozinha a comida',cavalo:'bicho que galopa',banana:'fruta amarela',menino:'criança',peteca:'brinquedo de bater com a mão',tapete:'fica no chão da sala',
+galinha:'bota ovo',abacate:'fruta verde de caroço grande',borboleta:'inseto de asas coloridas',foguete:'vai para o espaço',dente:'fica na boca',fada:'tem varinha mágica',
+vela:'acende no bolo',tijolo:'serve para fazer parede'};
 const PT_BAS={
 somInicial(){const w=pick(PALAVRAS_BASE),l=w.p[0];
 return mc('Com que letra começa a palavra <b>'+MAI(w.p)+'</b>?',MAI(l),distratoresDaLetra(l,3).map(MAI),{ouvir:'Com que letra começa a palavra '+w.p+'?'});},
@@ -3488,14 +3500,16 @@ contarSilabas(){const w=pick(PALAVRAS_BASE);
 return mc('Bata uma palma para cada pedaço: <b>'+MAI(w.p)+'</b>. Quantas sílabas?',String(w.s.length),[1,2,3,4,5].filter(n=>n!==w.s.length).map(String).slice(0,3));},
 juntarSilabas(){const w=pick(PALAVRAS_BASE.filter(x=>x.s.length===2)),erradas=shuf(PALAVRAS_BASE.filter(x=>x.s.length===2&&x.p!==w.p&&(x.s[0]===w.s[0]||x.s[1]===w.s[1]))).slice(0,3).map(x=>MAI(x.p));
 return mc('Junte as sílabas <b>'+MAI(w.s[0])+'</b> e <b>'+MAI(w.s[1])+'</b>. Que palavra forma?',MAI(w.p),erradas.length>=2?erradas:errosDeGrafia(w.p,3).map(MAI));},
-vogalQueFalta(){const w=pick(PALAVRAS_BASE.filter(x=>x.p.length<=6)),idx=[...w.p].map((c,i)=>/[aeiou]/.test(c)?i:-1).filter(i=>i>=0),i=pick(idx),v=w.p[i];
+vogalQueFalta(){const pos=PALAVRAS_BASE.filter(x=>x.p.length<=6).map(x=>({w:x,i:[...x.p].map((c,i)=>/[aeiou]/.test(c)&&lacunaUnica(x.p,i)?i:-1).filter(i=>i>=0)})).filter(x=>x.i.length);
+const e=pick(pos),w=e.w,i=pick(e.i),v=w.p[i];
 const lac=MAI(w.p.slice(0,i))+'__'+MAI(w.p.slice(i+1));
 return mc('Qual vogal falta em <b>'+lac+'</b>?',MAI(v),'aeiou'.split('').filter(x=>x!==v).slice(0,3).map(MAI),{ouvir:'Qual vogal falta na palavra '+w.p+'?'});},
-letraQueFalta(){const w=pick(PALAVRAS_BASE.filter(x=>/[bdpqmnfvtl]/.test(x.p))),idx=[...w.p].map((c,i)=>/[bdpqmnfvtl]/.test(c)?i:-1).filter(i=>i>=0),i=pick(idx),l=w.p[i];
+letraQueFalta(){const pos=PALAVRAS_BASE.map(x=>({w:x,i:[...x.p].map((c,i)=>/[bdpqmnfvtl]/.test(c)&&lacunaUnica(x.p,i)?i:-1).filter(i=>i>=0)})).filter(x=>x.i.length);
+const e=pick(pos),w=e.w,i=pick(e.i),l=w.p[i];
 const lac=MAI(w.p.slice(0,i))+'__'+MAI(w.p.slice(i+1));
 return mc('Qual letra completa <b>'+lac+'</b>?',MAI(l),distratoresDaLetra(l,3).map(MAI),{ouvir:'Qual letra completa a palavra '+w.p+'?'});},
-grafiaCerta(){const w=pick(PALAVRAS_BASE.filter(x=>x.p.length>=4));
-return mc('Qual está escrita do jeito certo?',MAI(w.p),errosDeGrafia(w.p,3).map(MAI),{ouvir:'Qual palavra está escrita do jeito certo? '+w.p});}
+grafiaCerta(){const w=pick(PALAVRAS_BASE.filter(x=>x.p.length>=4&&PISTA_PALAVRA[x.p]&&errosDeGrafia(x.p,3).length>=3));
+return mc('Qual está escrita do jeito certo? <b>'+PISTA_PALAVRA[w.p]+'</b>',MAI(w.p),errosDeGrafia(w.p,3).map(MAI),{ouvir:'Qual palavra está escrita do jeito certo? '+PISTA_PALAVRA[w.p]+': '+w.p});}
 };
 function relogioSVG(h,m){
 const am=m/60*360,ah=((h%12)+m/60)/12*360,p=(a,r)=>[(50+r*Math.sin(a*Math.PI/180)).toFixed(1),(50-r*Math.cos(a*Math.PI/180)).toFixed(1)];
@@ -3516,8 +3530,9 @@ dinheiro(){const m1=R(1,4),n=pick([2,5,10]),tot=m1+n;
 return mc('Uma criança tem '+m1+(m1===1?' moeda':' moedas')+' de R$&nbsp;1 e uma nota de R$&nbsp;'+n+'. Quanto ela tem ao todo?',money(tot),[money(tot+1),money(Math.max(1,tot-1)),money(m1*n)],{ouvir:'Uma criança tem '+m1+(m1===1?' moeda':' moedas')+' de 1 real e uma nota de '+n+' reais. Quanto ela tem ao todo?'});},
 troco(){const preco=R(2,9),pago=preco<5?5:10,t=pago-preco;
 return mc('Um lanche custa R$&nbsp;'+preco+'. Pagando com uma nota de R$&nbsp;'+pago+', quanto volta de troco?',money(t),[money(t+1),money(t+2),money(Math.max(1,t-1))].filter(x=>x!==money(t)),{ouvir:'Um lanche custa '+preco+' reais. Pagando com uma nota de '+pago+' reais, quanto volta de troco?'});},
-relogioHora(){const h=R(1,12),m=pick([0,0,30]);
-return mc('Que horas o relógio marca?',NOME_HORA(h,m),[NOME_HORA(h%12+1,m),NOME_HORA(h,m===30?0:30),NOME_HORA((h+5)%12+1,m)],{figure:relogioSVG(h,m)});},
+relogioHora(){const h=R(1,12),m=pick([0,0,30]),certa=NOME_HORA(h,m);
+const cand=[NOME_HORA(h%12+1,m),NOME_HORA(h,m===30?0:30),NOME_HORA((h+5)%12+1,m),NOME_HORA((h+10)%12+1,m)].filter((x,i,a)=>x!==certa&&a.indexOf(x)===i);
+return mc('Que horas o relógio marca?',certa,cand.slice(0,3),{figure:relogioSVG(h,m)});},
 formas(){const n=pick([3,4,5,6]);
 return mc('Quantos lados tem esta forma?',String(n),[3,4,5,6,8].filter(x=>x!==n).slice(0,3).map(String),{figure:formaSVG(n)});},
 formaNome(){const n=pick([0,3,4,6]);
@@ -3573,13 +3588,16 @@ litroMl(){const l=pick([1,2,3]);return mc('Quantos mililitros tem '+(l===1?'1 li
 qualUnidade(){const it=pick([['a altura de uma porta','metro'],['o peso de uma melancia','quilograma'],['a água de um balde','litro'],['o comprimento de uma borracha','centímetro'],
 ['o remédio numa colher','mililitro'],['o peso de uma bala','grama']]);
 return mc('Qual unidade é melhor para medir '+it[0]+'?',it[1],['metro','quilograma','litro','centímetro','mililitro','grama'].filter(x=>x!==it[1]).slice(0,3));},
-maisPesado(){const a=R(2,9)*100,b=R(1,3);return mc('O que pesa mais: '+a+' gramas ou '+(b===1?'1 quilo':b+' quilos')+'?',(b===1?'1 quilo':b+' quilos'),[a+' gramas','Pesam igual']);},
+maisPesado(){const b=R(1,3),gs=shuf([200,300,400,500,600,700,800,900]).slice(0,3);
+return mc('O que pesa mais?',(b===1?'1 quilo':b+' quilos'),gs.map(g=>g+' gramas'));},
 minutosHora(){const h=pick([1,2,3]);return mc('Quantos minutos tem '+(h===1?'1 hora':h+' horas')+'?',String(h*60),[h*100,h*30,h*60+10].map(String));},
 meiaHora(){return mc('Meia hora tem quantos minutos?','30',['50','15','60']);},
 duracao(){const ini=R(1,8),d=R(1,3),fim=ini+d,H=n=>n===1?'1 hora':n+' horas';
-return mc('O filme começou '+(ini===1?'à 1 hora':'às '+ini+' horas')+' e durou '+H(d)+'. A que horas terminou?',H(fim),[H(fim+1),H(ini),H(fim-2>0?fim-2:fim+2)]);},
-relogioMinutos(){const h=R(1,12),m=pick([15,45,10,20,40,50]);
-return mc('Que horas o relógio marca?',NOME_HORA(h,m),[NOME_HORA(h,(m+30)%60||5),NOME_HORA(h%12+1,m),NOME_HORA(h,m===15?45:15)],{figure:relogioSVG(h,m)});},
+const cand=[fim+1,ini,fim-1,fim+2,fim-2,ini+d+3].filter((x,i,a)=>x>0&&x<=12&&x!==fim&&a.indexOf(x)===i);
+return mc('O filme começou '+(ini===1?'à 1 hora':'às '+ini+' horas')+' e durou '+H(d)+'. A que horas terminou?',H(fim),cand.slice(0,3).map(H));},
+relogioMinutos(){const h=R(1,12),m=pick([15,45,10,20,40,50]),certa=NOME_HORA(h,m);
+const cand=[NOME_HORA(h,(m+30)%60||5),NOME_HORA(h%12+1,m),NOME_HORA(h,m===15?45:15),NOME_HORA(h,m===20?40:20),NOME_HORA((h+10)%12+1,m)].filter((x,i,a)=>x!==certa&&a.indexOf(x)===i);
+return mc('Que horas o relógio marca?',certa,cand.slice(0,3),{figure:relogioSVG(h,m)});},
 diaDepois(){const d=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'],i=R(0,6);
 return mc('Que dia da semana vem depois de '+d[i]+'?',d[(i+1)%7],[d[(i+6)%7],d[(i+2)%7],d[(i+3)%7]]);},
 mesDepois(){const m=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'],i=R(0,11);
@@ -3604,7 +3622,7 @@ const TEXTOS3=[
 {t:'Manu ajudou a mãe a arrumar a mesa do jantar. Ela colocou os pratos e os copos no lugar.',q:[['Quem ajudou a mãe?','Manu',['O pai','A avó','O irmão']],['O que Manu colocou na mesa?','Os pratos e os copos',['As flores','Os livros','As toalhas']]]},
 {t:'Quando o semáforo fica vermelho, os carros param. Então as pessoas atravessam a rua na faixa.',q:[['O que os carros fazem no sinal vermelho?','Param',['Correm','Buzinam','Viram']],['Onde as pessoas atravessam?','Na faixa',['No meio da rua','Na calçada','Na praça']]]},
 {t:'O passarinho fez um ninho no galho da árvore. Dentro do ninho havia três ovinhos azuis.',q:[['Onde estava o ninho?','No galho da árvore',['No telhado','No chão','Na janela']],['Quantos ovinhos havia?','Três',['Dois','Quatro','Cinco']]]},
-{t:'Caio estava com frio no acampamento. O avô acendeu uma fogueira e todos contaram histórias.',q:[['Por que Caio estava com frio?','Era noite no acampamento',['Estava na praia','Tomou sorvete','Estava na piscina']],['Quem acendeu a fogueira?','O avô',['Caio','A tia','O guarda']]]},
+{t:'Era noite no acampamento e ventava muito. Caio sentiu frio, e o avô acendeu uma fogueira. Todos contaram histórias.',q:[['Por que Caio sentiu frio?','Era noite e ventava muito',['Estava na praia','Tomou sorvete','Estava na piscina']],['Quem acendeu a fogueira?','O avô',['Caio','A tia','O guarda']]]},
 {t:'A biblioteca da escola abre às oito horas. Ana pegou um livro sobre planetas e devolveu na semana seguinte.',q:[['A que horas a biblioteca abre?','Às oito horas',['Às dez horas','Ao meio-dia','Às seis horas']],['Sobre o que era o livro?','Planetas',['Dinossauros','Cachorros','Futebol']]]},
 {t:'No inverno, o lago da cidade fica cheio de patos. As crianças levam milho para dar a eles.',q:[['Quando o lago fica cheio de patos?','No inverno',['No verão','Na primavera','No carnaval']],['O que as crianças levam?','Milho',['Pão doce','Bala','Pipoca']]]}
 ];
@@ -6001,6 +6019,7 @@ LIC.encerrado=true;
 registrarEvento('bloco_fim',{tipo:LIC.tipoBloco||'fase',lic:String((LIC.l&&LIC.l.id)||'').replace(/[^a-z0-9._]/gi,''),materia:MATERIA,
 perguntas:LIC.respondidas||0,acertos:LIC.acertos||0,abandonou:1,contou:0,seg:Math.round((Date.now()-(LIC.t0||Date.now()))/1000)});
 }
+if(typeof S==='object'&&S&&S.programaAtual){S.programaAtual=null;salvar();}
 $('#licao').classList.remove('on');document.body.style.overflow='';renderTrilha();
 if(typeof depoisDeFecharLicao==='function')depoisDeFecharLicao();
 }
@@ -8074,7 +8093,7 @@ return mk;
 }
 function perguntasDoTreino(t,n){
 n=n||TREINO.n;
-let r=[];for(let k=n;k<=n+12&&r.length<n;k+=3){r=perguntasCruas(t,k);r=typeof aplicarVerbos==='function'?aplicarVerbos(r,{id:'treino',makers:geradoresDoTema(t)}):r;}
+let r=[];for(let k=n;k<=n+30&&r.length<n;k+=3){r=perguntasCruas(t,k);r=typeof aplicarVerbos==='function'?aplicarVerbos(r,{id:'treino',makers:geradoresDoTema(t)}):r;}
 return r.slice(0,n);
 }
 function perguntasCruas(t,n){

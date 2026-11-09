@@ -67,6 +67,13 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     A.strictEqual(r.et, 'fim'); A.strictEqual(r.base, 10); A.ok(r.m > 0, 'sem moeda'); A.strictEqual(r.feitas, 0, 'treino deu estrela');
     A.deepStrictEqual(r.prog, { mat: [0] }, 'dia 1 do programa nao foi marcado');
   });
+  await teste('5b. treino do programa abandonado no meio nao marca o dia e limpa o programa em andamento', () => {
+    const b = novo();
+    b.avaliar("S.programa={};S.programaAtual={m:'mat',i:0};abrirTreino('mat','contar');LIC.resp=LIC.qs[0].answer;conferir();avancar();fecharLicao()");
+    A.strictEqual(b.avaliar('S.programaAtual'), null, 'programaAtual ficou');
+    b.avaliar("abrirTreino('mat','contar')"); let g = 0; while (b.avaliar('LIC.etapa') === 'questao' && g++ < 30) b.avaliar('LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar()');
+    A.ok(!(b.avaliar('JSON.stringify(S.programa)') || '').includes('[0]'), 'o dia foi marcado sem o programa: ' + b.avaliar('JSON.stringify(S.programa)'));
+  });
   await teste('6. programa de 20 dias: 20 dias por planeta, todos temas que existem; 3o ano: 20 textos com 2 perguntas, medidas e tempo nas fases', () => {
     const r = J(a.avaliar(`(()=>({p:['mat','pt','en'].map(m=>PROGRAMA20[m].length+':'+PROGRAMA20[m].filter(id=>!TEMAS[m].some(t=>t.id===id)).join()),
       textos:TEXTOS3.length,perg:TEXTOS3.every(x=>x.q.length===2&&x.q.every(q=>q[2].indexOf(q[1])<0)),trav:TEXTOS3.some(x=>/[—–]/.test(x.t)),

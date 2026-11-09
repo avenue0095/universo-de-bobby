@@ -39,6 +39,8 @@ function fecharLicao(){
     registrarEvento('bloco_fim',{tipo:LIC.tipoBloco||'fase',lic:String((LIC.l&&LIC.l.id)||'').replace(/[^a-z0-9._]/gi,''),materia:MATERIA,
       perguntas:LIC.respondidas||0,acertos:LIC.acertos||0,abandonou:1,contou:0,seg:Math.round((Date.now()-(LIC.t0||Date.now()))/1000)});
   }
+  /* treino do programa de 20 dias abandonado no meio não marca o dia (o dia só marca no fim do treino, em treinoConcluido) */
+  if(typeof S==='object'&&S&&S.programaAtual){S.programaAtual=null;salvar();}
   $('#licao').classList.remove('on');document.body.style.overflow='';renderTrilha();
   if(typeof depoisDeFecharLicao==='function')depoisDeFecharLicao();
 }

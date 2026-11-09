@@ -9,13 +9,17 @@ const MED3={
   qualUnidade(){const it=pick([['a altura de uma porta','metro'],['o peso de uma melancia','quilograma'],['a água de um balde','litro'],['o comprimento de uma borracha','centímetro'],
       ['o remédio numa colher','mililitro'],['o peso de uma bala','grama']]);
     return mc('Qual unidade é melhor para medir '+it[0]+'?',it[1],['metro','quilograma','litro','centímetro','mililitro','grama'].filter(x=>x!==it[1]).slice(0,3));},
-  maisPesado(){const a=R(2,9)*100,b=R(1,3);return mc('O que pesa mais: '+a+' gramas ou '+(b===1?'1 quilo':b+' quilos')+'?',(b===1?'1 quilo':b+' quilos'),[a+' gramas','Pesam igual']);},
+  maisPesado(){const b=R(1,3),gs=shuf([200,300,400,500,600,700,800,900]).slice(0,3);
+    return mc('O que pesa mais?',(b===1?'1 quilo':b+' quilos'),gs.map(g=>g+' gramas'));},
   minutosHora(){const h=pick([1,2,3]);return mc('Quantos minutos tem '+(h===1?'1 hora':h+' horas')+'?',String(h*60),[h*100,h*30,h*60+10].map(String));},
   meiaHora(){return mc('Meia hora tem quantos minutos?','30',['50','15','60']);},
   duracao(){const ini=R(1,8),d=R(1,3),fim=ini+d,H=n=>n===1?'1 hora':n+' horas';
-    return mc('O filme começou '+(ini===1?'à 1 hora':'às '+ini+' horas')+' e durou '+H(d)+'. A que horas terminou?',H(fim),[H(fim+1),H(ini),H(fim-2>0?fim-2:fim+2)]);},
-  relogioMinutos(){const h=R(1,12),m=pick([15,45,10,20,40,50]);
-    return mc('Que horas o relógio marca?',NOME_HORA(h,m),[NOME_HORA(h,(m+30)%60||5),NOME_HORA(h%12+1,m),NOME_HORA(h,m===15?45:15)],{figure:relogioSVG(h,m)});},
+    /* 3 distratores sempre diferentes entre si e da resposta (antes saíam repetidos e a pergunta ficava com 3 opções) */
+    const cand=[fim+1,ini,fim-1,fim+2,fim-2,ini+d+3].filter((x,i,a)=>x>0&&x<=12&&x!==fim&&a.indexOf(x)===i);
+    return mc('O filme começou '+(ini===1?'à 1 hora':'às '+ini+' horas')+' e durou '+H(d)+'. A que horas terminou?',H(fim),cand.slice(0,3).map(H));},
+  relogioMinutos(){const h=R(1,12),m=pick([15,45,10,20,40,50]),certa=NOME_HORA(h,m);
+    const cand=[NOME_HORA(h,(m+30)%60||5),NOME_HORA(h%12+1,m),NOME_HORA(h,m===15?45:15),NOME_HORA(h,m===20?40:20),NOME_HORA((h+10)%12+1,m)].filter((x,i,a)=>x!==certa&&a.indexOf(x)===i);
+    return mc('Que horas o relógio marca?',certa,cand.slice(0,3),{figure:relogioSVG(h,m)});},
   diaDepois(){const d=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'],i=R(0,6);
     return mc('Que dia da semana vem depois de '+d[i]+'?',d[(i+1)%7],[d[(i+6)%7],d[(i+2)%7],d[(i+3)%7]]);},
   mesDepois(){const m=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'],i=R(0,11);
@@ -41,7 +45,7 @@ const TEXTOS3=[
   {t:'Manu ajudou a mãe a arrumar a mesa do jantar. Ela colocou os pratos e os copos no lugar.',q:[['Quem ajudou a mãe?','Manu',['O pai','A avó','O irmão']],['O que Manu colocou na mesa?','Os pratos e os copos',['As flores','Os livros','As toalhas']]]},
   {t:'Quando o semáforo fica vermelho, os carros param. Então as pessoas atravessam a rua na faixa.',q:[['O que os carros fazem no sinal vermelho?','Param',['Correm','Buzinam','Viram']],['Onde as pessoas atravessam?','Na faixa',['No meio da rua','Na calçada','Na praça']]]},
   {t:'O passarinho fez um ninho no galho da árvore. Dentro do ninho havia três ovinhos azuis.',q:[['Onde estava o ninho?','No galho da árvore',['No telhado','No chão','Na janela']],['Quantos ovinhos havia?','Três',['Dois','Quatro','Cinco']]]},
-  {t:'Caio estava com frio no acampamento. O avô acendeu uma fogueira e todos contaram histórias.',q:[['Por que Caio estava com frio?','Era noite no acampamento',['Estava na praia','Tomou sorvete','Estava na piscina']],['Quem acendeu a fogueira?','O avô',['Caio','A tia','O guarda']]]},
+  {t:'Era noite no acampamento e ventava muito. Caio sentiu frio, e o avô acendeu uma fogueira. Todos contaram histórias.',q:[['Por que Caio sentiu frio?','Era noite e ventava muito',['Estava na praia','Tomou sorvete','Estava na piscina']],['Quem acendeu a fogueira?','O avô',['Caio','A tia','O guarda']]]},
   {t:'A biblioteca da escola abre às oito horas. Ana pegou um livro sobre planetas e devolveu na semana seguinte.',q:[['A que horas a biblioteca abre?','Às oito horas',['Às dez horas','Ao meio-dia','Às seis horas']],['Sobre o que era o livro?','Planetas',['Dinossauros','Cachorros','Futebol']]]},
   {t:'No inverno, o lago da cidade fica cheio de patos. As crianças levam milho para dar a eles.',q:[['Quando o lago fica cheio de patos?','No inverno',['No verão','Na primavera','No carnaval']],['O que as crianças levam?','Milho',['Pão doce','Bala','Pipoca']]]}
 ];
