@@ -163,7 +163,7 @@ async function conferirSenha(pin){
 }
 let liberadoAte=0;
 const respLiberado=()=>!temSenha()||Date.now()<liberadoAte;
-function pedirSenha(titulo,texto,aoAcertar,criando){
+function pedirSenha(titulo,texto,aoAcertar,criando,rotuloCancela){
   let erro='';
   const pinta=()=>{
     $('#folha').innerHTML='<div class="folha-in senha-in">'+
@@ -171,7 +171,7 @@ function pedirSenha(titulo,texto,aoAcertar,criando){
       '<input id="campo-pin" class="campo pin" type="password" inputmode="numeric" '+
       'autocomplete="off" maxlength="6" placeholder="••••" aria-label="Senha de 4 números">'+
       (erro?'<p class="erro-pin">'+erro+'</p>':'')+
-      '<div class="modal-bts"><button class="link" id="pin-cancela">Cancelar</button>'+
+      '<div class="modal-bts"><button class="link" id="pin-cancela">'+(rotuloCancela||'Cancelar')+'</button>'+
       '<button class="btn" id="pin-ok">'+(criando?'Criar senha':'Entrar')+'</button></div></div>';
     $('#folha').classList.add('on');
     const campo=$('#campo-pin');campo.focus();
@@ -192,6 +192,12 @@ function pedirSenha(titulo,texto,aoAcertar,criando){
     $('#pin-cancela').addEventListener('click',()=>{$('#folha').classList.remove('on');});
   };
   pinta();
+}
+/* área do responsável (relatório): sem senha criada, a criança veria o relatório. Na primeira abertura pede para criar a senha antes;
+   "Agora não" volta sem abrir (revisão independente de 09/11/2026). */
+function comSenhaDoResponsavel(fn){
+  if(!temSenha()){pedirSenha('Primeiro, crie uma senha','Esta área tem o relatório da criança. Crie uma senha de 4 a 6 números para ela não entrar sozinha. Anote em algum lugar, não dá para recuperar.',fn,true,'Agora não');return;}
+  comSenha(fn);
 }
 function comSenha(fn){
   if(respLiberado()){fn();return;}

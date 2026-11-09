@@ -12,12 +12,15 @@ const novo = (s) => { const a = carregarApp(s || 21, {}); a.avaliar("novoPerfil(
 (async () => {
   await teste('1. crianca que acerta 100%: toda habilidade da fase chega a pL >= 0,90 em ate 5 respostas e NAO fica dominada no mesmo dia', () => {
     const a = novo();
-    const r = a.avaliar(`(()=>{const out=[];['mat','pt','en'].forEach(m=>{const l=MATERIAS[m].units()[1].lessons[1];
-      l.makers.forEach((mk,i)=>{let q=null;for(let t=0;t<20&&!q;t++){try{q=mk();}catch(e){}}if(!q)return;q.__mk=mk;
+    const r = a.avaliar(`(()=>{const out=[],falhas=[];['mat','pt','en'].forEach(m=>{const l=MATERIAS[m].units()[1].lessons[1];
+      l.makers.forEach((mk,i)=>{let q=null;try{q=mk();}catch(e){falhas.push(l.id+':'+i+' excecao '+e.message);return;}if(!q){falhas.push(l.id+':'+i+' devolveu nada');return;}q.__mk=mk;
         let n=0;while(n<5&&habilDe(chaveDaPergunta(q)).p<.9){adaptRegistrar(q,true,{primeira:true,dia:'2026-11-02'});n++;}
-        const h=habilDe(chaveDaPergunta(q));out.push({k:chaveDaPergunta(q),p:h.p,n:n,dom:h.dom});});});return out;})()`);
-    A.ok(r.length >= 15, 'poucas habilidades testadas: ' + r.length);
-    r.forEach((h) => { A.ok(h.p >= 0.9, h.k + ' ficou em ' + h.p.toFixed(2) + ' depois de ' + h.n); A.ok(!h.dom, h.k + ' dominou no mesmo dia'); });
+        const h=habilDe(chaveDaPergunta(q));out.push({k:chaveDaPergunta(q),p:h.p,n:n,dom:h.dom});});});return {out:out,falhas:falhas};})()`);
+    /* gerador que lança exceção ou devolve nada é falha, não é pulado (revisão independente de 09/11) */
+    A.deepStrictEqual(JSON.parse(JSON.stringify(r.falhas)), [], 'gerador falhou');
+    const lista = r.out;
+    A.ok(lista.length >= 15, 'poucas habilidades testadas: ' + lista.length);
+    lista.forEach((h) => { A.ok(h.p >= 0.9, h.k + ' ficou em ' + h.p.toFixed(2) + ' depois de ' + h.n); A.ok(!h.dom, h.k + ' dominou no mesmo dia'); });
     /* dia 2 + acerto em revisao: agora domina */
     const d = a.avaliar(`(()=>{const l=UNITS_MAT[1].lessons[1];const q=genQuestions(l,1)[0];const k=chaveDaPergunta(q);
       for(let i=0;i<5;i++)adaptRegistrar(q,true,{primeira:true,dia:'2026-11-02'});

@@ -102,7 +102,7 @@ const textoDe = (h) => h.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
     const ruim = h.match(/(você mesma|você mesmo|sua filha|seu filho|a filha|o filho|seu jogador|sua jogadora|onde ela|ela mais|ele mais|peça para ela|peça para ele)/i);
     A.ok(!ruim, 'texto com genero fixo: ' + (ruim && ruim[0]));
     const src = fs.readFileSync(path.join(RAIZ, 'src', 'interface', 'perfil-e-responsavel.js'), 'utf8');
-    A.ok(/comSenha\(telaResponsavel\)/.test(src), 'a area do responsavel deveria abrir por comSenha');
+    A.ok(/comSenhaDoResponsavel\(telaResponsavel\)/.test(src), 'a area do responsavel deveria abrir por comSenhaDoResponsavel');
     const todos = fs.readdirSync(path.join(RAIZ, 'src', 'interface')).filter((f) => f.endsWith('.js'))
       .filter((f) => /relatorioHTML\(\)/.test(fs.readFileSync(path.join(RAIZ, 'src', 'interface', f), 'utf8')) && f !== 'relatorio.js');
     A.deepStrictEqual(todos, ['perfil-e-responsavel.js'], 'relatorio chamado fora da area do responsavel: ' + todos);
@@ -110,5 +110,19 @@ const textoDe = (h) => h.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
     A.ok(!/seu jogador|sua jogadora/.test(t), t);
   });
 
+  await teste('7. sem senha criada, "Para o responsavel" pede para criar a senha antes de mostrar o relatorio; "Agora nao" volta sem abrir', async () => {
+    const a = novo();
+    A.strictEqual(a.avaliar('temSenha()'), false);
+    HTML_LOG.length = 0;
+    a.avaliar('window.__abriu=0;comSenhaDoResponsavel(()=>{window.__abriu=1;telaResponsavel();})');
+    const h = textoDe(HTML_LOG.join(' '));
+    A.ok(/crie uma senha/i.test(h) && /Agora não/.test(h), 'nao pediu para criar a senha: ' + h.slice(0, 120));
+    A.ok(!/Como vai o aprendizado/.test(h) && a.avaliar('window.__abriu') === 0, 'o relatorio abriu sem senha');
+    /* com senha criada e liberada, abre */
+    await a.avaliar("definirSenha('4826')"); a.avaliar('liberadoAte=Date.now()+60000');
+    HTML_LOG.length = 0; a.avaliar('comSenhaDoResponsavel(()=>{window.__abriu=1;telaResponsavel();})');
+    A.strictEqual(a.avaliar('window.__abriu'), 1, 'com senha liberada nao abriu');
+    A.ok(/Como vai o aprendizado/.test(textoDe(HTML_LOG.join(' '))));
+  });
   resumo();
 })();

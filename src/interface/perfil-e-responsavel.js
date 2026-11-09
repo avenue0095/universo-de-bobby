@@ -64,7 +64,7 @@ function telaPerfil(){
   $('#ir-loja').addEventListener('click',()=>{lojaOrigem='perfil';telaLoja();});
   $('#ir-voz').addEventListener('click',telaVoz);
   $('#ir-galeria').addEventListener('click',()=>{fecharPerfil2();abrirGaleria(false);});
-  $('#ir-resp').addEventListener('click',()=>comSenha(telaResponsavel));
+  $('#ir-resp').addEventListener('click',()=>comSenhaDoResponsavel(telaResponsavel));
   $('#som-perfil').addEventListener('click',()=>{S.som=!S.som;salvar();pintarTopo();telaPerfil();});
   $('#ed-nome').addEventListener('click',()=>{fecharPerfil2();pedirNome(false);});
   $('#tr-jogador').addEventListener('click',()=>{fecharPerfil2();telaPerfis();});
