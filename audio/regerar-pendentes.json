@@ -1,6 +1,6 @@
 {
- "gerado": "2026-11-08",
- "total": 173,
+ "gerado": "2026-11-09",
+ "total": 631,
  "itens": [
   {
    "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
@@ -1767,6 +1767,4053 @@
    "categoria": "fala do Bobby (acerto)",
    "motivo": "texto novo de 08/11/2026 (1A: sem 'seguidas' na tela da criança); regerar com a voz local",
    "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Lia plantou um feijão num copo. Todo dia ela molhava a terra. Na sexta, nasceu um broto verde.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 1 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que Lia plantou?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Quando nasceu o broto?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O cachorro Pipoca adora correr na praça. Quando chove, ele fica na janela olhando a rua.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 2 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Onde Pipoca gosta de correr?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que Pipoca faz quando chove?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Davi esqueceu a lancheira em casa. A professora dividiu uma maçã com ele na hora do recreio.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 3 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que Davi esqueceu?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Quem dividiu a maçã?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A vovó Rosa faz bolo de cenoura aos domingos. Os netos chegam cedo para ajudar a mexer a massa.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 4 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Que bolo a vovó faz?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Por que os netos chegam cedo?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Nina perdeu um dente de leite. Ela guardou o dente numa caixinha embaixo do travesseiro.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 5 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que Nina perdeu?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Onde ela guardou o dente?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O ônibus da escola atrasou por causa da chuva forte. As crianças esperaram debaixo do toldo da padaria.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 6 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Por que o ônibus atrasou?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Onde as crianças esperaram?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Théo montou uma pipa azul com o pai. No sábado, a pipa subiu bem alto no céu.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 7 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "De que cor era a pipa?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Com quem Théo montou a pipa?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Clara tem um gato chamado Bigode. Ele dorme o dia todo e acorda quando ouve o barulho da ração.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 8 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Como se chama o gato?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que acorda o gato?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Na feira, Beto comprou três laranjas e duas bananas. Ele pagou com uma nota de dez reais.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 9 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Quantas laranjas Beto comprou?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Com que nota Beto pagou?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A turma visitou o museu dos dinossauros. O maior esqueleto era do tamanho de um ônibus.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 10 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Que museu a turma visitou?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Do tamanho de que era o maior esqueleto?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Elisa queria brincar de esconde-esconde, mas o irmão estava dormindo. Ela foi ler um livro de piratas.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 11 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "De que Elisa queria brincar?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Por que ela não brincou?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O pé de manga do quintal deu tantas frutas que a família fez suco para os vizinhos.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 12 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Que fruta deu no quintal?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que a família fez?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Rafa ganhou um caderno novo de presente. Na primeira página, desenhou um foguete indo para a lua.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 13 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que Rafa ganhou?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que Rafa desenhou?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A tartaruga do lago sai da água para tomar sol. Quando alguém chega perto, ela volta nadando.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 14 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Onde mora a tartaruga?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que ela faz quando alguém chega perto?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Manu ajudou a mãe a arrumar a mesa do jantar. Ela colocou os pratos e os copos no lugar.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 15 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Quem ajudou a mãe?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que Manu colocou na mesa?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Quando o semáforo fica vermelho, os carros param. Então as pessoas atravessam a rua na faixa.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 16 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que os carros fazem no sinal vermelho?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Onde as pessoas atravessam?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O passarinho fez um ninho no galho da árvore. Dentro do ninho havia três ovinhos azuis.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 17 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Onde estava o ninho?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Quantos ovinhos havia?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Caio estava com frio no acampamento. O avô acendeu uma fogueira e todos contaram histórias.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 18 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Por que Caio estava com frio?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Quem acendeu a fogueira?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A biblioteca da escola abre às oito horas. Ana pegou um livro sobre planetas e devolveu na semana seguinte.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 19 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A que horas a biblioteca abre?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Sobre o que era o livro?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "No inverno, o lago da cidade fica cheio de patos. As crianças levam milho para dar a eles.",
+   "materia": "pt",
+   "categoria": "texto curto (3º ano, leitura)",
+   "motivo": "texto novo de 08/11/2026 (pacote D, texto 20 de 20); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Quando o lago fica cheio de patos?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O que as crianças levam?",
+   "materia": "pt",
+   "categoria": "pergunta do texto curto (3º ano)",
+   "motivo": "texto novo de 08/11/2026 (pacote D); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Com que letra começa a palavra {palavra}?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Qual palavra rima com {palavra}?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Bata uma palma para cada pedaço: {palavra}. Quantas sílabas?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Junte as sílabas {a} e {b}. Que palavra forma?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Qual vogal falta na palavra {palavra}?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Qual letra completa a palavra {palavra}?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Qual palavra está escrita do jeito certo?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Que horas o relógio marca?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Quantos lados tem esta forma?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Qual é o nome desta forma?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Qual número continua o padrão?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Qual unidade é melhor para medir {coisa}?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Que dia da semana vem depois de {dia}?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Que mês vem depois de {mes}?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Meia hora tem quantos minutos?",
+   "materia": "todas",
+   "categoria": "modelo de enunciado novo (pacote D, aulas básicas e 3º ano)",
+   "motivo": "enunciado novo com parte que muda ({...}); gravar as partes fixas e as palavras do banco com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "&mdash",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a mais é a diferença",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a que horas terminou",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é b",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é centímetro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é círculo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é d",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é dezembro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é hexágono",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é janeiro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é julho",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é metro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é mililitro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é novembro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é p",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é quilograma",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é reais",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é setembro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "a resposta é terça feira",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "abacate",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "abre às oito horas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "acampamento",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "acorda quando ouve o barulho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "adora correr",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "agora ligue as outras",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "agora ligue as outras",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ajudou",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "amigos",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "apaguei",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "arraste",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "arraste os",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "arrumar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "as crianças esperaram debaixo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "as crianças levam milho para dar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "atrasou",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "avô",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "avô acendeu uma fogueira",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "azul com o pai",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "balas e deu",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "bata uma palma para cada pedaço",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "biblioteca",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "biscoitos igualmente entre",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "cada número dele vale",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "cada uma",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "caixas para cada cesta",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "carrinhos e",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "causa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "cenoura aos domingos",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "centena mais",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "centímetros",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "certa tem todas as letras",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "cestas o mesmo tanto em cada uma",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "chamado bigode",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "chuva",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "chuva forte",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "cidade fica cheio",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "coisa comprida usa metro ou centímetro peso usa quilo ou grama líquido usa litro ou mililitro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "com quantas figurinhas",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "com que nota",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "com quem",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "comece na hora em que começou e some as horas que durou",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "como se chama o",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "compare cada opção com isso",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "compare cada opção com isso",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "comprou três laranjas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "conte as moedas primeiro e depois junte a nota",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "conte as palmas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "conte do preço até o valor que você pagou",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "conte os lados",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "conte os lados com o dedo um por um até voltar ao começo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "cuidado com as letras parecidas como",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "dente",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "dentro",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "depois compare",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "desenhou",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "deu é tirar",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "devolveu",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "dez reais",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "dezena mais",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "dias",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "distribua um para cada amigo até acabar",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "do que tinha tire o que deu",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "duas bananas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "e atenção",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ela colocou os pratos",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ela foi ler um",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ela guardou o dente numa caixinha embaixo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ele dorme o dia todo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ele pagou com uma nota",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "eles",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "então as pessoas atravessam",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "esconde esconde",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "esconde esconde mas o irmão estava dormindo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "escute o final",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "escute o som que falta",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "esqueceu",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "estava com frio",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "está faltando",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "faixa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "fale as duas palavras",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "fale as duas sílabas uma logo depois",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "fale os dias da semana em ordem a partir de domingo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "fale os meses em ordem a partir de janeiro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "família fez",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "família fez suco para os vizinhos",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "faz quando chove",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "feira",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ficou",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "fogueira",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "frase que responde",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "galho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "galinha",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ganhou",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ganhou um caderno novo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ganhou é juntar",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "gosta",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "gramas",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "gramas ou",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "hora",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "hora",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "hora e durou",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "hora tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "horas e",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "horas e durou",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "horas e meia",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "indo para",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "inverno o lago",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "irmão estava dormindo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "jantar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "jeito certo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "junte as sílabas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "lago sai",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "lancheira",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "lancheira em",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "lanches para as",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "leia a pergunta de novo com calma e pense no que ela pede",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "leia cada opção bem devagar letra",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "leia o texto",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "leite",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "lembre",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "letra que não é",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "letras que não são",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "lia plantou um feijão num",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ligue cada pergunta à resposta certa",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ligue cada pergunta à resposta certa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "liguei uma para você",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "liguei uma para você",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "litro tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "lua",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "lugar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "maior esqueleto era",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "manga",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "massa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "meia hora tem quantos minutos",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "meia hora é a metade de",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "metro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "metro tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "metros",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "mexer",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "mililitros",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "moeda de",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "moedas de",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "montou",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "montou uma",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "multiplique os metros por",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "multiplique os quilos por",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ninho havia três ovinhos azuis",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "no",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "novo com calma",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "o filme começou à",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "o filme começou às",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "o grande mostra os minutos",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "o ponteiro pequeno mostra a hora",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "o que pesa mais",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "olhando",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "onde",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "onde as pessoas atravessam",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "onde ela guardou o dente",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "onde estava o ninho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "onde mora",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "os copos",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "os netos chegam cedo para ajudar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "os traços estão certos",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "os traços estão certos",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "outra bem juntinhas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ouça a palavra em inglês e p",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "pagando com uma nota de",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra abacate",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra batendo uma palma em cada pedaço",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra dente",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra galinha",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra inteira devagar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra lua",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra ovo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra panela",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra peteca",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra tapete",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra tijolo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "palavra uva",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "panela",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "para cada semana",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "passarinho fez um ninho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "patos",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "pegou um",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "pense no tamanho da coisa",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "perdeu",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "perdeu um dente",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "peteca",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "piratas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "presente",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "primeira página desenhou um",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "primeiro som",
+   "idioma": "pt-BR",
+   "materia": "en",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "primeiro som",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "procure entre as que sobraram",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "professora dividiu uma maçã com ele",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "pé",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual letra completa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual número continua o padrão",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra está escrita",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com anel",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com bico",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com brasa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com chapé",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com chiclete",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com cola",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com fico",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com flor",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com medo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com mola",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com panela",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com peteca",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com prato",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com sacola",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com sapeca",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com tapete",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual unidade é melhor para medir a altura de uma porta",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual unidade é melhor para medir a água de um balde",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual unidade é melhor para medir o comprimento de uma borracha",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual unidade é melhor para medir o peso de uma bala",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual unidade é melhor para medir o peso de uma melancia",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual unidade é melhor para medir o remédio numa colher",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual vogal falta",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual é o nome desta forma",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quando alguém chega perto ela volta nadando",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quando chove ele fica",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quando nasceu o broto",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quando o lago fica cheio",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quando o semáforo fica vermelho os carros param",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantas balas sobraram",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantas conchas são ao todo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantas laranjas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantas sementes tem aqui",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantas são ao todo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantas sílabas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quanto ela tem ao todo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos biscoitos cada amigo ganhou",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos carrinhos",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos centímetros tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos dias têm",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos ficam em cada cesta",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos gramas tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos lados tem esta forma",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos mililitros tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos minutos tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quantos ovinhos havia",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que acorda o",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que as crianças levam",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que cor era",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que dia da semana vem depois de domingo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que dia da semana vem depois de quarta feira",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que dia da semana vem depois de quinta feira",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que dia da semana vem depois de segunda feira",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que dia da semana vem depois de sexta feira",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que dia da semana vem depois de sábado",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que dia da semana vem depois de terça feira",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que ela faz quando alguém chega perto",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que ela não brincou",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que ela pede",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que era o maior esqueleto",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que fruta deu",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que horas o relógio marca",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que letra faz esse som",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que lia plantou",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que museu",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de abril",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de agosto",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de dezembro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de fevereiro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de janeiro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de julho",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de junho",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de maio",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de março",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de novembro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de outubro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que mês vem depois de setembro",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que número vem antes do",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que número vem depois do",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que os carros fazem",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que palavra forma",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "que som",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quem acendeu",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quem dividiu",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "queria brincar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quilo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quilo tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quilos",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "quintal deu tantas frutas que",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ração",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "reais",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "reais quanto volta de troco",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "real e uma nota de",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "recreio",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "repartir igual é dividir",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "repartiu",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é chapé",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é cola",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é com o pai",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é dente",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é ela disse",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é embaixo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é peteca",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é três",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é um",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é um caderno",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é um feijão",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "resposta é volta nadando",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "rimar é terminar com o mesmo som",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "rua",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sem lados retos é círculo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "semana",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "semana seguinte",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "semanas",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "semente e chegou mais uma",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sementes e chegou mais uma",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sementes e ganhou mais uma",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sementes e uma saiu",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sementes para cada cesta",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sexta",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sexta nasceu um broto verde",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sinal vermelho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sobre planetas",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "some o que tinha com o que ganhou",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "some o valor de cada moeda e o da nota",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "subiu bem alto",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "sábado",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "tamanho",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "tapete",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "tartaruga",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "tem um",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "terra",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "tijolo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "todo dia ela molhava",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "todos contaram histórias",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "toldo",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "toque em cada concha para contar",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "toque em cada semente para contar",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "toque em cada uma para contar",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "toque em verificar",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "toque em verificar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "toque nas letras",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "toque nas que ficaram para contar",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "transforme tudo em gramas",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "travesseiro",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "troco é o que sobra",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "turma visitou",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "turma visitou o museu dos dinossauros",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "um lanche custa",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "um ônibus",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "uma criança tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "uma semana tem",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "vamos",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "veja quanto o número pula de um para o outro e dê o mesmo pulo mais uma vez",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "você tinha",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "vovó faz",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "água para tomar sol",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "árvore",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "é e meia",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "é hexágono",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "é hora certa no",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "é quadrado",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "é triângulo",
+   "idioma": "pt-BR",
+   "materia": "mat",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "ônibus",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (pacote D, 09/11/2026)",
+   "motivo": "trecho sem clipe dos geradores novos (aulas básicas e 3º ano); gravar com a voz local",
    "trechos_sem_clipe": []
   }
  ]

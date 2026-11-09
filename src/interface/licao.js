@@ -148,7 +148,7 @@ function pintarLicao(){
   let h='<div class="surge"><div class="q-cena">'+barraMissao()+'<div class="cena-q" data-guia="'+guia+'">'+
     '<div class="guia-q">'+imgArte(guia+'-p04',{cls:'guia-img',eager:true,alt:PLANETAS[MATERIA].guiaNome+', o guia'})+'</div>'+
     '<div class="balao-q"><div class="balao-topo">'+amigo+'<div class="et">'+
-    (LIC.diag?'Exploração · ':(LIC.rev?'Revisão · ':''))+'Pergunta '+(LIC.i+1)+
+    (LIC.diag?'Exploração · ':(LIC.treino?'Treino · ':(LIC.rev?'Revisão · ':'')))+'Pergunta '+(LIC.i+1)+
     (q.__irma?' · <b>parecida</b>':(q.__rep?' · <b>de novo</b>':''))+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+
     (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>'+
@@ -610,6 +610,7 @@ function pintarFim(){
     if(LIC.revAgg&&LIC.revAgg.n)registrarEvento('revisao_item',{n:LIC.revAgg.n,ok:LIC.revAgg.ok,
       caixa_antes:LIC.revAgg.antes/LIC.revAgg.n,caixa_depois:LIC.revAgg.depois/LIC.revAgg.n});
     if(passou&&typeof revisaoPosFase==='function')revisaoPosFase(LIC);
+    if(passou&&LIC.treino&&typeof treinoConcluido==='function')treinoConcluido();
     if(passou){confete();somFim();}
     salvar();
   }
@@ -625,12 +626,12 @@ function pintarFim(){
   $('#palco').innerHTML='<div class="fim surge">'+
     MASC(passou?'comemora':'incentiva')+
     '<div class="estrelao acende">'+estrelasSVG(est)+'</div>'+
-    '<h2>'+(passou?(LIC.rev?'Revisão concluída!':(LIC.erros===0?'Fase perfeita!':'Fase concluída!'))
+    '<h2>'+(passou?(LIC.treino?'Treino concluído!':LIC.rev?'Revisão concluída!':(LIC.erros===0?'Fase perfeita!':'Fase concluída!'))
       :'Vamos descansar e revisar')+'</h2>'+
     (passou&&!LIC.rev?'<p class="fala-p">'+falaDe(LIC.erros===0?'fasePerfeita':'faseCompleta')+'</p>':'')+
     (passou&&LIC.miss&&LIC.miss.fim?'<p class="fecho">'+LIC.miss.fim+'</p>':'')+
     '<p class="sub">'+(passou?'Você acertou '+LIC.acertos+' de '+LIC.base+' perguntas.'+
-        (LIC.rev?(nErr?' Ainda faltam '+nErr+' no caderno de erros. Volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
+        (LIC.rev&&!LIC.treino?(nErr?' Ainda faltam '+nErr+' no caderno de erros. Volte aqui depois.':' Seu caderno de erros deste mundo está limpo!'):'')
       :'Os erros foram para o seu caderno e voltam amanhã na revisão. Seu progresso está guardado. Errar faz parte de aprender.')+'</p>'+
     (completouMundo?'<div class="mundo-ok">'+IC.trofeu+' Etapa '+LIC.u.n+' completa!</div><p class="fala-p">'+falaDe('etapaCompleta')+'</p>':'')+
     (passou&&!LIC.rev?premioDesenhoHTML(completouMundo):'')+

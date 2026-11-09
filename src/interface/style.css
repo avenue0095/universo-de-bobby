@@ -1993,6 +1993,12 @@ body[data-hora="noite"] .cena>.hora{background:var(--hora-noite);mix-blend-mode:
    o lembrete recolhe e os cartões ficam mais justos (o toque continua com 48 px de altura mínima). */
 @media (max-height:700px){
   .lc-in:has(.ligar) .guia-q,.lc-in:has(.ligar) .lembrete{display:none}
+  /* contar 20 objetos em tela baixa: o lembrete recolhido some (fica o botão Dica), sobra espaço para os objetos e as alternativas */
+  .lc-in:has(.cena-obj) .lembrete:not([open]){display:none}
+}
+/* tela baixa: no ligar o rótulo "Pergunta N" sai do balão (o enunciado é sempre o mesmo e continua sendo falado) */
+@media (max-height:700px){
+  .lc-in:has(.ligar) .balao-topo{display:none}
   .lc-in:has(.ligar) .balao-q .pergunta{font-size:var(--t-destaque);line-height:var(--lh-destaque)}
   .ligar{row-gap:var(--esp-4);column-gap:var(--esp-24)}
   .ligar-col{gap:var(--esp-4)}
@@ -2100,3 +2106,26 @@ body[data-trilha="trilha-verde"]{--item-trilha:var(--item-folha)}body[data-trilh
   .tracar-svg{cursor:crosshair}
   .tela.arrastando{cursor:grabbing}
 }
+
+/* ---------- pacote D: relógio, formas, texto curto, treinar por tema e programa de 20 dias ---------- */
+.relogio,.forma{display:block;width:min(160px,40vw);height:auto;margin:0 auto}
+.relogio .rel-fundo{fill:var(--cor-superficie);stroke:var(--cor-texto);stroke-width:3}
+.relogio .rel-n{fill:var(--cor-texto);text-anchor:middle;font-family:var(--fonte-titulo)}   /* tamanho no atributo do SVG (escala do relógio, não da página) */
+.relogio .rel-h{stroke:var(--cor-texto);stroke-width:5;stroke-linecap:round}
+.relogio .rel-m{stroke:var(--materia-base,var(--cor-foco));stroke-width:3;stroke-linecap:round}
+.relogio .rel-c{fill:var(--cor-texto)}
+.forma .fm{fill:var(--materia-suave,var(--mat-suave));stroke:var(--materia-base,var(--mat-base));stroke-width:4;stroke-linejoin:round}
+.texto-curto{display:block;margin-bottom:var(--esp-8);padding:var(--esp-8) var(--esp-16);border-radius:var(--raio-16);background:var(--cor-superficie);
+  font-family:var(--fonte-corpo);font-weight:var(--peso-corpo);font-size:var(--t-corpo);line-height:var(--lh-corpo);color:var(--cor-texto)}
+.temas{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:var(--esp-8);margin:var(--esp-16) 0}
+.tema{position:relative;display:grid;gap:var(--esp-4);align-content:center;min-height:var(--toque-conforto);padding:var(--esp-8) var(--esp-16);border-radius:var(--raio-16);
+  border:2px solid var(--cor-linha-forte);background:var(--cor-superficie);color:var(--cor-texto);font-size:var(--t-pequeno);line-height:var(--lh-pequeno);text-align:left}
+.tema.indicado{border-color:var(--cor-acerto)}
+.selo-ind{font-size:var(--t-legenda);line-height:var(--lh-legenda);color:var(--cor-acerto);font-weight:var(--peso-forte)}
+.programa{display:grid;gap:var(--esp-4);padding-left:var(--esp-24)}
+.programa li{display:flex;align-items:center;justify-content:space-between;gap:var(--esp-8);min-height:var(--toque-min)}
+.programa li.ok span{text-decoration:line-through;color:var(--cor-texto-suave)}
+.programa li.agora{font-weight:var(--peso-forte)}
+.treino-bt{display:none;margin:var(--esp-8) auto 0}
+/* no celular o treino fica em Perfil (a primeira dobra é do mapa); no computador também ganha botão no painel do lado */
+@media (min-width:1024px){.tela .painel-lado .treino-bt{display:block}}

@@ -144,6 +144,38 @@ bloco('C', async (c, feito) => {
   feito.push('C: 1A no navegador (topo com 12 dias de exploracao, nenhuma palavra de ofensiva na tela do mapa)');
 });
 
+/* ---------- D ---------- */
+bloco('D', async (c, feito) => {
+  for (const rot of ['390x844', '1280x800']) {
+    await c.tela(TELAS[rot], 'Eva');
+    await c.js("fecharFolha();window.scrollTo(0,0);0"); await dorme(300);
+    /* computador: botão no painel do mapa; celular: botão em Perfil */
+    if (TELAS[rot].mobile) { await c.js("telaPerfil();0"); await dorme(400); }
+    const bt = await c.js("(()=>{let b=document.querySelector('#abrir-treino');if(!b||!b.offsetParent)b=document.querySelector('#ir-treino');if(!b)return null;b.scrollIntoView({block:'center'});const r=b.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()");
+    if (!bt) { c.problemas.push(rot + ' treino: sem o botao Treinar por tema no mapa'); continue; }
+    await dorme(200); await c.tocar(bt.x, bt.y, TELAS[rot].mobile); await dorme(500);
+    const lista = await c.js("({n:document.querySelectorAll('#folha [data-tema]').length,ind:document.querySelectorAll('#folha .tema.indicado').length,lado:document.documentElement.scrollWidth>innerWidth})");
+    if (lista.n < 10 || !lista.ind || lista.lado) c.problemas.push(rot + ' treino: lista de temas ' + JSON.stringify(lista));
+    await c.foto('D-temas-' + rot);
+    await c.js("document.querySelector('#folha [data-tema=\"relogio\"]').click();0"); await dorme(600);
+    const tr = await c.js("({on:document.querySelector('#licao').classList.contains('on'),base:LIC.base,treino:LIC.treino})");
+    if (!tr.on || tr.base !== 10 || tr.treino !== 'relogio') c.problemas.push(rot + ' treino: nao abriu o tema relogio ' + JSON.stringify(tr));
+    /* acha um relogio de verdade entre as perguntas do treino */
+    const rel = await c.js("(()=>{const i=LIC.qs.findIndex(q=>q.figure&&/relogio/.test(q.figure));if(i<0)return {sem:1};LIC.i=i;pintarLicao();const s=document.querySelector('#palco svg.relogio');const r=s&&s.getBoundingClientRect();return {w:r?Math.round(r.width):0,n:s?s.querySelectorAll('text').length:0}})()");
+    if (rel.sem || rel.w < 80 || rel.n !== 12) c.problemas.push(rot + ' treino: relogio ' + JSON.stringify(rel));
+    await c.foto('D-relogio-' + rot);
+    let g = 0; await c.js('LIC.i=0;pintarLicao();0');
+    while ((await c.js('LIC.etapa')) === 'questao' && g++ < 30) await c.js('LIC.resp=LIC.qs[LIC.i].answer;conferir();avancar();0');
+    const fim = await c.js("({et:LIC.etapa,txt:(document.querySelector('#palco')||{}).innerText||''})");
+    if (fim.et !== 'fim' || !/Treino concluído/.test(fim.txt)) c.problemas.push(rot + ' treino: fim ' + JSON.stringify(fim).slice(0, 160));
+    await c.js("fecharLicao();telaResponsavel();0"); await dorme(400);
+    const pg = await c.js("({n:document.querySelectorAll('#perfil .programa li').length,bt:!!document.querySelector('#perfil [data-prog]')})");
+    if (pg.n !== 20 || !pg.bt) c.problemas.push(rot + ' programa de 20 dias: ' + JSON.stringify(pg));
+    c.coleta(rot + ' D');
+  }
+  feito.push('D: treinar por tema pelo botao do mapa (390 e 1280), relogio desenhado, rodada de 10 com fim de treino, programa de 20 dias na area do responsavel');
+});
+
 (async () => {
   const c = await abrirChrome();
   const feito = [];

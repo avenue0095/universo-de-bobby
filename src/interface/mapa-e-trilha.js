@@ -197,7 +197,7 @@ function renderTrilha(){
     '<p>'+curta+'</p>'+
     '<div class="meta-linha"><div class="meta-barra" role="progressbar" aria-valuemin="0" aria-valuemax="'+TOTAL_LESSONS+'" aria-valuenow="'+feitas()+
     '" aria-label="Fases deste planeta"><i style="width:'+pct+'%"></i></div><span>'+feitas()+' de '+TOTAL_LESSONS+' fases</span></div></div>'+
-    '</section>'+rotinaHTML()+'</aside>';
+    '</section>'+rotinaHTML()+(typeof telaTreino==='function'?'<button class="btn-sec treino-bt" id="abrir-treino">Treinar por tema</button>':'')+'</aside>';
   /* o mapa vem primeiro: a etapa onde o Bobby está sobe para o topo da lista, e as outras seguem na ordem de sempre */
   const ordem=UNITS.map((u,i)=>i);
   if(p){ordem.splice(ordem.indexOf(p[0]),1);ordem.unshift(p[0]);}
@@ -208,6 +208,7 @@ function renderTrilha(){
   });
   $('#tela').innerHTML=h;
   const en=$('#editar-nome');if(en)en.addEventListener('click',telaPerfil);
+  const at=$('#abrir-treino');if(at)at.addEventListener('click',()=>telaTreino(MATERIA));
   ligarRotina();
   /* nó trancado: continua no caminho do teclado (aria-disabled, não disabled) e explica o que falta em vez de ficar mudo */
   document.body.dataset.hora=horaDoDia();

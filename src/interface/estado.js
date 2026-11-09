@@ -62,7 +62,7 @@ function estadoVazio(){
     stats:{porLicao:{},dias:{},tempo:0,amostras:[]},missHist:[],
     som:true,voz:true,velocidade:1,
     habil:{},habilSemana:{w:'',p0:{}},diag:{},
-    exploracao:{dias:0,ultimo:''},desejos:[],cofrinho:{meta:'',base:0},visual:{moldura:'',trilha:''},amizade:{},ceu:[],gasto:0,
+    exploracao:{dias:0,ultimo:''},programa:{},programaAtual:null,desejos:[],cofrinho:{meta:'',base:0},visual:{moldura:'',trilha:''},amizade:{},ceu:[],gasto:0,
     legado:{nivel:'',errados:{},vozPt:'',vozEn:'',migradoEm:''}};
 }
 function clonar(o){
@@ -196,6 +196,9 @@ function estadoDe(dados){
   const am=objDe(d.amizade);s.amizade={};Object.keys(PRECOS.companheiro).forEach(c=>{const a=objDe(am[c]);if(am[c])s.amizade[c]={xp:intDe(a.xp,0,1e6,0),dia:diaOuVazio(a.dia)};});
   s.ceu=listaDe(d.ceu,500).filter(x=>typeof x==='string').map(x=>nomeSeguro(x,18)).filter(Boolean);
   s.gasto=intDe(d.gasto,0,1e9,0);
+  /* programa de 20 dias: dias feitos por matéria (0 a 19) */
+  const pg=objDe(d.programa);s.programa={};['mat','pt','en'].forEach(m=>{if(Array.isArray(pg[m]))s.programa[m]=pg[m].map(Number).filter(n=>Number.isInteger(n)&&n>=0&&n<20).filter((n,i,a)=>a.indexOf(n)===i);});
+  const pa=objDe(d.programaAtual);s.programaAtual=pa.m&&['mat','pt','en'].indexOf(pa.m)>=0?{m:pa.m,i:intDe(pa.i,0,19,0)}:null;
   s.habil=normalizaHabil(d.habil);s.habilSemana=normalizaHabilSemana(d.habilSemana);s.diag=normalizaDiag(d.diag);
   s.missHist=listaDe(d.missHist,5).filter(h=>h&&typeof h==='object'&&ehDia(h.dia)).map(h=>({dia:h.dia,ids:textosDe(h.ids,3,4),ok:intDe(h.ok,0,3,0)}));
   s.som=d.som!==false;s.voz=d.voz!==false;

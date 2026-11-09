@@ -48,6 +48,7 @@ function telaPerfil(){
   h+='</div>';
   h+='<h2 class="sec">Ajustes</h2>';
   h+='<div class="perfil-bts"><button class="btn" id="ir-loja">Meu personagem</button>'+
+     (typeof telaTreino==='function'?'<button class="btn" id="ir-treino">Treinar por tema</button>':'')+
      '<button class="btn laranja" id="ir-galeria">'+IC.quadro+' Meus desenhos</button>'+
      '<button class="btn laranja" id="ir-resp">Para o responsável</button>'+
      '<button class="btn laranja" id="ir-voz">'+IC.falar+' Voz e som</button>'+
@@ -63,6 +64,7 @@ function telaPerfil(){
     usarMateria(b.dataset.gal);telaPerfil();}));
   $('#ir-loja').addEventListener('click',()=>{lojaOrigem='perfil';telaLoja();});
   $('#ir-voz').addEventListener('click',telaVoz);
+  const it=$('#ir-treino');if(it)it.addEventListener('click',()=>{fecharPerfil2();telaTreino(MATERIA);});
   $('#ir-galeria').addEventListener('click',()=>{fecharPerfil2();abrirGaleria(false);});
   $('#ir-resp').addEventListener('click',()=>comSenhaDoResponsavel(telaResponsavel));
   $('#som-perfil').addEventListener('click',()=>{S.som=!S.som;salvar();pintarTopo();telaPerfil();});
@@ -106,6 +108,7 @@ function telaResponsavel(){
     stat(IC.alvo,pc+'%','acerto geral')+'</div>';
   h+=semanaHTML();
   if(typeof relatorioHTML==='function')h+=relatorioHTML();
+  if(typeof programaHTML==='function')h+=programaHTML();
   h+='<h2 class="sec">Últimos 7 dias</h2><div class="semana">';
   dias.forEach(x=>{const dt=new Date(x.d+'T12:00:00');
     h+='<div class="dia"><span class="col" style="height:'+Math.max(6,Math.round(x.n/maxD*70))+'px"></span>'+
@@ -165,7 +168,7 @@ function telaResponsavel(){
   $('#perfil').classList.add('on');document.body.style.overflow='hidden';
   $('#volta-resp').addEventListener('click',telaPerfil);
   $('#volta-resp2').addEventListener('click',telaPerfil);
-  ligarControles(telaResponsavel);ligarSemana();ligarMedidor();if(typeof ligarRelatorio==='function')ligarRelatorio();
+  ligarControles(telaResponsavel);ligarSemana();ligarMedidor();if(typeof ligarRelatorio==='function')ligarRelatorio();if(typeof ligarPrograma==='function')ligarPrograma();
   $('#bx-perfil').addEventListener('click',baixarPerfil);
   $('#rs-perfil').addEventListener('click',restaurarPerfil);
   $('#apagar-tudo').addEventListener('click',apagarTudoPasso1);
