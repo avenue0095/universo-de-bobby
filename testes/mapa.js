@@ -37,6 +37,10 @@ const J = (x) => JSON.parse(JSON.stringify(x));
         /* revisao de 08/11/2026: cada recorte com pelo menos 90% dentro do quadro visivel (a cena corta 8,17% de cada lado da imagem),
            e nas etapas 2 a 10 nenhuma peca cobre mais de 25% da outra */
         hs.forEach((r, i) => { const dentro = Math.max(0, Math.min(r[2], .9183) - Math.max(r[0], .0817)) / (r[2] - r[0]); A.ok(dentro >= .9, et + ': objeto ' + i + ' com ' + Math.round(dentro * 100) + '% dentro do quadro'); });
+        /* pendencia da rodada de 08/11 (onda 1, pacote A): nas etapas 2 a 10 nenhuma peca encosta na outra na vista completa, e nenhum
+           recorte encosta na borda de cima da imagem (topo >= 0,03) */
+        if (n > 1) hs.forEach((r, i) => hs.forEach((o, k) => { if (k <= i) return; const ix = Math.max(0, Math.min(r[2], o[2]) - Math.max(r[0], o[0])), iy = Math.max(0, Math.min(r[3], o[3]) - Math.max(r[1], o[1])); A.ok(ix * iy === 0, et + ': objetos ' + i + ' e ' + k + ' se sobrepoem'); }));
+        hs.forEach((r, i) => A.ok(r[1] >= .03 - 1e-9, et + ': objeto ' + i + ' encostado no topo'));
         if (n > 1) hs.forEach((r, i) => hs.forEach((o, k) => { if (k <= i) return; const ix = Math.max(0, Math.min(r[2], o[2]) - Math.max(r[0], o[0])), iy = Math.max(0, Math.min(r[3], o[3]) - Math.max(r[1], o[1])); A.ok(ix * iy <= .25 * Math.min(area(r), area(o)), et + ': objetos ' + i + ' e ' + k + ' sobrepostos'); }));
         /* o centro visivel: a cena corta 8,17% de cada lado da imagem */
         hs.forEach((r, i) => { const cx = (r[0] + r[2]) / 2; A.ok(cx > .0817 && cx < .9183, et + ': objeto ' + i + ' com o centro fora da cena'); });

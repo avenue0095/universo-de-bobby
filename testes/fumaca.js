@@ -657,8 +657,11 @@ async function main() {
         if (medidas.mobile) await cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
         await js("fecharLicao();fecharFolha();usarMateria('mat');fecharFolha();document.querySelector('#modal').classList.remove('on');S.faixa='f910';abrirLicao(0,0);LIC.etapa='questao';LIC.i=0;LIC.qs=[comVerbo(mc('Quantas bolinhas tem aqui?',7,[8,6,9],{figure:dots(7)}),UNITS[0].lessons[0])];pintarLicao();0"); await dorme(300);
         // tocar: cada toque mostra o numero no mesmo evento (medido no pointerdown), e fica marcado
-        await js("window.__t=[];document.querySelectorAll('.obj').forEach(o=>o.addEventListener('pointerdown',()=>{const t0=performance.now();requestAnimationFrame(()=>{window.__t.push({ms:performance.now()-t0,txt:o.querySelector('.obj-n').textContent})})}));0");
+        /* instavel uma vez em 360 (08/11): o ouvinte ficava preso ao elemento e a leitura podia sair antes do quadro seguinte. Agora o ouvinte
+           e delegado no documento (sobrevive a qualquer repintura), le o numero pelo data-i no quadro seguinte e o teste espera 2 quadros antes de ler. */
+        await js("window.__t=[];if(!window.__tOuv){window.__tOuv=1;document.addEventListener('pointerdown',e=>{const o=e.target.closest&&e.target.closest('.obj');if(!o||!window.__t)return;const i=o.dataset.i,t0=performance.now();requestAnimationFrame(()=>{const n=document.querySelector('.obj[data-i=\"'+i+'\"] .obj-n');window.__t.push({ms:performance.now()-t0,txt:n?n.textContent:''})})},true);}0");
         for (let i = 0; i < 7; i++) await toqueEm('.obj[data-i="' + i + '"]');
+        await js("new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>r(0))))");
         const tq = await js("({t:window.__t,marcados:document.querySelectorAll('.obj.marcado').length,cont:document.querySelector('#contagem').textContent,pressionado:!!window.__p})");
         if (tq.marcados !== 7 || !/7 contadas/.test(tq.cont)) problemas.push(rot + ' verbo tocar: ' + JSON.stringify({ marcados: tq.marcados, cont: tq.cont }));
         if (tq.t.length < 7 || tq.t.some((x) => x.ms > 100 || !x.txt)) problemas.push(rot + ' verbo tocar: numero nao apareceu em ate 100 ms ' + JSON.stringify(tq.t.slice(0, 3)));

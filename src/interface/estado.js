@@ -61,6 +61,7 @@ function estadoVazio(){
     semana:{chave:'',estrelas:0,aulaRevista:0,constelacao:false},
     stats:{porLicao:{},dias:{},tempo:0,amostras:[]},missHist:[],
     som:true,voz:true,velocidade:1,
+    habil:{},habilSemana:{w:'',p0:{}},diag:{},
     legado:{nivel:'',errados:{},vozPt:'',vozEn:'',migradoEm:''}};
 }
 function clonar(o){
@@ -178,6 +179,8 @@ function estadoDe(dados){
   s.colecao=normalizaColecao(d.colecao);
   const w=objDe(d.semana);s.semana={chave:String(w.chave||'').slice(0,10),estrelas:intDe(w.estrelas,0,99,0),aulaRevista:intDe(w.aulaRevista,0,99,0),constelacao:!!w.constelacao};
   s.stats=normalizaStats(d.stats);
+  /* 1G: adaptação por habilidade e diagnóstico (interface/adaptacao.js) */
+  s.habil=normalizaHabil(d.habil);s.habilSemana=normalizaHabilSemana(d.habilSemana);s.diag=normalizaDiag(d.diag);
   s.missHist=listaDe(d.missHist,5).filter(h=>h&&typeof h==='object'&&ehDia(h.dia)).map(h=>({dia:h.dia,ids:textosDe(h.ids,3,4),ok:intDe(h.ok,0,3,0)}));
   s.som=d.som!==false;s.voz=d.voz!==false;
   s.velocidade=numDe(d.velocidade,.8,1.2,1);   /* a voz gravada toca de 80% a 120% */

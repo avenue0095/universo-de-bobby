@@ -18,13 +18,16 @@ function congelarPergunta(q,ctx){
     if(k.indexOf('__')===0||typeof q[k]==='function')return;
     c[k]=q[k];
   });
-  c.m=(ctx&&ctx.m)||'mat';c.f=(ctx&&ctx.f)||'';c.w=(ctx&&ctx.w)||0;c.sk='';
+  c.m=(ctx&&ctx.m)||'mat';c.f=(ctx&&ctx.f)||'';c.w=(ctx&&ctx.w)||0;
+  /* sk: a habilidade (gerador) da pergunta, para a revisão confirmar ou derrubar o domínio (1G) */
+  c.sk=(typeof chaveDaPergunta==='function'?chaveDaPergunta(q):'')||'';
   return JSON.parse(JSON.stringify(c));
 }
 function perguntaDoItem(chave){
   const c=S.revisao.congelados[chave];
   if(!c)return null;
   const q=JSON.parse(JSON.stringify(c));
+  if(q.sk)q.__sk=q.sk;
   delete q.m;delete q.f;delete q.w;delete q.sk;
   q.__item=chave;
   const it=S.revisao.itens[chave];

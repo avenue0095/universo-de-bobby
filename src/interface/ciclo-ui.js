@@ -309,9 +309,10 @@ function semanaHTML(){
 function textoDoResumo(){
   const r=resumoSemana(S.stats,hoje());
   const p=proxima();
-  return 'Resumo da semana de '+(perfilAtual().nome||'seu jogador')+' no Universo de Bobby: '+r.dias+' de 7 dias com atividade, '+r.min+
+  const nm=perfilAtual().nome;
+  return 'Resumo da semana'+(nm?' de '+nm:'')+' no Universo de Bobby: '+r.dias+' de 7 dias com atividade, '+r.min+
     ' minutos, '+r.perguntas+' perguntas'+(r.pct!==null?', '+r.pct+'% de acerto':'')+'. '+r.revisoes+' revisões feitas.'+
-    (p?' Próxima fase: '+tituloDaProxima(p)+'.':'');
+    (typeof resumoDoRelatorio==='function'?resumoDoRelatorio():'')+(p?' Próxima fase: '+tituloDaProxima(p)+'.':'');
 }
 function ligarSemana(){
   const b=$('#copia-resumo');if(!b)return;

@@ -15,6 +15,8 @@ function abrirLicao(ui,li){
   const aquecimento=(typeof aquecimentoDaFase==='function'&&faseNova)?aquecimentoDaFase():[];
   /* aquecimento: 2 ou 3 itens do caderno entram logo depois da primeira pergunta (recuperar antes de aprender) */
   if(aquecimento.length&&_qs.length>1)_qs.splice(1,0,...aquecimento);
+  /* 1G: habilidade da fase com 6 respostas ou mais e domínio abaixo de 0,30: a primeira pergunta abre com o lembrete da aula aberto (exemplo resolvido) */
+  if(typeof precisaExemplo==='function'&&precisaExemplo(l)&&_qs[0])_qs[0].__exemplo=true;
   LIC={ui:ui,li:li,u:u,l:l,qs:_qs,base:_qs.length,i:0,passo:0,vidas:5,erros:0,acertos:0,
        combo:0,melhorCombo:0,etapa:'historia',resp:null,digitado:'',conferido:false,dica:false,
        md:{c:0,d:0,u:0},miss:(MISS_ATUAL?MISS_ATUAL[l.id]:null),
@@ -145,7 +147,7 @@ function pintarLicao(){
   let h='<div class="surge">'+barraMissao()+'<div class="cena-q" data-guia="'+guia+'">'+
     '<div class="guia-q">'+imgArte(guia+'-p04',{cls:'guia-img',eager:true,alt:PLANETAS[MATERIA].guiaNome+', o guia'})+'</div>'+
     '<div class="balao-q"><div class="balao-topo">'+amigo+'<div class="et">'+
-    (LIC.rev?'Revisão · ':'')+'Pergunta '+(LIC.i+1)+
+    (LIC.diag?'Exploração · ':(LIC.rev?'Revisão · ':''))+'Pergunta '+(LIC.i+1)+
     (q.__irma?' · <b>parecida</b>':(q.__rep?' · <b>de novo</b>':''))+'</div>'+
     '<button class="icobtn ouvir" data-ler="'+encodeURIComponent(q.ouvir||q.prompt)+'"'+
     (q.lang?' data-lang="'+escapa(q.lang)+'"':'')+' aria-label="Ouvir">'+IC.falar+'</button></div>'+
@@ -154,10 +156,10 @@ function pintarLicao(){
       return !LIC.rev&&(ult||meio)&&!(q.__rep)?'<small class="fala-mini">'+falaDe(ult?'ultima':'meio')+'</small>':'';})()+
     '<small class="fala-mini" id="fala-ocioso" hidden></small></div></div>';
   /* o lembrete da aula começa FECHADO (abre com um toque; abre sozinho depois de dois erros seguidos) */
-  if(!LIC.rev&&LIC.i<2){
+  if(!LIC.rev&&(LIC.i<2||q.__exemplo)){
     const lem=lembreteDaAula(LIC.l);
     /* o texto vai dentro de um <div>: nó de texto solto dentro de <details> fechado era lido pelo leitor de tela sem as palavras em negrito */
-    if(lem)h+='<details class="lembrete"><summary class="tit">'+IC.lampada+' Lembre da aula</summary><div class="lembrete-txt">'+lem+'</div></details>';
+    if(lem)h+='<details class="lembrete"'+(q.__exemplo?' open':'')+'><summary class="tit">'+IC.lampada+' Lembre da aula</summary><div class="lembrete-txt">'+lem+'</div></details>';
   }
   if(q.figure)h+='<div class="figura">'+q.figure+'</div>';
   if(typeof temTelaPropria==='function'&&temTelaPropria(q)){
@@ -479,6 +481,8 @@ function conferir(){
       else if(v===LIC.resp){b.classList.add('errada');b.insertAdjacentHTML('beforeend','<span class="sinal">'+IC.refazer+'</span>');}
     });
   }
+  /* diagnóstico de entrada: sem moeda, sem caderno, sem irmã; só anda a escada (interface/relatorio.js) */
+  if(LIC.diag&&typeof diagConferir==='function'){diagConferir(q,ok);return;}
   if(ok){
     LIC.acertos++;LIC.combo++;LIC.errosSeguidos=0;guiaPose('p02');regStat(LIC.l.id,'acertos');
     LIC.melhorCombo=Math.max(LIC.melhorCombo,LIC.combo);
@@ -528,6 +532,9 @@ function conferir(){
     if(ehF78()&&!LIC.dica)LIC.tDica=setTimeout(mostrarDica,700);
   }
   cicloPergunta(q,{ok:ok,ms:ms,dica:LIC.dica||0});
+  /* 1G: cada resposta alimenta a habilidade (gerador) de origem; no ligar, cada par conta pela sua pergunta de origem */
+  if(typeof adaptRegistrar==='function')(origens||[qb]).forEach((o,i)=>adaptRegistrar(chaveDaPergunta(o)?o:q,origens?!!certosLig[i]:ok,
+    {primeira:primeira,irma:!!q.__irma,rev:!!(q.__item||LIC.diaria||q.__aquec)}));
   if(primeira&&(LIC.diaria||q.__aquec)){const st=diaDeStats();st.rev=(st.rev||0)+1;if(ok)st.revAc=(st.revAc||0)+1;}
   pintarTopo();salvar();
   $('#acao').textContent=(LIC.vidas<=0)?'Continuar':(LIC.i+1>=LIC.qs.length?'Terminar':'Continuar');
@@ -569,6 +576,12 @@ function premioDesenhoHTML(completouMundo){
   return '<p class="premio-falta">'+IC.quadro+' '+(falta===1?'Falta 1 fase':'Faltam '+falta+' fases')+' para ganhar o desenho “'+escapa(d.nome)+'”.</p>';
 }
 function pintarFim(){
+  /* diagnóstico: fim próprio, sem estrela, sem moeda e sem número (interface/relatorio.js) */
+  if(LIC.diag&&typeof diagFimHTML==='function'){
+    $('#vidas').style.visibility='hidden';$('#rever').style.display='none';$('#dica').style.display='none';$('#prog').style.width='100%';
+    if(!LIC.encerrado){LIC.encerrado=true;$('#palco').innerHTML=diagFimHTML();salvar();}
+    $('#pe').className='pe';$('#acao').textContent='Voltar para o mapa';$('#acao').disabled=false;return;
+  }
   const passou=LIC.vidas>0;
   const est=!passou?0:(LIC.erros===0?3:(LIC.erros<=2?2:1));
   $('#vidas').style.visibility='hidden';

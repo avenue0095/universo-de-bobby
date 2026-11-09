@@ -1,6 +1,6 @@
 {
  "gerado": "2026-11-08",
- "total": 135,
+ "total": 141,
  "itens": [
   {
    "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
@@ -1463,6 +1463,54 @@
    "materia": "todas",
    "categoria": "pergunta (caderno de erros)",
    "motivo": "texto novo de 08/11/2026: pergunta com verbo antiga que volta do caderno sem os objetos vira escolha com este enunciado; regerar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "O Bobby quer saber por onde começar a viagem com você. São até 10 perguntas, sem ponto e sem pressa.",
+   "materia": "todas",
+   "categoria": "aula (missão de exploração)",
+   "motivo": "texto novo de 08/11/2026 (1G, diagnóstico de entrada); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Se não souber alguma, tudo bem: escolha a que parecer melhor e siga em frente.",
+   "materia": "todas",
+   "categoria": "aula (missão de exploração)",
+   "motivo": "texto novo de 08/11/2026 (1G, diagnóstico de entrada); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Não precisa acertar todas. A missão só mostra por onde começar.",
+   "materia": "todas",
+   "categoria": "aula (missão de exploração)",
+   "motivo": "texto novo de 08/11/2026 (1G, diagnóstico de entrada); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Isso mesmo!",
+   "materia": "todas",
+   "categoria": "retorno (missão de exploração)",
+   "motivo": "texto novo de 08/11/2026 (1G); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Valeu por tentar!",
+   "materia": "todas",
+   "categoria": "retorno (missão de exploração)",
+   "motivo": "texto novo de 08/11/2026 (1G); regerar com a voz local",
+   "idioma": "pt-BR",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "Missão de exploração concluída!",
+   "materia": "todas",
+   "categoria": "fim (missão de exploração)",
+   "motivo": "texto novo de 08/11/2026 (1G); regerar com a voz local",
+   "idioma": "pt-BR",
    "trechos_sem_clipe": []
   }
  ]

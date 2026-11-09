@@ -247,7 +247,7 @@
    "fonte": "BOBBY-SHEET.png",
    "g": "personagem",
    "h": 337,
-   "inicial": true,
+   "inicial": false,
    "w": 768
   },
   "bobby-sheet-frente": {
@@ -257,7 +257,7 @@
    "fonte": "BOBBY-SHEET-FRENTE.png",
    "g": "personagem",
    "h": 768,
-   "inicial": true,
+   "inicial": false,
    "w": 685
   },
   "brisa-p01": {
@@ -1317,7 +1317,7 @@
    "fonte": "ITEM-BASE.png",
    "g": "look",
    "h": 768,
-   "inicial": true,
+   "inicial": false,
    "w": 415
   },
   "item-bone": {
@@ -1673,8 +1673,8 @@
  },
  "manifesto_arte_lido": true,
  "totais": {
-  "demanda_bytes": 8471688,
-  "inicial_bytes": 2287818,
+  "demanda_bytes": 8629598,
+  "inicial_bytes": 2129908,
   "itens": 167,
   "total_bytes": 10759506
  },

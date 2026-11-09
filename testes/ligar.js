@@ -92,5 +92,13 @@ const RODADAS = arg('rodadas', 12);
     A.strictEqual(r.rev3, true, 'o par 3 nao entrou na revisao espacada'); A.strictEqual(r.rev1, false);
     A.deepStrictEqual(J(r.hist), [true, true, false]); A.deepStrictEqual(J(r.histQ), [1, 2, 3]);
   });
+  await teste('6. frequencia do ligar por materia (pendencia de 08/11: o revisor nao viu ligar de ingles em 40 sorteios): ingles em pelo menos 50% das rodadas nas 3 faixas, toda materia acima de 15%', () => {
+    const a = carregarApp(17, {}); a.avaliar("novoPerfil('Zeca','#12A06E')");
+    const r = J(a.avaliar(`(()=>{const o={};['f78','f910','f1112'].forEach(fx=>{S.faixa=fx;['mat','pt','en'].forEach(m=>{let rod=0,c=0;
+      MATERIAS[m].units().forEach(u=>u.lessons.forEach(l=>{for(let k=0;k<4;k++){rod++;if(genQuestions(l,8).some(q=>q.verbo==='ligar'))c++;}}));
+      o[fx+':'+m]=c/rod;});});return o;})()`));
+    console.log('          ' + Object.keys(r).map((k) => k + ' ' + Math.round(r[k] * 100) + '%').join(' | '));
+    Object.keys(r).forEach((k) => { A.ok(r[k] >= 0.15, k + ': ligar em ' + Math.round(r[k] * 100) + '% das rodadas'); if (/:en$/.test(k)) A.ok(r[k] >= 0.5, k + ': ingles com ligar em so ' + Math.round(r[k] * 100) + '%'); });
+  });
   resumo('ligar.js');
 })();

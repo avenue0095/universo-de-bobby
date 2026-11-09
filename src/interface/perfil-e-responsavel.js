@@ -99,13 +99,14 @@ function telaResponsavel(){
   const totalAcertos=Object.keys(porL).reduce((a,k)=>a+(porL[k].acertos||0),0);
   const pc=totalAcertos+totalErros?Math.round(totalAcertos/(totalAcertos+totalErros)*100):0;
 
-  let h='<div class="perfil-in"><p class="galeria-intro">Resumo de <b>'+escapa(perfilAtual().nome||'')+'</b> para você acompanhar. '+
+  let h='<div class="perfil-in"><p class="galeria-intro">Resumo de <b>'+escapa(perfilAtual().nome||'quem joga')+'</b> para acompanhar. '+
     'Nada aqui é enviado para lugar nenhum: fica só neste aparelho.</p>';
   h+='<div class="stats">'+
     stat(IC.medalha,fases()+'/'+TOTAL_LESSONS,'fases feitas')+
     stat(IC.relogio,fmtTempo(st.tempo),'tempo total')+
     stat(IC.alvo,pc+'%','acerto geral')+'</div>';
   h+=semanaHTML();
+  if(typeof relatorioHTML==='function')h+=relatorioHTML();
   h+='<h2 class="sec">Últimos 7 dias</h2><div class="semana">';
   dias.forEach(x=>{const dt=new Date(x.d+'T12:00:00');
     h+='<div class="dia"><span class="col" style="height:'+Math.max(6,Math.round(x.n/maxD*70))+'px"></span>'+
@@ -120,7 +121,7 @@ function telaResponsavel(){
     });
     h+='</div>';}
   h+='<h2 class="sec">O que fazer hoje</h2><ol class="passos plano">';
-  if(lista.length)h+='<li>Refaça junto a fase <b>'+lista[0].t+'</b> e peça para explicar em voz alta o que está fazendo.</li>';
+  if(lista.length)h+='<li>Joguem juntos a fase <b>'+lista[0].t+'</b> e peçam para a criança contar em voz alta como está pensando.</li>';
   if(p)h+='<li>A próxima fase nova é <b>'+tituloDaProxima(p)+'</b> (Mundo '+UNITS[p[0]].n+').</li>';
   h+='<li>Use a <b>Revisão do mundo</b> (medalha dourada no fim do mapa): ela devolve exatamente as perguntas erradas. A <b>Revisão do dia</b> do mapa traz de volta, aos poucos, o que já foi errado.</li>';
   h+='<li>Imprima o desenho da fase e peça para contar a história enquanto pinta: repetir com as mãos fixa mais que repetir com os olhos.</li></ol>';
@@ -133,7 +134,7 @@ function telaResponsavel(){
   h+='<h2 class="sec">Levar o progresso para outro aparelho</h2>';
   h+='<ol class="passos plano">'+
      '<li>Neste aparelho, toque em <b>Salvar cópia deste perfil</b> aqui embaixo. Sai um arquivo <b>.json</b>.</li>'+
-     '<li>Mande esse arquivo para o outro aparelho (WhatsApp para você mesma, e-mail, Drive: tanto faz).</li>'+
+     '<li>Mande esse arquivo para o outro aparelho (WhatsApp, e-mail ou Drive: tanto faz).</li>'+
      '<li>No outro aparelho, abra o app, vá em <b>Perfil → Para o responsável</b> e toque em <b>Restaurar de uma cópia</b>.</li>'+
      '<li>Escolha o arquivo. O perfil aparece na tela “Quem vai jogar?” com todo o progresso.</li>'+
      '</ol>';
@@ -165,7 +166,7 @@ function telaResponsavel(){
   $('#perfil').classList.add('on');document.body.style.overflow='hidden';
   $('#volta-resp').addEventListener('click',telaPerfil);
   $('#volta-resp2').addEventListener('click',telaPerfil);
-  ligarControles(telaResponsavel);ligarSemana();ligarMedidor();
+  ligarControles(telaResponsavel);ligarSemana();ligarMedidor();if(typeof ligarRelatorio==='function')ligarRelatorio();
   $('#bx-perfil').addEventListener('click',baixarPerfil);
   $('#rs-perfil').addEventListener('click',restaurarPerfil);
   $('#apagar-tudo').addEventListener('click',apagarTudoPasso1);

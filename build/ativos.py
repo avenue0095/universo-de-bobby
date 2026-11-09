@@ -43,7 +43,7 @@ INICIAIS = {
     # camada maior (teto de 3 MB no total): todas as expressões e poses do Bobby, que aparecem em toda pergunta e em Meu personagem
     'bobby-e03', 'bobby-e04', 'bobby-e05', 'bobby-e07', 'bobby-e08',
     'bobby-p02', 'bobby-p03', 'bobby-p04', 'bobby-p06', 'bobby-p07', 'bobby-p08', 'bobby-p09', 'bobby-p10', 'bobby-p11',
-    'bobby-sheet', 'bobby-sheet-frente', 'item-base',
+    # bobby-sheet, bobby-sheet-frente e item-base saíram da camada inicial em 08/11/2026 (nenhuma tela os usa no começo; teto de 3 MB)
     'planeta-mat', 'planeta-por', 'planeta-ing',
     'cen-mat01-apagado', 'cen-mat01-completo', 'cen-por01-apagado', 'cen-por01-completo', 'cen-ing01-apagado', 'cen-ing01-completo',
 }

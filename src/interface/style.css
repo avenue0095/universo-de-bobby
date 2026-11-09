@@ -1950,3 +1950,24 @@ body[data-hora="noite"] .cena>.hora{background:var(--hora-noite);mix-blend-mode:
   .folha-in h2{margin-top:0}
   .bilhete-texto{font-size:var(--t-corpo)!important;line-height:var(--lh-corpo)!important}
 }
+
+/* ---------- 1G: relatório dos pais (área do responsável) ---------- */
+.rel-cartao{background:var(--cor-superficie);border:1px solid var(--cor-linha);border-radius:var(--raio-16);padding:var(--esp-16);margin:var(--esp-8) 0 var(--esp-16);box-shadow:var(--sombra-1)}
+.rel-cartao p{margin:var(--esp-8) 0 0;font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
+.rel-cartao b{font-family:var(--fonte-titulo)}
+.rel-dica{color:var(--cor-texto-suave)}
+.rel-bncc,.rel-dicas{margin:var(--esp-8) 0 var(--esp-16)}
+.rel-bncc summary,.rel-dicas summary{cursor:pointer;min-height:var(--toque-min);display:flex;align-items:center;font-weight:var(--peso-forte)}
+.rel-bncc ul{margin:var(--esp-8) 0 0;padding-left:var(--esp-24);font-size:var(--t-legenda);line-height:var(--lh-legenda)}
+.rel-bncc li{margin-bottom:var(--esp-8)}
+.linha-mundo .diag-bt{flex:none;min-height:var(--toque-min);padding:0 var(--esp-16)}
+/* pendência de 08/11: em tela baixa (360x640, 320x568) o ligar com 3 cartões longos ficava sob o rodapé. Na pergunta de ligar o guia sai de cena,
+   o lembrete recolhe e os cartões ficam mais justos (o toque continua com 48 px de altura mínima). */
+@media (max-height:700px){
+  .lc-in:has(.ligar) .guia-q,.lc-in:has(.ligar) .lembrete{display:none}
+  .lc-in:has(.ligar) .balao-q .pergunta{font-size:var(--t-destaque);line-height:var(--lh-destaque)}
+  .ligar{row-gap:var(--esp-4);column-gap:var(--esp-24)}
+  .ligar-col{gap:var(--esp-4)}
+  .lig{padding:var(--esp-4) var(--esp-8);font-size:var(--t-legenda);line-height:var(--lh-legenda)}
+  .lig-b{padding-left:var(--esp-16);font-size:var(--t-pequeno);line-height:var(--lh-pequeno)}
+}

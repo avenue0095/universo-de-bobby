@@ -38,6 +38,8 @@ const INICIO=(()=>{try{return new URL('./',self.location.href).pathname;}catch(e
 const ehAudio=url=>MESMA(url)&&/\/audio\/.+\.(m4a|opus)$/.test(url.pathname);
 /* qualquer WebP de assets/ (personagens, expressoes, itens, looks, companheiros, planetas, cenarios, desenhos, recompensas e o que vier), menos as fontes */
 const ehArte=url=>MESMA(url)&&/\/assets\/(?!fontes\/)[^/]+\/.+\.webp$/.test(url.pathname);
+/* dados carregados sob demanda (assets/dados/*.json, nome com o hash do conteúdo): cache primeiro, como a arte */
+const ehDados=url=>MESMA(url)&&/\/assets\/dados\/[a-z0-9-]+\.json$/.test(url.pathname);
 const ehManifestoAudio=url=>MESMA(url)&&/\/audio\/manifesto-min\.json$/.test(url.pathname);
 
 const ehPagina=req=>req.mode==='navigate'||
@@ -60,7 +62,7 @@ self.addEventListener('fetch',e=>{
     return;
   }
   /* arte: cache primeiro, guarda na primeira vez (o arquivo só muda de nome quando muda a imagem) */
-  if(url&&ehArte(url)){
+  if(url&&(ehArte(url)||ehDados(url))){
     e.respondWith(caches.open(CACHE_ARTE).then(c=>c.match(req).then(r=>r||fetch(req).then(resp=>{
       if(resp&&resp.status===200)c.put(req,resp.clone());
       return resp;

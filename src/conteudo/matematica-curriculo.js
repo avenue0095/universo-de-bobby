@@ -667,7 +667,9 @@ function anyMaker(){return pick(pool(1,10))();}
 function genQuestions(lesson,n){
   const out=[];const seen=new Set();
   const emOrdem=!!lesson.ordem;
-  const novaSacola=()=>emOrdem?lesson.makers.slice():shuf(lesson.makers);
+  /* 1G: fora das fases em ordem, a sacola segue a adaptação por habilidade (alvo de acerto 70 a 85%, interface/adaptacao.js);
+     sem dado nenhum da criança ela equivale a embaralhar */
+  const novaSacola=()=>emOrdem?lesson.makers.slice():(typeof ordemAdaptativa==='function'&&typeof S==='object'&&S&&S.habil?ordemAdaptativa(lesson.makers,n):shuf(lesson.makers));
   let bag=novaSacola();let i=0,guard=0;
   /* a 1ª pergunta é sempre de reconhecer (múltipla escolha) quando a fase tiver alguma:
      reconhecer vem antes de produzir — ninguém escreve o que ainda não sabe ler */
