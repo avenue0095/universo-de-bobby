@@ -1,0 +1,5 @@
+# Falsos positivos do gitleaks, conferidos um por um (09/11/2026, fase 4).
+# docs/licencas/pagina-opengameart-jrpg-pack-4-calm-2026-10-24.html:55 e a pagina publica da OpenGameArt salva como prova
+# da licenca CC0 da musica; o "segredo" e o theme_token do Drupal do site deles (43 caracteres), nao e chave nem senha do projeto.
+docs/licencas/pagina-opengameart-jrpg-pack-4-calm-2026-10-24.html:generic-api-key:55
+7af80cd7993fb95aa79a457ce9cfbde22ec73ce6:docs/licencas/pagina-opengameart-jrpg-pack-4-calm-2026-10-24.html:generic-api-key:55
