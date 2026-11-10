@@ -160,7 +160,7 @@ Seis defeitos, um commit por grupo, sem push, sem conta, sem crédito gasto. `MU
 | 6 | Pagamento atrasado de assinatura `expirada` por novo checkout não liberava acesso | 537878e | A assinatura paga reabre (o checkout pendente novo expira antes). Não reabre se reembolsada, se já teve acesso, ou se a família já tem outra valendo (aí o evento fica com erro `pagamento_duplicado`) | `supabase/functions/testes/reabrir.test.ts` (4 testes) |
 
 Decisões de desenho que valem registrar:
-- **Critério do bloqueio para palavra estrangeira:** bloqueada se for gíria, palavrão, conotação ruim ou o nome da MESMA coisa em outra língua (ZAPATO, TOMATO); estrangeira neutra que a criança não conhece fica, com a observação na conferência (CAZA, MOPA, GATE, MALE, MALO). Palavra que só é real com acento: bloqueada se, lida em voz alta, a criança reconhece (DODO = dodô); fica se não (FACO, SAPE). Quem decide diferente é o Filipe: basta trocar o veredito na conferência e a lista.
+- **Critério do bloqueio para palavra estrangeira:** bloqueada se for gíria, palavrão, conotação ruim ou o nome da MESMA coisa em outra língua (ZAPATO, TOMATO); estrangeira neutra que a criança não conhece fica, com a observação na conferência (CAZA, MOPA, MALO). *Trocado na terceira passada (seção 6): palavra real do inglês é sempre bloqueada; GATE e MALE saíram.* Palavra que só é real com acento: bloqueada se, lida em voz alta, a criança reconhece (DODO = dodô); fica se não (FACO, SAPE). Quem decide diferente é o Filipe: basta trocar o veredito na conferência e a lista.
 - **VELA ficou com uma escrita errada só** (FELA bloqueada, sobra VOLA). Nunca chega à criança por `errosDeGrafia` (a escrita certa pede 3; o juntar sílabas usa BOLA e MALA); exceção explícita em `testes/conteudo.js` caso 2, provada em `testes/distratores.js` caso 5. PATO e MALA saíram da escrita certa (ficaram com 2 erradas); continuam nas outras atividades.
 - `errosDeGrafia` sorteia a lista crua e filtra depois, para gastar os mesmos números do sorteio de antes. Mesmo assim a amostra do `cobertura-audio.js` mudou (PATO e MALA saíram do sorteio) e achou **10 respostas de dica antigas sem clipe** (ex.: "A resposta é Na sexta."): entraram em `audio/regerar-pendentes.json`, como na parte 0. Nenhum áudio gerado.
 - Numeração: a migração do defeito 1 ficou 0005 e a do defeito 5 ficou 0006 (o pedido citava 0005 para o 5; a ordem dos commits seguiu a prioridade).
@@ -212,3 +212,65 @@ Decisões de desenho que valem registrar:
 3. Mesmo item comprado em dois aparelhos offline é pago duas vezes (resíduo do modelo por aparelho, ARQUITETURA 5.5). Devolver exige preço no servidor.
 4. O `aparelho_id` vai junto do snapshot na exportação LGPD (`exportar_meus_dados` usa `snapshot_perfil`); é texto aleatório, sem dado pessoal. Citar na política de privacidade quando ela for revisada.
 5. 10 respostas de dica sem clipe somadas ao `audio/regerar-pendentes.json` (745 itens agora): esperam o lote de áudio.
+
+## 6. Terceira passada (09/11/2026, depois da nota 7 do segundo revisor)
+
+Cinco itens, um commit cada, sem push, sem conta, sem crédito gasto. `MURO={modo:'aberto'}`, `index.html` como nome, `start_url "./index.html"` e `scope "./"` não mudaram (o conteúdo do `index.html` foi reconstruído pelo `build.py` porque `nuvem.js` e `bloqueio.js` mudaram).
+
+| # | Item | Commit | Conserto | Prova |
+|---|---|---|---|---|
+| 1 | Cliente inflava o próprio saldo: `moedas_aparelho` (0006) e `perfil_estado.moedas_ganhas` (0002) aceitavam insert/update direto pelo PostgREST com o JWT da família | 27cc6ec | `0007_saldo_so_pela_rpc.sql`: políticas de escrita de `moedas_aparelho` removidas e `revoke insert, update, delete, truncate` para `authenticated`; `perfil_estado` perde o update da tabela e recebe de volta só as colunas de bloco (`materia, look, config, ofensiva, colecao, desenhos, revisao_meta, prefs, blocos_em, versao_app`; nada de moedas, xp, acertos, combo, comprado) e o insert só de `perfil_id`. `sincronizar_perfil` vira `security definer`, dono `postgres`, `search_path = ''`, nomes qualificados, `perfil_e_meu` dentro, e **teto de 5000 `ganhas` a mais por chamada e por aparelho**; acima disso limita, grava em `moedas_limitadas` (tabela nova, RLS sem política) e não quebra. `nuvem.js` sobe o resto em parcelas (reagenda sozinho) e a migração aceita a primeira parcela | `rls.sql` blocos 3b (grants, definer, search_path, dono), 13b e 13f (update direto agora dá 42501), 13g (insert e update diretos negados; 2147483647 e 1e30 viram +5000; abaixo do teto entra inteiro), 14 (outra família com payload de moedas), 18 (registro do teto e B intocada). `testes/nuvem.js` a12 (perfil com 12.300 sobe em 3 parcelas, nada se perde) |
+| 2 | Duas mutações sobreviviam | 9e6164d | `reabrir.test.ts`: família com assinatura `atrasada` paga o checkout velho, não reabre e fica `pagamento_duplicado`. `testes/nuvem.js` a9b: servidor devolve `gastas` menor que o do aparelho | as duas mutações do revisor agora derrubam 1 teste cada (tabela abaixo) |
+| 3 | `reabrirPaga` gravava em duas etapas | 1a03805 | `0008_reabrir_assinatura_atomica.sql`: `public.reabrir_assinatura_paga`, `security definer`, dono `postgres`, `search_path = ''`, execute só para `service_role`. Trava as assinaturas da família em ordem de id, expira o pendente e ativa a paga na mesma transação. O webhook chama a RPC e, se ela responder `mudou` (outro aviso já tratou), relê e segue o caminho normal. O banco em memória dos testes imita a RPC e passa a cobrar `assinatura_vigente_unica` também no update | `reabrir.test.ts`: A e B pagos juntos (uma só valendo, o outro aviso marcado), CONFIRMED e RECEIVED juntos, e o caminho `mudou`. `rls.sql` bloco 19 |
+| 4 | Linha `legado` contada em dobro | 1eb5727 | `nuvem.js` `nuvemDescontarLegado`: o razão montado por `nuvemRazaoInicial` já inclui o legado. Uma vez, antes do primeiro envio (e no primeiro puxar), o razão do aparelho desconta a linha `legado`, campo a campo e sem ficar negativo: total = o maior dos dois, como na regra antiga | `testes/nuvem.js` a13 (legado 100 + razão 100 = 100, ganho novo soma) e a13b (aparelho vazio herda o legado 100/30) |
+| 5 | Distratores que são palavra real em inglês | 0ab4a24 | Regra conservadora: **palavra real do inglês corrente é sempre bloqueada** (o app ensina inglês). Bloqueadas GATE, MALE, PIPE, TADA, DENE, e GALINA a pedido. Releitura das liberadas: espanhol neutro fica com observação (CAZA, CESA, GASA, MALO, MOPA, PIDA, UVE e agora ARTO); PATU e RATU (empréstimos maori e fijiano em dicionário de inglês, não são inglês corrente) e FAPA, FAPETE (não são palavra) ficam, com observação. Conferência: 268 escritas, 27 bloqueadas, 241 liberadas | GATO, PIPA e FADA ficam com 2 erradas e saem da escrita certa sozinhas (`grafiaCerta` pede 3), como PATO. MALA fica com 1 (sobra MALO): mesma regra de VELA, exceção em `testes/conteudo.js` caso 2 e `testes/distratores.js` caso 5 prova que o juntar sílabas usa MAPA, BOLA e VELA |
+
+### O saldo continua sendo, em parte, confiança no cliente
+
+Abaixo do teto, o servidor não sabe se as moedas foram ganhas jogando: o jogo roda offline no aparelho e só o aparelho vê as respostas. O que a 0007 garante é o **tamanho** do estrago, não a ausência dele:
+- ninguém grava moeda fora da RPC (nem `moedas_aparelho`, nem as colunas de `perfil_estado`);
+- cada chamada sobe no máximo 5000 por aparelho. Pela economia do app (10 por acerto, +5 a cada 3 seguidos, +20 na fase perfeita e +5 na revisão no fim da fase, baú até 20, kit 15), isso é umas 300 respostas certas seguidas; online o app sincroniza a cada 60 s, e a criança média ganha ~180 por dia;
+- um adulto com o JWT da própria família ainda consegue subir até 5000 por chamada, e o limite de 240 sincronizações por hora (`limite_ok_usuario`) segura isso em ~1,2 milhão por hora. O dano fica dentro da família: moeda só compra cosmético do jogo, não vale dinheiro, não é vendida e não há ranking entre famílias.
+
+Fechar de vez exigiria o servidor reproduzir cada lição (pergunta, resposta, tempo), o que não cabe num app que funciona offline. O mesmo vale para `xp`, estrelas e contadores do dia (nunca descem, mas sobem pelo que o aparelho disser) e para `comprado` (a RPC une o que vier, sem preço no servidor; item 3 do PENDENTE da seção 5).
+
+### Mutações feitas à mão nesta passada (cada uma conferida e revertida)
+
+| Regra | Mutação | Resultado |
+|---|---|---|
+| 2 (revisor) | `atual.status === 'atrasada' ||` tirado de `vale` (feita no código de antes do item 3) | cai 1 teste (`reabrir.test.ts`, família atrasada) |
+| 2 (revisor) | `Math.max` trocado por atribuição no `gastas` do próprio aparelho em `nuvemMesclar` | cai a9b |
+| 1 | `nuvem.js` sem reagendar quando falta subir (sem `nuvemFaltaSubir` no `subir`) | cai a12 |
+| 1 | migração sem aceitar a primeira parcela (`moedasOk` só com `e.moedas`) | cai a12 |
+| 3 | webhook de volta ao `reabrirPaga` em duas etapas (código do commit 9e6164d) | cai "A e B pagos juntos" (B paga e expirada, sem marca) |
+| 3 | RPC em memória sem expirar o pendente | caem 3 testes |
+| 3 | `mudou` sem reler (retorna direto) | cai o teste do `mudou` |
+| 4 | sem o desconto do legado antes do primeiro envio | cai a13 |
+| 4 | desconto sem `legadoPendente=false` (repete a cada envio) | cai a13 |
+| 4 | desconto sem o piso de 0 | **não caiu**: o merge seguinte já corrige (o servidor guarda `greatest(..., 0)` e o próprio contador volta pelo maior). O piso fica como defesa; não há estado observável que o separe |
+| 5 | MALE tirada do bloqueio | `distratores.js` casos 3 e 4 caem |
+| 5 | MALA tirada da exceção `POUCOS` | `conteudo.js` caso 2 cai |
+| 1 (SQL) | as provas de `rls.sql` não rodam sem Postgres: mutação feita só no servidor falso (`testes/nuvem.js` sem o teto) | a12 cai |
+
+### Portão (09/11/2026, depois do commit 0ab4a24)
+
+| Comando | Resultado |
+|---|---|
+| `npm test` (36 suítes) | **OK**, 327 de 327 (eram 323: a9b, a12, a13, a13b) |
+| `node testes/toque.js` | **OK** |
+| `npm run fumaca` | **OK**: nenhuma exceção nem `console.error`; 3 fases jogadas em desktop e celular |
+| `node testes/onda1.js` | **OK** |
+| `deno test --no-remote supabase/functions` | **OK**, 40 de 40 (eram 36) |
+| `deno lint supabase/functions` | 0 problemas, 17 arquivos |
+| `deno lint` (repositório inteiro) | 626 avisos em 135 arquivos, **os mesmos 626 do commit c92aaa8** (variável sem uso e `window` no JS de navegador); nenhum novo |
+| `gitleaks dir .` e `gitleaks git .` | **limpo** (no leaks found) |
+| `semgrep --config p/javascript --config p/secrets` em `supabase`, `nuvem.js`, `bloqueio.js`, `build/distratores.js`, `testes/nuvem.js`, `testes/conteudo.js` | **0 achados**, 32 arquivos, 110 regras |
+| `python3 build/build.py --check` | **OK** |
+
+### PENDENTE desta passada
+
+1. `rls.sql` (agora **30 OK** esperados: blocos 3b, 13g, 18 e 19 novos; 13b e 13f ajustados) e as migrações 0005 a 0008 **não rodaram em banco**: não há Postgres nesta máquina. O SQL foi revisado à mão (ordem dos grants, dono e `search_path` das duas `security definer`, nomes qualificados, gatilhos chamados de dentro só usam funções do `pg_catalog`). PENDENTE-CONTA (S1).
+2. Com dois avisos juntos, o caminho normal (cobrança do checkout NOVO confirmada) ainda é um PATCH simples. Se a RPC reabrir a velha no meio, esse PATCH bate no índice e devolve 500; o Asaas repete, e na repetição o webhook vê a nova já `expirada`, chama a RPC e marca `pagamento_duplicado`. Estado final certo, com um 500 no caminho (provado no teste "A e B pagos juntos").
+3. `moedas_limitadas` não entra na exportação LGPD (`exportar_meus_dados`): só tem `aparelho_id` aleatório e números. Avaliar na revisão da política de privacidade.
+4. Os itens 2 a 5 do PENDENTE da seção 5 continuam valendo (estorno manual, item comprado em dois aparelhos offline, `aparelho_id` na exportação, clipes pendentes).
+
