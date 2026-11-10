@@ -90,3 +90,17 @@ Deno.test('reabrir: expirada que já teve acesso (inicio_em) não volta por paga
   assertEquals([m.A().status, m.B().status], ['expirada', 'pendente']);
   assertEquals(m.repo.eventos.get('pA')?.erro, 'expirada_ja_usada');
 });
+
+Deno.test('reabrir: família com assinatura ATRASADA paga o checkout velho: não reabre e o evento fica marcado pagamento_duplicado', async () => {
+  const m = await doisCheckouts();
+  // B foi paga, virou ativa e depois atrasou a cobrança seguinte (atrasada ainda dá acesso: é assinatura valendo)
+  await m.aviso(eventoAssinatura('SUBSCRIPTION_CREATED', { id: 'sB', assinatura: 'sub_B', referencia: m.B().id, ciclo: 'YEARLY' }));
+  await m.aviso(eventoPagamento('PAYMENT_CONFIRMED', { id: 'pB', pagamento: 'pay_B', assinatura: 'sub_B', valor: 297 }));
+  await m.aviso(eventoPagamento('PAYMENT_OVERDUE', { id: 'pB2', pagamento: 'pay_B2', assinatura: 'sub_B' }));
+  assertEquals(m.B().status, 'atrasada');
+  const r = await m.aviso(eventoPagamento('PAYMENT_CONFIRMED', { id: 'pA', pagamento: 'pay_A', assinatura: 'sub_A' }));
+  assertEquals(r.status, 200);
+  assertEquals([m.A().status, m.A().acesso_ate, m.B().status], ['expirada', null, 'atrasada']);
+  assertEquals(m.repo.eventos.get('pA')?.erro, 'pagamento_duplicado');
+  assertEquals(m.repo.eventos.get('pA')?.processado_em, null);
+});

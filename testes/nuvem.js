@@ -263,6 +263,21 @@ const servidorEstado = (m) => m.srv.snapshot(m.id);
     A.deepStrictEqual([servidorEstado(m).estado.moedas_ganhas, servidorEstado(m).estado.moedas], [50, 50]);
   });
 
+  await teste('a9b. servidor com gastas MENOR que o aparelho (comprou offline e puxou antes de empurrar): o merge nao baixa o gastas do razao nem devolve a moeda', async () => {
+    const m = await comPerfil(24);
+    m.a.avaliar('S.moedas+=200;salvar()');
+    await subir(m);   // servidor: ganhas 200, gastas 0
+    m.a.avaliar("S.moedas-=150;S.comprado.push('teo');salvar()");   // comprou offline: gastas 150 só no aparelho
+    A.strictEqual(servidorEstado(m).estado.moedas_gastas, 0);
+    m.passa(61000);
+    A.strictEqual(await m.a.avaliar('NUVEM.puxar(0)'), true);
+    A.deepStrictEqual(J(m.a.avaliar('(r=>[r.razao.ganhas,r.razao.gastas])(NUVEM.registro(STORE.perfis[0].id))')), [200, 150],
+      'o pull trocou o gastas do aparelho pelo do servidor (0)');
+    A.strictEqual(m.a.avaliar('S.moedas'), 50, 'o pull devolveu a moeda gasta');
+    await subir(m);
+    A.deepStrictEqual([servidorEstado(m).estado.moedas_gastas, servidorEstado(m).estado.moedas], [150, 50]);
+  });
+
   await teste('a12. teto do servidor (0007, 5000 por chamada): perfil antigo com 12.300 moedas migra, sobe em 3 parcelas sozinho e nada se perde', async () => {
     const m = montar(23);
     m.a.avaliar("novoPerfil('Zeca','#12A06E');S.moedas=12300;salvar()");
