@@ -330,6 +330,8 @@ function salvar(){
     STORE.perfis[STORE.atual].dados=S;
     if(S.nome)STORE.perfis[STORE.atual].nome=S.nome;
     salvarStore();
+    /* Fase 4: anota o que mudou para a nuvem (nuvem.js). Sem configuração de nuvem, ligada() é false e nada acontece. */
+    if(typeof NUVEM==='object'&&NUVEM&&NUVEM.ligada())NUVEM.marcarSujo();
   }
 }
 function perfilAtual(){return STORE.perfis[STORE.atual]||{nome:'',cor:CORES[0]};}
