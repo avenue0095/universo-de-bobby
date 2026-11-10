@@ -143,3 +143,72 @@ A parte 0 sozinha (commit 5ede594) passou pela mesma bateria antes do commit.
 Testes de mutação (conferência de que os testes pegam o erro): tolerância de 2 dias, token sempre aceito, idempotência desligada e consentimento ignorado derrubam os testes das funções; razão sem gasto, validação da migração desligada, envio sem checar a rede, intervalo de 60 s ignorado, estrela, bloco, moeda e item do merge sem a regra derrubam `testes/nuvem.js`.
 
 Aviso que não é desta rodada: `testes/cobertura-audio.js` com `--semente=4` falha também no código de antes (pergunta de português 99,46%); com a semente padrão, a do `npm test`, passa.
+
+---
+
+## 5. Segunda passada (09/11/2026, depois da nota 6 do revisor independente)
+
+Seis defeitos, um commit por grupo, sem push, sem conta, sem crédito gasto. `MURO={modo:'aberto'}`, `index.html`, `start_url "./index.html"` e `scope "./"` não mudaram.
+
+| # | Defeito | Commit | Conserto | Prova |
+|---|---|---|---|---|
+| 1 | Webhook aceitava aviso fora de ordem (RECEIVED + UPDATED atrasado voltava a `pendente` e o reembolso dava 404; REFUNDED + CONFIRMED atrasado voltava a `confirmado`) | 0f81d27 | `_shared/pagamento.ts` `mesclarPagamento`: o estado só avança (pendente, vencido, falhou < confirmado < recebido; estornado terminal), `pago_em` mantido. O webhook lê a cobrança antes de gravar (`buscarPagamento`) e aviso vencido pela regra não mexe na assinatura (OVERDUE atrasado não marca `atrasada`). Mesma regra no banco: `0005_pagamento_so_avanca.sql` (gatilho, cobre dois avisos simultâneos) | `supabase/functions/testes/ordem.test.ts` (5 testes, inclusive reembolso 200 depois do UPDATED atrasado); `rls.sql` bloco 17 |
+| 2 | `legivel` aceitava OFGUETE, FOGGUETE, GALINNHA, GALNIHA | c9285bf | Dígrafo conta como uma consoante mas entra no par: depois dele só vogal; antes de CH, QU, GU só R, S, L, N; antes de LH, NH nada; H solto só no começo. QU e GU só são dígrafo antes de vogal (ALGUMA, FIGURA seguem legíveis) | `testes/geradores.js` caso 7 com os 4 casos do revisor e mais 8; a implementação própria do teste tinha o mesmo ponto cego e foi corrigida |
+| 3 | Palavras reais e inadequadas como resposta errada (PEDO, DODO, PETATE, PALO) | da9e182 | `src/conteudo/bloqueio.js` (cada palavra com motivo) + `candidatosDeGrafia` (todas as escritas possíveis, sem sorteio). `build/distratores.js` gera `docs/fase4/DISTRATORES-CONFERENCIA.md`: **268 escritas das 38 palavras, todas lidas**; 21 bloqueadas (palavra real, gíria, nome, conotação ruim, palavra estrangeira para a mesma coisa) + bloqueio preventivo de palavrões e xingamentos | `testes/distratores.js` (5 casos, no `npm test`): nada bloqueado nem real sai; escrita nova sem leitura reprova; conferência e bloqueio batem |
+| 4 | `testes/nuvem.js` não pegava M5 e M6 | 9c1c976 | a9: servidor com `ganhas` menor que o aparelho; a10: fase, estrela e xp mudando durante o `sincronizarPerfil` continuam sujos e sobem no push seguinte | M5 e M6 feitas à mão: cada uma derruba o caso novo |
+| 5 | Merge perdia moeda ganha offline em dois aparelhos (base 100, +50, +30 dava 150) | d5d0928 | Opção preferida: `0006_moedas_por_aparelho.sql`, tabela `moedas_aparelho` (contador por `aparelho_id`, só cresce, RLS ligada com política explícita, sem delete), total = soma. `nuvem.js`: `aparelho_id` aleatório por instalação na outbox, razão próprio + outros. ARQUITETURA 5.5 reescrita | a11 em `testes/nuvem.js` (180 nos dois aparelhos e no banco, envio repetido não soma); `rls.sql` 13e e 13f |
+| 6 | Pagamento atrasado de assinatura `expirada` por novo checkout não liberava acesso | 537878e | A assinatura paga reabre (o checkout pendente novo expira antes). Não reabre se reembolsada, se já teve acesso, ou se a família já tem outra valendo (aí o evento fica com erro `pagamento_duplicado`) | `supabase/functions/testes/reabrir.test.ts` (4 testes) |
+
+Decisões de desenho que valem registrar:
+- **Critério do bloqueio para palavra estrangeira:** bloqueada se for gíria, palavrão, conotação ruim ou o nome da MESMA coisa em outra língua (ZAPATO, TOMATO); estrangeira neutra que a criança não conhece fica, com a observação na conferência (CAZA, MOPA, GATE, MALE, MALO). Palavra que só é real com acento: bloqueada se, lida em voz alta, a criança reconhece (DODO = dodô); fica se não (FACO, SAPE). Quem decide diferente é o Filipe: basta trocar o veredito na conferência e a lista.
+- **VELA ficou com uma escrita errada só** (FELA bloqueada, sobra VOLA). Nunca chega à criança por `errosDeGrafia` (a escrita certa pede 3; o juntar sílabas usa BOLA e MALA); exceção explícita em `testes/conteudo.js` caso 2, provada em `testes/distratores.js` caso 5. PATO e MALA saíram da escrita certa (ficaram com 2 erradas); continuam nas outras atividades.
+- `errosDeGrafia` sorteia a lista crua e filtra depois, para gastar os mesmos números do sorteio de antes. Mesmo assim a amostra do `cobertura-audio.js` mudou (PATO e MALA saíram do sorteio) e achou **10 respostas de dica antigas sem clipe** (ex.: "A resposta é Na sexta."): entraram em `audio/regerar-pendentes.json`, como na parte 0. Nenhum áudio gerado.
+- Numeração: a migração do defeito 1 ficou 0005 e a do defeito 5 ficou 0006 (o pedido citava 0005 para o 5; a ordem dos commits seguiu a prioridade).
+
+### Mutações feitas à mão nesta passada (cada uma conferida e revertida)
+
+| Regra | Mutação | Resultado |
+|---|---|---|
+| 1 | webhook grava o evento cru (sem `mesclarPagamento`) | 4 testes de `ordem.test.ts` caem |
+| 1 | sem o filtro "aviso vencido não mexe na assinatura" | OVERDUE atrasado cai |
+| 1 | estornado com nível 0 | 4 caem |
+| 1 | `pago_em` não preservado | 2 caem |
+| 1 | `antigo.status === 'estornado' ||` removido | não caiu: era redundante (estornado já tem o nível mais alto); a cláusula saiu do TS e do SQL |
+| 2 | dígrafo aceito antes de qualquer consoante | caso 7 cai (OFGUETE) |
+| 2 | sem a regra do H solto | caso 7 cai (GALNIHA) |
+| 2 | sem "depois de dígrafo só vogal" | não caía; caso MALHRA acrescentado, agora cai |
+| 2 | "nunca a mesma letra antes do dígrafo" removido | não caía: redundante (só R, S, L, N passam); cláusula removida |
+| 3 | sem `!bloqueada(t)` | `distratores.js` caso 2 cai |
+| 3 | operação nova de erro (troca das duas últimas sílabas) | caso 3 cai ("escrita nova sem leitura") |
+| 3 | FELA tirada do bloqueio | casos 1, 3 e 4 caem |
+| 4 | M5 (`razao.ganhas` por atribuição) | a9 cai (também depois do defeito 5) |
+| 4 | M6 (`limparEnviado` apaga tudo) | a10 cai |
+| 5 | servidor falso com GREATEST no total | a8 e a11 caem |
+| 5 | cliente ignora os outros aparelhos | a8 e a11 caem |
+| 5 | cliente conta o próprio aparelho como outro | 7 casos caem |
+| 6 | expirada continua só registrando | testes de `reabrir.test.ts` caem |
+| 6 | sem a checagem de outra assinatura valendo | "as duas pagas" cai |
+| 6 | não expira o pendente novo | "reabre" cai |
+| 6 | sem a checagem de `inicio_em` | "já teve acesso" cai |
+
+### Portão (09/11/2026, depois do commit 537878e)
+
+| Comando | Resultado |
+|---|---|
+| `npm test` (36 suítes, agora com `testes/distratores.js`) | **OK**, 323 de 323 |
+| `node testes/toque.js` | **OK** |
+| `npm run fumaca` | **OK**: nenhuma exceção nem `console.error`; 3 fases jogadas em desktop e celular |
+| `node testes/onda1.js` | **OK** |
+| `deno test --no-remote supabase/functions` | **OK**, 36 de 36 (eram 27) |
+| `deno lint supabase/functions` | 0 problemas, 17 arquivos |
+| `gitleaks dir .` e `gitleaks git .` | **limpo** (no leaks found) |
+| `semgrep --config p/javascript --config p/secrets` em `supabase`, `nuvem.js`, `basicas.js`, `bloqueio.js`, `build/distratores.js` e testes novos | **0 achados**, 31 arquivos |
+| `python3 build/build.py --check` | **OK** |
+
+### PENDENTE desta passada
+
+1. `rls.sql` (agora 26 OK esperados, blocos 13e, 13f e 17) e as migrações 0005 e 0006 **não rodaram em banco**: não há Postgres nesta máquina. PENDENTE-CONTA (S1).
+2. Pagamento em dobro (`pagamento_duplicado`, defeito 6) e cobrança paga de assinatura já usada (`expirada_ja_usada`) ficam marcados no `webhook_evento`, mas **o estorno é manual**: não há rotina automática.
+3. Mesmo item comprado em dois aparelhos offline é pago duas vezes (resíduo do modelo por aparelho, ARQUITETURA 5.5). Devolver exige preço no servidor.
+4. O `aparelho_id` vai junto do snapshot na exportação LGPD (`exportar_meus_dados` usa `snapshot_perfil`); é texto aleatório, sem dado pessoal. Citar na política de privacidade quando ela for revisada.
+5. 10 respostas de dica sem clipe somadas ao `audio/regerar-pendentes.json` (745 itens agora): esperam o lote de áudio.
