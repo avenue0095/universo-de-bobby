@@ -6,13 +6,16 @@ Cada linha foi lida à mão com olho de pai: palavra real (também a que só é 
 gíria, palavrão, palavra de outro país lusófono, nome próprio comum, conotação ruim em português, espanhol ou inglês.
 
 Critério para palavra estrangeira: bloqueada se for gíria, palavrão, conotação ruim ou o nome da MESMA coisa em outra língua
-(ZAPATO, TOMATO: a criança pode achar que está certo). Palavra estrangeira neutra e desconhecida da criança fica (CAZA, MOPA, UVE),
-com a observação na linha.
+(ZAPATO, TOMATO: a criança pode achar que está certo). **Palavra real do inglês corrente é sempre bloqueada**, porque o app
+ensina inglês (GATE, MALE, PIPE, TADA, DENE; terceira passada, 09/11/2026). Palavra de outra língua neutra e desconhecida da
+criança fica (CAZA, MOPA, UVE, MALO), com a observação na linha. Palavra que ficou com menos de 3 escritas erradas sai da escrita
+certa sozinha (grafiaCerta pede 3) e continua nas outras atividades; com menos de 2, testes/distratores.js caso 5 prova que
+o juntar sílabas não cai nela (PATO, MALA, VELA, GATO, PIPA, FADA).
 
 `testes/distratores.js` reprova se: aparecer escrita nova sem leitura (A CONFERIR), algum distrator do app estiver na lista de bloqueio,
 ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 
-**Resumo:** 268 escritas possíveis, 21 bloqueadas, 247 liberadas, 0 a conferir.
+**Resumo:** 268 escritas possíveis, 27 bloqueadas, 241 liberadas, 0 a conferir.
 
 ## Por palavra
 
@@ -41,22 +44,22 @@ ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 |---|---|---|
 | PAFO | ok |  |
 | PALO | BLOQUEADA | espanhol (pau), gíria sexual em alguns países |
-| PATU | ok |  |
+| PATU | ok | empréstimo maori no inglês da Nova Zelândia (clava), não é palavra do inglês corrente; fica |
 | POTO | BLOQUEADA | gíria chilena para bunda |
 
-### GATO (3 possíveis, 3 liberadas)
+### GATO (3 possíveis, 2 liberadas)
 
 | Escrita | Veredito | Observação |
 |---|---|---|
-| GATE | ok | inglês neutro (portão); não é palavra das aulas de inglês do app |
+| GATE | BLOQUEADA | inglês real (portão); o app ensina inglês |
 | GATU | ok |  |
 | GETO | ok | lida em voz alta não é GUETO (G antes de E soa J) |
 
-### MALA (3 possíveis, 2 liberadas)
+### MALA (3 possíveis, 1 liberadas)
 
 | Escrita | Veredito | Observação |
 |---|---|---|
-| MALE | ok | inglês neutro (macho); não é palavra das aulas de inglês do app |
+| MALE | BLOQUEADA | inglês real (macho, masculino); o app ensina inglês |
 | MALO | ok | espanhol neutro (mau), a criança não conhece |
 | NALA | BLOQUEADA | nome próprio que a criança conhece (O Rei Leão) e nome comum de bicho |
 
@@ -130,7 +133,7 @@ ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 | DODO | BLOQUEADA | DODÔ, a ave (a criança conhece do desenho); lida em voz alta é palavra |
 | PEDO | BLOQUEADA | som de PEIDO; em espanhol é peido; prefixo de pedofilia |
 
-### PIPA (5 possíveis, 3 liberadas)
+### PIPA (5 possíveis, 2 liberadas)
 
 | Escrita | Veredito | Observação |
 |---|---|---|
@@ -138,7 +141,7 @@ ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 | PAPI | BLOQUEADA | gíria de paquera (papi) no funk e no reggaeton |
 | PIBA | BLOQUEADA | gíria (menina) na Argentina |
 | PIDA | ok | espanhol neutro (verbo pedir) |
-| PIPE | ok | inglês neutro (cano) |
+| PIPE | BLOQUEADA | inglês real (cano); o app ensina inglês |
 
 ### MAPA (8 possíveis, 8 liberadas)
 
@@ -157,8 +160,8 @@ ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 
 | Escrita | Veredito | Observação |
 |---|---|---|
-| ARTO | ok |  |
-| RATU | ok |  |
+| ARTO | ok | espanhol raro (arto, planta espinhosa), a criança não conhece; sem conotação |
+| RATU | ok | título fijiano que alguns dicionários de inglês listam, não é palavra do inglês corrente; fica |
 
 ### UVA (2 possíveis, 2 liberadas)
 
@@ -345,7 +348,7 @@ ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 
 | Escrita | Veredito | Observação |
 |---|---|---|
-| FAPETE | ok |  |
+| FAPETE | ok | não é palavra; mesma observação de FAPA; fica |
 | LAPETE | ok |  |
 | PETATE | BLOQUEADA | gíria (morrer) no espanhol do México |
 | TABETE | ok |  |
@@ -357,12 +360,12 @@ ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 | TAPOTE | ok |  |
 | TEPETE | ok |  |
 
-### GALINHA (6 possíveis, 5 liberadas)
+### GALINHA (6 possíveis, 4 liberadas)
 
 | Escrita | Veredito | Observação |
 |---|---|---|
 | AGLINHA | ok |  |
-| GALINA | ok | nome russo raro no Brasil; sem conotação |
+| GALINA | BLOQUEADA | nome próprio (russo); bloqueado a pedido do Filipe, regra conservadora |
 | GELINHA | ok |  |
 | GOLINHA | BLOQUEADA | palavra real (gola pequena) |
 | JALINHA | ok |  |
@@ -431,25 +434,25 @@ ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 | TOGUETE | ok |  |
 | VOGUETE | ok |  |
 
-### DENTE (8 possíveis, 7 liberadas)
+### DENTE (8 possíveis, 6 liberadas)
 
 | Escrita | Veredito | Observação |
 |---|---|---|
 | BENTE | ok | nome escandinavo raro no Brasil; sem conotação |
 | DANTE | BLOQUEADA | nome próprio comum (Dante) |
-| DENE | ok |  |
+| DENE | BLOQUEADA | inglês real (vale estreito, no inglês britânico); o app ensina inglês |
 | DENFE | ok |  |
 | DENLE | ok |  |
 | DENTI | ok | italiano neutro (dentes); é o erro do E final que soa I |
 | DETE | ok |  |
 | DONTE | ok |  |
 
-### FADA (3 possíveis, 3 liberadas)
+### FADA (3 possíveis, 2 liberadas)
 
 | Escrita | Veredito | Observação |
 |---|---|---|
-| FAPA | ok |  |
-| TADA | ok |  |
+| FAPA | ok | não é palavra; a sílaba lembra gíria chula do inglês da internet que a criança não lê; fica |
+| TADA | BLOQUEADA | inglês real (ta-da, a interjeição de mágica); o app ensina inglês |
 | VADA | ok | italiano neutro (vá) |
 
 ### VELA (2 possíveis, 1 liberadas)

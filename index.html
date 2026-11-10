@@ -3469,6 +3469,12 @@ tapeti:'palavra real (tapeti, coelho do mato)',
 golinha:'palavra real (gola pequena)',
 dante:'nome próprio comum (Dante)',
 fela:'gíria ofensiva do Nordeste (fela da mãe)',
+gate:'inglês real (portão); o app ensina inglês',
+male:'inglês real (macho, masculino); o app ensina inglês',
+pipe:'inglês real (cano); o app ensina inglês',
+tada:'inglês real (ta-da, a interjeição de mágica); o app ensina inglês',
+dene:'inglês real (vale estreito, no inglês britânico); o app ensina inglês',
+galina:'nome próprio (russo); bloqueado a pedido do Filipe, regra conservadora',
 bosta:'palavrão',merda:'palavrão',porra:'palavrão',puta:'palavrão',puto:'palavrão e gíria de raiva',caralho:'palavrão',
 cacete:'palavrão',buceta:'palavrão',boceta:'palavrão',piroca:'palavrão',pica:'palavrão',xota:'palavrão',xoxota:'palavrão',
 xereca:'palavrão',foder:'palavrão',foda:'palavrão',fuder:'palavrão',porcaria:'xingamento',bunda:'corpo, vira piada',
@@ -5049,6 +5055,16 @@ saldo=nuvemInt(saldo);const d=saldo-reg.razao.saldo;
 if(d>0)reg.razao.ganhas+=d;else if(d<0)reg.razao.gastas+=-d;
 reg.razao.saldo=saldo;
 }
+function nuvemFaltaSubir(snap,reg,aparelho){
+if(!Array.isArray(nuvemObj(snap).moedas_aparelhos))return false;
+const l=(Array.isArray(nuvemObj(snap).moedas_aparelhos)?snap.moedas_aparelhos:[]).find(m=>m&&m.aparelho_id===aparelho)||{};
+return nuvemInt(l.ganhas)<reg.razao.ganhas||nuvemInt(l.gastas)<reg.razao.gastas;
+}
+function nuvemDescontarLegado(reg,snap){
+const l=(Array.isArray(nuvemObj(snap).moedas_aparelhos)?snap.moedas_aparelhos:[]).find(m=>m&&m.aparelho_id==='legado');
+if(l){reg.razao.ganhas=Math.max(0,reg.razao.ganhas-nuvemInt(l.ganhas));reg.razao.gastas=Math.max(0,reg.razao.gastas-nuvemInt(l.gastas));}
+reg.legadoPendente=false;
+}
 function nuvemMesclar(s,reg,snap,aparelho){
 snap=nuvemObj(snap);const e=nuvemObj(snap.estado),em=nuvemObj(e.blocos_em);
 const t=JSON.parse(JSON.stringify(s));
@@ -5094,7 +5110,7 @@ s.stats.porLicao=v.stats.porLicao;s.stats.dias=v.stats.dias;
 reg.razao.saldo=s.moedas;
 return s;
 }
-function nuvemRegistroVazio(){return {nuvemId:'',migradoEm:'',sujo:{estado:'',fases:{},itens:{},dias:{}},blocosEm:{},carimbos:{},foto:null,razao:null,outros:{},ultimoPush:0,ultimoPull:0};}
+function nuvemRegistroVazio(){return {nuvemId:'',migradoEm:'',sujo:{estado:'',fases:{},itens:{},dias:{}},blocosEm:{},carimbos:{},foto:null,razao:null,legadoPendente:false,outros:{},ultimoPush:0,ultimoPull:0};}
 const NUVEM_APARELHO_RE=/^[A-Za-z0-9_-]{6,64}$/;
 function nuvemNovoAparelho(){
 let b='';try{const a=new Uint8Array(12);crypto.getRandomValues(a);a.forEach(x=>{b+=('0'+x.toString(16)).slice(-2);});}catch(e){}
@@ -5126,7 +5142,7 @@ let out=null,timer=null,emCurso=null;
 const ler=()=>{if(!out){let x=null;try{x=JSON.parse(op.armazem.ler(NUVEM_CHAVE)||'null');}catch(e){}out=nuvemArrumar(x);}return out;};
 const gravar=()=>{try{op.armazem.gravar(NUVEM_CHAVE,JSON.stringify(out));}catch(e){}};
 const regDe=(id,s)=>{const o=ler();if(!o.perfis[id])o.perfis[id]=nuvemRegistroVazio();const r=o.perfis[id];
-if(!r.razao)r.razao=nuvemRazaoInicial(s,op.preco);if(!r.foto)r.foto=fotoCompleta(r,s,{});return r;};
+if(!r.razao){r.razao=nuvemRazaoInicial(s,op.preco);r.legadoPendente=true;}if(!r.foto)r.foto=fotoCompleta(r,s,{});return r;};
 function fotoCompleta(r,s,removidosAntes){const f=nuvemFoto(s);f.razao=r.razao.ganhas+'/'+r.razao.gastas;f.removidos={};
 Object.keys(removidosAntes||{}).forEach(k=>{if(r.sujo.itens[k]&&!f.itens[k])f.removidos[k]=removidosAntes[k];});return f;}
 function detectar(r,s){
@@ -5161,12 +5177,15 @@ if(r.sujo.estado===enviado.estado)r.sujo.estado='';
 }
 async function subir(i,tudo){
 const p=op.perfis()[i],s=op.dadosDe(i),r=regDe(p.id,s);
+if(r.legadoPendente)nuvemDescontarLegado(r,await tr.snapshotPerfil(r.nuvemId));
 detectar(r,s);
 const enviado=JSON.parse(JSON.stringify(r.sujo)),dados=payload(r,s,tudo);
 const snap=await tr.sincronizarPerfil(r.nuvemId,dados.estado,dados.fases,dados.itens,dados.dias);
 const s2=op.dadosDe(i);detectar(r,s2);limparEnviado(r,enviado);
 nuvemMesclar(s2,r,snap,ler().aparelho);r.foto=fotoCompleta(r,s2,r.foto.removidos);
-r.ultimoPush=agora().getTime();gravar();if(op.persistir)op.persistir(i);
+r.ultimoPush=agora().getTime();
+if(nuvemFaltaSubir(snap,r,ler().aparelho)){r.sujo.estado=r.sujo.estado||agora().toISOString();agendarPush(NUVEM_TEMPO.intervalo);}
+gravar();if(op.persistir)op.persistir(i);
 return snap;
 }
 async function empurrar(motivo){
@@ -5193,6 +5212,7 @@ async function puxar(i){
 const p=op.perfis()[i];if(!p||!online())return false;const r=ler().perfis[p.id];if(!r||!r.nuvemId)return false;
 if(agora().getTime()-r.ultimoPull<NUVEM_TEMPO.cachePull)return false;
 try{const s=op.dadosDe(i);detectar(r,s);const snap=await tr.snapshotPerfil(r.nuvemId);
+if(r.legadoPendente)nuvemDescontarLegado(r,snap);
 nuvemMesclar(s,r,snap,ler().aparelho);r.foto=fotoCompleta(r,s,r.foto.removidos);
 r.ultimoPull=agora().getTime();gravar();if(op.persistir)op.persistir(i);return true;}catch(e){return false;}
 }
@@ -5202,7 +5222,7 @@ const falhou=[],feitos=[];
 for(const i of idx){
 const p=ps[i],s=op.dadosDe(i),r=regDe(p.id,s);
 if(r.migradoEm){feitos.push(p.id);continue;}
-if(!r.nuvemId)r.razao=nuvemRazaoInicial(s,op.preco);
+if(!r.nuvemId){r.razao=nuvemRazaoInicial(s,op.preco);r.legadoPendente=true;}
 const antes={fases:Object.keys(s.feitas).length,xp:s.xp,moedas:s.moedas,comprado:(s.comprado||[]).slice()};
 const salvo=JSON.parse(JSON.stringify(r));
 try{
@@ -5211,7 +5231,8 @@ if(!criado||typeof criado.id!=='string')throw new Error('sem id');
 r.nuvemId=criado.id;
 const snap=await subir(i,true),e=nuvemObj(snap&&snap.estado),fs=Array.isArray(snap&&snap.fases)?snap.fases:[];
 const comp=Array.isArray(e.comprado)?e.comprado:[];
-const confere=fs.filter(f=>f&&f.estrelas>0).length>=antes.fases&&nuvemInt(e.xp)>=antes.xp&&nuvemInt(e.moedas)>=antes.moedas&&antes.comprado.every(id=>comp.indexOf(id)>=0);
+const moedasOk=nuvemInt(e.moedas)>=antes.moedas||(nuvemFaltaSubir(snap,r,ler().aparelho)&&nuvemInt(op.dadosDe(i).moedas)>=antes.moedas);
+const confere=fs.filter(f=>f&&f.estrelas>0).length>=antes.fases&&nuvemInt(e.xp)>=antes.xp&&moedasOk&&antes.comprado.every(id=>comp.indexOf(id)>=0);
 if(!confere)throw new Error('snapshot não confere');
 r.migradoEm=agora().toISOString();gravar();feitos.push(p.id);
 }catch(e){

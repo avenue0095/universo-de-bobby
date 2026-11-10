@@ -34,9 +34,11 @@ const J = (x) => JSON.parse(JSON.stringify(x));
     const r = J(a.avaliar(`(()=>{const o={conf:0,tot:0,ruim:[]};
       for(let i=0;i<300;i++){const q=PT_BAS.letraQueFalta();const l=q.answer.toLowerCase();const c=CONFUNDE[l]||[];o.tot++;
         if(q.options.filter(x=>x!==q.answer).filter(x=>c.indexOf(x.toLowerCase())>=0).length>=Math.min(2,c.length))o.conf++;}
-      /* VELA: a lista de bloqueio tirou FELA (gíria ofensiva) e sobrou só VOLA. Nunca chega à criança por errosDeGrafia: a escrita certa
-         exige 3 e o juntar sílabas tem BOLA e MALA (testes/distratores.js caso 5). A exceção só vale enquanto for necessária. */
-      const POUCOS={vela:1};
+      /* VELA: a lista de bloqueio tirou FELA (gíria ofensiva) e sobrou só VOLA. MALA: tirou NALA (nome) e MALE (inglês real, terceira
+         passada) e sobrou só MALO. Nenhuma chega à criança por errosDeGrafia: a escrita certa exige 3 e o juntar sílabas tem palavras do
+         banco com a mesma sílaba (VELA: BOLA e MALA; MALA: MAPA, BOLA e VELA; testes/distratores.js caso 5). A exceção só vale enquanto
+         for necessária. */
+      const POUCOS={vela:1,mala:1};
       PALAVRAS_BASE.forEach(w=>{const e=errosDeGrafia(w.p,3),min=POUCOS[w.p]||2;if(POUCOS[w.p]&&e.length>=2)o.ruim.push(w.p+': excecao sobrando');
         if(e.length<min||e.indexOf(w.p)>=0||new Set(e).size!==e.length)o.ruim.push(w.p+':'+e);
         e.forEach(x=>{if(Math.abs(x.length-w.p.length)>1)o.ruim.push(w.p+'->'+x);});});

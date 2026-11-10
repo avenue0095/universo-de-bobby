@@ -1,6 +1,6 @@
 /* Escritas que NUNCA aparecem como opção errada para a criança, mesmo que o corretor do macOS não as reconheça como palavra.
    Duas partes, cada palavra com o motivo:
-   (1) CONFERIDAS: saíram da leitura inteira, à mão, de TODOS os distratores possíveis das 37 palavras do banco
+   (1) CONFERIDAS: saíram da leitura inteira, à mão, de TODOS os distratores possíveis das 38 palavras do banco
        (docs/fase4/DISTRATORES-CONFERENCIA.md, gerado por build/distratores.js). Palavra real que o corretor não conhece,
        gíria, palavrão, palavra de outro país lusófono, nome próprio comum ou conotação ruim.
    (2) PREVENTIVAS: palavrões e gírias que o gerador ainda não produz, para não depender só do corretor se o banco crescer.
@@ -28,6 +28,14 @@ const BLOQUEIO_MOTIVO={
   golinha:'palavra real (gola pequena)',
   dante:'nome próprio comum (Dante)',
   fela:'gíria ofensiva do Nordeste (fela da mãe)',
+  /* terceira passada (09/11/2026): palavra real em inglês é sempre bloqueada, porque o app ensina inglês e a criança pode achar
+     que a escrita existe (decisão do Filipe: a regra mais conservadora do próprio documento) */
+  gate:'inglês real (portão); o app ensina inglês',
+  male:'inglês real (macho, masculino); o app ensina inglês',
+  pipe:'inglês real (cano); o app ensina inglês',
+  tada:'inglês real (ta-da, a interjeição de mágica); o app ensina inglês',
+  dene:'inglês real (vale estreito, no inglês britânico); o app ensina inglês',
+  galina:'nome próprio (russo); bloqueado a pedido do Filipe, regra conservadora',
   /* (2) preventivas */
   bosta:'palavrão',merda:'palavrão',porra:'palavrão',puta:'palavrão',puto:'palavrão e gíria de raiva',caralho:'palavrão',
   cacete:'palavrão',buceta:'palavrão',boceta:'palavrão',piroca:'palavrão',pica:'palavrão',xota:'palavrão',xoxota:'palavrão',
