@@ -83,6 +83,17 @@ function nuvemFaltaSubir(snap,reg,aparelho){
   return nuvemInt(l.ganhas)<reg.razao.ganhas||nuvemInt(l.gastas)<reg.razao.gastas;
 }
 
+/* linha 'legado' (0006): o total que um cliente antigo, sem aparelho_id, subiu para o perfil. Um aparelho que monta o razão pelo
+   nuvemRazaoInicial (saldo + preço do comprado) já tem esse total dentro do próprio saldo: o legado veio dele mesmo ou foi mesclado
+   nele pela regra antiga (o maior vence). Somar os dois contaria o mesmo dinheiro duas vezes (legado 100 + razão inicial 100 = 200).
+   Então, UMA vez, antes do primeiro envio, o razão inicial deste aparelho desconta a linha legado, campo a campo e sem ficar negativo:
+   total = legado + próprio = o maior dos dois, como na regra antiga. Ganho novo depois disso soma normalmente. */
+function nuvemDescontarLegado(reg,snap){
+  const l=(Array.isArray(nuvemObj(snap).moedas_aparelhos)?snap.moedas_aparelhos:[]).find(m=>m&&m.aparelho_id==='legado');
+  if(l){reg.razao.ganhas=Math.max(0,reg.razao.ganhas-nuvemInt(l.ganhas));reg.razao.gastas=Math.max(0,reg.razao.gastas-nuvemInt(l.gastas));}
+  reg.legadoPendente=false;
+}
+
 /* ---------- merge local: o snapshot do servidor por cima do estado do aparelho, com as regras do servidor ---------- */
 function nuvemMesclar(s,reg,snap,aparelho){
   snap=nuvemObj(snap);const e=nuvemObj(snap.estado),em=nuvemObj(e.blocos_em);
@@ -134,7 +145,7 @@ function nuvemMesclar(s,reg,snap,aparelho){
 }
 
 /* ---------- a outbox ---------- */
-function nuvemRegistroVazio(){return {nuvemId:'',migradoEm:'',sujo:{estado:'',fases:{},itens:{},dias:{}},blocosEm:{},carimbos:{},foto:null,razao:null,outros:{},ultimoPush:0,ultimoPull:0};}
+function nuvemRegistroVazio(){return {nuvemId:'',migradoEm:'',sujo:{estado:'',fases:{},itens:{},dias:{}},blocosEm:{},carimbos:{},foto:null,razao:null,legadoPendente:false,outros:{},ultimoPush:0,ultimoPull:0};}
 /* id deste aparelho para o razão de moedas: sorteado uma vez por instalação, não identifica pessoa nem aparelho físico */
 const NUVEM_APARELHO_RE=/^[A-Za-z0-9_-]{6,64}$/;
 function nuvemNovoAparelho(){
@@ -170,7 +181,7 @@ function criarNuvem(op){
   const ler=()=>{if(!out){let x=null;try{x=JSON.parse(op.armazem.ler(NUVEM_CHAVE)||'null');}catch(e){}out=nuvemArrumar(x);}return out;};
   const gravar=()=>{try{op.armazem.gravar(NUVEM_CHAVE,JSON.stringify(out));}catch(e){}};
   const regDe=(id,s)=>{const o=ler();if(!o.perfis[id])o.perfis[id]=nuvemRegistroVazio();const r=o.perfis[id];
-    if(!r.razao)r.razao=nuvemRazaoInicial(s,op.preco);if(!r.foto)r.foto=fotoCompleta(r,s,{});return r;};
+    if(!r.razao){r.razao=nuvemRazaoInicial(s,op.preco);r.legadoPendente=true;}if(!r.foto)r.foto=fotoCompleta(r,s,{});return r;};
   /* foto depois de aplicar o servidor: guarda a matéria dos removidos que ainda vão subir */
   function fotoCompleta(r,s,removidosAntes){const f=nuvemFoto(s);f.razao=r.razao.ganhas+'/'+r.razao.gastas;f.removidos={};
     Object.keys(removidosAntes||{}).forEach(k=>{if(r.sujo.itens[k]&&!f.itens[k])f.removidos[k]=removidosAntes[k];});return f;}
@@ -210,6 +221,7 @@ function criarNuvem(op){
   /* sobe um perfil e aplica a resposta. Lança se o transporte falhar (quem chama decide). */
   async function subir(i,tudo){
     const p=op.perfis()[i],s=op.dadosDe(i),r=regDe(p.id,s);
+    if(r.legadoPendente)nuvemDescontarLegado(r,await tr.snapshotPerfil(r.nuvemId));   /* antes do primeiro envio deste razão */
     detectar(r,s);
     const enviado=JSON.parse(JSON.stringify(r.sujo)),dados=payload(r,s,tudo);
     const snap=await tr.sincronizarPerfil(r.nuvemId,dados.estado,dados.fases,dados.itens,dados.dias);
@@ -246,6 +258,7 @@ function criarNuvem(op){
     const p=op.perfis()[i];if(!p||!online())return false;const r=ler().perfis[p.id];if(!r||!r.nuvemId)return false;
     if(agora().getTime()-r.ultimoPull<NUVEM_TEMPO.cachePull)return false;
     try{const s=op.dadosDe(i);detectar(r,s);const snap=await tr.snapshotPerfil(r.nuvemId);
+      if(r.legadoPendente)nuvemDescontarLegado(r,snap);
       nuvemMesclar(s,r,snap,ler().aparelho);r.foto=fotoCompleta(r,s,r.foto.removidos);
       r.ultimoPull=agora().getTime();gravar();if(op.persistir)op.persistir(i);return true;}catch(e){return false;}
   }
@@ -256,7 +269,7 @@ function criarNuvem(op){
     for(const i of idx){
       const p=ps[i],s=op.dadosDe(i),r=regDe(p.id,s);
       if(r.migradoEm){feitos.push(p.id);continue;}
-      if(!r.nuvemId)r.razao=nuvemRazaoInicial(s,op.preco);   /* perfil que já existia: o razão sai do que foi comprado (ARQUITETURA 5.5) */
+      if(!r.nuvemId){r.razao=nuvemRazaoInicial(s,op.preco);r.legadoPendente=true;}   /* perfil que já existia: o razão sai do que foi comprado (ARQUITETURA 5.5) */
       const antes={fases:Object.keys(s.feitas).length,xp:s.xp,moedas:s.moedas,comprado:(s.comprado||[]).slice()};
       const salvo=JSON.parse(JSON.stringify(r));
       try{

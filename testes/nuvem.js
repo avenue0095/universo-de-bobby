@@ -278,6 +278,37 @@ const servidorEstado = (m) => m.srv.snapshot(m.id);
     A.deepStrictEqual([servidorEstado(m).estado.moedas_gastas, servidorEstado(m).estado.moedas], [150, 50]);
   });
 
+  await teste('a13. linha legado (cliente antigo subiu 100 sem aparelho_id) e cliente novo cujo razao inicial tambem e 100: o total fica 100, nao 200', async () => {
+    const m = montar(25);
+    m.a.avaliar("novoPerfil('Zeca','#12A06E');S.moedas=100;salvar()");
+    // a mesma criança já estava na nuvem por um app antigo (sem aparelho_id): o servidor tem a linha 'legado' com 100
+    const idLocal = m.a.avaliar('STORE.perfis[0].id');
+    const { id } = await m.srv.criarPerfil({ id_local: idLocal, apelido: 'Zeca' });
+    await m.srv.sincronizarPerfil(id, { moedas_ganhas: 100, moedas_gastas: 0, blocos_em: {} }, [], [], []);
+    const r = J(await m.a.avaliar('NUVEM.migrarPrimeiraConta()'));
+    A.strictEqual(r.ok, true);
+    m.id = id;
+    A.deepStrictEqual([servidorEstado(m).estado.moedas_ganhas, servidorEstado(m).estado.moedas, m.a.avaliar('S.moedas')], [100, 100, 100],
+      'a linha legado foi contada em dobro');
+    // ganho novo depois disso soma normalmente, e o desconto não se repete
+    m.a.avaliar('S.moedas+=20;salvar()');
+    await subir(m);
+    A.deepStrictEqual([servidorEstado(m).estado.moedas_ganhas, m.a.avaliar('S.moedas')], [120, 120]);
+    m.passa(61000); await m.a.avaliar('NUVEM.puxar(0)');
+    A.strictEqual(m.a.avaliar('S.moedas'), 120);
+  });
+
+  await teste('a13b. aparelho novo e vazio (razao inicial 0) num perfil com legado 100 de outro aparelho: herda os 100, nada some', async () => {
+    const m = montar(26);
+    m.a.avaliar("novoPerfil('Zeca','#12A06E')");
+    const idLocal = m.a.avaliar('STORE.perfis[0].id');
+    const { id } = await m.srv.criarPerfil({ id_local: idLocal, apelido: 'Zeca' });
+    await m.srv.sincronizarPerfil(id, { moedas_ganhas: 100, moedas_gastas: 30, blocos_em: {} }, [], [], []);
+    A.strictEqual(J(await m.a.avaliar('NUVEM.migrarPrimeiraConta()')).ok, true);
+    m.id = id;
+    A.deepStrictEqual([servidorEstado(m).estado.moedas, m.a.avaliar('S.moedas')], [70, 70]);
+  });
+
   await teste('a12. teto do servidor (0007, 5000 por chamada): perfil antigo com 12.300 moedas migra, sobe em 3 parcelas sozinho e nada se perde', async () => {
     const m = montar(23);
     m.a.avaliar("novoPerfil('Zeca','#12A06E');S.moedas=12300;salvar()");
