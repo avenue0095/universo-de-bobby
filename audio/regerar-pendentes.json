@@ -1,6 +1,6 @@
 {
  "gerado": "2026-11-09",
- "total": 735,
+ "total": 745,
  "itens": [
   {
    "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
@@ -6751,6 +6751,110 @@
    "categoria": "trecho de enunciado sem clipe (achado pela amostra da fase 4, parte 0, 09/11/2026)",
    "motivo": "a amostra mudou com os geradores novos e achou este trecho antigo sem clipe; gravar com a voz local",
    "trechos_sem_clipe": []
+  },
+  {
+   "texto": "A resposta é PETECA.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:resposta é peteca"
+   ]
+  },
+  {
+   "texto": "A resposta é Fica na janela.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:resposta é fica"
+   ]
+  },
+  {
+   "texto": "A resposta é O dos dinossauros.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:dos dinossauros"
+   ]
+  },
+  {
+   "texto": "A resposta é Um dente de leite.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:resposta é um dente",
+    "quadro:leite"
+   ]
+  },
+  {
+   "texto": "A resposta é Para ajudar a mexer a massa.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:resposta é para ajudar",
+    "quadro:mexer",
+    "quadro:massa"
+   ]
+  },
+  {
+   "texto": "A resposta é A lancheira.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:lancheira"
+   ]
+  },
+  {
+   "texto": "A resposta é Bigode.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:resposta é bigode"
+   ]
+  },
+  {
+   "texto": "A resposta é Na sexta.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:sexta"
+   ]
+  },
+  {
+   "texto": "A resposta é De um ônibus.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:um ônibus"
+   ]
+  },
+  {
+   "texto": "A resposta é Por causa da chuva.",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "categoria": "resposta da dica (achada pela amostra da segunda passada da fase 4, 09/11/2026)",
+   "motivo": "texto antigo sem clipe; a amostra mudou porque a lista de bloqueio tirou PATO e MALA da escrita certa (menos de 3 erradas) e achou este; gravar com a voz local",
+   "trechos_sem_clipe": [
+    "quadro:causa",
+    "quadro:chuva"
+   ]
   }
  ]
 }

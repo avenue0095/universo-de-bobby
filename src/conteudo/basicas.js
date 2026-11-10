@@ -54,8 +54,10 @@ function legivel(t,p){
   return /[aeiouãõáéíóúâêô]/.test(t);
 }
 /* ---------- gerador de erros de ortografia: as 4 operações (trocar vizinhas, trocar por letra parecida, tirar uma, dobrar uma) ---------- */
-function errosDeGrafia(p,n){
-  p=String(p).toLowerCase();const out=new Set(),tenta=[];
+/* tentativas cruas (antes dos filtros). candidatosDeGrafia, abaixo, dá TODAS as escritas erradas que o app pode mostrar para p, sem
+   sorteio: é o que a conferência lê inteira (docs/fase4/DISTRATORES-CONFERENCIA.md, testes/distratores.js). */
+function tentativasDeGrafia(p){
+  p=String(p).toLowerCase();const tenta=[];
   for(let i=0;i<p.length-1;i++)if(p[i]!==p[i+1])tenta.push(p.slice(0,i)+p[i+1]+p[i]+p.slice(i+2));
   /* letra parecida, mas vogal só vira vogal e consoante só vira consoante (N por U dava BOUECA, impossível de ler) */
   const Vg=c=>/[aeiou]/.test(c||'');
@@ -68,10 +70,15 @@ function errosDeGrafia(p,n){
   if(/o$/.test(p))tenta.push(p.slice(0,-1)+'u');if(/e$/.test(p))tenta.push(p.slice(0,-1)+'i');
   /* sílaba trocada de lugar (BOLA -> LABO) */
   const w=PALAVRAS_BASE.find(x=>x.p===p);if(w&&w.s.length>=2){const t=w.s.slice();[t[0],t[1]]=[t[1],t[0]];tenta.push(t.join(''));}
-  /* nunca uma palavra de verdade (BALA no lugar de BOLA): conferido contra PALAVRAS_REAIS (corretor pt_BR, build/palavras-reais.swift) */
-  shuf(tenta).forEach(t=>{if(out.size<n&&t!==p&&t.length>=2&&!ehPalavraReal(t)&&legivel(t,p)&&!hiatoNovo(t,p))out.add(t);});
-  return [...out];
+  return tenta;
 }
+/* nunca uma palavra de verdade (BALA no lugar de BOLA): conferido contra PALAVRAS_REAIS (corretor pt_BR, build/palavras-reais.swift);
+   nunca palavra da lista de bloqueio (PEDO, PALO: palavrão, gíria, palavra de outro país, nome, conotação ruim; bloqueio.js) */
+const aceitaGrafia=(t,p)=>t!==p&&t.length>=2&&!ehPalavraReal(t)&&!bloqueada(t)&&legivel(t,p)&&!hiatoNovo(t,p);
+function candidatosDeGrafia(p){p=String(p).toLowerCase();return tentativasDeGrafia(p).filter(t=>aceitaGrafia(t,p));}
+/* sorteia a lista crua e filtra depois: o sorteio gasta os mesmos números de antes (as outras perguntas da fase não mudam) */
+function errosDeGrafia(p,n){p=String(p).toLowerCase();const out=new Set();shuf(tentativasDeGrafia(p)).forEach(t=>{if(out.size<n&&aceitaGrafia(t,p))out.add(t);});return [...out];}
+const bloqueada=t=>typeof PALAVRAS_BLOQUEADAS==='object'&&PALAVRAS_BLOQUEADAS.has(String(t).toLowerCase());
 const ehPalavraReal=t=>(typeof PALAVRAS_REAIS==='object'&&PALAVRAS_REAIS.has(String(t).toLowerCase()))||PALAVRAS_BASE.some(w=>w.p===String(t).toLowerCase());
 /* lacuna que só uma letra completa: nenhuma outra letra de A a Z (nem Ç) forma palavra real naquela posição */
 const LETRAS_AZ='abcdefghijklmnopqrstuvwxyzç'.split('');
