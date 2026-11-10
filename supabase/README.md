@@ -11,10 +11,13 @@ Estado em 24/10/2026: **escrito, não executado.** A máquina onde isto foi escr
 | `migrations/0001_schema.sql` | 11 tabelas, gatilhos (carimbo, limite de 4 perfis, criar `responsavel` ao cadastrar, `so_cresce` em `perfil_estado` e `progresso_fase`), `limite_ok()` (só servidor) e `limite_ok_usuario()` (chave derivada de `auth.uid()`), revogação de privilégios do `anon` |
 | `migrations/0002_rls.sql` | RLS ligada em todas as tabelas (sem FORCE, para os gatilhos `security definer` passarem); políticas só `to authenticated`; `perfil_e_meu()` |
 | `migrations/0003_rpc.sql` | `acesso_liberado()`, `snapshot_perfil()`, `sincronizar_perfil()`, `exportar_meus_dados()`, `pedir_exclusao()`; gatilho que cria `perfil_estado` |
+| `migrations/0004_checkout.sql` | `assinatura.provedor_checkout_id`: liga a assinatura ao Checkout do Asaas (o Bobby não cria cliente na API porque ela exige nome e CPF) |
 | `testes/rls.sql` | 23 provas de RLS, privilégios e merge, em `BEGIN ... ROLLBACK` (não deixa rastro) |
+| `functions/_shared/*.ts` | configuração (preço, tolerância, limites), Asaas, sessão e token em tempo constante, limite por conta, banco via PostgREST, log sem dado pessoal |
+| `functions/criar-checkout`, `webhook-pagamento`, `cancelar-assinatura`, `pedir-reembolso` | Edge Functions da assinatura (S2). Testes: `deno test --no-remote supabase/functions` (Asaas, Auth e banco falsos) |
 | `.env.example` | nomes das variáveis, sem valor |
 
-As Edge Functions (`criar-checkout`, `webhook-pagamento`, `cancelar-assinatura`, `apagar-conta`, `relatorio-semanal`) ainda não existem: são as sessões S3 a S5 do PLANO. O desenho delas está em `docs/fase4/ARQUITETURA.md`.
+As Edge Functions da assinatura existem desde 09/11/2026 e passam nos testes sem conta (`docs/fase4/ANDAMENTO.md`). Publicar o webhook sem verificação de JWT (ele confere o token do Asaas): `supabase functions deploy webhook-pagamento --no-verify-jwt`; as outras três com o padrão (`verify_jwt` ligado). `apagar-conta` e `relatorio-semanal` ainda não existem (S3 e S4).
 
 ## 2. Criar o projeto (mão do Filipe)
 
@@ -36,7 +39,7 @@ Com a CLI (`brew install supabase/tap/supabase`):
 cd /Users/filipealvesesilva/Projetos/universo-de-bobby
 supabase login
 supabase link --project-ref <ref-do-projeto>
-supabase db push          # aplica 0001, 0002, 0003 em ordem
+supabase db push          # aplica 0001, 0002, 0003 e 0004 em ordem
 ```
 
 Sem CLI: colar cada arquivo no **SQL Editor**, na ordem 0001 → 0002 → 0003. Cada um roda inteiro ou falha inteiro.
