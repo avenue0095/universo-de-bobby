@@ -61,6 +61,8 @@ export interface Repositorio {
   concluirEvento(id: string, erro: string | null): Promise<void>;
   /** Upsert por provedor_pagamento_id (uma linha por cobrança, nunca duas). */
   salvarPagamento(p: Pagamento): Promise<void>;
+  /** A linha da cobrança, se já existe (o webhook junta com o evento por mesclarPagamento antes de gravar). */
+  buscarPagamento(provedorPagamentoId: string): Promise<Pagamento | null>;
   pagamentosDaAssinatura(assinaturaId: string): Promise<Pagamento[]>;
 }
 
@@ -158,6 +160,15 @@ export class RepositorioPostgrest implements Repositorio {
       body: JSON.stringify(p),
       prefer: 'resolution=merge-duplicates,return=minimal',
     });
+  }
+
+  async buscarPagamento(provedorPagamentoId: string): Promise<Pagamento | null> {
+    exigir(ID_PROVEDOR.test(provedorPagamentoId), 'id de pagamento inválido');
+    const r = await this.pedir(
+      'pagamento?select=provedor_pagamento_id,assinatura_id,responsavel_id,provedor,valor_centavos,metodo,status,vencimento,pago_em' +
+        '&provedor_pagamento_id=eq.' + encodeURIComponent(provedorPagamentoId) + '&limit=1',
+    ) as Pagamento[];
+    return r?.[0] ?? null;
   }
 
   async pagamentosDaAssinatura(assinaturaId: string): Promise<Pagamento[]> {

@@ -1,6 +1,8 @@
 // Banco em memória com as MESMAS regras que o SQL impõe e que as funções dependem:
 //   * assinatura_vigente_unica: uma só assinatura pendente/ativa/atrasada por família (0001);
 //   * pagamento.provedor_pagamento_id único (upsert);
+//     (o gatilho pagamento_so_avanca da 0005 NÃO é imitado aqui de propósito: assim o
+//     teste prova que o webhook já aplica a regra sozinho, por mesclarPagamento)
 //   * webhook_evento.id é a chave (idempotência);
 //   * limite_ok: contador por chave dentro da janela (0001).
 // Serve só para os testes; a implementação real é RepositorioPostgrest.
@@ -89,6 +91,12 @@ export class RepositorioMemoria implements Repositorio {
     const i = this.pagamentos.findIndex((x) => x.provedor_pagamento_id === p.provedor_pagamento_id);
     if (i >= 0) this.pagamentos[i] = { ...this.pagamentos[i], ...p }; else this.pagamentos.push({ ...p });
     return Promise.resolve();
+  }
+
+  buscarPagamento(id: string): Promise<Pagamento | null> {
+    this.talvezFalhe('buscarPagamento');
+    const p = this.pagamentos.find((x) => x.provedor_pagamento_id === id);
+    return Promise.resolve(p ? { ...p } : null);
   }
 
   pagamentosDaAssinatura(id: string): Promise<Pagamento[]> {

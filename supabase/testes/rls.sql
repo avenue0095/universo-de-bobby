@@ -376,7 +376,35 @@ end $$;
 reset role;
 
 -- =============================================================================
--- Resumo esperado: 23 linhas "NOTICE: OK:" e nenhuma "FALHA". Conte com:
+-- Como o servidor (papel postgres): regras de gatilho que valem para qualquer gravação
+-- =============================================================================
+
+-- 17. pagamento só avança (0005): aviso atrasado do Asaas não desfaz pagamento nem estorno
+do $$
+declare st text; pg timestamptz;
+begin
+  insert into public.pagamento (provedor_pagamento_id, assinatura_id, responsavel_id, valor_centavos, status, pago_em)
+  values ('pay_teste_ordem_1', '00000000-0000-4000-8000-0000000000aa', '00000000-0000-4000-8000-00000000000a', 1990, 'recebido', '2026-11-10'),
+         ('pay_teste_ordem_2', '00000000-0000-4000-8000-0000000000aa', '00000000-0000-4000-8000-00000000000a', 1990, 'estornado', '2026-11-10');
+  -- RECEIVED e depois UPDATED atrasado (o mesmo upsert do webhook)
+  insert into public.pagamento (provedor_pagamento_id, valor_centavos, status, pago_em)
+  values ('pay_teste_ordem_1', 1990, 'pendente', null)
+  on conflict (provedor_pagamento_id) do update set status = excluded.status, pago_em = excluded.pago_em;
+  select status, pago_em into st, pg from public.pagamento where provedor_pagamento_id = 'pay_teste_ordem_1';
+  if st <> 'recebido' or pg is null then raise exception 'FALHA: aviso atrasado voltou a cobrança para % (pago_em %)', st, pg; end if;
+  -- REFUNDED e depois CONFIRMED atrasado
+  update public.pagamento set status = 'confirmado' where provedor_pagamento_id = 'pay_teste_ordem_2';
+  select status into st from public.pagamento where provedor_pagamento_id = 'pay_teste_ordem_2';
+  if st <> 'estornado' then raise exception 'FALHA: estorno virou % com aviso atrasado', st; end if;
+  -- avançar continua possível
+  update public.pagamento set status = 'estornado' where provedor_pagamento_id = 'pay_teste_ordem_1';
+  select status, pago_em into st, pg from public.pagamento where provedor_pagamento_id = 'pay_teste_ordem_1';
+  if st <> 'estornado' or pg is null then raise exception 'FALHA: recebido não avançou para estornado (%, %)', st, pg; end if;
+  raise notice 'OK: pagamento só avança (pendente < confirmado < recebido; estornado terminal)';
+end $$;
+
+-- =============================================================================
+-- Resumo esperado: 24 linhas "NOTICE: OK:" e nenhuma "FALHA". Conte com:
 --   psql ... -f supabase/testes/rls.sql 2>&1 | grep -c 'OK:'
 -- =============================================================================
 

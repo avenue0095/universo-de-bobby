@@ -12,6 +12,8 @@
 // Idempotente: o id do evento entra em webhook_evento antes de qualquer gravação;
 // evento repetido e já processado responde 200 e sai. Toda gravação é upsert ou
 // "maior data vence", então reprocessar um evento que falhou no meio não duplica.
+// Fora de ordem: o estado da cobrança só avança (pendente < confirmado < recebido,
+// estornado terminal; _shared/pagamento.ts e gatilho da 0005).
 //
 // O payload NÃO é guardado nem registrado (tem nome, e-mail e CPF do pagador).
 // O log leva só id do evento, tipo e id da assinatura.
@@ -20,6 +22,7 @@
 import { tokensIguais } from '../_shared/auth.ts';
 import { acessoAteDe, lerAmbiente } from '../_shared/config.ts';
 import { json, type Logger, lerJson, registrar } from '../_shared/http.ts';
+import { mesclarPagamento } from '../_shared/pagamento.ts';
 import { type EventoAsaas, lerEvento, statusDoPagamento } from '../_shared/provedor-asaas.ts';
 import { type Assinatura, type Repositorio, RepositorioPostgrest } from '../_shared/repositorio.ts';
 
@@ -61,11 +64,15 @@ async function processar(repo: Repositorio, ev: EventoAsaas, agora: Date): Promi
     if (!ev.pagamento || !st) return null;   // evento de cobrança que não muda nada no Bobby (ex.: PAYMENT_BANK_SLIP_VIEWED)
     if (!a) return 'sem_assinatura';
     const p = ev.pagamento;
-    await repo.salvarPagamento({
+    // o estado da cobrança só avança (_shared/pagamento.ts): evento atrasado não desfaz pagamento nem estorno
+    const gravado = mesclarPagamento(await repo.buscarPagamento(p.id), {
       provedor_pagamento_id: p.id, assinatura_id: a.id, responsavel_id: a.responsavel_id, provedor: 'asaas',
       valor_centavos: p.valorCentavos, metodo: p.metodo, status: st, vencimento: p.vencimento,
       pago_em: st === 'confirmado' || st === 'recebido' ? (p.pagoEm ?? agora.toISOString().slice(0, 10)) : null,
     });
+    await repo.salvarPagamento(gravado);
+    // evento vencido pela regra acima (ex.: OVERDUE depois de CONFIRMED da mesma cobrança): só registra, não mexe na assinatura
+    if (gravado.status !== st) return null;
     if (t === 'PAYMENT_CONFIRMED' || t === 'PAYMENT_RECEIVED') {
       if (a.status === 'reembolsada' || a.status === 'expirada') return null;   // pagamento tardio de assinatura encerrada: só registra
       const ate = acessoAteDe(p.vencimento ?? agora.toISOString().slice(0, 10), a.plano);
