@@ -239,6 +239,43 @@ const servidorEstado = (m) => m.srv.snapshot(m.id);
     A.deepStrictEqual([e.estado.look.cabeca, e.fases.find((f) => f.fase_id === '1.3').estrelas, e.itens[0].caixa, e.estado.moedas], ['gorro', 3, 2, 80]);
   });
 
+  await teste('a9. servidor com ganhas MENOR que o aparelho (ganhou offline e puxou antes de empurrar): o merge nao baixa o razao nem o saldo', async () => {
+    const m = await comPerfil(19);
+    m.a.avaliar('S.moedas+=50;salvar()');   // ganhou 50 sem empurrar ainda (o servidor continua com ganhas 0)
+    A.strictEqual(servidorEstado(m).estado.moedas_ganhas, 0);
+    m.passa(61000);
+    A.strictEqual(await m.a.avaliar('NUVEM.puxar(0)'), true);
+    A.strictEqual(m.a.avaliar('S.moedas'), 50, 'o pull devolveu o saldo do servidor (0) por cima do que o aparelho ganhou');
+    A.deepStrictEqual(J(m.a.avaliar('(r=>[r.razao.ganhas,r.razao.gastas])(NUVEM.registro(STORE.perfis[0].id))')), [50, 0]);
+    await subir(m);
+    A.deepStrictEqual([servidorEstado(m).estado.moedas_ganhas, servidorEstado(m).estado.moedas], [50, 50]);
+  });
+
+  await teste('a10. o que muda DURANTE o envio continua sujo e sobe no proximo push (limparEnviado so limpa o que foi enviado igual)', async () => {
+    const m = await comPerfil(20);
+    m.a.avaliar("S.feitas['1.1']=1;salvar()");
+    await subir(m);
+    // no meio da próxima ida ao servidor, a criança termina a 1.4 e melhora a 1.1 (o relógio anda: carimbo novo)
+    const orig = m.srv.sincronizarPerfil.bind(m.srv);
+    let uma = true;
+    m.srv.sincronizarPerfil = async (...x) => {
+      const r = await orig(...x);
+      if (uma) { uma = false; m.passa(1000); m.a.avaliar("S.feitas['1.1']=2;S.feitas['1.4']=3;S.xp+=7;salvar()"); }
+      return r;
+    };
+    m.a.avaliar("S.feitas['1.2']=1;salvar()");
+    await subir(m);
+    const sujo = J(m.a.avaliar('NUVEM.registro(STORE.perfis[0].id).sujo'));
+    A.deepStrictEqual(Object.keys(sujo.fases).sort(), ['1.1', '1.4'], 'o que mudou durante o envio deixou de estar sujo');
+    A.ok(sujo.estado, 'o xp que mudou durante o envio deixou de estar sujo');
+    A.deepStrictEqual(J(m.a.avaliar("[S.feitas['1.1'],S.feitas['1.4']]")), [2, 3], 'a resposta do servidor apagou o que a criança fez durante o envio');
+    await subir(m);
+    const fs = {}; servidorEstado(m).fases.forEach((f) => { fs[f.fase_id] = f.estrelas; });
+    A.deepStrictEqual([fs['1.1'], fs['1.2'], fs['1.4']], [2, 1, 3]);
+    A.strictEqual(servidorEstado(m).estado.xp, m.a.avaliar('S.xp'));
+    A.deepStrictEqual(J(m.a.avaliar('NUVEM.registro(STORE.perfis[0].id).sujo.fases')), {});
+  });
+
   /* ======================================================== (b) migração da primeira conta */
   const LICOES50 = (a) => J(a.avaliar("[].concat(...['mat','pt','en'].map(m=>MATERIAS[m].units().flatMap(u=>u.lessons.map(l=>l.id)))).slice(0,50)"));
   const perfilV4 = (m) => {
