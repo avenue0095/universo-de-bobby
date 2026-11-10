@@ -20,20 +20,37 @@ const ENCONTROS=/^(br|bl|cr|cl|dr|fr|fl|gr|gl|pr|pl|tr|vr|ch|lh|nh)/;
 function hiatoNovo(t,p){const pares=w=>(String(w).toLowerCase().match(/[aeiou](?=[aeiou])/g)?[...String(w).toLowerCase().matchAll(/(?=([aeiou][aeiou]))/g)].map(m=>m[1]):[]);const ok=new Set(pares(p));return pares(t).some(x=>!ok.has(x));}
 /* consoante seguida de consoante só quando o par existe de verdade: os encontros acima (BR, CL...), RR e SS, o par que a palavra certa
    já tem (DENTE tem NT, BORBOLETA tem RB) ou consoante que fecha sílaba no português (R, S, L antes de qualquer uma; M antes de P e B;
-   N antes das outras: ARTO, FESTA, CAMPO, DENTE). Letra dobrada só RR e SS (nada de RATTO, BOLLO). Sem isso saíam ACSA, AJNELA e DETNE. CH, LH, NH, QU e GU contam como uma letra só. */
+   N antes das outras: ARTO, FESTA, CAMPO, DENTE). Letra dobrada só RR e SS (nada de RATTO, BOLLO). Sem isso saíam ACSA, AJNELA e DETNE.
+   CH, LH, NH, QU e GU contam como UMA consoante, mas entram na conta do par (antes era um marcador que pulava o par e deixava passar
+   OFGUETE, FOGGUETE, GALINNHA): depois deles só vem vogal; antes de CH, QU e GU só R, S, L ou N que fecha sílaba (MARCHA, ESQUILO,
+   ALGUÉM, SANGUE; nunca GGU nem CCH), antes de LH e NH nenhuma consoante. H sozinho só no começo (HORA): GALNIHA não. */
 const PARES_OK=new Set(['br','bl','cr','cl','dr','fr','fl','gr','gl','pr','pl','tr','vr','rr','ss']);
 const fechaSilaba=x=>x[0]!==x[1]&&(/^[rsl]/.test(x)||/^m[pb]$/.test(x)||/^n[^pb]$/.test(x));
 const NAO_VOGAL=/[^aeiouãõáéíóúâêôy]/;
-function paresDeConsoante(w){const t=String(w).toLowerCase().replace(/(ch|lh|nh|qu|gu)/g,'C'),out=[];
-  for(let i=0;i<t.length-1;i++)if(NAO_VOGAL.test(t[i])&&NAO_VOGAL.test(t[i+1])&&t[i]!=='C'&&t[i+1]!=='C')out.push(t[i]+t[i+1]);return out;}
+const DIGRAFO=/^(ch|lh|nh|qu|gu)$/;
+/* a palavra em pedaços: dígrafo inteiro ou uma letra */
+/* QU e GU só são dígrafo antes de vogal (QUEIJO, GUERRA, ÁGUA); antes de consoante o U é vogal de verdade (AL-GU-MA, FI-GU-RA) */
+const DIGRAFOS_RE=/ch|lh|nh|[qg]u(?=[aeiouáéíóâêôãõ])/g;
+const pedacos=w=>String(w).toLowerCase().match(/ch|lh|nh|[qg]u(?=[aeiouáéíóâêôãõ])|./g)||[];
+/* todo encontro de duas consoantes seguidas (dígrafo conta como consoante), escrito junto: 'nt', 'fgu', 'nnh' */
+function paresDeConsoante(w){const t=pedacos(w),out=[];
+  for(let i=0;i<t.length-1;i++)if(NAO_VOGAL.test(t[i][0])&&NAO_VOGAL.test(t[i+1][0]))out.push(t[i]+t[i+1]);return out;}
+/* o par se lê? (sem contar o que a palavra certa já tem) */
+function parLegivel(x){
+  const d=x.slice(1);
+  if(x.length>2&&DIGRAFO.test(x.slice(0,2)))return false;   /* dígrafo seguido de consoante: CHT, NHL */
+  if(DIGRAFO.test(d))return /^(ch|qu|gu)$/.test(d)&&/^[rsln]$/.test(x[0]);
+  return PARES_OK.has(x)||fechaSilaba(x);
+}
 function legivel(t,p){
   t=String(t).toLowerCase();
   if(/q(?!u)/.test(t))return false;   /* Q sem U depois não se lê (QATO, QOLA, QENTE) */
-  if(/[^aeiouãõáéíóúâêôy]{3,}/.test(t.replace(/(ch|lh|nh|qu|gu)/g,'C')))return false;
+  if(pedacos(t).some((x,i)=>x==='h'&&i>0))return false;   /* H fora de CH, LH, NH só no começo da palavra (GALNIHA) */
+  if(/[^aeiouãõáéíóúâêôy]{3,}/.test(t.replace(DIGRAFOS_RE,'C')))return false;
   if(/^[^aeiouãõáéíóúâêô]{2}/.test(t)&&!ENCONTROS.test(t))return false;
   if(/[^aeiouãõáéíóúâêômrslz]$/.test(t))return false;
   const daPalavra=new Set(p?paresDeConsoante(p):[]);
-  if(paresDeConsoante(t).some(x=>!PARES_OK.has(x)&&!daPalavra.has(x)&&!fechaSilaba(x)))return false;
+  if(paresDeConsoante(t).some(x=>!daPalavra.has(x)&&!parLegivel(x)))return false;
   return /[aeiouãõáéíóúâêô]/.test(t);
 }
 /* ---------- gerador de erros de ortografia: as 4 operações (trocar vizinhas, trocar por letra parecida, tirar uma, dobrar uma) ---------- */

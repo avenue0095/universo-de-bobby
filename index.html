@@ -3462,16 +3462,26 @@ function hiatoNovo(t,p){const pares=w=>(String(w).toLowerCase().match(/[aeiou](?
 const PARES_OK=new Set(['br','bl','cr','cl','dr','fr','fl','gr','gl','pr','pl','tr','vr','rr','ss']);
 const fechaSilaba=x=>x[0]!==x[1]&&(/^[rsl]/.test(x)||/^m[pb]$/.test(x)||/^n[^pb]$/.test(x));
 const NAO_VOGAL=/[^aeiouãõáéíóúâêôy]/;
-function paresDeConsoante(w){const t=String(w).toLowerCase().replace(/(ch|lh|nh|qu|gu)/g,'C'),out=[];
-for(let i=0;i<t.length-1;i++)if(NAO_VOGAL.test(t[i])&&NAO_VOGAL.test(t[i+1])&&t[i]!=='C'&&t[i+1]!=='C')out.push(t[i]+t[i+1]);return out;}
+const DIGRAFO=/^(ch|lh|nh|qu|gu)$/;
+const DIGRAFOS_RE=/ch|lh|nh|[qg]u(?=[aeiouáéíóâêôãõ])/g;
+const pedacos=w=>String(w).toLowerCase().match(/ch|lh|nh|[qg]u(?=[aeiouáéíóâêôãõ])|./g)||[];
+function paresDeConsoante(w){const t=pedacos(w),out=[];
+for(let i=0;i<t.length-1;i++)if(NAO_VOGAL.test(t[i][0])&&NAO_VOGAL.test(t[i+1][0]))out.push(t[i]+t[i+1]);return out;}
+function parLegivel(x){
+const d=x.slice(1);
+if(x.length>2&&DIGRAFO.test(x.slice(0,2)))return false;
+if(DIGRAFO.test(d))return /^(ch|qu|gu)$/.test(d)&&/^[rsln]$/.test(x[0]);
+return PARES_OK.has(x)||fechaSilaba(x);
+}
 function legivel(t,p){
 t=String(t).toLowerCase();
 if(/q(?!u)/.test(t))return false;
-if(/[^aeiouãõáéíóúâêôy]{3,}/.test(t.replace(/(ch|lh|nh|qu|gu)/g,'C')))return false;
+if(pedacos(t).some((x,i)=>x==='h'&&i>0))return false;
+if(/[^aeiouãõáéíóúâêôy]{3,}/.test(t.replace(DIGRAFOS_RE,'C')))return false;
 if(/^[^aeiouãõáéíóúâêô]{2}/.test(t)&&!ENCONTROS.test(t))return false;
 if(/[^aeiouãõáéíóúâêômrslz]$/.test(t))return false;
 const daPalavra=new Set(p?paresDeConsoante(p):[]);
-if(paresDeConsoante(t).some(x=>!PARES_OK.has(x)&&!daPalavra.has(x)&&!fechaSilaba(x)))return false;
+if(paresDeConsoante(t).some(x=>!daPalavra.has(x)&&!parLegivel(x)))return false;
 return /[aeiouãõáéíóúâêô]/.test(t);
 }
 function errosDeGrafia(p,n){

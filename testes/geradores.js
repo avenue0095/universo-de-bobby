@@ -72,12 +72,24 @@ const J = (x) => JSON.parse(JSON.stringify(x));
   await teste('7. escrita legivel: Q so com U depois (QATO, QOLA, QENTE) e consoante com consoante so em encontro valido, RR, SS, par da palavra certa ou consoante que fecha silaba (ACSA, AJNELA, DETNE nao)', () => {
     /* implementacao propria do teste: pares de consoante que nao sao encontro nem existem na palavra certa */
     const ENC = new Set(['br', 'bl', 'cr', 'cl', 'dr', 'fr', 'fl', 'gr', 'gl', 'pr', 'pl', 'tr', 'vr', 'rr', 'ss']);
-    const pares = (w) => { const t = String(w).toLowerCase().replace(/(ch|lh|nh|qu|gu)/g, '#'); const o = [];
-      for (let i = 0; i < t.length - 1; i++) if (/[bcdfgjklmnpqrstvwxz]/.test(t[i]) && /[bcdfgjklmnpqrstvwxz]/.test(t[i + 1])) o.push(t[i] + t[i + 1]); return o; };
+    /* digrafo (CH, LH, NH, QU, GU) conta como UMA consoante e entra no par: OFGUETE tem F+GU, GALINNHA tem N+NH */
+    const DIG = /ch|lh|nh|[qg]u(?=[aeiouáéíóâêôãõ])|./g;   /* QU e GU so sao digrafo antes de vogal: AL-GU-MA tem U vogal */
+    const pares = (w) => { const t = String(w).toLowerCase().match(DIG) || []; const o = [];
+      for (let i = 0; i < t.length - 1; i++) if (/^[bcdfghjklmnpqrstvwxz]/.test(t[i]) && /^[bcdfghjklmnpqrstvwxz]/.test(t[i + 1])) o.push(t[i] + '+' + t[i + 1]); return o; };
     const ruimDe = (o, p) => { o = o.toLowerCase(); if (/q(?!u)/.test(o)) return 'Q sem U'; const da = new Set(pares(p));
+      if ((o.match(DIG) || []).some((x, i) => x === 'h' && i > 0)) return 'H solto';
       const fecha = (z) => z[0] !== z[1] && (/^[rsl]/.test(z) || /^m[pb]$/.test(z) || /^n[^pb]$/.test(z));   /* R, S, L, M e N fecham silaba: ARTO, CAMPO */
-      const x = pares(o).find((z) => !ENC.has(z) && !da.has(z) && !fecha(z)); return x ? 'par ' + x : ''; };
+      const ok = (z) => { const [x, y] = z.split('+'); if (x.length > 1) return false;   /* depois de digrafo so vogal */
+        if (y.length > 1) return x !== y[0] && /^(ch|qu|gu)$/.test(y) && /^[rsln]$/.test(x);   /* MARCHA, ESQUILO, SANGUE; nada antes de LH e NH */
+        return ENC.has(x + y) || fecha(x + y); };
+      const x = pares(o).find((z) => !da.has(z) && !ok(z)); return x ? 'par ' + x : ''; };
     ['qato', 'qola', 'qente', 'acsa', 'ajnela', 'detne', 'ratto', 'bollo', 'facca'].forEach((w) => A.strictEqual(a.avaliar('legivel(' + JSON.stringify(w) + ')'), false, w + ' deveria ser ilegivel'));
+    /* segunda passada: consoante colada em digrafo e H solto (antes passavam, o digrafo virava um marcador que pulava o par) */
+    [['ofguete', 'foguete'], ['fogguete', 'foguete'], ['galinnha', 'galinha'], ['galniha', 'galinha'], ['gallinha', 'galinha'],
+      ['ofgete', 'foguete'], ['bochla', 'bola'], ['achha', ''], ['malhha', ''], ['penhca', ''], ['tlha', ''], ['malhra', ''], ['velhsa', '']].forEach(([w, p]) =>
+      A.strictEqual(a.avaliar('legivel(' + JSON.stringify(w) + ',' + JSON.stringify(p) + ')'), false, w + ' deveria ser ilegivel'));
+    ['marcha', 'esquilo', 'sangue', 'cinquenta', 'hora', 'alguma', 'figura', 'agua', 'quando', 'galinha', 'foguete'].forEach((w) =>
+      A.strictEqual(a.avaliar('legivel(' + JSON.stringify(w) + ')'), true, w + ' deveria ser legivel'));
     ['bola', 'prato', 'carro', 'massa', 'chuva', 'quilo', 'galinha', 'foguete'].forEach((w) => A.strictEqual(a.avaliar('legivel(' + JSON.stringify(w) + ')'), true, w + ' deveria ser legivel'));
     A.strictEqual(a.avaliar("legivel('dente','dente')"), true, 'o NT de DENTE vale quando a palavra certa e DENTE');
     A.strictEqual(a.avaliar("legivel('detne','dente')"), false, 'TN nao existe em DENTE');
