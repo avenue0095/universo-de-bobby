@@ -1,5 +1,6 @@
 // Banco em memória com as MESMAS regras que o SQL impõe e que as funções dependem:
-//   * assinatura_vigente_unica: uma só assinatura pendente/ativa/atrasada por família (0001);
+//   * assinatura_vigente_unica: uma só assinatura pendente/ativa/atrasada por família (0001), no insert E no update;
+//   * reabrir_assinatura_paga (0008): a mesma regra, num passo só (sem await no meio = atômico como a transação);
 //   * pagamento.provedor_pagamento_id único (upsert);
 //     (o gatilho pagamento_so_avanca da 0005 NÃO é imitado aqui de propósito: assim o
 //     teste prova que o webhook já aplica a regra sozinho, por mesclarPagamento)
@@ -7,7 +8,9 @@
 //   * limite_ok: contador por chave dentro da janela (0001).
 // Serve só para os testes; a implementação real é RepositorioPostgrest.
 
-import type { Assinatura, FiltroAssinatura, NovaAssinatura, Pagamento, Repositorio } from '../_shared/repositorio.ts';
+import type { Assinatura, FiltroAssinatura, NovaAssinatura, Pagamento, Repositorio, ResultadoReabrir } from '../_shared/repositorio.ts';
+
+const VIGENTE = ['pendente', 'ativa', 'atrasada'];
 
 export class RepositorioMemoria implements Repositorio {
   assinaturas: Assinatura[] = [];
@@ -63,8 +66,33 @@ export class RepositorioMemoria implements Repositorio {
   atualizarAssinatura(id: string, patch: Partial<Assinatura>): Promise<void> {
     this.talvezFalhe('atualizarAssinatura');
     const a = this.assinaturas.find((x) => x.id === id);
+    if (a && patch.status && VIGENTE.includes(patch.status) &&
+      this.assinaturas.some((x) => x.id !== id && x.responsavel_id === a.responsavel_id && VIGENTE.includes(x.status))) {
+      return Promise.reject(new Error('banco respondeu 409'));   // assinatura_vigente_unica (o índice vale no update também)
+    }
     if (a) Object.assign(a, patch);
     return Promise.resolve();
+  }
+
+  reabrirAssinaturaPaga(id: string, acessoAte: string, agora: string): Promise<ResultadoReabrir> {
+    this.talvezFalhe('reabrirAssinaturaPaga');
+    const a = this.assinaturas.find((x) => x.id === id);
+    if (!a) return Promise.resolve('sem_assinatura');
+    if (a.status !== 'expirada') return Promise.resolve('mudou');
+    if (a.inicio_em) return Promise.resolve('expirada_ja_usada');
+    const familia = this.assinaturas.filter((x) => x.responsavel_id === a.responsavel_id && ['pendente', 'ativa', 'atrasada', 'cancelada'].includes(x.status));
+    const atual = familia.length ? familia[familia.length - 1] : null;   // a mais recente (criado_em desc)
+    if (atual && atual.id !== a.id) {
+      if (atual.status === 'ativa' || atual.status === 'atrasada' ||
+        (atual.status === 'cancelada' && !!atual.acesso_ate && new Date(atual.acesso_ate) > new Date(agora))) {
+        return Promise.resolve('pagamento_duplicado');
+      }
+      if (atual.status === 'pendente') atual.status = 'expirada';
+    }
+    a.status = 'ativa';
+    a.inicio_em = agora;
+    a.acesso_ate = a.acesso_ate && new Date(a.acesso_ate) > new Date(acessoAte) ? a.acesso_ate : acessoAte;
+    return Promise.resolve('reaberta');
   }
 
   buscarAssinatura(f: FiltroAssinatura): Promise<Assinatura | null> {

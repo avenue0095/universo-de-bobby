@@ -562,8 +562,34 @@ begin
   raise notice 'OK: teto registrado em moedas_limitadas; RPC de outra família não tocou em B';
 end $$;
 
+-- 19. reabrir_assinatura_paga (0008): só o servidor chama; reabre a expirada paga e expira o pendente novo na mesma transação
+do $$
+declare r text; st text; st2 text; ini timestamptz;
+begin
+  if has_function_privilege('authenticated', 'public.reabrir_assinatura_paga(uuid, timestamptz, timestamptz)', 'EXECUTE')
+     or has_function_privilege('anon', 'public.reabrir_assinatura_paga(uuid, timestamptz, timestamptz)', 'EXECUTE') then
+    raise exception 'FALHA: reabrir_assinatura_paga executável fora do servidor';
+  end if;
+  if not (select p.prosecdef and 'search_path=""' = any(p.proconfig) and pg_get_userbyid(p.proowner) = 'postgres'
+            from pg_proc p where p.oid = 'public.reabrir_assinatura_paga(uuid, timestamptz, timestamptz)'::regprocedure) then
+    raise exception 'FALHA: reabrir_assinatura_paga sem security definer, search_path vazio ou dono postgres';
+  end if;
+  -- B: 'bb' expirada sem inicio_em (do bloco 0) + um checkout novo pendente
+  insert into public.assinatura (id, responsavel_id, plano, valor_centavos, status, criado_em)
+  values ('00000000-0000-4000-8000-0000000000bc', '00000000-0000-4000-8000-00000000000b', 'mensal', 1990, 'pendente', now() + interval '1 second');
+  r := public.reabrir_assinatura_paga('00000000-0000-4000-8000-0000000000bb', now() + interval '30 days', now());
+  select status, inicio_em into st, ini from public.assinatura where id = '00000000-0000-4000-8000-0000000000bb';
+  select status into st2 from public.assinatura where id = '00000000-0000-4000-8000-0000000000bc';
+  if r <> 'reaberta' or st <> 'ativa' or ini is null or st2 <> 'expirada' then
+    raise exception 'FALHA: reabrir devolveu % (bb %, bc %)', r, st, st2;
+  end if;
+  r := public.reabrir_assinatura_paga('00000000-0000-4000-8000-0000000000bb', now() + interval '30 days', now());
+  if r <> 'mudou' then raise exception 'FALHA: segunda chamada devolveu % (esperado mudou)', r; end if;
+  raise notice 'OK: reabrir_assinatura_paga só para o servidor, atômica (expira o pendente e reabre a paga)';
+end $$;
+
 -- =============================================================================
--- Resumo esperado: 29 linhas "NOTICE: OK:" e nenhuma "FALHA". Conte com:
+-- Resumo esperado: 30 linhas "NOTICE: OK:" e nenhuma "FALHA". Conte com:
 --   psql ... -f supabase/testes/rls.sql 2>&1 | grep -c 'OK:'
 -- =============================================================================
 

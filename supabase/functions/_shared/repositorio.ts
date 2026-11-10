@@ -44,6 +44,10 @@ export interface Pagamento {
 export type NovaAssinatura = Pick<Assinatura, 'responsavel_id' | 'plano' | 'valor_centavos' | 'status' | 'max_perfis'> &
   Partial<Pick<Assinatura, 'provedor_checkout_id'>>;
 
+/** Resposta de public.reabrir_assinatura_paga (0008). 'mudou': já não está expirada (outro aviso tratou), o webhook relê. */
+export type ResultadoReabrir = 'reaberta' | 'mudou' | 'expirada_ja_usada' | 'pagamento_duplicado' | 'sem_assinatura';
+export const RESULTADOS_REABRIR: readonly ResultadoReabrir[] = ['reaberta', 'mudou', 'expirada_ja_usada', 'pagamento_duplicado', 'sem_assinatura'];
+
 export type FiltroAssinatura = { id: string } | { provedor_assinatura_id: string } | { provedor_checkout_id: string };
 
 export interface Repositorio {
@@ -56,6 +60,12 @@ export interface Repositorio {
   inserirAssinatura(a: NovaAssinatura): Promise<Assinatura>;
   atualizarAssinatura(id: string, patch: Partial<Assinatura>): Promise<void>;
   buscarAssinatura(f: FiltroAssinatura): Promise<Assinatura | null>;
+  /**
+   * Reabre, numa transação só e com a família travada, a assinatura 'expirada' que foi paga (public.reabrir_assinatura_paga, 0008):
+   * expira o checkout pendente mais novo e ativa a paga com inicio_em = agora e acesso_ate = o maior. Não reabre se já teve acesso
+   * ou se a família tem outra assinatura valendo (ativa, atrasada, cancelada com acesso no futuro).
+   */
+  reabrirAssinaturaPaga(id: string, acessoAte: string, agora: string): Promise<ResultadoReabrir>;
   /** Idempotência do webhook: 'novo' grava a linha; 'ja_processado' manda sair; 'reprocessar' é evento que falhou antes. */
   registrarEvento(id: string, tipo: string): Promise<'novo' | 'ja_processado' | 'reprocessar'>;
   concluirEvento(id: string, erro: string | null): Promise<void>;
@@ -135,6 +145,16 @@ export class RepositorioPostgrest implements Repositorio {
     exigir(campo === 'id' ? UUID.test(valor) : ID_PROVEDOR.test(valor), 'filtro inválido');
     const r = await this.pedir('assinatura?select=*&' + campo + '=eq.' + encodeURIComponent(valor) + '&limit=1') as Assinatura[];
     return r?.[0] ?? null;
+  }
+
+  async reabrirAssinaturaPaga(id: string, acessoAte: string, agora: string): Promise<ResultadoReabrir> {
+    exigir(UUID.test(id), 'id inválido');
+    const r = await this.pedir('rpc/reabrir_assinatura_paga', {
+      method: 'POST',
+      body: JSON.stringify({ p_assinatura: id, p_acesso_ate: acessoAte, p_agora: agora }),
+    });
+    exigir(typeof r === 'string' && (RESULTADOS_REABRIR as readonly string[]).includes(r), 'resposta inesperada de reabrir_assinatura_paga');
+    return r as ResultadoReabrir;
   }
 
   async registrarEvento(id: string, tipo: string): Promise<'novo' | 'ja_processado' | 'reprocessar'> {

@@ -55,26 +55,16 @@ async function acharAssinatura(repo: Repositorio, ev: EventoAsaas): Promise<Assi
 
 const maior = (a: string | null, b: Date): string => (a && new Date(a) > b ? a : b.toISOString());
 
-/**
+/*
  * Pagamento confirmado de assinatura 'expirada'. Acontece quando a família abriu um checkout, desistiu, abriu outro (criar-checkout
- * expira o pendente anterior) e depois pagou o PRIMEIRO. Pagou: tem de ter acesso. Reabre a assinatura paga, desde que:
- *   - ela nunca tenha tido acesso (inicio_em vazio): a expirada que já valeu um dia não volta por pagamento atrasado;
- *   - a família não tenha outra assinatura valendo (ativa, atrasada, ou cancelada com acesso_ate no futuro). Se tiver, as duas
+ * expira o pendente anterior) e depois pagou o PRIMEIRO. Pagou: tem de ter acesso. Quem reabre é public.reabrir_assinatura_paga
+ * (0008), numa transação com a família travada, para dois avisos juntos não se cruzarem nem baterem em assinatura_vigente_unica:
+ *   - só se ela nunca teve acesso (inicio_em vazio): a expirada que já valeu um dia não volta por pagamento atrasado;
+ *   - só se a família não tem outra assinatura valendo (ativa, atrasada, ou cancelada com acesso_ate no futuro). Se tiver, as duas
  *     foram pagas: não reabre (seria cobrança em dobro com um acesso só) e o evento fica com erro 'pagamento_duplicado' para
- *     o estorno (PENDENTE no docs/fase4/ANDAMENTO.md: ainda não há rotina automática).
- * O checkout pendente mais novo, se existir, vira 'expirada' ANTES (o índice assinatura_vigente_unica só deixa uma viva por família).
+ *     o estorno (PENDENTE no docs/fase4/ANDAMENTO.md: ainda não há rotina automática);
+ *   - o checkout pendente mais novo, se existir, vira 'expirada' antes, na mesma transação.
  */
-async function reabrirPaga(repo: Repositorio, a: Assinatura, agora: Date): Promise<Assinatura | string> {
-  if (a.inicio_em) return 'expirada_ja_usada';
-  const atual = await repo.assinaturaDoResponsavel(a.responsavel_id);
-  if (atual && atual.id !== a.id) {
-    const vale = atual.status === 'ativa' || atual.status === 'atrasada' ||
-      (atual.status === 'cancelada' && !!atual.acesso_ate && new Date(atual.acesso_ate) > agora);
-    if (vale) return 'pagamento_duplicado';
-    if (atual.status === 'pendente') await repo.atualizarAssinatura(atual.id, { status: 'expirada' });
-  }
-  return { ...a, status: 'pendente' };
-}
 
 async function processar(repo: Repositorio, ev: EventoAsaas, agora: Date): Promise<string | null> {
   let a = await acharAssinatura(repo, ev);
@@ -96,12 +86,16 @@ async function processar(repo: Repositorio, ev: EventoAsaas, agora: Date): Promi
     if (gravado.status !== st) return null;
     if (t === 'PAYMENT_CONFIRMED' || t === 'PAYMENT_RECEIVED') {
       if (a.status === 'reembolsada') return null;   // dinheiro devolvido: nunca reabre, só registra
-      if (a.status === 'expirada') {
-        const reaberta = await reabrirPaga(repo, a, agora);
-        if (typeof reaberta === 'string') return reaberta;
-        a = reaberta;
-      }
       const ate = acessoAteDe(p.vencimento ?? agora.toISOString().slice(0, 10), a.plano);
+      if (a.status === 'expirada') {
+        const r = await repo.reabrirAssinaturaPaga(a.id, ate.toISOString(), agora.toISOString());
+        if (r === 'reaberta') return null;
+        if (r !== 'mudou') return r;
+        // outro aviso já mexeu nela (ex.: CONFIRMED e RECEIVED juntos): relê e segue o caminho normal
+        a = await repo.buscarAssinatura({ id: a.id });
+        if (!a) return 'sem_assinatura';
+        if (a.status === 'reembolsada' || a.status === 'expirada') return null;
+      }
       await repo.atualizarAssinatura(a.id, {
         status: a.status === 'cancelada' ? 'cancelada' : 'ativa',
         inicio_em: a.inicio_em ?? agora.toISOString(),

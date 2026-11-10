@@ -104,3 +104,53 @@ Deno.test('reabrir: família com assinatura ATRASADA paga o checkout velho: não
   assertEquals(m.repo.eventos.get('pA')?.erro, 'pagamento_duplicado');
   assertEquals(m.repo.eventos.get('pA')?.processado_em, null);
 });
+
+// ---------------------------------------------------------------------------------------------------------------------------
+// Dois avisos ao mesmo tempo (terceira passada): a reabertura é uma transação só (0008, reabrir_assinatura_paga). O Asaas repete
+// o aviso que recebeu 500; o teste faz o mesmo. Nos dois casos o estado final tem de fazer sentido: uma assinatura só valendo e,
+// se as duas foram pagas, um aviso marcado pagamento_duplicado (nunca uma família que pagou e ficou sem marca nem acesso).
+// ---------------------------------------------------------------------------------------------------------------------------
+async function comRepeticao(m: Awaited<ReturnType<typeof doisCheckouts>>, avisos: unknown[]) {
+  const rs = await Promise.all(avisos.map((a) => m.aviso(a)));
+  for (let i = 0; i < avisos.length; i++) if (rs[i].status === 500) rs[i] = await m.aviso(avisos[i]);   // o Asaas repete
+  return rs.map((r) => r.status);
+}
+
+Deno.test('reabrir: A (velho, expirado) e B (novo, pendente) pagos JUNTOS: uma só fica valendo e o outro aviso fica marcado', async () => {
+  const m = await doisCheckouts();
+  await m.aviso(eventoAssinatura('SUBSCRIPTION_CREATED', { id: 'sB', assinatura: 'sub_B', referencia: m.B().id, ciclo: 'YEARLY' }));
+  const st = await comRepeticao(m, [
+    eventoPagamento('PAYMENT_CONFIRMED', { id: 'pA', pagamento: 'pay_A', assinatura: 'sub_A', vencimento: '2026-11-10' }),
+    eventoPagamento('PAYMENT_CONFIRMED', { id: 'pB', pagamento: 'pay_B', assinatura: 'sub_B', valor: 297 }),
+  ]);
+  assertEquals(st, [200, 200]);
+  const vivas = m.repo.assinaturas.filter((a) => ['ativa', 'atrasada', 'pendente'].includes(a.status));
+  assertEquals(vivas.length, 1);
+  assertEquals(vivas[0].status, 'ativa');
+  const morta = vivas[0].id === m.A().id ? 'pB' : 'pA';
+  assertEquals(m.repo.eventos.get(morta)?.erro, 'pagamento_duplicado');
+});
+
+Deno.test('reabrir: CONFIRMED e RECEIVED da mesma cobrança de A chegam JUNTOS: A reabre uma vez, B expira, nenhum aviso com erro', async () => {
+  const m = await doisCheckouts();
+  const st = await comRepeticao(m, [
+    eventoPagamento('PAYMENT_CONFIRMED', { id: 'pA1', pagamento: 'pay_A', assinatura: 'sub_A', vencimento: '2026-11-10' }),
+    eventoPagamento('PAYMENT_RECEIVED', { id: 'pA2', pagamento: 'pay_A', assinatura: 'sub_A', vencimento: '2026-11-10' }),
+  ]);
+  assertEquals(st, [200, 200]);
+  assertEquals([m.A().status, m.A().acesso_ate, m.B().status], ['ativa', '2026-12-13T03:00:00.000Z', 'expirada']);
+  assertEquals([m.repo.eventos.get('pA1')?.erro, m.repo.eventos.get('pA2')?.erro], [null, null]);
+});
+
+Deno.test("reabrir: a RPC responde 'mudou' (outro aviso reabriu no meio): o webhook relê e segue o caminho normal, acesso pelo maior", async () => {
+  const m = await doisCheckouts();
+  const orig = m.repo.reabrirAssinaturaPaga.bind(m.repo);
+  m.repo.reabrirAssinaturaPaga = async (id, _ate, agora) => {
+    await orig(id, '2026-11-20T03:00:00.000Z', agora);   // o "outro aviso" reabriu com acesso mais curto
+    return 'mudou';
+  };
+  const r = await m.aviso(eventoPagamento('PAYMENT_CONFIRMED', { id: 'pA', pagamento: 'pay_A', assinatura: 'sub_A', vencimento: '2026-11-10' }));
+  assertEquals(r.status, 200);
+  assertEquals([m.A().status, m.A().acesso_ate, m.B().status], ['ativa', '2026-12-13T03:00:00.000Z', 'expirada']);
+  assertEquals(m.repo.eventos.get('pA')?.erro, null);
+});
