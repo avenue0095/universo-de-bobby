@@ -50,6 +50,10 @@ begin
   insert into public.assinatura (id, responsavel_id, plano, valor_centavos, status, acesso_ate, provedor_assinatura_id) values
     ('00000000-0000-4000-8000-0000000000aa', a, 'anual', 14900, 'ativa', now() + interval '300 days', 'sub_teste_a'),
     ('00000000-0000-4000-8000-0000000000bb', b, 'mensal', 1990, 'expirada', now() - interval '10 days', 'sub_teste_b');
+
+  -- 0006: um aparelho de B com moedas (para provar que A não vê nem mexe)
+  insert into public.moedas_aparelho (perfil_id, aparelho_id, ganhas, gastas) values
+    ('00000000-0000-4000-8000-0000000000b1', 'aparelhoB01', 70, 10);
 end $$;
 
 -- -----------------------------------------------------------------------------
@@ -68,7 +72,7 @@ begin
       raise exception 'FALHA: tabela % sem RLS ligada', r.relname;
     end if;
   end loop;
-  if n <> 11 then raise exception 'FALHA: esperava 11 tabelas no public, achei %', n; end if;
+  if n <> 12 then raise exception 'FALHA: esperava 12 tabelas no public (11 + moedas_aparelho da 0006), achei %', n; end if;
   raise notice 'OK: % tabelas do public com RLS ligada', n;
 end $$;
 
@@ -305,6 +309,51 @@ begin
   raise notice 'OK: responsavel só grava relatorio_email; exclusão passa pela RPC';
 end $$;
 
+-- 13e. moedas por aparelho (0006): dois aparelhos offline não se apagam
+--      (até aqui o perfil tem só a linha 'legado' com 120 ganhas e 80 gastas, do caso 13)
+do $$
+declare e jsonb; r jsonb;
+begin
+  r := public.sincronizar_perfil('00000000-0000-4000-8000-0000000000a1',
+         '{"aparelho_id":"tabletA01","moedas_ganhas":50,"moedas_gastas":0}'::jsonb);
+  r := public.sincronizar_perfil('00000000-0000-4000-8000-0000000000a1',
+         '{"aparelho_id":"celularA1","moedas_ganhas":30,"moedas_gastas":20}'::jsonb);
+  -- a mesma mensagem do tablet chega de novo (rede ruim): não soma outra vez
+  r := public.sincronizar_perfil('00000000-0000-4000-8000-0000000000a1',
+         '{"aparelho_id":"tabletA01","moedas_ganhas":50,"moedas_gastas":0}'::jsonb);
+  e := r->'estado';
+  if (e->>'moedas_ganhas')::int <> 200 or (e->>'moedas_gastas')::int <> 100 or (e->>'moedas')::int <> 100 then
+    raise exception 'FALHA: moedas de dois aparelhos não somaram (esperado 200/100/100): %', e;
+  end if;
+  if jsonb_array_length(r->'moedas_aparelhos') <> 3 then
+    raise exception 'FALHA: snapshot sem as 3 linhas de aparelho (legado, tablet, celular): %', r->'moedas_aparelhos';
+  end if;
+  raise notice 'OK: moedas por aparelho somam (120 + 50 + 30) e repetir o envio não soma de novo';
+end $$;
+
+-- 13f. moedas_aparelho: A não vê nem apaga a linha de B; update direto não reduz; apagar a própria linha não acontece
+do $$
+declare n int; v int;
+begin
+  select count(*) into n from public.moedas_aparelho where perfil_id = '00000000-0000-4000-8000-0000000000b1';
+  if n <> 0 then raise exception 'FALHA: A vê % linhas de moedas de B', n; end if;
+  update public.moedas_aparelho set ganhas = 0 where perfil_id = '00000000-0000-4000-8000-0000000000a1' and aparelho_id = 'tabletA01';
+  select ganhas into v from public.moedas_aparelho where perfil_id = '00000000-0000-4000-8000-0000000000a1' and aparelho_id = 'tabletA01';
+  if v <> 50 then raise exception 'FALHA: update direto reduziu o contador do aparelho para %', v; end if;
+  begin
+    delete from public.moedas_aparelho where perfil_id = '00000000-0000-4000-8000-0000000000a1';
+    get diagnostics n = row_count;
+  exception when insufficient_privilege then n := 0;   -- 0006 tira o delete de authenticated: 42501 também prova
+  end;
+  if n <> 0 then raise exception 'FALHA: A apagou % linhas de moedas (sem política de delete)', n; end if;
+  begin
+    insert into public.moedas_aparelho (perfil_id, aparelho_id, ganhas) values ('00000000-0000-4000-8000-0000000000b1', 'intruso01', 999);
+    raise exception 'FALHA: A inseriu moedas no perfil de B';
+  exception when insufficient_privilege then null;
+  end;
+  raise notice 'OK: moedas_aparelho só do dono, só cresce e não se apaga por fora';
+end $$;
+
 -- 14. sincronizar_perfil no perfil de B é negado
 do $$
 begin
@@ -353,14 +402,14 @@ select set_config('request.jwt.claims', '{"role":"anon"}', true);
 do $$
 declare t text;
 begin
-  foreach t in array array['responsavel','perfil','perfil_estado','progresso_fase','erro_pendente','dia_atividade','assinatura','pagamento','consentimento','webhook_evento','limite_taxa'] loop
+  foreach t in array array['responsavel','perfil','perfil_estado','progresso_fase','erro_pendente','dia_atividade','assinatura','pagamento','consentimento','webhook_evento','limite_taxa','moedas_aparelho'] loop
     begin
       execute format('select count(*) from public.%I', t);
       raise exception 'FALHA: anon leu a tabela %', t;
     exception when insufficient_privilege then null;
     end;
   end loop;
-  raise notice 'OK: anon negado nas 11 tabelas (42501)';
+  raise notice 'OK: anon negado nas 12 tabelas (42501)';
 end $$;
 
 do $$
@@ -404,7 +453,7 @@ begin
 end $$;
 
 -- =============================================================================
--- Resumo esperado: 24 linhas "NOTICE: OK:" e nenhuma "FALHA". Conte com:
+-- Resumo esperado: 26 linhas "NOTICE: OK:" e nenhuma "FALHA". Conte com:
 --   psql ... -f supabase/testes/rls.sql 2>&1 | grep -c 'OK:'
 -- =============================================================================
 

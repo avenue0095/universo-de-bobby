@@ -2,7 +2,8 @@
 'use strict';
 /* Nuvem sem conta (Fase 4, S5 do docs/fase4/PLANO.md): merge local, outbox, migração da primeira conta e modo offline.
    O servidor aqui é FALSO e escrito à parte, seguindo o SQL de supabase/migrations/0003_rpc.sql (sincronizar_perfil e snapshot_perfil)
-   e os gatilhos so_cresce do 0001; não usa nada do nuvem.js. Os casos 1 a 3 repetem os números do caso 13 de supabase/testes/rls.sql.
+   e os gatilhos so_cresce do 0001, com as moedas por aparelho da 0006 (moedas_aparelho: contador de cada aparelho só cresce,
+   total = soma; chamada sem aparelho_id conta no aparelho 'legado'); não usa nada do nuvem.js. Os casos 1 a 3 repetem os números do caso 13 de supabase/testes/rls.sql.
    O transporte é falso também: nada de rede, nada de supabase-js.
    Uso: node testes/nuvem.js */
 const A = require('assert');
@@ -21,7 +22,8 @@ function servidorFalso() {
   function snapshot(id) {
     const p = perfis.get(id);
     const e = Object.assign({}, p.estado, { moedas: Math.max(p.estado.moedas_ganhas - p.estado.moedas_gastas, 0) });
-    return J({ perfil: p.perfil, estado: e, fases: [...p.fases.values()], itens: [...p.itens.values()], dias: [...p.dias.values()], baixado_em: new Date().toISOString() });
+    const moedas = [...p.moedas.entries()].sort().map(([aparelho_id, m]) => ({ aparelho_id, ganhas: m.ganhas, gastas: m.gastas }));
+    return J({ perfil: p.perfil, estado: e, moedas_aparelhos: moedas, fases: [...p.fases.values()], itens: [...p.itens.values()], dias: [...p.dias.values()], baixado_em: new Date().toISOString() });
   }
   return {
     perfis, chamadas: { criar: 0, sincronizar: 0, snapshot: 0 }, falhar: null,
@@ -30,7 +32,7 @@ function servidorFalso() {
       if (this.falhar === 'criar') return Promise.reject(new Error('rede'));
       for (const [id, p] of perfis) if (p.perfil.id_local === dados.id_local) return Promise.resolve({ id });   // unique(responsavel_id, id_local)
       const id = '00000000-0000-4000-8000-' + String(++n).padStart(12, '0');
-      perfis.set(id, { perfil: J(Object.assign({ id }, dados)), estado: novoEstado(), fases: new Map(), itens: new Map(), dias: new Map() });
+      perfis.set(id, { perfil: J(Object.assign({ id }, dados)), estado: novoEstado(), moedas: new Map(), fases: new Map(), itens: new Map(), dias: new Map() });
       return Promise.resolve({ id });
     },
     sincronizarPerfil(id, est, fases, itens, dias) {
@@ -43,7 +45,13 @@ function servidorFalso() {
         if (novo && (!velho || Date.parse(novo) > Date.parse(velho)) && k in est) { e[k] = k === 'materia' ? (['mat', 'pt', 'en'].includes(est[k]) ? est[k] : e[k]) : est[k]; e.blocos_em[k] = novo; }
       }
       e.comprado = [...new Set(e.comprado.concat((est.comprado || []).filter((x) => typeof x === 'string')))];   // 3b: união
-      for (const k of ['xp', 'moedas_ganhas', 'moedas_gastas', 'acertos_total', 'melhor_combo']) e[k] = mx(e[k], est[k]);   // greatest
+      for (const k of ['xp', 'acertos_total', 'melhor_combo']) e[k] = mx(e[k], est[k]);   // greatest
+      // 3c (0006): contador do aparelho só cresce; total = soma dos aparelhos
+      const ap = typeof est.aparelho_id === 'string' && /^[A-Za-z0-9_-]{6,64}$/.test(est.aparelho_id) ? est.aparelho_id : 'legado';
+      const m0 = p.moedas.get(ap) || { ganhas: 0, gastas: 0 };
+      p.moedas.set(ap, { ganhas: mx(m0.ganhas, est.moedas_ganhas), gastas: mx(m0.gastas, est.moedas_gastas) });
+      let sg = 0, ss = 0; for (const m of p.moedas.values()) { sg += m.ganhas; ss += m.gastas; }
+      e.moedas_ganhas = mx(e.moedas_ganhas, sg); e.moedas_gastas = mx(e.moedas_gastas, ss);
       for (const f of J(fases || [])) {   // 4: fases só crescem
         const v = p.fases.get(f.fase_id);
         const nf = { fase_id: f.fase_id, materia: f.materia, estrelas: Math.min(3, Math.max(0, f.estrelas || 0)), acertos: f.acertos || 0, erros: f.erros || 0, tempo_seg: f.tempo_seg || 0, concluida_em: f.concluida_em || null };
@@ -132,8 +140,9 @@ const servidorEstado = (m) => m.srv.snapshot(m.id);
     let e = servidorEstado(m).estado;
     A.deepStrictEqual([e.moedas_ganhas, e.moedas_gastas, e.moedas], [120, 80, 40]);
     A.strictEqual(m.a.avaliar('S.moedas'), 40, 'o saldo local voltou para 120: gastar foi desfeito');
-    // aparelho atrasado (outro tablet) manda valores menores e outro item
-    await m.srv.sincronizarPerfil(m.id, { xp: 10, moedas_ganhas: 5, moedas_gastas: 0, comprado: ['rufa'], blocos_em: {} }, [], [], []);
+    // mensagem atrasada DESTE aparelho (mesmo aparelho_id, contador velho) chega depois: nada volta
+    const ap = m.a.avaliar('NUVEM.aparelho()');
+    await m.srv.sincronizarPerfil(m.id, { aparelho_id: ap, xp: 10, moedas_ganhas: 5, moedas_gastas: 0, comprado: ['rufa'], blocos_em: {} }, [], [], []);
     e = servidorEstado(m).estado;
     A.deepStrictEqual([e.xp, e.moedas_ganhas, e.moedas_gastas, e.moedas], [500, 120, 80, 40]);
     m.passa(61000);
@@ -222,8 +231,8 @@ const servidorEstado = (m) => m.srv.snapshot(m.id);
     const m = await comPerfil(18);
     m.a.avaliar("S.feitas['1.3']=1;S.moedas+=50;S.look.cabeca='bone';S.revisao.congelados['er:aaa11111']={type:'mc',prompt:'3+3?',answer:'6',options:['6','7'],m:'mat',f:'1.1',w:1,sk:''};S.revisao.itens['er:aaa11111']=[1,'2026-11-11',1,0,1,'2026-11-10',0,0];salvar()");
     await subir(m);
-    // outro tablet: ganhou 30 moedas, look antigo (carimbo das 12:00), item velho
-    await m.srv.sincronizarPerfil(m.id, { moedas_ganhas: 80, look: { cabeca: 'coroa' }, blocos_em: { look: '2026-11-10T12:00:30Z' } }, [], [], []);
+    // outro tablet: ganhou 30 moedas (o contador DELE), look antigo (carimbo das 12:00), item velho
+    await m.srv.sincronizarPerfil(m.id, { aparelho_id: 'tablet-da-sala', moedas_ganhas: 30, look: { cabeca: 'coroa' }, blocos_em: { look: '2026-11-10T12:00:30Z' } }, [], [], []);
     // este aparelho, sem rede para empurrar, muda depois: 3 estrelas na 1.3, outro look, item na caixa 2
     m.passa(3600000);
     m.a.avaliar("S.feitas['1.3']=3;S.look.cabeca='gorro';S.revisao.itens['er:aaa11111']=[2,'2026-11-14',2,1,1,'2026-11-10',0,0];salvar()");
@@ -274,6 +283,50 @@ const servidorEstado = (m) => m.srv.snapshot(m.id);
     A.deepStrictEqual([fs['1.1'], fs['1.2'], fs['1.4']], [2, 1, 3]);
     A.strictEqual(servidorEstado(m).estado.xp, m.a.avaliar('S.xp'));
     A.deepStrictEqual(J(m.a.avaliar('NUVEM.registro(STORE.perfis[0].id).sujo.fases')), {});
+  });
+
+  await teste('a11. dois aparelhos offline (ARQUITETURA 5.5): base 100, o tablet ganha 50 e o celular ganha 30; os dois ficam com 180 e o banco tambem', async () => {
+    const srv = servidorFalso();
+    const t = await comPerfil(51, { servidor: srv });   // tablet
+    t.a.avaliar('S.moedas+=100;salvar()');
+    await subir(t);
+    A.strictEqual(servidorEstado(t).estado.moedas, 100);
+    // o celular entra na mesma conta e puxa o perfil (mesmo nuvemId, aparelho diferente)
+    const c = montar(52, { servidor: srv });
+    c.a.avaliar("novoPerfil('Zeca','#12A06E')");
+    c.a.ctx.__nid = t.id;
+    c.a.avaliar("(r=>{r.nuvemId=__nid;r.migradoEm='2026-11-10T12:00:00Z';})(NUVEM.registro(STORE.perfis[0].id)||(NUVEM.marcarSujo(),NUVEM.registro(STORE.perfis[0].id)))");
+    c.id = t.id;
+    c.passa(61000);
+    A.strictEqual(await c.a.avaliar('NUVEM.puxar(0)'), true);
+    A.strictEqual(c.a.avaliar('S.moedas'), 100, 'o celular nao recebeu as 100 da base');
+    A.notStrictEqual(t.a.avaliar('NUVEM.aparelho()'), c.a.avaliar('NUVEM.aparelho()'));
+    // os dois sem rede: o tablet ganha 50, o celular ganha 30 e gasta 20 num chapeu
+    t.rede.online = false; c.rede.online = false;
+    t.a.avaliar('S.moedas+=50;salvar()');
+    c.a.avaliar('S.moedas+=30;salvar()');
+    c.a.avaliar('S.moedas-=20;salvar()');
+    // a rede volta: os dois empurram, em qualquer ordem
+    t.rede.online = true; c.rede.online = true;
+    await subir(c); await subir(t);
+    let e = servidorEstado(t).estado;
+    A.deepStrictEqual([e.moedas_ganhas, e.moedas_gastas, e.moedas], [180, 20, 160], 'o banco perdeu o ganho de um dos aparelhos');
+    A.strictEqual(t.a.avaliar('S.moedas'), 160, 'tablet');
+    A.strictEqual(c.a.avaliar('S.moedas'), 110, 'o celular subiu antes do tablet: ainda nao sabe dos 50');
+    c.passa(61000);
+    A.strictEqual(await c.a.avaliar('NUVEM.puxar(0)'), true);   // abrir o app de novo: puxa
+    A.strictEqual(c.a.avaliar('S.moedas'), 160, 'celular');
+    // repetir os envios (rede ruim, mesma mensagem duas vezes) nao soma de novo
+    const apT = t.a.avaliar('NUVEM.aparelho()');
+    await srv.sincronizarPerfil(t.id, { aparelho_id: apT, moedas_ganhas: 150, moedas_gastas: 0, blocos_em: {} }, [], [], []);
+    await srv.sincronizarPerfil(t.id, { aparelho_id: apT, moedas_ganhas: 150, moedas_gastas: 0, blocos_em: {} }, [], [], []);
+    e = servidorEstado(t).estado;
+    A.deepStrictEqual([e.moedas_ganhas, e.moedas_gastas, e.moedas], [180, 20, 160]);
+    // e o razao de cada aparelho continua fechando: proprio + outros = saldo
+    for (const x of [t, c]) {
+      const z = J(x.a.avaliar('(r=>[r.razao.ganhas+Object.values(r.outros).reduce((s,o)=>s+o.ganhas,0),r.razao.gastas+Object.values(r.outros).reduce((s,o)=>s+o.gastas,0),S.moedas])(NUVEM.registro(STORE.perfis[0].id))'));
+      A.strictEqual(z[0] - z[1], z[2]);
+    }
   });
 
   /* ======================================================== (b) migração da primeira conta */

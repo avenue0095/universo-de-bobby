@@ -3,7 +3,8 @@
    (outbox 'universo-bobby-sync-v1'), empurra com atraso de 5 s (e ao esconder a aba e ao voltar a rede) e mescla a resposta com
    as MESMAS regras do servidor (supabase/migrations/0003_rpc.sql, sincronizar_perfil):
      - xp, acertos, melhor combo, estrelas, contadores do dia: o maior vence (nunca reduz);
-     - moedas são um razão: ganhas e gastas só crescem, o saldo é ganhas - gastas (gastar não volta, ganhar não some);
+     - moedas são um razão POR APARELHO: cada aparelho sobe só o que ELE ganhou e gastou (só cresce); o total é a soma dos
+       aparelhos e o saldo é ganhas - gastas. Dois aparelhos offline não se apagam (0006_moedas_por_aparelho.sql);
      - comprado: união;  blocos (look, config, ofensiva...): o carimbo mais novo vence;  item de revisão: o carimbo mais novo vence.
    SEM CONFIGURAÇÃO NÃO FAZ NADA: NUVEM_CONFIG vazio e nenhum transporte = nuvem desligada; marcarSujo volta na hora, sem gravar
    chave nenhuma e sem ouvir evento nenhum. O formato 'universo-bobby-v4' não muda (o razão de moedas mora na outbox).
@@ -64,7 +65,9 @@ function nuvemRazaoInicial(s,preco){
   const gastas=(s.comprado||[]).reduce((t,id)=>t+(typeof preco==='function'?nuvemInt(preco(id)):0),0);
   return {ganhas:nuvemInt(s.moedas)+gastas,gastas:gastas,saldo:nuvemInt(s.moedas)};
 }
-/* cada gravação compara o saldo com o último visto: subiu = ganhou, desceu = gastou. Os dois só crescem e ganhas - gastas == saldo. */
+/* cada gravação compara o saldo com o último visto: subiu = ganhou, desceu = gastou, no contador DESTE aparelho (reg.razao).
+   Os outros aparelhos ficam em reg.outros (o que o servidor disse de cada um). Tudo só cresce e total ganhas - total gastas == saldo. */
+const nuvemTotal=(reg,k)=>reg.razao[k]+Object.keys(reg.outros||{}).reduce((t,id)=>t+nuvemInt(reg.outros[id][k]),0);
 function nuvemObservarSaldo(reg,saldo){
   saldo=nuvemInt(saldo);const d=saldo-reg.razao.saldo;
   if(d>0)reg.razao.ganhas+=d;else if(d<0)reg.razao.gastas+=-d;
@@ -72,15 +75,22 @@ function nuvemObservarSaldo(reg,saldo){
 }
 
 /* ---------- merge local: o snapshot do servidor por cima do estado do aparelho, com as regras do servidor ---------- */
-function nuvemMesclar(s,reg,snap){
+function nuvemMesclar(s,reg,snap,aparelho){
   snap=nuvemObj(snap);const e=nuvemObj(snap.estado),em=nuvemObj(e.blocos_em);
   const t=JSON.parse(JSON.stringify(s));   /* trabalha numa cópia; o estado vivo só recebe o que passar por estadoDe */
   t.xp=Math.max(nuvemInt(t.xp),nuvemInt(e.xp));
   t.acertosTotal=Math.max(nuvemInt(t.acertosTotal),nuvemInt(e.acertos_total));
   t.melhorCombo=Math.max(nuvemInt(t.melhorCombo),nuvemInt(e.melhor_combo));
-  reg.razao.ganhas=Math.max(reg.razao.ganhas,nuvemInt(e.moedas_ganhas));
-  reg.razao.gastas=Math.max(reg.razao.gastas,nuvemInt(e.moedas_gastas));
-  t.moedas=Math.max(0,reg.razao.ganhas-reg.razao.gastas);
+  /* moedas: o servidor manda o contador de cada aparelho. O deste aparelho nunca desce (o que ele ganhou offline e ainda não subiu
+     fica); o de cada outro vale pelo maior já visto. Total = soma. Nenhum ganho de nenhum aparelho se perde. */
+  reg.outros=nuvemObj(reg.outros);
+  (Array.isArray(snap.moedas_aparelhos)?snap.moedas_aparelhos:[]).forEach(m=>{
+    if(!m||typeof m.aparelho_id!=='string')return;
+    if(m.aparelho_id===aparelho){reg.razao.ganhas=Math.max(reg.razao.ganhas,nuvemInt(m.ganhas));reg.razao.gastas=Math.max(reg.razao.gastas,nuvemInt(m.gastas));return;}
+    const o=nuvemObj(reg.outros[m.aparelho_id]);
+    reg.outros[m.aparelho_id]={ganhas:Math.max(nuvemInt(o.ganhas),nuvemInt(m.ganhas)),gastas:Math.max(nuvemInt(o.gastas),nuvemInt(m.gastas))};
+  });
+  t.moedas=Math.max(0,nuvemTotal(reg,'ganhas')-nuvemTotal(reg,'gastas'));
   (Array.isArray(e.comprado)?e.comprado:[]).forEach(id=>{if(typeof id==='string'&&t.comprado.indexOf(id)<0)t.comprado.push(id);});
   NUVEM_BLOCOS.forEach(b=>{if(nuvemMaisNovo(em[b],reg.blocosEm[b])&&e[b]!==undefined){nuvemPorBloco(t,b,e[b]);reg.blocosEm[b]=em[b];}});
   (Array.isArray(snap.fases)?snap.fases:[]).forEach(f=>{
@@ -115,12 +125,23 @@ function nuvemMesclar(s,reg,snap){
 }
 
 /* ---------- a outbox ---------- */
-function nuvemRegistroVazio(){return {nuvemId:'',migradoEm:'',sujo:{estado:'',fases:{},itens:{},dias:{}},blocosEm:{},carimbos:{},foto:null,razao:null,ultimoPush:0,ultimoPull:0};}
+function nuvemRegistroVazio(){return {nuvemId:'',migradoEm:'',sujo:{estado:'',fases:{},itens:{},dias:{}},blocosEm:{},carimbos:{},foto:null,razao:null,outros:{},ultimoPush:0,ultimoPull:0};}
+/* id deste aparelho para o razão de moedas: sorteado uma vez por instalação, não identifica pessoa nem aparelho físico */
+const NUVEM_APARELHO_RE=/^[A-Za-z0-9_-]{6,64}$/;
+function nuvemNovoAparelho(){
+  let b='';try{const a=new Uint8Array(12);crypto.getRandomValues(a);a.forEach(x=>{b+=('0'+x.toString(16)).slice(-2);});}catch(e){}
+  if(!b)for(let i=0;i<24;i++)b+=Math.floor(Math.random()*16).toString(16);
+  return 'ap'+b;
+}
 function nuvemArrumar(x){
-  const o={v:1,perfis:{},acesso:null};x=nuvemObj(x);const ps=nuvemObj(x.perfis);
+  const o={v:1,aparelho:'',perfis:{},acesso:null};x=nuvemObj(x);const ps=nuvemObj(x.perfis);
+  o.aparelho=typeof x.aparelho==='string'&&NUVEM_APARELHO_RE.test(x.aparelho)?x.aparelho:nuvemNovoAparelho();
   Object.keys(ps).slice(0,40).forEach(id=>{const r=Object.assign(nuvemRegistroVazio(),nuvemObj(ps[id]));
     r.sujo=Object.assign({estado:'',fases:{},itens:{},dias:{}},nuvemObj(r.sujo));
-    if(r.razao&&!(r.razao.ganhas>=0&&r.razao.gastas>=0&&r.razao.saldo>=0))r.razao=null;o.perfis[id]=r;});
+    if(r.razao&&!(r.razao.ganhas>=0&&r.razao.gastas>=0&&r.razao.saldo>=0))r.razao=null;
+    const outros={};Object.keys(nuvemObj(r.outros)).slice(0,60).forEach(k=>{const v=nuvemObj(r.outros[k]);
+      if(NUVEM_APARELHO_RE.test(k)&&k!==o.aparelho)outros[k]={ganhas:nuvemInt(v.ganhas),gastas:nuvemInt(v.gastas)};});
+    r.outros=outros;o.perfis[id]=r;});
   const a=nuvemObj(x.acesso);if(typeof a.acesso_ate==='string')o.acesso={liberado:!!a.liberado,acesso_ate:a.acesso_ate,conferidoEm:String(a.conferidoEm||'')};
   return o;
 }
@@ -131,7 +152,7 @@ function criarNuvem(op){
   const cfg=nuvemObj(op.config),tr=op.transporte;
   const ligadaJa=!!(cfg.url&&cfg.anon&&tr&&typeof tr.sincronizarPerfil==='function');
   const desligada={ligada:()=>false,marcarSujo:()=>false,empurrar:()=>Promise.resolve(0),puxar:()=>Promise.resolve(false),
-    migrarPrimeiraConta:()=>Promise.resolve({ok:false,motivo:'desligada'}),guardarAcesso:()=>false,acessoValido:()=>false,registro:()=>null};
+    migrarPrimeiraConta:()=>Promise.resolve({ok:false,motivo:'desligada'}),guardarAcesso:()=>false,acessoValido:()=>false,registro:()=>null,aparelho:()=>''};
   if(!ligadaJa)return desligada;
 
   const agora=op.agora||(()=>new Date()),agendar=op.agendar||setTimeout,desagendar=op.desagendar||clearTimeout;
@@ -162,7 +183,7 @@ function criarNuvem(op){
     r.foto=f;return mudou;
   }
   function payload(r,s,tudo){
-    const estado={xp:s.xp,moedas_ganhas:r.razao.ganhas,moedas_gastas:r.razao.gastas,acertos_total:s.acertosTotal,melhor_combo:s.melhorCombo,
+    const estado={xp:s.xp,aparelho_id:ler().aparelho,moedas_ganhas:r.razao.ganhas,moedas_gastas:r.razao.gastas,acertos_total:s.acertosTotal,melhor_combo:s.melhorCombo,
       comprado:(s.comprado||[]).slice(),blocos_em:Object.assign({},r.blocosEm),versao_app:typeof APP_VERSAO==='string'?APP_VERSAO:''};
     NUVEM_BLOCOS.forEach(b=>{estado[b]=nuvemBlocoDe(s,b);});
     const fases=(tudo?nuvemFasesDe(s):Object.keys(r.sujo.fases)).map(id=>nuvemFase(s,id));
@@ -184,7 +205,7 @@ function criarNuvem(op){
     const enviado=JSON.parse(JSON.stringify(r.sujo)),dados=payload(r,s,tudo);
     const snap=await tr.sincronizarPerfil(r.nuvemId,dados.estado,dados.fases,dados.itens,dados.dias);
     const s2=op.dadosDe(i);detectar(r,s2);limparEnviado(r,enviado);   /* o que mudou durante a ida fica sujo para a próxima */
-    nuvemMesclar(s2,r,snap);r.foto=fotoCompleta(r,s2,r.foto.removidos);
+    nuvemMesclar(s2,r,snap,ler().aparelho);r.foto=fotoCompleta(r,s2,r.foto.removidos);
     r.ultimoPush=agora().getTime();gravar();if(op.persistir)op.persistir(i);
     return snap;
   }
@@ -213,7 +234,7 @@ function criarNuvem(op){
     const p=op.perfis()[i];if(!p||!online())return false;const r=ler().perfis[p.id];if(!r||!r.nuvemId)return false;
     if(agora().getTime()-r.ultimoPull<NUVEM_TEMPO.cachePull)return false;
     try{const s=op.dadosDe(i);detectar(r,s);const snap=await tr.snapshotPerfil(r.nuvemId);
-      nuvemMesclar(s,r,snap);r.foto=fotoCompleta(r,s,r.foto.removidos);
+      nuvemMesclar(s,r,snap,ler().aparelho);r.foto=fotoCompleta(r,s,r.foto.removidos);
       r.ultimoPull=agora().getTime();gravar();if(op.persistir)op.persistir(i);return true;}catch(e){return false;}
   }
   /* primeira conta (ARQUITETURA 5.6): sobe cada perfil escolhido (até 4) e só marca migrado se o snapshot confere com o aparelho */
@@ -252,7 +273,7 @@ function criarNuvem(op){
     op.ouvir('visibilitychange',()=>(typeof document!=='undefined'&&document.visibilityState==='hidden')?empurrar('forcado'):null);
     op.ouvir('online',()=>empurrar('forcado'));
   }
-  return {ligada:()=>true,marcarSujo,empurrar,puxar,migrarPrimeiraConta,guardarAcesso,acessoValido,registro:id=>ler().perfis[id]||null};
+  return {ligada:()=>true,marcarSujo,empurrar,puxar,migrarPrimeiraConta,guardarAcesso,acessoValido,registro:id=>ler().perfis[id]||null,aparelho:()=>ler().aparelho};
 }
 
 /* instância do app. Sem NUVEM_CONFIG e sem transporte: desligada (não grava, não ouve, não chama rede). */
