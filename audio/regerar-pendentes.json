@@ -1,6 +1,6 @@
 {
  "gerado": "2026-11-09",
- "total": 723,
+ "total": 735,
  "itens": [
   {
    "texto": "Toque em cada semente para contar. Quantas sementes tem aqui?",
@@ -6642,6 +6642,114 @@
    "classe": "quadro-enunciado",
    "categoria": "trecho de enunciado novo (terceira passada de 09/11/2026)",
    "motivo": "trecho sem clipe (escrita certa e concordância revisadas); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "pano macio que fica",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "comprida que o",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "adora",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "é branco fica",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "gente escova",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "calçado",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "couro para ir à festa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "é o contrário",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "fogão para cozinhar",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "bicho verde que pula",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "coaxa",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado novo (fase 4, parte 0, 09/11/2026)",
+   "motivo": "trecho sem clipe (pistas da escrita certa reescritas para nao servir a duas palavras); gravar com a voz local",
+   "trechos_sem_clipe": []
+  },
+  {
+   "texto": "qual palavra rima com amor",
+   "idioma": "pt-BR",
+   "materia": "pt",
+   "classe": "quadro-enunciado",
+   "categoria": "trecho de enunciado sem clipe (achado pela amostra da fase 4, parte 0, 09/11/2026)",
+   "motivo": "a amostra mudou com os geradores novos e achou este trecho antigo sem clipe; gravar com a voz local",
    "trechos_sem_clipe": []
   }
  ]

@@ -69,5 +69,40 @@ const J = (x) => JSON.parse(JSON.stringify(x));
         if(/\\bQuant[oa]s [a-zçãõé]+ têm 1 /i.test(t)||/\\bQuant[oa]s [a-zçãõé]+ tem ([2-9]|\\d{2,}) /i.test(t))ruim.add(t.slice(0,90));}});return [...ruim].slice(0,10);})()`));
     A.deepStrictEqual(r, []);
   });
+  await teste('7. escrita legivel: Q so com U depois (QATO, QOLA, QENTE) e consoante com consoante so em encontro valido, RR, SS, par da palavra certa ou consoante que fecha silaba (ACSA, AJNELA, DETNE nao)', () => {
+    /* implementacao propria do teste: pares de consoante que nao sao encontro nem existem na palavra certa */
+    const ENC = new Set(['br', 'bl', 'cr', 'cl', 'dr', 'fr', 'fl', 'gr', 'gl', 'pr', 'pl', 'tr', 'vr', 'rr', 'ss']);
+    const pares = (w) => { const t = String(w).toLowerCase().replace(/(ch|lh|nh|qu|gu)/g, '#'); const o = [];
+      for (let i = 0; i < t.length - 1; i++) if (/[bcdfgjklmnpqrstvwxz]/.test(t[i]) && /[bcdfgjklmnpqrstvwxz]/.test(t[i + 1])) o.push(t[i] + t[i + 1]); return o; };
+    const ruimDe = (o, p) => { o = o.toLowerCase(); if (/q(?!u)/.test(o)) return 'Q sem U'; const da = new Set(pares(p));
+      const fecha = (z) => z[0] !== z[1] && (/^[rsl]/.test(z) || /^m[pb]$/.test(z) || /^n[^pb]$/.test(z));   /* R, S, L, M e N fecham silaba: ARTO, CAMPO */
+      const x = pares(o).find((z) => !ENC.has(z) && !da.has(z) && !fecha(z)); return x ? 'par ' + x : ''; };
+    ['qato', 'qola', 'qente', 'acsa', 'ajnela', 'detne', 'ratto', 'bollo', 'facca'].forEach((w) => A.strictEqual(a.avaliar('legivel(' + JSON.stringify(w) + ')'), false, w + ' deveria ser ilegivel'));
+    ['bola', 'prato', 'carro', 'massa', 'chuva', 'quilo', 'galinha', 'foguete'].forEach((w) => A.strictEqual(a.avaliar('legivel(' + JSON.stringify(w) + ')'), true, w + ' deveria ser legivel'));
+    A.strictEqual(a.avaliar("legivel('dente','dente')"), true, 'o NT de DENTE vale quando a palavra certa e DENTE');
+    A.strictEqual(a.avaliar("legivel('detne','dente')"), false, 'TN nao existe em DENTE');
+    const lotes = J(a.avaliar(`(()=>{const o=[];PALAVRAS_BASE.forEach(w=>{for(let k=0;k<60;k++)o.push([w.p,errosDeGrafia(w.p,3)]);});
+      for(let i=0;i<1000;i++){const q=PT_BAS.grafiaCerta();o.push([q.answer,q.options.filter(x=>x!==q.answer)]);}return o;})()`));
+    const ruins = new Set();
+    lotes.forEach(([p, erradas]) => erradas.forEach((o) => { const r = ruimDe(o, p); if (r) ruins.add(String(p).toUpperCase() + ' -> ' + String(o).toUpperCase() + ' (' + r + ')'); }));
+    A.deepStrictEqual([...ruins].slice(0, 12), []);
+  });
+  await teste('8. pistas da escrita certa: uma por palavra, sem pista repetida e sem as pistas que serviam para duas coisas (meia, menina, lingua, manga, brigadeiro)', () => {
+    const P = J(a.avaliar('PISTA_PALAVRA')), ruins = [];
+    const ambiguas = { sapato: 'vai no pé', menino: 'criança', dente: 'fica na boca', banana: 'fruta amarela', bolo: 'doce de aniversário' };
+    Object.keys(ambiguas).forEach((k) => { if (!P[k]) ruins.push('sem pista: ' + k); else if (P[k] === ambiguas[k]) ruins.push('pista ambigua continua: ' + k + ' = ' + P[k]); });
+    const vals = Object.values(P); if (new Set(vals).size !== vals.length) ruins.push('pista repetida');
+    Object.entries(P).forEach(([k, v]) => { if (v.toLowerCase().includes(k)) ruins.push('a pista entrega a palavra: ' + k); if (/[–—]/.test(v)) ruins.push('travessao: ' + k); });
+    const usadas = J(a.avaliar('PALAVRAS_BASE.filter(x=>x.p.length>=4&&errosDeGrafia(x.p,3).length>=3).map(x=>x.p)'));
+    usadas.forEach((w) => { if (!P[w]) ruins.push('palavra da escrita certa sem pista: ' + w); });
+    A.ok(usadas.length >= 25, 'a escrita certa ficou com poucas palavras: ' + usadas.length);
+    A.deepStrictEqual(ruins, []);
+  });
+  await teste('9. dinheiro, troco e repartir: sempre 4 opcoes distintas, nenhuma menor que 1', () => {
+    const r = J(a.avaliar(`(()=>{const ruins=[];['dinheiro','troco','historinhaReparte'].forEach(k=>{for(let i=0;i<2000;i++){const q=MAT_BAS[k]();
+      if(q.options.length!==4)ruins.push(k+': '+q.options.length+' opcoes '+q.options);
+      q.options.forEach(o=>{const v=Number(String(o).replace(/[^0-9,]/g,'').replace(',','.'));if(!(v>=1))ruins.push(k+': opcao '+o);});}});return [...new Set(ruins)].slice(0,10);})()`));
+    A.deepStrictEqual(r, []);
+  });
   resumo('geradores.js');
 })();

@@ -6,7 +6,7 @@
 
 /* ---------- letras que se confundem de verdade (b/d/p/q, m/n, u/v, f/t, i/l, a/o/e) ---------- */
 const CONFUNDE={b:['d','p','q'],d:['b','p','q'],p:['q','b','d'],q:['p','d','b'],m:['n','u'],n:['m','u'],u:['v','n'],v:['u','f'],f:['t','v'],t:['f','l'],
-  i:['l','j'],l:['i','t'],a:['o','e'],o:['a','e'],e:['a','o'],c:['e','o'],g:['q','j'],j:['g','i'],s:['z','c'],z:['s','x'],r:['n','l'],x:['z','ch']};
+  i:['l','j'],l:['i','t'],a:['o','e'],o:['a','e'],e:['a','o'],c:['e','o','g'],g:['q','j'],j:['g','i'],s:['z','c'],z:['s','x'],r:['n','l'],x:['z','ch']};
 function distratoresDaLetra(l,n){
   const c=(CONFUNDE[l]||[]).slice(),out=[];
   shuf(c).forEach(x=>{if(out.length<n&&x!==l&&out.indexOf(x)<0)out.push(x);});
@@ -18,11 +18,22 @@ function distratoresDaLetra(l,n){
 const ENCONTROS=/^(br|bl|cr|cl|dr|fr|fl|gr|gl|pr|pl|tr|vr|ch|lh|nh)/;
 /* duas vogais juntas que a palavra certa não tinha (MAAL, BLOO, SAAPTO): ruim de ler */
 function hiatoNovo(t,p){const pares=w=>(String(w).toLowerCase().match(/[aeiou](?=[aeiou])/g)?[...String(w).toLowerCase().matchAll(/(?=([aeiou][aeiou]))/g)].map(m=>m[1]):[]);const ok=new Set(pares(p));return pares(t).some(x=>!ok.has(x));}
-function legivel(t){
+/* consoante seguida de consoante só quando o par existe de verdade: os encontros acima (BR, CL...), RR e SS, o par que a palavra certa
+   já tem (DENTE tem NT, BORBOLETA tem RB) ou consoante que fecha sílaba no português (R, S, L antes de qualquer uma; M antes de P e B;
+   N antes das outras: ARTO, FESTA, CAMPO, DENTE). Letra dobrada só RR e SS (nada de RATTO, BOLLO). Sem isso saíam ACSA, AJNELA e DETNE. CH, LH, NH, QU e GU contam como uma letra só. */
+const PARES_OK=new Set(['br','bl','cr','cl','dr','fr','fl','gr','gl','pr','pl','tr','vr','rr','ss']);
+const fechaSilaba=x=>x[0]!==x[1]&&(/^[rsl]/.test(x)||/^m[pb]$/.test(x)||/^n[^pb]$/.test(x));
+const NAO_VOGAL=/[^aeiouãõáéíóúâêôy]/;
+function paresDeConsoante(w){const t=String(w).toLowerCase().replace(/(ch|lh|nh|qu|gu)/g,'C'),out=[];
+  for(let i=0;i<t.length-1;i++)if(NAO_VOGAL.test(t[i])&&NAO_VOGAL.test(t[i+1])&&t[i]!=='C'&&t[i+1]!=='C')out.push(t[i]+t[i+1]);return out;}
+function legivel(t,p){
   t=String(t).toLowerCase();
+  if(/q(?!u)/.test(t))return false;   /* Q sem U depois não se lê (QATO, QOLA, QENTE) */
   if(/[^aeiouãõáéíóúâêôy]{3,}/.test(t.replace(/(ch|lh|nh|qu|gu)/g,'C')))return false;
   if(/^[^aeiouãõáéíóúâêô]{2}/.test(t)&&!ENCONTROS.test(t))return false;
   if(/[^aeiouãõáéíóúâêômrslz]$/.test(t))return false;
+  const daPalavra=new Set(p?paresDeConsoante(p):[]);
+  if(paresDeConsoante(t).some(x=>!PARES_OK.has(x)&&!daPalavra.has(x)&&!fechaSilaba(x)))return false;
   return /[aeiouãõáéíóúâêô]/.test(t);
 }
 /* ---------- gerador de erros de ortografia: as 4 operações (trocar vizinhas, trocar por letra parecida, tirar uma, dobrar uma) ---------- */
@@ -36,10 +47,12 @@ function errosDeGrafia(p,n){
   const V=c=>/[aeiouãõáéíóúâêô]/.test(c||'');
   for(let i=1;i<p.length;i++)if(!V(p[i])&&!(V(p[i-1])&&V(p[i+1])))tenta.push(p.slice(0,i)+p.slice(i+1));   /* nem vogal com vogal (CAA, PAO, SAO) */
   for(let i=1;i<p.length-1;i++)if(/[bcdfglmnprstv]/.test(p[i])&&p[i]!==p[i-1]&&p[i]!==p[i+1])tenta.push(p.slice(0,i+1)+p[i]+p.slice(i+1));
+  /* o som do fim: O final soa U e E final soa I no Brasil (RATO -> RATU, DENTE -> DENTI), erro de verdade de quem está aprendendo */
+  if(/o$/.test(p))tenta.push(p.slice(0,-1)+'u');if(/e$/.test(p))tenta.push(p.slice(0,-1)+'i');
   /* sílaba trocada de lugar (BOLA -> LABO) */
   const w=PALAVRAS_BASE.find(x=>x.p===p);if(w&&w.s.length>=2){const t=w.s.slice();[t[0],t[1]]=[t[1],t[0]];tenta.push(t.join(''));}
   /* nunca uma palavra de verdade (BALA no lugar de BOLA): conferido contra PALAVRAS_REAIS (corretor pt_BR, build/palavras-reais.swift) */
-  shuf(tenta).forEach(t=>{if(out.size<n&&t!==p&&t.length>=2&&!ehPalavraReal(t)&&legivel(t)&&!hiatoNovo(t,p))out.add(t);});
+  shuf(tenta).forEach(t=>{if(out.size<n&&t!==p&&t.length>=2&&!ehPalavraReal(t)&&legivel(t,p)&&!hiatoNovo(t,p))out.add(t);});
   return [...out];
 }
 const ehPalavraReal=t=>(typeof PALAVRAS_REAIS==='object'&&PALAVRAS_REAIS.has(String(t).toLowerCase()))||PALAVRAS_BASE.some(w=>w.p===String(t).toLowerCase());
@@ -72,11 +85,11 @@ function somDaRima(w){
 }
 /* pista curta da palavra alvo da "escrita certa" */
 const PISTA_PALAVRA={bola:'brinquedo redondo que rola',dado:'cubo com pontinhos do jogo',pato:'ave que nada e faz quá-quá',gato:'bicho que mia',mala:'leva a roupa na viagem',
-  casa:'onde a família mora',bolo:'doce de aniversário',vaca:'bicho que dá leite',faca:'corta o pão',sapo:'pula na lagoa',tatu:'bicho com casco que cava buraco',
+  casa:'onde a família mora',bolo:'doce de aniversário onde vão as velinhas',vaca:'bicho que dá leite',faca:'corta o pão',sapo:'bicho verde que pula na lagoa e coaxa',tatu:'bicho com casco que cava buraco',
   dedo:'a mão tem cinco',pipa:'voa no céu presa na linha',mapa:'mostra o caminho',rato:'bichinho que gosta de queijo',nuvem:'fica no céu e traz chuva',
-  janela:'abre para entrar ar e luz',boneca:'brinquedo com cara de gente',macaco:'bicho que pula de galho em galho',sapato:'vai no pé',tomate:'fruto vermelho da salada',
-  panela:'cozinha a comida',cavalo:'bicho que galopa',banana:'fruta amarela',menino:'criança',peteca:'brinquedo de bater com a mão',tapete:'fica no chão da sala',
-  galinha:'bota ovo',abacate:'fruta verde de caroço grande',borboleta:'inseto de asas coloridas',foguete:'vai para o espaço',dente:'fica na boca',fada:'tem varinha mágica',
+  janela:'abre para entrar ar e luz',boneca:'brinquedo com cara de gente',macaco:'bicho que pula de galho em galho',sapato:'calçado de couro para ir à festa',tomate:'fruto vermelho da salada',
+  panela:'vai no fogão para cozinhar a comida',cavalo:'bicho que galopa',banana:'fruta amarela e comprida que o macaco adora',menino:'é o contrário de menina',peteca:'brinquedo de bater com a mão',tapete:'pano macio que fica no chão da sala',
+  galinha:'bota ovo',abacate:'fruta verde de caroço grande',borboleta:'inseto de asas coloridas',foguete:'vai para o espaço',dente:'é branco, fica na boca e a gente escova',fada:'tem varinha mágica',
   vela:'acende no bolo',tijolo:'serve para fazer parede'};
 
 /* ---------- português: trilha fonológica ---------- */
@@ -117,11 +130,16 @@ function formaSVG(n){
   return '<svg class="forma" viewBox="0 0 100 100" role="img" aria-label="forma"><path class="fm" d="'+d+'Z"/></svg>';
 }
 const NOME_FORMA={3:'triângulo',4:'quadrado',5:'pentágono',6:'hexágono',0:'círculo'};
+/* três erradas distintas, positivas e diferentes da certa (o mc só completa até 3 opções e não completa valor em reais) */
+function tresErradas(certa,cands,fmt){const out=[];fmt=fmt||String;
+  cands.forEach(v=>{if(out.length<3&&v>=1&&v!==certa&&out.indexOf(v)<0)out.push(v);});
+  for(let d=1;out.length<3;d++)[certa+d,certa-d].forEach(v=>{if(out.length<3&&v>=1&&v!==certa&&out.indexOf(v)<0)out.push(v);});
+  return out.map(fmt);}
 const MAT_BAS={
   dinheiro(){const m1=R(1,4),n=pick([2,5,10]),tot=m1+n;
-    return mc('Uma criança tem '+m1+(m1===1?' moeda':' moedas')+' de R$&nbsp;1 e uma nota de R$&nbsp;'+n+'. Quanto ela tem ao todo?',money(tot),[money(tot+1),money(Math.max(1,tot-1)),money(m1*n)],{ouvir:'Uma criança tem '+m1+(m1===1?' moeda':' moedas')+' de 1 real e uma nota de '+n+' reais. Quanto ela tem ao todo?'});},
+    return mc('Uma criança tem '+m1+(m1===1?' moeda':' moedas')+' de R$&nbsp;1 e uma nota de R$&nbsp;'+n+'. Quanto ela tem ao todo?',money(tot),tresErradas(tot,[tot+1,tot-1,m1*n,n,tot+2],money),{ouvir:'Uma criança tem '+m1+(m1===1?' moeda':' moedas')+' de 1 real e uma nota de '+n+' reais. Quanto ela tem ao todo?'});},
   troco(){const preco=R(2,9),pago=preco<5?5:10,t=pago-preco;
-    return mc('Um lanche custa R$&nbsp;'+preco+'. Pagando com uma nota de R$&nbsp;'+pago+', quanto volta de troco?',money(t),[money(t+1),money(t+2),money(Math.max(1,t-1))].filter(x=>x!==money(t)),{ouvir:'Um lanche custa '+preco+' reais. Pagando com uma nota de '+pago+' reais, quanto volta de troco?'});},
+    return mc('Um lanche custa R$&nbsp;'+preco+'. Pagando com uma nota de R$&nbsp;'+pago+', quanto volta de troco?',money(t),tresErradas(t,[t+1,t+2,t-1,preco],money),{ouvir:'Um lanche custa '+preco+' reais. Pagando com uma nota de '+pago+' reais, quanto volta de troco?'});},
   relogioHora(){const h=R(1,12),m=pick([0,0,30]),certa=NOME_HORA(h,m);
     const cand=[NOME_HORA(h%12+1,m),NOME_HORA(h,m===30?0:30),NOME_HORA((h+5)%12+1,m),NOME_HORA((h+10)%12+1,m)].filter((x,i,a)=>x!==certa&&a.indexOf(x)===i);
     return mc('Que horas o relógio marca?',certa,cand.slice(0,3),{figure:relogioSVG(h,m)});},
@@ -136,7 +154,7 @@ const MAT_BAS={
   historinhaTira(){const [a,b]=nome2(),x=R(8,15),y=R(2,7);
     return mc(a+' tinha '+x+' balas e deu '+y+' para '+b+'. Quantas balas sobraram?',String(x-y),[x+y,x-y+1,x-y-1].map(String));},
   historinhaReparte(){const [a]=nome2(),g=pick([2,3,4]),c=R(2,5),tot=g*c;
-    return mc(a+' repartiu '+tot+' biscoitos igualmente entre '+g+' amigos. Quantos biscoitos cada amigo ganhou?',String(c),[c+1,Math.max(1,c-1),tot-g].map(String));},
+    return mc(a+' repartiu '+tot+' biscoitos igualmente entre '+g+' amigos. Quantos biscoitos cada amigo ganhou?',String(c),tresErradas(c,[c+1,c-1,tot-g,g,c+2]));},
   historinhaCompara(){const [a,b]=nome2(),x=R(6,15),y=R(2,x-2);
     return mc(a+' tem '+x+' carrinhos e '+b+' tem '+y+'. Quantos carrinhos '+a+' tem a mais?',String(x-y),[x+y,x-y+1,x-y-1].map(String));}
 };
