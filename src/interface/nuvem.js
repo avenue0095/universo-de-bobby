@@ -74,6 +74,15 @@ function nuvemObservarSaldo(reg,saldo){
   reg.razao.saldo=saldo;
 }
 
+/* o servidor aceita no máximo 5000 moedas ganhas a mais por chamada e por aparelho (0007_saldo_so_pela_rpc.sql). Se o aparelho tem
+   mais guardado (dias offline, primeira subida de um perfil antigo), a linha DELE no snapshot volta menor que o razão local: falta subir
+   o resto. O aparelho não baixa o próprio contador (nuvemMesclar usa o maior), então nada se perde; só chega em parcelas. */
+function nuvemFaltaSubir(snap,reg,aparelho){
+  if(!Array.isArray(nuvemObj(snap).moedas_aparelhos))return false;   /* servidor sem a lista: não dá para saber, não insiste */
+  const l=(Array.isArray(nuvemObj(snap).moedas_aparelhos)?snap.moedas_aparelhos:[]).find(m=>m&&m.aparelho_id===aparelho)||{};
+  return nuvemInt(l.ganhas)<reg.razao.ganhas||nuvemInt(l.gastas)<reg.razao.gastas;
+}
+
 /* ---------- merge local: o snapshot do servidor por cima do estado do aparelho, com as regras do servidor ---------- */
 function nuvemMesclar(s,reg,snap,aparelho){
   snap=nuvemObj(snap);const e=nuvemObj(snap.estado),em=nuvemObj(e.blocos_em);
@@ -206,7 +215,10 @@ function criarNuvem(op){
     const snap=await tr.sincronizarPerfil(r.nuvemId,dados.estado,dados.fases,dados.itens,dados.dias);
     const s2=op.dadosDe(i);detectar(r,s2);limparEnviado(r,enviado);   /* o que mudou durante a ida fica sujo para a próxima */
     nuvemMesclar(s2,r,snap,ler().aparelho);r.foto=fotoCompleta(r,s2,r.foto.removidos);
-    r.ultimoPush=agora().getTime();gravar();if(op.persistir)op.persistir(i);
+    r.ultimoPush=agora().getTime();
+    /* teto do servidor: o resto do razão fica sujo e sobe na próxima janela de 60 s, sem esperar a criança ganhar mais */
+    if(nuvemFaltaSubir(snap,r,ler().aparelho)){r.sujo.estado=r.sujo.estado||agora().toISOString();agendarPush(NUVEM_TEMPO.intervalo);}
+    gravar();if(op.persistir)op.persistir(i);
     return snap;
   }
   /* motivo 'debounce' respeita o intervalo de 60 s por perfil; 'forcado' (aba escondida, rede voltou, fim de fase) não */
@@ -253,7 +265,9 @@ function criarNuvem(op){
         r.nuvemId=criado.id;
         const snap=await subir(i,true),e=nuvemObj(snap&&snap.estado),fs=Array.isArray(snap&&snap.fases)?snap.fases:[];
         const comp=Array.isArray(e.comprado)?e.comprado:[];
-        const confere=fs.filter(f=>f&&f.estrelas>0).length>=antes.fases&&nuvemInt(e.xp)>=antes.xp&&nuvemInt(e.moedas)>=antes.moedas&&antes.comprado.every(id=>comp.indexOf(id)>=0);
+        /* moedas: o servidor pode ter aceitado só uma parcela (teto por chamada); aí o que falta segue no razão deste aparelho e sobe depois */
+        const moedasOk=nuvemInt(e.moedas)>=antes.moedas||(nuvemFaltaSubir(snap,r,ler().aparelho)&&nuvemInt(op.dadosDe(i).moedas)>=antes.moedas);
+        const confere=fs.filter(f=>f&&f.estrelas>0).length>=antes.fases&&nuvemInt(e.xp)>=antes.xp&&moedasOk&&antes.comprado.every(id=>comp.indexOf(id)>=0);
         if(!confere)throw new Error('snapshot não confere');
         r.migradoEm=agora().toISOString();gravar();feitos.push(p.id);
       }catch(e){

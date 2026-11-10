@@ -3,7 +3,7 @@
 /* Nuvem sem conta (Fase 4, S5 do docs/fase4/PLANO.md): merge local, outbox, migração da primeira conta e modo offline.
    O servidor aqui é FALSO e escrito à parte, seguindo o SQL de supabase/migrations/0003_rpc.sql (sincronizar_perfil e snapshot_perfil)
    e os gatilhos so_cresce do 0001, com as moedas por aparelho da 0006 (moedas_aparelho: contador de cada aparelho só cresce,
-   total = soma; chamada sem aparelho_id conta no aparelho 'legado'); não usa nada do nuvem.js. Os casos 1 a 3 repetem os números do caso 13 de supabase/testes/rls.sql.
+   total = soma; chamada sem aparelho_id conta no aparelho 'legado') e o teto de 5000 ganhas a mais por chamada da 0007; não usa nada do nuvem.js. Os casos 1 a 3 repetem os números do caso 13 de supabase/testes/rls.sql.
    O transporte é falso também: nada de rede, nada de supabase-js.
    Uso: node testes/nuvem.js */
 const A = require('assert');
@@ -26,7 +26,7 @@ function servidorFalso() {
     return J({ perfil: p.perfil, estado: e, moedas_aparelhos: moedas, fases: [...p.fases.values()], itens: [...p.itens.values()], dias: [...p.dias.values()], baixado_em: new Date().toISOString() });
   }
   return {
-    perfis, chamadas: { criar: 0, sincronizar: 0, snapshot: 0 }, falhar: null,
+    perfis, chamadas: { criar: 0, sincronizar: 0, snapshot: 0 }, falhar: null, TETO: 5000, limitadas: [],
     criarPerfil(dados) {
       this.chamadas.criar++;
       if (this.falhar === 'criar') return Promise.reject(new Error('rede'));
@@ -49,7 +49,10 @@ function servidorFalso() {
       // 3c (0006): contador do aparelho só cresce; total = soma dos aparelhos
       const ap = typeof est.aparelho_id === 'string' && /^[A-Za-z0-9_-]{6,64}$/.test(est.aparelho_id) ? est.aparelho_id : 'legado';
       const m0 = p.moedas.get(ap) || { ganhas: 0, gastas: 0 };
-      p.moedas.set(ap, { ganhas: mx(m0.ganhas, est.moedas_ganhas), gastas: mx(m0.gastas, est.moedas_gastas) });
+      // 0007: no máximo TETO ganhas a mais por chamada e por aparelho; o excesso é limitado e registrado, sem erro
+      const pedido = Math.max(0, Math.floor(+est.moedas_ganhas || 0)), aceito = mx(m0.ganhas, Math.min(pedido, m0.ganhas + this.TETO));
+      if (pedido > aceito) this.limitadas.push({ perfil: id, aparelho: ap, pedido, aceito });
+      p.moedas.set(ap, { ganhas: aceito, gastas: mx(m0.gastas, est.moedas_gastas) });
       let sg = 0, ss = 0; for (const m of p.moedas.values()) { sg += m.ganhas; ss += m.gastas; }
       e.moedas_ganhas = mx(e.moedas_ganhas, sg); e.moedas_gastas = mx(e.moedas_gastas, ss);
       for (const f of J(fases || [])) {   // 4: fases só crescem
@@ -258,6 +261,25 @@ const servidorEstado = (m) => m.srv.snapshot(m.id);
     A.deepStrictEqual(J(m.a.avaliar('(r=>[r.razao.ganhas,r.razao.gastas])(NUVEM.registro(STORE.perfis[0].id))')), [50, 0]);
     await subir(m);
     A.deepStrictEqual([servidorEstado(m).estado.moedas_ganhas, servidorEstado(m).estado.moedas], [50, 50]);
+  });
+
+  await teste('a12. teto do servidor (0007, 5000 por chamada): perfil antigo com 12.300 moedas migra, sobe em 3 parcelas sozinho e nada se perde', async () => {
+    const m = montar(23);
+    m.a.avaliar("novoPerfil('Zeca','#12A06E');S.moedas=12300;salvar()");
+    const r = J(await m.a.avaliar('NUVEM.migrarPrimeiraConta()'));
+    A.strictEqual(r.ok, true, 'a migração reprovou porque o servidor aceitou só a primeira parcela');
+    m.id = m.a.avaliar('NUVEM.registro(STORE.perfis[0].id).nuvemId');
+    A.strictEqual(servidorEstado(m).estado.moedas_ganhas, 5000);
+    A.strictEqual(m.a.avaliar('S.moedas'), 12300, 'o aparelho baixou o saldo para o que o servidor aceitou');
+    A.deepStrictEqual(m.srv.limitadas.map((x) => [x.pedido, x.aceito]), [[12300, 5000]]);
+    // sem a criança ganhar nada: o app reagenda sozinho e sobe o resto
+    m.passa(61000); await m.rodarTimers();
+    A.strictEqual(servidorEstado(m).estado.moedas_ganhas, 10000);
+    m.passa(61000); await m.rodarTimers();
+    A.deepStrictEqual([servidorEstado(m).estado.moedas_ganhas, servidorEstado(m).estado.moedas, m.a.avaliar('S.moedas')], [12300, 12300, 12300]);
+    const n = m.srv.chamadas.sincronizar;
+    m.passa(61000); await m.rodarTimers();
+    A.strictEqual(m.srv.chamadas.sincronizar, n, 'depois de tudo subir não deve haver push extra');
   });
 
   await teste('a10. o que muda DURANTE o envio continua sujo e sobe no proximo push (limparEnviado so limpa o que foi enviado igual)', async () => {

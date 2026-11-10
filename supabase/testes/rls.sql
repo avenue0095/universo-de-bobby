@@ -72,7 +72,7 @@ begin
       raise exception 'FALHA: tabela % sem RLS ligada', r.relname;
     end if;
   end loop;
-  if n <> 12 then raise exception 'FALHA: esperava 12 tabelas no public (11 + moedas_aparelho da 0006), achei %', n; end if;
+  if n <> 13 then raise exception 'FALHA: esperava 13 tabelas no public (11 + moedas_aparelho da 0006 + moedas_limitadas da 0007), achei %', n; end if;
   raise notice 'OK: % tabelas do public com RLS ligada', n;
 end $$;
 
@@ -107,6 +107,48 @@ begin
    where schemaname = 'public' and tablename in ('webhook_evento','limite_taxa');
   if n > 0 then raise exception 'FALHA: webhook_evento/limite_taxa com política (%)', n; end if;
   raise notice 'OK: assinatura e pagamento só leitura; webhook_evento e limite_taxa sem política';
+end $$;
+
+-- -----------------------------------------------------------------------------
+-- 3b. Saldo de moedas só pela RPC (0007): sem política nem grant de escrita em
+--     moedas_aparelho, moedas_limitadas fechada, perfil_estado só com update nas
+--     colunas de bloco, e a RPC é security definer com search_path fixo
+-- -----------------------------------------------------------------------------
+do $$
+declare n int; cfg text[]; dono text; def boolean;
+begin
+  select count(*) into n from pg_policies
+   where schemaname = 'public' and tablename = 'moedas_aparelho' and cmd in ('INSERT','UPDATE','DELETE','ALL');
+  if n > 0 then raise exception 'FALHA: moedas_aparelho com política de escrita (%)', n; end if;
+  select count(*) into n from pg_policies where schemaname = 'public' and tablename = 'moedas_limitadas';
+  if n > 0 then raise exception 'FALHA: moedas_limitadas com política (%)', n; end if;
+  if has_table_privilege('authenticated', 'public.moedas_aparelho', 'INSERT')
+     or has_table_privilege('authenticated', 'public.moedas_aparelho', 'UPDATE')
+     or has_table_privilege('authenticated', 'public.moedas_aparelho', 'DELETE') then
+    raise exception 'FALHA: authenticated ainda escreve em moedas_aparelho';
+  end if;
+  if has_table_privilege('authenticated', 'public.moedas_limitadas', 'SELECT') then
+    raise exception 'FALHA: authenticated lê moedas_limitadas';
+  end if;
+  if has_table_privilege('authenticated', 'public.perfil_estado', 'UPDATE') then
+    raise exception 'FALHA: authenticated ainda tem update na tabela perfil_estado inteira';
+  end if;
+  if has_column_privilege('authenticated', 'public.perfil_estado', 'moedas_ganhas', 'UPDATE')
+     or has_column_privilege('authenticated', 'public.perfil_estado', 'moedas_gastas', 'UPDATE')
+     or has_column_privilege('authenticated', 'public.perfil_estado', 'xp', 'UPDATE')
+     or has_column_privilege('authenticated', 'public.perfil_estado', 'comprado', 'UPDATE')
+     or has_column_privilege('authenticated', 'public.perfil_estado', 'moedas_ganhas', 'INSERT') then
+    raise exception 'FALHA: authenticated grava moedas/xp/comprado de perfil_estado direto';
+  end if;
+  if not has_column_privilege('authenticated', 'public.perfil_estado', 'look', 'UPDATE') then
+    raise exception 'FALHA: o grant de volta das colunas de bloco não aconteceu (look)';
+  end if;
+  select p.proconfig, pg_get_userbyid(p.proowner), p.prosecdef into cfg, dono, def
+    from pg_proc p where p.oid = 'public.sincronizar_perfil(uuid, jsonb, jsonb, jsonb, jsonb)'::regprocedure;
+  if not def then raise exception 'FALHA: sincronizar_perfil não é security definer'; end if;
+  if cfg is null or not ('search_path=""' = any(cfg)) then raise exception 'FALHA: sincronizar_perfil sem search_path vazio (%)', cfg; end if;
+  if dono <> 'postgres' then raise exception 'FALHA: dono de sincronizar_perfil é %', dono; end if;
+  raise notice 'OK: moedas só pela RPC (sem escrita direta em moedas_aparelho nem nas colunas de moeda; RPC definer, search_path vazio, dono postgres)';
 end $$;
 
 -- -----------------------------------------------------------------------------
@@ -268,20 +310,30 @@ begin
   raise notice 'OK: sincronizar_perfil nunca reduz estrelas/moedas ganhas, gastar não devolve moeda, comprado é união';
 end $$;
 
--- 13b. update direto (fora da RPC) também não consegue reduzir
+-- 13b. update direto (fora da RPC): moedas, xp e comprado negados (0007); bloco
+--      continua gravável; estrelas seguem presas pelo gatilho so_cresce
 do $$
 declare v int;
 begin
-  update public.perfil_estado set xp = 1, moedas_ganhas = 1, comprado = '[]'::jsonb
-   where perfil_id = '00000000-0000-4000-8000-0000000000a1';
+  begin
+    update public.perfil_estado set xp = 1 where perfil_id = '00000000-0000-4000-8000-0000000000a1';
+    raise exception 'FALHA: update direto de xp aceito';
+  exception when insufficient_privilege then null;
+  end;
+  begin
+    update public.perfil_estado set comprado = '[]'::jsonb where perfil_id = '00000000-0000-4000-8000-0000000000a1';
+    raise exception 'FALHA: update direto de comprado aceito';
+  exception when insufficient_privilege then null;
+  end;
+  update public.perfil_estado set look = '{"chapeu":"festa"}'::jsonb where perfil_id = '00000000-0000-4000-8000-0000000000a1';
   update public.progresso_fase set estrelas = 0 where perfil_id = '00000000-0000-4000-8000-0000000000a1' and fase_id = '1.1';
   select xp into v from public.perfil_estado where perfil_id = '00000000-0000-4000-8000-0000000000a1';
-  if v <> 500 then raise exception 'FALHA: update direto reduziu xp para %', v; end if;
+  if v <> 500 then raise exception 'FALHA: xp mudou para %', v; end if;
   select jsonb_array_length(comprado) into v from public.perfil_estado where perfil_id = '00000000-0000-4000-8000-0000000000a1';
   if v <> 2 then raise exception 'FALHA: update direto apagou item comprado'; end if;
   select estrelas into v from public.progresso_fase where perfil_id = '00000000-0000-4000-8000-0000000000a1' and fase_id = '1.1';
   if v <> 3 then raise exception 'FALHA: update direto reduziu estrelas para %', v; end if;
-  raise notice 'OK: gatilhos so_cresce seguram o update direto';
+  raise notice 'OK: update direto de xp e comprado negado (42501), bloco gravável, estrelas presas pelo gatilho';
 end $$;
 
 -- 13c. limite_ok não é chamável pelo usuário (só a versão que deriva a chave de auth.uid())
@@ -337,7 +389,11 @@ declare n int; v int;
 begin
   select count(*) into n from public.moedas_aparelho where perfil_id = '00000000-0000-4000-8000-0000000000b1';
   if n <> 0 then raise exception 'FALHA: A vê % linhas de moedas de B', n; end if;
-  update public.moedas_aparelho set ganhas = 0 where perfil_id = '00000000-0000-4000-8000-0000000000a1' and aparelho_id = 'tabletA01';
+  begin
+    update public.moedas_aparelho set ganhas = 0 where perfil_id = '00000000-0000-4000-8000-0000000000a1' and aparelho_id = 'tabletA01';
+    raise exception 'FALHA: update direto em moedas_aparelho aceito';
+  exception when insufficient_privilege then null;   -- 0007: authenticated não tem update
+  end;
   select ganhas into v from public.moedas_aparelho where perfil_id = '00000000-0000-4000-8000-0000000000a1' and aparelho_id = 'tabletA01';
   if v <> 50 then raise exception 'FALHA: update direto reduziu o contador do aparelho para %', v; end if;
   begin
@@ -354,11 +410,51 @@ begin
   raise notice 'OK: moedas_aparelho só do dono, só cresce e não se apaga por fora';
 end $$;
 
+-- 13g. ninguém infla o próprio saldo (0007): insert e update diretos negados; a RPC
+--      aceita no máximo 5000 a mais por chamada e por aparelho, limita sem quebrar e
+--      registra em moedas_limitadas (contado como postgres no bloco 18)
+do $$
+declare r jsonb; e jsonb; v int;
+begin
+  begin
+    insert into public.moedas_aparelho (perfil_id, aparelho_id, ganhas) values ('00000000-0000-4000-8000-0000000000a1', 'infla0001', 2147483647);
+    raise exception 'FALHA: A inseriu moedas direto no próprio perfil';
+  exception when insufficient_privilege then null;
+  end;
+  begin
+    update public.perfil_estado set moedas_ganhas = 2147483647 where perfil_id = '00000000-0000-4000-8000-0000000000a1';
+    raise exception 'FALHA: A gravou moedas_ganhas direto';
+  exception when insufficient_privilege then null;
+  end;
+  begin
+    insert into public.perfil_estado (perfil_id, moedas_ganhas) values ('00000000-0000-4000-8000-0000000000a1', 2147483647);
+    raise exception 'FALHA: A inseriu perfil_estado com moedas';
+  exception when insufficient_privilege then null;
+  end;
+  -- até aqui: 200 ganhas (13e). Aparelho novo pede 2147483647: entra 5000
+  r := public.sincronizar_perfil('00000000-0000-4000-8000-0000000000a1',
+         '{"aparelho_id":"inflador1","moedas_ganhas":2147483647,"moedas_gastas":0}'::jsonb);
+  e := r->'estado';
+  if (e->>'moedas_ganhas')::int <> 5200 then raise exception 'FALHA: teto não segurou (esperado 5200): %', e; end if;
+  -- o mesmo aparelho pede um número que nem cabe em bigint: mais 5000, sem erro
+  r := public.sincronizar_perfil('00000000-0000-4000-8000-0000000000a1',
+         '{"aparelho_id":"inflador1","moedas_ganhas":1e30,"moedas_gastas":0}'::jsonb);
+  e := r->'estado';
+  if (e->>'moedas_ganhas')::int <> 10200 then raise exception 'FALHA: segunda chamada fora do teto (esperado 10200): %', e; end if;
+  -- abaixo do teto passa inteiro (confiança no cliente, ANDAMENTO 6): +300 no tablet
+  r := public.sincronizar_perfil('00000000-0000-4000-8000-0000000000a1',
+         '{"aparelho_id":"tabletA01","moedas_ganhas":350,"moedas_gastas":0}'::jsonb);
+  select ganhas into v from public.moedas_aparelho where perfil_id = '00000000-0000-4000-8000-0000000000a1' and aparelho_id = 'tabletA01';
+  if v <> 350 then raise exception 'FALHA: ganho abaixo do teto não entrou inteiro (%)', v; end if;
+  raise notice 'OK: insert/update direto de moedas negados; RPC limita a 5000 por chamada sem quebrar';
+end $$;
+
 -- 14. sincronizar_perfil no perfil de B é negado
 do $$
 begin
   begin
-    perform public.sincronizar_perfil('00000000-0000-4000-8000-0000000000b1', '{}'::jsonb);
+    perform public.sincronizar_perfil('00000000-0000-4000-8000-0000000000b1',
+              '{"aparelho_id":"aparelhoB01","moedas_ganhas":999999,"moedas_gastas":0}'::jsonb);
     raise exception 'FALHA: A sincronizou o perfil de B';
   exception when insufficient_privilege then
     raise notice 'OK: sincronizar_perfil recusa perfil de outro responsável';
@@ -402,14 +498,14 @@ select set_config('request.jwt.claims', '{"role":"anon"}', true);
 do $$
 declare t text;
 begin
-  foreach t in array array['responsavel','perfil','perfil_estado','progresso_fase','erro_pendente','dia_atividade','assinatura','pagamento','consentimento','webhook_evento','limite_taxa','moedas_aparelho'] loop
+  foreach t in array array['responsavel','perfil','perfil_estado','progresso_fase','erro_pendente','dia_atividade','assinatura','pagamento','consentimento','webhook_evento','limite_taxa','moedas_aparelho','moedas_limitadas'] loop
     begin
       execute format('select count(*) from public.%I', t);
       raise exception 'FALHA: anon leu a tabela %', t;
     exception when insufficient_privilege then null;
     end;
   end loop;
-  raise notice 'OK: anon negado nas 12 tabelas (42501)';
+  raise notice 'OK: anon negado nas 13 tabelas (42501)';
 end $$;
 
 do $$
@@ -452,8 +548,22 @@ begin
   raise notice 'OK: pagamento só avança (pendente < confirmado < recebido; estornado terminal)';
 end $$;
 
+-- 18. 0007 visto pelo servidor: o teto ficou registrado e a RPC negada (14) não mexeu em B
+do $$
+declare n int; v int;
+begin
+  select count(*) into n from public.moedas_limitadas
+   where perfil_id = '00000000-0000-4000-8000-0000000000a1' and aparelho_id = 'inflador1' and aceito in (5000, 10000);
+  if n <> 2 then raise exception 'FALHA: esperava 2 registros de teto em moedas_limitadas, achei %', n; end if;
+  select ganhas into v from public.moedas_aparelho where perfil_id = '00000000-0000-4000-8000-0000000000b1' and aparelho_id = 'aparelhoB01';
+  if v <> 70 then raise exception 'FALHA: a chamada negada de A mexeu nas moedas de B (%)', v; end if;
+  select count(*) into n from public.moedas_limitadas where perfil_id = '00000000-0000-4000-8000-0000000000b1';
+  if n <> 0 then raise exception 'FALHA: a chamada negada de A registrou teto no perfil de B'; end if;
+  raise notice 'OK: teto registrado em moedas_limitadas; RPC de outra família não tocou em B';
+end $$;
+
 -- =============================================================================
--- Resumo esperado: 26 linhas "NOTICE: OK:" e nenhuma "FALHA". Conte com:
+-- Resumo esperado: 29 linhas "NOTICE: OK:" e nenhuma "FALHA". Conte com:
 --   psql ... -f supabase/testes/rls.sql 2>&1 | grep -c 'OK:'
 -- =============================================================================
 
