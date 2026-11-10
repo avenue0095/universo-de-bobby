@@ -274,3 +274,12 @@ Fechar de vez exigiria o servidor reproduzir cada lição (pergunta, resposta, t
 3. `moedas_limitadas` não entra na exportação LGPD (`exportar_meus_dados`): só tem `aparelho_id` aleatório e números. Avaliar na revisão da política de privacidade.
 4. Os itens 2 a 5 do PENDENTE da seção 5 continuam valendo (estorno manual, item comprado em dois aparelhos offline, `aparelho_id` na exportação, clipes pendentes).
 
+
+## 7. Revisão final da terceira passada: nota 7, NÃO APROVADA (10/11/2026)
+
+O que falta para chegar a 8:
+1. Os testes deno de reabertura exercitam uma imitação em TS da RPC, não o SQL da 0008. Trocar `in ('ativa','atrasada')` por `in ('ativa')` em `0008:63` mantém 40/40. Completar o bloco 19 de `rls.sql` com os casos `atrasada` e `cancelada`.
+2. O teto de 5000 da 0007 e os grants só se provam no `rls.sql`, que nunca rodou. No `rls.sql`, criar o perfil como `authenticated`, não como superusuário. Na S1, rodar `rls.sql` antes de tudo e contar 30 "OK:".
+3. Decidir com o Filipe FAPA e FAGA, que lembram gíria chula do inglês. GALINA, MALE e GATE foram bloqueadas pela regra conservadora, também a confirmar.
+4. O teto vale por aparelho, não por chamada (até 51 linhas). O número "1,2 milhão por hora" desta seção está subestimado. `moedas_limitadas` não tem retenção.
+5. Transitório: o saldo pode aparecer 0 em outro aparelho por alguns minutos, enquanto `ganhas` sobe em parcelas. Nada se perde.
