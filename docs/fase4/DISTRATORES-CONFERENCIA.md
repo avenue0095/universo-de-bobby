@@ -365,7 +365,7 @@ ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 | Escrita | Veredito | Observação |
 |---|---|---|
 | AGLINHA | ok |  |
-| GALINA | BLOQUEADA | nome próprio (russo); bloqueado pela regra conservadora adotada na terceira passada, a confirmar com o Filipe |
+| GALINA | BLOQUEADA | nome próprio (russo); bloqueado pela regra conservadora adotada na terceira passada, confirmada pelo Filipe em 10/11/2026 |
 | GELINHA | ok |  |
 | GOLINHA | BLOQUEADA | palavra real (gola pequena) |
 | JALINHA | ok |  |
