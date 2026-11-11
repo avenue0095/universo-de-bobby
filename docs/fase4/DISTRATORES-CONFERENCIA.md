@@ -451,7 +451,7 @@ ou esta conferência e `src/conteudo/bloqueio.js` não baterem.
 
 | Escrita | Veredito | Observação |
 |---|---|---|
-| FAPA | ok | não é palavra; a sílaba lembra gíria chula do inglês da internet que a criança não lê; fica |
+| FAPA | ok | não é palavra; a sílaba lembra gíria chula do inglês da internet que a criança não lê; fica (o Filipe confirmou em 10/11/2026) |
 | TADA | BLOQUEADA | inglês real (ta-da, a interjeição de mágica); o app ensina inglês |
 | VADA | ok | italiano neutro (vá) |
 

@@ -280,6 +280,6 @@ Fechar de vez exigiria o servidor reproduzir cada lição (pergunta, resposta, t
 O que falta para chegar a 8:
 1. Os testes deno de reabertura exercitam uma imitação em TS da RPC, não o SQL da 0008. Trocar `in ('ativa','atrasada')` por `in ('ativa')` em `0008:63` mantém 40/40. Completar o bloco 19 de `rls.sql` com os casos `atrasada` e `cancelada`.
 2. O teto de 5000 da 0007 e os grants só se provam no `rls.sql`, que nunca rodou. No `rls.sql`, criar o perfil como `authenticated`, não como superusuário. Na S1, rodar `rls.sql` antes de tudo e contar 30 "OK:".
-3. Decidir com o Filipe FAPA e FAGA, que lembram gíria chula do inglês. GALINA, MALE e GATE foram bloqueadas pela regra conservadora, também a confirmar.
+3. FAPA e FAGA: o Filipe decidiu em 10/11/2026 deixar como está (ficam liberadas, com a observação na conferência). GALINA, MALE e GATE foram bloqueadas pela regra conservadora, ainda a confirmar com ele.
 4. O teto vale por aparelho, não por chamada (até 51 linhas). O número "1,2 milhão por hora" desta seção está subestimado. `moedas_limitadas` não tem retenção.
 5. Transitório: o saldo pode aparecer 0 em outro aparelho por alguns minutos, enquanto `ganhas` sobe em parcelas. Nada se perde.
